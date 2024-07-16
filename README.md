@@ -30,7 +30,6 @@
 ### Style
 
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-2.2.16-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
-![Styled-components](https://img.shields.io/badge/Styled--components-5.3.1-DB7093?style=flat-square&logo=styled-components&logoColor=white)
 
 ### 상태 관리
 
