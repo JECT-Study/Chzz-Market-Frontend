@@ -8,13 +8,11 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'plugin:testing-library/react',
+    'plugin:vitest/recommended',
+    'plugin:jest-dom/recommended',
   ],
-  ignorePatterns: [
-    'dist',
-    '.eslintrc.cjs',
-    'vite.config.ts',
-    '/src/vite-env.d.ts',
-  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
