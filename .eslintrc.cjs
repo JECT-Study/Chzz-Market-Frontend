@@ -16,12 +16,14 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
+    'import/no-extraneous-dependencies': "off",
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
   },
   parserOptions: {
-    project: './tsconfig.json',
+    tsconfigRootDir: './',
+    project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.node.json']
   },
 };
