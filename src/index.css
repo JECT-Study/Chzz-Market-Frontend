@@ -21,39 +21,3 @@
 body {
   font-family: 'Pretendard500';
 }
-
-/* Reset button, input, select, textarea */
-button,
-input,
-select,
-textarea {
-  color: inherit;
-  font: inherit;
-  margin: 0;
-  background: #fff;
-  border: none;
-  box-shadow: none;
-}
-
-button,
-input,
-select,
-textarea:focus {
-  outline: none;
-}
-
-/* Remove text decoration for links */
-a {
-  text-decoration: none;
-}
-
-/* Pointer cursor on button hover */
-button:hover {
-  cursor: pointer;
-}
-
-/* Remove list styles */
-ul,
-li {
-  list-style: none;
-}

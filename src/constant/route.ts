@@ -1,4 +1,4 @@
-export const ROUTERS = {
+const ROUTERS = {
   MAIN: '/',
 } as const;
 
