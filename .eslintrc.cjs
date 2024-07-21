@@ -30,6 +30,8 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    // Button 간의 Type구분 꺼두기
+    'react/button-has-type': 'off',
   },
   parserOptions: {
     tsconfigRootDir: './',

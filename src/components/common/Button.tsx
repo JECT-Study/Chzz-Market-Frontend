@@ -17,6 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   hoverColor,
   disabled,
   onClick,
+  type,
 }) => {
   const baseClasses = 'border-0 rounded focus:outline-none';
   const colorClasses = classNames({
@@ -50,7 +51,7 @@ const Button: React.FC<ButtonProps> = ({
       className={combinedClasses}
       disabled={disabled}
       onClick={onClick}
-      type="button"
+      type={type}
     >
       {children}
     </button>
