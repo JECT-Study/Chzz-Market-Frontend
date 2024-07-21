@@ -21,7 +21,15 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    // 함수형 컴포넌트 정의 규칙 수정
+    'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
   },
   parserOptions: {
     tsconfigRootDir: './',
