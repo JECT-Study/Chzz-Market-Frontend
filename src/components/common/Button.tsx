@@ -19,16 +19,16 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   type,
 }) => {
-  const baseClasses = 'border-0 rounded focus:outline-none';
+  const baseClasses = 'focus:outline-none';
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',
     'bg-white text-black border border-black': color === 'white',
     [`bg-${color}`]: color !== 'black' && color !== 'white',
   });
   const sizeClasses = classNames({
-    'w-[54px] h-[22px] text-xs': size === 'xsmall',
+    'px-1 py-0.5 text-xs': size === 'xsmall',
     'px-2 py-1 text-sm': size === 'small',
-    'w-[100px] h-[36px] text-sm': size === 'medium',
+    'px-4 py-2 text-base': size === 'medium',
     'px-6 py-3 text-lg': size === 'large',
   });
   const hoverColorClasses = classNames({
@@ -36,8 +36,8 @@ const Button: React.FC<ButtonProps> = ({
     'hover:bg-white hover:text-black': hoverColor === 'white',
   });
   const combinedClasses = classNames(
-    baseClasses,
     colorClasses,
+    baseClasses,
     sizeClasses,
     hoverColorClasses,
     className,
