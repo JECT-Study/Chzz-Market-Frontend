@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  size: 'xsmall' | 'small' | 'medium' | 'large';
+  size?: 'xsmall' | 'small' | 'medium' | 'large';
   disabled?: boolean;
   color: string;
   hoverColor?: string;
@@ -26,14 +26,15 @@ const Button: React.FC<ButtonProps> = ({
     [`bg-${color}`]: color !== 'black' && color !== 'white',
   });
   const sizeClasses = classNames({
-    'px-1 py-0.5 text-xs': size === 'xsmall',
+    'px-2 py-0.5 text-xs': size === 'xsmall',
     'px-2 py-1 text-sm': size === 'small',
     'px-4 py-2 text-base': size === 'medium',
     'px-6 py-3 text-lg': size === 'large',
   });
   const hoverColorClasses = classNames({
     'hover:bg-black hover:text-white': hoverColor === 'black',
-    'hover:bg-white hover:text-black': hoverColor === 'white',
+    'hover:bg-white hover:text-black border border-black':
+      hoverColor === 'white',
   });
   const combinedClasses = classNames(
     colorClasses,
@@ -61,6 +62,7 @@ const Button: React.FC<ButtonProps> = ({
 Button.defaultProps = {
   disabled: false,
   hoverColor: '',
+  size: 'small',
 };
 
 export default Button;
