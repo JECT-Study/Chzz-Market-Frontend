@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-function Layout({
+const Layout = ({
   header,
   children,
   footer,
@@ -8,7 +8,7 @@ function Layout({
   header: ReactNode;
   children: ReactNode;
   footer: ReactNode;
-}) {
+}) => {
   return (
     <div className="max-w-[600px] min-w-[375px] h-[100vh]">
       <header>{header}</header>
@@ -16,6 +16,6 @@ function Layout({
       <footer>{footer}</footer>
     </div>
   );
-}
+};
 
 export default Layout;
