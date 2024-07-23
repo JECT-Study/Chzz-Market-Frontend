@@ -13,7 +13,7 @@
 
 ### 패키지 매니저
 
-![pnpm](https://img.shields.io/badge/pnpm-6.14.6-fff7e2?style=flat-square&logo=pnpm&logoColor=white&color=rgb%2877%2C%2075%2C%20140%29)
+![npm](https://img.shields.io/badge/npm-6.14.6-red?style=flat-square&logo=npm&logoColor=white&color=rgb%28%20%233C3C3C%29)
 
 ### 언어
 
