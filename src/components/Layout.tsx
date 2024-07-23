@@ -1,11 +1,21 @@
-import { Outlet } from 'react-router-dom';
+import { ReactNode } from 'react';
 
-function Layout() {
+interface LayoutProps {
+  header: ReactNode;
+  children: ReactNode;
+  footer: ReactNode;
+}
+
+function Layout({ header, children, footer }: LayoutProps) {
   return (
     <div className="flex justify-center w-full h-screen">
-      <main className="w-[46rem] min-w-[23rem]">
-        <Outlet />
-      </main>
+      <div className="w-[46rem] min-w-[23rem] flex flex-col justify-between h-full">
+        {header}
+        <main className="flex flex-col w-full gap-4 px-8 py-4 overflow-y-scroll">
+          {children}
+        </main>
+        {footer && footer}
+      </div>
     </div>
   );
 }
