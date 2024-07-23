@@ -13,6 +13,7 @@ export default defineConfig({
       '@/assets': resolve(__dirname, 'src/assets'),
       '@/constants': resolve(__dirname, 'src/constants'),
       '@/mocks': resolve(__dirname, 'src/mocks'),
+      '@/pages': resolve(__dirname, 'src/pages'),
     },
   },
   test: {

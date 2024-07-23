@@ -19,7 +19,8 @@
       "@/components/*": ["components/*"],
       "@/assets/*": ["assets/*"],
       "@/constants/*": ["constants/*"],
-      "@/mocks/*": ["mocks/*"]
+      "@/mocks/*": ["mocks/*"],
+      "@/pages/*": ["pages/*"]
     }
   }
 }
