@@ -7,10 +7,10 @@ interface ReactQueryProviderProps {
   showDevTools?: boolean;
 }
 
-function ReactQueryProvider({
+const ReactQueryProvider = ({
   showDevTools,
   children,
-}: ReactQueryProviderProps) {
+}: ReactQueryProviderProps) => {
   const [client] = useState(
     new QueryClient({
       defaultOptions: {
@@ -29,7 +29,7 @@ function ReactQueryProvider({
       {children}
     </QueryClientProvider>
   );
-}
+};
 
 ReactQueryProvider.defaultProps = {
   showDevTools: false,

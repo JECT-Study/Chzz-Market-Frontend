@@ -1,6 +1,6 @@
 import { categories } from '../constants/categories';
 
-function CategoryItem({ name }: { name: string }) {
+const CategoryItem = ({ name }: { name: string }) => {
   return (
     <div className="flex flex-col items-center gap-2">
       <img
@@ -11,9 +11,9 @@ function CategoryItem({ name }: { name: string }) {
       <div className="text-sm">{name}</div>
     </div>
   );
-}
+};
 
-function CategoryList() {
+const CategoryList = () => {
   return (
     <div className="grid w-full grid-cols-4 gap-4">
       {Object.values(categories).map((value: string) => (
@@ -21,6 +21,6 @@ function CategoryList() {
       ))}
     </div>
   );
-}
+};
 
 export default CategoryList;

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { LuUsers } from 'react-icons/lu';
 import { FaHeart } from 'react-icons/fa';
-import Layout from './ui/Layout';
-import Button from './components/common/Button';
-import ongoingProducts from './mock/data/ongoingData';
-import upcomingProducts from './mock/data/upcomingData';
+import Layout from '@/components/Layout';
+import Button from '@/components/common/Button';
+import ongoingProducts from '@/mocks/data/ongoingData';
+import upcomingProducts from '@/mocks/data/upcomingData';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');

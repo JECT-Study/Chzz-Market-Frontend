@@ -1,11 +1,11 @@
-import CategoryList from '../components/CategoryList';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import HomeItem from '../components/HomeItem';
-import HomeItemList from '../components/HomeItemList';
-import Layout from '../components/Layout';
+import CategoryList from '@/components/CategoryList';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import HomeItem from '@/components/HomeItem';
+import HomeItemList from '@/components/HomeItemList';
+import Layout from '@/components/Layout';
 
-function Home() {
+const Home = () => {
   return (
     <Layout header={<Header name="치즈 마켓" />} footer={<Footer />}>
       <HomeItemList name="베스트 경매">
@@ -34,6 +34,6 @@ function Home() {
       </HomeItemList>
     </Layout>
   );
-}
+};
 
 export default Home;

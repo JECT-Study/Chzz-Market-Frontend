@@ -1,6 +1,6 @@
 import { AiOutlineUsergroupDelete } from 'react-icons/ai';
 
-function HomeItem() {
+const HomeItem = () => {
   return (
     <figure className="flex flex-col min-w-[9rem]">
       <div className="relative w-full h-full">
@@ -19,6 +19,6 @@ function HomeItem() {
       </figcaption>
     </figure>
   );
-}
+};
 
 export default HomeItem;

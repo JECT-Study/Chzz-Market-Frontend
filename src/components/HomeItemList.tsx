@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
-function HomeItemList({
+const HomeItemList = ({
   children,
   name,
 }: {
   children: ReactNode;
   name: string;
-}) {
+}) => {
   return (
     <section className="flex flex-col w-full gap-4">
       <div className="text-lg font-semibold">{name}</div>
@@ -15,6 +15,6 @@ function HomeItemList({
       </div>
     </section>
   );
-}
+};
 
 export default HomeItemList;

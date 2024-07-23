@@ -5,7 +5,7 @@ import {
   AiOutlineUser,
 } from 'react-icons/ai';
 
-function Footer() {
+const Footer = () => {
   return (
     <footer className="flex items-center gap-2 justify-around w-full min-h-[3.5rem] bg-yellow-500">
       <AiOutlineHome size={25} />
@@ -14,6 +14,6 @@ function Footer() {
       <AiOutlineUser size={25} />
     </footer>
   );
-}
+};
 
 export default Footer;
