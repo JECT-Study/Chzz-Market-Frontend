@@ -22,6 +22,17 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "react/react-in-jsx-scope": "off",
+    // 함수형 컴포넌트 정의 규칙 수정
+    'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
+    // Button 간의 Type구분 꺼두기
+    'react/button-has-type': 'off',
     'react/react-in-jsx-scope': 'off',
   },
   parserOptions: {
