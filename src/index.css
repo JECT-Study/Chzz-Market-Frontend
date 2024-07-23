@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Global Styles */
-* {
-  font-family: 'AppleSDGothicNeo', 'Noto Sans KR', 'sans-serif';
-  box-sizing: border-box;
-}
-
-/* Hide scrollbar */
-* {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-*::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, and Opera */
-}
-
 /* Pretendard500 font for body */
 body {
   font-family: 'Pretendard500';

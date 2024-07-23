@@ -1,5 +1,5 @@
-const ROUTERS = {
+const ROUTERS = Object.freeze({
   MAIN: '/',
-} as const;
+});
 
 export default ROUTERS;
