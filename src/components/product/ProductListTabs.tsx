@@ -11,7 +11,6 @@ const ProductListTabs: React.FC<ProductListTabsProps> = ({
 }) => {
   return (
     <div className="flex justify-center w-full mt-3">
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div
         className={classNames(
           'flex justify-center items-center w-full py-2 ml-4 cursor-pointer text-sm',
@@ -23,7 +22,6 @@ const ProductListTabs: React.FC<ProductListTabsProps> = ({
       >
         진행 중인 경매
       </div>
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div
         className={classNames(
           'flex justify-center w-full items-center py-2 mr-4 cursor-pointer text-sm',
