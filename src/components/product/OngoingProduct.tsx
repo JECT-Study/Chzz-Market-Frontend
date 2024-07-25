@@ -1,4 +1,3 @@
-import React from 'react';
 import { LuUsers } from 'react-icons/lu';
 import Button from '@/components/common/Button';
 

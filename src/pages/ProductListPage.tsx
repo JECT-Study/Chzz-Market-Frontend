@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Layout from '@/components/Layout';
 import ongoingProducts from '@/mocks/data/ongoingData';
 import upcomingProducts from '@/mocks/data/upcomingData';
