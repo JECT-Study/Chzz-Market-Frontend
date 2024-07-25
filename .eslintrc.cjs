@@ -34,6 +34,9 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'react/react-in-jsx-scope': 'off',
+    // import React from 'react' 꺼두기
+    "react/jsx-uses-react": "off",
+    "react/jsx-uses-vars": "off",
     // 함수형 컴포넌트 정의 규칙 수정
     'react/function-component-definition': [
       'error',

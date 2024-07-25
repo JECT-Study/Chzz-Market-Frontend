@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import ROUTERS from '@/constants/route';
 import MainPage from '@/pages/MainPage';
 import Home from '@/pages/home';
-import ProductList from '@/pages/ProductList';
+import ProductList from '@/pages/ProductListPage';
 
 const routeList = [
   {

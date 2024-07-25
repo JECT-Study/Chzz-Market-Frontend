@@ -1,13 +1,12 @@
 import CategoryList from '@/components/CategoryList';
 import Footer from '@/components/Footer';
-import Header from '@/components/Header';
 import HomeItem from '@/components/HomeItem';
 import HomeItemList from '@/components/HomeItemList';
 import Layout from '@/components/Layout';
 
 const Home = () => {
   return (
-    <Layout header={<Header name="치즈 마켓" />} footer={<Footer />}>
+    <Layout header="치즈 마켓" footer={<Footer />}>
       <HomeItemList name="베스트 경매">
         <HomeItem />
         <HomeItem />
