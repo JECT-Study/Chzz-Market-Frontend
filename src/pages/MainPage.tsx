@@ -1,4 +1,3 @@
-import React from 'react';
 import Popup from '@/components/common/Popup';
 
 const MainPage = () => {
