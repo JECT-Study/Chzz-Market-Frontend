@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import ROUTERS from '@/constants/route';
 import MainPage from '@/pages/MainPage';
 import Home from '@/pages/home';
-import ProductList from '@/pages/ProductListPage';
+import ProductListPage from '@/pages/ProductListPage';
+import ProfileEditPage from './pages/ProfileEditPage';
 
 const routeList = [
   {
@@ -15,7 +16,11 @@ const routeList = [
   },
   {
     path: ROUTERS.PRODUCT.LIST,
-    element: <ProductList />,
+    element: <ProductListPage />,
+  },
+  {
+    path: ROUTERS.PROFILE.EDIT,
+    element: <ProfileEditPage />,
   },
 ];
 

@@ -12,7 +12,7 @@ const Layout = ({ header, children, footer }: LayoutProps) => {
     <div className="flex justify-center w-full h-screen">
       <div className="w-[46rem] min-w-[23rem] flex flex-col justify-between h-full">
         <Header name={header} />
-        <main className="flex flex-col w-full gap-4 px-8 py-4 overflow-y-scroll">
+        <main className="flex flex-col w-full gap-4 px-8 py-4 flex-grow min-h-0 overflow-y-scroll">
           {children}
         </main>
         {footer && footer}
