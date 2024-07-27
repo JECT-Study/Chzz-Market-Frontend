@@ -10,7 +10,7 @@ interface ProductProps {
   isBidding: boolean;
 }
 
-const OngoingProduct: React.FC<{ product: ProductProps }> = ({ product }) => {
+const OngoingProduct = ({ product }: { product: ProductProps }) => {
   return (
     <div key={product.id} className="mb-4">
       <div className="flex h-[96px]">

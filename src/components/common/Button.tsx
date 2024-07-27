@@ -8,7 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   hoverColor?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   className,
   children,
   size,
@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   onClick,
   type,
-}) => {
+}: ButtonProps) => {
   const baseClasses = 'focus:outline-none';
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',

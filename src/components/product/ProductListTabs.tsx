@@ -5,10 +5,7 @@ interface ProductListTabsProps {
   setActiveTab: (tab: string) => void;
 }
 
-const ProductListTabs: React.FC<ProductListTabsProps> = ({
-  activeTab,
-  setActiveTab,
-}) => {
+const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
   return (
     <div className="flex justify-center w-full mt-3">
       <div

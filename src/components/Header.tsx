@@ -1,4 +1,4 @@
-const Header = ({ name }: { name: string }) => {
+const Header = ({ header }: { header: string }) => {
   return (
     <header className="flex items-center justify-between p-4 border-b">
       <button className="text-gray-500" aria-label="뒤로 가기">
@@ -16,7 +16,7 @@ const Header = ({ name }: { name: string }) => {
           />
         </svg>
       </button>
-      <h1 className="text-lg font-semibold">{name}</h1>
+      <h1 className="text-lg font-semibold">{header}</h1>
       <div />
     </header>
   );

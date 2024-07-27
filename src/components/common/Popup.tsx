@@ -7,12 +7,7 @@ interface PopupProps {
   height?: string;
 }
 
-const Popup: React.FC<PopupProps> = ({
-  title,
-  width,
-  height,
-  isParticipate,
-}) => {
+const Popup = ({ title, width, height, isParticipate }: PopupProps) => {
   const widthClass = width ? `w-${width}` : '300px';
   const heightClass = height ? `h-${height}` : '210px';
 
@@ -44,6 +39,11 @@ const Popup: React.FC<PopupProps> = ({
       </div>
     </div>
   );
+};
+
+Popup.defaultProps = {
+  width: '300px',
+  height: '210px',
 };
 
 export default Popup;
