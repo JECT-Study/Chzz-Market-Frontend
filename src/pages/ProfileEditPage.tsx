@@ -4,6 +4,7 @@ import Layout from '@/components/Layout';
 import Button from '@/components/common/Button';
 import ProfileInput from '@/components/profile/ProfileInput';
 import SelectRegion from '@/components/profile/SelectRegion';
+import Header from '@/components/Header';
 
 const ProfileEditPage = () => {
   const [profileName, setProfileName] = useState<string>('최대열다섯글자');
@@ -19,7 +20,7 @@ const ProfileEditPage = () => {
   };
 
   return (
-    <Layout header="프로필 수정" footer={<Footer />}>
+    <Layout header={<Header>프로필 수정</Header>} footer={<Footer />}>
       <div className="flex flex-col items-center px-4 py-6 space-y-4">
         <div className="w-20 h-20 bg-gray-300 rounded-full" />
         <h2 className="text-lg font-bold">프로필 정보</h2>

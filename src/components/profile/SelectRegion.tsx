@@ -1,8 +1,8 @@
-// interface Props {
-//   onClose: () => void;
-// }
+interface Props {
+  onClose: () => void;
+}
 
-const SelectRegion = () => {
+const SelectRegion = ({ onClose }: Props) => {
   return <div>1</div>;
 };
 
