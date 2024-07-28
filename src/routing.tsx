@@ -1,15 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import ROUTERS from '@/constants/route';
-import MainPage from '@/pages/MainPage';
-import Home from '@/pages/home';
+import Home from '@/pages/Home';
 import ProductListPage from '@/pages/ProductListPage';
 import ProfileEditPage from './pages/ProfileEditPage';
 
 const routeList = [
-  {
-    path: ROUTERS.MAIN,
-    element: <MainPage />,
-  },
   {
     path: ROUTERS.HOME,
     element: <Home />,

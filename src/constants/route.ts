@@ -1,6 +1,5 @@
 const ROUTERS = Object.freeze({
-  MAIN: '/',
-  HOME: '/home',
+  HOME: '/',
   PROFILE: {
     EDIT: '/profile/edit',
   },
