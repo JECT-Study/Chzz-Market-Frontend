@@ -14,6 +14,8 @@ export default defineConfig({
       '@/constants': resolve(__dirname, 'src/constants'),
       '@/mocks': resolve(__dirname, 'src/mocks'),
       '@/pages': resolve(__dirname, 'src/pages'),
+      '@/api': resolve(__dirname, 'src/api'),
+      '@/utils': resolve(__dirname, 'src/utils'),
     },
   },
   test: {
