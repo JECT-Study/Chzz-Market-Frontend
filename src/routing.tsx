@@ -4,6 +4,7 @@ import ROUTERS from '@/constants/route';
 import MainPage from '@/pages/MainPage';
 import Home from '@/pages/home';
 import ProductList from '@/pages/ProductList';
+import Test from './pages/Test';
 
 const routeList = [
   {
@@ -17,6 +18,10 @@ const routeList = [
   {
     path: ROUTERS.PRODUCT.LIST,
     element: <ProductList />,
+  },
+  {
+    path: '/test',
+    element: <Test />,
   },
 ];
 

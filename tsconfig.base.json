@@ -20,7 +20,9 @@
       "@/assets/*": ["assets/*"],
       "@/constants/*": ["constants/*"],
       "@/mocks/*": ["mocks/*"],
-      "@/pages/*": ["pages/*"]
+      "@/pages/*": ["pages/*"],
+      "@/api/*": ["api/*"],
+      "@/utils/*": ["utils/*"],
     }
   }
 }

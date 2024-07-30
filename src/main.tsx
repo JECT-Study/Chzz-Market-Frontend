@@ -7,7 +7,7 @@ import { store } from './store';
 import ReactQueryProvider from './provider/queryProvider';
 
 async function enableMocking(): Promise<void> {
-  if (process.env.NODE_ENV !== 'development') {
+  if (import.meta.env.MODE !== 'development') {
     return;
   }
 
