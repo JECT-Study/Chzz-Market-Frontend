@@ -20,7 +20,7 @@ const ProfileEditPage = () => {
   };
 
   return (
-    <Layout header={<Header>프로필 수정</Header>} footer={<Footer />}>
+    <Layout header={<Header>프로필 수정</Header>}>
       <div className="flex flex-col items-center px-4 py-6 space-y-4">
         <div className="w-20 h-20 bg-gray-300 rounded-full" />
         <h2 className="text-lg font-bold">프로필 정보</h2>
@@ -44,7 +44,7 @@ const ProfileEditPage = () => {
             {profileRegion}
           </div>
         </div>
-        {activeButtonSheet && <SelectRegion onClose={onCloseBottomSheet} />}
+        <SelectRegion onClose={onCloseBottomSheet} />
         <ProfileInput
           title="링크"
           value={link}
