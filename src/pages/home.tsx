@@ -7,7 +7,7 @@ import Layout from '@/components/Layout';
 
 const Home = () => {
   return (
-    <Layout header={<Header>치즈 마켓</Header>} footer={<Footer />}>
+    <Layout header={<Header path="/">치즈 마켓</Header>} footer={<Footer />}>
       <HomeItemList name="베스트 경매">
         <HomeItem />
         <HomeItem />

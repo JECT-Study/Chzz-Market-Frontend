@@ -19,7 +19,7 @@ const ProfileEditPage = () => {
   };
 
   return (
-    <Layout header={<Header>프로필 수정</Header>}>
+    <Layout header={<Header path="/">프로필 수정</Header>}>
       <div className="flex flex-col px-4 py-6 space-y-4">
         <h2 className="text-lg font-bold pb-4">프로필 정보</h2>
         <ProfileInput title="닉네임" value={profileName} onChange={() => {}} />

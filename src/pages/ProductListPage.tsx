@@ -11,7 +11,7 @@ import Header from '@/components/Header';
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
   return (
-    <Layout header={<Header>상품 경매 목록</Header>}>
+    <Layout header={<Header path="/">상품 경매 목록</Header>}>
       <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <ProductButtons />
       <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
