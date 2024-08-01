@@ -1,23 +1,23 @@
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import ROUTERS from '@/constants/route';
-import MainPage from '@/pages/MainPage';
 import Home from '@/pages/home';
+import ProductListPage from '@/pages/ProductListPage';
+import Test from '@/pages/Test';
+import ProfileEditPage from './pages/ProfileEditPage';
 import ProductList from '@/pages/ProductList';
-import Test from './pages/Test';
 
 const routeList = [
-  {
-    path: ROUTERS.MAIN,
-    element: <MainPage />,
-  },
   {
     path: ROUTERS.HOME,
     element: <Home />,
   },
   {
     path: ROUTERS.PRODUCT.LIST,
-    element: <ProductList />,
+    element: <ProductListPage />,
+  },
+  {
+    path: ROUTERS.PROFILE.EDIT,
+    element: <ProfileEditPage />,
   },
   {
     path: '/test',

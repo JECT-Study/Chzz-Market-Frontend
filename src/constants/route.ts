@@ -1,8 +1,10 @@
 const ROUTERS = Object.freeze({
-  MAIN: '/',
-  HOME: '/home',
+  HOME: '/',
+  PROFILE: {
+    EDIT: '/profile/edit',
+  },
   PRODUCT: {
-    // 이부분 정확하게 모르겠습니다. product/list product-list productList
+    // 이부분 정확하게 모르겠습니다. product/list or product-list or productList
     LIST: '/product/list',
   },
 });

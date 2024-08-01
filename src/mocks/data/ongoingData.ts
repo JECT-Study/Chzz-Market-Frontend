@@ -4,7 +4,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '16시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: false,
   },
   {
@@ -12,7 +12,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '1시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: true,
   },
   {
@@ -20,7 +20,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '1시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: true,
   },
   {
@@ -28,7 +28,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '4시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: true,
   },
   {
@@ -36,7 +36,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '5시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: true,
   },
   {
@@ -44,7 +44,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '6시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: true,
   },
   {
@@ -52,7 +52,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '7시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: true,
   },
   {
@@ -60,7 +60,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '8시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: true,
   },
   {
@@ -68,7 +68,7 @@ const ongoingProducts = [
     name: '[나이키] 신발',
     startPrice: '10,000원',
     timeLeft: '9시간 남음',
-    activeUserCount: '11',
+    activeUserCount: 11,
     isBidding: true,
   },
 ];

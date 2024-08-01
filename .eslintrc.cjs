@@ -34,6 +34,9 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'react/react-in-jsx-scope': 'off',
+    // import React from 'react' 꺼두기
+    "react/jsx-uses-react": "off",
+    "react/jsx-uses-vars": "off",
     // 함수형 컴포넌트 정의 규칙 수정
     'react/function-component-definition': [
       'error',
@@ -56,6 +59,13 @@ module.exports = {
         json: 'never',
       },
     ],
+    // button 컴포넌트 만들 때 key-events 꺼두기
+    "jsx-a11y/click-events-have-key-events": 'off',
+    "jsx-a11y/no-static-element-interactions": 'off',
+
+    'react/prop-types': 'off', // TypeScript를 사용하여 prop-type 규칙을 사용하지 않도록 설정합니다
+    '@typescript-eslint/explicit-module-boundary-types': 'off', // 모듈 경계에 대한 명시적 반환 유형 규칙 사용 안 함
+    '@typescript-eslint/no-unused-vars': 'off' //사용되지 않은 변수 무시 _
   },
   parserOptions: {
     tsconfigRootDir: './',
