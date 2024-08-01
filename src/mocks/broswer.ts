@@ -1,6 +1,9 @@
+/* eslint-disable import/no-named-as-default */
 import { setupWorker } from 'msw/browser';
-import { handlers } from './handlers';
+import { HttpHandler } from 'msw';
+import getTest from './handlers/test';
+
+export const handlers: HttpHandler[] = [getTest];
 
 export const worker = setupWorker(...handlers);
-
-export default worker;
+/* eslint-disable import/no-named-as-default */

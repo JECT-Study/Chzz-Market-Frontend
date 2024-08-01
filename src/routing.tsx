@@ -4,6 +4,7 @@ import Home from '@/pages/home';
 import ProductListPage from '@/pages/ProductListPage';
 import Test from '@/pages/Test';
 import ProfileEditPage from './pages/ProfileEditPage';
+import ProductList from '@/pages/ProductList';
 
 const routeList = [
   {
