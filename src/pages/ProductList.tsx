@@ -1,41 +1,19 @@
-import React, { useState } from 'react';
-import classNames from 'classnames';
-import { LuUsers } from 'react-icons/lu';
+import Button from '@/components/common/Button';
 import { FaHeart } from 'react-icons/fa';
 import Layout from '@/components/Layout';
-import Button from '@/components/common/Button';
+import { LuUsers } from 'react-icons/lu';
+import classNames from 'classnames';
 import ongoingProducts from '@/mocks/data/ongoingData';
 import upcomingProducts from '@/mocks/data/upcomingData';
+import { useState } from 'react';
+import Header from '@/components/Header';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
   const [activeFilter, setActiveFilter] = useState('');
 
   return (
-    <Layout
-      header={
-        <header className="flex items-center justify-between p-4 border-b">
-          <button className="text-gray-500" aria-label="뒤로 가기">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-          <h1 className="text-lg font-semibold">상품 경매 목록</h1>
-          <div />
-        </header>
-      }
-      footer={null}
-    >
+    <Layout header={<Header path="/">상품 경매 목록</Header>}>
       <div className="flex justify-center w-full mt-3">
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div
@@ -62,7 +40,7 @@ const ProductList = () => {
           사전 등록 경매
         </div>
       </div>
-      <div className="flex h-22px space-x-3 p-4">
+      <div className="flex p-4 space-x-3 h-22px">
         <Button
           size="xsmall"
           color={classNames(activeFilter === 'popular' ? 'black' : 'white')}

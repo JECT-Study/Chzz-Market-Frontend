@@ -4,10 +4,48 @@ import Header from '@/components/Header';
 import HomeItem from '@/components/HomeItem';
 import HomeItemList from '@/components/HomeItemList';
 import Layout from '@/components/Layout';
+import { Link } from 'react-router-dom';
+
+const HomeHeader = <Header path="/">치즈마켓</Header>;
 
 const Home = () => {
+  const HomeFooter = (
+    <Footer>
+      <nav className="flex items-center h-full">
+        <div className="flex justify-center items-center w-[11.25rem] h-[3.75rem]">
+          <img
+            src="/home_on.svg"
+            alt="homeOn"
+            className="cursor-pointer size-7"
+          />
+        </div>
+        <div className="flex justify-center items-center w-[11.25rem] h-[3.75rem]">
+          <img
+            src="/notice_off.svg"
+            alt="noticeOff"
+            className="cursor-pointer size-7"
+          />
+        </div>
+        <div className="flex justify-center items-center w-[11.25rem] h-[3.75rem]">
+          <img
+            src="/heart_off.svg"
+            alt="heartOff"
+            className="cursor-pointer size-7"
+          />
+        </div>
+        <div className="flex justify-center items-center w-[11.25rem] h-[3.75rem]">
+          <img
+            src="/my_off.svg"
+            alt="myOff"
+            className="cursor-pointer size-7"
+          />
+        </div>
+      </nav>
+    </Footer>
+  );
   return (
-    <Layout header={<Header name="치즈 마켓" />} footer={<Footer />}>
+    <Layout header={HomeHeader} footer={HomeFooter}>
+      <Link to="/register">등록</Link>
       <HomeItemList name="베스트 경매">
         <HomeItem />
         <HomeItem />

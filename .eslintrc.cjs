@@ -19,7 +19,12 @@ module.exports = {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true, // This is important to resolve types
-        project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.node.json', './tsconfig.base.json'],
+        project: [
+          './tsconfig.json',
+          './tsconfig.app.json',
+          './tsconfig.node.json',
+          './tsconfig.base.json',
+        ],
       },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -56,9 +61,24 @@ module.exports = {
         json: 'never',
       },
     ],
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        assert: 'either',
+        depth: 3,
+        controlComponents: ['Input', 'Select'], // 커스텀 컴포넌트를 여기에 추가
+      },
+    ],
   },
   parserOptions: {
     tsconfigRootDir: './',
-    project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.node.json', './tsconfig.base.json'],
+    project: [
+      './tsconfig.json',
+      './tsconfig.app.json',
+      './tsconfig.node.json',
+      './tsconfig.base.json',
+    ],
   },
 };
