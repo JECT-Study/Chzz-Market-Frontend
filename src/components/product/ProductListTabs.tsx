@@ -12,7 +12,7 @@ const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
         className={classNames(
           'flex justify-center items-center w-full py-2 ml-4 cursor-pointer text-sm',
           activeTab === 'ongoing'
-            ? 'border-b-2 border-black'
+            ? 'border-b-2 border-cheeseYellow'
             : 'border-b-2 border-gray-300',
         )}
         onClick={() => setActiveTab('ongoing')}
@@ -23,7 +23,7 @@ const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
         className={classNames(
           'flex justify-center w-full items-center py-2 mr-4 cursor-pointer text-sm',
           activeTab === 'upcoming'
-            ? 'border-b-2 border-black'
+            ? 'border-b-2 border-cheeseYellow'
             : 'border-b-2 border-gray-300',
         )}
         onClick={() => setActiveTab('upcoming')}

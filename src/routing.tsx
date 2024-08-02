@@ -1,10 +1,11 @@
-import Home from '@/pages/Home';
+import Home from '@/pages/home';
 import ProductListPage from '@/pages/ProductListPage';
 import ROUTERS from '@/constants/route';
 import Test from '@/pages/Test';
 import { createBrowserRouter } from 'react-router-dom';
 import Register from './pages/Register';
 import ProfileEditPage from './pages/ProfileEditPage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
 
 const routeList = [
   {
@@ -26,6 +27,10 @@ const routeList = [
   {
     path: ROUTERS.REGISTER,
     element: <Register />,
+  },
+  {
+    path: ROUTERS.ORDER.HISTORY,
+    element: <OrderHistoryPage />,
   },
 ];
 
