@@ -1,4 +1,4 @@
-import Home from '@/pages/home';
+import Home from '@/pages/Home';
 import ProductListPage from '@/pages/ProductListPage';
 import ROUTERS from '@/constants/route';
 import Test from '@/pages/Test';
