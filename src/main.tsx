@@ -1,9 +1,10 @@
 import './index.css';
-import ReactDOM from 'react-dom/client';
+
 import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom/client';
 import App from './App';
-import { store } from './store';
 import ReactQueryProvider from './provider/queryProvider';
+import { store } from './store';
 
 async function enableMocking(): Promise<void> {
   if (import.meta.env.MODE !== 'development') {

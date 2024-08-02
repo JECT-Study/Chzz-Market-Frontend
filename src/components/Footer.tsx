@@ -1,17 +1,9 @@
-import {
-  AiOutlineBell,
-  AiOutlineHeart,
-  AiOutlineHome,
-  AiOutlineUser,
-} from 'react-icons/ai';
+import { ReactNode } from 'react';
 
-const Footer = () => {
+const Footer = ({ children }: { children: ReactNode }) => {
   return (
-    <footer className="flex items-center gap-2 justify-around w-full min-h-[3.5rem] bg-yellow-500">
-      <AiOutlineHome size={25} />
-      <AiOutlineBell size={25} />
-      <AiOutlineHeart size={25} />
-      <AiOutlineUser size={25} />
+    <footer className="w-full min-h-[4.5rem] h-[4.5rem] px-8 py-4 shadow-top">
+      {children}
     </footer>
   );
 };

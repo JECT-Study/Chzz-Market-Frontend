@@ -1,10 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
-import ROUTERS from '@/constants/route';
 import Home from '@/pages/home';
 import ProductListPage from '@/pages/ProductListPage';
+import ROUTERS from '@/constants/route';
 import Test from '@/pages/Test';
+import { createBrowserRouter } from 'react-router-dom';
+import Register from './pages/Register';
 import ProfileEditPage from './pages/ProfileEditPage';
-import ProductList from '@/pages/ProductList';
 
 const routeList = [
   {
@@ -23,13 +23,16 @@ const routeList = [
     path: '/test',
     element: <Test />,
   },
+  {
+    path: ROUTERS.REGISTER,
+    element: <Register />,
+  },
 ];
 
 export const router = createBrowserRouter(
   routeList.map((item) => {
     return {
       ...item,
-      element: <div>{item.element}</div>,
       // errorElement <Error> 만들기
     };
   }),

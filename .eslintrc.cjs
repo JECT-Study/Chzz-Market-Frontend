@@ -19,7 +19,12 @@ module.exports = {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true, // This is important to resolve types
-        project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.node.json', './tsconfig.base.json'],
+        project: [
+          './tsconfig.json',
+          './tsconfig.app.json',
+          './tsconfig.node.json',
+          './tsconfig.base.json',
+        ],
       },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -35,8 +40,8 @@ module.exports = {
     ],
     'react/react-in-jsx-scope': 'off',
     // import React from 'react' 꺼두기
-    "react/jsx-uses-react": "off",
-    "react/jsx-uses-vars": "off",
+    'react/jsx-uses-react': 'off',
+    'react/jsx-uses-vars': 'off',
     // 함수형 컴포넌트 정의 규칙 수정
     'react/function-component-definition': [
       'error',
@@ -60,15 +65,30 @@ module.exports = {
       },
     ],
     // button 컴포넌트 만들 때 key-events 꺼두기
-    "jsx-a11y/click-events-have-key-events": 'off',
-    "jsx-a11y/no-static-element-interactions": 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
 
     'react/prop-types': 'off', // TypeScript를 사용하여 prop-type 규칙을 사용하지 않도록 설정합니다
     '@typescript-eslint/explicit-module-boundary-types': 'off', // 모듈 경계에 대한 명시적 반환 유형 규칙 사용 안 함
-    '@typescript-eslint/no-unused-vars': 'off' //사용되지 않은 변수 무시 _
+    '@typescript-eslint/no-unused-vars': 'off', //사용되지 않은 변수 무시 _
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        assert: 'either',
+        depth: 3,
+        controlComponents: ['Input', 'Select'], // 커스텀 컴포넌트를 여기에 추가
+      },
+    ],
   },
   parserOptions: {
     tsconfigRootDir: './',
-    project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.node.json', './tsconfig.base.json'],
+    project: [
+      './tsconfig.json',
+      './tsconfig.app.json',
+      './tsconfig.node.json',
+      './tsconfig.base.json',
+    ],
   },
 };
