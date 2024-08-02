@@ -9,7 +9,11 @@ interface HeaderProps {
   handleModal?: () => void;
 }
 
-const Header = ({ children, path, handleModal }: HeaderProps) => {
+const Header = ({
+  children = null,
+  path,
+  handleModal = undefined,
+}: HeaderProps) => {
   const navigate = useNavigate();
 
   return (
@@ -24,20 +28,17 @@ const Header = ({ children, path, handleModal }: HeaderProps) => {
         </button>
         {children && <h1 className="text-heading2">{children}</h1>}
         {handleModal && (
-          <BsThreeDotsVertical
-            className="absolute right-2"
+          <button
+            aria-label="옵션"
             onClick={handleModal}
-            size={25}
-          />
+            className="absolute right-2"
+          >
+            <BsThreeDotsVertical size={25} />
+          </button>
         )}
       </div>
     </header>
   );
-};
-
-Header.defaultProps = {
-  children: null,
-  handleModal: null,
 };
 
 export default Header;

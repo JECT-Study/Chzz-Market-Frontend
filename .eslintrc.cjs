@@ -81,6 +81,13 @@ module.exports = {
         controlComponents: ['Input', 'Select'], // 커스텀 컴포넌트를 여기에 추가
       },
     ],
+    'react/require-default-props': [
+      'off', // 기본 매개변수 사용을 허용
+      {
+        forbidDefaultForRequired: true,
+        ignoreFunctionalComponents: true,
+      },
+    ],
   },
   parserOptions: {
     tsconfigRootDir: './',

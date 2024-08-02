@@ -11,10 +11,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = ({
   className,
   children,
-  size,
+  size = 'medium',
   color,
-  hoverColor,
-  disabled,
+  hoverColor = '',
+  disabled = false,
   onClick,
   type,
 }: ButtonProps) => {
@@ -55,12 +55,6 @@ const Button = ({
       {children}
     </button>
   );
-};
-
-Button.defaultProps = {
-  disabled: false,
-  hoverColor: '',
-  size: undefined,
 };
 
 export default Button;

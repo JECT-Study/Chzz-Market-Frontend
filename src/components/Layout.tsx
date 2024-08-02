@@ -6,7 +6,7 @@ interface LayoutProps {
   footer?: ReactNode;
 }
 
-const Layout = ({ header, children, footer }: LayoutProps) => {
+const Layout = ({ header, children, footer = null }: LayoutProps) => {
   return (
     <div className="flex justify-center w-full h-screen">
       <div className="w-[46rem] min-w-[23rem] flex flex-col justify-between h-full border-x border-gray3">
@@ -18,10 +18,6 @@ const Layout = ({ header, children, footer }: LayoutProps) => {
       </div>
     </div>
   );
-};
-
-Layout.defaultProps = {
-  footer: null,
 };
 
 export default Layout;
