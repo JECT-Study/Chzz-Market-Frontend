@@ -1,10 +1,10 @@
 import Home from '@/pages/Home';
-import ProductListPage from '@/pages/ProductListPage';
+import ProductListPage from '@/pages/ProductList';
 import ROUTERS from '@/constants/route';
 import Test from '@/pages/Test';
 import { createBrowserRouter } from 'react-router-dom';
 import Register from './pages/Register';
-import ProfileEditPage from './pages/ProfileEditPage';
+import ProfileEditPage from './pages/ProfileEdit';
 
 const routeList = [
   {
