@@ -1,23 +1,71 @@
+import { AiOutlineLeft } from 'react-icons/ai';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import { ReactNode } from 'react';
 
-interface LayoutProps {
-  header: ReactNode;
-  children: ReactNode;
-  footer?: ReactNode;
+interface HeaderProps {
+  children?: ReactNode;
+  handleBack: () => void;
+  handleModal?: () => void;
 }
 
-const Layout = ({ header, children, footer = null }: LayoutProps) => {
+const Header = ({
+  children = null,
+  handleBack,
+  handleModal = undefined,
+}: HeaderProps) => {
+  return (
+    <header className="w-full min-h-[5rem] h-[5rem] px-8 py-4 shadow-bottom">
+      <div className="relative flex items-center justify-center w-full h-full">
+        <button
+          className="absolute left-2"
+          aria-label="뒤로 가기"
+          onClick={handleBack}
+        >
+          <AiOutlineLeft size={25} />
+        </button>
+        {children && <h2 className="text-heading2">{children}</h2>}
+        {handleModal && (
+          <button
+            aria-label="옵션"
+            onClick={handleModal}
+            className="absolute right-2"
+          >
+            <BsThreeDotsVertical size={25} />
+          </button>
+        )}
+      </div>
+    </header>
+  );
+};
+
+const Main = ({ children }: { children: ReactNode }) => {
+  return (
+    <main className="flex flex-col flex-grow w-full min-h-0 px-8 py-4 overflow-y-scroll">
+      {children}
+    </main>
+  );
+};
+
+const Footer = ({ children }: { children: ReactNode }) => {
+  return (
+    <footer className="w-full min-h-[4.5rem] h-[4.5rem] px-8 py-4 shadow-top">
+      {children}
+    </footer>
+  );
+};
+
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex justify-center w-full h-screen">
       <div className="w-[46rem] min-w-[23rem] flex flex-col justify-between h-full border-x border-gray3">
-        {header}
-        <main className="flex flex-col flex-grow w-full min-h-0 gap-4 px-8 py-4 overflow-y-scroll">
-          {children}
-        </main>
-        {footer && footer}
+        {children}
       </div>
     </div>
   );
 };
+
+Layout.Header = Header;
+Layout.Main = Main;
+Layout.Footer = Footer;
 
 export default Layout;
