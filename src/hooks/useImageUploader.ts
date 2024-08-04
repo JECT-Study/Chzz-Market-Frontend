@@ -3,6 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 export const useImageUploader = (
   state: string[],
   setState: Dispatch<SetStateAction<string[]>>,
+  max: number,
 ) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -15,7 +16,7 @@ export const useImageUploader = (
 
     const files = Array.from(e.target.files);
 
-    if (state.length + files.length > 4) {
+    if (state.length + files.length > max) {
       return;
     }
 

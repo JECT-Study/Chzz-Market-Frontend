@@ -19,7 +19,7 @@ const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
     hoveredIndex,
   } = useDragAndDrop(images, setImages);
   const { fileInputRef, deleteImage, handleImage, handleBoxClick } =
-    useImageUploader(images, setImages);
+    useImageUploader(images, setImages, 5);
 
   return (
     <RegisterLabel title="사진">
