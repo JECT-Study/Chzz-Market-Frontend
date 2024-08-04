@@ -24,7 +24,7 @@ const Register = () => {
   const [images, setImages] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  const title = caution === '' ? '경매 등록하기' : `${caution} 주의사항`;
+  const title = caution === '' ? '경매 등록하기' : `주의사항`;
   const cautionButton =
     caution === 'enroll' ? '경매 등록하기' : '사전 등록하기';
 
@@ -99,6 +99,7 @@ const Register = () => {
                 id="상품 설명"
                 placeholder="경매에 올릴 상품에 대해 자세히 설명해주세요.(최대 1,000자)"
                 className="focus-visible:ring-cheeseYellow"
+                maxLength={1000}
               />
             </RegisterLabel>
             <RegisterLabel title="경매 마감 시간">
@@ -107,7 +108,7 @@ const Register = () => {
                 type="text"
                 defaultValue="24 시간"
                 disabled
-                className="text-gray2 border-gray2 bg-[#f1f1f1]"
+                className="text-gray1 border-gray2 bg-[#f1f1f1]"
               />
             </RegisterLabel>
           </form>
@@ -126,16 +127,17 @@ const Register = () => {
               <Button
                 type="button"
                 color="white"
-                className="w-full py-3 rounded-lg active:bg-black active:text-white text-button border-gray"
+                className="flex-1 py-3 rounded-lg active:bg-black active:text-white text-button border-gray"
                 size="medium"
                 onClick={() => setCaution('pre-enroll')}
+                disabled
               >
                 사전 등록하기
               </Button>
               <Button
                 type="button"
                 color="bg-cheeseYellow"
-                className="w-full py-3 text-white rounded-lg active:bg-black text-button bg-cheeseYellow"
+                className="flex-[2] py-3 text-white rounded-lg active:bg-black text-button bg-cheeseYellow"
                 size="medium"
                 onClick={() => setCaution('enroll')}
               >

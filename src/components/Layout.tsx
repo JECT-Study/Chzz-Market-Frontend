@@ -14,7 +14,7 @@ const Header = ({
   handleModal = undefined,
 }: HeaderProps) => {
   return (
-    <header className="w-full min-h-[5rem] h-[5rem] px-8 py-4 shadow-bottom">
+    <header className="w-full min-h-[4rem] h-[4rem] px-8 py-4 shadow-bottom">
       <div className="relative flex items-center justify-center w-full h-full">
         <button
           className="absolute left-2"
@@ -48,7 +48,7 @@ const Main = ({ children }: { children: ReactNode }) => {
 
 const Footer = ({ children }: { children: ReactNode }) => {
   return (
-    <footer className="w-full min-h-[4.5rem] h-[4.5rem] px-8 py-4 shadow-top">
+    <footer className="w-full min-h-[4rem] h-[4rem] px-8 py-4 shadow-top">
       {children}
     </footer>
   );
