@@ -54,11 +54,13 @@ const ProfileEdit = () => {
             placeholder="http://"
             onChange={() => {}}
           />
-          <Button className="w-full h-[47px] rounded-lg" color="black">
-            프로필 수정 완료
-          </Button>
         </div>
       </Layout.Main>
+      <Layout.Footer>
+        <Button className="w-full h-[47px] rounded-lg" color="cheeseYellow">
+          프로필 수정 완료
+        </Button>
+      </Layout.Footer>
     </Layout>
   );
 };
