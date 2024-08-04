@@ -2,7 +2,7 @@ interface Props {
   title: string;
   value: string;
   placeholder?: string;
-  onChange: () => void;
+  onChange?: () => void;
 }
 
 const ProfileInput = ({ title, value, placeholder, onChange }: Props) => {
@@ -21,6 +21,7 @@ const ProfileInput = ({ title, value, placeholder, onChange }: Props) => {
 
 ProfileInput.defaultProps = {
   placeholder: null,
+  onChange: undefined,
 };
 
 export default ProfileInput;

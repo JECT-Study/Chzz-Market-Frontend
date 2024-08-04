@@ -1,10 +1,15 @@
-import Home from '@/pages/Home';
+import Home from '@/pages/home';
 import ProductListPage from '@/pages/ProductListPage';
 import ROUTERS from '@/constants/route';
 import Test from '@/pages/Test';
 import { createBrowserRouter } from 'react-router-dom';
 import Register from './pages/Register';
 import ProfileEditPage from './pages/ProfileEditPage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import MyPage from './pages/MyPage';
+import AllOrderList from './pages/AllOrderList';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 const routeList = [
   {
@@ -26,6 +31,26 @@ const routeList = [
   {
     path: ROUTERS.REGISTER,
     element: <Register />,
+  },
+  {
+    path: ROUTERS.ORDER.HISTORY,
+    element: <OrderHistoryPage />,
+  },
+  {
+    path: ROUTERS.MYPAGE,
+    element: <MyPage />,
+  },
+  {
+    path: ROUTERS.ORDER.AllLIST,
+    element: <AllOrderList />,
+  },
+  {
+    path: ROUTERS.SIGNUP,
+    element: <Signup />,
+  },
+  {
+    path: ROUTERS.LOGIN,
+    element: <Login />,
   },
 ];
 

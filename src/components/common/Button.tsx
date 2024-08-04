@@ -22,6 +22,7 @@ const Button = ({
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',
     'bg-white text-black border border-black': color === 'white',
+    'bg-cheeseYellow text-white': color === 'cheeseYellow',
   });
   const sizeClasses = classNames({
     'px-2 py-0.5 text-xs': size === 'xsmall',

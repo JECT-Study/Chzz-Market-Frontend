@@ -4,6 +4,15 @@ import Button from '@/components/common/Button';
 import ProfileInput from '@/components/profile/ProfileInput';
 import Header from '@/components/Header';
 import SelectCountry from '@/components/profile/SelectCountry';
+import Footer from '@/components/Footer';
+
+const ProfileEditPageFooter = (
+  <Footer>
+    <Button className="w-full h-[47px] rounded-lg" color="cheeseYellow">
+      프로필 수정 완료
+    </Button>
+  </Footer>
+);
 
 const ProfileEditPage = () => {
   const [profileName, setProfileName] = useState<string>('최대열다섯글자');
@@ -19,8 +28,11 @@ const ProfileEditPage = () => {
   };
 
   return (
-    <Layout header={<Header path="/">프로필 수정</Header>}>
-      <div className="flex flex-col px-4 py-6 space-y-4">
+    <Layout
+      header={<Header path="/">프로필 수정</Header>}
+      footer={ProfileEditPageFooter}
+    >
+      <div className="flex flex-col px-2 py-4 space-y-4">
         <h2 className="text-lg font-bold pb-4">프로필 정보</h2>
         <ProfileInput title="닉네임" value={profileName} onChange={() => {}} />
         <div className="w-full">
@@ -45,9 +57,6 @@ const ProfileEditPage = () => {
           placeholder="http://"
           onChange={() => {}}
         />
-        <Button className="w-full h-[47px] rounded-lg" color="black">
-          프로필 수정 완료
-        </Button>
       </div>
     </Layout>
   );
