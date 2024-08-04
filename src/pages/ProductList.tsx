@@ -6,12 +6,16 @@ import OngoingProduct from '@/components/product/OngoingProduct';
 import UpcomingProduct from '@/components/product/UpcomingProduct';
 import ProductButtons from '@/components/product/ProductButtons';
 import ProductListTabs from '@/components/product/ProductListTabs';
-import Header from '@/components/Header';
+import { useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
+  const navigate = useNavigate();
   return (
-    <Layout header={<Header path="/">상품 경매 목록</Header>}>
+    <Layout>
+      <Layout.Header handleBack={() => navigate('/')}>
+        상품 경매 목록
+      </Layout.Header>
       <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <ProductButtons />
       <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">

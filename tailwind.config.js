@@ -9,6 +9,9 @@ module.exports = {
   ],
   prefix: '',
   theme: {
+    fontFamily: {
+      sans: 'Pretendard, sans-serif',
+    },
     container: {
       center: true,
       padding: '2rem',
@@ -55,6 +58,20 @@ module.exports = {
           {
             lineHeight: '1.6',
             fontWeight: '500',
+          },
+        ],
+        body1Bold: [
+          '1rem',
+          {
+            lineHeight: '1.6',
+            fontWeight: '700',
+          },
+        ],
+        body2Bold: [
+          '.875rem',
+          {
+            lineHeight: '1.6',
+            fontWeight: '700',
           },
         ],
         button: [
