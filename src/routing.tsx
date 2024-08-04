@@ -9,6 +9,7 @@ import OrderHistoryPage from './pages/OrderHistoryPage';
 import MyPage from './pages/MyPage';
 import AllOrderList from './pages/AllOrderList';
 import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 const routeList = [
   {
@@ -46,6 +47,10 @@ const routeList = [
   {
     path: ROUTERS.SIGNUP,
     element: <Signup />,
+  },
+  {
+    path: ROUTERS.LOGIN,
+    element: <Login />,
   },
 ];
 

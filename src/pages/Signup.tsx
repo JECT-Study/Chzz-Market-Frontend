@@ -23,10 +23,19 @@ const Signup = () => {
       <div className="flex flex-col px-2 py-4 space-y-4">
         <h2 className="text-lg font-bold pb-4">기본 정보 입력</h2>
         <ProfileInput title="닉네임" value="" />
-        <div className="w-full">
-          <p className="text-gray-600">자기소개</p>
-        </div>
-        <ProfileInput title="링크" value="" onChange={() => {}} />
+        <ProfileInput title="지역" value="" />
+        <ProfileInput
+          title="은행 선택"
+          placeholder="은행을 선택해주세요"
+          value=""
+        />
+        <ProfileInput title="계좌번호" value="" />
+        <ProfileInput
+          title="자기소개"
+          placeholder="간단한 자기 소개를 입력해주세요."
+          value=""
+        />
+        <ProfileInput title="링크" placeholder="http://" value="" />
       </div>
     </Layout>
   );
