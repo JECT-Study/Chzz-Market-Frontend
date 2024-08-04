@@ -11,7 +11,7 @@ const OrderHistoryFooter = (
     <nav className="flex items-center h-full">
       <div className="flex justify-center items-center w-[11.25rem] h-[3.75rem]">
         <img
-          src="/home_on.svg"
+          src="/home_off.svg"
           alt="homeOff"
           className="cursor-pointer size-7"
         />
@@ -31,7 +31,7 @@ const OrderHistoryFooter = (
         />
       </div>
       <div className="flex justify-center items-center w-[11.25rem] h-[3.75rem]">
-        <img src="/my_off.svg" alt="myOff" className="cursor-pointer size-7" />
+        <img src="/my_on.svg" alt="myOn" className="cursor-pointer size-7" />
       </div>
     </nav>
   </Footer>

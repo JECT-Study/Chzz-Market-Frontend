@@ -10,17 +10,19 @@ const mockData = {
 
 const MyPageProfile = () => {
   return (
-    <div className="flex items-center">
-      <div className="w-16 h-16 rounded-full bg-gray-300 mr-4" />
+    <div className="flex items-center pb-8 mb-10 border-b border-b-gray3">
+      <div className="w-20 h-20 rounded-full bg-gray-300 mr-4" />
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <p className="text-lg font-bold mr-2 pr-2 border-r-2 border-r-gray3">
+            <p className="text-lg font-bold mr-2 pr-2 border-r border-r-gray3">
               {mockData.nickname}
             </p>
             <p>{mockData.country}</p>
           </div>
-          <button className="px-3 py-1 border rounded-md">수정</button>
+          <button className="px-3 py-1 border border-gray2 rounded-md">
+            수정
+          </button>
         </div>
         <div className="mt-2">
           <div className="font-bold">자기소개</div>
