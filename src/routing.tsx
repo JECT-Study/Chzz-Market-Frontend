@@ -6,8 +6,8 @@ import AllOrderList from './pages/AllOrderList';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyPage from './pages/MyPage';
-import OrderHistoryPage from './pages/OrderHistoryPage';
-import ProfileEditPage from './pages/ProfileEdit';
+import OrderHistory from './pages/OrderHistory';
+import ProfileEdit from './pages/ProfileEdit';
 import Register from './pages/Register';
 import Signup from './pages/Signup';
 
@@ -22,7 +22,7 @@ const routeList = [
   },
   {
     path: ROUTERS.PROFILE.EDIT,
-    element: <ProfileEditPage />,
+    element: <ProfileEdit />,
   },
   {
     path: '/test',
@@ -34,7 +34,7 @@ const routeList = [
   },
   {
     path: ROUTERS.ORDER.HISTORY,
-    element: <OrderHistoryPage />,
+    element: <OrderHistory />,
   },
   {
     path: ROUTERS.MYPAGE,

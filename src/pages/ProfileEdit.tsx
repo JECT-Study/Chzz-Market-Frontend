@@ -5,7 +5,7 @@ import ProfileInput from '@/components/profile/ProfileInput';
 import SelectCountry from '@/components/profile/SelectCountry';
 import { useNavigate } from 'react-router-dom';
 
-const ProfileEditPage = () => {
+const ProfileEdit = () => {
   const [profileName, setProfileName] = useState<string>('최대열다섯글자');
   const [profileIntro, setProfileIntro] = useState<string>(
     '안녕하세요. 나이키 직영 조던 정품 취급 전문가입니다.',
@@ -63,4 +63,4 @@ const ProfileEditPage = () => {
   );
 };
 
-export default ProfileEditPage;
+export default ProfileEdit;
