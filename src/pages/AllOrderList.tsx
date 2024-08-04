@@ -1,12 +1,10 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Layout from '@/components/Layout';
-import OrderListTab from '@/components/order/OrderListTab';
-import OrderProduct from '@/components/order/OrderProduct';
-import ongoingProducts from '@/mocks/data/ongoingData';
+import AllOrderTab from '@/components/mypage/AllOrderTab';
 import { useState } from 'react';
 
-const OrderHistoryFooter = (
+const myPageFooter = (
   <Footer>
     <nav className="flex items-center h-full">
       <div className="flex justify-center items-center w-[11.25rem] h-[3.75rem]">
@@ -37,24 +35,13 @@ const OrderHistoryFooter = (
   </Footer>
 );
 
-const OrderHistoryPage = () => {
-  const [activeTab, setActiveTab] = useState('joinedAuctions');
-
+const AllOrderList = () => {
+  const [activeTab, setActiveTab] = useState(true);
   return (
-    <Layout
-      header={<Header path="/">모든 참여 내역</Header>}
-      footer={OrderHistoryFooter}
-    >
-      <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'joinedAuctions' &&
-        ongoingProducts.map((product) => (
-          <OrderProduct key={product.id} product={product} />
-        ))}
-      {activeTab === 'successfulAuctions' && <div />}
-      {activeTab === 'failedAuctions' && <div />}
-      {activeTab === 'closedAuctions' && <div />}
+    <Layout header={<Header path="/">마이페이지</Header>} footer={myPageFooter}>
+      <AllOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
     </Layout>
   );
 };
 
-export default OrderHistoryPage;
+export default AllOrderList;

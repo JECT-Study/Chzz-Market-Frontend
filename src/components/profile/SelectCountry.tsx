@@ -31,14 +31,14 @@ const SelectCountry = ({ onClose }: Props) => {
           <Button
             key={item.id}
             size="medium"
-            className="rounded-lg"
+            className="rounded-lg border-gray3"
             color="white"
           >
             {item.name}
           </Button>
         ))}
       </div>
-      <Button size="medium" className="rounded-lg" color="black">
+      <Button size="medium" className="rounded-lg" color="cheeseYellow">
         지역 선택 완료
       </Button>
     </Modal>

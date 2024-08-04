@@ -1,5 +1,7 @@
 const ROUTERS = Object.freeze({
   HOME: '/',
+  SIGNUP: '/signup',
+  MYPAGE: '/mypage',
   PROFILE: {
     EDIT: '/profile/edit',
   },
@@ -8,6 +10,7 @@ const ROUTERS = Object.freeze({
   },
   ORDER: {
     HISTORY: '/order/history',
+    AllLIST: '/order/all-list',
   },
   REGISTER: '/register',
 });

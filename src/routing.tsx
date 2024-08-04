@@ -6,6 +6,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import Register from './pages/Register';
 import ProfileEditPage from './pages/ProfileEditPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
+import MyPage from './pages/MyPage';
+import AllOrderList from './pages/AllOrderList';
+import Signup from './pages/Signup';
 
 const routeList = [
   {
@@ -31,6 +34,18 @@ const routeList = [
   {
     path: ROUTERS.ORDER.HISTORY,
     element: <OrderHistoryPage />,
+  },
+  {
+    path: ROUTERS.MYPAGE,
+    element: <MyPage />,
+  },
+  {
+    path: ROUTERS.ORDER.AllLIST,
+    element: <AllOrderList />,
+  },
+  {
+    path: ROUTERS.SIGNUP,
+    element: <Signup />,
   },
 ];
 
