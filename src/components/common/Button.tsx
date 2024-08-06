@@ -22,6 +22,9 @@ const Button = ({
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',
     'bg-white text-black border border-black': color === 'white',
+    'bg-gray text-white': color === 'gray',
+    'bg-gray2 text-white': color === 'gray2',
+    'bg-gray3 text-white': color === 'gray3',
     'bg-cheeseYellow text-white': color === 'cheeseYellow',
   });
   const sizeClasses = classNames({
