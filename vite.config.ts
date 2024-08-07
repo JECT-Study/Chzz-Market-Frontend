@@ -16,6 +16,7 @@ export default defineConfig({
       '@/pages': resolve(__dirname, 'src/pages'),
       '@/api': resolve(__dirname, 'src/api'),
       '@/utils': resolve(__dirname, 'src/utils'),
+      '@/models': resolve(__dirname, 'src/models'),
     },
   },
   test: {
