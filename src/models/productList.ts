@@ -1,0 +1,18 @@
+export interface ProductListItem {
+  id: number;
+  cdnPath: string | null;
+  timeRemaining: number;
+  minPrice: number;
+  participantCount: number;
+  isParticipating: boolean;
+}
+
+export interface ProductList {
+  hasNext: boolean;
+  items: ProductListItem[];
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+}
