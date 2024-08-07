@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import ongoingProducts from '@/mocks/data/ongoingData';
-import upcomingProducts from '@/mocks/data/upcomingData';
 import OngoingProduct from '@/components/product/OngoingProduct';
-import UpcomingProduct from '@/components/product/UpcomingProduct';
 import ProductButtons from '@/components/product/ProductButtons';
 import ProductListTabs from '@/components/product/ProductListTabs';
 import { useNavigate } from 'react-router-dom';
+import useProductList from '@/hooks/useProductList';
+import UpcomingProduct from '@/components/product/UpcomingProduct';
+import { ProductListItem } from '@/models/productList';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
   const navigate = useNavigate();
+  const { ongoingData, upcomingData } = useProductList();
+  console.log(ongoingData);
+
   return (
     <Layout>
       <Layout.Header handleBack={() => navigate('/')}>
@@ -20,10 +23,10 @@ const ProductList = () => {
       <ProductButtons />
       <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
         {activeTab === 'ongoing'
-          ? ongoingProducts.map((product) => (
+          ? ongoingData?.items.map((product: ProductListItem) => (
               <OngoingProduct key={product.id} product={product} />
             ))
-          : upcomingProducts.map((product) => (
+          : upcomingData?.items.map((product: ProductListItem) => (
               <UpcomingProduct key={product.id} product={product} />
             ))}
       </div>
