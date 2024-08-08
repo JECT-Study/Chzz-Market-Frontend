@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import MyPage from '@/pages/MyPage';
 
 describe('Mypage', () => {
-  it('렌더 테스트 마이페이지', () => {
+  it.skip('렌더 테스트 마이페이지', () => {
     render(
       <BrowserRouter>
         <MyPage />

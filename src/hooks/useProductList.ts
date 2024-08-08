@@ -3,30 +3,56 @@ import {
   getUpcomingProductList,
 } from '@/api/product.api';
 import { BASE_KEY } from '@/constants/queryKey';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-const useProductList = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const useProductList = (): any => {
   const {
     data: ongoingData,
-    isLoading,
-    error,
-  } = useQuery({
+    isLoading: ongoingLoading,
+    error: ongoingError,
+    fetchNextPage: fetchNextOngoingPage,
+    hasNextPage: hasNextOngoingPage,
+  } = useInfiniteQuery({
     queryKey: [BASE_KEY.ONGOING_ORDER_LIST],
-    queryFn: () => getOngoingProductList(),
+    queryFn: ({ pageParam = 1 }) =>
+      getOngoingProductList({ pageParam, pageSize: 10 }),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNext) {
+        return lastPage.pageNumber + 1;
+      }
+      return undefined;
+    },
+    initialPageParam: 1,
   });
 
   const {
     data: upcomingData,
     isLoading: upcomingLoading,
     error: upcomingError,
-  } = useQuery({
+    fetchNextPage: fetchNextUpcomingPage,
+    hasNextPage: hasNextUpcomingPage,
+  } = useInfiniteQuery({
     queryKey: [BASE_KEY.UPCOMING_ORDER_LIST],
-    queryFn: () => getUpcomingProductList(),
+    queryFn: ({ pageParam = 1 }) =>
+      getUpcomingProductList({ pageParam, pageSize: 10 }),
+    getNextPageParam: (lastPage) => {
+      console.log(lastPage);
+      if (lastPage.hasNext) {
+        return lastPage.pageNumber + 1;
+      }
+      return undefined;
+    },
+    initialPageParam: 1,
   });
 
   return {
     ongoingData,
     upcomingData,
+    fetchNextOngoingPage,
+    fetchNextUpcomingPage,
+    hasNextOngoingPage,
+    hasNextUpcomingPage,
   };
 };
 

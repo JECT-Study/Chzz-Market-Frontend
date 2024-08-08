@@ -7,7 +7,7 @@ export interface ProductListItem {
   isParticipating: boolean;
 }
 
-export interface ProductList {
+export interface ProductListData {
   hasNext: boolean;
   items: ProductListItem[];
   pageNumber: number;
