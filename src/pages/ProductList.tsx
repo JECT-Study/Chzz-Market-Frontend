@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
 import OngoingProduct from '@/components/product/OngoingProduct';
 import ProductButtons from '@/components/product/ProductButtons';
@@ -16,9 +16,7 @@ const ProductList = () => {
     upcomingData,
     fetchNextOngoingPage,
     fetchNextUpcomingPage,
-    hasNextOngoingPage,
-    hasNextUpcomingPage,
-  } = useProductList();
+  } = useProductList(activeTab);
 
   return (
     <Layout>

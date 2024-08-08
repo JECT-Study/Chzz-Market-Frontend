@@ -6,7 +6,7 @@ import { BASE_KEY } from '@/constants/queryKey';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useProductList = (): any => {
+const useProductList = (activeTab: string): any => {
   const {
     data: ongoingData,
     isLoading: ongoingLoading,
@@ -24,6 +24,7 @@ const useProductList = (): any => {
       return undefined;
     },
     initialPageParam: 1,
+    enabled: activeTab === 'ongoing',
   });
 
   const {
@@ -37,13 +38,13 @@ const useProductList = (): any => {
     queryFn: ({ pageParam = 1 }) =>
       getUpcomingProductList({ pageParam, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
-      console.log(lastPage);
       if (lastPage.hasNext) {
         return lastPage.pageNumber + 1;
       }
       return undefined;
     },
     initialPageParam: 1,
+    enabled: activeTab === 'upcoming',
   });
 
   return {

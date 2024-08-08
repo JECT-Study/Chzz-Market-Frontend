@@ -2,7 +2,7 @@ const upcomingProducts = {
   hasNext: false,
   items: [
     {
-      name: 'upcoming data',
+      name: 'upcoming data1',
       cdnPath: '?ab=441&aad=2',
       timeRemaining: 86408,
       minPrice: 1000,
@@ -11,7 +11,7 @@ const upcomingProducts = {
       isParticipating: true,
     },
     {
-      name: 'Melinda Castro',
+      name: 'upcoming Castro2',
       cdnPath: null,
       timeRemaining: 86444,
       minPrice: 1000,

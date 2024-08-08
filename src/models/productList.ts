@@ -1,5 +1,6 @@
 export interface ProductListItem {
   id: number;
+  name: string;
   cdnPath: string | null;
   timeRemaining: number;
   minPrice: number;
