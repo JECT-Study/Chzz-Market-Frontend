@@ -2,30 +2,30 @@ const ongoingProducts = {
   hasNext: false,
   items: [
     {
-      name: 'ongoing data1',
+      name: '[나이키 신발]',
       cdnPath: '?ab=441&aad=2',
       timeRemaining: 86408,
-      minPrice: 1000,
-      participantCount: 6,
-      id: 17,
+      minPrice: 432523,
+      participantCount: 1,
+      id: 5213,
       isParticipating: true,
     },
     {
       name: 'Melinda Castro2',
       cdnPath: null,
       timeRemaining: 86444,
-      minPrice: 1000,
-      participantCount: 8,
-      id: 13,
+      minPrice: 12345,
+      participantCount: 123,
+      id: 1423,
       isParticipating: true,
     },
     {
       name: 'ongoing data3',
       cdnPath: '?ab=441&aad=2',
       timeRemaining: 86408,
-      minPrice: 1000,
-      participantCount: 6,
-      id: 17,
+      minPrice: 2344,
+      participantCount: 13,
+      id: 125,
       isParticipating: true,
     },
     {
@@ -34,7 +34,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 116,
       isParticipating: true,
     },
     {
@@ -43,7 +43,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 11234,
       isParticipating: true,
     },
     {
@@ -52,7 +52,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 61343,
       isParticipating: true,
     },
     {
@@ -61,7 +61,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 114621,
       isParticipating: true,
     },
     {
@@ -70,7 +70,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 34123,
       isParticipating: true,
     },
     {
@@ -79,7 +79,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 15968,
       isParticipating: true,
     },
     {
@@ -88,7 +88,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 1123,
       isParticipating: true,
     },
     {
@@ -97,7 +97,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 43527,
       isParticipating: true,
     },
     {
@@ -106,7 +106,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 11735,
       isParticipating: true,
     },
     {
@@ -115,7 +115,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 1213,
       isParticipating: true,
     },
     {
@@ -124,7 +124,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 13413,
       isParticipating: true,
     },
     {
@@ -133,7 +133,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 17347,
       isParticipating: true,
     },
     {
@@ -142,7 +142,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 11733,
       isParticipating: true,
     },
     {
@@ -151,7 +151,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 143127,
       isParticipating: true,
     },
     {
@@ -160,7 +160,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 114373,
       isParticipating: true,
     },
     {
@@ -169,7 +169,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 17123,
       isParticipating: true,
     },
     {
@@ -178,7 +178,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 138145,
       isParticipating: true,
     },
     {
@@ -187,7 +187,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 157,
       isParticipating: true,
     },
     {
@@ -196,7 +196,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 138345,
       isParticipating: true,
     },
     {
@@ -205,7 +205,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 1781534,
       isParticipating: true,
     },
     {
@@ -214,7 +214,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 11583,
       isParticipating: true,
     },
     {
@@ -223,7 +223,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 17815,
       isParticipating: true,
     },
     {
@@ -232,7 +232,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 500000000,
       participantCount: 8,
-      id: 13,
+      id: 153413,
       isParticipating: true,
     },
     {
@@ -241,7 +241,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 113457,
       isParticipating: true,
     },
     {
@@ -250,7 +250,7 @@ const ongoingProducts = {
       timeRemaining: 86444,
       minPrice: 1000,
       participantCount: 8,
-      id: 13,
+      id: 115343,
       isParticipating: true,
     },
     {
@@ -259,7 +259,7 @@ const ongoingProducts = {
       timeRemaining: 86408,
       minPrice: 1000,
       participantCount: 6,
-      id: 17,
+      id: 11737,
       isParticipating: true,
     },
     {
@@ -267,9 +267,9 @@ const ongoingProducts = {
       cdnPath: null,
       timeRemaining: 86444,
       minPrice: 50000000,
-      participantCount: 8,
-      id: 13,
-      isParticipating: true,
+      participantCount: 1324,
+      id: 11253,
+      isParticipating: false,
     },
   ],
   pageNumber: 0,

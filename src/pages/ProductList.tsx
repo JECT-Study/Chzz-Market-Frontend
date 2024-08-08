@@ -10,7 +10,10 @@ import { ProductListData, ProductListItem } from '@/models/productList';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
+  const [sortType, setSortType] = useState('');
   const navigate = useNavigate();
+  const [sortedOngoingProducts, setSortedOngoingProducts] =
+    useState<ProductListItem[]>();
   const {
     ongoingData,
     upcomingData,
@@ -18,20 +21,46 @@ const ProductList = () => {
     fetchNextUpcomingPage,
   } = useProductList(activeTab);
 
+  useEffect(() => {
+    if (ongoingData) {
+      const sortedProducts = ongoingData.pages.map((page: ProductListData) => {
+        const itemsCopy = [...page.items];
+        switch (sortType) {
+          case 'participantCount':
+            return itemsCopy.sort(
+              (a, b) => b.participantCount - a.participantCount,
+            );
+          case 'lowPrice':
+            return itemsCopy.sort((a, b) => a.minPrice - b.minPrice);
+          case 'highPrice':
+            return itemsCopy.sort((a, b) => b.minPrice - a.minPrice);
+          case 'latest':
+            return itemsCopy.sort((a, b) => b.timeRemaining - a.timeRemaining);
+          default:
+            return itemsCopy;
+        }
+      });
+      const flatProducts = sortedProducts?.flat();
+      setSortedOngoingProducts(flatProducts);
+    }
+  }, [ongoingData, sortType]);
+
+  useEffect(() => {}, [sortedOngoingProducts]);
+
+  console.log(sortedOngoingProducts);
+
   return (
     <Layout>
       <Layout.Header handleBack={() => navigate('/')}>
         상품 경매 목록
       </Layout.Header>
       <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-      <ProductButtons />
+      <ProductButtons setSortType={setSortType} />
       <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
         {activeTab === 'ongoing'
-          ? ongoingData?.pages.map((page: ProductListData) =>
-              page.items.map((product: ProductListItem) => (
-                <OngoingProduct key={product.id} product={product} />
-              )),
-            )
+          ? sortedOngoingProducts?.map((product: ProductListItem) => (
+              <OngoingProduct key={product.id} product={product} />
+            ))
           : upcomingData?.pages.map((page: ProductListData) =>
               page.items.map((product: ProductListItem) => (
                 <UpcomingProduct key={product.id} product={product} />
