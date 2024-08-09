@@ -14,15 +14,17 @@ const Header = ({
   handleModal = undefined,
 }: HeaderProps) => {
   return (
-    <header className="w-full min-h-[4rem] h-[4rem] px-8 py-4 shadow-bottom">
+    <header className="w-full min-h-[3.375rem] h-[3.375rem] px-8 py-4 shadow-bottom">
       <div className="relative flex items-center justify-center w-full h-full">
-        <button
-          className="absolute left-2"
-          aria-label="뒤로 가기"
-          onClick={handleBack}
-        >
-          <AiOutlineLeft size={25} />
-        </button>
+        {children !== '치즈 마켓' && (
+          <button
+            className="absolute left-2"
+            aria-label="뒤로 가기"
+            onClick={handleBack}
+          >
+            <AiOutlineLeft size={25} />
+          </button>
+        )}
         {children && <h2 className="text-heading2">{children}</h2>}
         {handleModal && (
           <button
@@ -48,7 +50,7 @@ const Main = ({ children }: { children: ReactNode }) => {
 
 const Footer = ({ children }: { children: ReactNode }) => {
   return (
-    <footer className="w-full min-h-[4rem] h-[4rem] px-8 py-4 shadow-top">
+    <footer className="w-full min-h-[5rem] h-[5rem] px-[1.25rem] py-[1rem] shadow-top">
       {children}
     </footer>
   );
