@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 const mockData = {
   nickname: '치즈',
   country: '서울',
@@ -9,8 +11,9 @@ const mockData = {
 // }
 
 const MyPageProfile = () => {
+  const navigator = useNavigate();
   return (
-    <div className="flex items-center pb-8 mb-10 border-b border-b-gray3">
+    <div className="flex items-center pb-8 my-10 border-b border-b-gray3">
       <div className="w-20 h-20 rounded-full bg-gray-300 mr-4" />
       <div className="flex-1">
         <div className="flex items-center justify-between">
@@ -20,7 +23,10 @@ const MyPageProfile = () => {
             </p>
             <p>{mockData.country}</p>
           </div>
-          <button className="px-3 py-1 border border-gray2 rounded-md">
+          <button
+            className="px-3 py-1 border border-gray2 rounded-md"
+            onClick={() => navigator('/profile/edit')}
+          >
             수정
           </button>
         </div>

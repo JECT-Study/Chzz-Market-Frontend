@@ -21,7 +21,7 @@ const ProfileEdit = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/')}>
+      <Layout.Header handleBack={() => navigate('/mypage')}>
         프로필 수정
       </Layout.Header>
       <Layout.Main>
