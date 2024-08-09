@@ -4,7 +4,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size?: 'xsmall' | 'small' | 'medium' | 'large';
   disabled?: boolean;
-  color: 'black' | 'white' | string;
+  color?: string;
   hoverColor?: string;
 }
 
@@ -12,7 +12,7 @@ const Button = ({
   className,
   children,
   size = 'medium',
-  color,
+  color = 'white',
   hoverColor = '',
   disabled = false,
   onClick,
