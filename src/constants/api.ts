@@ -6,8 +6,8 @@ export const API_END_POINT = {
   SIGNUP: '/users/signup',
   PROFILE: '/profile',
   ORDER_LIST: '/order/list',
-  ONGOING_PRODUCT_LIST: '/order/ongoing',
-  UPCOMING_PRODUCT_LIST: '/order/upcoming',
+  ONGOING_PRODUCT_LIST: '/product/list/api/v1/auctions',
+  UPCOMING_PRODUCT_LIST: '/product/list/api/v1/auctions/upcoming',
   // Test
   TEST: '/test',
 };

@@ -13,54 +13,52 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
     <div className="flex h-22px space-x-3 p-4">
       <Button
         size="xsmall"
-        color={classNames(
-          activeFilter === 'participantCount' ? 'black' : 'white',
-        )}
+        color={classNames(activeFilter === 'popularity' ? 'black' : 'white')}
         hoverColor="black"
         type="button"
         className="rounded-full"
         onClick={() => {
-          setSortType('participantCount');
-          setActiveFilter('participantCount');
+          setSortType('popularity');
+          setActiveFilter('popularity');
         }}
       >
         인기
       </Button>
       <Button
         size="xsmall"
-        color={classNames(activeFilter === 'highPrice' ? 'black' : 'white')}
+        color={classNames(activeFilter === 'expensive' ? 'black' : 'white')}
         hoverColor="black"
         type="button"
         className="rounded-full"
         onClick={() => {
-          setSortType('highPrice');
-          setActiveFilter('highPrice');
+          setSortType('expensive');
+          setActiveFilter('expensive');
         }}
       >
         높은 가격순
       </Button>
       <Button
         size="xsmall"
-        color={classNames(activeFilter === 'lowPrice' ? 'black' : 'white')}
+        color={classNames(activeFilter === 'cheap' ? 'black' : 'white')}
         hoverColor="black"
         type="button"
         className="rounded-full"
         onClick={() => {
-          setSortType('lowPrice');
-          setActiveFilter('lowPrice');
+          setSortType('cheap');
+          setActiveFilter('cheap');
         }}
       >
         낮은 가격순
       </Button>
       <Button
         size="xsmall"
-        color={classNames(activeFilter === 'latest' ? 'black' : 'white')}
+        color={classNames(activeFilter === 'newest' ? 'black' : 'white')}
         hoverColor="black"
         type="button"
         className="rounded-full"
         onClick={() => {
-          setSortType('latest');
-          setActiveFilter('latest');
+          setSortType('newest');
+          setActiveFilter('newest');
         }}
       >
         최신순

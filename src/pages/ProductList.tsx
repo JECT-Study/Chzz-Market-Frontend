@@ -10,7 +10,7 @@ import { ProductListData, ProductListItem } from '@/models/productList';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
-  const [sortType, setSortType] = useState('');
+  const [sortType, setSortType] = useState('newest');
   const navigate = useNavigate();
   const [sortedOngoingProducts, setSortedOngoingProducts] =
     useState<ProductListItem[]>();
@@ -19,35 +19,35 @@ const ProductList = () => {
     upcomingData,
     fetchNextOngoingPage,
     fetchNextUpcomingPage,
-  } = useProductList(activeTab);
+  } = useProductList(activeTab, sortType);
 
   useEffect(() => {
     if (ongoingData) {
       const sortedProducts = ongoingData.pages.map((page: ProductListData) => {
         const itemsCopy = [...page.items];
         switch (sortType) {
-          case 'participantCount':
+          case 'popularity':
             return itemsCopy.sort(
               (a, b) => b.participantCount - a.participantCount,
             );
-          case 'lowPrice':
+          case 'cheap':
             return itemsCopy.sort((a, b) => a.minPrice - b.minPrice);
-          case 'highPrice':
+          case 'expensive':
             return itemsCopy.sort((a, b) => b.minPrice - a.minPrice);
-          case 'latest':
+          case 'newest':
             return itemsCopy.sort((a, b) => b.timeRemaining - a.timeRemaining);
           default:
             return itemsCopy;
         }
+        // return itemsCopy; // 정렬 서버에서 정리, 클라이언트에서 사용할때 제거 서버에서 사용할때 위에 switch문 제거
       });
       const flatProducts = sortedProducts?.flat();
+      console.log(flatProducts);
       setSortedOngoingProducts(flatProducts);
     }
   }, [ongoingData, sortType]);
 
   useEffect(() => {}, [sortedOngoingProducts]);
-
-  console.log(sortedOngoingProducts);
 
   return (
     <Layout>
