@@ -32,6 +32,8 @@ module.exports = {
     },
   },
   rules: {
+    'testing-library/no-node-access': 'off',
+    'testing-library/no-container': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'react-refresh/only-export-components': [
