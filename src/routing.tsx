@@ -10,6 +10,7 @@ import OrderHistory from './pages/OrderHistory';
 import ProfileEdit from './pages/ProfileEdit';
 import Register from './pages/Register';
 import Signup from './pages/Signup';
+import DetailPage from './pages/DetailPage';
 
 const routeList = [
   {
@@ -51,6 +52,10 @@ const routeList = [
   {
     path: ROUTERS.LOGIN,
     element: <Login />,
+  },
+  {
+    path: ROUTERS.DETAIL.ITEM,
+    element: <DetailPage />,
   },
 ];
 

@@ -14,6 +14,9 @@ const ROUTERS = Object.freeze({
     AllLIST: '/order/all-list',
   },
   REGISTER: '/register',
+  DETAIL: {
+    ITEM: '/detail/:id', // 동적 경로 매개변수 설정
+  },
 });
 
 export default ROUTERS;
