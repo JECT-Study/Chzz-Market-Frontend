@@ -1,19 +1,18 @@
-/* eslint-disable import/no-named-as-default */
-import { setupWorker } from 'msw/browser';
 import { HttpHandler } from 'msw';
+import { setupWorker } from 'msw/browser';
 import {
   getBestProductsHandler,
   getDeadLineProductsHandler,
   getPreEnrollProductsHandler,
 } from './handlers/home';
-import getTest from './handlers/test';
-import {  
+import {
   getOngoingProductList,
   getUpcomingProductList,
 } from './handlers/ProductList';
 
+/* eslint-disable import/no-named-as-default */
+
 export const handlers: HttpHandler[] = [
-  getTest,
   getBestProductsHandler,
   getDeadLineProductsHandler,
   getPreEnrollProductsHandler,
