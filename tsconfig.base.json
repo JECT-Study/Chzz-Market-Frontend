@@ -23,6 +23,7 @@
       "@/pages/*": ["pages/*"],
       "@/api/*": ["api/*"],
       "@/utils/*": ["utils/*"],
+      "@/models/*": ["models/*"],
     }
   }
 }

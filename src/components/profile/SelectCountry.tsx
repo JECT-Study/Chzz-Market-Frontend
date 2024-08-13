@@ -26,6 +26,12 @@ interface Props {
 const SelectCountry = ({ onClose }: Props) => {
   return (
     <Modal isOpen onClose={onClose}>
+      <div className="flex justify-between">
+        <h2 className="text-lg font-bold">지역 선택</h2>
+        <button className="text-2xl" onClick={onClose}>
+          X
+        </button>
+      </div>
       <div className="grid grid-cols-3 gap-2">
         {countries.map((item) => (
           <Button

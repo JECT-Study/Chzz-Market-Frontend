@@ -7,12 +7,18 @@ import {
   getPreEnrollProductsHandler,
 } from './handlers/home';
 import getTest from './handlers/test';
+import {  
+  getOngoingProductList,
+  getUpcomingProductList,
+} from './handlers/ProductList';
 
 export const handlers: HttpHandler[] = [
   getTest,
   getBestProductsHandler,
   getDeadLineProductsHandler,
   getPreEnrollProductsHandler,
+  getUpcomingProductList,
+  getOngoingProductList,
 ];
 
 export const worker = setupWorker(...handlers);

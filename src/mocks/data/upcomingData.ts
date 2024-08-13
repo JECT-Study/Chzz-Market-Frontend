@@ -1,58 +1,30 @@
-const upcomingProducts = [
-  {
-    id: 1,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-  {
-    id: 2,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-  {
-    id: 3,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-  {
-    id: 4,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-  {
-    id: 5,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-  {
-    id: 6,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-  {
-    id: 7,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-  {
-    id: 8,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-  {
-    id: 9,
-    name: '[나이키] 신발',
-    startPrice: '10,000원',
-    likes: 33,
-  },
-];
+const upcomingProducts = {
+  hasNext: false,
+  items: [
+    {
+      name: 'upcoming data1',
+      cdnPath: '?ab=441&aad=2',
+      timeRemaining: 86408,
+      minPrice: 1000,
+      participantCount: 6,
+      id: 17,
+      isParticipating: true,
+    },
+    {
+      name: 'upcoming Castro2',
+      cdnPath: null,
+      timeRemaining: 86444,
+      minPrice: 1000,
+      participantCount: 8,
+      id: 13,
+      isParticipating: true,
+    },
+  ],
+  pageNumber: 0,
+  pageSize: 10,
+  totalPages: 1,
+  totalElements: 2,
+  last: true,
+};
 
 export default upcomingProducts;

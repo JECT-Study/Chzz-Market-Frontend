@@ -5,9 +5,10 @@ interface PopupProps {
   children: ReactNode;
   width?: string;
   height?: string;
+  title: string;
 }
 
-const Popup = ({ children, width, height }: PopupProps) => {
+const Popup = ({ children, title, width, height }: PopupProps) => {
   return ReactDOM.createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
       <div
@@ -15,6 +16,7 @@ const Popup = ({ children, width, height }: PopupProps) => {
         style={{ width, height }}
         onClick={(e) => e.stopPropagation()}
       >
+        <h2 className="w-full mb-5 text-2xl font-bold">{title}</h2>
         {children}
       </div>
     </div>,

@@ -5,6 +5,9 @@ export const API_END_POINT = {
   REFRESH_TOKEN: '/auth/token',
   SIGNUP: '/users/signup',
   PROFILE: '/profile',
+  ORDER_LIST: '/order/list',
+  ONGOING_PRODUCT_LIST: '/order/ongoing',
+  UPCOMING_PRODUCT_LIST: '/order/upcoming',
   // Test
   TEST: '/test',
   BEST: '/products/best',
