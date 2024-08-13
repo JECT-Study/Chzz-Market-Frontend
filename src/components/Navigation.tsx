@@ -1,25 +1,46 @@
+import { useNavigate } from 'react-router-dom';
+
 const NavigationItem = ({
   name,
+  onClick,
   active,
 }: {
   name: string;
+  onClick: () => void;
   active: boolean;
-}) => (
-  <div className="flex justify-center items-center w-[11.25rem] h-[3.75rem]">
-    <img
-      src={`${name}_${active ? 'on' : 'off'}.svg`}
-      alt={`${name}_${active ? 'on' : 'off'}`}
-      className="cursor-pointer size-7"
-    />
-  </div>
-);
+}) => {
+  return (
+    <li
+      onClick={onClick}
+      className="flex justify-center items-center w-[11.25rem] h-[3.75rem]"
+    >
+      <img
+        src={`${name}_${active ? 'on' : 'off'}.svg`}
+        alt={`${name}_${active ? 'on' : 'off'}_icon`}
+        className="cursor-pointer size-6"
+      />
+    </li>
+  );
+};
+
+const navItems = [
+  ['home', '/'],
+  ['notice', '/notice'],
+  ['heart', '/heart'],
+  ['my', '/my_page'],
+];
 
 const Navigation = ({ active }: { active: string }) => {
-  const items = ['home', 'notice', 'heart', 'my'];
+  const navigate = useNavigate();
   return (
     <nav className="flex items-center h-full">
-      {items.map((item) => (
-        <NavigationItem key={item} name={item} active={active === item} />
+      {navItems.map(([name, path]) => (
+        <NavigationItem
+          key={name}
+          name={name}
+          active={active === name}
+          onClick={() => navigate(path)}
+        />
       ))}
     </nav>
   );

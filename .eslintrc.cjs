@@ -32,6 +32,8 @@ module.exports = {
     },
   },
   rules: {
+    'no-nested-ternary': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'testing-library/no-node-access': 'off',
     'testing-library/no-container': 'off',
     'import/no-extraneous-dependencies': 'off',

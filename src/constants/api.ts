@@ -7,4 +7,7 @@ export const API_END_POINT = {
   PROFILE: '/profile',
   // Test
   TEST: '/test',
+  BEST: '/products/best',
+  DEADLINE: '/products/deadline',
+  PRE_ENROLL: '/products/pre_enroll',
 };

@@ -25,7 +25,7 @@ const Header = ({
             <AiOutlineLeft size={25} />
           </button>
         )}
-        {children && <h2 className="text-heading2">{children}</h2>}
+        {children && <h2 className="text-heading2 text-gray1">{children}</h2>}
         {handleModal && (
           <button
             aria-label="옵션"

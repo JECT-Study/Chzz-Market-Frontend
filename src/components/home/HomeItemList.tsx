@@ -9,7 +9,7 @@ const HomeItemList = ({
 }) => {
   return (
     <section className="flex flex-col w-full gap-4">
-      <div className="text-lg font-semibold">{name}</div>
+      <label className="text-lg font-semibold">{name}</label>
       <div className="flex items-center gap-4 overflow-x-scroll">
         {children}
       </div>
