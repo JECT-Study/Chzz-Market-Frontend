@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* input spin button 제거 */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* IE and Edge */
 * {
   -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */

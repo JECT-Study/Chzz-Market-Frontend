@@ -1,3 +1,5 @@
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -8,7 +10,6 @@ import {
 } from '@/components/ui/select';
 
 import Button from '@/components/common/Button';
-import ImageUploader from '@/components/register/ImageUploader';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/Layout';
 import RegisterCaution from '@/components/register/RegisterCaution';
@@ -16,20 +17,61 @@ import RegisterLabel from '@/components/register/RegisterLabel';
 import { Textarea } from '@/components/ui/textarea';
 import { categories } from '@/constants/categories';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { RegisterSchema } from '@/constants/schema';
+import FormField from '@/components/form/FormField';
+import ImageUploader from '@/components/register/ImageUploader';
+import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
+
+type FormFields = z.infer<typeof RegisterSchema>;
+
+const defaultValues = {
+  title: '',
+  images: [],
+  category: '',
+  description: '',
+  cost: '',
+};
 
 const Register = () => {
+  const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
-  const [images, setImages] = useState<string[]>([]);
-  const navigate = useNavigate();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setValue,
+    getValues,
+  } = useForm<FormFields>({
+    defaultValues,
+    resolver: zodResolver(RegisterSchema),
+  });
+
+  const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
+    name: 'cost',
+    setValue,
+    getValues,
+  });
 
   const title = caution === '' ? '경매 등록하기' : `주의사항`;
   const cautionButton =
-    caution === 'enroll' ? '경매 등록하기' : '사전 등록하기';
+    caution === 'enroll' ? '바로 등록하기' : '사전 등록하기';
+  const finalButton = isSubmitting ? '등록 중...' : cautionButton;
 
-  const clickCheck = () => setCheck((state) => !state);
-  const clickBack = () => (caution === '' ? navigate('/') : setCaution(''));
+  const toggleCheckBox = () => setCheck((state) => !state);
+  const clickBack = () => (caution === '' ? navigate(-1) : setCaution(''));
+
+  const onSubmit: SubmitHandler<FormFields> = async () => {};
+
+  const handleProceed = (proceedType: 'pre-enroll' | 'enroll') => {
+    handleSubmit(() => {
+      // 유효성 검사가 통과되면 실행.
+      setCaution(proceedType);
+    })();
+  };
 
   return (
     <Layout>
@@ -37,72 +79,96 @@ const Register = () => {
       <Layout.Main>
         {caution === '' ? (
           <form
-            onSubmit={(e) => e.preventDefault()}
             className="flex flex-col pt-5 gap-7"
+            onSubmit={handleSubmit(onSubmit)}
           >
-            <ImageUploader images={images} setImages={setImages} />
-            <RegisterLabel title="제목">
-              <Input
-                id="제목"
-                type="text"
-                placeholder="제목을 입력해주세요."
-                className="focus-visible:ring-cheeseYellow"
-              />
-            </RegisterLabel>
-            <RegisterLabel title="카테고리">
-              <Select>
-                <SelectTrigger
-                  id="카테고리"
-                  className="w-full focus:ring-cheeseYellow"
+            <FormField
+              label="사진"
+              name="images"
+              control={control}
+              error={errors.images?.message}
+              render={(field) => (
+                <ImageUploader
+                  images={field.value as string[]}
+                  setImages={(images: string[]) => field.onChange(images)}
+                />
+              )}
+            />
+            <FormField
+              label="제목"
+              name="title"
+              control={control}
+              error={errors.title?.message}
+              render={(field) => (
+                <Input
+                  id="제목"
+                  type="text"
+                  placeholder="제목을 입력해주세요."
+                  className="focus-visible:ring-cheeseYellow"
+                  {...field}
+                />
+              )}
+            />
+            <FormField
+              label="카테고리"
+              name="category"
+              control={control}
+              error={errors.category?.message}
+              render={(field) => (
+                <Select
+                  value={field.value as string}
+                  onValueChange={field.onChange}
                 >
-                  <SelectValue placeholder="카테고리를 선택하세요." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup className="focus-visible:ring-cheeseYellow">
-                    {Object.values(categories).map((el) => (
-                      <SelectItem key={el} value={el}>
-                        {el}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </RegisterLabel>
-            <RegisterLabel title="시작 가격">
-              <Input
-                id="시작 가격"
-                type="text"
-                placeholder="기본 1,000원"
-                defaultValue="1,000 원"
-                className="focus-visible:ring-cheeseYellow"
-              />
-              <div className="flex items-center gap-3">
-                <span className="px-3 py-1 text-sm text-center transition-colors border cursor-pointer hover:bg-cheeseYellow hover:text-white hover:border-cheeseYellow rounded-xl border-gray1">
-                  + 1,000원
-                </span>
-                <span className="px-3 py-1 text-sm text-center transition-colors border cursor-pointer hover:bg-cheeseYellow hover:text-white hover:border-cheeseYellow rounded-xl border-gray1">
-                  + 5,000원
-                </span>
-                <span className="px-3 py-1 text-sm text-center transition-colors border cursor-pointer hover:bg-cheeseYellow hover:text-white hover:border-cheeseYellow rounded-xl border-gray1">
-                  + 10,000원
-                </span>
-                <span className="px-3 py-1 text-sm text-center transition-colors border cursor-pointer hover:bg-cheeseYellow hover:text-white hover:border-cheeseYellow rounded-xl border-gray1">
-                  + 50,000원
-                </span>
-                <span className="px-3 py-1 text-sm text-center transition-colors border cursor-pointer hover:bg-cheeseYellow hover:text-white hover:border-cheeseYellow rounded-xl border-gray1">
-                  + 100,000원
-                </span>
-              </div>
-            </RegisterLabel>
-            <RegisterLabel title="상품 설명">
-              <Textarea
-                id="상품 설명"
-                placeholder="경매에 올릴 상품에 대해 자세히 설명해주세요.(최대 1,000자)"
-                className="focus-visible:ring-cheeseYellow"
-                maxLength={1000}
-              />
-            </RegisterLabel>
-            <RegisterLabel title="경매 마감 시간">
+                  <SelectTrigger
+                    id="카테고리"
+                    className="w-full focus:ring-cheeseYellow"
+                  >
+                    <SelectValue placeholder="카테고리를 선택하세요." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup className="focus-visible:ring-cheeseYellow">
+                      {Object.values(categories).map((el) => (
+                        <SelectItem key={el} value={el}>
+                          {el}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            <FormField
+              label="시작 가격"
+              name="cost"
+              control={control}
+              error={errors.cost?.message}
+              render={(field) => (
+                <Input
+                  id="시작 가격"
+                  type={isEditing ? 'number' : 'text'}
+                  placeholder="최소 시작가는 1,000원입니다."
+                  className=" focus-visible:ring-cheeseYellow"
+                  {...field}
+                  onBlur={handleBlur}
+                  onFocus={handleFocus}
+                />
+              )}
+            />
+            <FormField
+              label="상품 설명"
+              name="description"
+              control={control}
+              error={errors.description?.message}
+              render={(field) => (
+                <Textarea
+                  id="상품 설명"
+                  placeholder="경매에 올릴 상품에 대해 자세히 설명해주세요.(최대 1,000자)"
+                  className="focus-visible:ring-cheeseYellow"
+                  {...field}
+                />
+              )}
+            />
+            <RegisterLabel label="경매 마감 시간">
               <Input
                 id="경매 마감 시간"
                 type="text"
@@ -110,49 +176,55 @@ const Register = () => {
                 disabled
                 className="text-gray1 border-gray2 bg-[#f1f1f1]"
               />
+              <img
+                src="/notice.svg"
+                alt="notice"
+                className="absolute bottom-[17%] right-[2%]"
+              />
             </RegisterLabel>
           </form>
         ) : (
           <RegisterCaution
-            check={check}
-            handleCheck={clickCheck}
             kind={caution}
+            check={check}
+            handleCheck={toggleCheckBox}
           />
         )}
       </Layout.Main>
       <Layout.Footer>
-        <div className="flex items-center h-full gap-3">
+        <div className="flex items-center justify-center h-full gap-3">
           {caution === '' ? (
             <>
               <Button
-                type="button"
+                type="submit"
                 color="white"
-                className="flex-1 py-3 rounded-lg active:bg-black active:text-white text-button border-gray"
+                className="flex-1 h-full py-3 rounded-lg text-button active:bg-black active:text-white border-gray"
                 size="medium"
-                onClick={() => setCaution('pre-enroll')}
-                disabled
+                onClick={() => handleProceed('pre-enroll')}
               >
                 사전 등록하기
               </Button>
               <Button
-                type="button"
+                type="submit"
                 color="bg-cheeseYellow"
-                className="flex-[2] py-3 text-white rounded-lg active:bg-black text-button bg-cheeseYellow"
+                className="flex-[2] py-3 h-full text-white rounded-lg active:bg-black text-button bg-cheeseYellow"
                 size="medium"
-                onClick={() => setCaution('enroll')}
+                onClick={() => handleProceed('enroll')}
               >
                 바로 등록하기
               </Button>
             </>
           ) : (
             <Button
-              type="button"
+              type="submit"
               color="bg-cheeseYellow"
-              className="grow-[2] w-full active:bg-black rounded-lg text-button py-3 bg-cheeseYellow text-white"
+              className="w-full h-full py-3 text-white rounded-lg active:bg-black text-button bg-cheeseYellow"
               size="medium"
-              onClick={() => setCaution('')}
+              disabled={!check || isSubmitting}
+              onClick={handleSubmit(onSubmit)}
+              aria-label="최종 등록 버튼"
             >
-              {cautionButton}
+              {finalButton}
             </Button>
           )}
         </div>

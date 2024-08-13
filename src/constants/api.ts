@@ -10,4 +10,7 @@ export const API_END_POINT = {
   UPCOMING_PRODUCT_LIST: '/order/upcoming',
   // Test
   TEST: '/test',
+  BEST: '/products/best',
+  DEADLINE: '/products/deadline',
+  PRE_ENROLL: '/products/pre_enroll',
 };

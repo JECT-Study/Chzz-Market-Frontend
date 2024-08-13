@@ -1,25 +1,30 @@
+import { useNavigate } from 'react-router-dom';
 import { categories } from '../../constants/categories';
 
 const CategoryItem = ({ name }: { name: string }) => {
+  const navigate = useNavigate();
   return (
-    <div className="flex flex-col items-center gap-2">
+    <li
+      className="flex flex-col items-center gap-5 cursor-pointer"
+      onClick={() => navigate(`/register`)}
+    >
       <img
         src="/air-jordan-row.jpeg"
-        alt="air-jordan-row"
-        className="w-[4rem] h-[4rem] rounded-full"
+        alt={`${name} 카테고리`}
+        className="w-[5rem] h-[5em] rounded-full"
       />
-      <div className="text-sm">{name}</div>
-    </div>
+      <div className="text-body2 text-gray1">{name}</div>
+    </li>
   );
 };
 
 const CategoryList = () => {
   return (
-    <div className="grid w-full grid-cols-4 gap-4">
+    <ul className="flex flex-wrap items-center gap-5">
       {Object.values(categories).map((value: string) => (
         <CategoryItem key={value} name={value} />
       ))}
-    </div>
+    </ul>
   );
 };
 
