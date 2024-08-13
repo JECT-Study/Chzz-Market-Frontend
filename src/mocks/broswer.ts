@@ -5,10 +5,12 @@ import {
   getOngoingProductList,
   getUpcomingProductList,
 } from './handlers/ProductList';
+import { getMyAuctionPreRegister } from './handlers/myAuctuon';
 
 export const handlers: HttpHandler[] = [
   getUpcomingProductList,
   getOngoingProductList,
+  getMyAuctionPreRegister,
 ];
 
 export const worker = setupWorker(...handlers);

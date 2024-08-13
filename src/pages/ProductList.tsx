@@ -6,7 +6,7 @@ import ProductListTabs from '@/components/product/ProductListTabs';
 import { useNavigate } from 'react-router-dom';
 import useProductList from '@/hooks/useProductList';
 import UpcomingProduct from '@/components/product/UpcomingProduct';
-import { ProductListData, ProductListItem } from '@/models/productList';
+import { ProductListData, ProductListItem } from '@/types/productList';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
@@ -46,8 +46,6 @@ const ProductList = () => {
       setSortedOngoingProducts(flatProducts);
     }
   }, [ongoingData, sortType]);
-
-  useEffect(() => {}, [sortedOngoingProducts]);
 
   return (
     <Layout>

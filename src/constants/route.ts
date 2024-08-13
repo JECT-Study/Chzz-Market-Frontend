@@ -11,7 +11,7 @@ const ROUTERS = Object.freeze({
   },
   ORDER: {
     HISTORY: '/order/history',
-    AllLIST: '/order/all-list',
+    MYORDERLIST: '/order/myOrderList',
   },
   REGISTER: '/register',
 });

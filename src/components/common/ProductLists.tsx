@@ -1,9 +1,9 @@
-import { ProductListItem } from '@/models/productList';
 import { LuUsers } from 'react-icons/lu';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import Button from './Button';
 
-const ProductLists = ({ product }: { product: ProductListItem }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ProductLists = ({ product }: { product: any }) => {
   const remainHour = Math.floor(product.timeRemaining / 3600);
 
   return (
@@ -11,7 +11,7 @@ const ProductLists = ({ product }: { product: ProductListItem }) => {
       <div className="flex h-[106px]">
         <div className="relative w-[96px] h-full">
           <img
-            className="w-full h-full"
+            className="w-full h-full min-w-[96px] object-cover"
             src="/Nike_RedWhite_Thumbnail.jpeg"
             alt="Jordan Black Shoes"
           />
@@ -25,7 +25,7 @@ const ProductLists = ({ product }: { product: ProductListItem }) => {
           </div>
           <div className="flex">
             <div className="flex flex-col">
-              <div className="w-[104px] flex justify-center gap-2">
+              <div className="w-[84px] lg:w-[104px] flex justify-center gap-2">
                 <IoPricetagsOutline className="text-gray-500" />
                 <p className="text-sm text-gray-500">시작가</p>
               </div>
@@ -34,7 +34,7 @@ const ProductLists = ({ product }: { product: ProductListItem }) => {
               </p>
             </div>
             <div className="flex flex-col">
-              <div className="w-[104px] flex justify-center gap-2">
+              <div className="w-[84px] lg:w-[104px] flex justify-center gap-2">
                 <LuUsers className="text-gray-500" />
                 <p className="text-sm text-gray-500">참여자</p>
               </div>
@@ -47,7 +47,7 @@ const ProductLists = ({ product }: { product: ProductListItem }) => {
             color={product.isParticipating ? 'black' : 'white'}
             type="button"
             size="small"
-            className={`${product.isParticipating ? '' : ''} w-[215px] h-[33px] rounded-sm`}
+            className={`${product.isParticipating ? '' : ''} lg:w-[215px] h-[33px] rounded-sm`}
           >
             {product.isParticipating ? '경매 참여 중' : '경매 참여하기'}
           </Button>

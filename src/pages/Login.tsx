@@ -1,6 +1,6 @@
 import Button from '@/components/common/Button';
 import Layout from '@/components/Layout';
-import { Window } from '@/models/kakao';
+import { Window } from '@/types/kakao';
 import { SiNaver } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 

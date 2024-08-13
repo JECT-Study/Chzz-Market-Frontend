@@ -20,6 +20,10 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        sm: '500px',
+        lg: '750px',
+      },
       boxShadow: {
         top: '0 0 8px rgba(0, 0, 0, 0.08)',
         bottom: '0 0 8px rgba(0, 0, 0, 0.08)',
