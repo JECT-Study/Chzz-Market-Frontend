@@ -9,6 +9,7 @@ import {
   getOngoingProductList,
   getUpcomingProductList,
 } from './handlers/ProductList';
+import { getProductDetailsHandler } from './handlers/details';
 
 /* eslint-disable import/no-named-as-default */
 
@@ -18,6 +19,7 @@ export const handlers: HttpHandler[] = [
   getPreEnrollProductsHandler,
   getUpcomingProductList,
   getOngoingProductList,
+  getProductDetailsHandler,
 ];
 
 export const worker = setupWorker(...handlers);

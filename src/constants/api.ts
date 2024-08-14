@@ -13,4 +13,5 @@ export const API_END_POINT = {
   BEST: '/products/best',
   DEADLINE: '/products/deadline',
   PRE_ENROLL: '/products/pre_enroll',
+  DETAILS: '/auctions',
 };
