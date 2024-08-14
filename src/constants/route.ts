@@ -14,6 +14,7 @@ const ROUTERS = Object.freeze({
     AllLIST: '/order/all-list',
   },
   REGISTER: '/register',
+  BID: '/bid',
 });
 
 export default ROUTERS;

@@ -16,12 +16,13 @@ import {
   preEnrollProducts,
 } from '@/mocks/data/homeProductsData';
 
-// vi.fn()은 모의 함수나 스파이 함수(함수 호출을 기록하고 추적할 수 있는 함수)를 생성할 수 있다.
-// 이 모의 함수는 나중에 호출된 횟수, 호출 시 전달된 인수 등을 추적할 수 있다.
+/**
+ * vi.fn()은 모의 함수나 스파이 함수(함수 호출을 기록하고 추적할 수 있는 함수)를 생성할 수 있다.
+ * 이 모의 함수는 나중에 호출된 횟수, 호출 시 전달된 인수 등을 추적할 수 있다.
+ * vi.mock을 사용하여 react-router-dom 모듈을 모킹하고, 특정 기능(useNavigate)을 사용자 정의된 모의 함수로 대체
+ * 모듈 모킹은 테스트 환경에서 해당 모듈의 실제 구현을 대체하여 테스트 목적에 맞게 수정된 버전을 사용하게 한다.
+ */
 const mockedUseNavigate = vi.fn();
-
-// vi.mock을 사용하여 react-router-dom 모듈을 모킹하고, 특정 기능(useNavigate)을 사용자 정의된 모의 함수로 대체
-// 모듈 모킹은 테스트 환경에서 해당 모듈의 실제 구현을 대체하여 테스트 목적에 맞게 수정된 버전을 사용하게 한다.
 vi.mock('react-router-dom', async () => {
   // importActual은 실제 모듈의 원래 구현을 가져오는 기능을 한다.
   // 일부 기능은 실제 동작을 그대로 유지하면서 useNavigate만 모킹하려는 경우에 유용하다.
@@ -80,30 +81,29 @@ describe('Home 테스트', () => {
       const firstBestItems = bestItems[0];
       // 이미지 확인
       const imgElement = screen.getByRole('img', {
-        name: '0_/air-jordan-row.jpeg_best',
+        name: '0_img_best',
       });
       expect(firstBestItems).toContainElement(imgElement);
 
       // 이름 확인
-      const nameElement = screen.getByLabelText('0_이름_best');
+      const nameElement = screen.getByLabelText('0_name_best');
       expect(nameElement).toHaveTextContent('[나이키] 에어 조던 로우');
       expect(firstBestItems).toContainElement(nameElement);
 
       // 남은 시간 확인
-      const timeElement = screen.getByLabelText('0_남은 시간_best');
+      const timeElement = screen.getByLabelText('0_timeLeft_best');
       expect(timeElement).toHaveTextContent('14시간 남음');
       expect(firstBestItems).toContainElement(timeElement);
 
       // 시작 가격 확인
-      const priceElement = screen.getByLabelText('0_시작 가격_best');
+      const priceElement = screen.getByLabelText('0_startPrice_best');
       expect(priceElement).toHaveTextContent('100,000원');
       expect(firstBestItems).toContainElement(priceElement);
 
       // 참여자 수 확인
-      const participantsElement =
-        screen.getByLabelText('0_경매 참여자 수_best');
-      expect(participantsElement).toHaveTextContent('경매 참여자 11명');
-      expect(firstBestItems).toContainElement(participantsElement);
+      const userElement = screen.getByLabelText('0_activeUserCount_best');
+      expect(userElement).toHaveTextContent('경매 참여자 11명');
+      expect(firstBestItems).toContainElement(userElement);
 
       await user.click(firstBestItems);
 
@@ -121,17 +121,17 @@ describe('Home 테스트', () => {
 
       // 이미지 확인
       const imgElement = screen.getByRole('img', {
-        name: '0_/newbalance_993.jpeg_pre_enroll',
+        name: '0_img_pre_enroll',
       });
       expect(firstPreEnrollItem).toContainElement(imgElement);
 
       // 이름 확인
-      const nameElement = screen.getByLabelText('0_이름_pre_enroll');
+      const nameElement = screen.getByLabelText('0_name_pre_enroll');
       expect(nameElement).toHaveTextContent('[뉴발란스] 993');
       expect(firstPreEnrollItem).toContainElement(nameElement);
 
       // 시작 가격 확인
-      const priceElement = screen.getByLabelText('0_시작 가격_pre_enroll');
+      const priceElement = screen.getByLabelText('0_startPrice_pre_enroll');
       expect(priceElement).toHaveTextContent('230,000원');
       expect(firstPreEnrollItem).toContainElement(priceElement);
 
@@ -172,7 +172,7 @@ describe('Home 테스트', () => {
         // 7시간 남은 경매 상품
         const redTimeItem = bestItems[1];
 
-        const redTimeElement = screen.getByLabelText('1_남은 시간_best');
+        const redTimeElement = screen.getByLabelText('1_timeLeft_best');
         expect(redTimeItem).toContainElement(redTimeElement);
         expect(redTimeElement).toHaveClass('text-timeColor1 border-timeColor1');
       });
@@ -187,7 +187,7 @@ describe('Home 테스트', () => {
         // 14시간 남은 경매 상품
         const orangeTimeItem = bestItems[0];
 
-        const orangeTimeElement = screen.getByLabelText('0_남은 시간_best');
+        const orangeTimeElement = screen.getByLabelText('0_timeLeft_best');
         expect(orangeTimeItem).toContainElement(orangeTimeElement);
         expect(orangeTimeElement).toHaveClass(
           'text-timeColor2 border-timeColor2',
@@ -204,7 +204,7 @@ describe('Home 테스트', () => {
         // 7시간 남은 경매 상품
         const greenTimeItem = bestItems[2];
 
-        const greenTimeElement = screen.getByLabelText('2_남은 시간_best');
+        const greenTimeElement = screen.getByLabelText('2_timeLeft_best');
         expect(greenTimeItem).toContainElement(greenTimeElement);
         expect(greenTimeElement).toHaveClass(
           'text-timeColor3 border-timeColor3',
