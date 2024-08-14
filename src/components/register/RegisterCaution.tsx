@@ -14,29 +14,29 @@ interface CautionProps {
 const RegisterCaution = ({ kind, check, handleCheck }: CautionProps) => {
   return (
     <section className="flex flex-col pt-5 gap-[3rem]">
-      <h2 className="text-heading2">
+      <h3 className="text-heading2">
         {kind === 'enroll'
           ? ENROLLMENT_CAUTION.HEADING
           : PRE_ENROLLMENT_CAUTION.HEADING}
-      </h2>
-      <div className="space-y-4">
+      </h3>
+      <div className="space-y-5">
         {kind === 'enroll' ? (
           <>
-            <h5 className="text-body1Bold">{ENROLLMENT_CAUTION.TITLE}</h5>
+            <h4 className="text-body1Bold">{ENROLLMENT_CAUTION.TITLE}</h4>
             {Object.entries(ENROLLMENT_CAUTION.CONTENT).map(([key, value]) => (
-              <div key={key} className="space-y-1 text-body2 text-gray1">
-                <h6>{value.TITLE}</h6>
-                <p>{value.DESCRIPTION}</p>
+              <div key={key} className="space-y-1 text-body2 text-gray2">
+                <h5>{value.TITLE}</h5>
+                <p className="pl-3">{value.DESCRIPTION}</p>
               </div>
             ))}
           </>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-5">
             {Object.entries(PRE_ENROLLMENT_CAUTION.CONTENT).map(
               ([key, value]) => (
                 <div className="space-y-4" key={key}>
-                  <h6 className="text-body1Bold">{value.TITLE}</h6>
-                  <p className="text-body2 text-gray1">{value.DESCRIPTION}</p>
+                  <h4 className="text-body1Bold">{value.TITLE}</h4>
+                  <p className="text-body2 text-gray2">{value.DESCRIPTION}</p>
                 </div>
               ),
             )}

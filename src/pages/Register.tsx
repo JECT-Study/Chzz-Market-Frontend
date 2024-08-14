@@ -1,5 +1,3 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -8,21 +6,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '@/components/common/Button';
+import FormField from '@/components/form/FormField';
+import ImageUploader from '@/components/register/ImageUploader';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/Layout';
 import RegisterCaution from '@/components/register/RegisterCaution';
 import RegisterLabel from '@/components/register/RegisterLabel';
+import { RegisterSchema } from '@/constants/schema';
 import { Textarea } from '@/components/ui/textarea';
 import { categories } from '@/constants/categories';
+import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RegisterSchema } from '@/constants/schema';
-import FormField from '@/components/form/FormField';
-import ImageUploader from '@/components/register/ImageUploader';
-import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
@@ -83,7 +83,7 @@ const Register = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <FormField
-              label="사진"
+              label="사진*"
               name="images"
               control={control}
               error={errors.images?.message}
@@ -95,13 +95,13 @@ const Register = () => {
               )}
             />
             <FormField
-              label="제목"
+              label="제목*"
               name="title"
               control={control}
               error={errors.title?.message}
               render={(field) => (
                 <Input
-                  id="제목"
+                  id="제목*"
                   type="text"
                   placeholder="제목을 입력해주세요."
                   className="focus-visible:ring-cheeseYellow"
@@ -110,7 +110,7 @@ const Register = () => {
               )}
             />
             <FormField
-              label="카테고리"
+              label="카테고리*"
               name="category"
               control={control}
               error={errors.category?.message}
@@ -120,7 +120,7 @@ const Register = () => {
                   onValueChange={field.onChange}
                 >
                   <SelectTrigger
-                    id="카테고리"
+                    id="카테고리*"
                     className="w-full focus:ring-cheeseYellow"
                   >
                     <SelectValue placeholder="카테고리를 선택하세요." />
@@ -138,13 +138,13 @@ const Register = () => {
               )}
             />
             <FormField
-              label="시작 가격"
+              label="시작 가격*"
               name="cost"
               control={control}
               error={errors.cost?.message}
               render={(field) => (
                 <Input
-                  id="시작 가격"
+                  id="시작 가격*"
                   type={isEditing ? 'number' : 'text'}
                   placeholder="최소 시작가는 1,000원입니다."
                   className=" focus-visible:ring-cheeseYellow"
@@ -168,9 +168,9 @@ const Register = () => {
                 />
               )}
             />
-            <RegisterLabel label="경매 마감 시간">
+            <RegisterLabel label="경매 마감 시간*">
               <Input
-                id="경매 마감 시간"
+                id="경매 마감 시간*"
                 type="text"
                 defaultValue="24 시간"
                 disabled
@@ -196,19 +196,17 @@ const Register = () => {
           {caution === '' ? (
             <>
               <Button
-                type="submit"
+                type="button"
                 color="white"
-                className="flex-1 h-full py-3 rounded-lg text-button active:bg-black active:text-white border-gray"
-                size="medium"
+                className="flex-1 h-full rounded text-button active:bg-black active:text-white border-gray"
                 onClick={() => handleProceed('pre-enroll')}
               >
                 사전 등록하기
               </Button>
               <Button
-                type="submit"
-                color="bg-cheeseYellow"
-                className="flex-[2] py-3 h-full text-white rounded-lg active:bg-black text-button bg-cheeseYellow"
-                size="medium"
+                type="button"
+                color="cheeseYellow"
+                className="flex-[2] h-full rounded text-button active:bg-black transition-colors"
                 onClick={() => handleProceed('enroll')}
               >
                 바로 등록하기
@@ -216,10 +214,9 @@ const Register = () => {
             </>
           ) : (
             <Button
-              type="submit"
-              color="bg-cheeseYellow"
-              className="w-full h-full py-3 text-white rounded-lg active:bg-black text-button bg-cheeseYellow"
-              size="medium"
+              type="button"
+              color="cheeseYellow"
+              className="w-full h-full rounded active:bg-black text-button"
               disabled={!check || isSubmitting}
               onClick={handleSubmit(onSubmit)}
               aria-label="최종 등록 버튼"

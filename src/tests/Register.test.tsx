@@ -261,9 +261,9 @@ describe('경매 등록.', () => {
 
     await user.click(enrollBtn);
 
-    const categoryErrorMessage = screen.getByText(/카테고리를 선택해주세요/);
+    const categoryErrorMessage = screen.getByText(/카테고리를 선택해 주세요/);
     const imageErrorMessage =
-      screen.getByText(/사진은 최소 1장 이상 등록해주세요/);
+      screen.getByText(/사진은 최소 1장 이상 등록해 주세요/);
 
     expect(categoryErrorMessage).toBeInTheDocument();
     expect(imageErrorMessage).toBeInTheDocument();
@@ -320,7 +320,7 @@ describe('유효성 검사.', () => {
       // 사진이 없을 때
       await user.click(enrollBtn);
       const errorMessage =
-        screen.getByText(/사진은 최소 1장 이상 등록해주세요/);
+        screen.getByText(/사진은 최소 1장 이상 등록해 주세요/);
       expect(errorMessage).toBeInTheDocument();
     });
 
@@ -351,8 +351,9 @@ describe('유효성 검사.', () => {
       await user.click(enrollBtn);
 
       await waitFor(() => {
-        const errorMessage =
-          screen.getByText(/사진은 최대 5장 이하로 등록해주세요/);
+        const errorMessage = screen.getByText(
+          /사진은 최대 5장 이하로 등록해 주세요/,
+        );
         expect(errorMessage).toBeInTheDocument();
       });
     });
@@ -393,9 +394,7 @@ describe('유효성 검사.', () => {
 
       await user.click(enrollBtn);
 
-      const errorMessage = screen.getByText(
-        /시작 가격은 최소 1000원 이상 입력해주세요/,
-      );
+      const errorMessage = screen.getByText(/최소 1000원 이상 입력해 주세요/);
       await waitFor(() => {
         expect(errorMessage).toBeInTheDocument();
       });
@@ -412,7 +411,7 @@ describe('유효성 검사.', () => {
       await user.click(enrollBtn);
 
       const errorMessage = screen.getByText(
-        /상품 설명은 최소 5자 이상 입력해주세요/,
+        /상품 설명은 최소 5자 이상 입력해 주세요/,
       );
       expect(errorMessage).toBeInTheDocument();
     });
@@ -427,7 +426,7 @@ describe('유효성 검사.', () => {
 
       await waitFor(() => {
         const errorMessage = screen.getByText(
-          /상품 설명은 최대 1000자 이하로 입력해주세요/,
+          /상품 설명은 최대 1000자 이하로 입력해 주세요/,
         );
         expect(errorMessage).toBeInTheDocument();
       });

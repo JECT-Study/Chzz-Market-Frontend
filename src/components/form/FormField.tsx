@@ -26,7 +26,7 @@ const FormField = <T extends FieldValues>({
   return (
     <div className="relative flex flex-col gap-2">
       <label htmlFor={label} className="cursor-pointer text-heading3">
-        {`${label}${label !== '상품 설명' ? '*' : ''}`}
+        {label}
       </label>
       <Controller
         name={name}
