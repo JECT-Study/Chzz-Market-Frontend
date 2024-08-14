@@ -6,6 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   color?: string;
   hoverColor?: string;
+  type: 'button' | 'submit' | 'reset';
 }
 
 const Button = ({

@@ -3,10 +3,15 @@ import MyPageOrder from '@/components/mypage/MyPageOrder';
 import MyPageOrderList from '@/components/mypage/MyPageOrderList';
 import MyPageProfile from '@/components/mypage/MyPageProfile';
 import Navigation from '@/components/Navigation';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const formData = location.state?.formData;
+  console.log(formData);
+
   return (
     <Layout>
       <Layout.Header handleBack={() => navigate('/')}>마이페이지</Layout.Header>
