@@ -1,3 +1,4 @@
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { FocusEvent, useState } from 'react';
 import {
   FieldValues,
@@ -24,10 +25,7 @@ export const useEditableNumberInput = <T extends FieldValues>({
     const { value } = e.target;
     const num = Number(value.replace(/,/g, ''));
     if (!Number.isNaN(num)) {
-      setValue(
-        name,
-        `${num.toLocaleString('en-US')} 원` as PathValue<T, Path<T>>,
-      );
+      setValue(name, formatCurrencyWithWon(num) as PathValue<T, Path<T>>);
       setIsEditing(false);
     }
   };

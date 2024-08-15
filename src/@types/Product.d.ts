@@ -10,4 +10,10 @@ declare module 'Product' {
     timeLeft: number;
     activeUserCount: number;
   }
+
+  export interface BidProduct extends Product {
+    isParticipating: boolean;
+    bidAmount: number;
+    remainingBidCount: number;
+  }
 }

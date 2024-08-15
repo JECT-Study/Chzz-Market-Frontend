@@ -2,8 +2,9 @@ import ProductListPage from '@/pages/ProductList';
 import ROUTERS from '@/constants/route';
 import Test from '@/pages/Test';
 import { createBrowserRouter } from 'react-router-dom';
-import AllOrderList from './pages/AllOrderList';
 import Bid, { loader as bidLoader } from './pages/Bid';
+
+import AllOrderList from './pages/AllOrderList';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyPage from './pages/MyPage';
