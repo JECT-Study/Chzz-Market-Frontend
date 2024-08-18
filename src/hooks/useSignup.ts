@@ -26,6 +26,7 @@ export const useSignup = (): any => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<SignupForm>();
 
@@ -36,11 +37,13 @@ export const useSignup = (): any => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = handleSubmit((data: any) => {
     signupMutation.mutate(data);
+    console.log(data);
   });
 
   return {
     register,
     handleSubmit,
+    watch,
     errors,
     activeButtonSheet,
     setActiveButtonSheet,

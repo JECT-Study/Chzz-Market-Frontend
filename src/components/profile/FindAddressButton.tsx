@@ -36,7 +36,12 @@ const FindAddressButton = ({ onCompleted, children }: Props) => {
   }, []);
 
   return (
-    <Button type="button" size="small" onClick={() => {}}>
+    <Button
+      className="absolute right-0 bottom-3 rounded-md"
+      type="button"
+      size="small"
+      onClick={() => {}}
+    >
       {children}
     </Button>
   );

@@ -14,11 +14,26 @@ const Signup = () => {
   const {
     register,
     errors,
+    watch,
     activeButtonSheet,
     setActiveButtonSheet,
     onCloseBottomSheet,
     onSubmit,
   } = useSignup();
+
+  const handleSubmitClick = () => {
+    if (formRef.current) {
+      formRef.current.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true }),
+      );
+    }
+  };
+
+  const nickname = watch('nickname');
+  const region = watch('region');
+  const introduction = watch('introduction');
+
+  const isFormValid = nickname && region && introduction;
 
   return (
     <Layout>
@@ -36,7 +51,7 @@ const Signup = () => {
             registerProps={register('nickname', { required: true })}
             error={errors.nickname}
           />
-          <div>
+          <div className="relative">
             <ProfileInput
               title="지역 *"
               placeholder="지역을 입력해주세요."
@@ -76,17 +91,18 @@ const Signup = () => {
             placeholder="http://"
             registerProps={register('link')}
           />
-          <Layout.Footer>
-            <Button
-              type="submit"
-              className="w-full h-[47px] rounded-lg"
-              color={'' ? 'cheeseYellow' : 'gray2'}
-            >
-              회원 가입 완료
-            </Button>
-          </Layout.Footer>
         </form>
       </Layout.Main>
+      <Layout.Footer>
+        <Button
+          type="submit"
+          className="w-full h-[47px] rounded-lg"
+          color={isFormValid ? 'cheeseYellow' : 'gray2'}
+          onClick={handleSubmitClick}
+        >
+          회원 가입 완료
+        </Button>
+      </Layout.Footer>
     </Layout>
   );
 };
