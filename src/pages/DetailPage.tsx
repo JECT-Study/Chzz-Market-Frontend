@@ -7,7 +7,14 @@ import { useProgress } from '@/hooks/useProgress';
 
 const DetailPage: React.FC = () => {
   const totalTime = 24 * 60 * 60; // 24시간을 초로 변환
-  const { formatTime, progressBarWidth } = useProgress(totalTime);
+  const auctionStartTime = 1627880400; // 예시: 서버로부터 전달받은 경매 시작 시간 (초 단위 타임스탬프)
+  const serverCurrentTime = Math.floor(Date.now() / 1000); // 예시: 현재 서버 시간 (초 단위 타임스탬프)
+
+  const { formatTime, progressBarWidth } = useProgress(
+    auctionStartTime,
+    serverCurrentTime,
+    totalTime,
+  );
 
   return (
     <Layout>

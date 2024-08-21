@@ -15,7 +15,7 @@ const ROUTERS = Object.freeze({
   },
   REGISTER: '/register',
   DETAIL: {
-    ITEM: '/detail/:id', // 동적 경로 매개변수 설정
+    ITEM: '/detail/:id',
   },
 });
 
