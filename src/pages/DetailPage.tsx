@@ -4,6 +4,7 @@ import { AiOutlineLeft } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import ProgressBar from '@/components/detail/ProgressBar';
 import { useProgress } from '@/hooks/useProgress';
+import { useNavigate } from 'react-router-dom';
 
 const DetailPage: React.FC = () => {
   const totalTime = 24 * 60 * 60; // 24시간을 초로 변환
@@ -16,11 +17,16 @@ const DetailPage: React.FC = () => {
     totalTime,
   );
 
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate('/');
+  };
+
   return (
     <Layout>
       {/* 헤더 */}
       <header className="w-full flex items-center justify-between px-4 py-3 shadow-md">
-        <button aria-label="뒤로 가기">
+        <button aria-label="뒤로 가기" onClick={handleBackClick}>
           <AiOutlineLeft size={24} />
         </button>
         <div />
