@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@/components/common/Button';
 import classNames from 'classnames';
 
@@ -7,12 +7,35 @@ interface ProductButtonsProps {
 }
 
 const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [activeFilter, setActiveFilter] = useState('');
+
+  useEffect(() => {
+    const resize = () => setWindowSize(window.innerWidth);
+
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
+
+  const buttonSize = windowSize >= 500 ? 'small' : 'xsmall';
 
   return (
     <div className="flex h-22px space-x-3 p-4">
       <Button
-        size="xsmall"
+        size={buttonSize}
+        color={classNames(activeFilter === 'all' ? 'black' : 'white')}
+        hoverColor="black"
+        type="button"
+        className="rounded-full"
+        onClick={() => {
+          setSortType('all');
+          setActiveFilter('all');
+        }}
+      >
+        전체
+      </Button>
+      <Button
+        size={buttonSize}
         color={classNames(activeFilter === 'popularity' ? 'black' : 'white')}
         hoverColor="black"
         type="button"
@@ -25,7 +48,7 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
         인기
       </Button>
       <Button
-        size="xsmall"
+        size={buttonSize}
         color={classNames(activeFilter === 'expensive' ? 'black' : 'white')}
         hoverColor="black"
         type="button"
@@ -38,7 +61,7 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
         높은 가격순
       </Button>
       <Button
-        size="xsmall"
+        size={buttonSize}
         color={classNames(activeFilter === 'cheap' ? 'black' : 'white')}
         hoverColor="black"
         type="button"
@@ -51,7 +74,7 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
         낮은 가격순
       </Button>
       <Button
-        size="xsmall"
+        size={buttonSize}
         color={classNames(activeFilter === 'newest' ? 'black' : 'white')}
         hoverColor="black"
         type="button"

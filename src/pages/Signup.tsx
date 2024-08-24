@@ -5,10 +5,10 @@ import Button from '@/components/common/Button';
 import ProfileInput from '@/components/profile/ProfileInput';
 import { FaCaretDown } from 'react-icons/fa6';
 import SelectBank from '@/components/profile/SelectBank';
-import FindAddressButton from '@/components/profile/FindAddressButton';
 import { useSignup } from '@/hooks/useSignup';
 
 const Signup = () => {
+  const [bank, setBank] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const {
@@ -53,18 +53,8 @@ const Signup = () => {
           />
           <div className="relative">
             <ProfileInput
-              title="지역 *"
-              placeholder="지역을 입력해주세요."
-              registerProps={register('region', { required: true })}
-              error={errors.region}
-            />
-            <FindAddressButton onCompleted={() => {}}>
-              주소 입력
-            </FindAddressButton>
-          </div>
-          <div className="relative">
-            <ProfileInput
               title="은행 선택"
+              value={bank}
               placeholder="은행을 선택해주세요"
               registerProps={register('bank')}
             />
@@ -74,7 +64,9 @@ const Signup = () => {
               onClick={() => setActiveButtonSheet(!activeButtonSheet)}
             />
           </div>
-          {activeButtonSheet && <SelectBank onClose={onCloseBottomSheet} />}
+          {activeButtonSheet && (
+            <SelectBank onClose={onCloseBottomSheet} setBank={setBank} />
+          )}
           <ProfileInput
             title="계좌번호"
             placeholder="계좌번호를 입력해주세요."

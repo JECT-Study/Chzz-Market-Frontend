@@ -37,7 +37,6 @@ export const useSignup = (): any => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = handleSubmit((data: any) => {
     signupMutation.mutate(data);
-    console.log(data);
   });
 
   return {

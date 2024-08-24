@@ -5,6 +5,7 @@ interface Props {
   title: string;
   placeholder?: string;
   registerProps: UseFormRegisterReturn;
+  value?: string;
   error?: FieldError;
 }
 
@@ -12,12 +13,14 @@ const ProfileInput = ({
   title,
   placeholder = '',
   registerProps,
+  value,
   error,
 }: Props) => {
   return (
     <div className="w-full">
       <p className="text-gray-600">{title}</p>
       <input
+        value={value}
         className={`w-full py-2 h-[40px] border-b ${
           error ? 'border-b-2 border-red-500' : 'border-b'
         }`}

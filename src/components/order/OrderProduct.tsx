@@ -1,5 +1,5 @@
 import { AuctionItem } from '@/types/myAuctionData';
-import ProductLists from '../common/ProductLists';
+import ProductLists from '../common/ProductItem';
 
 export interface OrderProductProps {
   id: number;

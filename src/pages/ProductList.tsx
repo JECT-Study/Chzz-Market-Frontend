@@ -36,13 +36,14 @@ const ProductList = () => {
             return itemsCopy.sort((a, b) => b.minPrice - a.minPrice);
           case 'newest':
             return itemsCopy.sort((a, b) => b.timeRemaining - a.timeRemaining);
+          case 'all':
+            return itemsCopy;
           default:
             return itemsCopy;
         }
         // return itemsCopy; // 정렬 서버에서 정리, 클라이언트에서 사용할때 제거 서버에서 사용할때 위에 switch문 제거
       });
       const flatProducts = sortedProducts?.flat();
-      console.log(flatProducts);
       setSortedOngoingProducts(flatProducts);
     }
   }, [ongoingData, sortType]);
@@ -54,7 +55,7 @@ const ProductList = () => {
       </Layout.Header>
       <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <ProductButtons setSortType={setSortType} />
-      <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
+      <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
         {activeTab === 'ongoing'
           ? sortedOngoingProducts?.map((product: ProductListItem) => (
               <OngoingProduct key={product.id} product={product} />
