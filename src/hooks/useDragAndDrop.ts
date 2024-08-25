@@ -1,8 +1,8 @@
-import { Dispatch, DragEvent, SetStateAction, useState } from 'react';
+import { DragEvent, useState } from 'react';
 
 export const useDragAndDrop = (
   state: string[],
-  setState: Dispatch<SetStateAction<string[]>>,
+  setState: (images: string[]) => void,
 ) => {
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);

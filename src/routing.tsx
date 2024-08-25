@@ -3,6 +3,9 @@ import ROUTERS from '@/constants/route';
 import Test from '@/pages/Test';
 import { createBrowserRouter } from 'react-router-dom';
 import MyOrderList from './pages/MyOrderList';
+import Bid, { loader as bidLoader } from './pages/Bid';
+
+import AllOrderList from './pages/AllOrderList';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyPage from './pages/MyPage';
@@ -15,6 +18,11 @@ const routeList = [
   {
     path: ROUTERS.HOME,
     element: <Home />,
+  },
+  {
+    path: `${ROUTERS.BID}/:auctionId`,
+    element: <Bid />,
+    loader: bidLoader,
   },
   {
     path: ROUTERS.PRODUCT.LIST,

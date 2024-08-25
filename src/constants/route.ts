@@ -14,6 +14,7 @@ const ROUTERS = Object.freeze({
     MYORDERLIST: '/order/myOrderList',
   },
   REGISTER: '/register',
+  BID: '/bid',
 });
 
 export default ROUTERS;

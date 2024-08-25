@@ -11,4 +11,8 @@ export const API_END_POINT = {
   MY_ACUTION_PRE_REGISTER: '/product/list/api/v1/users/me/auctions',
   // Test
   TEST: '/test',
+  BEST: '/products/best',
+  DEADLINE: '/products/deadline',
+  PRE_ENROLL: '/products/pre_enroll',
+  DETAILS: '/auctions',
 };
