@@ -1,7 +1,7 @@
 import Button from '@/components/common/Button';
 import Layout from '@/components/Layout';
-import { Window } from '@/types/kakao';
 import { SiNaver } from 'react-icons/si';
+import { Window } from '@/@types/kakao';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {

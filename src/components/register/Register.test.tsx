@@ -9,7 +9,7 @@ import {
 
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import Register from '../pages/Register';
+import Register from '../../pages/Register';
 
 /* jsdom이 지원하지 않는 메서드 hasPointerCapture, setPointerCapture, scrollIntoView를 모킹한다.
   테스트 중에 이러한 메서드가 호출될 때 발생하는 에러를 방지한다.

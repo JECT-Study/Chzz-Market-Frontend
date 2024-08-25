@@ -1,4 +1,4 @@
-import { AuctionItem } from '@/types/myAuctionData';
+import { AuctionItem } from '@/@types/myAuctionData';
 import ProductLists from '../common/ProductItem';
 
 export interface OrderProductProps {

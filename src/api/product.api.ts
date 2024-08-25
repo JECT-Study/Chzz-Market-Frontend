@@ -1,6 +1,6 @@
 import { API_END_POINT } from '@/constants/api';
-import { ProductListData } from '@/types/productList';
-import { httpClient } from '@/utils/axios';
+import { ProductListData } from '@/@types/productList';
+import { httpClient } from '@/api/axios';
 
 export interface GetProductParams {
   pageParam: number;

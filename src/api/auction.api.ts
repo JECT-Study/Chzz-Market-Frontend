@@ -1,5 +1,5 @@
 import { API_END_POINT } from '@/constants/api';
-import { httpClient } from '@/utils/axios';
+import { httpClient } from '@/api/axios';
 
 export const getMyAuctionPreRegister = async ({
   page,

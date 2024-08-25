@@ -1,8 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-import { httpClient } from '@/utils/axios';
 import type { PreEnrollProduct, Product } from 'Product';
+
 import { API_END_POINT } from '@/constants/api';
-import { queryKeys } from '../queryKeys';
+import { httpClient } from '@/api/axios';
+import { queryKeys } from '@/constants/queryKeys';
+import { useQuery } from '@tanstack/react-query';
 
 export const useGetBestProducts = () => {
   const getBestProducts = async (): Promise<Product[]> => {

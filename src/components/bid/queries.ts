@@ -1,8 +1,8 @@
 import { API_END_POINT } from '@/constants/api';
 import type { BidProduct } from 'Product';
-import { httpClient } from '@/utils/axios';
+import { httpClient } from '@/api/axios';
+import { queryKeys } from '@/constants/queryKeys';
 import { useQuery } from '@tanstack/react-query';
-import { queryKeys } from '../queryKeys';
 
 export const useGetBidProductDetails = (auctionId: number) => {
   const getBidProductDetails = async (): Promise<BidProduct> => {

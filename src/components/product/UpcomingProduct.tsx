@@ -1,4 +1,4 @@
-import { ProductListItem } from '@/types/productList';
+import { ProductListItem } from '@/@types/productList';
 import ProductLists from '../common/ProductItem';
 
 const UpcomingProduct = ({ product }: { product: ProductListItem }) => {

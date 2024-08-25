@@ -1,4 +1,4 @@
-import { ProductListData } from '@/types/productList';
+import { ProductListData } from '@/@types/productList';
 
 const useFilterButtons = () => {
   const sortByPopularity = (products: ProductListData) => {

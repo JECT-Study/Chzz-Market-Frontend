@@ -1,4 +1,4 @@
-import { Window } from '@/types/kakao';
+import { Window } from '@/@types/kakao';
 import { useEffect } from 'react';
 
 const useKakaoInit = () => {

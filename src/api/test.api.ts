@@ -1,7 +1,7 @@
 import { API_END_POINT } from '@/constants/api';
 // eslint-disable-next-line import/no-cycle
 import { TestItems } from '@/pages/Test';
-import { httpClient } from '@/utils/axios';
+import { httpClient } from '@/api/axios';
 
 interface TestData {
   test: TestItems[];
