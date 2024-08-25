@@ -69,31 +69,31 @@ const DetailPage: React.FC = () => {
       <Layout.Header handleBack={handleBackClick} handleModal={toggleMenu}>
         제품 상세
       </Layout.Header>
-      <div className="bg-yellow-300 w-full">
-        <div className="w-full mb-2">
-          <img
-            src="/jordan-blue.png"
-            alt="Jordan Blue"
-            className="w-full h-auto object-cover" // Ensures the image maintains its aspect ratio
-          />
-        </div>
-        {/* 타이머 및 프로그레스 바 */}
-        <div
-          id="timer-section"
-          className={`${
-            isTimerFixed ? 'fixed top-0 left-0 right-0' : ''
-          } bg-white z-10 py-1 border-b border-gray-300`} // Reduced padding on y-axis
-        >
-          <div className="text-center text-green-500 font-bold text-lg">
-            {formatTime()}
-          </div>
-          <ProgressBar progressBarWidth={progressBarWidth} />
-        </div>
-      </div>
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
-      <div className="relative flex-grow pb-16 overflow-y-auto">
+      <div className="relative flex flex-col h-screen overflow-hidden">
         <Layout.Main>
           {/* 상품 이미지 영역 */}
+          <div className="bg-yellow-300 w-full relative">
+            <div className="w-full mb-2">
+              <img
+                src="/jordan-blue.png"
+                alt="Jordan Blue"
+                className="w-full h-auto object-cover" // Ensures the image maintains its aspect ratio
+              />
+            </div>
+            {/* 타이머 및 프로그레스 바 */}
+            <div
+              id="timer-section"
+              className={`${
+                isTimerFixed ? 'fixed top-0 left-0 right-0' : ''
+              } bg-white z-10 py-1 border-b border-gray-300`} // Reduced padding on y-axis
+            >
+              <div className="text-center text-green-500 font-bold text-lg">
+                {formatTime()}
+              </div>
+              <ProgressBar progressBarWidth={progressBarWidth} />
+            </div>
+          </div>
 
           {/* 경매 정보 영역 */}
           <div className="w-full px-4 my-4">
@@ -125,7 +125,7 @@ const DetailPage: React.FC = () => {
           </div>
 
           {/* 상품 설명 */}
-          <div className="px-4 mb-4 text-sm text-gray-700">
+          <div className="px-4 mb-4 text-sm text-gray-700 overflow-y-auto">
             <p className="mb-2">
               Air Jordan 1 Retro High OG는 마이클 조던(Michael Jordan)이 1985년
               NBA 농구 시즌에서 신은 초기 디자인을 재현한 스니커즈입니다. 이
@@ -226,47 +226,45 @@ const DetailPage: React.FC = () => {
             </p>
           </div>
         </Layout.Main>
-      </div>
-
-      {/* 화면 하단에 고정된 Footer */}
-      <Layout.Footer>
-        {isPreAuction ? (
-          <div className="flex items-center justify-between">
-            <div className="flex items-center mb-4">
-              <AiOutlineHeart className="text-xl text-gray-500 mr-2" />
-              <span className="text-gray-600">{interestCount}명</span>
+        {/* 화면 하단에 고정된 Footer */}
+        <Layout.Footer>
+          {isPreAuction ? (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center mb-4">
+                <AiOutlineHeart className="text-xl text-gray-500 mr-2" />
+                <span className="text-gray-600">{interestCount}명</span>
+              </div>
+              <button className="w-[50%] bg-orange-500 text-white py-3 rounded-none mb-4">
+                경매로 전환하기
+              </button>
             </div>
-            <button className="w-[50%] bg-orange-500 text-white py-3 rounded-none mb-4">
-              경매로 전환하기
+          ) : (
+            <button className="w-full bg-orange-500 text-white py-3 rounded-none mb-4">
+              경매 참여하기
             </button>
-          </div>
-        ) : (
-          <button className="w-full bg-orange-500 text-white py-3 rounded-none mb-4">
-            경매 참여하기
-          </button>
+          )}
+        </Layout.Footer>
+        {/* 백드롭 */}
+        {isMenuOpen && (
+          <>
+            <div
+              className="absolute inset-0 bg-black bg-opacity-50 z-40"
+              onClick={closeMenu}
+              style={{ top: 0, bottom: 0 }}
+            />
+
+            {/* 메뉴 (아코디언) */}
+            <div className="absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50">
+              <button className="flex items-center px-4 py-2 w-full text-left text-gray-700 hover:bg-gray-200">
+                수정하기
+              </button>
+              <button className="flex items-center px-4 py-2 w-full text-left text-red-600 hover:bg-red-100">
+                삭제하기
+              </button>
+            </div>
+          </>
         )}
-      </Layout.Footer>
-
-      {/* 백드롭 */}
-      {isMenuOpen && (
-        <>
-          <div
-            className="absolute inset-0 bg-black bg-opacity-50 z-40"
-            onClick={closeMenu}
-            style={{ top: 0, bottom: 0 }}
-          />
-
-          {/* 메뉴 (아코디언) */}
-          <div className="absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50">
-            <button className="flex items-center px-4 py-2 w-full text-left text-gray-700 hover:bg-gray-200">
-              수정하기
-            </button>
-            <button className="flex items-center px-4 py-2 w-full text-left text-red-600 hover:bg-red-100">
-              삭제하기
-            </button>
-          </div>
-        </>
-      )}
+      </div>
     </Layout>
   );
 };
