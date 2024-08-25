@@ -14,6 +14,9 @@ const ROUTERS = Object.freeze({
     MYORDERLIST: '/order/myOrderList',
   },
   REGISTER: '/register',
+  DETAIL: {
+    ITEM: '/detail/:id',
+  },
   BID: '/bid',
 });
 
