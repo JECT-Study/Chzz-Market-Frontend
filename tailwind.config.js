@@ -20,6 +20,10 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        sm: '500px',
+        lg: '750px',
+      },
       boxShadow: {
         top: '0 0 8px rgba(0, 0, 0, 0.08)',
         bottom: '0 0 8px rgba(0, 0, 0, 0.08)',
@@ -103,6 +107,9 @@ module.exports = {
         gray2: '#888888',
         gray3: '#D9D9D9',
         redNotice: '#FF0000',
+        timeColor1: '#F07C7B',
+        timeColor2: '#EB8003',
+        timeColor3: '#6DD29A',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

@@ -1,52 +1,40 @@
+import { countries } from '@/constants/countries';
 import Button from '../common/Button';
 import Modal from './Modal';
 
-const countries = [
-  { id: 1, name: '전체' },
-  { id: 2, name: '서울' },
-  { id: 3, name: '인천' },
-  { id: 4, name: '경기' },
-  { id: 5, name: '부산' },
-  { id: 6, name: '대구' },
-  { id: 7, name: '광주' },
-  { id: 8, name: '대전' },
-  { id: 9, name: '울산' },
-  { id: 10, name: '강원' },
-  { id: 11, name: '충청' },
-  { id: 12, name: '세종' },
-  { id: 13, name: '경남' },
-  { id: 14, name: '경북' },
-  { id: 15, name: '제주' },
-];
-
 interface Props {
   onClose: () => void;
+  setProfileRegion: (region: string) => void;
 }
 
-const SelectCountry = ({ onClose }: Props) => {
+const SelectCountry = ({ onClose, setProfileRegion }: Props) => {
   return (
     <Modal isOpen onClose={onClose}>
-      <div className="flex justify-between">
-        <h2 className="text-lg font-bold">지역 선택</h2>
-        <button className="text-2xl" onClick={onClose}>
-          X
-        </button>
+      <div className="h-full">
+        <div className="flex justify-between">
+          <h2 className="text-lg font-bold">지역 선택</h2>
+          <button className="text-2xl" onClick={onClose}>
+            X
+          </button>
+        </div>
+        <div className="h-2/5 grid grid-cols-3 gap-2 pt-10">
+          {countries.map((item) => (
+            <Button
+              key={item.id}
+              size="medium"
+              className="rounded-lg border-gray3"
+              color="white"
+              type="button"
+              onClick={() => {
+                setProfileRegion(item.name);
+                onClose();
+              }}
+            >
+              {item.name}
+            </Button>
+          ))}
+        </div>
       </div>
-      <div className="grid grid-cols-3 gap-2">
-        {countries.map((item) => (
-          <Button
-            key={item.id}
-            size="medium"
-            className="rounded-lg border-gray3"
-            color="white"
-          >
-            {item.name}
-          </Button>
-        ))}
-      </div>
-      <Button size="medium" className="rounded-lg" color="cheeseYellow">
-        지역 선택 완료
-      </Button>
     </Modal>
   );
 };

@@ -4,6 +4,7 @@ import Button from '@/components/common/Button';
 import ProfileInput from '@/components/profile/ProfileInput';
 import SelectCountry from '@/components/profile/SelectCountry';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const ProfileEdit = () => {
   const [profileName, setProfileName] = useState<string>('최대열다섯글자');
@@ -13,6 +14,7 @@ const ProfileEdit = () => {
   const [profileRegion, setProfileRegion] = useState<string>('서울');
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);
   const [link, setLink] = useState('');
+  const { register, watch, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const onCloseBottomSheet = () => {
@@ -30,11 +32,11 @@ const ProfileEdit = () => {
           <ProfileInput
             title="닉네임"
             value={profileName}
-            onChange={() => {}}
+            registerProps={register('nickname', { required: true })}
           />
           <div className="w-full">
             <p className="text-gray-600">자기소개</p>
-            <textarea className="w-full py-2 h-[60px] border-b" rows={2}>
+            <textarea className="w-full py-2 h-[60px] border-b">
               {profileIntro}
             </textarea>
           </div>
@@ -47,17 +49,26 @@ const ProfileEdit = () => {
               {profileRegion}
             </div>
           </div>
-          {activeButtonSheet && <SelectCountry onClose={onCloseBottomSheet} />}
+          {activeButtonSheet && (
+            <SelectCountry
+              onClose={onCloseBottomSheet}
+              setProfileRegion={setProfileRegion}
+            />
+          )}
           <ProfileInput
             title="링크"
             value={link}
             placeholder="http://"
-            onChange={() => {}}
+            registerProps={register('link', { required: true })}
           />
         </div>
       </Layout.Main>
       <Layout.Footer>
-        <Button className="w-full h-[47px] rounded-lg" color="cheeseYellow">
+        <Button
+          className="w-full h-[47px] rounded-lg"
+          color="cheeseYellow"
+          type="submit"
+        >
           프로필 수정 완료
         </Button>
       </Layout.Footer>

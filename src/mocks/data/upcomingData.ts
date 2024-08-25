@@ -9,6 +9,7 @@ const upcomingProducts = {
       participantCount: 6,
       id: 17,
       isParticipating: true,
+      category: 'fashion',
     },
     {
       name: 'upcoming Castro2',
@@ -18,6 +19,7 @@ const upcomingProducts = {
       participantCount: 8,
       id: 13,
       isParticipating: true,
+      category: 'fashion',
     },
   ],
   pageNumber: 0,

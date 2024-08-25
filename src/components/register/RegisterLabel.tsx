@@ -1,18 +1,22 @@
 import { ReactNode } from 'react';
+import ErrorMessage from '../common/ErrorMessage';
 
 const RegisterLabel = ({
-  title,
+  label,
   children,
+  error,
 }: {
-  title: string;
+  label: string;
   children: ReactNode;
+  error?: string;
 }) => {
   return (
-    <div className="flex flex-col gap-3">
-      <label htmlFor={title} className="cursor-pointer text-heading3">
-        {title} &#42;
+    <div className="relative flex flex-col gap-2">
+      <label htmlFor={label} className="cursor-pointer text-heading3">
+        {label}
       </label>
       {children}
+      {error && <ErrorMessage message={error} />}
     </div>
   );
 };

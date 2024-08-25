@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
   const navigate = useNavigate();
+
   return (
     <Layout>
       <Layout.Header handleBack={() => navigate('/')}>마이페이지</Layout.Header>
