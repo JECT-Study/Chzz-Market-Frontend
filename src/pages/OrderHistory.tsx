@@ -17,13 +17,13 @@ const OrderHistory = () => {
       </Layout.Header>
       <Layout.Main>
         <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
-        {activeTab === 'joinedAuctions' &&
+        {/* {activeTab === 'joinedAuctions' &&
           ongoingProducts.map((product) => (
             <OrderProduct key={product.id} product={product} />
-          ))}
-        {activeTab === 'successfulAuctions' && <div />}
+          ))} */}
+        {/* {activeTab === 'successfulAuctions' && <div />}
         {activeTab === 'failedAuctions' && <div />}
-        {activeTab === 'closedAuctions' && <div />}
+        {activeTab === 'closedAuctions' && <div />} */}
       </Layout.Main>
       <Layout.Footer>
         <Navigation active="my" />

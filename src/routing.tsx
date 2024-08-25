@@ -2,6 +2,7 @@ import ProductListPage from '@/pages/ProductList';
 import ROUTERS from '@/constants/route';
 import Test from '@/pages/Test';
 import { createBrowserRouter } from 'react-router-dom';
+import MyOrderList from './pages/MyOrderList';
 import Bid, { loader as bidLoader } from './pages/Bid';
 
 import AllOrderList from './pages/AllOrderList';
@@ -48,8 +49,8 @@ const routeList = [
     element: <MyPage />,
   },
   {
-    path: ROUTERS.ORDER.AllLIST,
-    element: <AllOrderList />,
+    path: ROUTERS.ORDER.MYORDERLIST,
+    element: <MyOrderList />,
   },
   {
     path: ROUTERS.SIGNUP,
