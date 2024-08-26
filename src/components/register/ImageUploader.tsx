@@ -1,5 +1,6 @@
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 import { useImageUploader } from '@/hooks/useImageUploader';
+import DeleteIcon from '@/assets/icons/delete.svg';
 import { Input } from '../ui/input';
 import AddImageButton from './AddImageButton';
 
@@ -52,7 +53,7 @@ const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
             onClick={() => deleteImage(image)}
             aria-label={`사진 삭제 ${index}`}
           >
-            <img src="/delete.svg" alt="사진 삭제 버튼" />
+            <img src={DeleteIcon} alt="사진 삭제 버튼" />
           </button>
         </div>
       ))}

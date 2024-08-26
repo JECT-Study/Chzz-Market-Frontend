@@ -15,12 +15,17 @@ const PopupBody = ({ isParticipate }: PopupBodyProps) => {
       </div>
       <div className="flex justify-center gap-6">
         <Button
+          type="button"
           className="bg-gray-500 w-[116px] h-[46px] rounded-lg"
           color="gray"
         >
           취소
         </Button>
-        <Button className="w-[116px] h-[46px] rounded-lg" color="black">
+        <Button
+          type="button"
+          className="w-[116px] h-[46px] rounded-lg"
+          color="black"
+        >
           {isParticipate ? '경매 등록' : '취소'}
         </Button>
       </div>

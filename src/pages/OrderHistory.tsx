@@ -1,8 +1,6 @@
 import Layout from '@/components/Layout';
 import Navigation from '@/components/Navigation';
 import OrderListTab from '@/components/order/OrderListTab';
-import OrderProduct from '@/components/order/OrderProduct';
-import ongoingProducts from '@/mocks/data/ongoingData';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 

@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
 import classNames from 'classnames';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+  children: ReactNode;
   size?: 'xsmall' | 'small' | 'medium' | 'large';
   disabled?: boolean;
   color?: string;
@@ -19,7 +20,8 @@ const Button = ({
   onClick,
   type,
 }: ButtonProps) => {
-  const baseClasses = 'focus:outline-none';
+  const baseClasses =
+    'focus:outline-none rounded active:bg-black transition-colors active:text-white';
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',
     'bg-white text-black border border-black': color === 'white',
@@ -31,7 +33,7 @@ const Button = ({
   const sizeClasses = classNames({
     'px-2 py-0.5 text-xs': size === 'xsmall',
     'px-2 py-1 text-sm': size === 'small',
-    'px-4 py-2 text-base': size === 'medium',
+    'px-4 py-2 text-button': size === 'medium',
     'px-6 py-3 text-lg': size === 'large',
   });
   const hoverColorClasses = classNames({

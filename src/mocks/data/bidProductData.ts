@@ -1,3 +1,6 @@
+import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
+import jordanRedImage from '@/assets/images/jordan_red.jpeg';
+
 export const bidProductData = [
   {
     id: 1,
@@ -8,7 +11,7 @@ export const bidProductData = [
     isParticipating: false,
     bidAmount: 0,
     remainingBidCount: 3,
-    img: '/air-jordan-row.jpeg',
+    img: jordanRedImage,
   },
   {
     id: 2,
@@ -19,6 +22,6 @@ export const bidProductData = [
     isParticipating: true,
     bidAmount: 130_000,
     remainingBidCount: 2,
-    img: '/jordan-black.jpeg',
+    img: jordanBlackImage,
   },
 ];

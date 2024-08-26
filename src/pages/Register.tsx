@@ -13,6 +13,7 @@ import FormField from '@/components/form/FormField';
 import ImageUploader from '@/components/register/ImageUploader';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/Layout';
+import NoticeIcon from '@/assets/icons/notice.svg';
 import RegisterCaution from '@/components/register/RegisterCaution';
 import RegisterLabel from '@/components/register/RegisterLabel';
 import { RegisterSchema } from '@/constants/schema';
@@ -177,7 +178,7 @@ const Register = () => {
                 className="text-gray1 border-gray2 bg-[#f1f1f1]"
               />
               <img
-                src="/notice.svg"
+                src={NoticeIcon}
                 alt="notice"
                 className="absolute bottom-[17%] right-[2%]"
               />
@@ -191,40 +192,38 @@ const Register = () => {
           />
         )}
       </Layout.Main>
-      <Layout.Footer>
-        <div className="flex items-center justify-center h-full gap-3">
-          {caution === '' ? (
-            <>
-              <Button
-                type="button"
-                color="white"
-                className="flex-1 h-full rounded text-button active:bg-black active:text-white border-gray"
-                onClick={() => handleProceed('pre-enroll')}
-              >
-                사전 등록하기
-              </Button>
-              <Button
-                type="button"
-                color="cheeseYellow"
-                className="flex-[2] h-full rounded text-button active:bg-black transition-colors"
-                onClick={() => handleProceed('enroll')}
-              >
-                바로 등록하기
-              </Button>
-            </>
-          ) : (
+      <Layout.Footer type={caution === '' ? 'double' : 'single'}>
+        {caution === '' ? (
+          <>
+            <Button
+              type="button"
+              color="white"
+              className="flex-1 h-full"
+              onClick={() => handleProceed('pre-enroll')}
+            >
+              사전 등록하기
+            </Button>
             <Button
               type="button"
               color="cheeseYellow"
-              className="w-full h-full rounded active:bg-black text-button"
-              disabled={!check || isSubmitting}
-              onClick={handleSubmit(onSubmit)}
-              aria-label="최종 등록 버튼"
+              className="flex-[2] h-full"
+              onClick={() => handleProceed('enroll')}
             >
-              {finalButton}
+              바로 등록하기
             </Button>
-          )}
-        </div>
+          </>
+        ) : (
+          <Button
+            type="button"
+            color="cheeseYellow"
+            className="w-full h-full"
+            disabled={!check || isSubmitting}
+            onClick={handleSubmit(onSubmit)}
+            aria-label="최종 등록 버튼"
+          >
+            {finalButton}
+          </Button>
+        )}
       </Layout.Footer>
     </Layout>
   );

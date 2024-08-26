@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '@/components/Layout';
-import { AiOutlineLeft, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineLeft } from 'react-icons/ai';
+import React, { useEffect, useState } from 'react';
 
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import Layout from '@/components/Layout';
 import ProgressBar from '@/components/detail/ProgressBar';
-import { useProgress } from '@/hooks/useProgress';
 import { useNavigate } from 'react-router-dom';
+import { useProgress } from '@/hooks/useProgress';
 
 const DetailPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,8 +62,6 @@ const DetailPage: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  console.log(isPreAuction, interestCount);
-
   return (
     <Layout>
       <Layout.Header handleBack={handleBackClick} handleModal={toggleMenu}>
@@ -73,12 +71,12 @@ const DetailPage: React.FC = () => {
       <div className="relative flex flex-col h-screen overflow-hidden">
         <Layout.Main>
           {/* 상품 이미지 영역 */}
-          <div className="bg-yellow-300 w-full relative">
+          <div className="relative w-full bg-yellow-300">
             <div className="w-full mb-2">
               <img
-                src="/jordan-blue.png"
+                src="/jordan-blue.jpeg"
                 alt="Jordan Blue"
-                className="w-full h-auto object-cover" // Ensures the image maintains its aspect ratio
+                className="object-cover w-full h-auto" // Ensures the image maintains its aspect ratio
               />
             </div>
             {/* 타이머 및 프로그레스 바 */}
@@ -88,7 +86,7 @@ const DetailPage: React.FC = () => {
                 isTimerFixed ? 'fixed top-0 left-0 right-0' : ''
               } bg-white z-10 py-1 border-b border-gray-300`} // Reduced padding on y-axis
             >
-              <div className="text-center text-green-500 font-bold text-lg">
+              <div className="text-lg font-bold text-center text-green-500">
                 {formatTime()}
               </div>
               <ProgressBar progressBarWidth={progressBarWidth} />
@@ -98,34 +96,34 @@ const DetailPage: React.FC = () => {
           {/* 경매 정보 영역 */}
           <div className="w-full px-4 my-4">
             <div className="flex items-center mb-4">
-              <div className="bg-gray-300 w-10 h-10 rounded-full" />
+              <div className="w-10 h-10 bg-gray-300 rounded-full" />
               <div className="ml-4">
                 <p className="text-sm text-gray-600">프로필 이름</p>
               </div>
             </div>
             <div className="mb-4">
-              <p className="font-bold text-lg">[나이키] 신발</p>
+              <p className="text-lg font-bold">[나이키] 신발</p>
             </div>
             <div className="w-full mb-4">
-              <div className="flex justify-around items-center border border-gray-300 rounded-lg p-4">
+              <div className="flex items-center justify-around p-4 border border-gray-300 rounded-lg">
                 <div className="text-center">
                   <p className="text-sm text-gray-500">시작가</p>
-                  <p className="font-bold text-lg">10,000,000원</p>
+                  <p className="text-lg font-bold">10,000,000원</p>
                 </div>
                 <div className="text-center">
                   <p className="text-sm text-gray-500">나의 참여 금액</p>
-                  <p className="font-bold text-lg">참여 전</p>
+                  <p className="text-lg font-bold">참여 전</p>
                 </div>
                 <div className="text-center">
                   <p className="text-sm text-gray-500">참여 인원</p>
-                  <p className="font-bold text-lg">55명</p>
+                  <p className="text-lg font-bold">55명</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* 상품 설명 */}
-          <div className="px-4 mb-4 text-sm text-gray-700 overflow-y-auto">
+          <div className="px-4 mb-4 overflow-y-auto text-sm text-gray-700">
             <p className="mb-2">
               Air Jordan 1 Retro High OG는 마이클 조던(Michael Jordan)이 1985년
               NBA 농구 시즌에서 신은 초기 디자인을 재현한 스니커즈입니다. 이
@@ -231,7 +229,7 @@ const DetailPage: React.FC = () => {
           {isPreAuction ? (
             <div className="flex items-center justify-between">
               <div className="flex items-center mb-4">
-                <AiOutlineHeart className="text-xl text-gray-500 mr-2" />
+                <AiOutlineHeart className="mr-2 text-xl text-gray-500" />
                 <span className="text-gray-600">{interestCount}명</span>
               </div>
               <button className="w-[50%] bg-orange-500 text-white py-3 rounded-none mb-4">
@@ -239,7 +237,7 @@ const DetailPage: React.FC = () => {
               </button>
             </div>
           ) : (
-            <button className="w-full bg-orange-500 text-white py-3 rounded-none mb-4">
+            <button className="w-full py-3 mb-4 text-white bg-orange-500 rounded-none">
               경매 참여하기
             </button>
           )}
@@ -248,17 +246,17 @@ const DetailPage: React.FC = () => {
         {isMenuOpen && (
           <>
             <div
-              className="absolute inset-0 bg-black bg-opacity-50 z-40"
+              className="absolute inset-0 z-40 bg-black bg-opacity-50"
               onClick={closeMenu}
               style={{ top: 0, bottom: 0 }}
             />
 
             {/* 메뉴 (아코디언) */}
             <div className="absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50">
-              <button className="flex items-center px-4 py-2 w-full text-left text-gray-700 hover:bg-gray-200">
+              <button className="flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200">
                 수정하기
               </button>
-              <button className="flex items-center px-4 py-2 w-full text-left text-red-600 hover:bg-red-100">
+              <button className="flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100">
                 삭제하기
               </button>
             </div>

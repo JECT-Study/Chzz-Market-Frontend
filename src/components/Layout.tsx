@@ -48,10 +48,22 @@ const Main = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const Footer = ({ children }: { children: ReactNode }) => {
+const Footer = ({
+  children,
+  type,
+}: {
+  children: ReactNode;
+  type: 'single' | 'double' | 'like';
+}) => {
+  const style = {
+    single: 'w-full h-full',
+    double: 'flex items-center justify-center h-full gap-3',
+    like: 'flex items-center justify-between h-full',
+  };
+
   return (
     <footer className="w-full min-h-[5rem] h-[5rem] px-[1.25rem] py-[1rem] shadow-top">
-      {children}
+      <div className={style[type]}>{children}</div>
     </footer>
   );
 };

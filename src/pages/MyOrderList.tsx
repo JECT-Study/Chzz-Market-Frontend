@@ -1,4 +1,4 @@
-import { AuctionItem, MyAuctionData } from '@/@types/myAuctionData';
+import { MyAuctionData } from '@/@types/myAuctionData';
 import OrderProduct, {
   OrderProductProps,
 } from '@/components/order/OrderProduct';
