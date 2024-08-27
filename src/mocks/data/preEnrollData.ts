@@ -1,4 +1,4 @@
-const upcomingProducts = {
+const preEnrollProducts = {
   hasNext: false,
   items: [
     {
@@ -24,9 +24,9 @@ const upcomingProducts = {
   ],
   pageNumber: 0,
   pageSize: 10,
-  totalPages: 1,
-  totalElements: 2,
-  last: true,
+  totalPages: 4,
+  totalElements: 30,
+  last: false,
 };
 
-export default upcomingProducts;
+export default preEnrollProducts;

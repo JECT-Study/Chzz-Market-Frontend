@@ -1,6 +1,6 @@
 import { AiOutlineLeft } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { ReactNode } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 interface HeaderProps {
   children?: ReactNode;
@@ -40,22 +40,22 @@ const Header = ({
   );
 };
 
-const Main = ({
-  children,
-  style,
-}: {
-  children: ReactNode;
-  style?: React.CSSProperties;
-}) => {
+const Main = forwardRef<
+  HTMLDivElement,
+  { children: ReactNode; style?: React.CSSProperties }
+>(({ children, style }, ref) => {
   return (
     <main
       className="flex flex-col flex-grow w-full min-h-0 px-8 py-4 overflow-y-scroll"
       style={style}
+      ref={ref}
     >
       {children}
     </main>
   );
-};
+});
+
+Main.displayName = 'Main';
 
 const Footer = ({
   children,

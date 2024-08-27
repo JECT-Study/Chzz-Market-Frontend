@@ -16,23 +16,10 @@ export const getOngoingProductList = async ({
   const response = await httpClient.get(
     `${API_END_POINT.ONGOING_PRODUCT_LIST}?category=fashion&type=${sortType}&page=${pageParam}&limit=${pageSize}`,
   );
-  const { items, totalElements } = response.data;
-  const totalPages = Math.ceil(totalElements / pageSize);
-  const last = pageParam >= totalPages;
-  const hasNext = !last;
-
-  return {
-    items,
-    pageNumber: pageParam,
-    pageSize,
-    totalPages,
-    totalElements,
-    last,
-    hasNext,
-  };
+  return response.data;
 };
 
-export const getUpcomingProductList = async ({
+export const getEnrollProductList = async ({
   pageParam,
   pageSize,
   sortType = 'newest',
@@ -40,18 +27,6 @@ export const getUpcomingProductList = async ({
   const response = await httpClient.get(
     `${API_END_POINT.UPCOMING_PRODUCT_LIST}?category=fashion&type=${sortType}&page=${pageParam}&limit=${pageSize}`,
   );
-  const { items, totalElements } = response.data;
-  const totalPages = Math.ceil(totalElements / pageSize);
-  const last = pageParam >= totalPages;
-  const hasNext = !last;
 
-  return {
-    items,
-    pageNumber: pageParam,
-    pageSize,
-    totalPages,
-    totalElements,
-    last,
-    hasNext,
-  };
+  return response.data;
 };

@@ -32,6 +32,7 @@ const ProfileEdit = () => {
       </Layout.Header>
       <Layout.Main>
         <form
+          ref={formRef}
           className="flex flex-col px-4 py-6 space-y-4"
           onSubmit={handleSubmit(() => {
             navigate('/mypage');

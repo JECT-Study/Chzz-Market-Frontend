@@ -1,11 +1,9 @@
 import { ProductListData, ProductListItem } from '@/@types/productList';
-import { useEffect, useState } from 'react';
-
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
 import OngoingProduct from '@/components/product/OngoingProduct';
 import ProductButtons from '@/components/product/ProductButtons';
 import ProductListTabs from '@/components/product/ProductListTabs';
-import UpcomingProduct from '@/components/product/UpcomingProduct';
 import { useNavigate } from 'react-router-dom';
 import useProductList from '@/hooks/useProductList';
 
@@ -15,14 +13,45 @@ const ProductList = () => {
   const navigate = useNavigate();
   const [sortedOngoingProducts, setSortedOngoingProducts] =
     useState<ProductListItem[]>();
+  const loader = useRef(null);
+  const mainContainerRef = useRef<HTMLDivElement>(null);
   const {
     ongoingData,
-    upcomingData,
+    // enrollData,
     fetchNextOngoingPage,
-    fetchNextUpcomingPage,
+    // fetchNextEnrollPage,
+    hasNextOngoingPage,
+    // hasNextEnrollPage,
   } = useProductList(activeTab, sortType);
 
+  const handleObserver = useCallback(
+    (entities: IntersectionObserverEntry[]) => {
+      const target = entities[0];
+      if (target.isIntersecting) {
+        if (hasNextOngoingPage) {
+          fetchNextOngoingPage();
+        }
+        // if (hasNextEnrollPage) {
+        //   fetchNextEnrollPage();
+        // }
+      }
+    },
+    [fetchNextOngoingPage, hasNextOngoingPage],
+  );
+
   useEffect(() => {
+    const options = {
+      root: mainContainerRef.current,
+      rootMargin: '0px',
+      threshold: 1.0,
+    };
+    const observer = new IntersectionObserver(handleObserver, options);
+
+    const currentLoader = loader.current;
+    if (currentLoader) {
+      observer.observe(currentLoader);
+    }
+
     if (ongoingData) {
       const sortedProducts = ongoingData.pages.map((page: ProductListData) => {
         const itemsCopy = [...page.items];
@@ -47,38 +76,47 @@ const ProductList = () => {
       const flatProducts = sortedProducts?.flat();
       setSortedOngoingProducts(flatProducts);
     }
-  }, [ongoingData, sortType]);
+    return () => {
+      if (currentLoader) {
+        observer.unobserve(currentLoader);
+      }
+    };
+  }, [
+    fetchNextOngoingPage,
+    hasNextOngoingPage,
+    ongoingData,
+    sortType,
+    handleObserver,
+  ]);
 
   return (
     <Layout>
       <Layout.Header handleBack={() => navigate('/')}>
         상품 경매 목록
       </Layout.Header>
-      <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }}>
+      <Layout.Main
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        ref={mainContainerRef}
+      >
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <ProductButtons setSortType={setSortType} />
         <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
-          {activeTab === 'ongoing'
-            ? sortedOngoingProducts?.map((product: ProductListItem) => (
+          {
+            activeTab === 'ongoing' ? (
+              sortedOngoingProducts?.map((product: ProductListItem) => (
                 <OngoingProduct key={product.id} product={product} />
               ))
-            : upcomingData?.pages.map((page: ProductListData) =>
-                page.items.map((product: ProductListItem) => (
-                  <UpcomingProduct key={product.id} product={product} />
-                )),
-              )}
-          <button
-            className="w-20 h-20"
-            onClick={() => {
-              if (activeTab === 'ongoing') {
-                fetchNextOngoingPage();
-              } else {
-                fetchNextUpcomingPage();
-              }
-            }}
-          >
-            더보기
-          </button>
+            ) : (
+              <div />
+            )
+            // enrollData?.pages.map((page: ProductListData) =>
+            //     page.items.map((product: ProductListItem) => (
+            //       <PreEnrollProduct key={product.id} product={product} />
+            //   ))
+            //   ,
+            // )
+          }
+          <div ref={loader} />
         </div>
       </Layout.Main>
     </Layout>

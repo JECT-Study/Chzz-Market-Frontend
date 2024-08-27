@@ -9,20 +9,15 @@ import {
   getBidProductDetailsHandler,
   getEditBidProductDetailsHandler,
 } from './handlers/details';
-import {
-  getOngoingProductList,
-  getUpcomingProductList,
-} from './handlers/ProductList';
+import { getOngoingProductList } from './handlers/ProductList';
 import { getMyAuctionPreRegister } from './handlers/myAuctuon';
-import postSignup from './handlers/Login';
+import { postSignup } from './handlers/Login';
 
 /* eslint-disable import/no-named-as-default */
-
 export const handlers: HttpHandler[] = [
   getBestProductsHandler,
   getDeadLineProductsHandler,
   getPreEnrollProductsHandler,
-  getUpcomingProductList,
   getOngoingProductList,
   getMyAuctionPreRegister,
   postSignup,

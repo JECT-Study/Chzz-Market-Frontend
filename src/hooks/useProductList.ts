@@ -1,6 +1,6 @@
 import {
   getOngoingProductList,
-  getUpcomingProductList,
+  getEnrollProductList,
 } from '@/components/product/queries';
 import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -15,45 +15,45 @@ const useProductList = (activeTab: string, sortType: string): any => {
     hasNextPage: hasNextOngoingPage,
   } = useInfiniteQuery({
     queryKey: [queryKeys.ONGOING_ORDER_LIST],
-    queryFn: ({ pageParam = 1 }) =>
+    queryFn: ({ pageParam = 0 }) =>
       getOngoingProductList({ pageParam, pageSize: 10, sortType }),
     getNextPageParam: (lastPage) => {
-      if (lastPage.hasNext) {
-        return lastPage.pageNumber + 1;
+      if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
+        return undefined;
       }
-      return undefined;
+      return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
     enabled: activeTab === 'ongoing',
   });
 
-  const {
-    data: upcomingData,
-    isLoading: upcomingLoading,
-    error: upcomingError,
-    fetchNextPage: fetchNextUpcomingPage,
-    hasNextPage: hasNextUpcomingPage,
-  } = useInfiniteQuery({
-    queryKey: [queryKeys.UPCOMING_ORDER_LIST],
-    queryFn: ({ pageParam = 1 }) =>
-      getUpcomingProductList({ pageParam, pageSize: 10, sortType }),
-    getNextPageParam: (lastPage) => {
-      if (lastPage.hasNext) {
-        return lastPage.pageNumber + 1;
-      }
-      return undefined;
-    },
-    initialPageParam: 0,
-    enabled: activeTab === 'upcoming',
-  });
+  // const {
+  //   data: enrollData,
+  //   isLoading: enrollLoading,
+  //   error: enrollError,
+  //   fetchNextPage: fetchNextEnrollPage,
+  //   hasNextPage: hasNextEnrollPage,
+  // } = useInfiniteQuery({
+  //   queryKey: [queryKeys.UPCOMING_ORDER_LIST],
+  //   queryFn: ({ pageParam = 0 }) =>
+  //   getEnrollProductList({ pageParam, pageSize: 10, sortType }),
+  //   getNextPageParam: (lastPage) => {
+  //     if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
+  //       return undefined;
+  //     }
+  //     return lastPage.pageNumber + 1;
+  //   },
+  //   initialPageParam: 0,
+  //   enabled: activeTab === 'upcoming',
+  // });
 
   return {
     ongoingData,
-    upcomingData,
+    // enrollData,
     fetchNextOngoingPage,
-    fetchNextUpcomingPage,
+    // fetchNextEnrollPage,
     hasNextOngoingPage,
-    hasNextUpcomingPage,
+    // hasNextEnrollPage,
   };
 };
 

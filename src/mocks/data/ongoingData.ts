@@ -1,5 +1,5 @@
 const ongoingProducts = {
-  hasNext: false,
+  hasNext: true,
   items: [
     {
       name: '[나이키 신발]',
@@ -303,8 +303,8 @@ const ongoingProducts = {
   ],
   pageNumber: 0,
   pageSize: 10,
-  totalPages: 1,
-  totalElements: 2,
+  totalPages: 3,
+  totalElements: 30,
   last: true,
 };
 

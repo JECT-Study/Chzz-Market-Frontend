@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import { SiNaver } from 'react-icons/si';
 import { Window } from '@/@types/kakao';
 import { useNavigate } from 'react-router-dom';
+import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,11 +22,10 @@ const Login = () => {
       <Layout.Header handleBack={() => navigate('/')}>로그인</Layout.Header>
       <Layout.Main>
         <div className="flex flex-col items-center h-full">
-          {/* <img /> */}
           <div className="w-full h-[52px]">
             <button className="w-full h-[52px]" onClick={handleKakaoLogin}>
               <img
-                src="/kakao_login_large_wide.png"
+                src={kakaoImage}
                 alt="kakaoButton"
                 className="w-full h-full object-contain "
               />
