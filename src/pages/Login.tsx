@@ -31,6 +31,7 @@ const Login = () => {
               />
             </button>
             <Button
+              type="button"
               className="relative flex items-center justify-center w-full border-none rounded-md bg-mainCheeseYellow"
               size="large"
               color="black"

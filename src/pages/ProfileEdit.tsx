@@ -11,7 +11,6 @@ const ProfileEdit = () => {
   const [profileIntro, setProfileIntro] = useState<string>(
     '안녕하세요. 나이키 직영 조던 정품 취급 전문가입니다.',
   );
-  const [profileRegion, setProfileRegion] = useState<string>('서울');
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);
   const [link, setLink] = useState('');
   const { register, watch, handleSubmit } = useForm();
@@ -40,21 +39,6 @@ const ProfileEdit = () => {
               {profileIntro}
             </textarea>
           </div>
-          <div className="w-full">
-            <p className="text-gray-600">지역</p>
-            <div
-              className="w-full py-2 h-[40px] border-b hover:cursor-pointer"
-              onClick={() => setActiveButtonSheet(!activeButtonSheet)}
-            >
-              {profileRegion}
-            </div>
-          </div>
-          {activeButtonSheet && (
-            <SelectCountry
-              onClose={onCloseBottomSheet}
-              setProfileRegion={setProfileRegion}
-            />
-          )}
           <ProfileInput
             title="링크"
             value={link}
@@ -63,7 +47,7 @@ const ProfileEdit = () => {
           />
         </div>
       </Layout.Main>
-      <Layout.Footer>
+      <Layout.Footer type="single">
         <Button
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"

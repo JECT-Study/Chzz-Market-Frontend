@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 
 interface OrderListTabProps {
   activeTab: string;
@@ -7,6 +8,19 @@ interface OrderListTabProps {
 
 const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
   const tabClass = 'flex-1 text-center py-2 cursor-pointer';
+  const [isWidthScreen, setIsWidthScreen] = useState(window.innerWidth >= 750);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWidthScreen(window.innerWidth >= 750);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="w-full flex justify-between items-center">
@@ -19,8 +33,15 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
         )}
         onClick={() => setActiveTab('joinedAuctions')}
       >
-        참여한
-        <br /> 경매
+        {isWidthScreen ? (
+          '참여한 경매'
+        ) : (
+          <>
+            참여한
+            <br />
+            경매
+          </>
+        )}
       </div>
       <div
         className={classNames(
@@ -31,8 +52,14 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
         )}
         onClick={() => setActiveTab('successfulAuctions')}
       >
-        경매 참여
-        <br /> 성공
+        {isWidthScreen ? (
+          '경매 참여 성공'
+        ) : (
+          <>
+            경매 참여
+            <br /> 성공
+          </>
+        )}
       </div>
       <div
         className={classNames(
@@ -43,8 +70,14 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
         )}
         onClick={() => setActiveTab('failedAuctions')}
       >
-        경매 참여
-        <br /> 실패
+        {isWidthScreen ? (
+          '경매 참여 실패'
+        ) : (
+          <>
+            경매 참여
+            <br /> 실패
+          </>
+        )}
       </div>
       <div
         className={classNames(
@@ -55,8 +88,15 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
         )}
         onClick={() => setActiveTab('closedAuctions')}
       >
-        종료된
-        <br /> 경매
+        {isWidthScreen ? (
+          '종료된 경매'
+        ) : (
+          <>
+            종료된
+            <br />
+            경매
+          </>
+        )}
       </div>
     </div>
   );

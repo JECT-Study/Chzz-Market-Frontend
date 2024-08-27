@@ -46,7 +46,7 @@ const AllOrderList = () => {
           </button>
         </div>
       </Layout.Main>
-      <Layout.Footer>
+      <Layout.Footer type="single">
         <Navigation active="my" />
       </Layout.Footer>
     </Layout>

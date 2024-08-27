@@ -1,8 +1,7 @@
 import {
   getOngoingProductList,
   getUpcomingProductList,
-} from '@/api/product.api';
-
+} from '@/components/product/queries';
 import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 

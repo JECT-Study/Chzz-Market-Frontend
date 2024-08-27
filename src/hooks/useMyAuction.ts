@@ -1,4 +1,4 @@
-import { getMyAuctionPreRegister } from '@/api/auction.api';
+import { getMyAuctionPreRegister } from '@/components/auction/queries';
 import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 

@@ -23,7 +23,7 @@ const OrderHistory = () => {
         {activeTab === 'failedAuctions' && <div />}
         {activeTab === 'closedAuctions' && <div />} */}
       </Layout.Main>
-      <Layout.Footer>
+      <Layout.Footer type="single">
         <Navigation active="my" />
       </Layout.Footer>
     </Layout>

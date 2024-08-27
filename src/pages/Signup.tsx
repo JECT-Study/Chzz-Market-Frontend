@@ -85,7 +85,7 @@ const Signup = () => {
           />
         </form>
       </Layout.Main>
-      <Layout.Footer>
+      <Layout.Footer type="single">
         <Button
           type="submit"
           className="w-full h-[47px] rounded-lg"

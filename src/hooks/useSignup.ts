@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { SignupFormSchema } from '@/constants/schema';
 import { useMutation } from '@tanstack/react-query';
-import { postSignup } from '@/api/login.api';
+import { postSignup } from '@/components/login/queries';
 
 type SignupForm = z.infer<typeof SignupFormSchema>;
 
