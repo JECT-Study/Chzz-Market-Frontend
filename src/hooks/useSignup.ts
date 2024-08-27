@@ -6,7 +6,15 @@ import { SignupFormSchema } from '@/constants/schema';
 import { useMutation } from '@tanstack/react-query';
 import { postSignup } from '@/components/login/queries';
 
-type SignupForm = z.infer<typeof SignupFormSchema>;
+type FormFields = z.infer<typeof SignupFormSchema>;
+
+const defaultValues = {
+  nickname: '',
+  bank: '',
+  accountNumber: '',
+  introduction: '',
+  link: '',
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useSignup = (): any => {
@@ -24,11 +32,13 @@ export const useSignup = (): any => {
   });
 
   const {
-    register,
+    control,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<SignupForm>();
+  } = useForm<FormFields>({
+    defaultValues,
+  });
 
   const onCloseBottomSheet = () => {
     setActiveButtonSheet(!activeButtonSheet);
@@ -40,10 +50,10 @@ export const useSignup = (): any => {
   });
 
   return {
-    register,
+    control,
+    formState: { errors },
     handleSubmit,
     watch,
-    errors,
     activeButtonSheet,
     setActiveButtonSheet,
     onCloseBottomSheet,

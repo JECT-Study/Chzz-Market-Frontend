@@ -7,7 +7,7 @@ interface OrderListTabProps {
 }
 
 const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
-  const tabClass = 'flex-1 text-center py-2 cursor-pointer';
+  const tabClass = 'flex-1 text-center cursor-pointer';
   const [isWidthScreen, setIsWidthScreen] = useState(window.innerWidth >= 750);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
           activeTab === 'joinedAuctions'
             ? 'border-b-2 border-cheeseYellow font-bold'
             : 'text-gray2 border-b-2 border-gray-300',
+          isWidthScreen && 'p-2',
         )}
         onClick={() => setActiveTab('joinedAuctions')}
       >
@@ -49,6 +50,7 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
           activeTab === 'successfulAuctions'
             ? 'border-b-2 border-cheeseYellow font-bold'
             : 'text-gray2 border-b-2 border-gray-300',
+          isWidthScreen && 'p-2',
         )}
         onClick={() => setActiveTab('successfulAuctions')}
       >
@@ -67,6 +69,7 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
           activeTab === 'failedAuctions'
             ? 'border-b-2 border-cheeseYellow font-bold'
             : 'text-gray2 border-b-2 border-gray-300',
+          isWidthScreen && 'p-2',
         )}
         onClick={() => setActiveTab('failedAuctions')}
       >
@@ -85,6 +88,7 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
           activeTab === 'closedAuctions'
             ? 'border-b-2 border-cheeseYellow font-bold'
             : 'text-gray2 border-b-2 border-gray-300',
+          isWidthScreen && 'p-2',
         )}
         onClick={() => setActiveTab('closedAuctions')}
       >

@@ -10,7 +10,7 @@ const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
     <div className="flex justify-center w-full mt-3">
       <div
         className={classNames(
-          'flex justify-center items-center w-full py-2 ml-4 cursor-pointer text-sm',
+          'flex justify-center items-center w-full py-2 cursor-pointer text-sm',
           activeTab === 'ongoing'
             ? 'border-b-2 border-cheeseYellow'
             : 'border-b-2 border-gray-300',
@@ -21,7 +21,7 @@ const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
       </div>
       <div
         className={classNames(
-          'flex justify-center w-full items-center py-2 mr-4 cursor-pointer text-sm',
+          'flex justify-center w-full items-center py-2 cursor-pointer text-sm',
           activeTab === 'upcoming'
             ? 'border-b-2 border-cheeseYellow'
             : 'border-b-2 border-gray-300',

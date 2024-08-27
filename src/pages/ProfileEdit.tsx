@@ -1,23 +1,28 @@
-import { useState } from 'react';
 import Layout from '@/components/Layout';
 import Button from '@/components/common/Button';
-import ProfileInput from '@/components/profile/ProfileInput';
-import SelectCountry from '@/components/profile/SelectCountry';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import FormField from '@/components/form/FormField';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useRef } from 'react';
 
 const ProfileEdit = () => {
-  const [profileName, setProfileName] = useState<string>('최대열다섯글자');
-  const [profileIntro, setProfileIntro] = useState<string>(
-    '안녕하세요. 나이키 직영 조던 정품 취급 전문가입니다.',
-  );
-  const [activeButtonSheet, setActiveButtonSheet] = useState(false);
-  const [link, setLink] = useState('');
-  const { register, watch, handleSubmit } = useForm();
+  const {
+    control,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
 
-  const onCloseBottomSheet = () => {
-    setActiveButtonSheet(!activeButtonSheet);
+  const handleSubmitClick = () => {
+    if (formRef.current) {
+      formRef.current.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true }),
+      );
+    }
   };
 
   return (
@@ -26,32 +31,62 @@ const ProfileEdit = () => {
         프로필 수정
       </Layout.Header>
       <Layout.Main>
-        <div className="flex flex-col px-4 py-6 space-y-4">
+        <form
+          className="flex flex-col px-4 py-6 space-y-4"
+          onSubmit={handleSubmit(() => {
+            navigate('/mypage');
+          })}
+        >
           <h2 className="pb-4 text-lg font-bold">프로필 정보</h2>
-          <ProfileInput
-            title="닉네임"
-            value={profileName}
-            registerProps={register('nickname', { required: true })}
+          <FormField
+            label="닉네임 *"
+            name="nickname"
+            control={control}
+            render={(field) => (
+              <Input
+                id="닉네임 *"
+                type="text"
+                placeholder="닉네임을 입력해주세요 (공백 제외 15글자 이내)"
+                className="focus-visible:ring-cheeseYellow"
+                {...field}
+              />
+            )}
           />
-          <div className="w-full">
-            <p className="text-gray-600">자기소개</p>
-            <textarea className="w-full py-2 h-[60px] border-b">
-              {profileIntro}
-            </textarea>
-          </div>
-          <ProfileInput
-            title="링크"
-            value={link}
-            placeholder="http://"
-            registerProps={register('link', { required: true })}
+          <FormField
+            label="자기소개"
+            name="introduction"
+            control={control}
+            render={(field) => (
+              <Textarea
+                id="자기소개"
+                placeholder="자기소개를 입력해주세요"
+                className="focus-visible:ring-cheeseYellow"
+                {...field}
+              />
+            )}
           />
-        </div>
+          <FormField
+            label="링크"
+            name="link"
+            control={control}
+            render={(field) => (
+              <Input
+                id="링크"
+                type="text"
+                placeholder="링크를 입력해주세요"
+                className="focus-visible:ring-cheeseYellow"
+                {...field}
+              />
+            )}
+          />
+        </form>
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
+          type="submit"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
-          type="submit"
+          onClick={handleSubmitClick}
         >
           프로필 수정 완료
         </Button>

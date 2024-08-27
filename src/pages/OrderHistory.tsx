@@ -13,15 +13,15 @@ const OrderHistory = () => {
       <Layout.Header handleBack={() => navigate('/')}>
         모든 참여 내역
       </Layout.Header>
-      <Layout.Main>
+      <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }}>
         <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
         {/* {activeTab === 'joinedAuctions' &&
           ongoingProducts.map((product) => (
             <OrderProduct key={product.id} product={product} />
           ))} */}
-        {/* {activeTab === 'successfulAuctions' && <div />}
+        {activeTab === 'successfulAuctions' && <div />}
         {activeTab === 'failedAuctions' && <div />}
-        {activeTab === 'closedAuctions' && <div />} */}
+        {activeTab === 'closedAuctions' && <div />}
       </Layout.Main>
       <Layout.Footer type="single">
         <Navigation active="my" />

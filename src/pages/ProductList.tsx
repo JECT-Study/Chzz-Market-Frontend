@@ -54,31 +54,33 @@ const ProductList = () => {
       <Layout.Header handleBack={() => navigate('/')}>
         상품 경매 목록
       </Layout.Header>
-      <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-      <ProductButtons setSortType={setSortType} />
-      <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
-        {activeTab === 'ongoing'
-          ? sortedOngoingProducts?.map((product: ProductListItem) => (
-              <OngoingProduct key={product.id} product={product} />
-            ))
-          : upcomingData?.pages.map((page: ProductListData) =>
-              page.items.map((product: ProductListItem) => (
-                <UpcomingProduct key={product.id} product={product} />
-              )),
-            )}
-        <button
-          className="w-20 h-20"
-          onClick={() => {
-            if (activeTab === 'ongoing') {
-              fetchNextOngoingPage();
-            } else {
-              fetchNextUpcomingPage();
-            }
-          }}
-        >
-          더보기
-        </button>
-      </div>
+      <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }}>
+        <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        <ProductButtons setSortType={setSortType} />
+        <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
+          {activeTab === 'ongoing'
+            ? sortedOngoingProducts?.map((product: ProductListItem) => (
+                <OngoingProduct key={product.id} product={product} />
+              ))
+            : upcomingData?.pages.map((page: ProductListData) =>
+                page.items.map((product: ProductListItem) => (
+                  <UpcomingProduct key={product.id} product={product} />
+                )),
+              )}
+          <button
+            className="w-20 h-20"
+            onClick={() => {
+              if (activeTab === 'ongoing') {
+                fetchNextOngoingPage();
+              } else {
+                fetchNextUpcomingPage();
+              }
+            }}
+          >
+            더보기
+          </button>
+        </div>
+      </Layout.Main>
     </Layout>
   );
 };

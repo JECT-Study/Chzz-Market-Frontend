@@ -40,9 +40,18 @@ const Header = ({
   );
 };
 
-const Main = ({ children }: { children: ReactNode }) => {
+const Main = ({
+  children,
+  style,
+}: {
+  children: ReactNode;
+  style?: React.CSSProperties;
+}) => {
   return (
-    <main className="flex flex-col flex-grow w-full min-h-0 px-8 py-4 overflow-y-scroll">
+    <main
+      className="flex flex-col flex-grow w-full min-h-0 px-8 py-4 overflow-y-scroll"
+      style={style}
+    >
       {children}
     </main>
   );

@@ -4,7 +4,7 @@ const ongoingProducts = {
     {
       name: '[나이키 신발]',
       cdnPath: '?ab=441&aad=2',
-      timeRemaining: 86408,
+      timeRemaining: 12,
       minPrice: 432523,
       participantCount: 1,
       id: 5213,
@@ -14,7 +14,7 @@ const ongoingProducts = {
     {
       name: 'Melinda Castro2',
       cdnPath: null,
-      timeRemaining: 86444,
+      timeRemaining: 42,
       minPrice: 12345,
       participantCount: 123,
       id: 1423,
@@ -24,7 +24,7 @@ const ongoingProducts = {
     {
       name: 'ongoing data3',
       cdnPath: '?ab=441&aad=2',
-      timeRemaining: 86408,
+      timeRemaining: 62,
       minPrice: 2344,
       participantCount: 13,
       id: 125,
@@ -74,10 +74,10 @@ const ongoingProducts = {
     {
       name: 'Melinda Castro8',
       cdnPath: null,
-      timeRemaining: 86444,
-      minPrice: 1000,
-      participantCount: 8,
-      id: 34123,
+      timeRemaining: 120,
+      minPrice: 120,
+      participantCount: 120,
+      id: 555,
       isParticipating: true,
       category: 'fashion',
     },

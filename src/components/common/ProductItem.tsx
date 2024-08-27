@@ -1,23 +1,30 @@
 import { LuUsers } from 'react-icons/lu';
 import { IoPricetagsOutline } from 'react-icons/io5';
+import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
+import { getTimeColor } from '@/utils/getTimeColor';
 import Button from './Button';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProductItem = ({ product }: { product: any }) => {
   const remainHour = Math.floor(product.timeRemaining / 3600);
+  const timeColor = getTimeColor(remainHour);
 
   return (
     <div key={product.id} className="mb-4">
       <div className="flex flex-col">
-        <div className="relative w-full h-auto mb-4">
-          <img
-            className="w-full h-full object-cover"
-            src="/Nike_RedWhite_Thumbnail.jpeg"
-            alt="Jordan Black Shoes"
-          />
-          <p className="absolute bottom-0 left-11 text-sm font-semibold text-orange-400">
-            {`${remainHour}시간 남음`}
-          </p>
+        <div className="w-full h-auto mb-4">
+          <div className="relative">
+            <img
+              className="object-cover w-full h-[10rem] rounded-t"
+              src={jordanBlackImage}
+              alt="Jordan Black Shoes"
+            />
+            <div
+              className={`absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 ${timeColor} border-b-2`}
+            >
+              {`${remainHour}시간 남음`}
+            </div>
+          </div>
         </div>
 
         <div className="flex flex-col gap-[8px]">
