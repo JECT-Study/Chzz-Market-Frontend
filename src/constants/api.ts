@@ -1,6 +1,9 @@
 export const API_END_POINT = {
   // AUTH
-  LOGIN: '/auth/login',
+  LOGIN: {
+    KAKAO: '/auth/kakao',
+    NAVER: '/auth/naver',
+  },
   LOGOUT: '/auth/logout',
   REFRESH_TOKEN: '/auth/token',
   SIGNUP: '/users/signup',

@@ -11,7 +11,7 @@ import {
 } from './handlers/details';
 import { getOngoingProductList } from './handlers/ProductList';
 import { getMyAuctionPreRegister } from './handlers/myAuctuon';
-import { postSignup } from './handlers/Login';
+import postSignup from './handlers/Login';
 
 /* eslint-disable import/no-named-as-default */
 export const handlers: HttpHandler[] = [

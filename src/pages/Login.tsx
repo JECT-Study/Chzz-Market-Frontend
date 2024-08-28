@@ -1,21 +1,13 @@
 import Button from '@/components/common/Button';
 import Layout from '@/components/Layout';
 import { SiNaver } from 'react-icons/si';
-import { Window } from '@/@types/kakao';
 import { useNavigate } from 'react-router-dom';
 import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
+import { useAuth } from '@/hooks/useAuth';
 
 const Login = () => {
   const navigate = useNavigate();
-
-  const handleKakaoLogin = () => {
-    if ((window as Window).Kakao) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).Kakao.Auth.authorize({
-        redirectUri: 'http://localhost:5173/login/kakao/code',
-      });
-    }
-  };
+  const { handleKakaoLogin } = useAuth();
 
   return (
     <Layout>

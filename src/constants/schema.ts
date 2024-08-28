@@ -34,4 +34,10 @@ export const RegisterSchema = z.object({
     .or(z.literal('')),
 });
 
+export const AddressBookSchema = z.object({
+  name: z.string().min(1, '이름을 입력해주세요.'),
+  address: z.string().min(1, '주소를 입력해주세요.'),
+  bank: z.string().min(1, '은행을 선택해주세요.'),
+});
+
 export const BidSchema = RegisterSchema.pick({ cost: true });
