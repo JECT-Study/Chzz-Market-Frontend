@@ -1,7 +1,6 @@
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { AiOutlineUsergroupDelete } from 'react-icons/ai';
 import BidCaution from '@/components/bid/BidCaution';
 import { BidSchema } from '@/constants/schema';
 import Button from '@/components/common/Button';
@@ -15,6 +14,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useGetBidProductDetails } from '@/components/bid/queries';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import UserIcon from '@/assets/icons/user.svg';
+import PriceIcon from '@/assets/icons/price.svg';
 
 type FormFields = z.infer<typeof BidSchema>;
 
@@ -76,7 +77,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
               <img
                 src={img}
                 alt="이미지"
-                className="object-cover w-full h-[10rem] rounded"
+                className="object-cover w-full h-[12rem] rounded"
               />
               <div
                 aria-label="남은 시간"
@@ -86,18 +87,32 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
               </div>
             </div>
             <figcaption className="flex flex-col gap-1">
-              <h3 aria-label="이름" className="text-gray1 text-heading3">
+              <h3 aria-label="이름" className="text-heading3">
                 {name}
               </h3>
-              <div aria-label="시작 가격" className="text-body1Bold text-gray1">
-                {startPrice}
+              <div
+                aria-label="시작 가격"
+                className="flex items-center text-body2 text-gray2"
+              >
+                <img src={PriceIcon} alt="price_icon" />
+                <span>
+                  시작가{' '}
+                  <span className="text-black text-body2Bold">
+                    {startPrice}
+                  </span>
+                </span>
               </div>
               <div
                 aria-label="경매 참여자 수"
                 className="flex items-center text-body2 text-gray2"
               >
-                <AiOutlineUsergroupDelete />
-                <span>경매 참여자 {activeUserCount}명</span>
+                <img src={UserIcon} alt="user_icon" />
+                <span>
+                  참여자{' '}
+                  <span className="text-black text-body2Bold">
+                    {activeUserCount}명
+                  </span>
+                </span>
               </div>
             </figcaption>
           </figure>
@@ -132,7 +147,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
           <BidCaution check={check} handleCheck={toggleCheckBox} />
         </div>
       </Layout.Main>
-      <Layout.Footer>
+      <Layout.Footer type={isParticipating ? 'double' : 'single'}>
         {!isParticipating ? (
           <Button
             type="button"
@@ -145,7 +160,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
             {buttonName}
           </Button>
         ) : (
-          <div className="flex items-center justify-center h-full gap-3">
+          <>
             <Button
               type="button"
               color="white"
@@ -166,7 +181,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
                 ? `(${remainingBidCount}회 가능)`
                 : '(소진)'}
             </Button>
-          </div>
+          </>
         )}
       </Layout.Footer>
     </Layout>

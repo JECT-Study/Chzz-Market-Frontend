@@ -74,7 +74,7 @@ const Home = () => {
           <p>Loading</p>
         )}
       </Layout.Main>
-      <Layout.Footer>
+      <Layout.Footer type="single">
         <Navigation active="home" />
       </Layout.Footer>
     </Layout>

@@ -91,7 +91,7 @@ describe('입찰 테스트', () => {
     expect(item).toContainElement(priceElement);
 
     const userElement = screen.getByLabelText('경매 참여자 수');
-    expect(userElement).toHaveTextContent('경매 참여자 11명');
+    expect(userElement).toHaveTextContent('참여자 11명');
     expect(item).toContainElement(userElement);
   });
 

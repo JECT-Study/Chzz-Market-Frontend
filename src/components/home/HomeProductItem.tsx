@@ -1,7 +1,8 @@
 import { getTimeColor } from '@/utils/getTimeColor';
 import type { PreEnrollProduct, Product } from 'Product';
-import { AiOutlineUsergroupDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import UserIcon from '@/assets/icons/user.svg';
+import PriceIcon from '@/assets/icons/price.svg';
 
 type HomeItemProps<T> = T extends 'pre_enroll'
   ? { kind: 'pre_enroll'; product: PreEnrollProduct; idx: number }
@@ -44,17 +45,28 @@ const HomeProductItem = <T extends 'pre_enroll' | 'enroll' | 'deadline'>({
         </div>
         <div
           aria-label={`${idx}_startPrice_${kind}`}
-          className="text-body2Bold text-gray1"
+          className="flex items-center text-gray2"
         >
-          {product.startPrice}
+          <img src={PriceIcon} alt="price_icon" />
+          <span>
+            시작가{' '}
+            <span className="text-black text-body2Bold">
+              {product.startPrice}
+            </span>
+          </span>
         </div>
         {kind !== 'pre_enroll' && (
           <div
             aria-label={`${idx}_activeUserCount_${kind}`}
             className="flex items-center text-gray2"
           >
-            <AiOutlineUsergroupDelete />
-            <span>경매 참여자 {product.activeUserCount}명</span>
+            <img src={UserIcon} alt="user_icon" />
+            <span>
+              참여자{' '}
+              <span className="text-black text-body2Bold">
+                {product.activeUserCount}명
+              </span>
+            </span>
           </div>
         )}
       </figcaption>
