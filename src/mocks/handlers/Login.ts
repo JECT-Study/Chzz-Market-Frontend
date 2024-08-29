@@ -9,6 +9,12 @@ const postSignup: HttpHandler = http.post(
         status: 'created',
         message: 'success',
       }),
+      {
+        status: 201,
+        headers: {
+          Authorization: 'Bearer accessTokenaaaaaa',
+        },
+      },
     );
   },
 );
