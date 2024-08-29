@@ -1,20 +1,19 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
-
-import { BrowserRouter } from 'react-router-dom';
-import Home from '@/pages/Home';
-import userEvent from '@testing-library/user-event';
-
-import {
-  useGetBestProducts,
-  useGetDeadlineProducts,
-  useGetPreEnrollProducts,
-} from '@/components/home/queries';
 import {
   bestProducts,
   deadlineProducts,
   preEnrollProducts,
 } from '@/mocks/data/homeProductsData';
+import { render, screen } from '@testing-library/react';
+import {
+  useGetBestProducts,
+  useGetDeadlineProducts,
+  useGetPreEnrollProducts,
+} from '@/components/home/queries';
+
+import { BrowserRouter } from 'react-router-dom';
+import Home from '@/pages/Home';
+import userEvent from '@testing-library/user-event';
 
 /**
  * vi.fn()은 모의 함수나 스파이 함수(함수 호출을 기록하고 추적할 수 있는 함수)를 생성할 수 있다.
@@ -102,7 +101,7 @@ describe('Home 테스트', () => {
 
       // 참여자 수 확인
       const userElement = screen.getByLabelText('0_activeUserCount_best');
-      expect(userElement).toHaveTextContent('경매 참여자 11명');
+      expect(userElement).toHaveTextContent('참여자 11명');
       expect(firstBestItems).toContainElement(userElement);
 
       await user.click(firstBestItems);
@@ -174,7 +173,7 @@ describe('Home 테스트', () => {
 
         const redTimeElement = screen.getByLabelText('1_timeLeft_best');
         expect(redTimeItem).toContainElement(redTimeElement);
-        expect(redTimeElement).toHaveClass('text-timeColor1 border-timeColor1');
+        expect(redTimeElement).toHaveClass('text-timeColor2 border-timeColor2');
       });
 
       test('16시간 미만일 경우 주황색으로 표시한다.', async () => {
@@ -249,11 +248,13 @@ describe('Home 테스트', () => {
     test('알림 버튼은 색깔없는 아이콘이어야 하며, 클릭해도 알림페이지로 이동한다.', async () => {
       const { user } = setup();
 
-      const noticeIcon = screen.getByRole('img', { name: /notice_off_icon/ });
+      const noticeIcon = screen.getByRole('img', {
+        name: /notification_off_icon/,
+      });
 
       await user.click(noticeIcon);
 
-      expect(mockedUseNavigate).toHaveBeenCalledWith('/notice');
+      expect(mockedUseNavigate).toHaveBeenCalledWith('/notification');
     });
 
     test('좋아요 버튼은 색깔없는 아이콘이어야 하며, 클릭해도 좋아요페이지로 이동한다.', async () => {
@@ -275,7 +276,7 @@ describe('Home 테스트', () => {
 
       await user.click(myIcon);
 
-      expect(mockedUseNavigate).toHaveBeenCalledWith('/my_page');
+      expect(mockedUseNavigate).toHaveBeenCalledWith('/mypage');
     });
   });
 });
