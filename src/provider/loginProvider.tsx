@@ -18,7 +18,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
     }
   }, [isLogin, navigate, location.pathname]);
 
-  return { children };
+  return children as JSX.Element;
 };
 
 export default LoginProvider;
