@@ -1,7 +1,5 @@
-import { AiOutlineHeart, AiOutlineLeft } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 import React, { useEffect, useState } from 'react';
-
-import { BsThreeDotsVertical } from 'react-icons/bs';
 import Layout from '@/components/Layout';
 import ProgressBar from '@/components/detail/ProgressBar';
 import { useNavigate } from 'react-router-dom';
@@ -94,28 +92,28 @@ const DetailPage: React.FC = () => {
           </div>
 
           {/* 경매 정보 영역 */}
-          <div className="w-full px-4 my-4">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-gray-300 rounded-full" />
-              <div className="ml-4">
-                <p className="text-sm text-gray-600">프로필 이름</p>
-              </div>
-            </div>
+          <div className="px-4 my-4">
+            {/* 경매 아이템 제목 & 시작가 */}
             <div className="mb-4">
-              <p className="text-lg font-bold">[나이키] 신발</p>
+              <p className="text-lg font-bold mb-1">[나이키] 신발</p>
+              <p className="text-sm text-gray-500">
+                <span className="inline-flex items-center">
+                  <span className="mr-1">💎</span> 시작가{' '}
+                  <span className="font-bold">10,000,000원</span>
+                </span>
+              </p>
             </div>
-            <div className="w-full mb-4">
-              <div className="flex items-center justify-around p-4 border border-gray-300 rounded-lg">
-                <div className="text-center">
-                  <p className="text-sm text-gray-500">시작가</p>
-                  <p className="text-lg font-bold">10,000,000원</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm text-gray-500">나의 참여 금액</p>
+
+            {/* 나의 참여 금액 & 경매 참여인원 */}
+            <div className="w-full mb-4 border border-gray-300 rounded-lg">
+              <div className="flex items-center justify-between">
+                <div className="text-center flex-1 py-4">
+                  <p className="text-sm text-gray-500 mb-1">나의 참여 금액</p>
                   <p className="text-lg font-bold">참여 전</p>
                 </div>
-                <div className="text-center">
-                  <p className="text-sm text-gray-500">참여 인원</p>
+                <div className="border-l border-gray-300 h-full" />
+                <div className="text-center flex-1 py-4">
+                  <p className="text-sm text-gray-500 mb-1">참여 인원</p>
                   <p className="text-lg font-bold">55명</p>
                 </div>
               </div>
