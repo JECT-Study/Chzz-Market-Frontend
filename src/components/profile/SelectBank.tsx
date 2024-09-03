@@ -5,10 +5,10 @@ import Modal from './Modal';
 
 interface Props {
   onClose: () => void;
-  setBank: (bank: string) => void;
+  onSelect: (bank: string) => void;
 }
 
-const SelectBank = ({ onClose, setBank }: Props) => {
+const SelectBank = ({ onClose, onSelect }: Props) => {
   return (
     <Modal isOpen onClose={onClose}>
       <div className="">
@@ -31,7 +31,7 @@ const SelectBank = ({ onClose, setBank }: Props) => {
                 className="flex flex-col items-center justify-center w-24 h-24 transition duration-300 border rounded-lg shadow-sm border-gary-300 hover:bg-gray-100"
                 color="gray3"
                 onClick={() => {
-                  setBank(item.name);
+                  onSelect(item.name);
                   onClose();
                 }}
               >

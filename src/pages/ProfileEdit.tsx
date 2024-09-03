@@ -55,7 +55,7 @@ const ProfileEdit = () => {
           />
           <FormField
             label="자기소개"
-            name="introduction"
+            name="bio"
             control={control}
             render={(field) => (
               <Textarea

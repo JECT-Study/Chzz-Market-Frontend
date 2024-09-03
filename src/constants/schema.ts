@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const SignupFormSchema = z.object({
   nickname: z.string().min(1).max(15),
-  bank: z.string().optional(),
+  bankName: z.string().optional(),
   accountNumber: z.string().optional(),
-  introduction: z.string().optional(),
+  bio: z.string().optional(),
   link: z.string().optional(),
 });
 

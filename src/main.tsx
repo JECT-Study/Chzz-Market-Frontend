@@ -8,13 +8,11 @@ import ReactQueryProvider from './provider/queryProvider';
 import { storeLogin } from './store/authSlice';
 
 async function enableMocking(): Promise<void> {
-  if (import.meta.env.MODE !== 'development') {
-    return;
-  }
-
-  const { worker } = await import('./mocks/broswer');
-
-  await worker.start();
+  // if (import.meta.env.MODE !== 'development') {
+  //   return;
+  // }
+  // const { worker } = await import('./mocks/broswer');
+  // await worker.start();
 }
 
 enableMocking().then(() => {

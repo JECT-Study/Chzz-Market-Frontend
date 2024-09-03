@@ -11,9 +11,9 @@ type FormFields = z.infer<typeof SignupFormSchema>;
 
 const defaultValues = {
   nickname: '',
-  bank: '',
+  bankName: '',
   accountNumber: '',
-  introduction: '',
+  bio: '',
   link: '',
 };
 
@@ -32,6 +32,7 @@ export const useSignup = (): any => {
 
   const {
     control,
+    setValue,
     handleSubmit,
     watch,
     formState: { errors },
@@ -53,6 +54,7 @@ export const useSignup = (): any => {
     formState: { errors },
     handleSubmit,
     watch,
+    setValue,
     activeButtonSheet,
     setActiveButtonSheet,
     onCloseBottomSheet,

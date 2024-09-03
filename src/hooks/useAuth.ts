@@ -1,13 +1,10 @@
 import { Window } from '@/@types/kakao';
+import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
+  const navigate = useNavigate();
   const handleKakaoLogin = () => {
-    if ((window as Window).Kakao) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).Kakao.Auth.authorize({
-        redirectUri: 'http://localhost:5173/signup',
-      });
-    }
+    window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
   };
 
   const handleNaverLogin = () => {

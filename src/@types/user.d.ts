@@ -1,7 +1,7 @@
 export interface User {
   nickname: string;
-  bank: string | null;
+  bankName: string | null;
   accountNumber: string | null;
-  introduction?: string | null;
+  bio?: string | null;
   link?: string | null;
 }
