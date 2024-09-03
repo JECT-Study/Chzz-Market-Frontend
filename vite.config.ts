@@ -17,6 +17,7 @@ export default defineConfig({
       '@/api': resolve(__dirname, 'src/api'),
       '@/utils': resolve(__dirname, 'src/utils'),
       '@/models': resolve(__dirname, 'src/models'),
+      '@/store': resolve(__dirname, 'src/store'),
     },
   },
   test: {

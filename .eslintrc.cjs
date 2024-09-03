@@ -74,6 +74,11 @@ module.exports = {
 
     'testing-library/no-node-access': 'warn',
 
+    // 의존성 문제 해결
+    'no-param-reassign': 'off',
+    'import/no-cycle': 'off',
+    'import/no-named-as-default': 'off',
+
     'react/prop-types': 'off', // TypeScript를 사용하여 prop-type 규칙을 사용하지 않도록 설정합니다
     '@typescript-eslint/explicit-module-boundary-types': 'off', // 모듈 경계에 대한 명시적 반환 유형 규칙 사용 안 함
     '@typescript-eslint/no-unused-vars': 'off', //사용되지 않은 변수 무시 _

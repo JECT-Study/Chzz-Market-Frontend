@@ -5,13 +5,13 @@ import {
   getDeadLineProductsHandler,
   getPreEnrollProductsHandler,
 } from './handlers/home';
+import { getOngoingProductList } from './handlers/productList';
+import getMyAuctionPreRegister from './handlers/myAuctuon';
+import postSignup from './handlers/Login';
 import {
   getBidProductDetailsHandler,
   getEditBidProductDetailsHandler,
 } from './handlers/details';
-import { getOngoingProductList } from './handlers/ProductList';
-import { getMyAuctionPreRegister } from './handlers/myAuctuon';
-import { postSignup } from './handlers/Login';
 
 /* eslint-disable import/no-named-as-default */
 export const handlers: HttpHandler[] = [

@@ -1,9 +1,9 @@
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routing';
-import useKakaoInit from './hooks/useKakaoInit';
+// import useKakaoInit from './hooks/useKakaoInit';
 
 const App = () => {
-  useKakaoInit();
+  // useKakaoInit();
 
   return <RouterProvider router={router} />;
 };

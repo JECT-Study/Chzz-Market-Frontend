@@ -1,13 +1,16 @@
 export const API_END_POINT = {
   // AUTH
-  LOGIN: '/auth/login',
+  LOGIN: {
+    KAKAO: '/auth/kakao',
+    NAVER: '/auth/naver',
+  },
   LOGOUT: '/auth/logout',
   REFRESH_TOKEN: '/auth/token',
-  SIGNUP: '/users/signup',
+  SIGNUP: 'api/v1/users',
   PROFILE: '/profile',
   ORDER_LIST: '/order/list',
-  ONGOING_PRODUCT_LIST: '/product/list/api/v1/auctions',
-  UPCOMING_PRODUCT_LIST: '/product/list/api/v1/auctions',
+  ONGOING_PRODUCT_LIST: '/product_list/api/v1/auctions',
+  UPCOMING_PRODUCT_LIST: '/product_list/api/v1/auctions',
   MY_ACUTION_PRE_REGISTER: '/product/list/api/v1/users/me/auctions',
   // Test
   TEST: '/test',

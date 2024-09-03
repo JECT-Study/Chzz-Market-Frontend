@@ -1,7 +1,7 @@
 import { http, HttpHandler, HttpResponse } from 'msw';
 import { API_END_POINT } from '@/constants/api';
 
-export const postSignup: HttpHandler = http.post(
+const postSignup: HttpHandler = http.post(
   `${API_END_POINT.SIGNUP}`,
   async () => {
     return new HttpResponse(
@@ -9,6 +9,12 @@ export const postSignup: HttpHandler = http.post(
         status: 'created',
         message: 'success',
       }),
+      {
+        status: 201,
+        headers: {
+          Authorization: 'Bearer accessTokenaaaaaa',
+        },
+      },
     );
   },
 );
