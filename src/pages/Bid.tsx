@@ -6,7 +6,7 @@ import { BidSchema } from '@/constants/schema';
 import Button from '@/components/common/Button';
 import FormField from '@/components/form/FormField';
 import { Input } from '@/components/ui/input';
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import { getTimeColor } from '@/utils/getTimeColor';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 import { useState } from 'react';

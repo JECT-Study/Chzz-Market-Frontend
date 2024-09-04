@@ -1,11 +1,12 @@
-import { AiOutlineHeart, AiOutlineLeft } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 import React, { useEffect, useState } from 'react';
+import JordanBlue from '@/assets/images/jordan_blue.jpeg';
 
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import ProgressBar from '@/components/detail/ProgressBar';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '@/hooks/useProgress';
+import Button from '@/components/common/Button';
 
 const DetailPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,7 +75,7 @@ const DetailPage: React.FC = () => {
           <div className="relative w-full bg-yellow-300">
             <div className="w-full mb-2">
               <img
-                src="/jordan-blue.jpeg"
+                src={JordanBlue}
                 alt="Jordan Blue"
                 className="object-cover w-full h-auto" // Ensures the image maintains its aspect ratio
               />
@@ -225,21 +226,29 @@ const DetailPage: React.FC = () => {
           </div>
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
-        <Layout.Footer>
+        <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
           {isPreAuction ? (
-            <div className="flex items-center justify-between">
-              <div className="flex items-center mb-4">
-                <AiOutlineHeart className="mr-2 text-xl text-gray-500" />
+            <>
+              <div className="flex items-center flex-1 h-full gap-2">
+                <AiOutlineHeart className="text-xl text-gray-500" />
                 <span className="text-gray-600">{interestCount}명</span>
               </div>
-              <button className="w-[50%] bg-orange-500 text-white py-3 rounded-none mb-4">
+              <Button
+                type="button"
+                className="flex-[2] h-full"
+                color="cheeseYellow"
+              >
                 경매로 전환하기
-              </button>
-            </div>
+              </Button>
+            </>
           ) : (
-            <button className="w-full py-3 mb-4 text-white bg-orange-500 rounded-none">
+            <Button
+              type="button"
+              className="w-full h-full"
+              color="cheeseYellow"
+            >
               경매 참여하기
-            </button>
+            </Button>
           )}
         </Layout.Footer>
         {/* 백드롭 */}

@@ -9,7 +9,7 @@ import CategoryList from '@/components/home/CategoryList';
 import HomeItemList from '@/components/home/HomeItemList';
 import HomeProductItem from '@/components/home/HomeProductItem';
 import HomeRegisterBtn from '@/components/home/HomeRegisterBtn';
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import Navigation from '@/components/Navigation';
 import { useNavigate } from 'react-router-dom';
 import { useScrollDetection } from '@/hooks/useScrollDetection';
