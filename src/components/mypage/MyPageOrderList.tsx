@@ -1,3 +1,4 @@
+import { useAuth } from '@/hooks/useAuth';
 import { IoIosArrowForward } from 'react-icons/io';
 
 const mypageList = [
@@ -13,12 +14,15 @@ const mypageList = [
 ];
 
 const MyPageOrderList = () => {
+  const { handleLogout } = useAuth();
+
   return (
     <div className="flex flex-col">
       {mypageList.map((item) => (
         <div
           key={item.id}
           className="w-full flex justify-between py-2 border-b border-b-gray3"
+          onClick={item.title === '로그아웃' ? handleLogout : undefined}
         >
           <h2 className="text-lg font-medium">{item.title}</h2>
           <IoIosArrowForward className="text-2xl" />

@@ -1,28 +1,30 @@
-import { Window } from '@/@types/kakao';
+import { logout } from '@/components/login/queries';
+import { removeToken } from '@/utils/tokenUtils';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
   const navigate = useNavigate();
+
   const handleKakaoLogin = () => {
     window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
   };
 
   const handleNaverLogin = () => {
-    if ((window as Window).Naver) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).Naver.Auth.authorize({
-        redirectUri: 'http://localhost:5173/signup',
-      });
-    }
+    window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
   };
 
-  // const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
-  // const REDIRECT_URL = process.env.REACT_APP_KAKAO_REDIRECT_URL;
-  // const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
+  const logoutMutation = useMutation({
+    mutationFn: () => logout(),
+    onSuccess: () => {
+      removeToken();
+      navigate('/');
+    },
+  });
 
-  // const loginHanlder = () => {
-  //   window.location.href = link;
-  // };
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
-  return { handleKakaoLogin, handleNaverLogin };
+  return { handleKakaoLogin, handleNaverLogin, handleLogout };
 };

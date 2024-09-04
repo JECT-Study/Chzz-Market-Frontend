@@ -21,6 +21,10 @@ const MyPage = () => {
             <MyPageOrder />
             <MyPageOrderList />
           </div>
+
+          <button onClick={() => navigate('/product/list')}>
+            상품 목록으로 이동
+          </button>
         </Layout.Main>
         <Layout.Footer type="single">
           <Navigation active="my" />

@@ -42,6 +42,12 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'no-underscore-dangle': [
+      'error',
+      {
+        allow: ['_retry'],
+      }
+    ],
     'react/react-in-jsx-scope': 'off',
     // import React from 'react' 꺼두기
     'react/jsx-uses-react': 'off',

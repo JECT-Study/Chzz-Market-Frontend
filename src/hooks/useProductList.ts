@@ -15,8 +15,8 @@ const useProductList = (activeTab: string, sortType: string): any => {
     hasNextPage: hasNextOngoingPage,
   } = useInfiniteQuery({
     queryKey: [queryKeys.ONGOING_ORDER_LIST],
-    queryFn: ({ pageParam = 0 }) =>
-      getOngoingProductList({ pageParam, pageSize: 10, sortType }),
+    queryFn: () =>
+      getOngoingProductList({ pageNumber: 0, pageSize: 10, sortType }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;
