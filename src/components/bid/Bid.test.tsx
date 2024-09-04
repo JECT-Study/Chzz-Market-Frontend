@@ -4,21 +4,14 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import Bid from '@/pages/Bid';
 import { bidProductData } from '@/mocks/data/bidProductData';
-import userEvent from '@testing-library/user-event';
+import { mockedUseNavigate } from '@/setupTests';
 import { useGetBidProductDetails } from '@/components/bid/queries';
+import userEvent from '@testing-library/user-event';
 
 vi.mock('@/components/bid/queries');
-const mockedUseNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  const mod =
-    await vi.importActual<typeof import('react-router-dom')>(
-      'react-router-dom',
-    );
-
-  return {
-    ...mod,
-    useNavigate: () => mockedUseNavigate,
-  };
+vi.mocked(useGetBidProductDetails).mockReturnValue({
+  isLoading: false,
+  productDetails: bidProductData[0],
 });
 
 /**
@@ -38,15 +31,7 @@ const router = createMemoryRouter(
     initialEntries: ['/bid/1'],
   },
 );
-
 describe('입찰 테스트', () => {
-  beforeEach(() => {
-    vi.mocked(useGetBidProductDetails).mockReturnValue({
-      isLoading: false,
-      productDetails: bidProductData[0],
-    });
-  });
-
   const setup = () => {
     const utils = render(<RouterProvider router={router} />);
     const user = userEvent.setup();

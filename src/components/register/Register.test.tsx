@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import {
   act,
   fireEvent,
@@ -9,6 +9,7 @@ import {
 
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { mockedUseNavigate } from '@/setupTests';
 import Register from '../../pages/Register';
 
 /* jsdom이 지원하지 않는 메서드 hasPointerCapture, setPointerCapture, scrollIntoView를 모킹한다.
@@ -19,29 +20,15 @@ import Register from '../../pages/Register';
 
   Object.defineProperty를 사용하면 객체의 프로퍼티를 정의하거나 수정할 수 있다. 이를 통해 Element.prototype에 새로운 메서드를 추가하거나 기존 메서드를 오버라이드할 수 있다. */
 
-beforeAll(() => {
-  Object.defineProperty(Element.prototype, 'hasPointerCapture', {
-    value: () => false,
-    // 프로퍼티가 변경 가능한 지 여부
-  });
-  Object.defineProperty(Element.prototype, 'setPointerCapture', {
-    value: () => {},
-  });
-  Object.defineProperty(Element.prototype, 'scrollIntoView', {
-    value: () => {},
-  });
+Object.defineProperty(Element.prototype, 'hasPointerCapture', {
+  value: () => false,
+  // 프로퍼티가 변경 가능한 지 여부
 });
-
-const mockedUseNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  const mod =
-    await vi.importActual<typeof import('react-router-dom')>(
-      'react-router-dom',
-    );
-  return {
-    ...mod,
-    useNavigate: () => mockedUseNavigate,
-  };
+Object.defineProperty(Element.prototype, 'setPointerCapture', {
+  value: () => {},
+});
+Object.defineProperty(Element.prototype, 'scrollIntoView', {
+  value: () => {},
 });
 
 const fillFormWithValidData = async (

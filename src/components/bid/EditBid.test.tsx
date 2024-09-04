@@ -6,22 +6,14 @@ import Bid from '@/pages/Bid';
 import { bidProductData } from '@/mocks/data/bidProductData';
 import { useGetBidProductDetails } from '@/components/bid/queries';
 import userEvent from '@testing-library/user-event';
-
-const mockedUseNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  const mod =
-    await vi.importActual<typeof import('react-router-dom')>(
-      'react-router-dom',
-    );
-
-  return {
-    ...mod,
-    useNavigate: () => mockedUseNavigate,
-  };
-});
+import { mockedUseNavigate } from '@/setupTests';
 
 vi.mock('@/components/bid/queries');
 
+vi.mocked(useGetBidProductDetails).mockReturnValue({
+  isLoading: false,
+  productDetails: bidProductData[1],
+});
 const router = createMemoryRouter(
   [
     {
@@ -36,13 +28,6 @@ const router = createMemoryRouter(
 );
 
 describe('입찰가 수정 테스트', () => {
-  beforeEach(() => {
-    vi.mocked(useGetBidProductDetails).mockReturnValue({
-      isLoading: false,
-      productDetails: bidProductData[1],
-    });
-  });
-
   const setup = () => {
     const utils = render(<RouterProvider router={router} />);
     const user = userEvent.setup();
