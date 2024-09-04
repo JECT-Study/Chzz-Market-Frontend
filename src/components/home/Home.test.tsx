@@ -14,52 +14,38 @@ import {
 import { BrowserRouter } from 'react-router-dom';
 import Home from '@/pages/Home';
 import userEvent from '@testing-library/user-event';
-
-/**
- * vi.fn()은 모의 함수나 스파이 함수(함수 호출을 기록하고 추적할 수 있는 함수)를 생성할 수 있다.
- * 이 모의 함수는 나중에 호출된 횟수, 호출 시 전달된 인수 등을 추적할 수 있다.
- * vi.mock을 사용하여 react-router-dom 모듈을 모킹하고, 특정 기능(useNavigate)을 사용자 정의된 모의 함수로 대체
- * 모듈 모킹은 테스트 환경에서 해당 모듈의 실제 구현을 대체하여 테스트 목적에 맞게 수정된 버전을 사용하게 한다.
- */
-const mockedUseNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  // importActual은 실제 모듈의 원래 구현을 가져오는 기능을 한다.
-  // 일부 기능은 실제 동작을 그대로 유지하면서 useNavigate만 모킹하려는 경우에 유용하다.
-  const mod =
-    await vi.importActual<typeof import('react-router-dom')>(
-      'react-router-dom',
-    );
-  return {
-    ...mod,
-    // useNavigate 훅이 호출될 때마다 mockedUseNavigate 라는 모의 함수가 호출된다.
-    useNavigate: () => mockedUseNavigate,
-  };
-});
-
-// 이 모킹 코드는 테스트 중에 react-router-dom의 useNavigate 훅을 사용하는 컴포넌트를 렌더링할 때 실제 네비게이션 동작을 발생시키지 않고 mockedUseNavigate 라는 모의함수가 호출되도록 한다.
+import { mockedUseNavigate } from '@/setupTests';
+import { notificationData } from '@/mocks/data/notificationData';
+import { useGetNotifications } from '../notification/queries';
 
 // vi.mock을 사용해 특정 모듈을 모킹할 수 있다.
 // 실제로 useGetBestProducts 함수를 실행하는 대신, 원하는 반환값을 제공하는 모의 함수를 제공한다는 뜻
 //  @/components/home/queries에서 불러오는 모든 함수들을 모킹
 vi.mock('@/components/home/queries');
 
+// 모듈을 모킹한 후, 우리는 각 함수가 어떤 값을 반환할지 정의
+// 모킹을 통해 설정한 반환값은 실제로 테스트를 진행할 때, 컴포넌트가 이 훅에서 데이터를 가져오는 것처럼 작동하게 합니다. 이 과정에서 API 요청이 발생하지 않으며, 데이터가 항상 일관되게 제공됩니다.
+vi.mocked(useGetBestProducts).mockReturnValue({
+  isBestLoading: false, // 로딩 완료 상태로 설정
+  bestItems: bestProducts,
+});
+vi.mocked(useGetDeadlineProducts).mockReturnValue({
+  isDeadlineLoading: false, // 로딩 완료 상태로 설정
+  deadlineItems: deadlineProducts,
+});
+vi.mocked(useGetPreEnrollProducts).mockReturnValue({
+  isPreEnrollLoading: false, // 로딩 완료 상태로 설정
+  preEnrollItems: preEnrollProducts,
+});
+
+vi.mock('@/components/notification/queries');
+
+vi.mocked(useGetNotifications).mockReturnValue({
+  isLoading: false,
+  notifications: notificationData,
+});
+
 describe('Home 테스트', () => {
-  beforeEach(() => {
-    // 모듈을 모킹한 후, 우리는 각 함수가 어떤 값을 반환할지 정의
-    // 모킹을 통해 설정한 반환값은 실제로 테스트를 진행할 때, 컴포넌트가 이 훅에서 데이터를 가져오는 것처럼 작동하게 합니다. 이 과정에서 API 요청이 발생하지 않으며, 데이터가 항상 일관되게 제공됩니다.
-    vi.mocked(useGetBestProducts).mockReturnValue({
-      isBestLoading: false, // 로딩 완료 상태로 설정
-      bestItems: bestProducts,
-    });
-    vi.mocked(useGetDeadlineProducts).mockReturnValue({
-      isDeadlineLoading: false, // 로딩 완료 상태로 설정
-      deadlineItems: deadlineProducts,
-    });
-    vi.mocked(useGetPreEnrollProducts).mockReturnValue({
-      isPreEnrollLoading: false, // 로딩 완료 상태로 설정
-      preEnrollItems: preEnrollProducts,
-    });
-  });
   const setup = () => {
     const utils = render(<Home />, { wrapper: BrowserRouter });
     const user = userEvent.setup();
