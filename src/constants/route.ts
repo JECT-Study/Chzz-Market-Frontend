@@ -18,6 +18,8 @@ const ROUTERS = Object.freeze({
     ITEM: '/detail/:id',
   },
   BID: '/bid',
+  NOTIFICATION: '/notification',
+  BIDDER_LIST: '/auction/bidder-list',
 });
 
 export default ROUTERS;
