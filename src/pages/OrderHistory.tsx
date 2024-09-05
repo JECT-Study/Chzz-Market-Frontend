@@ -10,7 +10,7 @@ const OrderHistory = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/mypage')}>
+      <Layout.Header handleBack={() => navigate('/user')}>
         모든 참여 내역
       </Layout.Header>
       <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }}>

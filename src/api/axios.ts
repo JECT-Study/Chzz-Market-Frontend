@@ -28,22 +28,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
     if (accessToken) {
       request.headers.Authorization = `Bearer ${accessToken}`;
     }
-    // else {
-    //     try {
-    //       await refreshToken();
-    //       accessToken = getToken();
 
-    //       if (accessToken) {
-    //         request.headers.Authorization = `Bearer ${accessToken}`;
-    //       } else {
-    //         removeToken();
-    //         window.location.href = '/login';
-    //       }
-    //     } catch (refreshError) {
-    //       removeToken();
-    //       window.location.href = '/login';
-    //     }
-    //   }
     return request;
   });
 
@@ -63,19 +48,28 @@ export const createClient = (config?: AxiosRequestConfig) => {
         !originalRequest._retry
       ) {
         const errorMessage = error.response.data?.message;
+        console.log(errorMessage);
 
         originalRequest._retry = true;
 
         if (errorMessage === '토큰이 만료되었습니다.') {
           try {
             await refreshToken();
-            return await axiosInstance(originalRequest);
+            const newAccessToken = getToken();
+
+            originalRequest.headers = originalRequest.headers || {};
+            if (newAccessToken) {
+              originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+              return await axiosInstance(originalRequest);
+            }
+            removeToken();
+            alert('로그인이 필요합니다.');
+            window.location.href = '/login';
           } catch (refreshError) {
-            if (refreshError) {
+            if (refreshError === '리프레시 토큰이 유효하지 않습니다.') {
               removeToken();
               alert('리프레쉬 토큰이 만료');
               window.location.href = '/login';
-              return Promise.reject(refreshError);
             }
           }
         }
@@ -83,6 +77,13 @@ export const createClient = (config?: AxiosRequestConfig) => {
         if (errorMessage === 'Authentication is required') {
           removeToken();
           alert('로그인이 필요합니다.');
+          window.location.href = '/login';
+          return Promise.reject(error);
+        }
+
+        if (errorMessage === '리프레시 토큰이 유효하지 않습니다.') {
+          removeToken();
+          alert('리프레쉬 토큰이 만료');
           window.location.href = '/login';
           return Promise.reject(error);
         }

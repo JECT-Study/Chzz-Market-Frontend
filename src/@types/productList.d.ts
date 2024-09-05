@@ -1,4 +1,4 @@
-export interface ProductListItem {
+export interface OngoingProductListItem {
   id: number;
   name: string;
   cdnPath: string | null;
@@ -8,9 +8,27 @@ export interface ProductListItem {
   isParticipating: boolean;
 }
 
-export interface ProductListData {
+export interface OngoingProductListData {
   hasNext: boolean;
-  items: ProductListItem[];
+  items: OngoingProductListItem[];
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+}
+
+export interface PreEnrollProductListItem {
+  id: number;
+  name: string;
+  cdnPath: string;
+  likeCount: number;
+  isLiked: boolean;
+}
+
+export interface PreEnrollProductListData {
+  hasNext: boolean;
+  items: PreEnrollProductListItem[];
   pageNumber: number;
   pageSize: number;
   totalPages: number;

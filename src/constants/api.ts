@@ -10,7 +10,7 @@ export const API_END_POINT = {
   PROFILE: '/profile',
   ORDER_LIST: '/order/list',
   ONGOING_PRODUCT_LIST: 'api/v1/auctions',
-  UPCOMING_PRODUCT_LIST: 'api/v1/products',
+  PRE_ENROLL_PRODUCT_LIST: 'api/v1/products',
   MY_ACUTION_PRE_REGISTER: '/product/list/api/v1/users/me/auctions',
   MY_ACUTION: 'api/v1/users/me/auctions',
   // Test

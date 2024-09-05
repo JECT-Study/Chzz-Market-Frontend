@@ -3,6 +3,7 @@ import {
   useGetBestProducts,
   useGetDeadlineProducts,
   useGetPreEnrollProducts,
+  useRefreshTokenOnSuccess,
 } from '@/components/home/queries';
 
 import CategoryList from '@/components/home/CategoryList';
@@ -17,6 +18,7 @@ import { useScrollDetection } from '@/hooks/useScrollDetection';
 const Home = () => {
   const navigate = useNavigate();
   const { isScrolled, elementRef } = useScrollDetection(0);
+  useRefreshTokenOnSuccess();
 
   const { isBestLoading, bestItems } = useGetBestProducts();
   const { isDeadlineLoading, deadlineItems } = useGetDeadlineProducts();

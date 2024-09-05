@@ -27,33 +27,33 @@ const useProductList = (activeTab: string, sortType: string): any => {
     enabled: activeTab === 'ongoing',
   });
 
-  // const {
-  //   data: enrollData,
-  //   isLoading: enrollLoading,
-  //   error: enrollError,
-  //   fetchNextPage: fetchNextEnrollPage,
-  //   hasNextPage: hasNextEnrollPage,
-  // } = useInfiniteQuery({
-  //   queryKey: [queryKeys.UPCOMING_ORDER_LIST],
-  //   queryFn: ({ pageParam = 0 }) =>
-  //   getEnrollProductList({ pageParam, pageSize: 10, sortType }),
-  //   getNextPageParam: (lastPage) => {
-  //     if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
-  //       return undefined;
-  //     }
-  //     return lastPage.pageNumber + 1;
-  //   },
-  //   initialPageParam: 0,
-  //   enabled: activeTab === 'upcoming',
-  // });
+  const {
+    data: enrollData,
+    isLoading: enrollLoading,
+    error: enrollError,
+    fetchNextPage: fetchNextEnrollPage,
+    hasNextPage: hasNextEnrollPage,
+  } = useInfiniteQuery({
+    queryKey: [queryKeys.PRE_ENROLL_ORDER_LIST],
+    queryFn: () =>
+      getEnrollProductList({ pageNumber: 0, pageSize: 10, sortType }),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
+        return undefined;
+      }
+      return lastPage.pageNumber + 1;
+    },
+    initialPageParam: 0,
+    enabled: activeTab === 'pre-enroll',
+  });
 
   return {
     ongoingData,
-    // enrollData,
+    enrollData,
     fetchNextOngoingPage,
-    // fetchNextEnrollPage,
+    fetchNextEnrollPage,
     hasNextOngoingPage,
-    // hasNextEnrollPage,
+    hasNextEnrollPage,
   };
 };
 

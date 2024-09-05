@@ -3,7 +3,8 @@ import type { PreEnrollProduct, Product } from 'Product';
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
-import { useQuery } from '@tanstack/react-query';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
+import { refreshToken } from '../login/queries';
 
 export const useGetBestProducts = () => {
   const getBestProducts = async (): Promise<Product[]> => {
@@ -49,4 +50,15 @@ export const useGetPreEnrollProducts = () => {
   });
 
   return { isPreEnrollLoading, preEnrollItems };
+};
+
+export const useRefreshTokenOnSuccess = (): UseQueryResult<void, unknown> => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const status = queryParams.get('status');
+
+  return useQuery({
+    queryKey: [queryKeys.REFRESH_TOKEN, status],
+    queryFn: () => refreshToken(),
+    enabled: status === 'success',
+  });
 };

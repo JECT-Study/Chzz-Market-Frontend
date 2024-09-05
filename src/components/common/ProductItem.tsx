@@ -2,10 +2,19 @@ import { LuUsers } from 'react-icons/lu';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import { getTimeColor } from '@/utils/getTimeColor';
+import {
+  OngoingProductListItem,
+  PreEnrollProductListItem,
+} from '@/@types/productList';
 import Button from './Button';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const ProductItem = ({ product }: { product: any }) => {
+interface ProductProps
+  extends PreEnrollProductListItem,
+    OngoingProductListItem {
+  cdnPath: string;
+}
+
+const ProductItem = ({ product }: { product: ProductProps }) => {
   const remainHour = Math.floor(product.timeRemaining / 3600);
   const timeColor = getTimeColor(remainHour);
 

@@ -27,7 +27,7 @@ const ProfileEdit = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/mypage')}>
+      <Layout.Header handleBack={() => navigate('/user')}>
         프로필 수정
       </Layout.Header>
       <Layout.Main>
@@ -35,7 +35,7 @@ const ProfileEdit = () => {
           ref={formRef}
           className="flex flex-col px-4 py-6 space-y-4"
           onSubmit={handleSubmit(() => {
-            navigate('/mypage');
+            navigate('/user');
           })}
         >
           <h2 className="pb-4 text-lg font-bold">프로필 정보</h2>
