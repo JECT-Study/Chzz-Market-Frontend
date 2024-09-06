@@ -7,4 +7,5 @@ export interface Kakao {
 
 export interface Window {
   Kakao?: Kakao;
+  Naver?: Naver;
 }

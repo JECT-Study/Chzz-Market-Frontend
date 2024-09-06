@@ -5,6 +5,9 @@ import {
   deadLineProductsHandler,
   preEnrollProductsHandler,
 } from './handlers/home';
+import { getOngoingProductList } from './handlers/productList';
+import getMyAuctionPreRegister from './handlers/myAuctuon';
+import postSignup from './handlers/Login';
 import {
   bidProductDetailsHandler,
   editBidProductDetailsHandler,
@@ -13,10 +16,6 @@ import {
   notificationDeleteHandler,
   notificationHandler,
 } from './handlers/notification';
-
-import { getMyAuctionPreRegister } from './handlers/myAuctuon';
-import { getOngoingProductList } from './handlers/ProductList';
-import { postSignup } from './handlers/Login';
 import { realTimeNotificationHandler } from './handlers/realTimeNotification';
 
 /* eslint-disable import/no-named-as-default */

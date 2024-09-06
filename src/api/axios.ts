@@ -1,3 +1,5 @@
+import { refreshToken } from '@/components/login/queries';
+import { getToken, setToken, updateReduxAuthState } from '@/utils/tokenUtils';
 import axios, { AxiosRequestConfig } from 'axios';
 
 export const createClient = (config?: AxiosRequestConfig) => {
@@ -10,7 +12,9 @@ export const createClient = (config?: AxiosRequestConfig) => {
     timeout: 5000,
     ...config,
   });
+
   axiosInstance.interceptors.request.use((request) => {
+    request.headers.Authorization = `Bearer ${getToken() ? getToken() : ''}`;
     return request;
   });
 
@@ -18,7 +22,20 @@ export const createClient = (config?: AxiosRequestConfig) => {
     (response) => {
       return response;
     },
-    (error) => {
+    async (error) => {
+      const originalRequest = error.config;
+      const hasToken = getToken();
+
+      if (error.response.status === 401) {
+        if (hasToken) {
+          const refreshedToken = await refreshToken();
+
+          updateReduxAuthState(refreshedToken);
+          setToken(refreshedToken);
+
+          return axiosInstance(originalRequest);
+        }
+      }
       return Promise.reject(error);
     },
   );

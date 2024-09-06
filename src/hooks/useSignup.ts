@@ -4,15 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { SignupFormSchema } from '@/constants/schema';
 import { useMutation } from '@tanstack/react-query';
+import { User } from '@/@types/user';
 import { postSignup } from '@/components/login/queries';
 
 type FormFields = z.infer<typeof SignupFormSchema>;
 
 const defaultValues = {
   nickname: '',
-  bank: '',
+  bankName: '',
   accountNumber: '',
-  introduction: '',
+  bio: '',
   link: '',
 };
 
@@ -22,17 +23,16 @@ export const useSignup = (): any => {
   const navigate = useNavigate();
 
   const signupMutation = useMutation({
-    mutationFn: postSignup,
+    mutationFn: (data: User) => postSignup(data),
     onSuccess: () => {
       navigate('/mypage');
     },
-    onError: (error) => {
-      console.log(error);
-    },
+    onError: (error) => {},
   });
 
   const {
     control,
+    setValue,
     handleSubmit,
     watch,
     formState: { errors },
@@ -54,6 +54,7 @@ export const useSignup = (): any => {
     formState: { errors },
     handleSubmit,
     watch,
+    setValue,
     activeButtonSheet,
     setActiveButtonSheet,
     onCloseBottomSheet,

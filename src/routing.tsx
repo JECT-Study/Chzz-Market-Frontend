@@ -1,6 +1,5 @@
 import ProductListPage from '@/pages/ProductList';
 import ROUTERS from '@/constants/route';
-import Test from '@/pages/Test';
 import { createBrowserRouter } from 'react-router-dom';
 import Bid, { loader as bidLoader } from './pages/Bid';
 
@@ -16,6 +15,7 @@ import Register from './pages/Register';
 import Signup from './pages/Signup';
 import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 import GlobalLayout from './components/layout/GlobalLayout';
+import AddressBook from './pages/AddressBook';
 
 const routeList = [
   {
@@ -78,6 +78,10 @@ const routeList = [
       {
         path: ROUTERS.DETAIL.ITEM,
         element: <DetailPage />,
+      },
+      {
+        path: ROUTERS.ADDRESSBOOK,
+        element: <AddressBook />,
       },
     ],
   },

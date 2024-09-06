@@ -10,12 +10,13 @@ import { ChevronDown } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 
 const Signup = () => {
-  const [bank, setBank] = useState('');
+  const [selectBank, setSelectBank] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const {
     control,
+    setValue,
     watch,
     formState: { errors },
     activeButtonSheet,
@@ -23,6 +24,12 @@ const Signup = () => {
     onCloseBottomSheet,
     onSubmit,
   } = useSignup();
+
+  const handleSelectBank = (bank: string) => {
+    setValue('bankName', 'KB');
+    setSelectBank('KB');
+    setActiveButtonSheet(false);
+  };
 
   const handleSubmitClick = () => {
     if (formRef.current) {
@@ -33,7 +40,7 @@ const Signup = () => {
   };
 
   const nickname = watch('nickname');
-  const Selectbank = watch('bank');
+  const Selectbank = watch('bankName');
   const accountNumber = watch('accountNumber');
 
   useEffect(() => {
@@ -71,16 +78,16 @@ const Signup = () => {
           >
             <FormField
               label="은행 *"
-              name="bank"
+              name="bankName"
               control={control}
-              error={errors.bank?.message}
+              error={errors.bankname?.message}
               render={(field) => (
                 <Input
                   id="은행 *"
                   placeholder="은행을 선택해주세요"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
-                  value={bank}
+                  value={selectBank}
                 />
               )}
             />
@@ -90,7 +97,10 @@ const Signup = () => {
             />
           </div>
           {activeButtonSheet && (
-            <SelectBank onClose={onCloseBottomSheet} setBank={setBank} />
+            <SelectBank
+              onClose={onCloseBottomSheet}
+              onSelect={handleSelectBank}
+            />
           )}
           <FormField
             label="계좌번호 *"
@@ -109,9 +119,9 @@ const Signup = () => {
           />
           <FormField
             label="자기소개"
-            name="introduction"
+            name="bio"
             control={control}
-            error={errors.introduction?.message}
+            error={errors.bio?.message}
             render={(field) => (
               <Textarea
                 id="자기소개"
