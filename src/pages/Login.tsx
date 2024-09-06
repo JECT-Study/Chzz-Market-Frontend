@@ -1,4 +1,7 @@
-import Layout from '@/components/Layout';
+import Button from '@/components/common/Button';
+import Layout from '@/components/layout/Layout';
+import { SiNaver } from 'react-icons/si';
+import { Window } from '@/@types/kakao';
 import { useNavigate } from 'react-router-dom';
 import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
 import naverImage from '@/assets/images/naver_login.png';

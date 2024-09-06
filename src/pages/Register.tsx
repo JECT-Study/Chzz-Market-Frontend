@@ -12,7 +12,7 @@ import Button from '@/components/common/Button';
 import FormField from '@/components/form/FormField';
 import ImageUploader from '@/components/register/ImageUploader';
 import { Input } from '@/components/ui/input';
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import NoticeIcon from '@/assets/icons/notice.svg';
 import RegisterCaution from '@/components/register/RegisterCaution';
 import RegisterLabel from '@/components/register/RegisterLabel';

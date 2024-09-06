@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import Navigation from '@/components/Navigation';
 import OrderListTab from '@/components/order/OrderListTab';
 import { useNavigate } from 'react-router-dom';

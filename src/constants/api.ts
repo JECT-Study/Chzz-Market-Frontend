@@ -18,4 +18,6 @@ export const API_END_POINT = {
   DEADLINE: '/products/deadline',
   PRE_ENROLL: '/products/pre_enroll',
   DETAILS: '/auctions',
+  NOTIFICATION: '/api/v1/notifications',
+  REALTIME_NOTIFICATION: '/api/v1/notifications/subscribe',
 };

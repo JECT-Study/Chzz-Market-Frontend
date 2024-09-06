@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';

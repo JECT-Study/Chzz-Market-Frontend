@@ -8,6 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: string;
   hoverColor?: string;
   type: 'button' | 'submit' | 'reset';
+  ariaLabel?: string;
 }
 
 const Button = ({
@@ -19,9 +20,10 @@ const Button = ({
   disabled = false,
   onClick,
   type,
+  ariaLabel = '',
 }: ButtonProps) => {
   const baseClasses =
-    'focus:outline-none rounded active:bg-black transition-colors active:text-white';
+    'focus:outline-none rounded transition-colors active:bg-black ';
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',
     'bg-white text-black border border-black': color === 'white',
@@ -37,7 +39,7 @@ const Button = ({
     'px-6 py-3 text-lg': size === 'large',
   });
   const hoverColorClasses = classNames({
-    'hover:bg-black hover:text-white': hoverColor === 'black',
+    'hover:bg-black/70 hover:text-white': hoverColor === 'black',
     'hover:bg-white hover:text-black border border-black':
       hoverColor === 'white',
   });
@@ -58,6 +60,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
       type={type}
+      aria-label={ariaLabel}
     >
       {children}
     </button>

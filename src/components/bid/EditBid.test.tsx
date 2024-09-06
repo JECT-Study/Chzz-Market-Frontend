@@ -4,24 +4,16 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import Bid from '@/pages/Bid';
 import { bidProductData } from '@/mocks/data/bidProductData';
-import userEvent from '@testing-library/user-event';
 import { useGetBidProductDetails } from '@/components/bid/queries';
-
-const mockedUseNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  const mod =
-    await vi.importActual<typeof import('react-router-dom')>(
-      'react-router-dom',
-    );
-
-  return {
-    ...mod,
-    useNavigate: () => mockedUseNavigate,
-  };
-});
+import userEvent from '@testing-library/user-event';
+import { mockedUseNavigate } from '@/setupTests';
 
 vi.mock('@/components/bid/queries');
 
+vi.mocked(useGetBidProductDetails).mockReturnValue({
+  isLoading: false,
+  productDetails: bidProductData[1],
+});
 const router = createMemoryRouter(
   [
     {
@@ -36,13 +28,6 @@ const router = createMemoryRouter(
 );
 
 describe('입찰가 수정 테스트', () => {
-  beforeEach(() => {
-    vi.mocked(useGetBidProductDetails).mockReturnValue({
-      isLoading: false,
-      productDetails: bidProductData[1],
-    });
-  });
-
   const setup = () => {
     const utils = render(<RouterProvider router={router} />);
     const user = userEvent.setup();
@@ -89,7 +74,7 @@ describe('입찰가 수정 테스트', () => {
 
     const timeElement = screen.getByLabelText('남은 시간');
     expect(timeElement).toHaveTextContent('7시간 남음');
-    expect(timeElement).toHaveClass('text-timeColor1 border-timeColor1');
+    expect(timeElement).toHaveClass('text-timeColor2 border-timeColor2');
     expect(item).toContainElement(timeElement);
 
     const priceElement = screen.getByLabelText('시작 가격');
@@ -97,7 +82,7 @@ describe('입찰가 수정 테스트', () => {
     expect(item).toContainElement(priceElement);
 
     const userElement = screen.getByLabelText('경매 참여자 수');
-    expect(userElement).toHaveTextContent('경매 참여자 8명');
+    expect(userElement).toHaveTextContent('참여자 8명');
     expect(item).toContainElement(userElement);
 
     const bidAmount = await screen.findByLabelText('나의 참여 금액');

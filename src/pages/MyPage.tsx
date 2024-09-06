@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import MyPageOrder from '@/components/mypage/MyPageOrder';
 import MyPageOrderList from '@/components/mypage/MyPageOrderList';
 import MyPageProfile from '@/components/mypage/MyPageProfile';

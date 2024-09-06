@@ -29,7 +29,7 @@ const CautionCheck = ({ check, handleCheck }: CheckProps) => {
       >
         <img src={iconSrc} alt={`check_${state}`} className="w-6 h-6" />
       </span>
-      <span onClick={handleCheck} className="pt-[1px] text-body2 text-gray1">
+      <span onClick={handleCheck} className="pt-[3px] text-body2 text-gray1">
         주의사항을 모두 확인하였으며 위 내용에 동의합니다.
       </span>
     </label>

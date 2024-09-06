@@ -1,6 +1,6 @@
 import { ProductListData, ProductListItem } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import OngoingProduct from '@/components/product/OngoingProduct';
 import ProductButtons from '@/components/product/ProductButtons';
 import ProductListTabs from '@/components/product/ProductListTabs';

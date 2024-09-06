@@ -110,6 +110,7 @@ module.exports = {
         timeColor1: '#F07C7B',
         timeColor2: '#01C091',
         timeColor3: '#2253FF',
+        notificationBgColor: '#FFEFD1',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

@@ -6,20 +6,20 @@ import {
   preEnrollProducts,
 } from '../data/homeProductsData';
 
-export const getBestProductsHandler: HttpHandler = http.get(
+export const bestProductsHandler: HttpHandler = http.get(
   `http://localhost:3000${API_END_POINT.BEST}`,
   () => {
     return HttpResponse.json(bestProducts);
   },
 );
 
-export const getDeadLineProductsHandler: HttpHandler = http.get(
+export const deadLineProductsHandler: HttpHandler = http.get(
   `http://localhost:3000${API_END_POINT.DEADLINE}`,
   () => {
     return HttpResponse.json(deadlineProducts);
   },
 );
-export const getPreEnrollProductsHandler: HttpHandler = http.get(
+export const preEnrollProductsHandler: HttpHandler = http.get(
   `http://localhost:3000${API_END_POINT.PRE_ENROLL}`,
   () => {
     return HttpResponse.json(preEnrollProducts);
