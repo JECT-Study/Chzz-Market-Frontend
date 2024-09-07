@@ -5,7 +5,14 @@ const encoder = new TextEncoder();
 
 export const realTimeNotificationsHandler: HttpHandler = http.get(
   `${API_END_POINT.REALTIME_NOTIFICATIONS}?userId=1`,
-  () => {
+  ({ request }) => {
+    const url = new URL(request.url);
+    const userId = url.searchParams.get('userId');
+
+    if (!userId) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
     const stream = new ReadableStream({
       start(controller) {
         controller.enqueue(

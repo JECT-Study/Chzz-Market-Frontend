@@ -7,7 +7,7 @@ import {
 } from './handlers/home';
 import getMyAuctionPreRegister from './handlers/myAuctuon';
 import postSignup from './handlers/Login';
-import { bidProductDetailsHandler } from './handlers/details';
+import { bidProductDetailsHandler } from './handlers/bidProductDetails';
 import {
   notificationDeleteHandler,
   notificationsHandler,
