@@ -35,7 +35,7 @@ const routeList = [
         loader: bidLoader,
       },
       {
-        path: `${ROUTERS.BIDDER_LIST}/:auctionId`,
+        path: `${ROUTERS.FINAL_BIDDER_LIST}`,
         element: <BidderList />,
         loader: bidderListLoader,
       },
@@ -46,10 +46,6 @@ const routeList = [
       {
         path: ROUTERS.PROFILE.EDIT,
         element: <ProfileEdit />,
-      },
-      {
-        path: '/test',
-        element: <Test />,
       },
       {
         path: ROUTERS.REGISTER,
