@@ -1,8 +1,8 @@
-import type { PreEnrollProduct, Product } from 'Product';
+import type { PreRegisterProduct, Product } from 'Product';
 import {
   useGetBestProducts,
-  useGetDeadlineProducts,
-  useGetPreEnrollProducts,
+  useGetImminentProducts,
+  useGetPreRegisterProducts,
 } from '@/components/home/queries';
 
 import CategoryList from '@/components/home/CategoryList';
@@ -18,11 +18,13 @@ const Home = () => {
   const navigate = useNavigate();
   const { isScrolled, elementRef } = useScrollDetection(0);
 
-  const { isBestLoading, bestItems } = useGetBestProducts();
-  const { isDeadlineLoading, deadlineItems } = useGetDeadlineProducts();
-  const { isPreEnrollLoading, preEnrollItems } = useGetPreEnrollProducts();
+  const { isBestLoading, bestProducts } = useGetBestProducts();
+  const { isImminentLoading, imminentProducts } = useGetImminentProducts();
+  const { isPreRegisterLoading, preRegisterProducts } =
+    useGetPreRegisterProducts();
 
-  const loadingState = isBestLoading || isDeadlineLoading || isPreEnrollLoading;
+  const loadingState =
+    isBestLoading || isImminentLoading || isPreRegisterLoading;
 
   return (
     <Layout>
@@ -36,7 +38,7 @@ const Home = () => {
             className="relative flex flex-col w-full gap-6 overflow-y-scroll"
           >
             <HomeItemList name="베스트 경매">
-              {bestItems?.map((product: Product, idx) => (
+              {bestProducts?.map((product: Product, idx) => (
                 <HomeProductItem
                   key={product.id}
                   kind="best"
@@ -46,10 +48,10 @@ const Home = () => {
               ))}
             </HomeItemList>
             <HomeItemList name="종료 임박 경매">
-              {deadlineItems?.map((product: Product, idx) => (
+              {imminentProducts?.map((product: Product, idx) => (
                 <HomeProductItem
                   key={product.id}
-                  kind="deadline"
+                  kind="imminent"
                   product={product}
                   idx={idx}
                 />
@@ -59,10 +61,10 @@ const Home = () => {
               <CategoryList />
             </HomeItemList>
             <HomeItemList name="사전 등록 경매">
-              {preEnrollItems?.map((product: PreEnrollProduct, idx) => (
+              {preRegisterProducts?.map((product: PreRegisterProduct, idx) => (
                 <HomeProductItem
                   key={product.id}
-                  kind="pre_enroll"
+                  kind="pre-register"
                   product={product}
                   idx={idx}
                 />

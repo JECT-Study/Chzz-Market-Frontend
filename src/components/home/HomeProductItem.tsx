@@ -1,22 +1,22 @@
 import { getTimeColor } from '@/utils/getTimeColor';
-import type { PreEnrollProduct, Product } from 'Product';
+import type { PreRegisterProduct, Product } from 'Product';
 import { useNavigate } from 'react-router-dom';
 import UserIcon from '@/assets/icons/user.svg';
 import PriceIcon from '@/assets/icons/price.svg';
 
-type HomeItemProps<T> = T extends 'pre_enroll'
-  ? { kind: 'pre_enroll'; product: PreEnrollProduct; idx: number }
-  : T extends 'best' | 'deadline'
-    ? { kind: 'best' | 'deadline'; product: Product; idx: number }
+type HomeItemProps<T> = T extends 'pre-register'
+  ? { kind: 'pre-register'; product: PreRegisterProduct; idx: number }
+  : T extends 'best' | 'imminent'
+    ? { kind: 'best' | 'imminent'; product: Product; idx: number }
     : never;
 
-const HomeProductItem = <T extends 'pre_enroll' | 'enroll' | 'deadline'>({
+const HomeProductItem = <T extends 'pre-register' | 'enroll' | 'imminent'>({
   kind,
   product,
   idx,
 }: HomeItemProps<T>) => {
   const navigate = useNavigate();
-  const timeColor = kind !== 'pre_enroll' && getTimeColor(product.timeLeft);
+  const timeColor = kind !== 'pre-register' && getTimeColor(product.timeLeft);
 
   return (
     <figure
@@ -30,7 +30,7 @@ const HomeProductItem = <T extends 'pre_enroll' | 'enroll' | 'deadline'>({
           alt={`${idx}_img_${kind}`}
           className="object-cover w-full h-[10rem] rounded-t"
         />
-        {kind !== 'pre_enroll' && (
+        {kind !== 'pre-register' && (
           <div
             aria-label={`${idx}_timeLeft_${kind}`}
             className={`absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 ${timeColor} border-b-2`}
@@ -55,7 +55,7 @@ const HomeProductItem = <T extends 'pre_enroll' | 'enroll' | 'deadline'>({
             </span>
           </span>
         </div>
-        {kind !== 'pre_enroll' && (
+        {kind !== 'pre-register' && (
           <div
             aria-label={`${idx}_activeUserCount_${kind}`}
             className="flex items-center text-gray2"

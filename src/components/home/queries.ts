@@ -1,4 +1,4 @@
-import type { PreEnrollProduct, Product } from 'Product';
+import type { PreRegisterProduct, Product } from 'Product';
 
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
@@ -7,46 +7,41 @@ import { useQuery } from '@tanstack/react-query';
 
 export const useGetBestProducts = () => {
   const getBestProducts = async (): Promise<Product[]> => {
-    const response = await httpClient.get(
-      `http://localhost:3000${API_END_POINT.BEST}`,
-    );
+    const response = await httpClient.get(`${API_END_POINT.BEST}`);
     return response.data;
   };
 
-  const { isLoading: isBestLoading, data: bestItems } = useQuery({
+  const { isLoading: isBestLoading, data: bestProducts } = useQuery({
     queryKey: [queryKeys.BEST_PRODUCTS],
     queryFn: () => getBestProducts(),
   });
 
-  return { isBestLoading, bestItems };
+  return { isBestLoading, bestProducts };
 };
-export const useGetDeadlineProducts = () => {
-  const getDeadlineProducts = async (): Promise<Product[]> => {
-    const response = await httpClient.get(
-      `http://localhost:3000${API_END_POINT.DEADLINE}`,
-    );
+export const useGetImminentProducts = () => {
+  const getImminentProducts = async (): Promise<Product[]> => {
+    const response = await httpClient.get(`${API_END_POINT.IMMINENT}`);
     return response.data;
   };
 
-  const { isLoading: isDeadlineLoading, data: deadlineItems } = useQuery({
-    queryKey: [queryKeys.DEADLINE_PRODUCTS],
-    queryFn: () => getDeadlineProducts(),
+  const { isLoading: isImminentLoading, data: imminentProducts } = useQuery({
+    queryKey: [queryKeys.IMMINENT_PRODUCTS],
+    queryFn: () => getImminentProducts(),
   });
 
-  return { isDeadlineLoading, deadlineItems };
+  return { isImminentLoading, imminentProducts };
 };
-export const useGetPreEnrollProducts = () => {
-  const getPreEnrollProducts = async (): Promise<PreEnrollProduct[]> => {
-    const response = await httpClient.get(
-      `http://localhost:3000${API_END_POINT.PRE_ENROLL}`,
-    );
+export const useGetPreRegisterProducts = () => {
+  const getPreRegisterProducts = async (): Promise<PreRegisterProduct[]> => {
+    const response = await httpClient.get(`${API_END_POINT.PRE_REGISTER}`);
     return response.data;
   };
 
-  const { isLoading: isPreEnrollLoading, data: preEnrollItems } = useQuery({
-    queryKey: [queryKeys.PRE_ENROLL_PRODUCTS],
-    queryFn: () => getPreEnrollProducts(),
-  });
+  const { isLoading: isPreRegisterLoading, data: preRegisterProducts } =
+    useQuery({
+      queryKey: [queryKeys.PRE_REGISTER_PRODUCTS],
+      queryFn: () => getPreRegisterProducts(),
+    });
 
-  return { isPreEnrollLoading, preEnrollItems };
+  return { isPreRegisterLoading, preRegisterProducts };
 };

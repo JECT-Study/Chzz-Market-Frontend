@@ -2,26 +2,26 @@ import { HttpHandler, HttpResponse, http } from 'msw';
 import { API_END_POINT } from '@/constants/api';
 import {
   bestProducts,
-  deadlineProducts,
-  preEnrollProducts,
+  imminentProducts,
+  preRegisterProducts,
 } from '../data/homeProductsData';
 
 export const bestProductsHandler: HttpHandler = http.get(
-  `http://localhost:3000${API_END_POINT.BEST}`,
+  `${API_END_POINT.BEST}`,
   () => {
     return HttpResponse.json(bestProducts);
   },
 );
 
-export const deadLineProductsHandler: HttpHandler = http.get(
-  `http://localhost:3000${API_END_POINT.DEADLINE}`,
+export const imminentProductsHandler: HttpHandler = http.get(
+  `${API_END_POINT.IMMINENT}`,
   () => {
-    return HttpResponse.json(deadlineProducts);
+    return HttpResponse.json(imminentProducts);
   },
 );
-export const preEnrollProductsHandler: HttpHandler = http.get(
-  `http://localhost:3000${API_END_POINT.PRE_ENROLL}`,
+export const preRegisterProductsHandler: HttpHandler = http.get(
+  `${API_END_POINT.PRE_REGISTER}`,
   () => {
-    return HttpResponse.json(preEnrollProducts);
+    return HttpResponse.json(preRegisterProducts);
   },
 );

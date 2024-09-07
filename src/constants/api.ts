@@ -14,10 +14,10 @@ export const API_END_POINT = {
   MY_ACUTION_PRE_REGISTER: '/product/list/api/v1/users/me/auctions',
   // Test
   TEST: '/test',
-  BEST: '/products/best',
-  DEADLINE: '/products/deadline',
-  PRE_ENROLL: '/products/pre_enroll',
+  BEST: '/api/v1/auctions/best',
+  IMMINENT: '/api/v1/auctions/imminent',
+  PRE_REGISTER: '/api/v1/auctions/pre-register',
   DETAILS: '/auctions',
-  NOTIFICATION: '/api/v1/notifications',
-  REALTIME_NOTIFICATION: '/api/v1/notifications/subscribe',
+  NOTIFICATIONS: '/api/v1/notifications',
+  REALTIME_NOTIFICATIONS: '/api/v1/notifications/subscribe',
 };

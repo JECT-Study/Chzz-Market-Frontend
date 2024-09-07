@@ -47,7 +47,7 @@ export const bestProducts = [
   },
 ];
 
-export const deadlineProducts = [
+export const imminentProducts = [
   {
     id: 1,
     name: '[나이키] 조던 블랙',
@@ -90,7 +90,7 @@ export const deadlineProducts = [
   },
 ];
 
-export const preEnrollProducts = [
+export const preRegisterProducts = [
   {
     id: 1,
     name: '[뉴발란스] 993',

@@ -3,8 +3,8 @@ import { HttpHandler, HttpResponse, http } from 'msw';
 
 const encoder = new TextEncoder();
 
-export const realTimeNotificationHandler: HttpHandler = http.get(
-  `${API_END_POINT.REALTIME_NOTIFICATION}?userId=1`,
+export const realTimeNotificationsHandler: HttpHandler = http.get(
+  `${API_END_POINT.REALTIME_NOTIFICATIONS}?userId=1`,
   () => {
     const stream = new ReadableStream({
       start(controller) {

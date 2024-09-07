@@ -12,13 +12,13 @@ import { queryKeys } from '@/constants/queryKeys';
 
 export const useGetNotifications = () => {
   const getNotifications = async (): Promise<NotificationType[]> => {
-    const response = await httpClient.get(`${API_END_POINT.NOTIFICATION}`);
+    const response = await httpClient.get(`${API_END_POINT.NOTIFICATIONS}`);
 
     return response.data;
   };
 
   const { isLoading, data: notifications } = useQuery({
-    queryKey: [queryKeys.NOTIFICATION],
+    queryKey: [queryKeys.NOTIFICATIONS],
     queryFn: () => getNotifications(),
   });
 
@@ -31,13 +31,13 @@ export const useDeleteNotification = (): {
   const queryClient = useQueryClient();
 
   const deleteNotification = async (id: number) => {
-    await httpClient.delete(`${API_END_POINT.NOTIFICATION}/${id}`);
+    await httpClient.delete(`${API_END_POINT.NOTIFICATIONS}/${id}`);
   };
 
   const { mutate } = useMutation({
     mutationFn: deleteNotification,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.NOTIFICATION] });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.NOTIFICATIONS] });
     },
   });
 

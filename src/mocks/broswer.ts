@@ -2,34 +2,30 @@ import { HttpHandler } from 'msw';
 import { setupWorker } from 'msw/browser';
 import {
   bestProductsHandler,
-  deadLineProductsHandler,
-  preEnrollProductsHandler,
+  imminentProductsHandler,
+  preRegisterProductsHandler,
 } from './handlers/home';
-import { getOngoingProductList } from './handlers/productList';
 import getMyAuctionPreRegister from './handlers/myAuctuon';
 import postSignup from './handlers/Login';
-import {
-  bidProductDetailsHandler,
-  editBidProductDetailsHandler,
-} from './handlers/details';
+import { bidProductDetailsHandler } from './handlers/details';
 import {
   notificationDeleteHandler,
-  notificationHandler,
+  notificationsHandler,
 } from './handlers/notification';
-import { realTimeNotificationHandler } from './handlers/realTimeNotification';
+import { realTimeNotificationsHandler } from './handlers/realTimeNotification';
+import { getOngoingProductList } from './handlers/ProductList';
 
 /* eslint-disable import/no-named-as-default */
 export const handlers: HttpHandler[] = [
   bestProductsHandler,
-  deadLineProductsHandler,
-  preEnrollProductsHandler,
+  imminentProductsHandler,
+  preRegisterProductsHandler,
   getOngoingProductList,
   getMyAuctionPreRegister,
   postSignup,
   bidProductDetailsHandler,
-  editBidProductDetailsHandler,
-  realTimeNotificationHandler,
-  notificationHandler,
+  realTimeNotificationsHandler,
+  notificationsHandler,
   notificationDeleteHandler,
 ];
 

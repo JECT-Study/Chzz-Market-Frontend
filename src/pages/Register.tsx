@@ -129,8 +129,8 @@ const Register = () => {
                   <SelectContent>
                     <SelectGroup className="focus-visible:ring-cheeseYellow">
                       {Object.values(categories).map((el) => (
-                        <SelectItem key={el} value={el}>
-                          {el}
+                        <SelectItem key={el.value} value={el.value}>
+                          {el.value}
                         </SelectItem>
                       ))}
                     </SelectGroup>

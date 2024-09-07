@@ -9,7 +9,7 @@ import Popup from '../common/Popup';
 const GlobalLayout = () => {
   const { state: notifications, setState: setNotifications } =
     useSSE<RealTimeNotificationType>(
-      `${API_END_POINT.REALTIME_NOTIFICATION}?userId=1`,
+      `${API_END_POINT.REALTIME_NOTIFICATIONS}?userId=1`,
     );
 
   const [currentNotification, setCurrentNotification] =

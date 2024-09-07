@@ -5,15 +5,15 @@ import { notificationData } from '../data/notificationData';
 
 let notifications = [...notificationData];
 
-export const notificationHandler: HttpHandler = http.get(
-  `${API_END_POINT.NOTIFICATION}`,
+export const notificationsHandler: HttpHandler = http.get(
+  `${API_END_POINT.NOTIFICATIONS}`,
   () => {
     return HttpResponse.json(notifications);
   },
 );
 
 export const notificationDeleteHandler: HttpHandler = http.delete(
-  `${API_END_POINT.NOTIFICATION}/:id`,
+  `${API_END_POINT.NOTIFICATIONS}/:id`,
   ({ params }) => {
     const id = params.id as string;
 
