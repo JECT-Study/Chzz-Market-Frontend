@@ -9,12 +9,13 @@ export const useSSE = <T>(url: string) => {
     eventSource.onopen = () => {
       // console.log('SSE Connection opened!');
     };
-    eventSource.onerror = (error) =>
+    eventSource.onerror = (error) => {
       // console.error('SSE Connection error!', error);
+    };
 
-      eventSource.addEventListener('init', (e) => {
-        // console.log(e.data);
-      });
+    eventSource.addEventListener('init', () => {
+      // console.log(e.data);
+    });
     eventSource.addEventListener('notification', (e) => {
       const data = JSON.parse(e.data);
       setState((prev) => [...prev, data]);

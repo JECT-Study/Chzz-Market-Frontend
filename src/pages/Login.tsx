@@ -1,7 +1,4 @@
-import Button from '@/components/common/Button';
 import Layout from '@/components/layout/Layout';
-import { SiNaver } from 'react-icons/si';
-import { Window } from '@/@types/kakao';
 import { useNavigate } from 'react-router-dom';
 import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
 import naverImage from '@/assets/images/naver_login.png';
@@ -24,12 +21,12 @@ const Login = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-4 items-center w-full">
+          <div className="flex flex-col items-center w-full gap-4">
             <div className="w-100 h-[52px]">
               <img
                 src={kakaoImage}
                 alt="kakaoButton"
-                className="w-full h-full object-contain cursor-pointer"
+                className="object-contain w-full h-full cursor-pointer"
                 onClick={handleKakaoLogin}
               />
             </div>
@@ -37,7 +34,7 @@ const Login = () => {
               <img
                 src={naverImage}
                 alt="naverButton"
-                className="w-full h-full object-contain cursor-pointer"
+                className="object-contain w-full h-full cursor-pointer"
                 onClick={handleNaverLogin}
               />
             </div>

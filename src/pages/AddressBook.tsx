@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import Layout from '@/components/Layout';
 import Button from '@/components/common/Button';
 import BlackShose from '@/assets/images/jordan_black.jpeg';
 import { z } from 'zod';
@@ -10,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { ChevronDown } from 'lucide-react';
 import SelectBank from '@/components/profile/SelectBank';
 import { useState } from 'react';
+import Layout from '@/components/layout/Layout';
 
 type FormFields = z.infer<typeof AddressBookSchema>;
 
@@ -44,14 +44,14 @@ const AddressBook = () => {
       <Layout.Main>
         <div className="space-y-6">
           {/* 기본 정보 입력 */}
-          <div className="rounded-lg p-4 space-y-2">
+          <div className="p-4 space-y-2 rounded-lg">
             <h2 className="text-lg font-semibold">기본 정보 입력</h2>
             {/* 상품 정보 */}
-            <div className="flex p-2 items-center space-x-4">
+            <div className="flex items-center p-2 space-x-4">
               <img
                 src={BlackShose}
                 alt="product"
-                className="w-28 h-28 object-cover rounded-md xs:w-24 xs:h-24"
+                className="object-cover rounded-md w-28 h-28 xs:w-24 xs:h-24"
               />
               <div>
                 <p className="font-semibold">[나이키] 신발</p>
@@ -139,7 +139,10 @@ const AddressBook = () => {
               />
             </div>
             {activeButtonSheet && (
-              <SelectBank onClose={onCloseBottomSheet} setBank={setBank} />
+              <SelectBank
+                onClose={onCloseBottomSheet}
+                onSelect={(el) => setBank(el)}
+              />
             )}
             <div className="space-y-2">
               <div className="flex items-center">
