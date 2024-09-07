@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import newBalance from '@/assets/images/newbalance_993.jpeg';
 import { categories } from '../../constants/categories';
 
-const CategoryItem = ({ name }: { name: string }) => {
+const CategoryItem = ({ name, icon }: { name: string; icon: string }) => {
   const navigate = useNavigate();
   return (
     <li
@@ -10,7 +9,7 @@ const CategoryItem = ({ name }: { name: string }) => {
       onClick={() => navigate(`/register`)}
     >
       <img
-        src={newBalance}
+        src={icon}
         alt={`${name} 카테고리`}
         className="w-[5rem] h-[5em] rounded-full border p-1"
       />
@@ -22,8 +21,8 @@ const CategoryItem = ({ name }: { name: string }) => {
 const CategoryList = () => {
   return (
     <ul className="flex flex-wrap items-center gap-5">
-      {Object.values(categories).map((value: string) => (
-        <CategoryItem key={value} name={value} />
+      {Object.values(categories).map((el) => (
+        <CategoryItem key={el.value} name={el.value} icon={el.icon} />
       ))}
     </ul>
   );
