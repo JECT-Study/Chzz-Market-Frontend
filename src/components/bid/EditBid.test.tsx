@@ -1,12 +1,12 @@
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { act, render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import Bid from '@/pages/Bid';
 import { bidProductData } from '@/mocks/data/bidProductData';
+import { mockedUseNavigate } from '@/setupTests';
 import { useGetBidProductDetails } from '@/components/bid/queries';
 import userEvent from '@testing-library/user-event';
-import { mockedUseNavigate } from '@/setupTests';
 
 vi.mock('@/components/bid/queries');
 
@@ -81,7 +81,7 @@ describe('입찰가 수정 테스트', () => {
     expect(priceElement).toHaveTextContent('120,000원');
     expect(item).toContainElement(priceElement);
 
-    const userElement = screen.getByLabelText('경매 참여자 수');
+    const userElement = screen.getByLabelText('참여자');
     expect(userElement).toHaveTextContent('참여자 8명');
     expect(item).toContainElement(userElement);
 

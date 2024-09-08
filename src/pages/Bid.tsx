@@ -1,19 +1,19 @@
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import AuctionItem from '@/components/common/AuctionItem';
 import BidCaution from '@/components/bid/BidCaution';
 import { BidSchema } from '@/constants/schema';
 import Button from '@/components/common/Button';
 import FormField from '@/components/form/FormField';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/layout/Layout';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
+import { useGetBidProductDetails } from '@/components/bid/queries';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useGetBidProductDetails } from '@/components/bid/queries';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import BidItem from '@/components/common/BidItem';
 
 type FormFields = z.infer<typeof BidSchema>;
 
@@ -44,7 +44,15 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
   if (isLoading) return <p>Loading...</p>;
   if (!productDetails) return <p>Product not found</p>;
 
-  const { remainingBidCount, bidAmount } = productDetails;
+  const {
+    img,
+    name,
+    startPrice,
+    activeUserCount,
+    remainingBidCount,
+    bidAmount,
+    timeLeft,
+  } = productDetails;
 
   const buttonName = isSubmitting ? '제안 중...' : '제안하기';
   const heading = isParticipating ? '금액 수정하기' : '경매 참여하기';
@@ -58,7 +66,15 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
       <Layout.Header handleBack={() => navigate(-1)}>{heading}</Layout.Header>
       <Layout.Main>
         <div className="flex flex-col gap-8">
-          <BidItem progress item={productDetails} />
+          <AuctionItem axis="row" label="입찰 상품">
+            <AuctionItem.Image src={img} time={timeLeft} />
+            <AuctionItem.Main
+              kind="register"
+              name={name}
+              count={activeUserCount}
+              startPrice={startPrice}
+            />
+          </AuctionItem>
           {isParticipating && (
             <div className="flex flex-col gap-2">
               <div className="text-heading3">나의 참여 금액</div>

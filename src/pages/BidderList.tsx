@@ -1,6 +1,6 @@
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
-import BidItem from '@/components/common/BidItem';
+import AuctionItem from '@/components/common/AuctionItem';
 import Button from '@/components/common/Button';
 import Layout from '@/components/layout/Layout';
 import { bidderListData } from '@/mocks/data/bidderListData';
@@ -14,6 +14,7 @@ const BidderList = () => {
   const { isLoading, productDetails } = useGetBidProductDetails(auctionId);
   if (isLoading) return <p>Loading...</p>;
   if (!productDetails) return <p>Product not found</p>;
+  const { img, name, startPrice, activeUserCount } = productDetails;
 
   return (
     <Layout>
@@ -22,14 +23,25 @@ const BidderList = () => {
       </Layout.Header>
       <Layout.Main>
         <div className="flex flex-col gap-8 pt-4">
-          <BidItem progress={false} item={productDetails} />
-          <h2 className="text-heading2">참여 가격</h2>
+          <AuctionItem axis="row" label="입찰자 목록 상품">
+            <AuctionItem.Image src={img} />
+            <AuctionItem.Main
+              kind="register"
+              name={name}
+              count={activeUserCount}
+              startPrice={startPrice}
+            />
+          </AuctionItem>
+          <div className="flex items-center justify-between">
+            <h2 className="text-heading2">참여 가격</h2>
+            <div className="text-body2 text-gray1">높은 가격순</div>
+          </div>
           <hr className="border my-[-16px] border-gray3" />
-          <ul className="">
+          <ul className="flex flex-col gap-2">
             {bidderListData.map((el) => (
               <li
                 key={el.id}
-                className={`flex p-3  items-center justify-between text-gray1 ${el.id === 0 && 'border border-cheeseYellow rounded-lg'}`}
+                className={`flex p-3 items-center justify-between text-gray1 ${el.id === 0 && 'border border-cheeseYellow rounded-lg'}`}
               >
                 <span className="text-body1">{el.nickname}</span>
                 <span className="text-body1Bold">
