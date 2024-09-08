@@ -5,15 +5,20 @@ import {
   imminentProductsHandler,
   preRegisterProductsHandler,
 } from './handlers/home';
-import getMyAuctionPreRegister from './handlers/myAuctuon';
-import postSignup from './handlers/Login';
-import { bidProductDetailsHandler } from './handlers/bidProductDetails';
 import {
   notificationDeleteHandler,
   notificationsHandler,
 } from './handlers/notification';
-import { realTimeNotificationsHandler } from './handlers/realTimeNotification';
+import {
+  preRegisterHeartDeleteHandler,
+  preRegisterHeartHandler,
+} from './handlers/preRegisterHeart';
+
+import { bidProductDetailsHandler } from './handlers/bidProductDetails';
+import getMyAuctionPreRegister from './handlers/myAuctuon';
 import { getOngoingProductList } from './handlers/ProductList';
+import postSignup from './handlers/Login';
+import { realTimeNotificationsHandler } from './handlers/realTimeNotification';
 
 /* eslint-disable import/no-named-as-default */
 export const handlers: HttpHandler[] = [
@@ -27,6 +32,8 @@ export const handlers: HttpHandler[] = [
   realTimeNotificationsHandler,
   notificationsHandler,
   notificationDeleteHandler,
+  preRegisterHeartHandler,
+  preRegisterHeartDeleteHandler,
 ];
 
 export const worker = setupWorker(...handlers);

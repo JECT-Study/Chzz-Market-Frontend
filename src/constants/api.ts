@@ -12,12 +12,11 @@ export const API_END_POINT = {
   ONGOING_PRODUCT_LIST: '/product_list/api/v1/auctions',
   UPCOMING_PRODUCT_LIST: '/product_list/api/v1/auctions',
   MY_ACUTION_PRE_REGISTER: '/product/list/api/v1/users/me/auctions',
-  // Test
-  TEST: '/test',
   BEST: '/api/v1/auctions/best',
   IMMINENT: '/api/v1/auctions/imminent',
   PRE_REGISTER: '/api/v1/auctions/pre-register',
   DETAILS: '/auctions',
   NOTIFICATIONS: '/api/v1/notifications',
   REALTIME_NOTIFICATIONS: '/api/v1/notifications/subscribe',
+  PRE_REGISTERED_HEART: '/api/v1/auctions/pre-registered/heart',
 };

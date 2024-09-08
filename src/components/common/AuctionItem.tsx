@@ -14,7 +14,10 @@ const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
   const axisStyle = axis === 'column' && 'flex-col';
 
   return (
-    <figure aria-label={label} className={`flex gap-2 ${axisStyle}`}>
+    <figure
+      aria-label={label}
+      className={`flex gap-2 min-w-[12rem] ${axisStyle}`}
+    >
       {children}
     </figure>
   );
@@ -28,7 +31,7 @@ const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
       <img
         src={src}
         alt="이미지"
-        className="object-cover w-full h-[13rem] rounded"
+        className="object-cover w-full h-[12rem] rounded"
       />
       {time && (
         <div
@@ -81,7 +84,7 @@ const Main = ({ kind, name, startPrice, count }: MainProps) => {
 };
 
 const Button = ({ children }: { children: ReactNode }) => {
-  return { children };
+  return <div onClick={(e) => e.stopPropagation()}>{children}</div>;
 };
 
 AuctionItem.Image = Image;
