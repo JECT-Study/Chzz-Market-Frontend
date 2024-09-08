@@ -1,6 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 
+import { BrowserRouter } from 'react-router-dom';
 import Notification from '@/pages/Notification';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
@@ -50,7 +51,7 @@ vi.mocked(useDeleteNotification).mockReturnValue({
 
 describe('알림 테스트', () => {
   const setup = () => {
-    const utils = render(<Notification />);
+    const utils = render(<Notification />, { wrapper: BrowserRouter });
     const user = userEvent.setup();
 
     return {
