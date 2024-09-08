@@ -2,8 +2,12 @@ import ProductListPage from '@/pages/ProductList';
 import ROUTERS from '@/constants/route';
 import { createBrowserRouter } from 'react-router-dom';
 import Bid, { loader as bidLoader } from './pages/Bid';
+import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 
+import AddressBook from './pages/AddressBook';
 import DetailPage from './pages/DetailPage';
+import GlobalLayout from './components/layout/GlobalLayout';
+import Heart from './pages/Heart';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyOrderList from './pages/MyOrderList';
@@ -13,9 +17,6 @@ import OrderHistory from './pages/OrderHistory';
 import ProfileEdit from './pages/ProfileEdit';
 import Register from './pages/Register';
 import Signup from './pages/Signup';
-import BidderList, { loader as bidderListLoader } from './pages/BidderList';
-import GlobalLayout from './components/layout/GlobalLayout';
-import AddressBook from './pages/AddressBook';
 
 const routeList = [
   {
@@ -24,6 +25,10 @@ const routeList = [
       {
         path: ROUTERS.HOME,
         element: <Home />,
+      },
+      {
+        path: ROUTERS.HEART,
+        element: <Heart />,
       },
       {
         path: ROUTERS.NOTIFICATION,

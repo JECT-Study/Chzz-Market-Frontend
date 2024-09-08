@@ -1,5 +1,6 @@
 const ROUTERS = Object.freeze({
   HOME: '/',
+  HEART: '/heart',
   SIGNUP: '/signup',
   LOGIN: '/login',
   MYPAGE: '/mypage',

@@ -1,17 +1,19 @@
 declare module 'Product' {
-  export interface PreRegisterProduct {
+  export interface Product {
     id: number;
     name: string;
     startPrice: string;
     img: string;
   }
-
-  export interface Product extends PreRegisterProduct {
-    timeLeft: number;
+  export interface PreRegisterProduct extends Product {
+    likeCount: number;
+  }
+  export interface RegisterProduct extends Product {
     activeUserCount: number;
+    timeLeft: number;
   }
 
-  export interface BidProduct extends Product {
+  export interface BidProduct extends RegisterProduct {
     isParticipating: boolean;
     bidAmount: number;
     remainingBidCount: number;
