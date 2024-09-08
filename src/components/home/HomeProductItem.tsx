@@ -1,8 +1,9 @@
-import { getTimeColor } from '@/utils/getTimeColor';
 import type { PreRegisterProduct, Product } from 'Product';
-import { useNavigate } from 'react-router-dom';
-import UserIcon from '@/assets/icons/user.svg';
+
 import PriceIcon from '@/assets/icons/price.svg';
+import UserIcon from '@/assets/icons/user.svg';
+import { getTimeColor } from '@/utils/getTimeColor';
+import { useNavigate } from 'react-router-dom';
 
 type HomeItemProps<T> = T extends 'pre-register'
   ? { kind: 'pre-register'; product: PreRegisterProduct; idx: number }
@@ -10,7 +11,7 @@ type HomeItemProps<T> = T extends 'pre-register'
     ? { kind: 'best' | 'imminent'; product: Product; idx: number }
     : never;
 
-const HomeProductItem = <T extends 'pre-register' | 'enroll' | 'imminent'>({
+const HomeProductItem = <T extends 'pre-register' | 'best' | 'imminent'>({
   kind,
   product,
   idx,
