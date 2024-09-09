@@ -79,9 +79,9 @@ const Footer = ({
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <main className="flex flex-col justify-center w-full h-full border-x border-gray3">
+    <div className="flex flex-col justify-center w-full h-full border-x border-gray3">
       {children}
-    </main>
+    </div>
   );
 };
 

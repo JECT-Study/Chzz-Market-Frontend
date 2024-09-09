@@ -19,11 +19,9 @@ const NavigationItem = ({
     name === 'notification' && unreadNotificationsCount > 0;
 
   return (
-    <li
-      onClick={onClick}
-      className="flex justify-center transition-all items-center w-[11.25rem] h-[3.75rem] relative"
-    >
+    <li className="flex justify-center transition-all items-center w-[11.25rem] h-[3.75rem] relative">
       <img
+        onClick={onClick}
         src={iconSrc}
         alt={`${name}_${active ? 'on' : 'off'}_icon`}
         className="cursor-pointer size-6"

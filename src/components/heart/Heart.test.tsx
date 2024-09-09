@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Heart from '@/pages/Heart';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
@@ -9,6 +9,7 @@ import { preRegisterHeartData } from '@/mocks/data/preRegisterHeartData';
 import userEvent from '@testing-library/user-event';
 import { useGetNotifications } from '../notification/queries';
 import { useDeletePreRegisterHeart, useGetPreRegisterHeart } from './queries';
+import NavigationLayout from '../layout/NavigationLayout';
 
 vi.mock('@/components/heart/queries', () => ({
   useGetPreRegisterHeart: vi.fn(),
@@ -36,7 +37,15 @@ vi.mocked(useDeletePreRegisterHeart).mockReturnValue({
 
 describe('좋아요 페이지 테스트', () => {
   const setup = () => {
-    const utils = render(<Heart />, { wrapper: BrowserRouter });
+    const utils = render(
+      <MemoryRouter initialEntries={['/notification']}>
+        <Routes>
+          <Route element={<NavigationLayout />}>
+            <Route path="/notification" element={<Heart />} />
+          </Route>
+        </Routes>
+      </MemoryRouter>,
+    );
     const user = userEvent.setup();
 
     return {

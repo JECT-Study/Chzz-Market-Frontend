@@ -34,7 +34,7 @@ const NavigationContextProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const handleNavigationState = useCallback(
-    () => (state: NavigationState) => setNavigationState(state),
+    (state: NavigationState) => setNavigationState(state),
     [setNavigationState],
   );
 
@@ -42,7 +42,6 @@ const NavigationContextProvider = ({ children }: { children: ReactNode }) => {
     () => ({ navigationState, handleNavigationState }),
     [navigationState, handleNavigationState],
   );
-
   return (
     <NavigationContext.Provider value={value}>
       {children}

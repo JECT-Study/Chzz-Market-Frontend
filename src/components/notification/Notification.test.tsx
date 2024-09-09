@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Notification from '@/pages/Notification';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
@@ -11,6 +11,7 @@ import {
   useGetNotifications,
   useReadNotification,
 } from './queries';
+import NavigationLayout from '../layout/NavigationLayout';
 
 vi.mock('@/components/notification/queries', () => ({
   useGetNotifications: vi.fn(),
@@ -33,35 +34,17 @@ vi.mocked(useDeleteNotification).mockReturnValue({
   mutate: mutateDeleteMock,
 });
 
-// const createTestQueryClient = () =>
-//   new QueryClient({
-//     defaultOptions: {
-//       queries: {
-//         retry: false,
-//       },
-//     },
-//   });
-
-// export function renderWithClient(ui: ReactElement) {
-//   const testQueryClient = createTestQueryClient();
-//   const { rerender, ...result } = render(
-//     <QueryClientProvider client={testQueryClient}>{ui}</QueryClientProvider>,
-//   );
-
-//   return {
-//     ...result,
-//     rerender: (rerenderUi: ReactElement) =>
-//       rerender(
-//         <QueryClientProvider client={testQueryClient}>
-//           {rerenderUi}
-//         </QueryClientProvider>,
-//       ),
-//   };
-// }
-
 describe('알림 테스트', () => {
   const setup = () => {
-    const utils = render(<Notification />, { wrapper: BrowserRouter });
+    const utils = render(
+      <MemoryRouter initialEntries={['/notification']}>
+        <Routes>
+          <Route element={<NavigationLayout />}>
+            <Route path="/notification" element={<Notification />} />
+          </Route>
+        </Routes>
+      </MemoryRouter>,
+    );
     const user = userEvent.setup();
 
     return {
