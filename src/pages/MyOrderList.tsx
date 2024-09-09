@@ -5,7 +5,7 @@ import OrderProduct, {
 
 import AllOrderTab from '@/components/mypage/AllOrderTab';
 import Layout from '@/components/layout/Layout';
-import Navigation from '@/components/Navigation';
+import Navigation from '@/components/navigation/Navigation';
 import useMyAuction from '@/hooks/useMyAuction';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';

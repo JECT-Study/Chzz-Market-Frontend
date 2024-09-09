@@ -5,6 +5,7 @@ import type { RealTimeNotificationType } from 'Notification';
 import { useSSE } from '@/hooks/useSSE';
 import RealTimeNotification from './RealTimeNotification';
 import Popup from '../common/Popup';
+import { NavigationContextProvider } from '../navigation/NavigationContext';
 
 const GlobalLayout = () => {
   const { state: notifications, setState: setNotifications } =
@@ -32,7 +33,9 @@ const GlobalLayout = () => {
   return (
     <div className="flex justify-center w-full h-screen">
       <div className="relative w-[46rem] min-w-[23rem] h-full">
-        <Outlet />
+        <NavigationContextProvider>
+          <Outlet />
+        </NavigationContextProvider>
         {currentNotification && (
           <Popup onClose={closePopup}>
             <RealTimeNotification

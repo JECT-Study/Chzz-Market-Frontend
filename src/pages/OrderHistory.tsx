@@ -1,5 +1,5 @@
 import Layout from '@/components/layout/Layout';
-import Navigation from '@/components/Navigation';
+import Navigation from '@/components/navigation/Navigation';
 import OrderListTab from '@/components/order/OrderListTab';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';

@@ -17,22 +17,32 @@ import OrderHistory from './pages/OrderHistory';
 import ProfileEdit from './pages/ProfileEdit';
 import Register from './pages/Register';
 import Signup from './pages/Signup';
+import NavigationLayout from './components/layout/NavigationLayout';
 
 const routeList = [
   {
     element: <GlobalLayout />,
     children: [
       {
-        path: ROUTERS.HOME,
-        element: <Home />,
-      },
-      {
-        path: ROUTERS.HEART,
-        element: <Heart />,
-      },
-      {
-        path: ROUTERS.NOTIFICATION,
-        element: <Notification />,
+        element: <NavigationLayout />,
+        children: [
+          {
+            path: ROUTERS.HOME,
+            element: <Home />,
+          },
+          {
+            path: ROUTERS.HEART,
+            element: <Heart />,
+          },
+          {
+            path: ROUTERS.NOTIFICATION,
+            element: <Notification />,
+          },
+          {
+            path: ROUTERS.USER,
+            element: <MyPage />,
+          },
+        ],
       },
       {
         path: `${ROUTERS.BID}/:auctionId`,
@@ -59,10 +69,6 @@ const routeList = [
       {
         path: ROUTERS.ORDER.HISTORY,
         element: <OrderHistory />,
-      },
-      {
-        path: ROUTERS.MYPAGE,
-        element: <MyPage />,
       },
       {
         path: ROUTERS.ORDER.MYORDERLIST,
