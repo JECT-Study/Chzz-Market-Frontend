@@ -11,7 +11,7 @@ const CategoryItem = ({ name, icon }: { name: string; icon: string }) => {
       <img
         src={icon}
         alt={`${name} 카테고리`}
-        className="w-[5rem] h-[5em] rounded-full border p-1"
+        className="sm:w-[7rem] sm:h-[7em] w-[4rem] h-[4rem] rounded-full bg-categoryColor sm:p-7 p-3"
       />
       <div className="text-body2 text-gray1">{name}</div>
     </li>
