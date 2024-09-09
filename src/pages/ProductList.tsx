@@ -1,9 +1,9 @@
 import { ProductListData, ProductListItem } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
-import OngoingProduct from '@/components/product/OngoingProduct';
-import ProductButtons from '@/components/product/ProductButtons';
-import ProductListTabs from '@/components/product/ProductListTabs';
+import OngoingProduct from '@/components/productList/OngoingProduct';
+import ProductButtons from '@/components/productList/ProductButtons';
+import ProductListTabs from '@/components/productList/ProductListTabs';
 import { useNavigate } from 'react-router-dom';
 import useProductList from '@/hooks/useProductList';
 
