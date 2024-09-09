@@ -3,7 +3,7 @@ import OrderProduct, {
   OrderProductProps,
 } from '@/components/order/OrderProduct';
 
-import AllOrderTab from '@/components/mypage/AllOrderTab';
+import AllOrderTab from '@/components/user/AllOrderTab';
 import Layout from '@/components/Layout';
 import Navigation from '@/components/Navigation';
 import useMyAuction from '@/hooks/useMyAuction';

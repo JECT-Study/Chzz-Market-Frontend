@@ -1,7 +1,7 @@
 import { useAuth } from '@/hooks/useAuth';
 import { IoIosArrowForward } from 'react-icons/io';
 
-const mypageList = [
+const userList = [
   { id: 1, title: '모든 등록 내역' },
   {
     id: 2,
@@ -13,12 +13,12 @@ const mypageList = [
   },
 ];
 
-const MyPageOrderList = () => {
+const UserOrderList = () => {
   const { handleLogout } = useAuth();
 
   return (
     <div className="flex flex-col">
-      {mypageList.map((item) => (
+      {userList.map((item) => (
         <div
           key={item.id}
           className="w-full flex justify-between py-2 border-b border-b-gray3"
@@ -32,4 +32,4 @@ const MyPageOrderList = () => {
   );
 };
 
-export default MyPageOrderList;
+export default UserOrderList;

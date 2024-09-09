@@ -5,12 +5,7 @@ const mockData = {
   country: '서울',
 };
 
-// interface MyPageProfileProps {
-//   nickname: string;
-//   country: string;
-// }
-
-const MyPageProfile = () => {
+const UserProfile = () => {
   const navigator = useNavigate();
   return (
     <div className="flex items-center pb-8 my-10 border-b border-b-gray3">
@@ -39,4 +34,4 @@ const MyPageProfile = () => {
   );
 };
 
-export default MyPageProfile;
+export default UserProfile;

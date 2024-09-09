@@ -2,7 +2,7 @@ const ROUTERS = Object.freeze({
   HOME: '/',
   SIGNUP: '/signup',
   LOGIN: '/login',
-  MYPAGE: '/user',
+  USER: '/user',
   PROFILE: {
     EDIT: '/profile/edit',
   },

@@ -1,12 +1,12 @@
 import Layout from '@/components/Layout';
-import MyPageOrder from '@/components/mypage/MyPageOrder';
-import MyPageOrderList from '@/components/mypage/MyPageOrderList';
-import MyPageProfile from '@/components/mypage/MyPageProfile';
+import UserOrder from '@/components/user/UserOrder';
+import UserOrderList from '@/components/user/UserOrderList';
+import UserProfile from '@/components/user/UserProfile';
 import Navigation from '@/components/Navigation';
 import LoginProvider from '@/provider/loginProvider';
 import { useNavigate } from 'react-router-dom';
 
-const MyPage = () => {
+const User = () => {
   const navigate = useNavigate();
 
   return (
@@ -17,9 +17,9 @@ const MyPage = () => {
         </Layout.Header>
         <Layout.Main>
           <div className="flex flex-col">
-            <MyPageProfile />
-            <MyPageOrder />
-            <MyPageOrderList />
+            <UserProfile />
+            <UserOrder />
+            <UserOrderList />
           </div>
 
           <button onClick={() => navigate('/product/list')}>
@@ -34,4 +34,4 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+export default User;

@@ -6,7 +6,7 @@ import Bid, { loader as bidLoader } from './pages/Bid';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyOrderList from './pages/MyOrderList';
-import MyPage from './pages/MyPage';
+import User from './pages/User';
 import OrderHistory from './pages/OrderHistory';
 import ProfileEdit from './pages/ProfileEdit';
 import Register from './pages/Register';
@@ -41,8 +41,8 @@ const routeList = [
     element: <OrderHistory />,
   },
   {
-    path: ROUTERS.MYPAGE,
-    element: <MyPage />,
+    path: ROUTERS.USER,
+    element: <User />,
   },
   {
     path: ROUTERS.ORDER.MYORDERLIST,
