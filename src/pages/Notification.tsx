@@ -1,6 +1,7 @@
 import {
   useDeleteNotification,
   useGetNotifications,
+  useReadNotification,
 } from '@/components/notification/queries';
 
 import Layout from '@/components/layout/Layout';
@@ -12,9 +13,11 @@ import { useNavigate } from 'react-router-dom';
 const Notification = () => {
   const navigate = useNavigate();
   const { isLoading, notifications } = useGetNotifications();
-  const { mutate } = useDeleteNotification();
+  const { mutate: deleteNotification } = useDeleteNotification();
+  const { mutate: readNotification } = useReadNotification();
 
-  const clickDelete = (id: number) => mutate(id);
+  const clickDelete = (id: number) => deleteNotification(id);
+  const clickRead = (id: number) => readNotification(id);
 
   if (isLoading) return <p>Loading...</p>;
   if (!notifications) return <p>Notifications not found</p>;
@@ -29,6 +32,7 @@ const Notification = () => {
               key={item.id}
               item={item}
               handleDelete={clickDelete}
+              handleRead={clickRead}
             />
           ))}
         </div>

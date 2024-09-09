@@ -5,12 +5,18 @@ import { useNavigate } from 'react-router-dom';
 const NotificationItem = ({
   item,
   handleDelete,
+  handleRead,
 }: {
   item: NotificationType;
   handleDelete: (id: number) => void;
+  handleRead: (id: number) => void;
 }) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(item.link);
+
+  const handleClick = () => {
+    handleRead(item.id);
+    navigate(item.link);
+  };
 
   return (
     <div

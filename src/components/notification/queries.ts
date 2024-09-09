@@ -25,6 +25,25 @@ export const useGetNotifications = () => {
   return { isLoading, notifications };
 };
 
+export const useReadNotification = (): {
+  mutate: UseMutateFunction<unknown, Error, number, unknown>;
+} => {
+  const queryClient = useQueryClient();
+
+  const readNotification = async (id: number) => {
+    await httpClient.post(`${API_END_POINT.NOTIFICATIONS}/${id}/read`);
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: readNotification,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.NOTIFICATIONS] });
+    },
+  });
+
+  return { mutate };
+};
+
 export const useDeleteNotification = (): {
   mutate: UseMutateFunction<unknown, Error, number, unknown>;
 } => {

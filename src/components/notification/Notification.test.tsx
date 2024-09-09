@@ -6,10 +6,15 @@ import Notification from '@/pages/Notification';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
 import userEvent from '@testing-library/user-event';
-import { useDeleteNotification, useGetNotifications } from './queries';
+import {
+  useDeleteNotification,
+  useGetNotifications,
+  useReadNotification,
+} from './queries';
 
 vi.mock('@/components/notification/queries', () => ({
   useGetNotifications: vi.fn(),
+  useReadNotification: vi.fn(),
   useDeleteNotification: vi.fn(),
 }));
 
@@ -18,9 +23,14 @@ vi.mocked(useGetNotifications).mockReturnValue({
   notifications: notificationData,
 });
 
-const mutateMock = vi.fn();
+const mutateReadMock = vi.fn();
+vi.mocked(useReadNotification).mockReturnValue({
+  mutate: mutateReadMock,
+});
+
+const mutateDeleteMock = vi.fn();
 vi.mocked(useDeleteNotification).mockReturnValue({
-  mutate: mutateMock,
+  mutate: mutateDeleteMock,
 });
 
 // const createTestQueryClient = () =>
@@ -151,7 +161,7 @@ describe('알림 테스트', () => {
 
     await user.click(button);
 
-    expect(mutateMock).toHaveBeenCalledWith(1);
+    expect(mutateDeleteMock).toHaveBeenCalledWith(1);
 
     // await waitFor(() => {
     //   expect(

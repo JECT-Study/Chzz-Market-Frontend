@@ -7,6 +7,7 @@ import {
 } from './handlers/home';
 import {
   notificationDeleteHandler,
+  notificationReadHandler,
   notificationsHandler,
 } from './handlers/notification';
 import {
@@ -31,6 +32,7 @@ export const handlers: HttpHandler[] = [
   bidProductDetailsHandler,
   realTimeNotificationsHandler,
   notificationsHandler,
+  notificationReadHandler,
   notificationDeleteHandler,
   preRegisterHeartHandler,
   preRegisterHeartDeleteHandler,
