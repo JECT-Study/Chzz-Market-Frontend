@@ -1,3 +1,4 @@
+import { useProfile } from '@/hooks/useProfile';
 import { useNavigate } from 'react-router-dom';
 
 const mockData = {
@@ -7,6 +8,8 @@ const mockData = {
 
 const UserProfile = () => {
   const navigator = useNavigate();
+  const { profileData } = useProfile();
+  console.log(profileData);
   return (
     <div className="flex items-center pb-8 my-10 border-b border-b-gray3">
       <div className="w-20 h-20 rounded-full bg-gray-300 mr-4" />

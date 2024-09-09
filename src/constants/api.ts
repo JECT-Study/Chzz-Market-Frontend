@@ -7,7 +7,7 @@ export const API_END_POINT = {
   LOGOUT: '/api/v1/users/logout',
   REFRESH_TOKEN: '/api/v1/users/tokens/reissue',
   SIGNUP: 'api/v1/users',
-  PROFILE: '/profile',
+  PROFILE: 'api/v1/users',
   ORDER_LIST: '/order/list',
   ONGOING_PRODUCT_LIST: 'api/v1/auctions',
   PRE_ENROLL_PRODUCT_LIST: 'api/v1/products',

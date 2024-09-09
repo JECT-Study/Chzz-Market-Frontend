@@ -11,6 +11,12 @@ interface ErrorResponseData {
   status: string;
 }
 
+const handleTokenError = (message: string) => {
+  removeToken();
+  alert(message);
+  window.location.href = '/login';
+};
+
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_SERVER_API_URL,
@@ -24,67 +30,50 @@ export const createClient = (config?: AxiosRequestConfig) => {
 
   axiosInstance.interceptors.request.use(async (request) => {
     const accessToken = getToken();
-
     if (accessToken) {
       request.headers.Authorization = `Bearer ${accessToken}`;
     }
-
     return request;
   });
 
   axiosInstance.interceptors.response.use(
-    (response) => {
-      return response;
-    },
+    (response) => response,
     async (error: AxiosError<ErrorResponseData>) => {
       const originalRequest = error.config as AxiosRequestConfigWithRetry;
       if (!originalRequest) {
         return Promise.reject(error);
       }
 
-      if (
-        error.response &&
-        error.response.status === 401 &&
-        !originalRequest._retry
-      ) {
-        const errorMessage = error.response.data?.message;
+      const { response } = error;
+      if (response && response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        const errorMessage = response.data?.message;
         console.log(errorMessage);
 
-        originalRequest._retry = true;
-
-        if (errorMessage === '토큰이 만료되었습니다.') {
+        if (errorMessage === '리프레시 토큰이 만료되었습니다.') {
           try {
             await refreshToken();
             const newAccessToken = getToken();
+            if (!newAccessToken)
+              throw new Error('리프레시 토큰이 만료되었습니다.');
 
             originalRequest.headers = originalRequest.headers || {};
-            if (newAccessToken) {
-              originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-              return await axiosInstance(originalRequest);
-            }
-            removeToken();
-            alert('로그인이 필요합니다.');
-            window.location.href = '/login';
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+            return await axiosInstance(originalRequest);
           } catch (refreshError) {
-            if (refreshError === '리프레시 토큰이 유효하지 않습니다.') {
-              removeToken();
-              alert('리프레쉬 토큰이 만료');
-              window.location.href = '/login';
-            }
+            handleTokenError('토큰이 만료되었습니다.');
+            return Promise.reject(refreshError);
           }
         }
 
-        if (errorMessage === 'Authentication is required') {
-          removeToken();
-          alert('로그인이 필요합니다.');
-          window.location.href = '/login';
-          return Promise.reject(error);
-        }
-
-        if (errorMessage === '리프레시 토큰이 유효하지 않습니다.') {
-          removeToken();
-          alert('리프레쉬 토큰이 만료');
-          window.location.href = '/login';
+        if (
+          [
+            'Authentication is required',
+            '리프레시 토큰이 유효하지 않습니다.',
+          ].includes(errorMessage)
+        ) {
+          handleTokenError('로그인이 필요합니다.');
           return Promise.reject(error);
         }
       }
