@@ -21,7 +21,7 @@ export const notificationReadHandler: HttpHandler = http.post(
     const notificationId = parseInt(id, 10);
 
     notifications = notifications.map((el: NotificationType) =>
-      el.id === notificationId ? { ...el, check: true } : el,
+      el.id === notificationId ? { ...el, isRead: true } : el,
     );
 
     return HttpResponse.json({ status: 204 });

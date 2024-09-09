@@ -44,7 +44,7 @@ const Navigation = ({ active }: { active: string }) => {
   if (!notifications) return <div>loading</div>;
 
   const unreadNotificationsCount = notifications.reduce(
-    (acc, cur) => (!cur.check ? acc + 1 : acc),
+    (acc, cur) => (!cur.isRead ? acc + 1 : acc),
     0,
   );
 

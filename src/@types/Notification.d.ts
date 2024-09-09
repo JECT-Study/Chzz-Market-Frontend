@@ -1,18 +1,17 @@
 declare module 'Notification' {
   export interface RealTimeNotificationType {
+    id: number;
     title: string;
     message: string;
     buttonName: string;
-    id: number;
   }
 
   export interface NotificationType {
     id: number;
     type: string;
     message: string;
-    time: string;
-    img: string;
-    check: boolean;
-    link: string;
+    cdnPath: string;
+    isRead: boolean;
+    createdAt: string;
   }
 }
