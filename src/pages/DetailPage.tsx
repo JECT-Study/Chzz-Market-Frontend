@@ -1,14 +1,14 @@
 import { AiOutlineHeart } from 'react-icons/ai';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import JordanBlue from '@/assets/images/jordan_blue.jpeg';
 
 import Layout from '@/components/layout/Layout';
-import ProgressBar from '@/components/detail/ProgressBar';
+import ProgressBar from '@/components/details/ProgressBar';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '@/hooks/useProgress';
 import Button from '@/components/common/Button';
 
-const DetailPage: React.FC = () => {
+const Details = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTimerFixed, setIsTimerFixed] = useState(false);
 
@@ -276,4 +276,4 @@ const DetailPage: React.FC = () => {
   );
 };
 
-export default DetailPage;
+export default Details;

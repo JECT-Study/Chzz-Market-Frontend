@@ -3,8 +3,9 @@ import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import jordanBlueImage from '@/assets/images/jordan_blue.jpeg';
 import jordanRedImage from '@/assets/images/jordan_red.jpeg';
 import newBalanceImage from '@/assets/images/newbalance_993.jpeg';
+import { PreRegisterProduct, RegisterProduct } from 'Product';
 
-export const bestProducts = [
+export const bestProducts: RegisterProduct[] = [
   {
     id: 1,
     name: '[나이키] 에어 조던 로우',
@@ -47,7 +48,7 @@ export const bestProducts = [
   },
 ];
 
-export const imminentProducts = [
+export const imminentProducts: RegisterProduct[] = [
   {
     id: 1,
     name: '[나이키] 조던 블랙',
@@ -90,30 +91,34 @@ export const imminentProducts = [
   },
 ];
 
-export const preRegisterProducts = [
+export const preRegisterProducts: PreRegisterProduct[] = [
   {
     id: 1,
     name: '[뉴발란스] 993',
     startPrice: '230,000원',
     img: newBalanceImage,
+    likeCount: 5,
   },
   {
     id: 2,
     name: '[나이키] 에어 조던 로우',
     startPrice: '100,000원',
     img: jordanRedImage,
+    likeCount: 12,
   },
   {
     id: 3,
     name: '[나이키] 조던 블루',
     startPrice: '180,000원',
     img: jordanBlueImage,
+    likeCount: 2,
   },
   {
     id: 4,
     name: '[나이키] 조던 블랙',
     startPrice: '120,000원',
     img: jordanBlackImage,
+    likeCount: 30,
   },
 
   {
@@ -121,5 +126,6 @@ export const preRegisterProducts = [
     name: '[아디다스] 슈퍼스타',
     startPrice: '70,000원',
     img: adidasImage,
+    likeCount: 45,
   },
 ];
