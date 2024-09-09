@@ -14,12 +14,12 @@ const ROUTERS = Object.freeze({
     HISTORY: '/order/history',
     MYORDERLIST: '/order/myOrderList',
   },
-  REGISTER: '/register',
+  REGISTER: '/auctions/register',
   DETAIL: {
     ITEM: '/detail/:id',
   },
   ADDRESSBOOK: '/addressbook',
-  BID: '/bid',
+  BID: '/auctions/bid/:auctionId',
   NOTIFICATION: '/notification',
   FINAL_BIDDER_LIST: '/auctions/:auctionId/final-bidder-list',
 });
