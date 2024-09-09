@@ -13,7 +13,7 @@ declare module 'Product' {
     timeLeft: number;
   }
 
-  export interface BidProduct extends RegisterProduct {
+  export interface ProductDetails extends RegisterProduct {
     isParticipating: boolean;
     bidAmount: number;
     remainingBidCount: number;

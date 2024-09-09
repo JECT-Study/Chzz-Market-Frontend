@@ -10,10 +10,10 @@ import { Input } from '@/components/ui/input';
 import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
-import { useGetBidProductDetails } from '@/components/bid/queries';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useGetProductDetails } from '@/components/details/queries';
 
 type FormFields = z.infer<typeof BidSchema>;
 
@@ -40,7 +40,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
     getValues,
   });
 
-  const { isLoading, productDetails } = useGetBidProductDetails(auctionId);
+  const { isLoading, productDetails } = useGetProductDetails(auctionId);
   if (isLoading) return <p>Loading...</p>;
   if (!productDetails) return <p>Product not found</p>;
 

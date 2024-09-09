@@ -15,11 +15,11 @@ import {
   preRegisterHeartHandler,
 } from './handlers/preRegisterHeart';
 
-import { bidProductDetailsHandler } from './handlers/bidProductDetails';
 import getMyAuctionPreRegister from './handlers/myAuctuon';
 import { getOngoingProductList } from './handlers/ProductList';
 import postSignup from './handlers/Login';
 import { realTimeNotificationsHandler } from './handlers/realTimeNotification';
+import { productDetailsHandler } from './handlers/productDetails';
 
 /* eslint-disable import/no-named-as-default */
 export const handlers: HttpHandler[] = [
@@ -29,7 +29,7 @@ export const handlers: HttpHandler[] = [
   getOngoingProductList,
   getMyAuctionPreRegister,
   postSignup,
-  bidProductDetailsHandler,
+  productDetailsHandler,
   realTimeNotificationsHandler,
   notificationsHandler,
   notificationReadHandler,

@@ -5,13 +5,13 @@ import Button from '@/components/common/Button';
 import Layout from '@/components/layout/Layout';
 import { bidderListData } from '@/mocks/data/bidderListData';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import { useGetBidProductDetails } from '@/components/bid/queries';
+import { useGetProductDetails } from '@/components/details/queries';
 
 const BidderList = () => {
   const navigate = useNavigate();
   const auctionId = useLoaderData() as number;
 
-  const { isLoading, productDetails } = useGetBidProductDetails(auctionId);
+  const { isLoading, productDetails } = useGetProductDetails(auctionId);
   if (isLoading) return <p>Loading...</p>;
   if (!productDetails) return <p>Product not found</p>;
   const { img, name, startPrice, activeUserCount } = productDetails;

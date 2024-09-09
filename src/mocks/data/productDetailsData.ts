@@ -1,7 +1,8 @@
 import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import jordanRedImage from '@/assets/images/jordan_red.jpeg';
+import { ProductDetails } from 'Product';
 
-export const bidProductData = [
+export const productDetailsData: ProductDetails[] = [
   {
     id: 1,
     name: '[나이키] 에어 조던 로우',

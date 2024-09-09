@@ -3,16 +3,16 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
 import Bid from '@/pages/Bid';
-import { bidProductData } from '@/mocks/data/bidProductData';
 import { mockedUseNavigate } from '@/setupTests';
-import { useGetBidProductDetails } from '@/components/bid/queries';
 import userEvent from '@testing-library/user-event';
+import { productDetailsData } from '@/mocks/data/productDetailsData';
+import { useGetProductDetails } from '../details/queries';
 
-vi.mock('@/components/bid/queries');
+vi.mock('@/components/details/queries');
 
-vi.mocked(useGetBidProductDetails).mockReturnValue({
+vi.mocked(useGetProductDetails).mockReturnValue({
   isLoading: false,
-  productDetails: bidProductData[1],
+  productDetails: productDetailsData[1],
 });
 const router = createMemoryRouter(
   [
