@@ -48,23 +48,20 @@ export const createClient = (config?: AxiosRequestConfig) => {
       if (response && response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         const errorMessage = response.data?.message;
-        console.log(errorMessage);
 
-        if (errorMessage === '리프레시 토큰이 만료되었습니다.') {
-          try {
-            await refreshToken();
-            const newAccessToken = getToken();
-            if (!newAccessToken)
-              throw new Error('리프레시 토큰이 만료되었습니다.');
+        if (
+          errorMessage === '리프레시 토큰이 만료되었습니다.' ||
+          errorMessage === '토큰이 만료되었습니다.'
+        ) {
+          refreshToken();
+          const newAccessToken = getToken();
+          if (!newAccessToken)
+            throw new Error('리프레시 토큰이 만료되었습니다.');
 
-            originalRequest.headers = originalRequest.headers || {};
-            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+          originalRequest.headers = originalRequest.headers || {};
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
-            return await axiosInstance(originalRequest);
-          } catch (refreshError) {
-            handleTokenError('토큰이 만료되었습니다.');
-            return Promise.reject(refreshError);
-          }
+          return axiosInstance(originalRequest);
         }
 
         if (

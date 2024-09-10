@@ -13,8 +13,9 @@ const useProductList = (activeTab: string, sortType: string): any => {
     error: ongoingError,
     fetchNextPage: fetchNextOngoingPage,
     hasNextPage: hasNextOngoingPage,
+    refetch: refetchOngoingData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.ONGOING_ORDER_LIST],
+    queryKey: [queryKeys.ONGOING_ORDER_LIST, sortType],
     queryFn: () =>
       getOngoingProductList({ pageNumber: 0, pageSize: 10, sortType }),
     getNextPageParam: (lastPage) => {
@@ -33,8 +34,9 @@ const useProductList = (activeTab: string, sortType: string): any => {
     error: enrollError,
     fetchNextPage: fetchNextEnrollPage,
     hasNextPage: hasNextEnrollPage,
+    refetch: refetchEnrollData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.PRE_ENROLL_ORDER_LIST],
+    queryKey: [queryKeys.PRE_ENROLL_ORDER_LIST, sortType],
     queryFn: () =>
       getEnrollProductList({ pageNumber: 0, pageSize: 10, sortType }),
     getNextPageParam: (lastPage) => {
@@ -54,6 +56,8 @@ const useProductList = (activeTab: string, sortType: string): any => {
     fetchNextEnrollPage,
     hasNextOngoingPage,
     hasNextEnrollPage,
+    refetchOngoingData,
+    refetchEnrollData,
   };
 };
 

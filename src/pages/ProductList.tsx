@@ -1,5 +1,4 @@
 import {
-  OngoingProductListData,
   OngoingProductListItem,
   PreEnrollProductListData,
   PreEnrollProductListItem,
@@ -15,10 +14,8 @@ import PreEnrollProduct from '@/components/product/PreEnrollProduct';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
-  const [sortType, setSortType] = useState('newest');
+  const [sortType, setSortType] = useState('all');
   const navigate = useNavigate();
-  const [sortedOngoingProducts, setSortedOngoingProducts] =
-    useState<OngoingProductListItem[]>();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
   const {
@@ -28,7 +25,11 @@ const ProductList = () => {
     fetchNextEnrollPage,
     hasNextOngoingPage,
     hasNextEnrollPage,
+    refetchOngoingData,
+    refetchEnrollData,
   } = useProductList(activeTab, sortType);
+  const ongoingItems = ongoingData?.pages[0]?.items || [];
+  const enrollItems = enrollData?.pages[0]?.items || [];
 
   const handleObserver = useCallback(
     (entities: IntersectionObserverEntry[]) => {
@@ -63,46 +64,20 @@ const ProductList = () => {
       observer.observe(currentLoader);
     }
 
-    if (ongoingData) {
-      const sortedProducts = ongoingData.pages.map(
-        (page: OngoingProductListData) => {
-          const itemsCopy = [...page.items];
-          switch (sortType) {
-            case 'popularity':
-              return itemsCopy.sort(
-                (a, b) => b.participantCount - a.participantCount,
-              );
-            case 'cheap':
-              return itemsCopy.sort((a, b) => a.minPrice - b.minPrice);
-            case 'expensive':
-              return itemsCopy.sort((a, b) => b.minPrice - a.minPrice);
-            case 'newest':
-              return itemsCopy.sort(
-                (a, b) => b.timeRemaining - a.timeRemaining,
-              );
-            case 'all':
-              return itemsCopy;
-            default:
-              return itemsCopy;
-          }
-          // return itemsCopy; // 정렬 서버에서 정리, 클라이언트에서 사용할때 제거 서버에서 사용할때 위에 switch문 제거
-        },
-      );
-      const flatProducts = sortedProducts?.flat();
-      setSortedOngoingProducts(flatProducts);
-    }
     return () => {
       if (currentLoader) {
         observer.unobserve(currentLoader);
       }
     };
-  }, [
-    fetchNextOngoingPage,
-    hasNextOngoingPage,
-    ongoingData,
-    sortType,
-    handleObserver,
-  ]);
+  }, [fetchNextOngoingPage, hasNextOngoingPage, handleObserver]);
+
+  useEffect(() => {
+    if (activeTab === 'ongoing') {
+      refetchOngoingData();
+    } else {
+      refetchEnrollData();
+    }
+  }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
     <Layout>
@@ -117,10 +92,10 @@ const ProductList = () => {
         <ProductButtons setSortType={setSortType} />
         <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
           {activeTab === 'ongoing'
-            ? sortedOngoingProducts?.map((product: OngoingProductListItem) => (
+            ? ongoingItems?.map((product: OngoingProductListItem) => (
                 <OngoingProduct key={product.id} product={product} />
               ))
-            : enrollData?.pages.map((page: PreEnrollProductListData) =>
+            : enrollItems?.pages.map((page: PreEnrollProductListData) =>
                 page.items.map((product: PreEnrollProductListItem) => (
                   <PreEnrollProduct key={product.id} product={product} />
                 )),

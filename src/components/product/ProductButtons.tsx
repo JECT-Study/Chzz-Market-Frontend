@@ -8,7 +8,7 @@ interface ProductButtonsProps {
 
 const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const [activeFilter, setActiveFilter] = useState('');
+  const [activeFilter, setActiveFilter] = useState('newest');
 
   useEffect(() => {
     const resize = () => setWindowSize(window.innerWidth);

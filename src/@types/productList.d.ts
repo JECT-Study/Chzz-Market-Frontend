@@ -24,6 +24,7 @@ export interface PreEnrollProductListItem {
   cdnPath: string;
   likeCount: number;
   isLiked: boolean;
+  minPrice: number;
 }
 
 export interface PreEnrollProductListData {
