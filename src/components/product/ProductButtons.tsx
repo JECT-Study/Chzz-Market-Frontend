@@ -23,19 +23,6 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
     <div className="flex h-22px space-x-3 p-4">
       <Button
         size={buttonSize}
-        color={classNames(activeFilter === 'all' ? 'black' : 'white')}
-        hoverColor="black"
-        type="button"
-        className="rounded-full"
-        onClick={() => {
-          setSortType('all');
-          setActiveFilter('all');
-        }}
-      >
-        전체
-      </Button>
-      <Button
-        size={buttonSize}
         color={classNames(activeFilter === 'popularity' ? 'black' : 'white')}
         hoverColor="black"
         type="button"

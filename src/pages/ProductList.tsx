@@ -14,7 +14,7 @@ import PreEnrollProduct from '@/components/product/PreEnrollProduct';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
-  const [sortType, setSortType] = useState('all');
+  const [sortType, setSortType] = useState('newest');
   const navigate = useNavigate();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
