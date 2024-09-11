@@ -1,6 +1,6 @@
 import {
   OngoingAuctionListItem,
-  PreEnrollAuctionListItem,
+  PreEnrollProductListItem,
 } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
@@ -95,7 +95,7 @@ const ProductList = () => {
             ? ongoingItems?.map((product: OngoingAuctionListItem) => (
                 <OngoingProduct key={product.id} product={product} />
               ))
-            : enrollItems?.map((product: PreEnrollAuctionListItem) => (
+            : enrollItems?.map((product: PreEnrollProductListItem) => (
                 <PreEnrollProduct key={product.id} product={product} />
               ))}
           <div ref={loader} />

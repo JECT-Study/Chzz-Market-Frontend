@@ -18,7 +18,7 @@ export interface OngoingAuctionListData {
   last: boolean;
 }
 
-export interface PreEnrollAuctionListItem {
+export interface PreEnrollProductListItem {
   id: number;
   name: string;
   cdnPath: string;
@@ -27,9 +27,9 @@ export interface PreEnrollAuctionListItem {
   minPrice: number;
 }
 
-export interface PreEnrollAuctionListData {
+export interface PreEnrollProductListData {
   hasNext: boolean;
-  items: PreEnrollAuctionListItem[];
+  items: PreEnrollProductListItem[];
   pageNumber: number;
   pageSize: number;
   totalPages: number;
@@ -37,19 +37,21 @@ export interface PreEnrollAuctionListData {
   last: boolean;
 }
 
-export interface OngoingProductListItem extends OngoingAuctionListItem {
+export interface OngoingAuctionRegisterdItem extends OngoingAuctionListItem {
   status: string;
   createdAt: string;
 }
 
-export interface OngoingProductListData extends OngoingAuctionListData {
-  items: OngoingProductListItem[];
+export interface OngoingAuctionRegisteredData extends OngoingAuctionListData {
+  items: OngoingAuctionRegisterdItem[];
 }
 
-export interface PreEnrollProductListItem extends PreEnrollProductListItem {
+export interface PreEnrollProductRegisteredItem
+  extends PreEnrollProductListItem {
   createdAt: string;
 }
 
-export interface PreEnrollProductListData extends PreEnrollAuctionListData {
-  items: PreEnrollProductListItem[];
+export interface PreEnrollProductRegisteredData
+  extends PreEnrollProductListData {
+  items: PreEnrollProductRegisteredData[];
 }

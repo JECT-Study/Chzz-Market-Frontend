@@ -1,12 +1,12 @@
 import {
-  getOngoingProductList,
-  getEnrollProductList,
-} from '@/components/product/queries';
+  getAuctionOngoingRegister,
+  getAuctionPreEnrollRegister,
+} from '@/components/user/queries';
 import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useProductList = (activeTab: string, sortType: string): any => {
+const useMyAuctionList = (activeTab: boolean, nickname: string): any => {
   const {
     data: ongoingData,
     isLoading: ongoingLoading,
@@ -15,9 +15,9 @@ const useProductList = (activeTab: string, sortType: string): any => {
     hasNextPage: hasNextOngoingPage,
     refetch: refetchOngoingData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.ONGOING_AUCTION_LIST, sortType],
+    queryKey: [queryKeys.MY_AUCTION_REGISTERD, nickname],
     queryFn: () =>
-      getOngoingProductList({ pageNumber: 0, pageSize: 10, sortType }),
+      getAuctionOngoingRegister({ pageNumber: 0, pageSize: 10, nickname }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;
@@ -25,7 +25,7 @@ const useProductList = (activeTab: string, sortType: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'ongoing',
+    enabled: activeTab === true, // 활성화 상태 설정
   });
 
   const {
@@ -36,9 +36,9 @@ const useProductList = (activeTab: string, sortType: string): any => {
     hasNextPage: hasNextEnrollPage,
     refetch: refetchEnrollData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.PRE_ENROLL_PRODUCT_LIST, sortType],
+    queryKey: [queryKeys.MY_PRODUCT_REGISTERD, nickname],
     queryFn: () =>
-      getEnrollProductList({ pageNumber: 0, pageSize: 10, sortType }),
+      getAuctionPreEnrollRegister({ pageNumber: 0, pageSize: 10, nickname }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;
@@ -46,7 +46,7 @@ const useProductList = (activeTab: string, sortType: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'pre-enroll',
+    enabled: activeTab === false,
   });
 
   return {
@@ -61,4 +61,4 @@ const useProductList = (activeTab: string, sortType: string): any => {
   };
 };
 
-export default useProductList;
+export default useMyAuctionList;

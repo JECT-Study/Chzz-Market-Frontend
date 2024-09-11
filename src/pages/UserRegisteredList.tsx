@@ -1,22 +1,83 @@
-import { MyAuctionData } from '@/@types/myAuctionData';
-import OrderProduct, {
-  OrderProductProps,
-} from '@/components/order/OrderProduct';
 import Layout from '@/components/Layout';
 import Navigation from '@/components/Navigation';
-import useMyAuction from '@/hooks/useMyAuction';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import UserOrderTab from '@/components/user/UserOrderTab';
+import useMyAuctionList from '@/hooks/useMyAuctionList';
+import OngoingMyRegister from '@/components/user/OngoingMyRegister';
+import {
+  OngoingAuctionRegisterdItem,
+  PreEnrollProductRegisteredItem,
+} from '@/@types/productList';
+import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 
 const UserRegisteredList = () => {
   const [activeTab, setActiveTab] = useState(true);
   const navigate = useNavigate();
+  const loader = useRef(null);
+  const mainContainerRef = useRef<HTMLDivElement>(null);
 
-  const { myAuctionData, fetchNextOngoingPage } = useMyAuction();
+  const {
+    ongoingData,
+    enrollData,
+    fetchNextOngoingPage,
+    fetchNextEnrollPage,
+    hasNextOngoingPage,
+    hasNextEnrollPage,
+    refetchOngoingData,
+    refetchEnrollData,
+  } = useMyAuctionList(activeTab, 'nickname');
 
-  const ongoingContent =
-    myAuctionData?.pages.flatMap((page: MyAuctionData) => page.content) || [];
+  const ongoingItems = ongoingData?.pages[0]?.items || [];
+  const enrollItems = enrollData?.pages[0]?.items || [];
+
+  const handleObserver = useCallback(
+    (entities: IntersectionObserverEntry[]) => {
+      const target = entities[0];
+      if (target.isIntersecting) {
+        if (hasNextOngoingPage) {
+          fetchNextOngoingPage();
+        }
+        if (hasNextEnrollPage) {
+          fetchNextEnrollPage();
+        }
+      }
+    },
+    [
+      fetchNextOngoingPage,
+      fetchNextEnrollPage,
+      hasNextOngoingPage,
+      hasNextEnrollPage,
+    ],
+  );
+
+  useEffect(() => {
+    const options = {
+      root: mainContainerRef.current,
+      rootMargin: '0px',
+      threshold: 1.0,
+    };
+    const observer = new IntersectionObserver(handleObserver, options);
+
+    const currentLoader = loader.current;
+    if (currentLoader) {
+      observer.observe(currentLoader);
+    }
+
+    return () => {
+      if (currentLoader) {
+        observer.unobserve(currentLoader);
+      }
+    };
+  }, [fetchNextOngoingPage, hasNextOngoingPage, handleObserver]);
+
+  useEffect(() => {
+    if (activeTab === true) {
+      refetchOngoingData();
+    } else {
+      refetchEnrollData();
+    }
+  }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
     <Layout>
@@ -24,25 +85,13 @@ const UserRegisteredList = () => {
       <Layout.Main>
         <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
-          {activeTab ? (
-            ongoingContent.map((content: OrderProductProps) => (
-              <OrderProduct key={content.id} product={content} />
-            ))
-          ) : (
-            <div>a</div>
-          )}
-          <button
-            className="w-20 h-20"
-            onClick={() => {
-              if (activeTab) {
-                fetchNextOngoingPage();
-              } else {
-                // fetchNextUpcomingPage();
-              }
-            }}
-          >
-            더보기
-          </button>
+          {activeTab
+            ? ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
+                <OngoingMyRegister product={product} key={product.id} />
+              ))
+            : enrollItems.map((product: PreEnrollProductRegisteredItem) => (
+                <PreEnrollMyRegister product={product} key={product.id} />
+              ))}
         </div>
       </Layout.Main>
       <Layout.Footer type="single">

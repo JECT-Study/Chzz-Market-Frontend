@@ -1,9 +1,9 @@
 import { API_END_POINT } from '@/constants/api';
+import { httpClient } from '@/api/axios';
 import {
   OngoingAuctionListData,
-  PreEnrollAuctionListData,
+  PreEnrollProductListData,
 } from '@/@types/productList';
-import { httpClient } from '@/api/axios';
 
 export interface GetProductParams {
   pageNumber: number;
@@ -26,7 +26,7 @@ export const getEnrollProductList = async ({
   pageNumber,
   pageSize,
   sortType = 'newest',
-}: GetProductParams): Promise<PreEnrollAuctionListData> => {
+}: GetProductParams): Promise<PreEnrollProductListData> => {
   const response = await httpClient.get(
     `${API_END_POINT.PRE_ENROLL_PRODUCT_LIST}?category=ELECTRONICS&page=${pageNumber}&size=${pageSize}&sort=${sortType}`,
   );

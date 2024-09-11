@@ -1,12 +1,12 @@
-import { PreEnrollProductListItem } from '@/@types/productList';
+import { PreEnrollProductRegisteredItem } from '@/@types/productList';
 import { FaHeart } from 'react-icons/fa';
 import ProductItem from '../common/ProductItem';
 import Button from '../common/Button';
 
-const PreEnrollProduct = ({
+const PreEnrollMyRegister = ({
   product,
 }: {
-  product: PreEnrollProductListItem;
+  product: PreEnrollProductRegisteredItem;
 }) => {
   return (
     <ProductItem product={product}>
@@ -29,4 +29,4 @@ const PreEnrollProduct = ({
   );
 };
 
-export default PreEnrollProduct;
+export default PreEnrollMyRegister;

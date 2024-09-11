@@ -11,8 +11,8 @@ export const API_END_POINT = {
   ORDER_LIST: '/order/list',
   ONGOING_PRODUCT_LIST: 'api/v1/auctions',
   PRE_ENROLL_PRODUCT_LIST: 'api/v1/products',
-  MY_ACUTION_PRE_REGISTER: '/product/list/api/v1/users/me/auctions',
-  MY_ACUTION: 'api/v1/users/me/auctions',
+  MY_ACUTION_ONGOING_REGISTER: 'api/v1/auctions/users',
+  MY_ACUTION_PRE_ENROLL_REGISTER: 'api/v1/products/users',
   // Test
   TEST: '/test',
   BEST: '/products/best',

@@ -12,6 +12,8 @@ export interface ProductProps {
   isParticipating?: boolean;
   likeCount?: number;
   isLiked?: boolean;
+  status?: string;
+  createdAt?: string;
 }
 
 const ProductItem = ({
