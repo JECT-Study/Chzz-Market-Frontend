@@ -1,9 +1,9 @@
-import { OngoingProductListItem } from '@/@types/productList';
+import { OngoingAuctionListItem } from '@/@types/productList';
 import { LuUsers } from 'react-icons/lu';
 import ProductItem from '../common/ProductItem';
 import Button from '../common/Button';
 
-const OngoingProduct = ({ product }: { product: OngoingProductListItem }) => {
+const OngoingProduct = ({ product }: { product: OngoingAuctionListItem }) => {
   return (
     <ProductItem product={product}>
       <div className="flex">

@@ -1,6 +1,6 @@
 import {
-  OngoingProductListItem,
-  PreEnrollProductListItem,
+  OngoingAuctionListItem,
+  PreEnrollAuctionListItem,
 } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
@@ -92,10 +92,10 @@ const ProductList = () => {
         <ProductButtons setSortType={setSortType} />
         <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
           {activeTab === 'ongoing'
-            ? ongoingItems?.map((product: OngoingProductListItem) => (
+            ? ongoingItems?.map((product: OngoingAuctionListItem) => (
                 <OngoingProduct key={product.id} product={product} />
               ))
-            : enrollItems?.map((product: PreEnrollProductListItem) => (
+            : enrollItems?.map((product: PreEnrollAuctionListItem) => (
                 <PreEnrollProduct key={product.id} product={product} />
               ))}
           <div ref={loader} />

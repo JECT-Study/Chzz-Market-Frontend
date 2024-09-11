@@ -1,7 +1,7 @@
 import { API_END_POINT } from '@/constants/api';
 import {
-  OngoingProductListData,
-  PreEnrollProductListData,
+  OngoingAuctionListData,
+  PreEnrollAuctionListData,
 } from '@/@types/productList';
 import { httpClient } from '@/api/axios';
 
@@ -15,7 +15,7 @@ export const getOngoingProductList = async ({
   pageNumber,
   pageSize,
   sortType = 'newest',
-}: GetProductParams): Promise<OngoingProductListData> => {
+}: GetProductParams): Promise<OngoingAuctionListData> => {
   const response = await httpClient.get(
     `${API_END_POINT.ONGOING_PRODUCT_LIST}?category=electronics&sort=${sortType}&page=${pageNumber}&size=${pageSize}`,
   );
@@ -26,7 +26,7 @@ export const getEnrollProductList = async ({
   pageNumber,
   pageSize,
   sortType = 'newest',
-}: GetProductParams): Promise<PreEnrollProductListData> => {
+}: GetProductParams): Promise<PreEnrollAuctionListData> => {
   const response = await httpClient.get(
     `${API_END_POINT.PRE_ENROLL_PRODUCT_LIST}?category=ELECTRONICS&page=${pageNumber}&size=${pageSize}&sort=${sortType}`,
   );

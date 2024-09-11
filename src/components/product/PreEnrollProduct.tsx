@@ -1,4 +1,4 @@
-import { PreEnrollProductListItem } from '@/@types/productList';
+import { PreEnrollAuctionListItem } from '@/@types/productList';
 import { FaHeart } from 'react-icons/fa';
 import ProductItem from '../common/ProductItem';
 import Button from '../common/Button';
@@ -6,7 +6,7 @@ import Button from '../common/Button';
 const PreEnrollProduct = ({
   product,
 }: {
-  product: PreEnrollProductListItem;
+  product: PreEnrollAuctionListItem;
 }) => {
   return (
     <ProductItem product={product}>
