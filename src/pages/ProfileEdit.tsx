@@ -1,21 +1,20 @@
 import Layout from '@/components/Layout';
 import Button from '@/components/common/Button';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
 import FormField from '@/components/form/FormField';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useRef } from 'react';
+import { useEditProfile } from '@/hooks/useProfile';
+import { UserProfile } from '@/@types/user';
 
 const ProfileEdit = () => {
-  const {
-    control,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const location = useLocation();
+  const { profileData } = location.state as { profileData: UserProfile };
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
+  const { control, watch, handleSubmit, errors, handleEditProfile } =
+    useEditProfile();
 
   const handleSubmitClick = () => {
     if (formRef.current) {
@@ -23,6 +22,10 @@ const ProfileEdit = () => {
         new Event('submit', { cancelable: true, bubbles: true }),
       );
     }
+  };
+
+  const onSubmit = (data: UserProfile) => {
+    handleEditProfile(data);
   };
 
   return (
@@ -34,9 +37,7 @@ const ProfileEdit = () => {
         <form
           ref={formRef}
           className="flex flex-col px-4 py-6 space-y-4"
-          onSubmit={handleSubmit(() => {
-            navigate('/user');
-          })}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <h2 className="pb-4 text-lg font-bold">프로필 정보</h2>
           <FormField

@@ -5,3 +5,9 @@ export interface User {
   bio?: string | null;
   link?: string | null;
 }
+
+export interface UserProfile {
+  nickname: string;
+  bio: string;
+  link: string;
+}
