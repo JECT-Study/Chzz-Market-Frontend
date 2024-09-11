@@ -17,7 +17,7 @@ const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
         )}
         onClick={() => setActiveTab('ongoing')}
       >
-        진행 중인 경매
+        정식 경매
       </div>
       <div
         className={classNames(
@@ -28,7 +28,7 @@ const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
         )}
         onClick={() => setActiveTab('pre-enroll')}
       >
-        사전 등록 경매
+        사전 경매
       </div>
     </div>
   );

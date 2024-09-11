@@ -36,3 +36,12 @@ export interface PreEnrollProductListData {
   totalElements: number;
   last: boolean;
 }
+
+export interface OngoingAuctionListItem extends OngoingProductListItem {
+  status: string;
+  createAt: string;
+}
+
+export interface OngoingAuctionListData extends OngoingProductListData {
+  items: OngoingAuctionListItem[];
+}

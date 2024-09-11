@@ -9,9 +9,11 @@ const ROUTERS = Object.freeze({
   PRODUCT: {
     LIST: '/product/list',
   },
+  REGISTERED: {
+    LIST: 'user/registered/list',
+  },
   ORDER: {
     HISTORY: '/order/history',
-    MYORDERLIST: '/order/myOrderList',
   },
   REGISTER: '/register',
   DETAIL: {

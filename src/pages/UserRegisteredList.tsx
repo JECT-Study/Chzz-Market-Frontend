@@ -2,15 +2,14 @@ import { MyAuctionData } from '@/@types/myAuctionData';
 import OrderProduct, {
   OrderProductProps,
 } from '@/components/order/OrderProduct';
-
-import AllOrderTab from '@/components/user/AllOrderTab';
 import Layout from '@/components/Layout';
 import Navigation from '@/components/Navigation';
 import useMyAuction from '@/hooks/useMyAuction';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import UserOrderTab from '@/components/user/UserOrderTab';
 
-const AllOrderList = () => {
+const UserRegisteredList = () => {
   const [activeTab, setActiveTab] = useState(true);
   const navigate = useNavigate();
 
@@ -23,7 +22,7 @@ const AllOrderList = () => {
     <Layout>
       <Layout.Header handleBack={() => navigate('/')}>마이페이지</Layout.Header>
       <Layout.Main>
-        <AllOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
+        <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
           {activeTab ? (
             ongoingContent.map((content: OrderProductProps) => (
@@ -53,4 +52,4 @@ const AllOrderList = () => {
   );
 };
 
-export default AllOrderList;
+export default UserRegisteredList;

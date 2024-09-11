@@ -1,21 +1,27 @@
-import { LuUsers } from 'react-icons/lu';
-import { IoPricetagsOutline } from 'react-icons/io5';
 import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import { getTimeColor } from '@/utils/getTimeColor';
-import {
-  OngoingProductListItem,
-  PreEnrollProductListItem,
-} from '@/@types/productList';
-import Button from './Button';
+import { IoPricetagsOutline } from 'react-icons/io5';
 
-interface ProductProps
-  extends PreEnrollProductListItem,
-    OngoingProductListItem {
-  cdnPath: string;
+export interface ProductProps {
+  id: number;
+  name: string;
+  minPrice: number;
+  cdnPath?: string | null;
+  timeRemaining?: number;
+  participantCount?: number;
+  isParticipating?: boolean;
+  likeCount?: number;
+  isLiked?: boolean;
 }
 
-const ProductItem = ({ product }: { product: ProductProps }) => {
-  const remainHour = Math.floor(product.timeRemaining / 3600);
+const ProductItem = ({
+  product,
+  children,
+}: {
+  product: ProductProps;
+  children: React.ReactNode;
+}) => {
+  const remainHour = Math.floor(product.timeRemaining ?? 0 / 3600);
   const timeColor = getTimeColor(remainHour);
 
   return (
@@ -50,24 +56,8 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
                 {`${product.minPrice.toLocaleString()}원`}
               </p>
             </div>
-            <div className="flex">
-              <div className="flex gap-2">
-                <LuUsers className="text-gray-500" />
-                <p className="text-sm text-gray-500">참여자</p>
-              </div>
-              <p className="ml-4 font-semibold">
-                {`${product.participantCount}명`}
-              </p>
-            </div>
+            {children}
           </div>
-          <Button
-            color={product.isParticipating ? 'black' : 'white'}
-            type="button"
-            size="small"
-            className={`${product.isParticipating ? '' : ''} w-[160px] h-[33px] rounded-sm`}
-          >
-            {product.isParticipating ? '경매 참여 중' : '경매 참여하기'}
-          </Button>
         </div>
       </div>
     </div>

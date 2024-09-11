@@ -1,10 +1,11 @@
 import { OngoingProductListItem } from '@/@types/productList';
 import { LuUsers } from 'react-icons/lu';
-import ProductLists from '../common/ProductItem';
+import ProductItem from '../common/ProductItem';
+import Button from '../common/Button';
 
 const OngoingProduct = ({ product }: { product: OngoingProductListItem }) => {
   return (
-    <ProductLists product={product}>
+    <ProductItem product={product}>
       <div className="flex">
         <div className="flex gap-2">
           <LuUsers className="text-gray-500" />
@@ -12,7 +13,15 @@ const OngoingProduct = ({ product }: { product: OngoingProductListItem }) => {
         </div>
         <p className="ml-4 font-semibold">{`${product.participantCount}명`}</p>
       </div>
-    </ProductLists>
+      <Button
+        color={product.isParticipating ? 'black' : 'white'}
+        type="button"
+        size="small"
+        className={`${product.isParticipating ? '' : ''} w-full h-[33px] rounded-sm`}
+      >
+        {product.isParticipating ? '경매 참여하기' : '경매 중단하기'}
+      </Button>
+    </ProductItem>
   );
 };
 

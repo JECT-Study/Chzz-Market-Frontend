@@ -1,6 +1,5 @@
 import {
   OngoingProductListItem,
-  PreEnrollProductListData,
   PreEnrollProductListItem,
 } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -28,6 +27,7 @@ const ProductList = () => {
     refetchOngoingData,
     refetchEnrollData,
   } = useProductList(activeTab, sortType);
+
   const ongoingItems = ongoingData?.pages[0]?.items || [];
   const enrollItems = enrollData?.pages[0]?.items || [];
 
@@ -95,11 +95,9 @@ const ProductList = () => {
             ? ongoingItems?.map((product: OngoingProductListItem) => (
                 <OngoingProduct key={product.id} product={product} />
               ))
-            : enrollItems?.pages.map((page: PreEnrollProductListData) =>
-                page.items.map((product: PreEnrollProductListItem) => (
-                  <PreEnrollProduct key={product.id} product={product} />
-                )),
-              )}
+            : enrollItems?.map((product: PreEnrollProductListItem) => (
+                <PreEnrollProduct key={product.id} product={product} />
+              ))}
           <div ref={loader} />
         </div>
       </Layout.Main>

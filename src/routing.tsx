@@ -5,7 +5,6 @@ import Bid, { loader as bidLoader } from './pages/Bid';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
-import MyOrderList from './pages/MyOrderList';
 import User from './pages/User';
 import OrderHistory from './pages/OrderHistory';
 import ProfileEdit from './pages/ProfileEdit';
@@ -13,6 +12,7 @@ import Register from './pages/Register';
 import Signup from './pages/Signup';
 import DetailPage from './pages/DetailPage';
 import AddressBook from './pages/AddressBook';
+import UserRegisteredList from './pages/UserRegisteredList';
 
 const routeList = [
   {
@@ -45,8 +45,8 @@ const routeList = [
     element: <User />,
   },
   {
-    path: ROUTERS.ORDER.MYORDERLIST,
-    element: <MyOrderList />,
+    path: ROUTERS.REGISTERED.LIST,
+    element: <UserRegisteredList />,
   },
   {
     path: ROUTERS.SIGNUP,
