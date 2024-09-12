@@ -2,6 +2,7 @@ import Layout from '@/components/Layout';
 import { useNavigate } from 'react-router-dom';
 import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
 import naverImage from '@/assets/images/naver_login.png';
+import ChizzImage from '@/assets/icons/main_cheese_icon.svg';
 import { useAuth } from '@/hooks/useAuth';
 
 const Login = () => {
@@ -13,28 +14,25 @@ const Login = () => {
       <Layout.Header handleBack={() => navigate('/')}>로그인</Layout.Header>
       <Layout.Main>
         <div className="flex flex-col items-center h-full">
-          <div className="h-2/5">
-            <img
-              src="https://via.placeholder.com/300"
-              alt="logo"
-              className="w-52 h-52"
-            />
+          <div className="w-full h-2/5 flex flex-col justify-center items-center mt-10">
+            <img src={ChizzImage} alt="logo" className="w-52 h-52" />
+            <h2 className="text-center pt-5 text-5xl font-bold">치즈 마켓</h2>
           </div>
 
-          <div className="flex flex-col gap-4 items-center w-full">
-            <div className="w-100 h-[52px]">
+          <div className="flex flex-col gap-4 items-center w-full mt-20">
+            <div className="w-[320px] h-12">
               <img
                 src={kakaoImage}
                 alt="kakaoButton"
-                className="w-full h-full object-contain cursor-pointer"
+                className="w-full h-full object-cover cursor-pointer rounded-lg"
                 onClick={handleKakaoLogin}
               />
             </div>
-            <div className="w-100 h-[52px]">
+            <div className="w-[320px] h-12 ">
               <img
                 src={naverImage}
                 alt="naverButton"
-                className="w-full h-full object-contain cursor-pointer"
+                className="w-full h-full object-cover cursor-pointer rounded-lg"
                 onClick={handleNaverLogin}
               />
             </div>
