@@ -82,7 +82,10 @@ const UserRegisteredList = () => {
   return (
     <Layout>
       <Layout.Header handleBack={() => navigate('/')}>마이페이지</Layout.Header>
-      <Layout.Main>
+      <Layout.Main
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        ref={mainContainerRef}
+      >
         <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
           {activeTab

@@ -1,10 +1,13 @@
-import { OngoingAuctionListItem } from '@/@types/productList';
+import { MyHistoryAuctionListItem } from '@/@types/productList';
 import { LuUsers } from 'react-icons/lu';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import ProductItem from '../common/ProductItem';
-import Button from '../common/Button';
 
-const OngoingProduct = ({ product }: { product: OngoingAuctionListItem }) => {
+const OrderHistoryProduct = ({
+  product,
+}: {
+  product: MyHistoryAuctionListItem;
+}) => {
   return (
     <ProductItem product={product}>
       <div className="flex">
@@ -23,16 +26,8 @@ const OngoingProduct = ({ product }: { product: OngoingAuctionListItem }) => {
         </div>
         <p className="ml-4 font-semibold">{`${product.participantCount}명`}</p>
       </div>
-      <Button
-        color={product.isParticipating ? 'black' : 'white'}
-        type="button"
-        size="small"
-        className={`${product.isParticipating ? '' : ''} w-full h-[33px] rounded-sm`}
-      >
-        {product.isParticipating ? '경매 참여하기' : '경매 중단하기'}
-      </Button>
     </ProductItem>
   );
 };
 
-export default OngoingProduct;
+export default OrderHistoryProduct;
