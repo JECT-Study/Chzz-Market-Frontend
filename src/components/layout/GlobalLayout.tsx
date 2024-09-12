@@ -1,22 +1,26 @@
-import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+
 import { API_END_POINT } from '@/constants/api';
+import { Outlet } from 'react-router-dom';
 import type { RealTimeNotificationType } from 'Notification';
 import { useSSE } from '@/hooks/useSSE';
-import RealTimeNotification from './RealTimeNotification';
-import Popup from '../common/Popup';
 import { NavigationContextProvider } from '../navigation/NavigationContext';
+import Popup from '../common/Popup';
+import RealTimeNotification from './RealTimeNotification';
+import { useReadNotification } from '../notification/queries';
 
 const GlobalLayout = () => {
   const { state: notifications, setState: setNotifications } =
-    useSSE<RealTimeNotificationType>(
-      `${API_END_POINT.REALTIME_NOTIFICATIONS}?userId=1`,
-    );
+    useSSE<RealTimeNotificationType>(`${API_END_POINT.REALTIME_NOTIFICATIONS}`);
 
   const [currentNotification, setCurrentNotification] =
     useState<RealTimeNotificationType | null>(null);
 
+  const { mutate: readNotification } = useReadNotification();
+
   const closePopup = () => {
+    if (currentNotification && !currentNotification.auctionId)
+      readNotification(currentNotification.notificationId);
     setCurrentNotification(null);
   };
 

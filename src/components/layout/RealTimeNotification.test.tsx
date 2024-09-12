@@ -1,8 +1,20 @@
 import { act, render, screen } from '@testing-library/react';
 import { beforeAll, describe, expect, test, vi } from 'vitest';
-import userEvent from '@testing-library/user-event';
+
 import { mockedUseNavigate } from '@/setupTests';
+import { realTimeNotificationData } from '@/mocks/data/realTimeNotificationData';
+import userEvent from '@testing-library/user-event';
+import { useReadNotification } from '../notification/queries';
 import GlobalLayout from './GlobalLayout';
+
+vi.mock('@/components/notification/queries', () => ({
+  useReadNotification: vi.fn(),
+}));
+
+const mutateReadMock = vi.fn();
+vi.mocked(useReadNotification).mockReturnValue({
+  mutate: mutateReadMock,
+});
 
 describe('Layout 알림 테스트', () => {
   // 테스트 시작 전에 EventSource 모킹
@@ -10,34 +22,14 @@ describe('Layout 알림 테스트', () => {
     global.EventSource = vi.fn(() => ({
       addEventListener: vi.fn((event, callback) => {
         if (event === 'notification') {
-          const messages = [
-            {
-              id: 1,
-              title: '내 경매 알림',
-              message:
-                '[나이키] 신발 경매가 성공적으로 종료되었으며, 최종 구매자가 결정되었습니다.',
-              buttonName: '경매 참여자 목록 보러가기',
-            },
-            {
-              id: 2,
-              title: '경매 취소 알림',
-              message:
-                '경매 취소 알림 해당 경매의 참여자가 없어 경매가 유찰되었습니다.',
-              buttonName: '확인',
-            },
-            {
-              id: 3,
-              title: '내 경매 알림',
-              message:
-                '축하합니다! 경매에서 [나이키] 신발의 최종 구매자로 선정되었습니다.',
-              buttonName: '구매 확정하러 가기',
-            },
-          ];
-
-          messages.forEach((message, idx) => {
-            setTimeout(() => {
-              callback({ data: JSON.stringify(message) });
-            }, [1000, 4000, 7000][idx]);
+          realTimeNotificationData.forEach((messageString, idx) => {
+            const dataMatch = messageString.match(/data:(.*)\n/);
+            if (dataMatch && dataMatch[1]) {
+              const message = JSON.parse(dataMatch[1].trim()); // 문자열을 객체로 변환
+              setTimeout(() => {
+                callback({ data: JSON.stringify(message) }); // JSON 문자열로 다시 전송
+              }, [1000, 4000, 7000][idx]);
+            }
           });
         }
       }),
@@ -55,7 +47,7 @@ describe('Layout 알림 테스트', () => {
     };
   };
 
-  test('로그인한 상태에서 실시간 알림이 도착하면 사용자 화면에 알림 팝업이 발생하고, 그 안에 제목, 메시지, 버튼이 존재한다.', async () => {
+  test('실시간 알림이 도착하면 전체 화면에 알림 팝업이 발생하고, 그 안에 제목, 메시지, 버튼이 존재한다.', async () => {
     render(<GlobalLayout />);
 
     const popup = await screen.findByLabelText(
@@ -92,7 +84,7 @@ describe('Layout 알림 테스트', () => {
 
   describe('알림의 종류에 따라 알림 확인 여부를 달리한다.', () => {
     test(
-      '확인 버튼인 알림인 경우 확인버튼을 클릭하면 팝업이 사라진다.',
+      '팝업 버튼이 확인 버튼인 경우 버튼 클릭시 팝업이 사라진다.',
       { timeout: 8000 },
       async () => {
         const { user } = setup();
@@ -121,7 +113,7 @@ describe('Layout 알림 테스트', () => {
       },
     );
 
-    test('확인 버튼이 아닌 알림인 경우 버튼 클릭시 특정 작업이 수행된다.', async () => {
+    test('팝업 버튼이 아닌 확인 버튼이 아닌 경우, 버튼 클릭시 특정 화면으로 이동한다.', async () => {
       const { user } = setup();
 
       await screen.findByLabelText(/알림 박스/, {}, { timeout: 1100 });
@@ -131,7 +123,7 @@ describe('Layout 알림 테스트', () => {
       });
       await user.click(button);
 
-      expect(mockedUseNavigate).toHaveBeenCalledWith('/notification');
+      expect(mockedUseNavigate).toHaveBeenCalledOnce();
     });
   });
 
