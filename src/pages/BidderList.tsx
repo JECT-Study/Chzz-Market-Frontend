@@ -1,19 +1,33 @@
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
 import AuctionItem from '@/components/common/AuctionItem';
+import { BIDDER_LIST_PRICE_FILTER } from '@/constants/filter';
+import type { Bidder } from 'Bid';
 import Button from '@/components/common/Button';
 import Layout from '@/components/layout/Layout';
-import { bidderListData } from '@/mocks/data/bidderListData';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { useGetBidderList } from '@/components/bidderList/queries';
 import { useGetProductDetails } from '@/components/details/queries';
+import { useState } from 'react';
 
 const BidderList = () => {
   const navigate = useNavigate();
   const auctionId = useLoaderData() as number;
+  const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
+  const handleFilterState = () =>
+    setFilterState((prev) =>
+      prev.name === BIDDER_LIST_PRICE_FILTER.HIGH.name
+        ? BIDDER_LIST_PRICE_FILTER.LOW
+        : BIDDER_LIST_PRICE_FILTER.HIGH,
+    );
 
   const { isLoading, productDetails } = useGetProductDetails(auctionId);
-  if (isLoading) return <p>Loading...</p>;
-  if (!productDetails) return <p>Product not found</p>;
+  const { isBidderListLoading, bidderList } = useGetBidderList(
+    auctionId,
+    filterState.sort,
+  );
+  if (isLoading || isBidderListLoading) return <p>Loading...</p>;
+  if (!productDetails || !bidderList) return <p>Product not found</p>;
   const { img, name, startPrice, activeUserCount } = productDetails;
 
   return (
@@ -34,14 +48,24 @@ const BidderList = () => {
           </AuctionItem>
           <div className="flex items-center justify-between">
             <h2 className="text-heading2">참여 가격</h2>
-            <div className="text-body2 text-gray1">높은 가격순</div>
+            <div
+              onClick={handleFilterState}
+              className="flex items-center gap-1 cursor-pointer text-body2 text-gray1"
+            >
+              <span>{filterState.name}</span>
+              <img
+                className="pb-1"
+                src={filterState.icon}
+                alt={filterState.name}
+              />
+            </div>
           </div>
           <hr className="border my-[-16px] border-gray3" />
           <ul className="flex flex-col gap-2">
-            {bidderListData.map((el) => (
+            {bidderList.map((el: Bidder, idx: number) => (
               <li
                 key={el.id}
-                className={`flex p-3 items-center justify-between text-gray1 ${el.id === 0 && 'border border-cheeseYellow rounded-lg'}`}
+                className={`flex p-3 items-center justify-between text-gray1 ${idx === 0 && 'border border-cheeseYellow rounded-lg'}`}
               >
                 <span className="text-body1">{el.nickname}</span>
                 <span className="text-body1Bold">

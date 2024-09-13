@@ -1,4 +1,6 @@
-export const bidderListData = [
+import type { Bidder } from 'Bid';
+
+export const bidderListData: Bidder[] = [
   {
     id: 0,
     nickname: '나이키매냐나이키매냐나이키매냐',

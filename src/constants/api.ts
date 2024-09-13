@@ -15,7 +15,7 @@ export const API_END_POINT = {
   BEST: '/api/v1/auctions/best',
   IMMINENT: '/api/v1/auctions/imminent',
   PRE_REGISTER: '/api/v1/auctions/pre-register',
-  DETAILS: '/auctions',
+  AUCTIONS: '/api/v1/auctions',
   NOTIFICATIONS: '/api/v1/notifications',
   REALTIME_NOTIFICATIONS: '/api/v1/notifications/subscribe',
   PRE_REGISTERED_HEART: '/api/v1/auctions/pre-registered/heart',

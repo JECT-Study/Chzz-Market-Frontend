@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 export const useGetProductDetails = (auctionId: number) => {
   const getProductDetails = async (): Promise<ProductDetails> => {
     const response = await httpClient.get(
-      `${API_END_POINT.DETAILS}/${auctionId}`,
+      `${API_END_POINT.AUCTIONS}/${auctionId}`,
     );
 
     return response.data;
