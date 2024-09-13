@@ -22,6 +22,13 @@ const OrderWonProduct = ({ product }: { product: MyWonAuctionListItem }) => {
         </div>
         <p className="ml-4 font-semibold">{`${product.endDateTime}`}</p>
       </div>
+      <div className="flex">
+        <div className="flex gap-2">
+          <LuUsers className="text-gray-500" />
+          <p className="text-sm text-gray-500">최종 낙찰금액</p>
+        </div>
+        <p className="ml-4 font-semibold">{`${product.winningBid}`}</p>
+      </div>
     </ProductItem>
   );
 };

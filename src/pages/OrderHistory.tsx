@@ -4,6 +4,14 @@ import OrderListTab from '@/components/order/OrderListTab';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useHistory from '@/hooks/useHistory';
+import OrderHistoryProduct from '@/components/order/OrderHistoryProduct';
+import OrderWonProduct from '@/components/order/OrderWonProduct';
+import OrderLostProduct from '@/components/order/OrderLostProduct';
+import {
+  MyHistoryAuctionListItem,
+  MyLostAuctionListItem,
+  MyWonAuctionListItem,
+} from '@/@types/productList';
 
 const OrderHistory = () => {
   const [activeTab, setActiveTab] = useState('AuctionHistory');
@@ -78,7 +86,7 @@ const OrderHistory = () => {
       refetchHistoryData();
     } else if (activeTab === 'AuctionsWon') {
       refetchWonData();
-    } else {
+    } else if (activeTab === 'AuctionsLost') {
       refetchLostData();
     }
   }, [activeTab, refetchHistoryData, refetchWonData, refetchLostData]);
@@ -90,7 +98,18 @@ const OrderHistory = () => {
       </Layout.Header>
       <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }}>
         <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
-        {activeTab === ''}
+        {activeTab === 'AuctionHistory' &&
+          historyItems.map((product: MyHistoryAuctionListItem) => (
+            <OrderHistoryProduct key={product.id} product={product} />
+          ))}
+        {activeTab === 'AuctionsWon' &&
+          wonItems.map((product: MyWonAuctionListItem) => (
+            <OrderWonProduct key={product.id} product={product} />
+          ))}
+        {activeTab === 'AuctionsLost' &&
+          lostItems.map((product: MyLostAuctionListItem) => (
+            <OrderLostProduct key={product.id} product={product} />
+          ))}
       </Layout.Main>
       <Layout.Footer type="single">
         <Navigation active="my" />
