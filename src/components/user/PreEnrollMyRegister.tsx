@@ -1,10 +1,14 @@
-import { OngoingAuctionListItem } from '@/@types/productList';
-import { LuUsers } from 'react-icons/lu';
+import { PreEnrollProductRegisteredItem } from '@/@types/productList';
+import { FaHeart } from 'react-icons/fa';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import ProductItem from '../common/ProductItem';
 import Button from '../common/Button';
 
-const OngoingProduct = ({ product }: { product: OngoingAuctionListItem }) => {
+const PreEnrollMyRegister = ({
+  product,
+}: {
+  product: PreEnrollProductRegisteredItem;
+}) => {
   return (
     <ProductItem product={product}>
       <div className="flex">
@@ -18,21 +22,21 @@ const OngoingProduct = ({ product }: { product: OngoingAuctionListItem }) => {
       </div>
       <div className="flex">
         <div className="flex gap-2">
-          <LuUsers className="text-gray-500" />
-          <p className="text-sm text-gray-500">참여자</p>
+          <FaHeart className="text-gray-500" />
+          <p className="text-sm text-gray-500">좋아요</p>
         </div>
-        <p className="ml-4 font-semibold">{`${product.participantCount}명`}</p>
+        <p className="ml-4 font-semibold">{`${product.likeCount}`}</p>
       </div>
       <Button
-        color={product.isParticipating ? 'black' : 'white'}
+        color={product.isLiked ? 'black' : 'white'}
         type="button"
         size="small"
-        className={`${product.isParticipating ? '' : ''} w-full h-[33px] rounded-sm`}
+        className={`${product.isLiked ? '' : ''} w-full h-[33px] rounded-sm`}
       >
-        {product.isParticipating ? '경매 참여하기' : '경매 중단하기'}
+        {product.isLiked ? '좋아요' : '안좋아요'}
       </Button>
     </ProductItem>
   );
 };
 
-export default OngoingProduct;
+export default PreEnrollMyRegister;

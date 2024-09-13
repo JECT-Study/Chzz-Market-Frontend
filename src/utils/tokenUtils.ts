@@ -6,14 +6,12 @@ export const getToken = () => {
   return state.auth.token;
 };
 
-export const updateReduxAuthState = (token: string) => {
+export const setToken = (token: string | null) => {
   store.dispatch(storeLogin({ token }));
+  localStorage.setItem('accessToken', token || '');
 };
 
 export const removeToken = () => {
   store.dispatch(storeLogout());
-};
-
-export const setToken = (token: string) => {
-  store.dispatch(storeLogin({ token }));
+  localStorage.removeItem('accessToken');
 };

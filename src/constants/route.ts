@@ -5,14 +5,16 @@ const ROUTERS = Object.freeze({
   LOGIN: '/login',
   USER: '/user',
   PROFILE: {
-    EDIT: '/profile/edit',
+    EDIT: 'user/profile/edit',
   },
   PRODUCT: {
     LIST: '/product/list',
   },
+  REGISTERED: {
+    LIST: 'user/registered/list',
+  },
   ORDER: {
     HISTORY: '/order/history',
-    MYORDERLIST: '/order/myOrderList',
   },
   REGISTER: '/auctions/register',
   DETAIL: {

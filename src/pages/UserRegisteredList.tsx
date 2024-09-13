@@ -1,22 +1,22 @@
-import {
-  OngoingAuctionListItem,
-  PreEnrollProductListItem,
-} from '@/@types/productList';
-import { useCallback, useEffect, useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
-import OngoingProduct from '@/components/productList/OngoingProduct';
-import ProductButtons from '@/components/productList/ProductButtons';
-import ProductListTabs from '@/components/productList/ProductListTabs';
+import Navigation from '@/components/navigation/Navigation';
 import { useNavigate } from 'react-router-dom';
-import useProductList from '@/hooks/useProductList';
-import PreEnrollProduct from '@/components/productList/PreEnrollProduct';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import UserOrderTab from '@/components/user/UserOrderTab';
+import useMyAuctionList from '@/hooks/useMyAuctionList';
+import OngoingMyRegister from '@/components/user/OngoingMyRegister';
+import {
+  OngoingAuctionRegisterdItem,
+  PreEnrollProductRegisteredItem,
+} from '@/@types/productList';
+import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 
-const ProductList = () => {
-  const [activeTab, setActiveTab] = useState('ongoing');
-  const [sortType, setSortType] = useState('newest');
+const UserRegisteredList = () => {
+  const [activeTab, setActiveTab] = useState(true);
   const navigate = useNavigate();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
+
   const {
     ongoingData,
     enrollData,
@@ -26,7 +26,7 @@ const ProductList = () => {
     hasNextEnrollPage,
     refetchOngoingData,
     refetchEnrollData,
-  } = useProductList(activeTab, sortType);
+  } = useMyAuctionList(activeTab, 'nickname');
 
   const ongoingItems = ongoingData?.pages[0]?.items || [];
   const enrollItems = enrollData?.pages[0]?.items || [];
@@ -72,7 +72,7 @@ const ProductList = () => {
   }, [fetchNextOngoingPage, hasNextOngoingPage, handleObserver]);
 
   useEffect(() => {
-    if (activeTab === 'ongoing') {
+    if (activeTab === true) {
       refetchOngoingData();
     } else {
       refetchEnrollData();
@@ -81,28 +81,27 @@ const ProductList = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/')}>
-        상품 경매 목록
-      </Layout.Header>
+      <Layout.Header handleBack={() => navigate('/')}>마이페이지</Layout.Header>
       <Layout.Main
         style={{ paddingLeft: 0, paddingRight: 0 }}
         ref={mainContainerRef}
       >
-        <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        <ProductButtons setSortType={setSortType} />
-        <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
-          {activeTab === 'ongoing'
-            ? ongoingItems?.map((product: OngoingAuctionListItem) => (
-                <OngoingProduct key={product.id} product={product} />
+        <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
+        <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
+          {activeTab
+            ? ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
+                <OngoingMyRegister product={product} key={product.id} />
               ))
-            : enrollItems?.map((product: PreEnrollProductListItem) => (
-                <PreEnrollProduct key={product.id} product={product} />
+            : enrollItems.map((product: PreEnrollProductRegisteredItem) => (
+                <PreEnrollMyRegister product={product} key={product.id} />
               ))}
-          <div ref={loader} />
         </div>
       </Layout.Main>
+      <Layout.Footer type="single">
+        <Navigation active="my" />
+      </Layout.Footer>
     </Layout>
   );
 };
 
-export default ProductList;
+export default UserRegisteredList;

@@ -1,13 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
-import MyPage from '@/pages/MyPage';
+import USER from '@/pages/User';
 
-describe('Mypage', () => {
+describe('USER', () => {
   it.skip('렌더 테스트 마이페이지', () => {
     render(
       <BrowserRouter>
-        <MyPage />
+        <USER />
       </BrowserRouter>,
     );
 

@@ -25,7 +25,7 @@ export const useSignup = (): any => {
   const signupMutation = useMutation({
     mutationFn: (data: User) => postSignup(data),
     onSuccess: () => {
-      navigate('/mypage');
+      navigate('/user');
     },
     onError: (error) => {},
   });

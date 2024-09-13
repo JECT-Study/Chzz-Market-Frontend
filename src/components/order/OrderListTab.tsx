@@ -27,18 +27,18 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
       <div
         className={classNames(
           tabClass,
-          activeTab === 'joinedAuctions'
+          activeTab === 'AuctionHistory'
             ? 'border-b-2 border-cheeseYellow font-bold'
             : 'text-gray2 border-b-2 border-gray-300',
           isWidthScreen && 'p-2',
         )}
-        onClick={() => setActiveTab('joinedAuctions')}
+        onClick={() => setActiveTab('AuctionHistory')}
       >
         {isWidthScreen ? (
-          '참여한 경매'
+          '진행중인 경매'
         ) : (
           <>
-            참여한
+            진행중인
             <br />
             경매
           </>
@@ -47,58 +47,38 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
       <div
         className={classNames(
           tabClass,
-          activeTab === 'successfulAuctions'
+          activeTab === 'AuctionsWon'
             ? 'border-b-2 border-cheeseYellow font-bold'
             : 'text-gray2 border-b-2 border-gray-300',
           isWidthScreen && 'p-2',
         )}
-        onClick={() => setActiveTab('successfulAuctions')}
+        onClick={() => setActiveTab('AuctionsWon')}
       >
         {isWidthScreen ? (
-          '경매 참여 성공'
+          '성공한 경매'
         ) : (
           <>
-            경매 참여
-            <br /> 성공
+            성공한
+            <br /> 경매
           </>
         )}
       </div>
       <div
         className={classNames(
           tabClass,
-          activeTab === 'failedAuctions'
+          activeTab === 'AuctionsLost'
             ? 'border-b-2 border-cheeseYellow font-bold'
             : 'text-gray2 border-b-2 border-gray-300',
           isWidthScreen && 'p-2',
         )}
-        onClick={() => setActiveTab('failedAuctions')}
+        onClick={() => setActiveTab('AuctionsLost')}
       >
         {isWidthScreen ? (
-          '경매 참여 실패'
+          '실패한 경매'
         ) : (
           <>
-            경매 참여
-            <br /> 실패
-          </>
-        )}
-      </div>
-      <div
-        className={classNames(
-          tabClass,
-          activeTab === 'closedAuctions'
-            ? 'border-b-2 border-cheeseYellow font-bold'
-            : 'text-gray2 border-b-2 border-gray-300',
-          isWidthScreen && 'p-2',
-        )}
-        onClick={() => setActiveTab('closedAuctions')}
-      >
-        {isWidthScreen ? (
-          '종료된 경매'
-        ) : (
-          <>
-            종료된
-            <br />
-            경매
+            실패한
+            <br /> 경매
           </>
         )}
       </div>

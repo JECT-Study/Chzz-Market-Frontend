@@ -10,14 +10,14 @@ import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import MyOrderList from './pages/MyOrderList';
-import MyPage from './pages/MyPage';
 import Notification from './pages/Notification';
+import User from './pages/User';
 import OrderHistory from './pages/OrderHistory';
 import ProfileEdit from './pages/ProfileEdit';
 import Register from './pages/Register';
 import Signup from './pages/Signup';
 import NavigationLayout from './components/layout/NavigationLayout';
+import UserRegisteredList from './pages/UserRegisteredList';
 
 const routeList = [
   {
@@ -40,7 +40,7 @@ const routeList = [
           },
           {
             path: ROUTERS.USER,
-            element: <MyPage />,
+            element: <User />,
           },
         ],
       },
@@ -71,8 +71,8 @@ const routeList = [
         element: <OrderHistory />,
       },
       {
-        path: ROUTERS.ORDER.MYORDERLIST,
-        element: <MyOrderList />,
+        path: ROUTERS.REGISTERED.LIST,
+        element: <UserRegisteredList />,
       },
       {
         path: ROUTERS.SIGNUP,

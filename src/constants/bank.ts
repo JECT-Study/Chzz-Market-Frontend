@@ -10,14 +10,14 @@ import SHINHAN from '@/assets/banks/bank_shinhan.svg';
 import URI from '@/assets/banks/bank_uri.svg';
 
 export const banks = [
-  { id: 1, name: 'NH농협', img: NH },
-  { id: 2, name: 'KB국민', img: KB },
-  { id: 3, name: '카카오뱅크', img: KAKAO },
-  { id: 4, name: '신한', img: SHINHAN },
-  { id: 5, name: '우리', img: URI },
-  { id: 6, name: 'IBK기업', img: IBK },
-  { id: 7, name: '하나', img: HANA },
-  { id: 8, name: '새마을', img: SAEMAUL },
-  { id: 9, name: '시티', img: CITY },
-  { id: 10, name: 'K뱅크', img: KBANK },
+  { id: 1, name: 'NH', img: NH },
+  { id: 2, name: 'KB', img: KB },
+  { id: 3, name: 'KAKAO', img: KAKAO },
+  { id: 4, name: 'SHINHAN', img: SHINHAN },
+  { id: 5, name: 'WOORI', img: URI },
+  { id: 6, name: 'IBK', img: IBK },
+  { id: 7, name: 'HANA', img: HANA },
+  { id: 8, name: 'SAEMAUL', img: SAEMAUL },
+  { id: 9, name: 'CITI', img: CITY },
+  { id: 10, name: 'KBANK', img: KBANK },
 ];

@@ -3,6 +3,7 @@ import {
   useGetBestProducts,
   useGetImminentProducts,
   useGetPreRegisterProducts,
+  useRefreshTokenOnSuccess,
 } from '@/components/home/queries';
 
 import CategoryList from '@/components/home/CategoryList';
@@ -16,6 +17,7 @@ import { useNavigationContext } from '@/components/navigation/NavigationContext'
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
   const { handleNavigationState } = useNavigationContext();
+  useRefreshTokenOnSuccess();
 
   const { isBestLoading, bestProducts } = useGetBestProducts();
   const { isImminentLoading, imminentProducts } = useGetImminentProducts();

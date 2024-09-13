@@ -8,7 +8,7 @@ interface ProductButtonsProps {
 
 const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const [activeFilter, setActiveFilter] = useState('');
+  const [activeFilter, setActiveFilter] = useState('newest');
 
   useEffect(() => {
     const resize = () => setWindowSize(window.innerWidth);
@@ -21,19 +21,6 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
 
   return (
     <div className="flex h-22px space-x-3 p-4">
-      <Button
-        size={buttonSize}
-        color={classNames(activeFilter === 'all' ? 'black' : 'white')}
-        hoverColor="black"
-        type="button"
-        className="rounded-full"
-        onClick={() => {
-          setSortType('all');
-          setActiveFilter('all');
-        }}
-      >
-        전체
-      </Button>
       <Button
         size={buttonSize}
         color={classNames(activeFilter === 'popularity' ? 'black' : 'white')}
