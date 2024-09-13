@@ -1,14 +1,14 @@
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
 import AuctionItem from '@/components/common/AuctionItem';
+import { BIDDER_LIST_PRICE_FILTER } from '@/constants/filter';
+import type { Bidder } from 'Bid';
 import Button from '@/components/common/Button';
 import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { useGetBidderList } from '@/components/bidderList/queries';
 import { useGetProductDetails } from '@/components/details/queries';
 import { useState } from 'react';
-import { BIDDER_LIST_PRICE_FILTER } from '@/constants/filter';
-import { useGetBidderList } from '@/components/bidderList/queries';
-import type { BidderListType } from 'Bid';
 
 const BidderList = () => {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ const BidderList = () => {
           </div>
           <hr className="border my-[-16px] border-gray3" />
           <ul className="flex flex-col gap-2">
-            {bidderList.map((el: BidderListType, idx: number) => (
+            {bidderList.map((el: Bidder, idx: number) => (
               <li
                 key={el.id}
                 className={`flex p-3 items-center justify-between text-gray1 ${idx === 0 && 'border border-cheeseYellow rounded-lg'}`}
