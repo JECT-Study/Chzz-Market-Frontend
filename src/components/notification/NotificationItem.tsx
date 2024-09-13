@@ -1,7 +1,8 @@
+import { NOTIFICATION_CONTENTS } from '@/constants/notification';
 import type { NotificationType } from 'Notification';
 import XButtonIcon from '@/assets/icons/x_button.svg';
-import { useNavigate } from 'react-router-dom';
 import { getTimeAgo } from '@/utils/getTimeAgo';
+import { useNavigate } from 'react-router-dom';
 
 const NotificationItem = ({
   item,
@@ -13,14 +14,16 @@ const NotificationItem = ({
   handleRead: (id: number) => void;
 }) => {
   const navigate = useNavigate();
+  const { id, isRead, cdnPath, message, createdAt, type, auctionId } = item;
+  const time = getTimeAgo(createdAt);
 
   const handleClick = () => {
-    handleRead(item.id);
-    navigate('/');
+    if (NOTIFICATION_CONTENTS[type]?.link && auctionId) {
+      navigate(NOTIFICATION_CONTENTS[type].link!(auctionId));
+      handleRead(id);
+    }
   };
 
-  const { id, isRead, cdnPath, message, createdAt } = item;
-  const time = getTimeAgo(createdAt);
   return (
     <div
       className={`p-5 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} `}
@@ -28,10 +31,10 @@ const NotificationItem = ({
     >
       <figure
         onClick={handleClick}
-        className="flex w-full cursor-pointer"
+        className={`flex w-full ${auctionId && 'cursor-pointer'}`}
         aria-label={`알림_${id}`}
       >
-        <figcaption className="flex flex-col flex-1 cursor-pointer justify-between min-h-[6rem] p-3">
+        <figcaption className="flex flex-col flex-1 justify-between min-h-[6rem] p-3">
           <h4 className="text-body1" aria-label={`알림 제목${id}`}>
             {message}
           </h4>

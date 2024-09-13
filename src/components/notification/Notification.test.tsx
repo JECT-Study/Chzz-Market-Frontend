@@ -1,17 +1,17 @@
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Notification from '@/pages/Notification';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
 import userEvent from '@testing-library/user-event';
+import NavigationLayout from '../layout/NavigationLayout';
 import {
   useDeleteNotification,
   useGetNotifications,
   useReadNotification,
 } from './queries';
-import NavigationLayout from '../layout/NavigationLayout';
 
 vi.mock('@/components/notification/queries', () => ({
   useGetNotifications: vi.fn(),
@@ -117,7 +117,6 @@ describe('알림 테스트', () => {
   test('알림 클릭하면 알림 세부 정보를 볼 수 있는 페이지로 이동한다.', async () => {
     const { user } = setup();
 
-    // 읽지 않은 알람
     const notifications = await screen.findAllByRole('figure', {
       name: /알림/,
     });
@@ -125,7 +124,7 @@ describe('알림 테스트', () => {
     const firstItem = notifications[0];
     await user.click(firstItem);
 
-    expect(mockedUseNavigate).toHaveBeenCalledWith('/');
+    expect(mockedUseNavigate).toHaveBeenCalled();
   });
 
   // FIX

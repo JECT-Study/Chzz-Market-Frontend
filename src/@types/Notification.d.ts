@@ -1,9 +1,9 @@
 declare module 'Notification' {
   export interface RealTimeNotificationType {
-    id: number;
-    title: string;
+    notificationId: number;
     message: string;
-    buttonName: string;
+    type: string;
+    auctionId?: number;
   }
 
   export interface NotificationType {
@@ -12,6 +12,7 @@ declare module 'Notification' {
     message: string;
     cdnPath: string;
     isRead: boolean;
+    auctionId?: number;
     createdAt: string;
   }
 }

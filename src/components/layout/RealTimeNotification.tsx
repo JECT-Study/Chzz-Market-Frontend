@@ -1,24 +1,27 @@
+import { NOTIFICATION_CONTENTS } from '@/constants/notification';
 import type { RealTimeNotificationType } from 'Notification';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
+import { useReadNotification } from '../notification/queries';
 
 const RealTimeNotification = ({
   notification,
   onClose,
 }: {
-  notification: RealTimeNotificationType | null;
+  notification: RealTimeNotificationType;
   onClose: () => void;
 }) => {
-  const { title, message, buttonName } = notification!;
   const navigate = useNavigate();
+  const { mutate: readNotification } = useReadNotification();
+  const { message, type, auctionId, notificationId } = notification!;
+  const { buttonName, title } = NOTIFICATION_CONTENTS[type];
 
   const handleClick = () => {
-    if (buttonName !== '확인') {
-      // 알림에 따라 특정 링크로 이동
-      navigate('/notification');
+    if (NOTIFICATION_CONTENTS[type]?.link && auctionId) {
+      navigate(NOTIFICATION_CONTENTS[type].link!(auctionId));
     }
+    readNotification(notificationId);
     onClose();
-    // 읽는 작업
   };
 
   return (
