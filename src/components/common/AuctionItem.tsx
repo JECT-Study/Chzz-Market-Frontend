@@ -1,8 +1,8 @@
-import LikeIcon from '@/assets/icons/like.svg';
-import PriceIcon from '@/assets/icons/price.svg';
 import { ReactNode } from 'react';
-import UserIcon from '@/assets/icons/user.svg';
-import { getTimeColor } from '@/utils/getTimeColor';
+import ParticipantCount from './atomic/ParticipantCount';
+import LikeCount from './atomic/LikeCount';
+import MinPrice from './atomic/MinPrice';
+import TimeLabel from './atomic/TimeLabel';
 
 interface AuctionItemProps {
   label: string;
@@ -24,8 +24,6 @@ const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
 };
 
 const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
-  const color = time && getTimeColor(time);
-
   return (
     <div className="relative border rounded">
       <img
@@ -33,14 +31,7 @@ const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
         alt="이미지"
         className="object-cover w-full h-[12rem] rounded"
       />
-      {time && (
-        <div
-          aria-label="남은 시간"
-          className={`absolute text-body2 bottom-0 w-full pt-1 text-center bg-white opacity-80 ${color} border-b-2`}
-        >
-          {time}시간 남음
-        </div>
-      )}
+      {time && <TimeLabel time={time} />}
     </div>
   );
 };
@@ -48,36 +39,23 @@ const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
 interface MainProps {
   kind: 'register' | 'pre-register';
   name: string;
-  startPrice: string;
+  price: number;
   count: number;
 }
 
-const Main = ({ kind, name, startPrice, count }: MainProps) => {
-  const countLabel = kind === 'register' ? '참여자' : '좋아요';
-  const icon = kind === 'register' ? UserIcon : LikeIcon;
+const Main = ({ kind, name, price, count }: MainProps) => {
   return (
-    <figcaption className="flex flex-col gap-1">
+    <figcaption className="flex flex-col gap-2 p-2">
       <h3 aria-label="이름" className="text-heading3">
         {name}
       </h3>
-      <div
-        aria-label="시작 가격"
-        className="flex items-center text-body2 text-gray2"
-      >
-        <img src={PriceIcon} alt="price_icon" />
-        <span>
-          시작가 <span className="text-black text-body2Bold">{startPrice}</span>
-        </span>
-      </div>
-      <div
-        aria-label={countLabel}
-        className="flex items-center text-body2 text-gray2"
-      >
-        <img src={icon} alt={countLabel} />
-        <span>
-          {countLabel}{' '}
-          <span className="text-black text-body2Bold">{count}명</span>
-        </span>
+      <div>
+        <MinPrice price={price} />
+        {kind === 'register' ? (
+          <ParticipantCount count={count} />
+        ) : (
+          <LikeCount count={count} />
+        )}
       </div>
     </figcaption>
   );
