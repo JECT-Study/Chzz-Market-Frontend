@@ -1,11 +1,11 @@
 import { API_END_POINT } from '@/constants/api';
-import type { ProductDetails } from 'Product';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { AuctionDetails } from 'Auction';
 
-export const useGetProductDetails = (auctionId: number) => {
-  const getProductDetails = async (): Promise<ProductDetails> => {
+export const useGetAuctionDetails = (auctionId: number) => {
+  const getAuctionDetails = async (): Promise<AuctionDetails> => {
     const response = await httpClient.get(
       `${API_END_POINT.AUCTIONS}/${auctionId}`,
     );
@@ -13,13 +13,12 @@ export const useGetProductDetails = (auctionId: number) => {
     return response.data;
   };
 
-  const { isLoading, data: productDetails } = useQuery({
+  const { data: auctionDetails } = useSuspenseQuery({
     queryKey: [queryKeys.DETAILS, auctionId],
-    queryFn: () => getProductDetails(),
+    queryFn: getAuctionDetails,
   });
 
   return {
-    isLoading,
-    productDetails,
+    auctionDetails,
   };
 };

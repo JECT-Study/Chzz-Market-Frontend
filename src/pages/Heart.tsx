@@ -5,15 +5,15 @@ import {
 
 import AuctionItem from '@/components/common/AuctionItem';
 import Button from '@/components/common/Button';
-import type { PreRegisterProduct } from 'Product';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useNavigationContext } from '@/components/navigation/NavigationContext';
+import { PreRegisterAuction } from 'Auction';
 
 const Heart = () => {
   const navigate = useNavigate();
   const { handleNavigationState } = useNavigationContext();
-  const { isLoading, preRegisterHeartList } = useGetPreRegisterHeart();
+  const { preRegisterHeartList } = useGetPreRegisterHeart();
   const { mutate } = useDeletePreRegisterHeart();
   const handleDelete = (id: number) => mutate(id);
 
@@ -24,22 +24,20 @@ const Heart = () => {
     });
   }, [handleNavigationState]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!preRegisterHeartList) return <div>List not found!</div>;
   return (
     <ul className="grid items-center justify-center grid-cols-2 gap-4 px-10 py-5">
-      {preRegisterHeartList.map((el: PreRegisterProduct) => (
+      {preRegisterHeartList.map((el: PreRegisterAuction) => (
         <li
           key={el.id}
           onClick={() => navigate(`/product/${el.id}`)}
           className="cursor-pointer"
         >
           <AuctionItem axis="column" label="좋아요 한 사전 경매 상품">
-            <AuctionItem.Image src={el.img} />
+            <AuctionItem.Image src={el.cdnPath} />
             <AuctionItem.Main
               name={el.name}
               count={el.likeCount}
-              startPrice={el.startPrice}
+              price={el.minPrice}
               kind="pre-register"
             />
             <AuctionItem.Button>

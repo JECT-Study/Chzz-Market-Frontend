@@ -2,7 +2,7 @@ import { API_END_POINT } from '@/constants/api';
 import type { Bidder } from 'Bid';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useGetBidderList = (auctionId: number, sort: 'desc' | 'asc') => {
   const getBidderList = async (): Promise<Bidder[]> => {
@@ -13,10 +13,10 @@ export const useGetBidderList = (auctionId: number, sort: 'desc' | 'asc') => {
     return response.data;
   };
 
-  const { isLoading: isBidderListLoading, data: bidderList } = useQuery({
+  const { data: bidderList } = useSuspenseQuery({
     queryKey: [queryKeys.BIDDER_LIST, auctionId, sort],
     queryFn: getBidderList,
   });
 
-  return { isBidderListLoading, bidderList };
+  return { bidderList };
 };

@@ -7,8 +7,8 @@ import Button from '@/components/common/Button';
 import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useGetBidderList } from '@/components/bidderList/queries';
-import { useGetProductDetails } from '@/components/details/queries';
 import { useState } from 'react';
+import { useGetAuctionDetails } from '@/components/details/queries';
 
 const BidderList = () => {
   const navigate = useNavigate();
@@ -21,14 +21,10 @@ const BidderList = () => {
         : BIDDER_LIST_PRICE_FILTER.HIGH,
     );
 
-  const { isLoading, productDetails } = useGetProductDetails(auctionId);
-  const { isBidderListLoading, bidderList } = useGetBidderList(
-    auctionId,
-    filterState.sort,
-  );
-  if (isLoading || isBidderListLoading) return <p>Loading...</p>;
-  if (!productDetails || !bidderList) return <p>Product not found</p>;
-  const { img, name, startPrice, activeUserCount } = productDetails;
+  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { bidderList } = useGetBidderList(auctionId, filterState.sort);
+
+  const { cdnPath, name, minPrice, participantCount } = auctionDetails;
 
   return (
     <Layout>
@@ -38,12 +34,12 @@ const BidderList = () => {
       <Layout.Main>
         <div className="flex flex-col gap-8 pt-4">
           <AuctionItem axis="row" label="입찰자 목록 상품">
-            <AuctionItem.Image src={img} />
+            <AuctionItem.Image src={cdnPath} />
             <AuctionItem.Main
               kind="register"
               name={name}
-              count={activeUserCount}
-              startPrice={startPrice}
+              count={participantCount}
+              price={minPrice}
             />
           </AuctionItem>
           <div className="flex items-center justify-between">

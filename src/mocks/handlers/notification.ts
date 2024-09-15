@@ -1,4 +1,4 @@
-import { HttpHandler, HttpResponse, http } from 'msw';
+import { HttpHandler, HttpResponse, delay, http } from 'msw';
 
 import { API_END_POINT } from '@/constants/api';
 import type { NotificationType } from 'Notification';
@@ -8,7 +8,8 @@ let notifications = [...notificationData];
 
 export const notificationsHandler: HttpHandler = http.get(
   `${API_END_POINT.NOTIFICATIONS}`,
-  () => {
+  async () => {
+    await delay(1500);
     return HttpResponse.json(notifications);
   },
 );
@@ -24,7 +25,7 @@ export const notificationReadHandler: HttpHandler = http.post(
       el.id === notificationId ? { ...el, isRead: true } : el,
     );
 
-    return HttpResponse.json({ status: 204 });
+    return HttpResponse.json({ data: notifications, status: 204 });
   },
 );
 
@@ -37,6 +38,6 @@ export const notificationDeleteHandler: HttpHandler = http.delete(
 
     notifications = notifications.filter((el) => el.id !== notificationId);
 
-    return HttpResponse.json({ status: 204 });
+    return HttpResponse.json({ data: notifications, status: 204 });
   },
 );

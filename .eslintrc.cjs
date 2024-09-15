@@ -38,10 +38,7 @@ module.exports = {
     'testing-library/no-container': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'react-refresh/only-export-components': 'off',
     'react/react-in-jsx-scope': 'off',
     // import React from 'react' 꺼두기
     'react/jsx-uses-react': 'off',

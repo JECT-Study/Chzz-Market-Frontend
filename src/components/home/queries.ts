@@ -1,47 +1,41 @@
-import type { PreRegisterProduct, Product } from 'Product';
-
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQueries } from '@tanstack/react-query';
+import type { PreRegisterAuction, RegisterAuction } from 'Auction';
 
-export const useGetBestProducts = () => {
-  const getBestProducts = async (): Promise<Product[]> => {
+export const useGetHomeAuctions = () => {
+  const getBestAuctions = async (): Promise<RegisterAuction[]> => {
     const response = await httpClient.get(`${API_END_POINT.BEST}`);
     return response.data;
   };
-
-  const { isLoading: isBestLoading, data: bestProducts } = useQuery({
-    queryKey: [queryKeys.BEST_PRODUCTS],
-    queryFn: () => getBestProducts(),
-  });
-
-  return { isBestLoading, bestProducts };
-};
-export const useGetImminentProducts = () => {
-  const getImminentProducts = async (): Promise<Product[]> => {
+  const getImminentAuctions = async (): Promise<RegisterAuction[]> => {
     const response = await httpClient.get(`${API_END_POINT.IMMINENT}`);
     return response.data;
   };
-
-  const { isLoading: isImminentLoading, data: imminentProducts } = useQuery({
-    queryKey: [queryKeys.IMMINENT_PRODUCTS],
-    queryFn: () => getImminentProducts(),
-  });
-
-  return { isImminentLoading, imminentProducts };
-};
-export const useGetPreRegisterProducts = () => {
-  const getPreRegisterProducts = async (): Promise<PreRegisterProduct[]> => {
+  const getPreRegisterAuctions = async (): Promise<PreRegisterAuction[]> => {
     const response = await httpClient.get(`${API_END_POINT.PRE_REGISTER}`);
     return response.data;
   };
 
-  const { isLoading: isPreRegisterLoading, data: preRegisterProducts } =
-    useQuery({
-      queryKey: [queryKeys.PRE_REGISTER_PRODUCTS],
-      queryFn: () => getPreRegisterProducts(),
+  const [bestAuctionsQuery, imminentAuctionsQuery, preRegisterAuctionsQuery] =
+    useSuspenseQueries({
+      queries: [
+        { queryKey: [queryKeys.BEST_AUCTIONS], queryFn: getBestAuctions },
+        {
+          queryKey: [queryKeys.IMMINENT_AUCTIONS],
+          queryFn: getImminentAuctions,
+        },
+        {
+          queryKey: [queryKeys.PRE_REGISTER_AUCTIONS],
+          queryFn: getPreRegisterAuctions,
+        },
+      ],
     });
 
-  return { isPreRegisterLoading, preRegisterProducts };
+  const bestAuctions = bestAuctionsQuery.data;
+  const imminentAuctions = imminentAuctionsQuery.data;
+  const preRegisterAuctions = preRegisterAuctionsQuery.data;
+
+  return { bestAuctions, imminentAuctions, preRegisterAuctions };
 };

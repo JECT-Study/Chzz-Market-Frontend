@@ -5,7 +5,7 @@ import AuctionItem from '@/components/common/AuctionItem';
 import BidCaution from '@/components/bid/BidCaution';
 import { BidSchema } from '@/constants/schema';
 import Button from '@/components/common/Button';
-import FormField from '@/components/form/FormField';
+import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
@@ -13,7 +13,7 @@ import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useGetProductDetails } from '@/components/details/queries';
+import { useGetAuctionDetails } from '@/components/details/queries';
 
 type FormFields = z.infer<typeof BidSchema>;
 
@@ -22,6 +22,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
   const [check, setCheck] = useState<boolean>(false);
   const toggleCheckBox = () => setCheck((state) => !state);
   const auctionId = useLoaderData() as number;
+  const { auctionDetails } = useGetAuctionDetails(auctionId);
 
   const {
     control,
@@ -40,25 +41,21 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
     getValues,
   });
 
-  const { isLoading, productDetails } = useGetProductDetails(auctionId);
-  if (isLoading) return <p>Loading...</p>;
-  if (!productDetails) return <p>Product not found</p>;
-
   const {
-    img,
+    cdnPath,
     name,
-    startPrice,
-    activeUserCount,
+    minPrice,
+    participantCount,
     remainingBidCount,
     bidAmount,
-    timeLeft,
-  } = productDetails;
+    timeRemaining,
+  } = auctionDetails;
 
   const buttonName = isSubmitting ? '제안 중...' : '제안하기';
   const heading = isParticipating ? '금액 수정하기' : '경매 참여하기';
 
   const onSubmit: SubmitHandler<FormFields> = async () => {
-    navigate(`/product/${auctionId}`);
+    navigate(`/auctions/${auctionId}`);
   };
 
   return (
@@ -67,12 +64,12 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
       <Layout.Main>
         <div className="flex flex-col gap-8">
           <AuctionItem axis="row" label="입찰 상품">
-            <AuctionItem.Image src={img} time={timeLeft} />
+            <AuctionItem.Image src={cdnPath} time={timeRemaining} />
             <AuctionItem.Main
               kind="register"
               name={name}
-              count={activeUserCount}
-              startPrice={startPrice}
+              count={participantCount}
+              price={minPrice}
             />
           </AuctionItem>
           {isParticipating && (
