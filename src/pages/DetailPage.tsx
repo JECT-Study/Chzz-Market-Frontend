@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import JordanBlue from '@/assets/images/jordan_blue.jpeg';
 import Layout from '@/components/layout/Layout';
 import ProgressBar from '@/components/details/ProgressBar';
-
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '@/hooks/useProgress';
 import Button from '@/components/common/Button';
+import { CiCoins1 } from 'react-icons/ci';
+import Participants from '@/assets/icons/participants.svg';
+import Price from '@/assets/icons/price.svg';
 
 const Details = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -101,7 +103,10 @@ const Details = () => {
               <p className="text-lg font-bold mb-1">[나이키] 신발</p>
               <p className="text-sm text-gray-500">
                 <span className="inline-flex items-center">
-                  <span className="mr-1">💎</span> 시작가{' '}
+                  <span className="mr-1">
+                    <img src={Price} alt="Price" />
+                  </span>
+                  시작가
                   <span className="font-bold">10,000,000원</span>
                 </span>
               </p>
@@ -110,13 +115,23 @@ const Details = () => {
             {/* 나의 참여 금액 & 경매 참여인원 */}
             <div className="w-full mb-4 border border-gray-300 rounded-lg">
               <div className="flex items-center justify-between">
-                <div className="text-center flex-1 py-4">
-                  <p className="text-sm text-gray-500 mb-1">나의 참여 금액</p>
-                  <p className="text-lg font-bold">참여 전</p>
+                <div className="flex flex-col items-center text-center flex-1 py-4">
+                  <div className="flex items-center text-sm text-gray-400 mb-1">
+                    <CiCoins1 className="text-xl mx-1" />
+                    <span className="ml-1">나의 참여 금액</span>
+                  </div>
+                  <p className="text-xl font-bold text-gray-800">참여 전</p>
                 </div>
                 <div className="border-l border-gray-300 h-full" />
-                <div className="text-center flex-1 py-4">
-                  <p className="text-sm text-gray-500 mb-1">참여 인원</p>
+                <div className="flex flex-col items-center text-center flex-1 py-4">
+                  <div className="flex items-center text-sm text-gray-400 mb-1">
+                    <img
+                      src={Participants}
+                      alt="Participants"
+                      className="w-4 h-4 mx-2 mb-1"
+                    />
+                    <p className="text-sm text-gray-500 mb-1">참여 인원</p>
+                  </div>
                   <p className="text-lg font-bold">55명</p>
                 </div>
               </div>
