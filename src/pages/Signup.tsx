@@ -26,8 +26,8 @@ const Signup = () => {
   } = useSignup();
 
   const handleSelectBank = (bank: string) => {
-    setValue('bankName', 'KB');
-    setSelectBank('KB');
+    setValue('bankName', bank);
+    setSelectBank(bank);
     setActiveButtonSheet(false);
   };
 

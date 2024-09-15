@@ -39,6 +39,12 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'react-refresh/only-export-components': 'off',
+    'no-underscore-dangle': [
+      'error',
+      {
+        allow: ['_retry'],
+      }
+    ],
     'react/react-in-jsx-scope': 'off',
     // import React from 'react' 꺼두기
     'react/jsx-uses-react': 'off',

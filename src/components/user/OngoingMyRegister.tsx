@@ -1,10 +1,14 @@
-import { OngoingAuctionListItem } from '@/@types/productList';
+import { OngoingAuctionRegisterdItem } from '@/@types/productList';
 import { LuUsers } from 'react-icons/lu';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import ProductItem from '../common/ProductItem';
 import Button from '../common/Button';
 
-const OngoingProduct = ({ product }: { product: OngoingAuctionListItem }) => {
+const OngoingMyRegister = ({
+  product,
+}: {
+  product: OngoingAuctionRegisterdItem;
+}) => {
   return (
     <ProductItem product={product}>
       <div className="flex">
@@ -35,4 +39,4 @@ const OngoingProduct = ({ product }: { product: OngoingAuctionListItem }) => {
   );
 };
 
-export default OngoingProduct;
+export default OngoingMyRegister;

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const MyPageOrder = () => {
+const UserOrder = () => {
   const navigate = useNavigate();
   return (
     <div className="mb-10">
@@ -36,4 +36,4 @@ const MyPageOrder = () => {
   );
 };
 
-export default MyPageOrder;
+export default UserOrder;

@@ -1,11 +1,25 @@
 import { z } from 'zod';
 
 export const SignupFormSchema = z.object({
-  nickname: z.string().min(1).max(15),
-  bankName: z.string().optional(),
-  accountNumber: z.string().optional(),
+  nickname: z
+    .string()
+    .min(1, '닉네임은 최소 1자 이상 입력해 주세요.')
+    .max(15, '닉네임은 최대 15자 이하로 입력해 주세요.'),
+  bankName: z.string(),
+  accountNumber: z
+    .string()
+    .regex(/^\d+$/, '계좌번호는 숫자만 입력할 수 있습니다.')
+    .min(10, '계좌번호를 최소 10자 입력해주세요.')
+    .max(14, '계좌번호는 최대 14자 이하로 입력해주세요.'),
+
   bio: z.string().optional(),
-  link: z.string().optional(),
+  link: z
+    .string()
+    .optional()
+    .refine(
+      (value) => !value || /^(https?:\/\/)/.test(value),
+      '링크는 http:// 또는 https://로 시작해야 합니다.',
+    ),
 });
 
 export const RegisterSchema = z.object({

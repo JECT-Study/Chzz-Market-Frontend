@@ -1,21 +1,20 @@
 import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import FormField from '@/components/common/form/FormField';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useRef } from 'react';
+import { useEditProfile } from '@/hooks/useProfile';
+import { UserProfile } from '@/@types/user';
 
 const ProfileEdit = () => {
-  const {
-    control,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const location = useLocation();
+  const { profileData } = location.state as { profileData: UserProfile };
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
+  const { control, watch, handleSubmit, errors, handleEditProfile } =
+    useEditProfile();
 
   const handleSubmitClick = () => {
     if (formRef.current) {
@@ -25,18 +24,20 @@ const ProfileEdit = () => {
     }
   };
 
+  const onSubmit = (data: UserProfile) => {
+    handleEditProfile(data);
+  };
+
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/mypage')}>
+      <Layout.Header handleBack={() => navigate('/user')}>
         프로필 수정
       </Layout.Header>
       <Layout.Main>
         <form
           ref={formRef}
           className="flex flex-col px-4 py-6 space-y-4"
-          onSubmit={handleSubmit(() => {
-            navigate('/mypage');
-          })}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <h2 className="pb-4 text-lg font-bold">프로필 정보</h2>
           <FormField

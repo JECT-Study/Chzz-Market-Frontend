@@ -7,11 +7,12 @@ import { useEffect } from 'react';
 import { useNavigationContext } from '@/components/navigation/NavigationContext';
 import { useScrollDetection } from '@/hooks/useScrollDetection';
 import type { PreRegisterAuction, RegisterAuction } from 'Auction';
-import { useGetHomeAuctions } from '@/components/home/queries';
+import { useGetHomeAuctions, useRefreshTokenOnSuccess } from '@/components/home/queries';
 
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
   const { handleNavigationState } = useNavigationContext();
+  useRefreshTokenOnSuccess();
 
   const { bestAuctions, imminentAuctions, preRegisterAuctions } =
     useGetHomeAuctions();

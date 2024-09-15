@@ -1,12 +1,28 @@
-import { LuUsers } from 'react-icons/lu';
-import { IoPricetagsOutline } from 'react-icons/io5';
 import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import { getTimeColor } from '@/utils/getTimeColor';
-import Button from './Button';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const ProductItem = ({ product }: { product: any }) => {
-  const remainHour = Math.floor(product.timeRemaining / 3600);
+export interface ProductProps {
+  id: number;
+  name: string;
+  minPrice: number;
+  cdnPath?: string | null;
+  timeRemaining?: number;
+  participantCount?: number;
+  isParticipating?: boolean;
+  likeCount?: number;
+  isLiked?: boolean;
+  status?: string;
+  createdAt?: string;
+}
+
+const ProductItem = ({
+  product,
+  children,
+}: {
+  product: ProductProps;
+  children: React.ReactNode;
+}) => {
+  const remainHour = Math.floor(product.timeRemaining ?? 0 / 3600);
   const timeColor = getTimeColor(remainHour);
 
   return (
@@ -16,14 +32,16 @@ const ProductItem = ({ product }: { product: any }) => {
           <div className="relative">
             <img
               className="object-cover w-full h-[10rem] rounded-t"
-              src={jordanBlackImage}
+              src={`${product.cdnPath ? product.cdnPath : jordanBlackImage}`}
               alt="Jordan Black Shoes"
             />
-            <div
-              className={`absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 ${timeColor} border-b-2`}
-            >
-              {`${remainHour}시간 남음`}
-            </div>
+            {remainHour && (
+              <div
+                className={`absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 ${timeColor} border-b-2`}
+              >
+                {`${remainHour}시간 남음`}
+              </div>
+            )}
           </div>
         </div>
 
@@ -31,34 +49,7 @@ const ProductItem = ({ product }: { product: any }) => {
           <div>
             <p className="text-sm font-semibold">{product.name}</p>
           </div>
-          <div className="flex flex-col">
-            <div className="flex">
-              <div className="flex gap-2">
-                <IoPricetagsOutline className="text-gray-500" />
-                <p className="text-sm text-gray-500">시작가</p>
-              </div>
-              <p className="ml-4 font-semibold">
-                {`${product.minPrice.toLocaleString()}원`}
-              </p>
-            </div>
-            <div className="flex">
-              <div className="flex gap-2">
-                <LuUsers className="text-gray-500" />
-                <p className="text-sm text-gray-500">참여자</p>
-              </div>
-              <p className="ml-4 font-semibold">
-                {`${product.participantCount}명`}
-              </p>
-            </div>
-          </div>
-          <Button
-            color={product.isParticipating ? 'black' : 'white'}
-            type="button"
-            size="small"
-            className={`${product.isParticipating ? '' : ''} w-[160px] h-[33px] rounded-sm`}
-          >
-            {product.isParticipating ? '경매 참여 중' : '경매 참여하기'}
-          </Button>
+          <div className="flex flex-col">{children}</div>
         </div>
       </div>
     </div>
