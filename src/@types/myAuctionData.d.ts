@@ -1,11 +1,7 @@
+import type { Auction } from 'Auction';
+
 // 개별 제품의 인터페이스
-export interface AuctionItem {
-  id: number;
-  name: string;
-  cdnPath: string;
-  timeRemaining: number;
-  minPrice: number;
-  participantCount: number;
+export interface AuctionItem extends Auction {
   status: string;
   createdAt: string;
 }

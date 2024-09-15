@@ -1,9 +1,9 @@
 import { HttpHandler } from 'msw';
 import { setupWorker } from 'msw/browser';
 import {
-  bestProductsHandler,
-  imminentProductsHandler,
-  preRegisterProductsHandler,
+  bestAuctionsHandler,
+  imminentAuctionsHandler,
+  preRegisterAuctionsHandler,
 } from './handlers/home';
 import {
   notificationDeleteHandler,
@@ -19,18 +19,18 @@ import { bidderListHandler } from './handlers/bidderList';
 import getMyAuctionPreRegister from './handlers/myAuctuon';
 import { getOngoingProductList } from './handlers/ProductList';
 import postSignup from './handlers/Login';
-import { productDetailsHandler } from './handlers/productDetails';
 import { realTimeNotificationsHandler } from './handlers/realTimeNotification';
+import { auctionDetailsHandler } from './handlers/auctionDetails';
 
 /* eslint-disable import/no-named-as-default */
 export const handlers: HttpHandler[] = [
-  bestProductsHandler,
-  imminentProductsHandler,
-  preRegisterProductsHandler,
+  bestAuctionsHandler,
+  imminentAuctionsHandler,
+  preRegisterAuctionsHandler,
   getOngoingProductList,
   getMyAuctionPreRegister,
   postSignup,
-  productDetailsHandler,
+  auctionDetailsHandler,
   realTimeNotificationsHandler,
   notificationsHandler,
   notificationReadHandler,
