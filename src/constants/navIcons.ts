@@ -28,7 +28,7 @@ export const navIcons: {
     on: HeartOn,
     off: HeartOff,
   },
-  my: {
+  user: {
     path: '/user',
     title: '마이페이지',
     on: MyOn,

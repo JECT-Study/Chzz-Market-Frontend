@@ -9,7 +9,7 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '@/components/common/Button';
-import FormField from '@/components/form/FormField';
+import FormField from '@/components/common/form/FormField';
 import ImageUploader from '@/components/register/ImageUploader';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/layout/Layout';

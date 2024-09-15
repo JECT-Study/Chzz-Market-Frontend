@@ -4,7 +4,7 @@ import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
 import SelectBank from '@/components/profile/SelectBank';
 import { useSignup } from '@/hooks/useSignup';
-import FormField from '@/components/form/FormField';
+import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import { ChevronDown } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
