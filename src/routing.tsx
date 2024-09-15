@@ -83,7 +83,11 @@ const routeList = [
         element: <Login />,
       },
       {
-        path: ROUTERS.DETAIL.ITEM,
+        path: ROUTERS.AUCTION.ITEM,
+        element: <DetailPage />,
+      },
+      {
+        path: ROUTERS.PRE_AUCTION.ITEM,
         element: <DetailPage />,
       },
       {
