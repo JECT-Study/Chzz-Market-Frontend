@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { useNavigationContext } from '@/components/navigation/NavigationContext';
 
 const Notification = () => {
-  const { isLoading, notifications } = useGetNotifications();
+  const { notifications } = useGetNotifications();
   const { handleNavigationState } = useNavigationContext();
   const { mutate: deleteNotification } = useDeleteNotification();
   const { mutate: readNotification } = useReadNotification();
@@ -25,7 +25,6 @@ const Notification = () => {
     });
   }, [handleNavigationState]);
 
-  if (isLoading) return <p>Loading...</p>;
   if (!notifications) return <p>Notifications not found</p>;
 
   return (

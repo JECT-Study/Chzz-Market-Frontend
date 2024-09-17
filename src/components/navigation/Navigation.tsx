@@ -41,9 +41,7 @@ const Navigation = ({ active }: { active: string }) => {
   const { handleNavigationState } = useNavigationContext();
   const { notifications } = useGetNotifications();
 
-  if (!notifications) return <div>loading</div>;
-
-  const unreadNotificationsCount = notifications.reduce(
+  const unreadNotificationsCount = notifications?.reduce(
     (acc, cur) => (!cur.isRead ? acc + 1 : acc),
     0,
   );

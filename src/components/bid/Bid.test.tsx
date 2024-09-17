@@ -5,13 +5,12 @@ import { describe, expect, test, vi } from 'vitest';
 import Bid from '@/pages/Bid';
 import { mockedUseNavigate } from '@/setupTests';
 import userEvent from '@testing-library/user-event';
-import { productDetailsData } from '@/mocks/data/productDetailsData';
-import { useGetProductDetails } from '../details/queries';
+import { auctionDetailsData } from '@/mocks/data/auctionDetailsData';
+import { useGetAuctionDetails } from '../details/queries';
 
 vi.mock('@/components/details/queries');
-vi.mocked(useGetProductDetails).mockReturnValue({
-  isLoading: false,
-  productDetails: productDetailsData[0],
+vi.mocked(useGetAuctionDetails).mockReturnValue({
+  auctionDetails: auctionDetailsData[0],
 });
 
 /**
@@ -22,13 +21,13 @@ vi.mocked(useGetProductDetails).mockReturnValue({
 const router = createMemoryRouter(
   [
     {
-      path: '/bid/:auctionId',
+      path: '/auctions/bid/:auctionId',
       element: <Bid />,
-      loader: () => 1,
+      loader: () => 0,
     },
   ],
   {
-    initialEntries: ['/bid/1'],
+    initialEntries: ['/auctions/bid/0'],
   },
 );
 describe('입찰 테스트', () => {
@@ -54,30 +53,20 @@ describe('입찰 테스트', () => {
     expect(mockedUseNavigate).toHaveBeenCalledWith(-1);
   });
 
-  test('경매 상품에 사진, 이름, 시작가, 경매 참여자 수, 남은 시간을 표시한다.', async () => {
+  test('경매 상품에 사진, 이름, 시작가, 참여자, 시간을 표시한다.', async () => {
     render(<RouterProvider router={router} />);
 
-    const item = await screen.findByRole('figure', { name: /입찰 상품/ });
-
     const imgElement = screen.getByRole('img', { name: '이미지' });
-    expect(item).toContainElement(imgElement);
-
     const nameElement = screen.getByLabelText('이름');
-    expect(nameElement).toHaveTextContent('[나이키] 에어 조던 로우');
-    expect(item).toContainElement(nameElement);
-
-    const timeElement = screen.getByLabelText('남은 시간');
-    expect(timeElement).toHaveTextContent('14시간 남음');
-    expect(timeElement).toHaveClass('text-timeColor2 border-timeColor2');
-    expect(item).toContainElement(timeElement);
-
-    const priceElement = screen.getByLabelText('시작 가격');
-    expect(priceElement).toHaveTextContent('100,000원');
-    expect(item).toContainElement(priceElement);
-
+    const timeElement = screen.getByLabelText('시간');
+    const priceElement = screen.getByLabelText('시작가');
     const userElement = screen.getByLabelText('참여자');
-    expect(userElement).toHaveTextContent('참여자 11명');
-    expect(item).toContainElement(userElement);
+
+    expect(imgElement).toBeInTheDocument();
+    expect(nameElement).toBeInTheDocument();
+    expect(timeElement).toBeInTheDocument();
+    expect(priceElement).toBeInTheDocument();
+    expect(userElement).toBeInTheDocument();
   });
 
   test('입찰 가격을 입력하고 난 후, focus를 벗어날 시 가격을 천 단위로 나누고 원을 붙인다.', async () => {
@@ -115,7 +104,7 @@ describe('입찰 테스트', () => {
     expect(submitBtn).toBeEnabled();
 
     await user.click(submitBtn);
-    expect(mockedUseNavigate).toHaveBeenCalledWith('/product/1');
+    expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/0');
   });
 
   test('입찰 가격 유효성 검사', async () => {

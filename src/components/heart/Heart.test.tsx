@@ -21,12 +21,10 @@ vi.mock('@/components/notification/queries', () => ({
 }));
 
 vi.mocked(useGetNotifications).mockReturnValue({
-  isLoading: false,
   notifications: notificationData,
 });
 
 vi.mocked(useGetPreRegisterHeart).mockReturnValue({
-  isLoading: false,
   preRegisterHeartList: preRegisterHeartData,
 });
 

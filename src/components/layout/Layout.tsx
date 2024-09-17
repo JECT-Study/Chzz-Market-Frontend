@@ -8,7 +8,7 @@ interface HeaderProps {
   handleModal?: () => void;
 }
 
-const Header = ({
+export const Header = ({
   children = null,
   handleBack,
   handleModal = undefined,

@@ -23,7 +23,7 @@ const Button = ({
   ariaLabel = '',
 }: ButtonProps) => {
   const baseClasses =
-    'focus:outline-none rounded transition-colors active:bg-black ';
+    'focus:outline-none rounded transition-colors active:bg-black active:text-white ';
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',
     'bg-white text-black border border-black': color === 'white',

@@ -4,7 +4,7 @@ import BlackShose from '@/assets/images/jordan_black.jpeg';
 import { z } from 'zod';
 import { AddressBookSchema } from '@/constants/schema';
 import { useForm } from 'react-hook-form';
-import FormField from '@/components/form/FormField';
+import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import { ChevronDown } from 'lucide-react';
 import SelectBank from '@/components/profile/SelectBank';
