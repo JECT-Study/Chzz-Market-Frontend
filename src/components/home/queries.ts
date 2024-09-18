@@ -2,7 +2,11 @@ import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
 import type { PreRegisterAuction, RegisterAuction } from 'Auction';
-import { UseQueryResult, useSuspenseQueries  } from '@tanstack/react-query';
+import {
+  UseQueryResult,
+  useQuery,
+  useSuspenseQueries,
+} from '@tanstack/react-query';
 import { refreshToken } from '../login/queries';
 
 export const useGetHomeAuctions = () => {
