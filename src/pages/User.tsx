@@ -5,20 +5,18 @@ import UserProfile from '@/components/user/UserProfile';
 import Navigation from '@/components/navigation/Navigation';
 import LoginProvider from '@/provider/loginProvider';
 import { useNavigate } from 'react-router-dom';
-import FindAddressButton from '@/components/address/FIndAddressButton';
-import { useState } from 'react';
 
 const User = () => {
   const navigate = useNavigate();
-  const [value, setValue] = useState<{
-    roadAddress: string;
-    jibun: string;
-    zonecode: string;
-  }>({
-    roadAddress: '',
-    jibun: '',
-    zonecode: '',
-  });
+  // const [value, setValue] = useState<{
+  //   roadAddress: string;
+  //   jibun: string;
+  //   zonecode: string;
+  // }>({
+  //   roadAddress: '',
+  //   jibun: '',
+  //   zonecode: '',
+  // });
 
   return (
     <LoginProvider>
