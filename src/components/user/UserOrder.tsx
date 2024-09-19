@@ -1,6 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-
-// 아이콘 import (경로는 직접 넣으셔야 합니다)
 import OnGoingIcon from '@/assets/icons/ongoing_auction.svg';
 import SuccessIcon from '@/assets/icons/successful_auction.svg';
 import FailedIcon from '@/assets/icons/failed_auction.svg';
