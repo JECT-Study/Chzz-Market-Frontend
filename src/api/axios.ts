@@ -53,15 +53,21 @@ export const createClient = (config?: AxiosRequestConfig) => {
           errorMessage === '리프레시 토큰이 만료되었습니다.' ||
           errorMessage === '토큰이 만료되었습니다.'
         ) {
-          refreshToken();
-          const newAccessToken = getToken();
-          if (!newAccessToken)
-            throw new Error('리프레시 토큰이 만료되었습니다.');
+          try {
+            refreshToken();
+            const newAccessToken = getToken();
+            if (!newAccessToken)
+              throw new Error('리프레시 토큰이 만료되었습니다.');
+            originalRequest.headers = originalRequest.headers || {};
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
-          originalRequest.headers = originalRequest.headers || {};
-          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
-          return axiosInstance(originalRequest);
+            return await axiosInstance(originalRequest);
+          } catch (refreshError) {
+            handleTokenError(
+              '리프레시 토큰이 만료되었습니다. 다시 로그인해주세요',
+            );
+            return Promise.reject(refreshError);
+          }
         }
 
         if (
@@ -74,6 +80,12 @@ export const createClient = (config?: AxiosRequestConfig) => {
           return Promise.reject(error);
         }
       }
+
+      if (response && response.status === 403) {
+        handleTokenError('접근 권한이 없습니다.');
+        return Promise.reject(error);
+      }
+
       return Promise.reject(error);
     },
   );
