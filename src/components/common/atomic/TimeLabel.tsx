@@ -1,7 +1,7 @@
 import { getTimeColor } from '@/utils/getTimeColor';
 
 const TimeLabel = ({ time }: { time: number }) => {
-  const formattedTime = Math.floor(time / 3600);
+  const formattedTime = Math.ceil(time / 3600);
   const color = getTimeColor(formattedTime);
   return (
     <div
