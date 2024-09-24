@@ -23,5 +23,6 @@ export const API_END_POINT = {
   MY_ACUTION_PRE_ENROLL_REGISTER: 'api/v1/products/users',
   DEADLINE: '/products/deadline',
   PRE_ENROLL: '/products/pre_enroll',
-  DETAILS: '/auctions',
+  AUCTION_ITEM: 'api/v1/auctions/auction/:auctionId',
+  PRE_AUCTION_ITEM: 'api/v1/pre-auction/:auctionId',
 };

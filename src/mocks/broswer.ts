@@ -21,6 +21,7 @@ import { getOngoingProductList } from './handlers/ProductList';
 import postSignup from './handlers/Login';
 import { productDetailsHandler } from './handlers/productDetails';
 import { realTimeNotificationsHandler } from './handlers/realTimeNotification';
+import { auctionDetailPage } from './handlers/auctionDetailPage';
 
 /* eslint-disable import/no-named-as-default */
 export const handlers: HttpHandler[] = [
@@ -38,6 +39,7 @@ export const handlers: HttpHandler[] = [
   preRegisterHeartHandler,
   preRegisterHeartDeleteHandler,
   bidderListHandler,
+  auctionDetailPage,
 ];
 
 export const worker = setupWorker(...handlers);
