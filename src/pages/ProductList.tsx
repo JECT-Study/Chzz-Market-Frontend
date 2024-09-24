@@ -81,9 +81,7 @@ const ProductList = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/')}>
-        상품 경매 목록
-      </Layout.Header>
+      <Layout.Header title="상품 경매 목록" handleBack={() => navigate('/')} />
       <Layout.Main
         style={{ paddingLeft: 0, paddingRight: 0 }}
         ref={mainContainerRef}

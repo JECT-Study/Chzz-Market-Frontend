@@ -52,7 +52,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
   } = auctionDetails;
 
   const buttonName = isSubmitting ? '제안 중...' : '제안하기';
-  const heading = isParticipating ? '금액 수정하기' : '경매 참여하기';
+  const title = isParticipating ? '금액 수정하기' : '경매 참여하기';
 
   const onSubmit: SubmitHandler<FormFields> = async () => {
     navigate(`/auctions/${auctionId}`);
@@ -60,7 +60,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate(-1)}>{heading}</Layout.Header>
+      <Layout.Header title={title} handleBack={() => navigate(-1)} />
       <Layout.Main>
         <div className="flex flex-col gap-8">
           <AuctionItem axis="row" label="입찰 상품">

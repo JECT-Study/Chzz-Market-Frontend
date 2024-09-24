@@ -30,9 +30,7 @@ const ProfileEdit = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/user')}>
-        프로필 수정
-      </Layout.Header>
+      <Layout.Header title="프로필 수정" handleBack={() => navigate('/user')} />
       <Layout.Main>
         <form
           ref={formRef}

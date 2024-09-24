@@ -76,7 +76,7 @@ const Register = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={clickBack}>{title}</Layout.Header>
+      <Layout.Header title={title} handleBack={clickBack} />
       <Layout.Main>
         {caution === '' ? (
           <form

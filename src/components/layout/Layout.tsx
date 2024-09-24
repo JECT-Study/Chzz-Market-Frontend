@@ -1,22 +1,22 @@
 import { AiOutlineLeft } from 'react-icons/ai';
-import { BsThreeDotsVertical } from 'react-icons/bs';
 import { ReactNode, forwardRef } from 'react';
+import ThreeDotsIcon from '@/assets/icons/three_dots.svg';
 
 interface HeaderProps {
-  children?: ReactNode;
+  title: string;
   handleBack: () => void;
   handleModal?: () => void;
 }
 
-export const Header = ({
-  children = null,
+const Header = ({
+  title,
   handleBack,
   handleModal = undefined,
 }: HeaderProps) => {
   return (
     <header className="w-full min-h-[3.375rem] h-[3.375rem] px-8 py-4 shadow-bottom">
       <div className="relative flex items-center justify-center w-full h-full">
-        {children !== '치즈 마켓' && (
+        {title !== '치즈 마켓' && (
           <button
             className="absolute left-2"
             aria-label="뒤로 가기"
@@ -25,14 +25,14 @@ export const Header = ({
             <AiOutlineLeft size={25} />
           </button>
         )}
-        {children && <h2 className="text-heading2 text-gray1">{children}</h2>}
+        {title && <h2 className="text-heading2 text-gray1">{title}</h2>}
         {handleModal && (
           <button
             aria-label="옵션"
             onClick={handleModal}
             className="absolute right-2"
           >
-            <BsThreeDotsVertical size={25} />
+            <img src={ThreeDotsIcon} alt="옵션 아이콘" className="size-5" />
           </button>
         )}
       </div>

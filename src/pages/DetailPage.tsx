@@ -65,9 +65,11 @@ const Details = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={handleBackClick} handleModal={toggleMenu}>
-        제품 상세
-      </Layout.Header>
+      <Layout.Header
+        title="제품 상세"
+        handleBack={handleBackClick}
+        handleModal={toggleMenu}
+      />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className="relative flex flex-col h-screen overflow-hidden">
         <Layout.Main>
@@ -98,7 +100,7 @@ const Details = () => {
           <div className="px-4 my-4">
             {/* 경매 아이템 제목 & 시작가 */}
             <div className="mb-4">
-              <p className="text-lg font-bold mb-1">[나이키] 신발</p>
+              <p className="mb-1 text-lg font-bold">[나이키] 신발</p>
               <p className="text-sm text-gray-500">
                 <span className="inline-flex items-center">
                   <span className="mr-1">💎</span> 시작가{' '}
@@ -110,13 +112,13 @@ const Details = () => {
             {/* 나의 참여 금액 & 경매 참여인원 */}
             <div className="w-full mb-4 border border-gray-300 rounded-lg">
               <div className="flex items-center justify-between">
-                <div className="text-center flex-1 py-4">
-                  <p className="text-sm text-gray-500 mb-1">나의 참여 금액</p>
+                <div className="flex-1 py-4 text-center">
+                  <p className="mb-1 text-sm text-gray-500">나의 참여 금액</p>
                   <p className="text-lg font-bold">참여 전</p>
                 </div>
-                <div className="border-l border-gray-300 h-full" />
-                <div className="text-center flex-1 py-4">
-                  <p className="text-sm text-gray-500 mb-1">참여 인원</p>
+                <div className="h-full border-l border-gray-300" />
+                <div className="flex-1 py-4 text-center">
+                  <p className="mb-1 text-sm text-gray-500">참여 인원</p>
                   <p className="text-lg font-bold">55명</p>
                 </div>
               </div>

@@ -9,7 +9,7 @@ import { preRegisterHeartData } from '@/mocks/data/preRegisterHeartData';
 import userEvent from '@testing-library/user-event';
 import { useGetNotifications } from '../notification/queries';
 import { useDeletePreRegisterHeart, useGetPreRegisterHeart } from './queries';
-import NavigationLayout from '../layout/NavigationLayout';
+import LayoutWithNav from '../layout/LayoutWithNav';
 
 vi.mock('@/components/heart/queries', () => ({
   useGetPreRegisterHeart: vi.fn(),
@@ -38,7 +38,7 @@ describe('좋아요 페이지 테스트', () => {
     const utils = render(
       <MemoryRouter initialEntries={['/notification']}>
         <Routes>
-          <Route element={<NavigationLayout />}>
+          <Route element={<LayoutWithNav />}>
             <Route path="/notification" element={<Heart />} />
           </Route>
         </Routes>
