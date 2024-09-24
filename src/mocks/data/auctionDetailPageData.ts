@@ -219,6 +219,46 @@ const auctionDetailPageData: AuctionItem[] = [
       'https://cdn.mos.cms.futurecdn.net/pARvMxPaaNixzABa2DgEXg.jpg',
     ],
   },
+  {
+    productId: 12,
+    sellerId: 12,
+    sellerName: 'User12',
+    title: 'Samsung Galaxy Z Fold 5',
+    description:
+      'Next-gen foldable smartphone with a large display and enhanced productivity features.',
+    minPrice: 1800000, // 현실적인 스마트폰 가격 (약 180만원)
+    endDateTime: generateRandomEndDateTime(),
+    status: 'PENDING',
+    isSeller: false,
+    participantCount: 0,
+    isParticipating: false,
+    bidAmount: 0,
+    remainingBidCount: 5,
+    imageList: [
+      'https://images.samsung.com/is/image/samsung/p6pim/levant/galaxy-z-fold5/f946/sm-f946bzbgeux/gallery/levant-galaxy-z-fold5-f946-470140-sm-f946bzbgeux-621237687?$2052_1641_PNG$',
+      'https://cdn.mos.cms.futurecdn.net/kek8nDAzj5P9Kv2TuVpDWg.jpg',
+    ],
+  },
+  {
+    productId: 13,
+    sellerId: 13,
+    sellerName: 'User13',
+    title: 'Sony A7 IV Mirrorless Camera',
+    description:
+      'High-performance mirrorless camera with advanced image processing and 33MP full-frame sensor.',
+    minPrice: 3000000, // 현실적인 카메라 가격 (약 300만원)
+    endDateTime: generateRandomEndDateTime(),
+    status: 'PENDING',
+    isSeller: true,
+    participantCount: 0,
+    isParticipating: false,
+    bidAmount: 0,
+    remainingBidCount: 3,
+    imageList: [
+      'https://www.sony.com/image/4f4c92321d8b3bbdcb6ad7b272b6ebd0?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF',
+      'https://cdn.mos.cms.futurecdn.net/dxt1Xp5tTp9ZG9NcdGLkB7.jpg',
+    ],
+  },
 ];
 
 export default auctionDetailPageData;

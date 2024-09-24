@@ -1,16 +1,14 @@
-import { AiOutlineHeart } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
-import JordanBlue from '@/assets/images/jordan_blue.jpeg';
 import Layout from '@/components/layout/Layout';
 import ProgressBar from '@/components/details/ProgressBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProgress } from '@/hooks/useProgress';
-import Button from '@/components/common/Button';
 import { CiCoins1 } from 'react-icons/ci';
 import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
 import axios from 'axios';
-import { API_END_POINT } from '@/constants/api';
+import SellersFooter from '@/components/details/SellersFooter';
+import BuyersFooter from '@/components/details/BuyersFooter';
 import type { AuctionItem } from '@/mocks/data/auctionDetailPageData';
 
 const Details = () => {
@@ -40,7 +38,7 @@ const Details = () => {
     setIsMenuOpen(false);
   };
 
-  const { formattedTime, progressBarWidth } = useProgress(
+  useProgress(
     Number(auctionItem?.endDateTime) - 86400,
     serverCurrentTime,
     totalTime,
@@ -89,8 +87,8 @@ const Details = () => {
           <div className="relative w-full bg-yellow-300">
             <div className="w-full mb-2">
               <img
-                src={JordanBlue}
-                alt="Jordan Blue"
+                src={auctionItem?.imageList[0] || auctionItem?.title}
+                alt={auctionItem?.title}
                 className="object-cover w-full h-auto" // Ensures the image maintains its aspect ratio
               />
             </div>
@@ -179,28 +177,18 @@ const Details = () => {
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
         <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
-          {isPreAuction ? (
-            <>
-              <div className="flex items-center flex-1 h-full gap-2">
-                <AiOutlineHeart className="text-xl text-gray-500" />
-                <span className="text-gray-600">{interestCount}명</span>
-              </div>
-              <Button
-                type="button"
-                className="flex-[2] h-full"
-                color="cheeseYellow"
-              >
-                경매로 전환하기
-              </Button>
-            </>
+          {auctionItem && auctionItem.isSeller ? (
+            <SellersFooter
+              isSeller={auctionItem.isSeller}
+              status={auctionItem.status}
+            />
           ) : (
-            <Button
-              type="button"
-              className="w-full h-full"
-              color="cheeseYellow"
-            >
-              경매 참여하기
-            </Button>
+            <BuyersFooter
+              isSeller={auctionItem?.isSeller ?? false}
+              status={auctionItem?.status ?? ''}
+              isParticipating={auctionItem?.isParticipating ?? false}
+              remainingBidCount={auctionItem?.remainingBidCount ?? 0}
+            />
           )}
         </Layout.Footer>
         {/* 백드롭 */}
