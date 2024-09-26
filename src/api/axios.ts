@@ -1,6 +1,7 @@
-import { refreshToken } from '@/components/login/queries';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { getToken, removeToken } from '@/utils/tokenUtils';
-import axios, { AxiosRequestConfig, AxiosError } from 'axios';
+
+import { refreshToken } from '@/components/login/queries';
 
 interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
   _retry?: boolean;
@@ -19,7 +20,7 @@ const handleTokenError = (message: string) => {
 
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_MOCK_API_URL,
+    baseURL: import.meta.env.VITE_SERVER_API_URL,
     headers: {
       'Content-Type': 'application/json',
     },
