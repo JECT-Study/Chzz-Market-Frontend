@@ -95,9 +95,10 @@ const OrderHistory = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/user')}>
-        모든 참여 내역
-      </Layout.Header>
+      <Layout.Header
+        title="모든 참여 내역"
+        handleBack={() => navigate('/user')}
+      />
       <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }}>
         <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === 'AuctionHistory' &&

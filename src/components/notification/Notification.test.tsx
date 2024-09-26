@@ -6,7 +6,7 @@ import Notification from '@/pages/Notification';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
 import userEvent from '@testing-library/user-event';
-import NavigationLayout from '../layout/NavigationLayout';
+import LayoutWithNav from '../layout/LayoutWithNav';
 import {
   useDeleteNotification,
   useGetNotifications,
@@ -38,7 +38,7 @@ describe('알림 테스트', () => {
     const utils = render(
       <MemoryRouter initialEntries={['/notification']}>
         <Routes>
-          <Route element={<NavigationLayout />}>
+          <Route element={<LayoutWithNav />}>
             <Route path="/notification" element={<Notification />} />
           </Route>
         </Routes>

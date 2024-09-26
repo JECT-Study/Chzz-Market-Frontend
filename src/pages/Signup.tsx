@@ -56,7 +56,7 @@ const Signup = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/')}>회원가입</Layout.Header>
+      <Layout.Header title="회원가입" handleBack={() => navigate('/')} />
       <Layout.Main>
         <form
           ref={formRef}

@@ -4,7 +4,6 @@ import { API_END_POINT } from '@/constants/api';
 import { Outlet } from 'react-router-dom';
 import type { RealTimeNotificationType } from 'Notification';
 import { useSSE } from '@/hooks/useSSE';
-import { NavigationContextProvider } from '../navigation/NavigationContext';
 import Popup from '../common/Popup';
 import RealTimeNotification from './RealTimeNotification';
 import { useReadNotification } from '../notification/queries';
@@ -38,9 +37,7 @@ const GlobalLayout = () => {
   return (
     <div className="flex justify-center w-full h-screen">
       <div className="relative w-[46rem] min-w-[23rem] h-full">
-        <NavigationContextProvider>
-          <Outlet />
-        </NavigationContextProvider>
+        <Outlet />
         {currentNotification && (
           <Popup onClose={closePopup}>
             <RealTimeNotification

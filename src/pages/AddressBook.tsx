@@ -38,9 +38,7 @@ const AddressBook = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/')}>
-        배송 정보 입력
-      </Layout.Header>
+      <Layout.Header title="배송 정보 입력" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="space-y-6">
           {/* 기본 정보 입력 */}

@@ -28,9 +28,7 @@ const BidderList = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate(-1)}>
-        경매 참여자 목록
-      </Layout.Header>
+      <Layout.Header title="경매 참여자 목록" handleBack={() => navigate(-1)} />
       <Layout.Main>
         <div className="flex flex-col gap-8 pt-4">
           <AuctionItem axis="row" label="입찰자 목록 상품">

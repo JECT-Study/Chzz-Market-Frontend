@@ -1,7 +1,6 @@
 import { navIcons } from '@/constants/navIcons';
 import { useNavigate } from 'react-router-dom';
 import { useGetNotifications } from '../notification/queries';
-import { useNavigationContext } from './NavigationContext';
 
 const NavigationItem = ({
   name,
@@ -38,7 +37,6 @@ const NavigationItem = ({
 
 const Navigation = ({ active }: { active: string }) => {
   const navigate = useNavigate();
-  const { handleNavigationState } = useNavigationContext();
   const { notifications } = useGetNotifications();
 
   const unreadNotificationsCount = notifications?.reduce(
@@ -54,7 +52,6 @@ const Navigation = ({ active }: { active: string }) => {
           name={name}
           active={active === name}
           onClick={() => {
-            handleNavigationState({ title: value.title, active: name });
             navigate(value.path);
           }}
           unreadNotificationsCount={unreadNotificationsCount}

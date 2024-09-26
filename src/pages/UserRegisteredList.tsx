@@ -83,7 +83,7 @@ const UserRegisteredList = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/')}>마이페이지</Layout.Header>
+      <Layout.Header title="마이페이지" handleBack={() => navigate('/')} />
       <Layout.Main
         style={{ paddingLeft: 0, paddingRight: 0 }}
         ref={mainContainerRef}

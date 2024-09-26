@@ -13,7 +13,7 @@ import {
 import { getTimeColor } from '@/utils/getTimeColor';
 import { useGetNotifications } from '../notification/queries';
 import { useGetHomeAuctions } from './queries';
-import NavigationLayout from '../layout/NavigationLayout';
+import LayoutWithNav from '../layout/LayoutWithNav';
 
 // vi.mock을 사용해 특정 모듈을 모킹할 수 있다.
 // 실제로 useGetBestAuctions 함수를 실행하는 대신, 원하는 반환값을 제공하는 모의 함수를 제공한다는 뜻
@@ -39,7 +39,7 @@ describe('Home 테스트', () => {
     const utils = render(
       <MemoryRouter initialEntries={['/']}>
         <Routes>
-          <Route element={<NavigationLayout />}>
+          <Route element={<LayoutWithNav />}>
             <Route path="/" element={<Home />} />
           </Route>
         </Routes>

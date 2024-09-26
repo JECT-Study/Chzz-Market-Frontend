@@ -21,9 +21,7 @@ const User = () => {
   return (
     <LoginProvider>
       <Layout>
-        <Layout.Header handleBack={() => navigate('/')}>
-          마이페이지
-        </Layout.Header>
+        <Layout.Header title="마이페이지" handleBack={() => navigate('/')} />
         <Layout.Main>
           <div className="flex flex-col">
             <UserProfile />

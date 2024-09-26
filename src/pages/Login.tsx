@@ -11,7 +11,7 @@ const Login = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={() => navigate('/')}>로그인</Layout.Header>
+      <Layout.Header title="로그인" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="flex flex-col items-center h-full">
           <div className="w-full h-2/5 flex flex-col justify-center items-center mt-10">

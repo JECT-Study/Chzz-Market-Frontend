@@ -77,9 +77,11 @@ const Details = () => {
 
   return (
     <Layout>
-      <Layout.Header handleBack={handleBackClick} handleModal={toggleMenu}>
-        제품 상세
-      </Layout.Header>
+      <Layout.Header
+        title="제품 상세"
+        handleBack={handleBackClick}
+        handleModal={toggleMenu}
+      />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className="relative flex flex-col h-screen overflow-hidden">
         <Layout.Main>
@@ -135,7 +137,6 @@ const Details = () => {
                 </p>
               </div>
             )}
-
             {/* 나의 참여 금액 & 경매 참여인원 */}
             <div className="w-full mb-4 border border-gray-300 rounded-lg">
               <div className="flex items-center justify-between">

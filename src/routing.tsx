@@ -12,7 +12,7 @@ import Heart from './pages/Heart';
 import Home from './pages/Home';
 import LoadingSpinner from './components/common/loading/LoadingSpinner';
 import Login from './pages/Login';
-import NavigationLayout from './components/layout/NavigationLayout';
+import LayoutWithNav from './components/layout/LayoutWithNav';
 import Notification from './pages/Notification';
 import User from './pages/User';
 import OrderHistory from './pages/OrderHistory';
@@ -28,7 +28,7 @@ const routeList = [
       {
         element: (
           <Suspense fallback={<LoadingSpinner text="Global" />}>
-            <NavigationLayout />
+            <LayoutWithNav />
           </Suspense>
         ),
         children: [
@@ -61,9 +61,7 @@ const routeList = [
       {
         path: `${ROUTERS.BID}`,
         element: (
-          <Suspense
-            fallback={<LoadingSpinner title="경매 참여하기" text="Bid" />}
-          >
+          <Suspense fallback={<LoadingSpinner text="Bid" />}>
             <Bid />
           </Suspense>
         ),
@@ -72,11 +70,7 @@ const routeList = [
       {
         path: `${ROUTERS.FINAL_BIDDER_LIST}`,
         element: (
-          <Suspense
-            fallback={
-              <LoadingSpinner title="경매 참여자 목록" text="Bidder list" />
-            }
-          >
+          <Suspense fallback={<LoadingSpinner text="Bidder list" />}>
             <BidderList />
           </Suspense>
         ),
