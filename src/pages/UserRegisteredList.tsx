@@ -1,6 +1,6 @@
 import Layout from '@/components/layout/Layout';
 import Navigation from '@/components/navigation/Navigation';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import UserOrderTab from '@/components/user/UserOrderTab';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
@@ -12,7 +12,9 @@ import {
 import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 
 const UserRegisteredList = () => {
-  const [activeTab, setActiveTab] = useState(true);
+  const location = useLocation();
+  const sortType = location.state?.sortType;
+  const [activeTab, setActiveTab] = useState(sortType || true);
   const navigate = useNavigate();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);

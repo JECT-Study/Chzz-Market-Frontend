@@ -5,20 +5,18 @@ import UserProfile from '@/components/user/UserProfile';
 import Navigation from '@/components/navigation/Navigation';
 import LoginProvider from '@/provider/loginProvider';
 import { useNavigate } from 'react-router-dom';
-import FindAddressButton from '@/components/address/FIndAddressButton';
-import { useState } from 'react';
 
 const User = () => {
   const navigate = useNavigate();
-  const [value, setValue] = useState<{
-    roadAddress: string;
-    jibun: string;
-    zonecode: string;
-  }>({
-    roadAddress: '',
-    jibun: '',
-    zonecode: '',
-  });
+  // const [value, setValue] = useState<{
+  //   roadAddress: string;
+  //   jibun: string;
+  //   zonecode: string;
+  // }>({
+  //   roadAddress: '',
+  //   jibun: '',
+  //   zonecode: '',
+  // });
 
   return (
     <LoginProvider>
@@ -30,19 +28,6 @@ const User = () => {
             <UserOrder />
             <UserOrderList />
           </div>
-
-          <button onClick={() => navigate('/product/list')}>
-            상품 목록으로 이동
-          </button>
-          <FindAddressButton
-            onCompleted={(roadAddress, jibun, zonecode) => {
-              setValue({
-                roadAddress,
-                jibun,
-                zonecode,
-              });
-            }}
-          />
         </Layout.Main>
         <Layout.Footer type="single">
           <Navigation active="my" />
