@@ -18,10 +18,10 @@ const ROUTERS = Object.freeze({
   },
   REGISTER: '/auctions/register',
   AUCTION: {
-    ITEM: '/auctions/auction/:auctionId',
+    ITEM: '/auctions/auction',
   },
   PRE_AUCTION: {
-    ITEM: '/auctions/pre-auction/:auctionId',
+    ITEM: '/auctions/pre-auction',
   },
 
   ADDRESSBOOK: '/addressbook',

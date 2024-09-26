@@ -111,7 +111,7 @@ const routeList = [
         element: <Login />,
       },
       {
-        path: ROUTERS.AUCTION.ITEM,
+        path: `${ROUTERS.AUCTION.ITEM}/:productId`,
         element: <DetailPage />,
       },
       {
