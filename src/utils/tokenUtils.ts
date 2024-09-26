@@ -3,12 +3,19 @@ import { storeLogin, storeLogout } from '@/store/authSlice';
 
 export const getToken = () => {
   const state = store.getState();
-  return state.auth.token;
+  const { token } = state.auth;
+
+  return token || localStorage.getItem('accessToken');
 };
 
 export const setToken = (token: string | null) => {
   store.dispatch(storeLogin({ token }));
-  localStorage.setItem('accessToken', token || '');
+
+  if (token) {
+    localStorage.setItem('accessToken', token);
+  } else {
+    localStorage.removeItem('accessToken');
+  }
 };
 
 export const removeToken = () => {

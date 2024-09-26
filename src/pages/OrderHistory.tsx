@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/Layout';
 import Navigation from '@/components/navigation/Navigation';
 import OrderListTab from '@/components/order/OrderListTab';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useHistory from '@/hooks/useHistory';
 import OrderHistoryProduct from '@/components/order/OrderHistoryProduct';
@@ -14,7 +14,9 @@ import {
 } from '@/@types/productList';
 
 const OrderHistory = () => {
-  const [activeTab, setActiveTab] = useState('AuctionHistory');
+  const location = useLocation();
+  const sortType = location.state?.sortType;
+  const [activeTab, setActiveTab] = useState(sortType || 'AuctionHistory');
   const navigate = useNavigate();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);

@@ -16,7 +16,6 @@ export const postSignup = async (data: User) => {
   if (accessToken && accessToken.startsWith('Bearer ')) {
     const token = accessToken.split(' ')[1];
     setToken(token);
-    localStorage.setItem('accessToken', token);
   }
 
   return response.data;
@@ -26,7 +25,6 @@ export const logout = async () => {
   await httpClient.post(API_END_POINT.LOGOUT, {}, { withCredentials: true });
 
   removeToken();
-  setToken(null);
 };
 
 export const refreshToken = async () => {
@@ -47,7 +45,6 @@ export const refreshToken = async () => {
     return response.data;
   } catch (error) {
     removeToken();
-    setToken(null);
     throw error;
   }
 };

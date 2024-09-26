@@ -3,7 +3,6 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
 const userList = [
-  { id: 1, title: '내가 등록한 경매 내역' },
   {
     id: 2,
     title: '설정',
@@ -36,7 +35,7 @@ const UserOrderList = () => {
           className="w-full flex justify-between py-2 border-b border-b-gray3"
           onClick={() => handleItemClick(item.title)}
         >
-          <h2 className="text-lg font-medium">{item.title}</h2>
+          <h2 className="text-xl font-medium">{item.title}</h2>
           <IoIosArrowForward className="text-2xl" />
         </div>
       ))}
