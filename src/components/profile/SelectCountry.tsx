@@ -17,7 +17,7 @@ const SelectCountry = ({ onClose, setProfileRegion }: Props) => {
             X
           </button>
         </div>
-        <div className="h-2/5 grid grid-cols-3 gap-2 pt-10">
+        <div className="grid grid-cols-3 gap-2 pt-10 h-2/5">
           {countries.map((item) => (
             <Button
               key={item.id}

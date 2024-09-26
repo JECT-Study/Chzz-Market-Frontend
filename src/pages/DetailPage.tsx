@@ -6,14 +6,13 @@ import { useProgress } from '@/hooks/useProgress';
 import { CiCoins1 } from 'react-icons/ci';
 import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
-import axios from 'axios';
 import SellersFooter from '@/components/details/SellersFooter';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import type { AuctionItem } from '@/mocks/data/auctionDetailPageData';
 
 const Details = () => {
   const { productId } = useParams() as { productId: string }; // URL에서 productId 가져오기
-  const [auctionItem, setAuctionItem] = useState<AuctionItem | null>(null); // 경매 데이터를 저장할 상태
+  const [auctionItem, _setAuctionItem] = useState<AuctionItem | null>(null); // 경매 데이터를 저장할 상태
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
