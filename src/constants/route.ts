@@ -1,10 +1,33 @@
 const ROUTERS = Object.freeze({
-  MAIN: '/',
-  HOME: '/home',
+  HOME: '/',
+  HEART: '/heart',
+  SIGNUP: '/signup',
+  LOGIN: '/login',
+  USER: '/user',
+  PROFILE: {
+    EDIT: 'user/profile/edit',
+  },
   PRODUCT: {
-    // 이부분 정확하게 모르겠습니다. product/list product-list productList
     LIST: '/product/list',
   },
+  REGISTERED: {
+    LIST: 'user/registered/list',
+  },
+  ORDER: {
+    HISTORY: '/order/history',
+  },
+  REGISTER: '/auctions/register',
+  AUCTION: {
+    ITEM: '/auctions/auction',
+  },
+  PRE_AUCTION: {
+    ITEM: '/auctions/pre-auction',
+  },
+
+  ADDRESSBOOK: '/addressbook',
+  BID: '/auctions/bid/:auctionId',
+  NOTIFICATION: '/notification',
+  FINAL_BIDDER_LIST: '/auctions/:auctionId/final-bidder-list',
 });
 
 export default ROUTERS;

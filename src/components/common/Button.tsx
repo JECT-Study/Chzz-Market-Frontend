@@ -1,38 +1,45 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import classNames from 'classnames';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+  children: ReactNode;
   size?: 'xsmall' | 'small' | 'medium' | 'large';
   disabled?: boolean;
-  color: string;
+  color?: string;
   hoverColor?: string;
+  type: 'button' | 'submit' | 'reset';
+  ariaLabel?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   className,
   children,
-  size,
-  color,
-  hoverColor,
-  disabled,
+  size = 'medium',
+  color = 'white',
+  hoverColor = '',
+  disabled = false,
   onClick,
   type,
-}) => {
-  const baseClasses = 'focus:outline-none';
+  ariaLabel = '',
+}: ButtonProps) => {
+  const baseClasses =
+    'focus:outline-none rounded transition-colors active:bg-black active:text-white ';
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',
     'bg-white text-black border border-black': color === 'white',
-    [`bg-${color}`]: color !== 'black' && color !== 'white',
+    'bg-gray text-white': color === 'gray',
+    'bg-gray2 text-white': color === 'gray2',
+    'bg-gray3 text-white': color === 'gray3',
+    'bg-cheeseYellow text-white': color === 'cheeseYellow',
   });
   const sizeClasses = classNames({
     'px-2 py-0.5 text-xs': size === 'xsmall',
     'px-2 py-1 text-sm': size === 'small',
-    'px-4 py-2 text-base': size === 'medium',
+    'px-4 py-2 text-button': size === 'medium',
     'px-6 py-3 text-lg': size === 'large',
   });
   const hoverColorClasses = classNames({
-    'hover:bg-black hover:text-white': hoverColor === 'black',
+    'hover:bg-black/70 hover:text-white': hoverColor === 'black',
     'hover:bg-white hover:text-black border border-black':
       hoverColor === 'white',
   });
@@ -53,16 +60,11 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       onClick={onClick}
       type={type}
+      aria-label={ariaLabel}
     >
       {children}
     </button>
   );
-};
-
-Button.defaultProps = {
-  disabled: false,
-  hoverColor: '',
-  size: 'small',
 };
 
 export default Button;

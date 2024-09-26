@@ -1,0 +1,28 @@
+export const API_END_POINT = {
+  // AUTH
+  LOGIN: {
+    KAKAO: '/auth/kakao',
+    NAVER: '/auth/naver',
+  },
+  LOGOUT: '/api/v1/users/logout',
+  REFRESH_TOKEN: '/api/v1/users/tokens/reissue',
+  SIGNUP: 'api/v1/users',
+  PROFILE: 'api/v1/users',
+  ORDER_LIST: '/order/list',
+  ONGOING_PRODUCT_LIST: 'api/v1/auctions',
+  MY_ACUTION_PRE_REGISTER: '/product/list/api/v1/users/me/auctions',
+  BEST: '/api/v1/auctions/best',
+  IMMINENT: '/api/v1/auctions/imminent',
+  PRE_REGISTER: '/api/v1/auctions/pre-register',
+  AUCTIONS: '/api/v1/auctions',
+  NOTIFICATIONS: '/api/v1/notifications',
+  REALTIME_NOTIFICATIONS: '/api/v1/notifications/subscribe',
+  PRE_REGISTERED_HEART: '/api/v1/auctions/pre-registered/heart',
+  PRE_ENROLL_PRODUCT_LIST: 'api/v1/products',
+  MY_ACUTION_ONGOING_REGISTER: 'api/v1/auctions/users',
+  MY_ACUTION_PRE_ENROLL_REGISTER: 'api/v1/products/users',
+  DEADLINE: '/products/deadline',
+  PRE_ENROLL: '/products/pre_enroll',
+  AUCTION_ITEM: 'api/v1/auctions/auction/:auctionId',
+  PRE_AUCTION_ITEM: 'api/v1/pre-auction/:auctionId',
+};
