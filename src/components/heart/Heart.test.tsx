@@ -1,15 +1,15 @@
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Heart from '@/pages/Heart';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
 import { preRegisterHeartData } from '@/mocks/data/preRegisterHeartData';
 import userEvent from '@testing-library/user-event';
 import { useGetNotifications } from '../notification/queries';
-import { useDeletePreRegisterHeart, useGetPreRegisterHeart } from './queries';
 import LayoutWithNav from '../layout/LayoutWithNav';
+import { useDeletePreRegisterHeart, useGetPreRegisterHeart } from './queries';
 
 vi.mock('@/components/heart/queries', () => ({
   useGetPreRegisterHeart: vi.fn(),
@@ -64,7 +64,7 @@ describe('좋아요 페이지 테스트', () => {
   });
 
   test('좋아요 한 사전 경매 상품 목록이 화면에 렌더링된다.', async () => {
-    const { user } = setup();
+    const { user: _user } = setup();
     const heartProducts = await screen.findAllByRole('figure', {
       name: /좋아요 한 사전 경매 상품/,
     });

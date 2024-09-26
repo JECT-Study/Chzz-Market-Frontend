@@ -94,7 +94,7 @@ describe.skip('Signup', () => {
       </BrowserRouter>,
     );
 
-    const backBtn = screen.getByText('회원가입').closest('button');
+    // const backBtn = screen.getByText('회원가입').closest('button');
     // fireEvent.click(backBtn);
 
     expect(navigate).toHaveBeenCalledWith('/');

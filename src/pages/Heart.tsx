@@ -6,7 +6,6 @@ import {
 import AuctionItem from '@/components/common/AuctionItem';
 import Button from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { PreRegisterAuction } from 'Auction';
 
 const Heart = () => {

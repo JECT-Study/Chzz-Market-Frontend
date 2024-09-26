@@ -26,8 +26,7 @@ const AddressBook = () => {
 
   const {
     control,
-    handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<FormFields>({
     defaultValues,
   });

@@ -16,9 +16,9 @@ const Details = () => {
   const [auctionItem, setAuctionItem] = useState<AuctionItem | null>(null); // 경매 데이터를 저장할 상태
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isTimerFixed, setIsTimerFixed] = useState(false);
-  const [isPreAuction, setIsPreAuction] = useState(false);
-  const [interestCount, setInterestCount] = useState(1);
+  const [isTimerFixed, _setIsTimerFixed] = useState(false);
+  const [isPreAuction, _setIsPreAuction] = useState(false);
+  const [_interestCount, _setInterestCount] = useState(1);
   const [serverCurrentTime, setServerCurrentTime] = useState(
     Math.floor(Date.now() / 1000),
   ); // 서버 시간 예시
@@ -52,16 +52,12 @@ const Details = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `api/v1/auctions/auction/${productId}`,
-        );
-        console.log(response.data);
-        setAuctionItem(response.data.auctionData);
-      } catch (error) {
-        console.error(error);
-        alert('경매 데이터를 가져오는 중 오류가 발생했습니다.');
-      }
+      // try {
+      //   const response = await axios.get(
+      //     `api/v1/auctions/auction/${productId}`,
+      //   );
+      //   setAuctionItem(response.data.auctionData);
+      // } catch (error) {}
     };
     fetchData();
     setIsLoading(false);
@@ -101,7 +97,7 @@ const Details = () => {
                 className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}
               >
                 {isLoading ? (
-                  <div className="text-center text-gray-500 font-bold">
+                  <div className="font-bold text-center text-gray-500">
                     로딩 중...
                   </div>
                 ) : (
@@ -121,7 +117,7 @@ const Details = () => {
             {/* 경매 아이템 제목 & 시작가 */}
             {auctionItem && (
               <div className="mb-4">
-                <p className="text-lg font-bold mb-1">
+                <p className="mb-1 text-lg font-bold">
                   {auctionItem.title || ''}
                 </p>
                 <p className="text-sm text-gray-500">
@@ -140,9 +136,9 @@ const Details = () => {
             {/* 나의 참여 금액 & 경매 참여인원 */}
             <div className="w-full mb-4 border border-gray-300 rounded-lg">
               <div className="flex items-center justify-between">
-                <div className="flex flex-col items-center text-center flex-1 py-4">
-                  <div className="flex items-center text-sm text-gray-400 mb-1">
-                    <CiCoins1 className="text-xl mx-1" />
+                <div className="flex flex-col items-center flex-1 py-4 text-center">
+                  <div className="flex items-center mb-1 text-sm text-gray-400">
+                    <CiCoins1 className="mx-1 text-xl" />
                     <span className="ml-1">나의 참여 금액</span>
                   </div>
                   <p className="text-xl font-bold text-gray-800">
@@ -151,15 +147,15 @@ const Details = () => {
                       : '참여 전'}
                   </p>
                 </div>
-                <div className="border-l border-gray-300 h-full" />
-                <div className="flex flex-col items-center text-center flex-1 py-4">
-                  <div className="flex items-center text-sm text-gray-400 mb-1">
+                <div className="h-full border-l border-gray-300" />
+                <div className="flex flex-col items-center flex-1 py-4 text-center">
+                  <div className="flex items-center mb-1 text-sm text-gray-400">
                     <img
                       src={Participants}
                       alt="Participants"
                       className="w-4 h-4 mx-2 mb-1"
                     />
-                    <p className="text-sm text-gray-500 mb-1">참여 인원</p>
+                    <p className="mb-1 text-sm text-gray-500">참여 인원</p>
                   </div>
                   <p className="text-lg font-bold">
                     {auctionItem?.participantCount
