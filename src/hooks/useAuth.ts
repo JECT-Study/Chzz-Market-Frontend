@@ -1,3 +1,4 @@
+import { useRefreshTokenOnSuccess } from '@/components/home/queries';
 import { logout } from '@/components/login/queries';
 import { removeToken } from '@/utils/tokenUtils';
 import { useMutation } from '@tanstack/react-query';
@@ -7,11 +8,11 @@ export const useAuth = () => {
   const navigate = useNavigate();
 
   const handleKakaoLogin = () => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
+    window.location.href = 'https://chzz.store/oauth2/authorization/kakao';
   };
 
   const handleNaverLogin = () => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
+    window.location.href = 'https://chzz.store/oauth2/authorization/naver';
   };
 
   const logoutMutation = useMutation({

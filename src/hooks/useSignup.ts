@@ -22,22 +22,31 @@ export const useSignup = (): any => {
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);
   const navigate = useNavigate();
 
-  const signupMutation = useMutation({
-    mutationFn: (data: User) => postSignup(data),
-    onSuccess: () => {
-      navigate('/user');
-    },
-    onError: (error) => {},
-  });
-
   const {
     control,
     setValue,
     handleSubmit,
     watch,
     formState: { errors },
+    setError,
   } = useForm<FormFields>({
     defaultValues,
+  });
+
+  const signupMutation = useMutation({
+    mutationFn: (data: User) => postSignup(data),
+    onSuccess: () => {
+      navigate('/user');
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError: (error: any) => {
+      if (error.repsonse && error.repsonse.status === 400) {
+        const errorMessage = error.response.data?.message || '';
+        if (errorMessage.includes('닉네임이 중복되었습니다.')) {
+          setError('nickname', { message: '이미 사용 중인 닉네임입니다.' });
+        }
+      }
+    },
   });
 
   const onCloseBottomSheet = () => {
