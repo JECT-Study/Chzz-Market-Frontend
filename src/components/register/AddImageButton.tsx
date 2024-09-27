@@ -1,12 +1,11 @@
 import { AiOutlinePlus } from 'react-icons/ai';
 
-const AddImageButton = ({
-  handleBoxClick,
-  length,
-}: {
+interface AddImageButtonProps {
   handleBoxClick: () => void;
   length: number;
-}) => {
+}
+
+const AddImageButton = ({ handleBoxClick, length }: AddImageButtonProps) => {
   return (
     <button
       type="button"

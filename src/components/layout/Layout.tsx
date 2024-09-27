@@ -1,10 +1,11 @@
 import { ReactNode, forwardRef } from 'react';
 import ThreeDotsIcon from '@/assets/icons/three_dots.svg';
 import BackArrowIcon from '@/assets/icons/back_arrow.svg';
+import { useNavigate } from 'react-router';
 
 interface HeaderProps {
   title: string;
-  handleBack: () => void;
+  handleBack?: () => void;
   handleModal?: () => void;
 }
 
@@ -13,6 +14,9 @@ const Header = ({
   handleBack,
   handleModal = undefined,
 }: HeaderProps) => {
+  const navigate = useNavigate();
+  if (!handleBack) handleBack = () => navigate(-1);
+
   return (
     <header className="w-full min-h-[3.375rem] h-[3.375rem] px-8 py-4 shadow-bottom">
       <div className="relative flex items-center justify-center w-full h-full">
