@@ -28,11 +28,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 type FormFields = z.infer<typeof RegisterSchema>;
 
 const defaultValues = {
-  title: '',
+  productName: '',
   images: [],
   category: '',
   description: '',
-  cost: '',
+  minPrice: '',
 };
 
 const Register = () => {
@@ -52,26 +52,53 @@ const Register = () => {
   });
 
   const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
-    name: 'cost',
+    name: 'minPrice',
     setValue,
     getValues,
   });
 
   const title = caution === '' ? '경매 등록하기' : `주의사항`;
   const cautionButton =
-    caution === 'enroll' ? '바로 등록하기' : '사전 등록하기';
+    caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
   const finalButton = isSubmitting ? '등록 중...' : cautionButton;
 
   const toggleCheckBox = () => setCheck((state) => !state);
   const clickBack = () => (caution === '' ? navigate(-1) : setCaution(''));
-
-  const onSubmit: SubmitHandler<FormFields> = async () => {};
-
-  const handleProceed = (proceedType: 'pre-enroll' | 'enroll') => {
+  const handleProceed = (proceedType: 'PRE_REGISTER' | 'REGISTER') => {
     handleSubmit(() => {
       // 유효성 검사가 통과되면 실행.
       setCaution(proceedType);
     })();
+  };
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    const { productName, images, category, description, minPrice } = data;
+    const formData = new FormData();
+
+    const registerData = {
+      productName,
+      category,
+      description,
+      minPrice,
+      auctionRegisterType: caution,
+    };
+
+    formData.append('request', JSON.stringify(registerData));
+    formData.append('images', JSON.stringify(images));
+
+    // const blobImages = images.forEach((base64Image, index) => {
+    //   const byteString = atob(base64Image.split(',')[1]); // base64 데이터에서 실제 데이터 부분 추출
+    //   const mimeString = base64Image.split(',')[0].split(':')[1].split(';')[0]; // MIME 타입 추출
+
+    //   const arrayBuffer = new Uint8Array(byteString.length);
+    //   for (let i = 0; i < byteString.length; i++) {
+    //     arrayBuffer[i] = byteString.charCodeAt(i);
+    //   }
+
+    //   const blob = new Blob([arrayBuffer], { type: mimeString });
+    //   formData.append('images', blob, `image${index + 1}.jpg`); // 각 파일에 이름을 부여
+    // });
+
+    // console.log(images);
   };
 
   return (
@@ -97,9 +124,9 @@ const Register = () => {
             />
             <FormField
               label="제목*"
-              name="title"
+              name="productName"
               control={control}
-              error={errors.title?.message}
+              error={errors.productName?.message}
               render={(field) => (
                 <Input
                   id="제목*"
@@ -140,9 +167,9 @@ const Register = () => {
             />
             <FormField
               label="시작 가격*"
-              name="cost"
+              name="minPrice"
               control={control}
-              error={errors.cost?.message}
+              error={errors.minPrice?.message}
               render={(field) => (
                 <Input
                   id="시작 가격*"
@@ -199,7 +226,7 @@ const Register = () => {
               type="button"
               color="white"
               className="flex-1 h-full"
-              onClick={() => handleProceed('pre-enroll')}
+              onClick={() => handleProceed('PRE_REGISTER')}
             >
               사전 등록하기
             </Button>
@@ -207,7 +234,7 @@ const Register = () => {
               type="button"
               color="cheeseYellow"
               className="flex-[2] h-full"
-              onClick={() => handleProceed('enroll')}
+              onClick={() => handleProceed('REGISTER')}
             >
               바로 등록하기
             </Button>
@@ -220,6 +247,7 @@ const Register = () => {
             disabled={!check || isSubmitting}
             onClick={handleSubmit(onSubmit)}
             aria-label="최종 등록 버튼"
+            loading={isSubmitting}
           >
             {finalButton}
           </Button>

@@ -10,11 +10,10 @@ import { UserProfile } from '@/@types/user';
 
 const ProfileEdit = () => {
   const location = useLocation();
-  const { profileData } = location.state as { profileData: UserProfile };
+  const { profileData: _UserProfile } = location.state;
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
-  const { control, watch, handleSubmit, errors, handleEditProfile } =
-    useEditProfile();
+  const { control, handleSubmit, handleEditProfile } = useEditProfile();
 
   const handleSubmitClick = () => {
     if (formRef.current) {

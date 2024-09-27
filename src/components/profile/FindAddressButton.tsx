@@ -2,14 +2,13 @@ import { useEffect } from 'react';
 import Button from '../common/Button';
 
 interface Props {
-  onCompleted: (address: string) => void;
   children: React.ReactNode;
 }
 
 const SCRIPT_URL =
   '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
 
-const FindAddressButton = ({ onCompleted, children }: Props) => {
+const FindAddressButton = ({ children }: Props) => {
   // 스크립트 코드
 
   // 핸들러
@@ -37,7 +36,7 @@ const FindAddressButton = ({ onCompleted, children }: Props) => {
 
   return (
     <Button
-      className="absolute right-0 bottom-3 rounded-md"
+      className="absolute right-0 rounded-md bottom-3"
       type="button"
       size="small"
       onClick={() => {}}

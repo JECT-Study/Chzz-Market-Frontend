@@ -20,7 +20,7 @@ import getMyAuctionPreRegister from './handlers/myAuctuon';
 import postSignup from './handlers/Login';
 import { realTimeNotificationsHandler } from './handlers/realTimeNotification';
 import { auctionDetailsHandler } from './handlers/auctionDetails';
-import { getOngoingProductList } from './handlers/productList';
+import { getOngoingProductList } from './handlers/ProductList';
 
 /* eslint-disable import/no-named-as-default */
 export const handlers: HttpHandler[] = [

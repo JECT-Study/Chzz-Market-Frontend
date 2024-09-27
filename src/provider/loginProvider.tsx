@@ -1,7 +1,6 @@
-import { isLoggedIn } from '@/store/authSlice';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import { useEffect } from 'react';
 
 interface LoginProviderProps {
   children: React.ReactNode;
@@ -9,7 +8,8 @@ interface LoginProviderProps {
 
 const LoginProvider = ({ children }: LoginProviderProps) => {
   const navigate = useNavigate();
-  const isLogin = useSelector(isLoggedIn);
+  const isLogin = true;
+  // const isLogin = useSelector(isLoggedIn);
   const location = useLocation();
 
   useEffect(() => {

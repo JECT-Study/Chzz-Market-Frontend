@@ -1,15 +1,16 @@
-import Layout from '@/components/layout/Layout';
-import Navigation from '@/components/navigation/Navigation';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import UserOrderTab from '@/components/user/UserOrderTab';
-import useMyAuctionList from '@/hooks/useMyAuctionList';
-import OngoingMyRegister from '@/components/user/OngoingMyRegister';
 import {
   OngoingAuctionRegisterdItem,
   PreEnrollProductRegisteredItem,
 } from '@/@types/productList';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import Layout from '@/components/layout/Layout';
+import Navigation from '@/components/navigation/Navigation';
+import OngoingMyRegister from '@/components/user/OngoingMyRegister';
 import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
+import UserOrderTab from '@/components/user/UserOrderTab';
+import useMyAuctionList from '@/hooks/useMyAuctionList';
 
 const UserRegisteredList = () => {
   const location = useLocation();
@@ -83,7 +84,10 @@ const UserRegisteredList = () => {
 
   return (
     <Layout>
-      <Layout.Header title="마이페이지" handleBack={() => navigate('/')} />
+      <Layout.Header
+        title="내가 등록한 경매 내역"
+        handleBack={() => navigate('/')}
+      />
       <Layout.Main
         style={{ paddingLeft: 0, paddingRight: 0 }}
         ref={mainContainerRef}
@@ -100,7 +104,7 @@ const UserRegisteredList = () => {
         </div>
       </Layout.Main>
       <Layout.Footer type="single">
-        <Navigation active="my" />
+        <Navigation active="user" />
       </Layout.Footer>
     </Layout>
   );

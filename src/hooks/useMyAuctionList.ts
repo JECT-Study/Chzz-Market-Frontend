@@ -2,6 +2,7 @@ import {
   getAuctionOngoingRegister,
   getAuctionPreEnrollRegister,
 } from '@/components/user/queries';
+
 import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -9,8 +10,8 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 const useMyAuctionList = (activeTab: boolean, nickname: string): any => {
   const {
     data: ongoingData,
-    isLoading: ongoingLoading,
-    error: ongoingError,
+    isLoading: _ongoingLoading,
+    error: _ongoingError,
     fetchNextPage: fetchNextOngoingPage,
     hasNextPage: hasNextOngoingPage,
     refetch: refetchOngoingData,
@@ -30,8 +31,8 @@ const useMyAuctionList = (activeTab: boolean, nickname: string): any => {
 
   const {
     data: enrollData,
-    isLoading: enrollLoading,
-    error: enrollError,
+    isLoading: _enrollLoading,
+    error: _enrollError,
     fetchNextPage: fetchNextEnrollPage,
     hasNextPage: hasNextEnrollPage,
     refetch: refetchEnrollData,
