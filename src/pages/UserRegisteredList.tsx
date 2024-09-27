@@ -3,10 +3,8 @@ import {
   PreEnrollProductRegisteredItem,
 } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import Layout from '@/components/layout/Layout';
-import Navigation from '@/components/navigation/Navigation';
 import OngoingMyRegister from '@/components/user/OngoingMyRegister';
 import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 import UserOrderTab from '@/components/user/UserOrderTab';
@@ -16,7 +14,6 @@ const UserRegisteredList = () => {
   const location = useLocation();
   const sortType = location.state?.sortType;
   const [activeTab, setActiveTab] = useState(sortType || true);
-  const navigate = useNavigate();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
