@@ -1,6 +1,6 @@
-import { AiOutlineLeft } from 'react-icons/ai';
 import { ReactNode, forwardRef } from 'react';
 import ThreeDotsIcon from '@/assets/icons/three_dots.svg';
+import BackArrowIcon from '@/assets/icons/back_arrow.svg';
 
 interface HeaderProps {
   title: string;
@@ -22,10 +22,10 @@ const Header = ({
             aria-label="뒤로 가기"
             onClick={handleBack}
           >
-            <AiOutlineLeft size={25} />
+            <img src={BackArrowIcon} alt="뒤로가기 아이콘" className="size-5" />
           </button>
         )}
-        {title && <h2 className="text-heading2 text-gray1">{title}</h2>}
+        <h2 className="text-heading2 text-gray1">{title}</h2>
         {handleModal && (
           <button
             aria-label="옵션"
