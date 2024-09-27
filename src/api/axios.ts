@@ -20,7 +20,7 @@ const handleTokenError = (message: string) => {
 
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
-    baseURL: 'https://chzz.store',
+    baseURL: import.meta.env.VITE_API_URL,
     headers: {
       'Content-Type': 'application/json',
     },

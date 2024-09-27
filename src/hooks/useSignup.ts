@@ -22,14 +22,6 @@ export const useSignup = (): any => {
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);
   const navigate = useNavigate();
 
-  const signupMutation = useMutation({
-    mutationFn: (data: User) => postSignup(data),
-    onSuccess: () => {
-      navigate('/user');
-    },
-    onError: () => {},
-  });
-
   const {
     control,
     setValue,
