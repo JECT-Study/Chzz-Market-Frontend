@@ -49,7 +49,7 @@ const Signup = () => {
   }, [nickname, Selectbank, accountNumber]);
 
   useEffect(() => {
-    if (link && !link.startWith('https://')) {
+    if (link && !link.startsWith('https://')) {
       setValue('link', `https://${link}`);
     }
   }, [link, setValue]);

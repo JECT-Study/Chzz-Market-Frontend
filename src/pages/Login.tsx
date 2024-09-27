@@ -4,10 +4,12 @@ import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
 import naverImage from '@/assets/images/naver_login.png';
 import ChizzImage from '@/assets/icons/main_cheese_icon.svg';
 import { useAuth } from '@/hooks/useAuth';
+import { useRefreshTokenOnSuccess } from '@/components/home/queries';
 
 const Login = () => {
   const navigate = useNavigate();
   const { handleKakaoLogin, handleNaverLogin } = useAuth();
+  useRefreshTokenOnSuccess();
 
   return (
     <Layout>
