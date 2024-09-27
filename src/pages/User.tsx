@@ -20,19 +20,11 @@ const User = () => {
 
   return (
     <LoginProvider>
-      <Layout>
-        <Layout.Header title="마이페이지" handleBack={() => navigate('/')} />
-        <Layout.Main>
-          <div className="flex flex-col">
-            <UserProfile />
-            <UserOrder />
-            <UserOrderList />
-          </div>
-        </Layout.Main>
-        <Layout.Footer type="single">
-          <Navigation active="my" />
-        </Layout.Footer>
-      </Layout>
+      <div className="flex flex-col">
+        <UserProfile />
+        <UserOrder />
+        <UserOrderList />
+      </div>
     </LoginProvider>
   );
 };

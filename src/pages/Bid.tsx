@@ -31,12 +31,12 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
     getValues,
     handleSubmit,
   } = useForm<FormFields>({
-    defaultValues: { cost: '' },
+    defaultValues: { minPrice: '' },
     resolver: zodResolver(BidSchema),
   });
 
   const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
-    name: 'cost',
+    name: 'minPrice',
     setValue,
     getValues,
   });
@@ -85,9 +85,9 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
           )}
           <FormField
             label="가격 제안하기"
-            name="cost"
+            name="minPrice"
             control={control}
-            error={errors.cost?.message}
+            error={errors.minPrice?.message}
             render={(field) => (
               <Input
                 id="가격 제안하기"
