@@ -83,6 +83,7 @@ const Register = () => {
     };
 
     formData.append('request', JSON.stringify(registerData));
+    formData.append('images', JSON.stringify(images));
 
     // const blobImages = images.forEach((base64Image, index) => {
     //   const byteString = atob(base64Image.split(',')[1]); // base64 데이터에서 실제 데이터 부분 추출
