@@ -50,10 +50,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
         originalRequest._retry = true;
         const errorMessage = response.data?.message;
 
-        if (
-          errorMessage === '리프레시 토큰이 만료되었습니다.' ||
-          errorMessage === '토큰이 만료되었습니다.'
-        ) {
+        if (errorMessage === '토큰이 만료되었습니다.') {
           try {
             refreshToken();
             const newAccessToken = getToken();
@@ -72,11 +69,16 @@ export const createClient = (config?: AxiosRequestConfig) => {
         }
 
         if (
-          [
-            'Authentication is required',
-            '리프레시 토큰이 유효하지 않습니다.',
-          ].includes(errorMessage)
+          errorMessage === '리프레시 토큰이 유효하지 않습니다.' ||
+          errorMessage === '리프레시 토큰이 없습니다.'
         ) {
+          handleTokenError(
+            '리프레시 토큰이 유효하지 않습니다. 다시 로그인해주세요.',
+          );
+          return Promise.reject(error);
+        }
+
+        if (errorMessage === 'Authentication is required') {
           handleTokenError('로그인이 필요합니다.');
           return Promise.reject(error);
         }
