@@ -1,8 +1,6 @@
-import Layout from '@/components/layout/Layout';
 import UserOrder from '@/components/user/UserOrder';
 import UserOrderList from '@/components/user/UserOrderList';
 import UserProfile from '@/components/user/UserProfile';
-import Navigation from '@/components/navigation/Navigation';
 import LoginProvider from '@/provider/loginProvider';
 import { useNavigate } from 'react-router-dom';
 
