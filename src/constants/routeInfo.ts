@@ -17,4 +17,12 @@ export const ROUTE_INFO: {
     title: '마이페이지',
     active: 'user',
   },
+  '/user/list/participated': {
+    title: '참여한 정식 경매 내역',
+    active: 'user',
+  },
+  '/user/list/registered': {
+    title: '내가 등록한 경매 내역',
+    active: 'user',
+  },
 });

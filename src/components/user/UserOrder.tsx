@@ -4,6 +4,7 @@ import SuccessIcon from '@/assets/icons/successful_auction.svg';
 import FailedIcon from '@/assets/icons/failed_auction.svg';
 import AuctionIcon from '@/assets/icons/auction.svg';
 import PreAuctionIcon from '@/assets/icons/pre_auction.svg';
+import ROUTERS from '@/constants/route';
 
 const UserOrder = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const UserOrder = () => {
           <div
             className="flex flex-col items-center w-1/3 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate('/order/history', {
+              navigate(ROUTERS.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionHistory' },
               })
             }
@@ -36,7 +37,9 @@ const UserOrder = () => {
           <div
             className="flex flex-col items-center w-1/3 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate('/order/history', { state: { sortType: 'AuctionsWon' } })
+              navigate(ROUTERS.PARTICIPATED_LIST, {
+                state: { sortType: 'AuctionsWon' },
+              })
             }
           >
             <img src={SuccessIcon} alt="성공한 경매" className="w-8 h-8 mb-2" />
@@ -48,7 +51,7 @@ const UserOrder = () => {
           <div
             className="flex flex-col items-center w-1/3 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate('/order/history', {
+              navigate(ROUTERS.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionsLost' },
               })
             }
@@ -68,7 +71,7 @@ const UserOrder = () => {
           <div
             className="flex flex-col items-center w-1/2 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate('/user/registered/list', { state: { sortType: true } })
+              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: true } })
             }
           >
             <img src={AuctionIcon} alt="정식 경매" className="w-8 h-8 mb-2" />
@@ -80,7 +83,7 @@ const UserOrder = () => {
           <div
             className="flex flex-col items-center w-1/2 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate('user/registered/list', { state: { sortType: false } })
+              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: false } })
             }
           >
             <img

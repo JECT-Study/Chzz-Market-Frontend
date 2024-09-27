@@ -14,7 +14,7 @@ import LayoutWithNav from './components/layout/LayoutWithNav';
 import Login from './pages/Login';
 import NotFound from './components/common/NotFound';
 import Notification from './pages/Notification';
-import OrderHistory from './pages/OrderHistory';
+import OrderHistory from './pages/UserParticipatedList';
 import ProfileEdit from './pages/ProfileEdit';
 import Register from './pages/Register';
 import Signup from './pages/Signup';
@@ -37,6 +37,14 @@ const layoutWithNavRoute = [
   {
     path: ROUTERS.USER,
     element: <User />,
+  },
+  {
+    path: ROUTERS.REGISTERED_LIST,
+    element: <UserRegisteredList />,
+  },
+  {
+    path: ROUTERS.PARTICIPATED_LIST,
+    element: <OrderHistory />,
   },
 ];
 
@@ -67,24 +75,16 @@ export const router = createBrowserRouter([
         loader: bidderListLoader,
       },
       {
-        path: ROUTERS.PRODUCT.LIST,
+        path: ROUTERS.PRODUCT_LIST,
         element: <ProductListPage />,
       },
       {
-        path: ROUTERS.PROFILE.EDIT,
+        path: ROUTERS.PROFILE_EDIT,
         element: <ProfileEdit />,
       },
       {
         path: ROUTERS.REGISTER,
         element: <Register />,
-      },
-      {
-        path: ROUTERS.ORDER.HISTORY,
-        element: <OrderHistory />,
-      },
-      {
-        path: ROUTERS.REGISTERED.LIST,
-        element: <UserRegisteredList />,
       },
       {
         path: ROUTERS.SIGNUP,
