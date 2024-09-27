@@ -9,7 +9,7 @@ export const usePostRegister = (): {
   const postRegister = async (formData: FormData) => {
     await httpClient.post(`${API_END_POINT.AUCTIONS}`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
     });
   };

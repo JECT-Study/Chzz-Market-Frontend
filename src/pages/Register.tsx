@@ -85,7 +85,9 @@ const Register = () => {
     };
 
     formData.append('request', JSON.stringify(registerData));
-    formData.append('images', JSON.stringify(images));
+    images.forEach((file) => {
+      formData.append(`images`, file);
+    });
 
     mutate(formData);
 
