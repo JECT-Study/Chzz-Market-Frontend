@@ -24,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { usePostRegister } from '@/components/register/quries';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
@@ -50,6 +51,7 @@ const Register = () => {
     defaultValues,
     resolver: zodResolver(RegisterSchema),
   });
+  const { mutate } = usePostRegister();
 
   const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
     name: 'minPrice',
@@ -84,6 +86,8 @@ const Register = () => {
 
     formData.append('request', JSON.stringify(registerData));
     formData.append('images', JSON.stringify(images));
+
+    mutate(formData);
 
     // const blobImages = images.forEach((base64Image, index) => {
     //   const byteString = atob(base64Image.split(',')[1]); // base64 데이터에서 실제 데이터 부분 추출
