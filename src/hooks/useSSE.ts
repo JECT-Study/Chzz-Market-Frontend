@@ -4,7 +4,7 @@ export const useSSE = <T>(url: string) => {
   const [state, setState] = useState<T[]>([]);
 
   useEffect(() => {
-    const eventSource = new EventSource(url);
+    const eventSource = new EventSource(`https://chzz.store${url}`);
 
     eventSource.onopen = () => {
       // console.log('SSE Connection opened!');
