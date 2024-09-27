@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { z } from 'zod';
 import { SignupFormSchema } from '@/constants/schema';
-import { useMutation } from '@tanstack/react-query';
 import { User } from '@/@types/user';
 import { postSignup } from '@/components/login/queries';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { z } from 'zod';
 
 type FormFields = z.infer<typeof SignupFormSchema>;
 
@@ -27,7 +27,7 @@ export const useSignup = (): any => {
     onSuccess: () => {
       navigate('/user');
     },
-    onError: (error) => {},
+    onError: () => {},
   });
 
   const {

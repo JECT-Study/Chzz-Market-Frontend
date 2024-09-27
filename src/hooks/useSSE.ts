@@ -9,7 +9,7 @@ export const useSSE = <T>(url: string) => {
     eventSource.onopen = () => {
       // console.log('SSE Connection opened!');
     };
-    eventSource.onerror = (error) => {
+    eventSource.onerror = () => {
       // console.error('SSE Connection error!', error);
     };
 

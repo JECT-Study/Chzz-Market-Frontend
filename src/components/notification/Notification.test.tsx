@@ -66,7 +66,7 @@ describe('알림 테스트', () => {
   });
 
   test('알림에는 제목, 사진, 시간이 표시되어야 하며, 읽지 않은 알림은 배경색으로 구분한다.', async () => {
-    const { user } = setup();
+    const { user: _user } = setup();
 
     // 읽지 않은 알람
     const notifications = await screen.findAllByRole('figure', {

@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { toast } from 'sonner';
 import { useState } from 'react';
 
 interface ReactQueryProviderProps {
@@ -20,6 +21,11 @@ const ReactQueryProvider = ({
           retryOnMount: true,
           refetchOnReconnect: false,
           retry: false,
+        },
+        mutations: {
+          onError: (error) => {
+            toast(`${error.message}`);
+          },
         },
       },
     }),

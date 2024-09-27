@@ -1,8 +1,9 @@
 import {
-  getMyLostAuction,
   getMyHistoryAuction,
+  getMyLostAuction,
   getMyWonAuction,
 } from '@/components/auction/queries';
+
 import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -10,8 +11,8 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 const useHistory = (activeTab: string): any => {
   const {
     data: historyData,
-    isLoading: historyLoading,
-    error: historyError,
+    isLoading: _historyLoading,
+    error: _historyError,
     fetchNextPage: fetchNextHistoryPage,
     hasNextPage: hasNextHistoryPage,
     refetch: refetchHistoryData,
@@ -30,8 +31,8 @@ const useHistory = (activeTab: string): any => {
 
   const {
     data: wonData,
-    isLoading: wonLoading,
-    error: wonError,
+    isLoading: _wonLoading,
+    error: _wonError,
     fetchNextPage: fetchNextWonPage,
     hasNextPage: hasNextWonPage,
     refetch: refetchWonData,
@@ -50,8 +51,8 @@ const useHistory = (activeTab: string): any => {
 
   const {
     data: lostData,
-    isLoading: lostLoading,
-    error: lostError,
+    isLoading: _lostLoading,
+    error: _lostError,
     fetchNextPage: fetchNextLostPage,
     hasNextPage: hasNextLostPage,
     refetch: refetchLostData,

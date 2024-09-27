@@ -4,14 +4,11 @@ import HomeAuctionItem from '@/components/home/HomeAuctionItem';
 import HomeRegisterBtn from '@/components/home/HomeRegisterBtn';
 import { useScrollDetection } from '@/hooks/useScrollDetection';
 import type { PreRegisterAuction, RegisterAuction } from 'Auction';
-import {
-  useGetHomeAuctions,
-  useRefreshTokenOnSuccess,
-} from '@/components/home/queries';
+import { useGetHomeAuctions } from '@/components/home/queries';
 
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
-  useRefreshTokenOnSuccess();
+  // useRefreshTokenOnSuccess();
 
   const { bestAuctions, imminentAuctions, preRegisterAuctions } =
     useGetHomeAuctions();
