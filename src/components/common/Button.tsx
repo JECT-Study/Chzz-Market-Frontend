@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import classNames from 'classnames';
+import ButtonSpinner from './ButtonSpinner';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   hoverColor?: string;
   type: 'button' | 'submit' | 'reset';
   ariaLabel?: string;
+  loading?: boolean;
 }
 
 const Button = ({
@@ -21,6 +23,7 @@ const Button = ({
   onClick,
   type,
   ariaLabel = '',
+  loading = false,
 }: ButtonProps) => {
   const baseClasses =
     'focus:outline-none rounded transition-colors active:bg-black active:text-white ';
@@ -62,7 +65,10 @@ const Button = ({
       type={type}
       aria-label={ariaLabel}
     >
-      {children}
+      <div className="flex items-center justify-center w-full gap-3">
+        {loading && <ButtonSpinner />}
+        <span className="pt-[.125rem]">{children}</span>
+      </div>
     </button>
   );
 };
