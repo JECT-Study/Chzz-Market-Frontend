@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { getToken, removeToken } from '@/utils/tokenUtils';
 
 import { refreshToken } from '@/components/login/queries';
+import { toast } from 'sonner';
 
 interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
   _retry?: boolean;
@@ -14,7 +15,7 @@ interface ErrorResponseData {
 
 const handleTokenError = (message: string) => {
   removeToken();
-  alert(message);
+  toast(message);
   window.location.href = '/login';
 };
 

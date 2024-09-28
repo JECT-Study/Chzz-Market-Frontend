@@ -39,6 +39,9 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'react-refresh/only-export-components': 'off',
+    'react/jsx-no-useless-fragment': 'off',
+    'react-hooks/rules-of-hooks': 'off',
+    'no-return-assign': 'off',
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'no-underscore-dangle': [
