@@ -1,5 +1,6 @@
 import { navIcons } from '@/constants/navIcons';
 import { useNavigate } from 'react-router-dom';
+import { getToken } from '@/utils/tokenUtils';
 import { useGetNotifications } from '../notification/queries';
 
 const NavigationItem = ({
@@ -36,9 +37,26 @@ const NavigationItem = ({
 };
 
 const Navigation = ({ active }: { active: string }) => {
+  const token = getToken();
   const navigate = useNavigate();
-  const { notifications } = useGetNotifications();
+  if (!token) {
+    return (
+      <nav className="flex items-center h-full">
+        {Object.entries(navIcons).map(([name, value]) => (
+          <NavigationItem
+            key={name}
+            name={name}
+            active={active === name}
+            onClick={() => {
+              navigate(value.path);
+            }}
+          />
+        ))}
+      </nav>
+    );
+  }
 
+  const { notifications } = useGetNotifications();
   const unreadNotificationsCount = notifications?.reduce(
     (acc, cur) => (!cur.isRead ? acc + 1 : acc),
     0,
