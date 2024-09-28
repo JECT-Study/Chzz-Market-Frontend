@@ -1,7 +1,5 @@
-// ./build.sh 
-
 #!/bin/sh
 cd ../
 mkdir output
-cp -R ./team-repository-name/* ./output
-cp -R ./output ./team-repository-name/
+cp -R ./Chzz-Market-Frontend/* ./output
+cp -R ./output ./Chzz-Market-Frontend/
