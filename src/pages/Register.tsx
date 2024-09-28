@@ -86,7 +86,12 @@ const Register = () => {
       auctionRegisterType: caution,
     };
 
-    formData.append('request', JSON.stringify(registerData));
+    formData.append(
+      'request',
+      new Blob([JSON.stringify(registerData)], {
+        type: 'application/json',
+      }),
+    );
     images.forEach((base64Image, index) => {
       const byteString = atob(base64Image.split(',')[1]); // base64 데이터에서 실제 데이터 부분 추출
       const mimeString = base64Image.split(',')[0].split(':')[1].split(';')[0]; // MIME 타입 추출
