@@ -3,10 +3,8 @@ import {
   PreEnrollProductRegisteredItem,
 } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import Layout from '@/components/layout/Layout';
-import Navigation from '@/components/navigation/Navigation';
 import OngoingMyRegister from '@/components/user/OngoingMyRegister';
 import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 import UserOrderTab from '@/components/user/UserOrderTab';
@@ -16,7 +14,6 @@ const UserRegisteredList = () => {
   const location = useLocation();
   const sortType = location.state?.sortType;
   const [activeTab, setActiveTab] = useState(sortType || true);
-  const navigate = useNavigate();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
@@ -83,30 +80,18 @@ const UserRegisteredList = () => {
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
-    <Layout>
-      <Layout.Header
-        title="내가 등록한 경매 내역"
-        handleBack={() => navigate('/')}
-      />
-      <Layout.Main
-        style={{ paddingLeft: 0, paddingRight: 0 }}
-        ref={mainContainerRef}
-      >
-        <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-        <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
-          {activeTab
-            ? ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
-                <OngoingMyRegister product={product} key={product.id} />
-              ))
-            : enrollItems.map((product: PreEnrollProductRegisteredItem) => (
-                <PreEnrollMyRegister product={product} key={product.id} />
-              ))}
-        </div>
-      </Layout.Main>
-      <Layout.Footer type="single">
-        <Navigation active="user" />
-      </Layout.Footer>
-    </Layout>
+    <div className="mx-[-32px] my-[-16px]">
+      <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
+        {activeTab
+          ? ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
+              <OngoingMyRegister product={product} key={product.id} />
+            ))
+          : enrollItems.map((product: PreEnrollProductRegisteredItem) => (
+              <PreEnrollMyRegister product={product} key={product.id} />
+            ))}
+      </div>
+    </div>
   );
 };
 

@@ -24,6 +24,9 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { usePostRegister } from '@/components/register/quries';
+import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
+import type { RegisterType } from 'Register';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
@@ -50,6 +53,7 @@ const Register = () => {
     defaultValues,
     resolver: zodResolver(RegisterSchema),
   });
+  const { mutate: register } = usePostRegister();
 
   const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
     name: 'minPrice',
@@ -74,31 +78,27 @@ const Register = () => {
     const { productName, images, category, description, minPrice } = data;
     const formData = new FormData();
 
-    const registerData = {
+    const registerData: RegisterType = {
       productName,
       category,
       description,
-      minPrice,
+      minPrice: convertCurrencyToNumber(minPrice),
       auctionRegisterType: caution,
     };
 
     formData.append('request', JSON.stringify(registerData));
-    formData.append('images', JSON.stringify(images));
+    images.forEach((base64Image, index) => {
+      const byteString = atob(base64Image.split(',')[1]); // base64 데이터에서 실제 데이터 부분 추출
+      const mimeString = base64Image.split(',')[0].split(':')[1].split(';')[0]; // MIME 타입 추출
 
-    // const blobImages = images.forEach((base64Image, index) => {
-    //   const byteString = atob(base64Image.split(',')[1]); // base64 데이터에서 실제 데이터 부분 추출
-    //   const mimeString = base64Image.split(',')[0].split(':')[1].split(';')[0]; // MIME 타입 추출
-
-    //   const arrayBuffer = new Uint8Array(byteString.length);
-    //   for (let i = 0; i < byteString.length; i++) {
-    //     arrayBuffer[i] = byteString.charCodeAt(i);
-    //   }
-
-    //   const blob = new Blob([arrayBuffer], { type: mimeString });
-    //   formData.append('images', blob, `image${index + 1}.jpg`); // 각 파일에 이름을 부여
-    // });
-
-    // console.log(images);
+      const arrayBuffer = new Uint8Array(byteString.length);
+      arrayBuffer.forEach(
+        (_, idx) => (arrayBuffer[idx] = byteString.charCodeAt(idx)),
+      );
+      const blob = new Blob([arrayBuffer], { type: mimeString });
+      formData.append('images', blob, `image${index}.jpg`); // 각 파일에 이름을 부여
+    });
+    register(formData);
   };
 
   return (
@@ -156,7 +156,7 @@ const Register = () => {
                   <SelectContent>
                     <SelectGroup className="focus-visible:ring-cheeseYellow">
                       {Object.values(categories).map((el) => (
-                        <SelectItem key={el.value} value={el.value}>
+                        <SelectItem key={el.value} value={el.code}>
                           {el.value}
                         </SelectItem>
                       ))}
