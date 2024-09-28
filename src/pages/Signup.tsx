@@ -42,17 +42,10 @@ const Signup = () => {
   const nickname = watch('nickname');
   const Selectbank = watch('bankName');
   const accountNumber = watch('accountNumber');
-  const link = watch('link');
 
   useEffect(() => {
     setIsFormValid(!!(nickname && Selectbank && accountNumber));
   }, [nickname, Selectbank, accountNumber]);
-
-  useEffect(() => {
-    if (link && !link.startsWith('https://')) {
-      setValue('link', `https://${link}`);
-    }
-  }, [link, setValue]);
 
   return (
     <Layout>
