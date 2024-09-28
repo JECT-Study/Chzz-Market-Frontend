@@ -9,8 +9,15 @@ export const useSSE = <T>(url: string) => {
 
   useEffect(() => {
     const fetchSSE = () => {
+      const accessToken = getToken();
       eventSource.current = new EventSource(
         `${import.meta.env.VITE_API_URL}${url}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        },
       );
 
       eventSource.current.onopen = () => {};

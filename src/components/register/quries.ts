@@ -8,7 +8,11 @@ export const usePostRegister = (): {
   mutate: UseMutateFunction<unknown, Error, FormData, unknown>;
 } => {
   const postRegister = async (formData: FormData) => {
-    await httpClient.post(`${API_END_POINT.AUCTIONS}`, formData);
+    await httpClient.post(`${API_END_POINT.AUCTIONS}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   };
 
   const navigate = useNavigate();
