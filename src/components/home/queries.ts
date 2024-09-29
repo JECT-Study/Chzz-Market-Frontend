@@ -51,7 +51,7 @@ export const useRefreshTokenOnSuccess = (): UseQueryResult<void, unknown> => {
 
   return useQuery({
     queryKey: [queryKeys.REFRESH_TOKEN, status],
-    queryFn: () => refreshToken(),
+    queryFn: refreshToken,
     enabled: status === 'success',
   });
 };
