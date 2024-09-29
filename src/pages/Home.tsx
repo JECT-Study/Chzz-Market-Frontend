@@ -5,41 +5,38 @@ import HomeRegisterBtn from '@/components/home/HomeRegisterBtn';
 import { useScrollDetection } from '@/hooks/useScrollDetection';
 import type { PreRegisterAuction, RegisterAuction } from 'Auction';
 import { useGetHomeAuctions } from '@/components/home/queries';
+import NoData from '@/components/common/NoData';
 
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
 
-  const { bestAuctions, imminentAuctions, preRegisterAuctions } =
-    useGetHomeAuctions();
+  const { bestAuctions, imminentAuctions, preRegisterAuctions } = useGetHomeAuctions();
 
   return (
-    <div
-      ref={elementRef}
-      role="main"
-      aria-label="main_area"
-      className="relative flex flex-col w-full gap-6 overflow-y-scroll"
-    >
-      <HomeItemList name="베스트 경매">
-        {bestAuctions.map((auction: RegisterAuction) => (
-          <HomeAuctionItem key={auction.id} kind="register" auction={auction} />
-        ))}
+    <div ref={elementRef} role='main' aria-label='main_area' className='relative flex flex-col w-full gap-6 overflow-y-scroll'>
+      <HomeItemList name='베스트 경매'>
+        {bestAuctions.length > 0 ? (
+          bestAuctions.map((auction: RegisterAuction) => <HomeAuctionItem key={auction.id} kind='register' auction={auction} />)
+        ) : (
+          <NoData />
+        )}
       </HomeItemList>
-      <HomeItemList name="종료 임박 경매">
-        {imminentAuctions.map((auction: RegisterAuction) => (
-          <HomeAuctionItem key={auction.id} kind="register" auction={auction} />
-        ))}
+      <HomeItemList name='종료 임박 경매'>
+        {imminentAuctions.length > 0 ? (
+          imminentAuctions.map((auction: RegisterAuction) => <HomeAuctionItem key={auction.id} kind='register' auction={auction} />)
+        ) : (
+          <NoData />
+        )}
       </HomeItemList>
-      <HomeItemList name="카테고리">
+      <HomeItemList name='카테고리'>
         <CategoryList />
       </HomeItemList>
-      <HomeItemList name="사전 등록 경매">
-        {preRegisterAuctions.map((auction: PreRegisterAuction) => (
-          <HomeAuctionItem
-            key={auction.id}
-            kind="pre-register"
-            auction={auction}
-          />
-        ))}
+      <HomeItemList name='사전 등록 경매'>
+        {preRegisterAuctions.length > 0 ? (
+          preRegisterAuctions.map((auction: PreRegisterAuction) => <HomeAuctionItem key={auction.id} kind='pre-register' auction={auction} />)
+        ) : (
+          <NoData />
+        )}
       </HomeItemList>
       <HomeRegisterBtn isScrolled={isScrolled} />
     </div>
