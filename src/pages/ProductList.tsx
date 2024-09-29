@@ -28,8 +28,12 @@ const ProductList = () => {
     refetchEnrollData,
   } = useProductList(activeTab, sortType);
 
-  const ongoingItems = ongoingData?.pages[0]?.items || [];
-  const enrollItems = enrollData?.pages[0]?.items || [];
+  const [ongoingItems, setOngoingItems] = useState<OngoingAuctionListItem[]>(
+    ongoingData?.pages[0]?.items || [],
+  );
+  const [enrollItems, setEnrollItems] = useState<PreEnrollProductListItem[]>(
+    enrollData?.pages[0]?.items || [],
+  );
 
   const handleObserver = useCallback(
     (entities: IntersectionObserverEntry[]) => {
@@ -78,6 +82,14 @@ const ProductList = () => {
       refetchEnrollData();
     }
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
+
+  const handleDeleteOngoingProduct = (id: number) => {
+    setOngoingItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const handleDeleteEnrollProduct = (id: number) => {
+    setEnrollItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
 
   return (
     <Layout>
