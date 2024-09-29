@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { getToken, removeToken } from '@/utils/tokenUtils';
+import { getToken, removeToken, setToken } from '@/utils/tokenUtils';
 
 import { refreshToken } from '@/components/login/queries';
 import { toast } from 'sonner';
@@ -17,6 +17,62 @@ const handleTokenError = (message: string) => {
   removeToken();
   toast(message);
   window.location.href = '/login';
+};
+
+const parseJwt = (token: string) => {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(function (c) {
+          return `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`;
+        })
+        .join(''),
+    );
+
+    return JSON.parse(jsonPayload);
+  } catch (error) {
+    return null;
+  }
+};
+
+const getAccessTokenExpiration = () => {
+  const token = getToken();
+  if (token) {
+    const parsedToken = parseJwt(token);
+    if (parsedToken && parsedToken.exp) {
+      return parsedToken.exp * 1000;
+    }
+  }
+  return null;
+};
+
+const tokenRefresh = () => {
+  const expiration = getAccessTokenExpiration();
+  if (expiration) {
+    const currentTime = Date.now();
+    const timeout = expiration - currentTime - 60000;
+
+    if (timeout > 0) {
+      setTimeout(async () => {
+        try {
+          const refreshData = await refreshToken();
+          const newAccessToken = getToken();
+          if (!newAccessToken) {
+            throw new Error('리프레시 토큰이 만료되었습니다.');
+          }
+          setToken(newAccessToken);
+          tokenRefresh();
+        } catch (error) {
+          handleTokenError(
+            '토큰 갱신 중 오류 발생되었습니다. 다시 로그인해주세요.',
+          );
+        }
+      }, timeout);
+    }
+  }
 };
 
 export const createClient = (config?: AxiosRequestConfig) => {
@@ -113,3 +169,4 @@ export const createClient = (config?: AxiosRequestConfig) => {
 };
 
 export const httpClient = createClient();
+tokenRefresh();
