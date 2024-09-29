@@ -53,9 +53,22 @@ export const useSignup = (): any => {
     setActiveButtonSheet(!activeButtonSheet);
   };
 
+  const formLink = (link: string) => {
+    if (link && !link.startsWith('https://')) {
+      return `https://${link}`;
+    }
+    if (link && !link.startsWith('http://')) {
+      return `http://${link}`;
+    }
+    return link;
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = handleSubmit((data: any) => {
-    signupMutation.mutate(data);
+    const formattedLink = formLink(data.link);
+    const formattedData = { ...data, link: formattedLink };
+
+    signupMutation.mutate(formattedData);
   });
 
   return {

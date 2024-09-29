@@ -1,8 +1,8 @@
 import Layout from '@/components/layout/Layout';
 import { useNavigate } from 'react-router-dom';
 import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
-import naverImage from '@/assets/images/naver_login.png';
 import ChizzImage from '@/assets/icons/main_cheese_icon.svg';
+import { SiNaver } from 'react-icons/si';
 import { useAuth } from '@/hooks/useAuth';
 import { useRefreshTokenOnSuccess } from '@/components/home/queries';
 
@@ -26,17 +26,21 @@ const Login = () => {
               <img
                 src={kakaoImage}
                 alt="kakaoButton"
-                className="w-full h-full object-cover cursor-pointer rounded-lg"
+                className="w-full h-full object-cover cursor-pointer rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-[#c8b612] focus:outline-none"
                 onClick={handleKakaoLogin}
               />
             </div>
             <div className="w-[320px] h-12 ">
-              <img
-                src={naverImage}
-                alt="naverButton"
-                className="w-full h-full object-cover cursor-pointer rounded-lg"
+              <button
                 onClick={handleNaverLogin}
-              />
+                className="w-full h-12 bg-[#1ec800] text-white text-lg rounded-lg flex items-center cursor-pointer hover:bg-[#17b000] focus:ring-2 focus:ring-offset-2 focus:ring-[#17b000] focus:outline-none"
+                aria-label="네이버 로그인"
+              >
+                <div className="flex items-center justify-center w-12 h-full rounded-l-lg">
+                  <SiNaver size={24} />
+                </div>
+                <span className="flex-grow mr-6">네이버 로그인</span>
+              </button>
             </div>
           </div>
         </div>
