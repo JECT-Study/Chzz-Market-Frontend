@@ -21,8 +21,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.CLOUDOORT_GITHUB_KEY }}
         with:
           source-directory: 'output'
-          destination-github-username: CLOUDoort
-          destination-repository-name: Chzz-Market-Frontend
+          destination-github-username: Chzz-Market-Frontend
+          destination-repository-name: CLOUDoort
           user-email: ${{ secrets.CLOUDOORT_ACCOUNT_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
