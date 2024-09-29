@@ -25,7 +25,6 @@ const GlobalLayout = () => {
 
   useEffect(() => {
     const showNextNotification = () => {
-      /* 페이지 테스트를 위해 주석 처리 */
       setCurrentNotification(notifications[0]);
       setNotifications((prev) => prev.slice(1));
     };

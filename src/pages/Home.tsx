@@ -10,10 +10,11 @@ import {
   imminentAuctionsData,
   preRegisterAuctionsData,
 } from '@/mocks/data/homeAuctionsData';
+import { useRefreshTokenOnSuccess } from '@/components/home/queries';
 
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
-  // useRefreshTokenOnSuccess();
+  useRefreshTokenOnSuccess();
 
   // const { bestAuctions, imminentAuctions, preRegisterAuctions } =
   //   useGetHomeAuctions();

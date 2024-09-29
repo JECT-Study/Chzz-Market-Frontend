@@ -21,7 +21,6 @@ export const usePostRegister = (): {
   const { mutate } = useMutation({
     mutationFn: postRegister,
     onSuccess: () => navigate('/'),
-    onError: (error) => toast(error.message),
   });
 
   return { mutate };

@@ -3,6 +3,7 @@ import './index.css';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import { store } from '@/store';
+import { Toaster } from 'sonner';
 import App from './App';
 import ReactQueryProvider from './provider/queryProvider';
 import { storeLogin } from './store/authSlice';
@@ -25,6 +26,7 @@ enableMocking().then(() => {
     <ReactQueryProvider showDevTools>
       <Provider store={store}>
         <App />
+        <Toaster />
       </Provider>
     </ReactQueryProvider>,
   );
