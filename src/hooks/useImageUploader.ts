@@ -1,8 +1,10 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 
 export const useImageUploader = (
   state: string[],
   setState: (images: string[]) => void,
+  files: File[],
+  setFiles: Dispatch<SetStateAction<File[]>>,
 ) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -19,19 +21,15 @@ export const useImageUploader = (
     });
   };
 
-  const addImages = async (files: File[]) => {
+  const addImages = async (newFiles: File[]) => {
     try {
       const newImages = await Promise.all(
-        files.map(async (file) => {
-          const dataUrl = await convertFileToDataURL(file);
-          return state.includes(dataUrl) ? null : dataUrl;
-        }),
+        newFiles.map(async (newFile) => convertFileToDataURL(newFile)),
       );
-      const validNewImages = newImages.filter(
-        (image): image is string => image !== null,
-      );
-
-      setState([...state, ...validNewImages]);
+      const imgArr = Array.from(new Set([...state, ...newImages]));
+      const fileArr = Array.from(new Set([...files, ...newFiles]));
+      setFiles(fileArr);
+      setState(imgArr);
     } catch (error) {
       throw new Error('Error reading file!');
     }
@@ -40,13 +38,14 @@ export const useImageUploader = (
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
-    const files = Array.from(e.target.files);
+    const curFiles = Array.from(e.target.files);
 
-    addImages(files);
+    addImages(curFiles);
   };
 
-  const deleteImage = (target: string) => {
-    setState(state.filter((img: string) => img !== target));
+  const deleteImage = (targetIdx: number) => {
+    setFiles(files.filter((_, idx) => idx !== targetIdx));
+    setState(state.filter((_, idx) => idx !== targetIdx));
   };
 
   const handleBoxClick = () => {
@@ -54,6 +53,7 @@ export const useImageUploader = (
   };
 
   return {
+    files,
     fileInputRef,
     deleteImage,
     handleImage,

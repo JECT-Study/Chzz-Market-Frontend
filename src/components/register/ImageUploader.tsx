@@ -1,15 +1,23 @@
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 import { useImageUploader } from '@/hooks/useImageUploader';
 import DeleteIcon from '@/assets/icons/delete.svg';
+import { Dispatch, SetStateAction } from 'react';
 import { Input } from '../ui/input';
 import AddImageButton from './AddImageButton';
 
 interface ImageUploaderProps {
   images: string[];
   setImages: (value: string[]) => void;
+  files: File[];
+  setFiles: Dispatch<SetStateAction<File[]>>;
 }
 
-const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
+const ImageUploader = ({
+  files,
+  setFiles,
+  images,
+  setImages,
+}: ImageUploaderProps) => {
   const {
     handleDragStart,
     handleDragLeave,
@@ -18,7 +26,7 @@ const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
     hoveredIndex,
   } = useDragAndDrop(images, setImages);
   const { fileInputRef, deleteImage, handleImage, handleBoxClick } =
-    useImageUploader(images, setImages);
+    useImageUploader(images, setImages, files, setFiles);
 
   return (
     <div className="flex items-center gap-3 overflow-scroll min-h-36">
@@ -50,7 +58,7 @@ const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
           )}
           <button
             className="absolute top-[-5%] right-[-5%] cursor-pointer text-black size-6"
-            onClick={() => deleteImage(image)}
+            onClick={() => deleteImage(index)}
             aria-label={`사진 삭제 ${index}`}
           >
             <img src={DeleteIcon} alt="사진 삭제 버튼" />

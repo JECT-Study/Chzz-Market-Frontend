@@ -54,6 +54,7 @@ const Register = () => {
     resolver: zodResolver(RegisterSchema),
   });
   const { mutate: register } = usePostRegister();
+  const [files, setFiles] = useState<File[]>([]);
 
   const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
     name: 'minPrice',
@@ -75,7 +76,7 @@ const Register = () => {
     })();
   };
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const { productName, images, category, description, minPrice } = data;
+    const { productName, category, description, minPrice } = data;
     const formData = new FormData();
 
     const registerData: RegisterType = {
@@ -92,17 +93,7 @@ const Register = () => {
         type: 'application/json',
       }),
     );
-    images.forEach((base64Image, index) => {
-      const byteString = atob(base64Image.split(',')[1]); // base64 데이터에서 실제 데이터 부분 추출
-      const mimeString = base64Image.split(',')[0].split(':')[1].split(';')[0]; // MIME 타입 추출
-
-      const arrayBuffer = new Uint8Array(byteString.length);
-      arrayBuffer.forEach(
-        (_, idx) => (arrayBuffer[idx] = byteString.charCodeAt(idx)),
-      );
-      const blob = new Blob([arrayBuffer], { type: mimeString });
-      formData.append('images', blob, `image${index}.jpg`); // 각 파일에 이름을 부여
-    });
+    files.forEach((file) => formData.append('images', file));
     register(formData);
   };
 
@@ -122,6 +113,8 @@ const Register = () => {
               error={errors.images?.message}
               render={(field) => (
                 <ImageUploader
+                  files={files}
+                  setFiles={setFiles}
                   images={field.value as string[]}
                   setImages={(images: string[]) => field.onChange(images)}
                 />

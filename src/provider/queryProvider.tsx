@@ -24,7 +24,8 @@ const ReactQueryProvider = ({
         },
         mutations: {
           onError: (error) => {
-            toast(`${error.message}`);
+            const errorMessage = error.message || 'Unknown error occurred';
+            toast(errorMessage);
           },
         },
       },
