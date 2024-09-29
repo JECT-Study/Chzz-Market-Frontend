@@ -29,10 +29,10 @@ const ProductItem = ({
   const timeColor = getTimeColor(remainHour);
 
   useEffect(() => {
-    if (remainHour === 0) {
+    if (product.timeRemaining === 0) {
       onDelete(product.id);
     }
-  }, [remainHour, onDelete, product.id]);
+  }, [product.timeRemaining, onDelete, product.id]);
 
   return (
     <div key={product.id} className="mb-4">
