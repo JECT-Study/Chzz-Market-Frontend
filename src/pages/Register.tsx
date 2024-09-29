@@ -93,6 +93,7 @@ const Register = () => {
         type: 'application/json',
       }),
     );
+
     files.forEach((file) => formData.append('images', file));
     register(formData);
   };
