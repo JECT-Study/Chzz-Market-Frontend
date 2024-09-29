@@ -1,5 +1,6 @@
+import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
-import { NativeEventSource, EventSourcePolyfill } from 'event-source-polyfill';
+
 import { getToken } from '@/utils/tokenUtils';
 
 export const useSSE = <T>(url: string) => {
@@ -11,19 +12,16 @@ export const useSSE = <T>(url: string) => {
     const fetchSSE = () => {
       const accessToken = getToken();
       if (accessToken) {
-        eventSource.current = new EventSource(
-          `${import.meta.env.VITE_API_URL}${url}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-            withCredentials: true,
+        eventSource.current = new EventSource(`${import.meta.env.VITE_API_URL}${url}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
           },
-        );
+          withCredentials: true,
+        });
 
         eventSource.current.onopen = () => {};
 
-        eventSource.current.onerror = () => {
+        eventSource.current.onerror = (error) => {
           eventSource.current?.close();
           setTimeout(fetchSSE, 3000);
         };
@@ -35,8 +33,10 @@ export const useSSE = <T>(url: string) => {
           setState((prev) => [...prev, data]);
         });
       }
+      return () => eventSource.current?.close();
     };
-    return () => eventSource.current?.close();
+
+    fetchSSE();
   }, [url, EventSource]);
 
   return { state, setState };
