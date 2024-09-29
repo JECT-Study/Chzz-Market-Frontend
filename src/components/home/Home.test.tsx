@@ -6,9 +6,9 @@ import userEvent from '@testing-library/user-event';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
 import {
-  bestAuctions,
-  imminentAuctions,
-  preRegisterAuctions,
+  bestAuctionsData,
+  imminentAuctionsData,
+  preRegisterAuctionsData,
 } from '@/mocks/data/homeAuctionsData';
 import { getTimeColor } from '@/utils/getTimeColor';
 import { useGetNotifications } from '../notification/queries';
@@ -23,9 +23,9 @@ vi.mock('@/components/home/queries');
 // 모듈을 모킹한 후, 우리는 각 함수가 어떤 값을 반환할지 정의
 // 모킹을 통해 설정한 반환값은 실제로 테스트를 진행할 때, 컴포넌트가 이 훅에서 데이터를 가져오는 것처럼 작동하게 합니다. 이 과정에서 API 요청이 발생하지 않으며, 데이터가 항상 일관되게 제공됩니다.
 vi.mocked(useGetHomeAuctions).mockReturnValue({
-  bestAuctions,
-  imminentAuctions,
-  preRegisterAuctions,
+  bestAuctions: bestAuctionsData,
+  imminentAuctions: imminentAuctionsData,
+  preRegisterAuctions: preRegisterAuctionsData,
 });
 
 vi.mock('@/components/notification/queries');
@@ -58,12 +58,12 @@ describe('Home 테스트', () => {
       const { user } = setup();
 
       // 이 코드에서는 await을 사용해 findByRole이 요소를 찾을 때까지 기다린다. 이는 비동기적으로 로딩된 데이터를 처리하는 데 유용
-      const bestAuctionsData = await screen.findAllByRole('figure', {
+      const bestAuctionsMockData = await screen.findAllByRole('figure', {
         name: /register/,
       });
-      const firstBestAuctionsData = bestAuctionsData[0];
+      const firstBestAuctionsMockData = bestAuctionsMockData[0];
 
-      await user.click(firstBestAuctionsData);
+      await user.click(firstBestAuctionsMockData);
 
       expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/auction/0');
     });
@@ -71,11 +71,11 @@ describe('Home 테스트', () => {
     test('사전 경매 상품을 클릭하면 사전 경매 상세 페이지로 이동한다.', async () => {
       const { user } = setup();
 
-      const preRegisterAuctionsData = await screen.findAllByRole('figure', {
+      const preRegisterAuctionsMockData = await screen.findAllByRole('figure', {
         name: /pre-register/,
       });
 
-      const firstPreRegisterAuction = preRegisterAuctionsData[0];
+      const firstPreRegisterAuction = preRegisterAuctionsMockData[0];
 
       await user.click(firstPreRegisterAuction);
 
