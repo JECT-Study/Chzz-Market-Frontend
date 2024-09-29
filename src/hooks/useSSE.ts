@@ -21,7 +21,7 @@ export const useSSE = <T>(url: string) => {
 
         eventSource.current.onopen = () => {};
 
-        eventSource.current.onerror = (error) => {
+        eventSource.current.onerror = () => {
           eventSource.current?.close();
           setTimeout(fetchSSE, 3000);
         };
