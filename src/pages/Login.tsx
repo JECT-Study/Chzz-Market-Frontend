@@ -9,7 +9,10 @@ import { useRefreshTokenOnSuccess } from '@/components/home/queries';
 const Login = () => {
   const navigate = useNavigate();
   const { handleKakaoLogin, handleNaverLogin } = useAuth();
-  useRefreshTokenOnSuccess();
+  const { isError } = useRefreshTokenOnSuccess();
+  if (isError) {
+    return console.error(isError);
+  }
 
   return (
     <Layout>

@@ -31,8 +31,23 @@ export const createClient = (config?: AxiosRequestConfig) => {
   });
 
   axiosInstance.interceptors.request.use(async (request) => {
-    const accessToken = getToken();
-    if (accessToken) {
+    let accessToken = getToken();
+
+    if (!accessToken) {
+      try {
+        const refreshData = await refreshToken();
+
+        accessToken = getToken();
+        if (accessToken) {
+          request.headers.Authorization = `Bearer ${accessToken}`;
+        } else {
+          throw new Error('리프레시 토큰이 만료되었습니다.');
+        }
+      } catch (error) {
+        handleTokenError('토큰이 만료되었습니다. 다시 로그인해주세요.');
+        return Promise.reject(error);
+      }
+    } else {
       request.headers.Authorization = `Bearer ${accessToken}`;
     }
     return request;
@@ -53,7 +68,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
 
         if (errorMessage === '토큰이 만료되었습니다.') {
           try {
-            refreshToken();
+            await refreshToken();
             const newAccessToken = getToken();
             if (!newAccessToken)
               throw new Error('리프레시 토큰이 만료되었습니다.');

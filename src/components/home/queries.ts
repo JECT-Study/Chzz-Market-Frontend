@@ -3,10 +3,12 @@ import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
 import type { PreRegisterAuction, RegisterAuction } from 'Auction';
 import {
+  UseMutationResult,
   UseQueryResult,
-  useQuery,
+  useMutation,
   useSuspenseQueries,
 } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { refreshToken } from '../login/queries';
 
 export const useGetHomeAuctions = () => {
@@ -45,13 +47,26 @@ export const useGetHomeAuctions = () => {
   return { bestAuctions, imminentAuctions, preRegisterAuctions };
 };
 
-export const useRefreshTokenOnSuccess = (): UseQueryResult<void, unknown> => {
+export const useRefreshTokenOnSuccess = (): UseMutationResult<
+  void,
+  unknown,
+  void,
+  unknown
+> => {
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(window.location.search);
   const status = queryParams.get('status');
 
-  return useQuery({
-    queryKey: [queryKeys.REFRESH_TOKEN, status],
-    queryFn: () => refreshToken(),
-    enabled: status === 'success',
+  const RefreshMutation = useMutation({
+    mutationFn: () => refreshToken(),
+    onSuccess: () => {
+      navigate('/');
+    },
+    onError: (error) => {},
   });
+  if (status === 'success') {
+    RefreshMutation.mutate();
+  }
+
+  return RefreshMutation;
 };

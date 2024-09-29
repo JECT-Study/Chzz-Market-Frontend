@@ -8,8 +8,6 @@ import { useGetHomeAuctions } from '@/components/home/queries';
 
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
-  // useRefreshTokenOnSuccess();
-
   const { bestAuctions, imminentAuctions, preRegisterAuctions } =
     useGetHomeAuctions();
 
