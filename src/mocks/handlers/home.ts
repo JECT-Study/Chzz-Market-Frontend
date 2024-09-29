@@ -2,16 +2,16 @@ import { HttpHandler, HttpResponse, delay, http } from 'msw';
 
 import { API_END_POINT } from '@/constants/api';
 import {
-  bestAuctions,
-  imminentAuctions,
-  preRegisterAuctions,
+  bestAuctionsData,
+  imminentAuctionsData,
+  preRegisterAuctionsData,
 } from '../data/homeAuctionsData';
 
 export const bestAuctionsHandler: HttpHandler = http.get(
   `${API_END_POINT.BEST}`,
   async () => {
     await delay(1500);
-    return HttpResponse.json(bestAuctions);
+    return HttpResponse.json(bestAuctionsData);
   },
 );
 
@@ -19,13 +19,13 @@ export const imminentAuctionsHandler: HttpHandler = http.get(
   `${API_END_POINT.IMMINENT}`,
   async () => {
     await delay(1500);
-    return HttpResponse.json(imminentAuctions);
+    return HttpResponse.json(imminentAuctionsData);
   },
 );
 export const preRegisterAuctionsHandler: HttpHandler = http.get(
   `${API_END_POINT.PRE_REGISTER}`,
   async () => {
     await delay(1500);
-    return HttpResponse.json(preRegisterAuctions);
+    return HttpResponse.json(preRegisterAuctionsData);
   },
 );

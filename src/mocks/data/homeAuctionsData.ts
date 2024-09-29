@@ -5,7 +5,7 @@ import jordanRedImage from '@/assets/images/jordan_red.jpeg';
 import newBalanceImage from '@/assets/images/newbalance_993.jpeg';
 import { PreRegisterAuction, RegisterAuction } from 'Auction';
 
-export const bestAuctions: RegisterAuction[] = [
+export const bestAuctionsData: RegisterAuction[] = [
   {
     id: 0,
     name: '[나이키] 에어 조던 로우',
@@ -48,7 +48,7 @@ export const bestAuctions: RegisterAuction[] = [
   },
 ];
 
-export const imminentAuctions: RegisterAuction[] = [
+export const imminentAuctionsData: RegisterAuction[] = [
   {
     id: 0,
     name: '[나이키] 조던 블랙',
@@ -91,7 +91,7 @@ export const imminentAuctions: RegisterAuction[] = [
   },
 ];
 
-export const preRegisterAuctions: PreRegisterAuction[] = [
+export const preRegisterAuctionsData: PreRegisterAuction[] = [
   {
     id: 0,
     name: '[뉴발란스] 993',
