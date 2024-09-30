@@ -4,6 +4,11 @@ import { API_END_POINT } from '@/constants/api';
 // eslint-disable-next-line import/no-cycle
 import { User } from '@/@types/user';
 import { httpClient } from '@/api/axios';
+import { useNavigate } from 'react-router-dom';
+import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
+import { storeLogin } from '@/store/authSlice';
+import { useEffect } from 'react';
 
 export const postSignup = async (data: User) => {
   const response = await httpClient.post(
@@ -12,11 +17,10 @@ export const postSignup = async (data: User) => {
     { withCredentials: true },
   );
 
-  const accessToken = response.headers.authorization;
+  const accessToken = response.headers.authorization?.split(' ')[1];
 
-  if (accessToken && accessToken.startsWith('Bearer ')) {
-    const token = accessToken.split(' ')[1];
-    setToken(token);
+  if (accessToken) {
+    setToken(accessToken);
   }
 
   return response.data;
@@ -36,11 +40,10 @@ export const refreshToken = async () => {
       { withCredentials: true },
     );
 
-    const accessToken = response.headers.authorization;
+    const accessToken = response.headers.authorization?.split(' ')[1];
 
-    if (accessToken && accessToken.startsWith('Bearer ')) {
-      const token = accessToken.split(' ')[1];
-      setToken(token);
+    if (accessToken) {
+      setToken(accessToken);
     }
 
     return response.data;
@@ -48,4 +51,32 @@ export const refreshToken = async () => {
     removeToken();
     throw error;
   }
+};
+
+export const useRefreshTokenOnSuccess = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const queryParams = new URLSearchParams(window.location.search);
+  const status = queryParams.get('status');
+
+  const { mutate, isError, error, isSuccess } = useMutation({
+    mutationFn: () => refreshToken(),
+    onSuccess: () => {
+      const newAccessToken = localStorage.getItem('accessToken');
+      if (newAccessToken) {
+        dispatch(storeLogin({ token: newAccessToken }));
+      }
+    },
+    onError: () => {
+      navigate('/login');
+    },
+  });
+
+  useEffect(() => {
+    if (status === 'success') {
+      mutate();
+    }
+  }, [status, mutate]);
+
+  return { isSuccess };
 };
