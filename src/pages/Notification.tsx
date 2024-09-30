@@ -1,12 +1,8 @@
-import {
-  useDeleteNotification,
-  useGetNotifications,
-  useReadNotification,
-} from '@/components/notification/queries';
+import { useDeleteNotification, useGetNotifications, useReadNotification } from '@/components/notification/queries';
 
 import NotificationItem from '@/components/notification/NotificationItem';
 import type { NotificationType } from 'Notification';
-import NoData from '@/components/common/NoData';
+import NoData from '@/components/common/loadingAndError/NoData';
 
 const Notification = () => {
   const { notifications } = useGetNotifications();
@@ -19,18 +15,13 @@ const Notification = () => {
   return (
     <>
       {notifications.length > 0 ? (
-        <div className="mx-[-32px] my-[-16px]">
+        <div className='mx-[-32px] my-[-16px]'>
           {notifications.map((item: NotificationType) => (
-            <NotificationItem
-              key={item.id}
-              item={item}
-              handleDelete={clickDelete}
-              handleRead={clickRead}
-            />
+            <NotificationItem key={item.id} item={item} handleDelete={clickDelete} handleRead={clickRead} />
           ))}
         </div>
       ) : (
-        <div className="w-full h-full">
+        <div className='w-full h-full'>
           <NoData />
         </div>
       )}

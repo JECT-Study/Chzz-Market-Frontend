@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import classNames from 'classnames';
-import ButtonSpinner from './ButtonSpinner';
+import ButtonSpinner from './loadingAndError/ButtonSpinner';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -25,8 +25,7 @@ const Button = ({
   ariaLabel = '',
   loading = false,
 }: ButtonProps) => {
-  const baseClasses =
-    'focus:outline-none rounded transition-colors active:bg-black active:text-white ';
+  const baseClasses = 'focus:outline-none rounded transition-colors active:bg-black active:text-white ';
   const colorClasses = classNames({
     'bg-black text-white': color === 'black',
     'bg-white text-black border border-black': color === 'white',
@@ -43,31 +42,17 @@ const Button = ({
   });
   const hoverColorClasses = classNames({
     'hover:bg-black/70 hover:text-white': hoverColor === 'black',
-    'hover:bg-white hover:text-black border border-black':
-      hoverColor === 'white',
+    'hover:bg-white hover:text-black border border-black': hoverColor === 'white',
   });
-  const combinedClasses = classNames(
-    colorClasses,
-    baseClasses,
-    sizeClasses,
-    hoverColorClasses,
-    className,
-    {
-      'opacity-50 cursor-not-allowed': disabled,
-    },
-  );
+  const combinedClasses = classNames(colorClasses, baseClasses, sizeClasses, hoverColorClasses, className, {
+    'opacity-50 cursor-not-allowed': disabled,
+  });
 
   return (
-    <button
-      className={combinedClasses}
-      disabled={disabled}
-      onClick={onClick}
-      type={type}
-      aria-label={ariaLabel}
-    >
-      <div className="flex items-center justify-center w-full gap-3">
+    <button className={combinedClasses} disabled={disabled} onClick={onClick} type={type} aria-label={ariaLabel}>
+      <div className='flex items-center justify-center w-full gap-3'>
         {loading && <ButtonSpinner />}
-        <span className="pt-[.125rem]">{children}</span>
+        <span className='pt-[.125rem]'>{children}</span>
       </div>
     </button>
   );
