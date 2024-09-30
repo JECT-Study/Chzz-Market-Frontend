@@ -4,14 +4,14 @@ import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
 import ChizzImage from '@/assets/icons/main_cheese_icon.svg';
 import { SiNaver } from 'react-icons/si';
 import { useAuth } from '@/hooks/useAuth';
-import { useRefreshTokenOnSuccess } from '@/components/home/queries';
+import { useRefreshTokenOnSuccess } from '@/components/login/queries';
 
 const Login = () => {
   const navigate = useNavigate();
   const { handleKakaoLogin, handleNaverLogin } = useAuth();
-  const { isError } = useRefreshTokenOnSuccess();
-  if (isError) {
-    return console.error(isError);
+  const { isSuccess } = useRefreshTokenOnSuccess();
+  if (isSuccess) {
+    navigate('/');
   }
 
   return (
