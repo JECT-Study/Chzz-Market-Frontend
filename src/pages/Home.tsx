@@ -5,12 +5,12 @@ import HomeRegisterBtn from '@/components/home/HomeRegisterBtn';
 import { useScrollDetection } from '@/hooks/useScrollDetection';
 import type { PreRegisterAuction, RegisterAuction } from 'Auction';
 import { useGetHomeAuctions } from '@/components/home/queries';
-import NoData from '@/components/common/NoData';
+import NoData from '@/components/common/loadingAndError/NoData';
 
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
-
-  const { bestAuctions, imminentAuctions, preRegisterAuctions } = useGetHomeAuctions();
+  const { bestAuctions, imminentAuctions, preRegisterAuctions } =
+    useGetHomeAuctions();
 
   return (
     <div ref={elementRef} role='main' aria-label='main_area' className='relative flex flex-col w-full gap-6 overflow-y-scroll'>

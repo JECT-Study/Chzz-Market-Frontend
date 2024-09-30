@@ -5,14 +5,14 @@ import Bid, { loader as bidLoader } from './pages/Bid';
 import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 
 import AddressBook from './pages/AddressBook';
-import AsyncBoundary from './components/common/AsyncBoundary';
+import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
 import DetailPage from './pages/DetailPage';
 import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
 import LayoutWithNav from './components/layout/LayoutWithNav';
 import Login from './pages/Login';
-import NotFound from './components/common/NotFound';
+import NotFound from './components/common/loadingAndError/NotFound';
 import Notification from './pages/Notification';
 import OrderHistory from './pages/UserParticipatedList';
 import ProfileEdit from './pages/ProfileEdit';
@@ -20,8 +20,10 @@ import Register from './pages/Register';
 import Signup from './pages/Signup';
 import User from './pages/User';
 import UserRegisteredList from './pages/UserRegisteredList';
+import PrivateRoute from './components/common/route/PrivateRoute';
+import PublicRoute from './components/common/route/PublicRoute';
 
-const layoutWithNavRoute = [
+const layoutWithNavRouteList = [
   {
     path: ROUTERS.HOME,
     element: <Home />,
@@ -48,6 +50,42 @@ const layoutWithNavRoute = [
   },
 ];
 
+const privateRouteList = [
+  {
+    path: ROUTERS.BID,
+    element: <Bid />,
+    loader: bidLoader,
+  },
+  {
+    path: ROUTERS.FINAL_BIDDER_LIST,
+    element: <BidderList />,
+    loader: bidderListLoader,
+  },
+  {
+    path: ROUTERS.PROFILE_EDIT,
+    element: <ProfileEdit />,
+  },
+  {
+    path: ROUTERS.REGISTER,
+    element: <Register />,
+  },
+  {
+    path: ROUTERS.ADDRESSBOOK,
+    element: <AddressBook />,
+  },
+];
+
+const publicRouteList = [
+  {
+    path: ROUTERS.SIGNUP,
+    element: <Signup />,
+  },
+  {
+    path: ROUTERS.LOGIN,
+    element: <Login />,
+  },
+];
+
 export const router = createBrowserRouter([
   {
     element: <GlobalLayout />,
@@ -59,52 +97,27 @@ export const router = createBrowserRouter([
             <LayoutWithNav />
           </AsyncBoundary>
         ),
-        children: layoutWithNavRoute.map(({ path, element }) => ({
+        children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
-          element: <AsyncBoundary>{element}</AsyncBoundary>,
+          element: <AsyncBoundary>{path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}</AsyncBoundary>,
         })),
       },
-      {
-        path: `${ROUTERS.BID}`,
-        element: <Bid />,
-        loader: bidLoader,
-      },
-      {
-        path: `${ROUTERS.FINAL_BIDDER_LIST}`,
-        element: <BidderList />,
-        loader: bidderListLoader,
-      },
+      ...privateRouteList.map(({ path, element, loader }) => ({
+        path,
+        element: <PrivateRoute>{element}</PrivateRoute>,
+        ...(loader && { loader }),
+      })),
+      ...publicRouteList.map(({ path, element }) => ({
+        path,
+        element: <PublicRoute>{element}</PublicRoute>,
+      })),
       {
         path: ROUTERS.PRODUCT_LIST,
         element: <ProductListPage />,
       },
       {
-        path: ROUTERS.PROFILE_EDIT,
-        element: <ProfileEdit />,
-      },
-      {
-        path: ROUTERS.REGISTER,
-        element: <Register />,
-      },
-      {
-        path: ROUTERS.SIGNUP,
-        element: <Signup />,
-      },
-      {
-        path: ROUTERS.LOGIN,
-        element: <Login />,
-      },
-      {
         path: `${ROUTERS.AUCTION.ITEM}/:productId`,
         element: <DetailPage />,
-      },
-      {
-        path: ROUTERS.PRE_AUCTION.ITEM,
-        element: <DetailPage />,
-      },
-      {
-        path: ROUTERS.ADDRESSBOOK,
-        element: <AddressBook />,
       },
     ],
   },
