@@ -26,7 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <ReactQueryProvider showDevTools>
     <Provider store={store}>
       <App />
-      <Toaster />
+      <Toaster richColors />
     </Provider>
   </ReactQueryProvider>
 );
