@@ -3,10 +3,14 @@ import { categories } from '../../constants/categories';
 
 const CategoryItem = ({ name, icon }: { name: string; icon: string }) => {
   const navigate = useNavigate();
+
+  const onClickCategory = () => {
+    navigate(`/product/list?category=${name}`);
+  };
   return (
     <li
       className="flex flex-col items-center gap-3 cursor-pointer"
-      onClick={() => navigate(`/register`)}
+      onClick={onClickCategory}
     >
       <img
         src={icon}
