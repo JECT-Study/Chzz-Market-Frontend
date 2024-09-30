@@ -1,7 +1,5 @@
 import { navIcons } from '@/constants/navIcons';
 import { useNavigate } from 'react-router-dom';
-import { getToken } from '@/utils/tokenUtils';
-import { useGetNotifications } from '../notification/queries';
 
 const NavigationItem = ({
   name,
@@ -15,55 +13,46 @@ const NavigationItem = ({
   unreadNotificationsCount?: number;
 }) => {
   const iconSrc = navIcons[name][active ? 'on' : 'off'];
-  const notificationCondition =
-    name === 'notification' && unreadNotificationsCount > 0;
+  const notificationCondition = name === 'notification' && unreadNotificationsCount > 0;
 
   return (
-    <li className="flex justify-center transition-all items-center w-[11.25rem] h-[3.75rem] relative">
-      <img
-        onClick={onClick}
-        src={iconSrc}
-        alt={`${name}_${active ? 'on' : 'off'}_icon`}
-        className="cursor-pointer size-6"
-      />
+    <li className='flex justify-center transition-all items-center w-[11.25rem] h-[3.75rem] relative'>
+      <img onClick={onClick} src={iconSrc} alt={`${name}_${active ? 'on' : 'off'}_icon`} className='cursor-pointer size-6' />
       {notificationCondition && (
-        <div
-          aria-label="읽지 않은 알림을 표시하는 빨간 점"
-          className="absolute top-[25%] right-[42%] rounded-full size-1 bg-cheeseYellow"
-        />
+        <div aria-label='읽지 않은 알림을 표시하는 빨간 점' className='absolute top-[25%] right-[42%] rounded-full size-1 bg-cheeseYellow' />
       )}
     </li>
   );
 };
 
 const Navigation = ({ active }: { active: string }) => {
-  const token = getToken();
+  // const token = getToken();
   const navigate = useNavigate();
-  if (!token) {
-    return (
-      <nav className="flex items-center h-full">
-        {Object.entries(navIcons).map(([name, value]) => (
-          <NavigationItem
-            key={name}
-            name={name}
-            active={active === name}
-            onClick={() => {
-              navigate(value.path);
-            }}
-          />
-        ))}
-      </nav>
-    );
-  }
+  // if (!token) {
+  //   return (
+  //     <nav className="flex items-center h-full">
+  //       {Object.entries(navIcons).map(([name, value]) => (
+  //         <NavigationItem
+  //           key={name}
+  //           name={name}
+  //           active={active === name}
+  //           onClick={() => {
+  //             navigate(value.path);
+  //           }}
+  //         />
+  //       ))}
+  //     </nav>
+  //   );
+  // }
 
-  const { notifications } = useGetNotifications();
-  const unreadNotificationsCount = notifications?.reduce(
-    (acc, cur) => (!cur.isRead ? acc + 1 : acc),
-    0,
-  );
+  // const { notifications } = useGetNotifications();
+  // const unreadNotificationsCount = notifications?.reduce(
+  //   (acc, cur) => (!cur.isRead ? acc + 1 : acc),
+  //   0,
+  // );
 
   return (
-    <nav className="flex items-center h-full">
+    <nav className='flex items-center h-full'>
       {Object.entries(navIcons).map(([name, value]) => (
         <NavigationItem
           key={name}
@@ -72,7 +61,6 @@ const Navigation = ({ active }: { active: string }) => {
           onClick={() => {
             navigate(value.path);
           }}
-          unreadNotificationsCount={unreadNotificationsCount}
         />
       ))}
     </nav>

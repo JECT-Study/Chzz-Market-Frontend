@@ -1,5 +1,6 @@
+import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
-import { NativeEventSource, EventSourcePolyfill } from 'event-source-polyfill';
+
 import { getToken } from '@/utils/tokenUtils';
 
 export const useSSE = <T>(url: string) => {
@@ -9,27 +10,31 @@ export const useSSE = <T>(url: string) => {
 
   useEffect(() => {
     const fetchSSE = () => {
-      eventSource.current = new EventSource(
-        `${import.meta.env.VITE_API_URL}${url}`,
-      );
+      const accessToken = getToken();
+      if (accessToken) {
+        eventSource.current = new EventSource(`${import.meta.env.VITE_API_URL}${url}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        });
 
-      eventSource.current.onopen = () => {};
+        eventSource.current.onopen = () => {};
 
-      eventSource.current.onerror = () => {
-        eventSource.current?.close();
-        setTimeout(fetchSSE, 3000);
-      };
+        eventSource.current.onerror = () => {
+          eventSource.current?.close();
+          setTimeout(fetchSSE, 3000);
+        };
 
-      eventSource.current.addEventListener('init', () => {});
+        eventSource.current.addEventListener('init', () => {});
 
-      eventSource.current.addEventListener('notification', (e) => {
-        const data = JSON.parse(e.data);
-        setState((prev) => [...prev, data]);
-      });
+        eventSource.current.addEventListener('notification', (e) => {
+          const data = JSON.parse(e.data);
+          setState((prev) => [...prev, data]);
+        });
+      }
     };
-
-    const token = getToken();
-    if (token) fetchSSE();
+    fetchSSE();
     return () => eventSource.current?.close();
   }, [url, EventSource]);
 

@@ -7,11 +7,11 @@ export const useAuth = () => {
   const navigate = useNavigate();
 
   const handleKakaoLogin = () => {
-    window.location.href = 'https://chzz.store/oauth2/authorization/kakao';
+    window.location.href = `${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`;
   };
 
   const handleNaverLogin = () => {
-    window.location.href = 'https://chzz.store/oauth2/authorization/naver';
+    window.location.href = `${import.meta.env.VITE_API_URL}/oauth2/authorization/naver`;
   };
 
   const logoutMutation = useMutation({

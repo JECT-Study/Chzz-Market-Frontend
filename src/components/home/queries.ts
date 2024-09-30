@@ -1,12 +1,9 @@
+import type { PreRegisterAuction, RegisterAuction } from 'Auction';
+import { UseQueryResult, useQuery, useSuspenseQueries } from '@tanstack/react-query';
+
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
-import type { PreRegisterAuction, RegisterAuction } from 'Auction';
-import {
-  UseQueryResult,
-  useQuery,
-  useSuspenseQueries,
-} from '@tanstack/react-query';
 import { refreshToken } from '../login/queries';
 
 export const useGetHomeAuctions = () => {
@@ -20,23 +17,22 @@ export const useGetHomeAuctions = () => {
   };
   const getPreRegisterAuctions = async (): Promise<PreRegisterAuction[]> => {
     const response = await httpClient.get(`${API_END_POINT.PRE_REGISTER}`);
-    return response.data;
+    return response.data.items;
   };
 
-  const [bestAuctionsQuery, imminentAuctionsQuery, preRegisterAuctionsQuery] =
-    useSuspenseQueries({
-      queries: [
-        { queryKey: [queryKeys.BEST_AUCTIONS], queryFn: getBestAuctions },
-        {
-          queryKey: [queryKeys.IMMINENT_AUCTIONS],
-          queryFn: getImminentAuctions,
-        },
-        {
-          queryKey: [queryKeys.PRE_REGISTER_AUCTIONS],
-          queryFn: getPreRegisterAuctions,
-        },
-      ],
-    });
+  const [bestAuctionsQuery, imminentAuctionsQuery, preRegisterAuctionsQuery] = useSuspenseQueries({
+    queries: [
+      { queryKey: [queryKeys.BEST_AUCTIONS], queryFn: getBestAuctions },
+      {
+        queryKey: [queryKeys.IMMINENT_AUCTIONS],
+        queryFn: getImminentAuctions,
+      },
+      {
+        queryKey: [queryKeys.PRE_REGISTER_AUCTIONS],
+        queryFn: getPreRegisterAuctions,
+      },
+    ],
+  });
 
   const bestAuctions = bestAuctionsQuery.data;
   const imminentAuctions = imminentAuctionsQuery.data;
@@ -51,7 +47,7 @@ export const useRefreshTokenOnSuccess = (): UseQueryResult<void, unknown> => {
 
   return useQuery({
     queryKey: [queryKeys.REFRESH_TOKEN, status],
-    queryFn: () => refreshToken(),
+    queryFn: refreshToken,
     enabled: status === 'success',
   });
 };
