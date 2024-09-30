@@ -1,7 +1,4 @@
-import {
-  OngoingAuctionListItem,
-  PreEnrollProductListItem,
-} from '@/@types/productList';
+import { OngoingAuctionListItem, PreEnrollProductListItem } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import OngoingProduct from '@/components/productList/OngoingProduct';
@@ -21,23 +18,11 @@ const ProductList = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || 'all';
 
-  const {
-    ongoingData,
-    enrollData,
-    fetchNextOngoingPage,
-    fetchNextEnrollPage,
-    hasNextOngoingPage,
-    hasNextEnrollPage,
-    refetchOngoingData,
-    refetchEnrollData,
-  } = useProductList(activeTab, sortType, category);
+  const { ongoingData, enrollData, fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage, refetchOngoingData, refetchEnrollData } =
+    useProductList(activeTab, sortType, category);
 
-  const [ongoingItems, setOngoingItems] = useState<OngoingAuctionListItem[]>(
-    ongoingData?.pages[0]?.items || [],
-  );
-  const [enrollItems, setEnrollItems] = useState<PreEnrollProductListItem[]>(
-    enrollData?.pages[0]?.items || [],
-  );
+  const [ongoingItems] = useState<OngoingAuctionListItem[]>(ongoingData?.pages[0]?.items || []);
+  const [enrollItems] = useState<PreEnrollProductListItem[]>(enrollData?.pages[0]?.items || []);
 
   const handleObserver = useCallback(
     (entities: IntersectionObserverEntry[]) => {
@@ -51,12 +36,7 @@ const ProductList = () => {
         }
       }
     },
-    [
-      fetchNextOngoingPage,
-      fetchNextEnrollPage,
-      hasNextOngoingPage,
-      hasNextEnrollPage,
-    ],
+    [fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage]
   );
 
   useEffect(() => {
@@ -87,31 +67,24 @@ const ProductList = () => {
     }
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
-  const handleDeleteOngoingProduct = (id: number) => {
-    setOngoingItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
+  // const handleDeleteOngoingProduct = (id: number) => {
+  //   setOngoingItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  // };
 
-  const handleDeleteEnrollProduct = (id: number) => {
-    setEnrollItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
+  // const handleDeleteEnrollProduct = (id: number) => {
+  //   setEnrollItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  // };
 
   return (
     <Layout>
-      <Layout.Header title="상품 경매 목록" handleBack={() => navigate('/')} />
-      <Layout.Main
-        style={{ paddingLeft: 0, paddingRight: 0 }}
-        ref={mainContainerRef}
-      >
+      <Layout.Header title='상품 경매 목록' handleBack={() => navigate('/')} />
+      <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }} ref={mainContainerRef}>
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <ProductButtons setSortType={setSortType} />
-        <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
+        <div className='grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
           {activeTab === 'ongoing'
-            ? ongoingItems?.map((product: OngoingAuctionListItem) => (
-                <OngoingProduct key={product.id} product={product} />
-              ))
-            : enrollItems?.map((product: PreEnrollProductListItem) => (
-                <PreEnrollProduct key={product.id} product={product} />
-              ))}
+            ? ongoingItems?.map((product: OngoingAuctionListItem) => <OngoingProduct key={product.id} product={product} />)
+            : enrollItems?.map((product: PreEnrollProductListItem) => <PreEnrollProduct key={product.id} product={product} />)}
           <div ref={loader} />
         </div>
       </Layout.Main>
