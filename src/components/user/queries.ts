@@ -19,7 +19,7 @@ export const getAuctionOngoingRegister = async ({
   nickname,
 }: GetAuctionProps): Promise<OngoingAuctionRegisteredData> => {
   const response = await httpClient.get(
-    `${API_END_POINT.MY_ACUTION_ONGOING_REGISTER}/${nickname}?&sort=${sortType}&page=${pageNumber}&size=${pageSize}`,
+    `${API_END_POINT.MY_ACUTION_ONGOING_REGISTER}/장석원1?&sort=${sortType}&page=${pageNumber}&size=${pageSize}`,
   );
   return response.data;
 };
@@ -31,7 +31,7 @@ export const getAuctionPreEnrollRegister = async ({
   nickname,
 }: GetAuctionProps): Promise<PreEnrollProductRegisteredData> => {
   const response = await httpClient.get(
-    `${API_END_POINT.MY_ACUTION_PRE_ENROLL_REGISTER}/${nickname}?&sort=${sortType}&page=${pageNumber}&size=${pageSize}`,
+    `${API_END_POINT.MY_ACUTION_PRE_ENROLL_REGISTER}/장석원1?&sort=${sortType}&page=${pageNumber}&size=${pageSize}`,
   );
   return response.data;
 };

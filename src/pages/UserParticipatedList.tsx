@@ -91,20 +91,22 @@ const UserParticipatedList = () => {
   }, [activeTab, refetchHistoryData, refetchWonData, refetchLostData]);
 
   return (
-    <div className="mx-[-32px] my-[-16px]">
+    <div className="mx-[-32px] my-[-4px]">
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'AuctionHistory' &&
-        historyItems.map((product: MyHistoryAuctionListItem) => (
-          <OrderHistoryProduct key={product.id} product={product} />
-        ))}
-      {activeTab === 'AuctionsWon' &&
-        wonItems.map((product: MyWonAuctionListItem) => (
-          <OrderWonProduct key={product.id} product={product} />
-        ))}
-      {activeTab === 'AuctionsLost' &&
-        lostItems.map((product: MyLostAuctionListItem) => (
-          <OrderLostProduct key={product.id} product={product} />
-        ))}
+      <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
+        {activeTab === 'AuctionHistory' &&
+          historyItems.map((product: MyHistoryAuctionListItem) => (
+            <OrderHistoryProduct key={product.id} product={product} />
+          ))}
+        {activeTab === 'AuctionsWon' &&
+          wonItems.map((product: MyWonAuctionListItem) => (
+            <OrderWonProduct key={product.id} product={product} />
+          ))}
+        {activeTab === 'AuctionsLost' &&
+          lostItems.map((product: MyLostAuctionListItem) => (
+            <OrderLostProduct key={product.id} product={product} />
+          ))}
+      </div>
     </div>
   );
 };

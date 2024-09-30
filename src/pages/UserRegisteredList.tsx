@@ -80,9 +80,9 @@ const UserRegisteredList = () => {
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
-    <div className="mx-[-32px] my-[-16px]">
+    <div className="mx-[-32px] my-[-4px]">
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
+      <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
         {activeTab
           ? ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
               <OngoingMyRegister product={product} key={product.id} />

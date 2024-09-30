@@ -75,7 +75,7 @@ const Register = () => {
       productName,
       category,
       description,
-      minPrice: convertCurrencyToNumber(minPrice) + 1,
+      minPrice: convertCurrencyToNumber(minPrice),
       auctionRegisterType: caution,
     };
 
