@@ -7,7 +7,7 @@ import Layout from '@/components/layout/Layout';
 import OngoingProduct from '@/components/productList/OngoingProduct';
 import ProductButtons from '@/components/productList/ProductButtons';
 import ProductListTabs from '@/components/productList/ProductListTabs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useProductList from '@/hooks/useProductList';
 import PreEnrollProduct from '@/components/productList/PreEnrollProduct';
 
@@ -17,6 +17,10 @@ const ProductList = () => {
   const navigate = useNavigate();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
+
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category') || 'all';
+
   const {
     ongoingData,
     enrollData,
@@ -26,7 +30,7 @@ const ProductList = () => {
     hasNextEnrollPage,
     refetchOngoingData,
     refetchEnrollData,
-  } = useProductList(activeTab, sortType);
+  } = useProductList(activeTab, sortType, category);
 
   const [ongoingItems, setOngoingItems] = useState<OngoingAuctionListItem[]>(
     ongoingData?.pages[0]?.items || [],

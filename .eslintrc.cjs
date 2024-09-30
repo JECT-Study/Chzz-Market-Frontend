@@ -81,6 +81,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
 
     'testing-library/no-node-access': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
 
     // 의존성 문제 해결
     'no-param-reassign': 'off',
