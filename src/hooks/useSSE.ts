@@ -33,10 +33,9 @@ export const useSSE = <T>(url: string) => {
           setState((prev) => [...prev, data]);
         });
       }
-      return () => eventSource.current?.close();
     };
-
     fetchSSE();
+    return () => eventSource.current?.close();
   }, [url, EventSource]);
 
   return { state, setState };
