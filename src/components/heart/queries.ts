@@ -1,9 +1,4 @@
-import {
-  UseMutateFunction,
-  useMutation,
-  useQueryClient,
-  useSuspenseQuery,
-} from '@tanstack/react-query';
+import { UseMutateFunction, useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
@@ -12,9 +7,7 @@ import { PreRegisterAuction } from 'Auction';
 
 export const useGetPreRegisterHeart = () => {
   const getPreRegisterHeart = async (): Promise<PreRegisterAuction[]> => {
-    const response = await httpClient.get(
-      `${API_END_POINT.PRE_REGISTERED_HEART}`,
-    );
+    const response = await httpClient.get(`${API_END_POINT.PRE_REGISTER}/history`);
 
     return response.data;
   };
@@ -32,9 +25,7 @@ export const useDeletePreRegisterHeart = (): {
 } => {
   const queryClient = useQueryClient();
   const deletePreRegisterHeart = async (id: number) => {
-    const response = await httpClient.delete(
-      `${API_END_POINT.PRE_REGISTERED_HEART}/${id}`,
-    );
+    const response = await httpClient.delete(`${API_END_POINT.PRE_REGISTER}/${id}`);
     return response.data.data;
   };
 

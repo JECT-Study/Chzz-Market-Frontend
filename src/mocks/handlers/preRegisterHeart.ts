@@ -5,24 +5,16 @@ import { preRegisterHeartData } from '../data/preRegisterHeartData';
 
 let curPreRegisterHeartData = [...preRegisterHeartData];
 
-export const preRegisterHeartHandler: HttpHandler = http.get(
-  `${API_END_POINT.PRE_REGISTERED_HEART}`,
-  async () => {
-    await delay(1000);
-    return HttpResponse.json(curPreRegisterHeartData);
-  },
-);
+export const preRegisterHeartHandler: HttpHandler = http.get(`${API_END_POINT.PRE_REGISTER}/history`, async () => {
+  await delay(1000);
+  return HttpResponse.json(curPreRegisterHeartData);
+});
 
-export const preRegisterHeartDeleteHandler: HttpHandler = http.delete(
-  `${API_END_POINT.PRE_REGISTERED_HEART}/:id`,
-  ({ params }) => {
-    const id = params.id as string;
-    const heartId = parseInt(id, 10);
+export const preRegisterHeartDeleteHandler: HttpHandler = http.delete(`${API_END_POINT.PRE_REGISTER}/:id`, ({ params }) => {
+  const id = params.id as string;
+  const heartId = parseInt(id, 10);
 
-    curPreRegisterHeartData = curPreRegisterHeartData.filter(
-      (el) => el.id !== heartId,
-    );
+  curPreRegisterHeartData = curPreRegisterHeartData.filter((el) => el.id !== heartId);
 
-    return HttpResponse.json({ data: curPreRegisterHeartData, status: 204 });
-  },
-);
+  return HttpResponse.json({ data: curPreRegisterHeartData, status: 204 });
+});

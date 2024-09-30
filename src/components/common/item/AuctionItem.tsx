@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import ParticipantCount from './atomic/ParticipantCount';
-import LikeCount from './atomic/LikeCount';
-import MinPrice from './atomic/MinPrice';
-import TimeLabel from './atomic/TimeLabel';
+import ParticipantCount from '../atomic/ParticipantCount';
+import LikeCount from '../atomic/LikeCount';
+import MinPrice from '../atomic/MinPrice';
+import TimeLabel from '../atomic/TimeLabel';
 
 interface AuctionItemProps {
   label: string;
@@ -14,10 +14,7 @@ const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
   const axisStyle = axis === 'column' && 'flex-col';
 
   return (
-    <figure
-      aria-label={label}
-      className={`flex gap-2 min-w-[12rem] ${axisStyle}`}
-    >
+    <figure aria-label={label} className={`flex gap-2 min-w-[12rem] ${axisStyle}`}>
       {children}
     </figure>
   );
@@ -25,12 +22,8 @@ const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
 
 const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
   return (
-    <div className="relative border rounded">
-      <img
-        src={src}
-        alt="이미지"
-        className="object-cover w-full h-[12rem] rounded"
-      />
+    <div className='relative border rounded'>
+      <img src={src} alt='이미지' className='object-cover w-full h-[12rem] rounded' />
       {time && <TimeLabel time={time} />}
     </div>
   );
@@ -45,17 +38,13 @@ interface MainProps {
 
 const Main = ({ kind, name, price, count }: MainProps) => {
   return (
-    <figcaption className="flex flex-col gap-2 p-2">
-      <h3 aria-label="이름" className="text-heading3">
+    <figcaption className='flex flex-col gap-2 p-2'>
+      <h3 aria-label='이름' className='text-heading3'>
         {name}
       </h3>
       <div>
         <MinPrice price={price} />
-        {kind === 'register' ? (
-          <ParticipantCount count={count} />
-        ) : (
-          <LikeCount count={count} />
-        )}
+        {kind === 'register' ? <ParticipantCount count={count} /> : <LikeCount count={count} />}
       </div>
     </figcaption>
   );
