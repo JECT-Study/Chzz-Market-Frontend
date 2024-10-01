@@ -2,8 +2,8 @@ import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
 
 import { getToken } from '@/utils/tokenUtils';
-import { useSelector } from 'react-redux';
 import { isLoggedIn } from '@/store/authSlice';
+import { useSelector } from 'react-redux';
 
 export const useSSE = <T>(url: string) => {
   const [state, setState] = useState<T[]>([]);
@@ -18,7 +18,7 @@ export const useSSE = <T>(url: string) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        heartbeatTimeout: 600000,
+        heartbeatTimeout: 2_100_000,
         withCredentials: true,
       });
 
