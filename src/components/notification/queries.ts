@@ -1,22 +1,15 @@
-import {
-  UseMutateFunction,
-  useMutation,
-  useQueryClient,
-  useSuspenseQuery,
-} from '@tanstack/react-query';
+import { UseMutateFunction, useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
 import { API_END_POINT } from '@/constants/api';
-import { NotificationType } from 'Notification';
+import type { INotification } from 'Notification';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
 
 export const useGetNotifications = () => {
-  const getNotifications = async (): Promise<NotificationType[]> => {
-    const response = await httpClient.get(
-      `${API_END_POINT.NOTIFICATIONS}?page=0&size=20`,
-    );
+  const getNotifications = async (): Promise<INotification[]> => {
+    const response = await httpClient.get(`${API_END_POINT.NOTIFICATIONS}`);
 
-    return response.data;
+    return response.data.items;
   };
 
   const { data: notifications } = useSuspenseQuery({
@@ -33,9 +26,7 @@ export const useReadNotification = (): {
   const queryClient = useQueryClient();
 
   const readNotification = async (id: number) => {
-    const response = await httpClient.post(
-      `${API_END_POINT.NOTIFICATIONS}/${id}/read`,
-    );
+    const response = await httpClient.post(`${API_END_POINT.NOTIFICATIONS}/${id}/read`);
     return response.data.data;
   };
 
@@ -56,9 +47,7 @@ export const useDeleteNotification = (): {
   const queryClient = useQueryClient();
 
   const deleteNotification = async (id: number) => {
-    const response = await httpClient.delete(
-      `${API_END_POINT.NOTIFICATIONS}/${id}`,
-    );
+    const response = await httpClient.delete(`${API_END_POINT.NOTIFICATIONS}/${id}`);
     return response.data.data;
   };
 
