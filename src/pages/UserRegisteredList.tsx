@@ -1,13 +1,11 @@
-import {
-  OngoingAuctionRegisterdItem,
-  PreEnrollProductRegisteredItem,
-} from '@/@types/productList';
+import { OngoingAuctionRegisterdItem, PreEnrollProductRegisteredItem } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
+import EmptyBoundary from '@/components/common/EmptyBoundary';
 import OngoingMyRegister from '@/components/user/OngoingMyRegister';
 import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 import UserOrderTab from '@/components/user/UserOrderTab';
+import { useLocation } from 'react-router-dom';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
 
 const UserRegisteredList = () => {
@@ -17,16 +15,8 @@ const UserRegisteredList = () => {
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
-  const {
-    ongoingData,
-    enrollData,
-    fetchNextOngoingPage,
-    fetchNextEnrollPage,
-    hasNextOngoingPage,
-    hasNextEnrollPage,
-    refetchOngoingData,
-    refetchEnrollData,
-  } = useMyAuctionList(activeTab, 'nickname');
+  const { ongoingData, enrollData, fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage, refetchOngoingData, refetchEnrollData } =
+    useMyAuctionList(activeTab, 'nickname');
 
   const ongoingItems = ongoingData?.pages[0]?.items || [];
   const enrollItems = enrollData?.pages[0]?.items || [];
@@ -43,12 +33,7 @@ const UserRegisteredList = () => {
         }
       }
     },
-    [
-      fetchNextOngoingPage,
-      fetchNextEnrollPage,
-      hasNextOngoingPage,
-      hasNextEnrollPage,
-    ],
+    [fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage]
   );
 
   useEffect(() => {
@@ -80,16 +65,22 @@ const UserRegisteredList = () => {
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
-    <div className="mx-[-32px] my-[-16px]">
+    <div className='mx-[-32px] my-[-16px]'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="p-4 h-[calc(100vh-100px)] overflow-y-auto">
-        {activeTab
-          ? ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
+      <div className='p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+        {activeTab ? (
+          <EmptyBoundary dataLength={ongoingItems.length} type='userRegisterAuction'>
+            {ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
               <OngoingMyRegister product={product} key={product.id} />
-            ))
-          : enrollItems.map((product: PreEnrollProductRegisteredItem) => (
+            ))}
+          </EmptyBoundary>
+        ) : (
+          <EmptyBoundary dataLength={enrollItems.length} type='userPreRegisterAuction'>
+            {enrollItems.map((product: PreEnrollProductRegisteredItem) => (
               <PreEnrollMyRegister product={product} key={product.id} />
             ))}
+          </EmptyBoundary>
+        )}
       </div>
     </div>
   );

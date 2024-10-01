@@ -1,6 +1,6 @@
 import { FallbackProps } from 'react-error-boundary';
 import Button from '../Button';
-import NoData from './NoData';
+import NoData from '../EmptyFallback';
 
 const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   if (!error) return null;

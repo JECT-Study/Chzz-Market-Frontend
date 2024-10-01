@@ -1,15 +1,12 @@
-import OrderListTab from '@/components/order/OrderListTab';
-import { useLocation } from 'react-router-dom';
+import { MyHistoryAuctionListItem, MyLostAuctionListItem, MyWonAuctionListItem } from '@/@types/productList';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import useHistory from '@/hooks/useHistory';
+
 import OrderHistoryProduct from '@/components/order/OrderHistoryProduct';
-import OrderWonProduct from '@/components/order/OrderWonProduct';
+import OrderListTab from '@/components/order/OrderListTab';
 import OrderLostProduct from '@/components/order/OrderLostProduct';
-import {
-  MyHistoryAuctionListItem,
-  MyLostAuctionListItem,
-  MyWonAuctionListItem,
-} from '@/@types/productList';
+import OrderWonProduct from '@/components/order/OrderWonProduct';
+import useHistory from '@/hooks/useHistory';
+import { useLocation } from 'react-router-dom';
 
 const UserParticipatedList = () => {
   const location = useLocation();
@@ -50,14 +47,7 @@ const UserParticipatedList = () => {
         }
       }
     },
-    [
-      hasNextHistoryPage,
-      fetchNextHistoryPage,
-      hasNextWonPage,
-      fetchNextWonPage,
-      hasNextLostPage,
-      fetchNextLostPage,
-    ],
+    [hasNextHistoryPage, fetchNextHistoryPage, hasNextWonPage, fetchNextWonPage, hasNextLostPage, fetchNextLostPage]
   );
 
   useEffect(() => {
@@ -91,20 +81,13 @@ const UserParticipatedList = () => {
   }, [activeTab, refetchHistoryData, refetchWonData, refetchLostData]);
 
   return (
-    <div className="mx-[-32px] my-[-16px]">
+    <div className='mx-[-32px] my-[-16px] h-full'>
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'AuctionHistory' &&
-        historyItems.map((product: MyHistoryAuctionListItem) => (
-          <OrderHistoryProduct key={product.id} product={product} />
-        ))}
-      {activeTab === 'AuctionsWon' &&
-        wonItems.map((product: MyWonAuctionListItem) => (
-          <OrderWonProduct key={product.id} product={product} />
-        ))}
-      {activeTab === 'AuctionsLost' &&
-        lostItems.map((product: MyLostAuctionListItem) => (
-          <OrderLostProduct key={product.id} product={product} />
-        ))}
+      {historyItems.map((product: MyHistoryAuctionListItem) => (
+        <OrderHistoryProduct key={product.id} product={product} />
+      ))}
+      {activeTab === 'AuctionsWon' && wonItems.map((product: MyWonAuctionListItem) => <OrderWonProduct key={product.id} product={product} />)}
+      {activeTab === 'AuctionsLost' && lostItems.map((product: MyLostAuctionListItem) => <OrderLostProduct key={product.id} product={product} />)}
     </div>
   );
 };
