@@ -4,7 +4,6 @@ import LikeCount from '../common/atomic/LikeCount';
 import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
 import TimeLabel from '../common/atomic/TimeLabel';
-import { addDefaultImg } from '@/utils/addDefaultImg';
 import { truncateText } from '@/utils/truncateText';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +19,7 @@ const HomeAuctionItem = <T extends 'pre-register' | 'register'>({ kind, auction 
   return (
     <figure className='flex flex-col min-w-[11rem] gap-2 border rounded text-body2 cursor-pointer' aria-label={kind} onClick={handleClick}>
       <div className='relative'>
-        <img src={auction.cdnPath} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' onError={addDefaultImg} />
+        <img src={auction.cdnPath} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' />
         {kind === 'register' && <TimeLabel time={auction.timeRemaining} />}
       </div>
       <figcaption className='flex flex-col gap-2 p-2'>
