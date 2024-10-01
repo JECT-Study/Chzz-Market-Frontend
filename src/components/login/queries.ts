@@ -32,13 +32,15 @@ export const refreshToken = async () => {
   try {
     const response = await httpClient.post(API_END_POINT.REFRESH_TOKEN, {}, { withCredentials: true });
 
-    const accessToken = response.headers.authorization?.split(' ')[1];
+    const newAccessToken = response.headers.authorization?.split(' ')[1];
 
-    if (accessToken) {
-      setToken(accessToken);
+    if (newAccessToken) {
+      setToken(newAccessToken);
+    } else {
+      throw new Error('리프레시 토큰이 만료되었습니다.');
     }
 
-    return response.data;
+    return newAccessToken;
   } catch (error) {
     removeToken();
     throw error;

@@ -47,12 +47,14 @@ export const createClient = (config?: AxiosRequestConfig) => {
       }
 
       const { response } = error;
+
       if (response && response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
 
         try {
           await refreshToken();
           const newAccessToken = getToken();
+          
           if (!newAccessToken) {
             throw new Error('리프레시 토큰이 만료되었습니다.');
           }
