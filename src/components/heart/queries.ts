@@ -9,7 +9,7 @@ export const useGetPreRegisterHeart = () => {
   const getPreRegisterHeart = async (): Promise<PreRegisterAuction[]> => {
     const response = await httpClient.get(`${API_END_POINT.PRE_REGISTER}/history`);
 
-    return response.data;
+    return response.data.items;
   };
 
   const { data: preRegisterHeartList } = useSuspenseQuery({
