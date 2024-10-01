@@ -19,7 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 type FormFields = z.infer<typeof BidSchema>;
 
-const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
+const Bid = () => {
   const navigate = useNavigate();
   const [check, setCheck] = useState<boolean>(false);
   const toggleCheckBox = () => setCheck((state) => !state);
@@ -44,7 +44,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
     getValues,
   });
 
-  const { cdnPath, name, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining } = auctionDetails;
+  const { cdnPath, name, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating } = auctionDetails;
 
   const buttonName = isSubmitting ? '제안 중...' : '제안하기';
   const title = isParticipating ? '금액 수정하기' : '경매 참여하기';
