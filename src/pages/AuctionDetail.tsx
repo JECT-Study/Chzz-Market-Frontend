@@ -9,7 +9,7 @@ import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
 import SellersFooter from '@/components/details/SellersFooter';
 import BuyersFooter from '@/components/details/BuyersFooter';
-import type { AuctionItem } from '@/mocks/data/auctionDetailPageData';
+import type { AuctionItem } from '@/components/details/AuctionItem';
 
 const AuctionDetail = () => {
   const { productId } = useParams() as { productId: string };
@@ -130,7 +130,7 @@ const AuctionDetail = () => {
                 </p>
               </div>
             )}
-            {/* 나의 참여 금액 & 경매 참여인원 */}
+            {/* 나의 참여 금액 & 경매 참여인원 */}/
             <div className='w-full mb-4 border border-gray-300 rounded-lg'>
               <div className='flex items-center justify-between'>
                 <div className='flex flex-col items-center flex-1 py-4 text-center'>
