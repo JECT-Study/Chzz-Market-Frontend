@@ -6,9 +6,9 @@ import type { Bidder } from 'Bid';
 import Button from '@/components/common/Button';
 import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { useGetAuctionDetails } from '@/components/details/queries';
 import { useGetBidderList } from '@/components/bidderList/queries';
 import { useState } from 'react';
-import { useGetAuctionDetails } from '@/components/details/queries';
 
 const BidderList = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const BidderList = () => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
   const { bidderList } = useGetBidderList(auctionId, filterState.sort);
 
-  const { cdnPath, name, minPrice, participantCount } = auctionDetails;
+  const { imageList, name, minPrice, participantCount } = auctionDetails;
 
   return (
     <Layout>
@@ -28,7 +28,7 @@ const BidderList = () => {
       <Layout.Main>
         <div className='flex flex-col gap-8 pt-4'>
           <AuctionItem axis='row' label='입찰자 목록 상품'>
-            <AuctionItem.Image src={cdnPath} />
+            <AuctionItem.Image src={imageList[0]} />
             <AuctionItem.Main kind='register' name={name} count={participantCount} price={minPrice} />
           </AuctionItem>
           <div className='flex items-center justify-between'>
