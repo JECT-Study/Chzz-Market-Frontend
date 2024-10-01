@@ -14,3 +14,15 @@ export interface AuctionItem {
   remainingBidCount: number;
   imageList: string[];
 }
+
+export interface PreAuctionItem {
+  productId: number;
+  productName: string;
+  sellerName: string;
+  minPrice: number;
+  createdAt: string;
+  description: string;
+  likeCount: number;
+  isLiked: boolean;
+  imageUrls: string[];
+}
