@@ -1,6 +1,3 @@
-import ProductListPage from '@/pages/ProductList';
-import ROUTERS from '@/constants/route';
-import { createBrowserRouter } from 'react-router-dom';
 import Bid, { loader as bidLoader } from './pages/Bid';
 import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 
@@ -15,13 +12,16 @@ import Login from './pages/Login';
 import NotFound from './components/common/loadingAndError/NotFound';
 import Notification from './pages/Notification';
 import OrderHistory from './pages/UserParticipatedList';
+import PrivateRoute from './components/common/route/PrivateRoute';
+import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
+import PublicRoute from './components/common/route/PublicRoute';
+import ROUTERS from '@/constants/route';
 import Register from './pages/Register';
 import Signup from './pages/Signup';
 import User from './pages/User';
 import UserRegisteredList from './pages/UserRegisteredList';
-import PrivateRoute from './components/common/route/PrivateRoute';
-import PublicRoute from './components/common/route/PublicRoute';
+import { createBrowserRouter } from 'react-router-dom';
 
 const layoutWithNavRouteList = [
   {
@@ -53,7 +53,11 @@ const layoutWithNavRouteList = [
 const privateRouteList = [
   {
     path: ROUTERS.BID,
-    element: <Bid />,
+    element: (
+      <AsyncBoundary>
+        <Bid />
+      </AsyncBoundary>
+    ),
     loader: bidLoader,
   },
   {
@@ -113,7 +117,7 @@ export const router = createBrowserRouter([
       })),
       {
         path: ROUTERS.PRODUCT_LIST,
-        element: <ProductListPage />,
+        element: <ProductList />,
       },
       {
         path: `${ROUTERS.AUCTION.ITEM}/:productId`,

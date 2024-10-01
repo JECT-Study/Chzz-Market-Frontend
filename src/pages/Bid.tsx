@@ -8,12 +8,14 @@ import Button from '@/components/common/Button';
 import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/layout/Layout';
+import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
+import { useGetAuctionDetails } from '@/components/details/queries';
+import { usePostBid } from '@/components/bid/queries';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useGetAuctionDetails } from '@/components/details/queries';
 
 type FormFields = z.infer<typeof BidSchema>;
 
@@ -23,6 +25,7 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
   const toggleCheckBox = () => setCheck((state) => !state);
   const auctionId = useLoaderData() as number;
   const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { mutate: postBid } = usePostBid(auctionId);
 
   const {
     control,
@@ -46,8 +49,13 @@ const Bid = ({ isParticipating = false }: { isParticipating?: boolean }) => {
   const buttonName = isSubmitting ? '제안 중...' : '제안하기';
   const title = isParticipating ? '금액 수정하기' : '경매 참여하기';
 
-  const onSubmit: SubmitHandler<FormFields> = async () => {
-    navigate(`/auctions/${auctionId}`);
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    const bidData = {
+      auctionId: Number(auctionId),
+      amount: convertCurrencyToNumber(data.minPrice),
+    };
+
+    postBid(bidData);
   };
 
   return (
