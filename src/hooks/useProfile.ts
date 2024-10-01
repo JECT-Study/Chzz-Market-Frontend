@@ -40,8 +40,21 @@ export const useEditProfile = () => {
     },
   });
 
+  const formLink = (link: string) => {
+    if (link && !link.startsWith('https://')) {
+      return `https://${link}`;
+    }
+    if (link && !link.startsWith('http://')) {
+      return `http://${link}`;
+    }
+    return link;
+  };
+
   const handleEditProfile = (data: UserProfile) => {
-    profileMutation.mutate(data);
+    const formattedLink = formLink(data.link);
+    const formattedData = { ...data, link: formattedLink };
+
+    profileMutation.mutate(formattedData);
   };
 
   return {

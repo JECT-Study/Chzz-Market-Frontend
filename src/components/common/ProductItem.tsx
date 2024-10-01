@@ -1,6 +1,5 @@
 import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import { getTimeColor } from '@/utils/getTimeColor';
-import { useEffect } from 'react';
 
 export interface ProductProps {
   id: number;

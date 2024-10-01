@@ -5,7 +5,7 @@ import { API_END_POINT } from '@/constants/api';
 import { User } from '@/@types/user';
 import { httpClient } from '@/api/axios';
 import { useNavigate } from 'react-router-dom';
-import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { storeLogin } from '@/store/authSlice';
 import { useEffect } from 'react';
@@ -59,7 +59,7 @@ export const useRefreshTokenOnSuccess = () => {
   const queryParams = new URLSearchParams(window.location.search);
   const status = queryParams.get('status');
 
-  const { mutate, isError, error, isSuccess } = useMutation({
+  const { mutate, isSuccess } = useMutation({
     mutationFn: () => refreshToken(),
     onSuccess: () => {
       const newAccessToken = localStorage.getItem('accessToken');
