@@ -3,10 +3,8 @@ import ROUTERS from '@/constants/route';
 import { createBrowserRouter } from 'react-router-dom';
 import Bid, { loader as bidLoader } from './pages/Bid';
 import BidderList, { loader as bidderListLoader } from './pages/BidderList';
-
 import AddressBook from './pages/AddressBook';
 import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
-import DetailPage from './pages/AuctionDetail';
 import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
