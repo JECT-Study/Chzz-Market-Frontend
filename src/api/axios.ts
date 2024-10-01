@@ -49,41 +49,22 @@ export const createClient = (config?: AxiosRequestConfig) => {
       const { response } = error;
       if (response && response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
-        const errorMessage = response.data?.message;
 
-        if (errorMessage === '토큰이 만료되었습니다.') {
-          try {
-            await refreshToken();
-            const newAccessToken = getToken();
-            if (!newAccessToken)
-              throw new Error('리프레시 토큰이 만료되었습니다.');
-            originalRequest.headers = originalRequest.headers || {};
-            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
-            setToken(newAccessToken); // refreshToken 함수에서 토큰 저장 누락시 추가
-
-            return await axiosInstance(originalRequest); // 새로운 토큰 재요청
-          } catch (refreshError) {
-            handleTokenError(
-              '리프레시 토큰이 만료되었습니다. 다시 로그인해주세요',
-            );
-            return Promise.reject(refreshError);
+        try {
+          await refreshToken();
+          const newAccessToken = getToken();
+          if (!newAccessToken) {
+            throw new Error('리프레시 토큰이 만료되었습니다.');
           }
-        }
 
-        if (
-          errorMessage === '리프레시 토큰이 유효하지 않습니다.' ||
-          errorMessage === '리프레시 토큰이 없습니다.'
-        ) {
-          handleTokenError(
-            '리프레시 토큰이 유효하지 않습니다. 다시 로그인해주세요.',
-          );
-          return Promise.reject(error);
-        }
+          originalRequest.headers = originalRequest.headers || {};
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+          setToken(newAccessToken);
 
-        if (errorMessage === 'Authentication is required') {
-          handleTokenError('로그인이 필요합니다.');
-          return Promise.reject(error);
+          return await axiosInstance(originalRequest);
+        } catch (refreshError) {
+          handleTokenError('리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.');
+          return Promise.reject(refreshError);
         }
       }
 
