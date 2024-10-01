@@ -56,15 +56,6 @@ const AuctionDetail = () => {
     setIsLoading(false);
   }, [productId]);
 
-  const fullImageUrls = auctionItem?.imageList.map(
-    (imagePath) => `${import.meta.env.VITE_API_URL}${imagePath}`
-  );
-  console.log(
-    `https://chzz-cdn.s3.ap-northeast-2.amazonaws.com${
-      auctionItem?.imageList[0]
-    }`
-  );
-
   return (
     <Layout>
       <Layout.Header
@@ -102,7 +93,6 @@ const AuctionDetail = () => {
                   <ProgressBar
                     initialTimeRemaining={auctionItem.timeRemaining}
                     totalTime={totalTime} // Should be 86400
-                    isLoading={isLoading}
                   />
                 )}
               </div>
@@ -130,7 +120,7 @@ const AuctionDetail = () => {
                 </p>
               </div>
             )}
-            {/* 나의 참여 금액 & 경매 참여인원 */}/
+            {/* 나의 참여 금액 & 경매 참여인원 */}
             <div className='w-full mb-4 border border-gray-300 rounded-lg'>
               <div className='flex items-center justify-between'>
                 <div className='flex flex-col items-center flex-1 py-4 text-center'>

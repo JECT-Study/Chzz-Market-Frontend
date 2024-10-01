@@ -4,20 +4,17 @@ import Layout from '@/components/layout/Layout';
 import axios from 'axios';
 import ProgressBar from '@/components/details/ProgressBar';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CiCoins1 } from 'react-icons/ci';
-import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
-import SellersFooter from '@/components/details/SellersFooter';
-import BuyersFooter from '@/components/details/BuyersFooter';
-import type { AuctionItem } from '@/mocks/data/auctionDetailPageData';
+import type { PreAuctionItem } from '@/components/details/AuctionItem';
 
 const PreAuction = () => {
   const { productId } = useParams() as { productId: string };
-  const [auctionItem, setAuctionItem] = useState<AuctionItem | null>(null);
+  const [preAuctionItem, setPreAuctionItem] = useState<PreAuctionItem | null>(
+    null
+  );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
-  const [isPreAuction, _setIsPreAuction] = useState(false);
   const [_interestCount, _setInterestCount] = useState(1);
 
   const totalTime = 24 * 60 * 60;
@@ -47,7 +44,7 @@ const PreAuction = () => {
           `${import.meta.env.VITE_API_URL}/api/v1/products/${productId}`
         );
         console.log(response.data);
-        setAuctionItem(response.data);
+        setPreAuctionItem(response.data);
       } catch (error) {
         alert('경매 데이터를 가져오는 중 오류가 발생했습니다.');
       }
@@ -71,14 +68,14 @@ const PreAuction = () => {
             <div className='w-full mb-2'>
               <img
                 src={`https://chzz-cdn.s3.ap-northeast-2.amazonaws.com/${
-                  auctionItem?.imageUrls[0]
+                  preAuctionItem?.imageUrls[0]
                 }`}
-                alt={auctionItem?.productName}
+                alt={preAuctionItem?.productName}
                 className='object-cover w-full h-auto'
               />
             </div>
             {/* 타이머 및 프로그레스 바 */}
-            {auctionItem && (
+            {preAuctionItem && (
               <div
                 id='timer-section'
                 className={`bg-white z-10 py-1 ${
@@ -91,9 +88,8 @@ const PreAuction = () => {
                   </div>
                 ) : (
                   <ProgressBar
-                    initialTimeRemaining={auctionItem.timeRemaining}
+                    initialTimeRemaining={''}
                     totalTime={totalTime} // Should be 86400
-                    isLoading={isLoading}
                   />
                 )}
               </div>
@@ -103,10 +99,10 @@ const PreAuction = () => {
           {/* 경매 정보 영역 */}
           <div className='px-4 my-4'>
             {/* 경매 아이템 제목 & 시작가 */}
-            {auctionItem && (
+            {preAuctionItem && (
               <div className='mb-4'>
                 <p className='mb-1 text-lg font-bold'>
-                  {auctionItem.productName ||
+                  {preAuctionItem.productName ||
                     '[ERROR] 이름이 등록되지 않았어요!'}
                 </p>
                 <p className='text-sm text-gray-500'>
@@ -116,14 +112,14 @@ const PreAuction = () => {
                     </span>
                     시작가
                     <span className='font-bold p'>
-                      {numberWithCommas(Number(auctionItem.minPrice))}원
+                      {numberWithCommas(Number(preAuctionItem.minPrice))}원
                     </span>
                   </span>
                 </p>
               </div>
             )}
             {/* 나의 참여 금액 & 경매 참여인원 */}
-            <div className='w-full mb-4 border border-gray-300 rounded-lg'>
+            {/* <div className='w-full mb-4 border border-gray-300 rounded-lg'>
               <div className='flex items-center justify-between'>
                 <div className='flex flex-col items-center flex-1 py-4 text-center'>
                   <div className='flex items-center mb-1 text-sm text-gray-400'>
@@ -131,8 +127,8 @@ const PreAuction = () => {
                     <span className='ml-1'>나의 참여 금액</span>
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
-                    {auctionItem?.isParticipating
-                      ? `${numberWithCommas(Number(auctionItem.bidAmount))}원`
+                    {preAuctionItem?.isParticipating
+                      ? `${numberWithCommas(Number(preAuctionItem.bidAmount))}원`
                       : '참여 전'}
                   </p>
                 </div>
@@ -147,35 +143,24 @@ const PreAuction = () => {
                     <p className='mb-1 text-sm text-gray-500'>참여 인원</p>
                   </div>
                   <p className='text-lg font-bold'>
-                    {auctionItem?.participantCount
-                      ? `${auctionItem.participantCount}명`
+                    {preAuctionItem?.isLiked
+                      ? `${preAuctionItem.isLI}명`
                       : '0명'}
                   </p>
                 </div>
               </div>
-            </div>
+            </div> 
+          */}
           </div>
 
           {/* 상품 설명 */}
           <div className='px-4 mb-4 overflow-y-auto text-sm text-gray-700'>
-            <p>{auctionItem?.description}</p>
+            <p>{preAuctionItem?.description}</p>
           </div>
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
-        <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
-          {auctionItem && auctionItem.isSeller ? (
-            <SellersFooter
-              isSeller={auctionItem.isSeller}
-              status={auctionItem.status}
-            />
-          ) : (
-            <BuyersFooter
-              isSeller={auctionItem?.isSeller ?? false}
-              status={auctionItem?.status ?? ''}
-              isParticipating={auctionItem?.isParticipating ?? false}
-              remainingBidCount={auctionItem?.remainingBidCount ?? 0}
-            />
-          )}
+        <Layout.Footer type='double'>
+          <div>TEMP</div>
         </Layout.Footer>
         {/* 백드롭 */}
         {isMenuOpen && (

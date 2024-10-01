@@ -1,21 +1,23 @@
+/* eslint-disable prettier/prettier */
 import { useState, useEffect } from 'react';
 
 interface ProgressBarProps {
-  initialTimeRemaining: number; // Time remaining in seconds from the server
-  totalTime: number; // Total auction time in seconds (86,400 seconds)
-  isLoading: boolean;
+  initialTimeRemaining: number | '';
+  totalTime: number;
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
   initialTimeRemaining,
   totalTime,
-  isLoading,
 }) => {
-  const [timeRemaining, setTimeRemaining] = useState(initialTimeRemaining);
+  const [timeRemaining, setTimeRemaining] = useState<number>(
+    typeof initialTimeRemaining === 'number' ? initialTimeRemaining : 0
+  );
 
   useEffect(() => {
-    // Reset timeRemaining when initialTimeRemaining changes
-    setTimeRemaining(initialTimeRemaining);
+    setTimeRemaining(
+      typeof initialTimeRemaining === 'number' ? initialTimeRemaining : 0
+    );
 
     const interval = setInterval(() => {
       setTimeRemaining((prevTime) => {
@@ -30,10 +32,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     return () => clearInterval(interval);
   }, [initialTimeRemaining]);
 
-  // Calculate progress bar width
   const progressBarWidth = (timeRemaining / totalTime) * 100;
 
-  // Format time as HH:MM:SS
   const hours = Math.floor(timeRemaining / 3600);
   const minutes = Math.floor((timeRemaining % 3600) / 60);
   const seconds = timeRemaining % 60;
