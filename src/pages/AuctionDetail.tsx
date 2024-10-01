@@ -1,15 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { useEffect, useState } from 'react';
-import Layout from '@/components/layout/Layout';
-import axios from 'axios';
-import ProgressBar from '@/components/details/ProgressBar';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import type { AuctionItem } from '@/components/details/AuctionItem';
+import BuyersFooter from '@/components/details/BuyersFooter';
 import { CiCoins1 } from 'react-icons/ci';
+import Layout from '@/components/layout/Layout';
 import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
+import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
-import BuyersFooter from '@/components/details/BuyersFooter';
-import type { AuctionItem } from '@/components/details/AuctionItem';
+import axios from 'axios';
 
 const AuctionDetail = () => {
   const { productId } = useParams() as { productId: string };
@@ -43,9 +44,7 @@ const AuctionDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/v1/auctions/${productId}?viewType=FULL`
-        );
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/auctions/${productId}?viewType=FULL`);
         console.log(response.data);
         setAuctionItem(response.data);
       } catch (error) {
@@ -58,37 +57,20 @@ const AuctionDetail = () => {
 
   return (
     <Layout>
-      <Layout.Header
-        title='제품 상세'
-        handleBack={handleBackClick}
-        handleModal={toggleMenu}
-      />
+      <Layout.Header title='제품 상세' handleBack={handleBackClick} handleModal={toggleMenu} />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
         <Layout.Main>
           {/* 상품 이미지 영역 */}
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
-              <img
-                src={`https://chzz-cdn.s3.ap-northeast-2.amazonaws.com/${
-                  auctionItem?.imageList[0]
-                }`}
-                alt={auctionItem?.name}
-                className='object-cover w-full h-auto'
-              />
+              <img src={`${auctionItem?.imageList[0]}`} alt={auctionItem?.name} className='object-cover w-full h-auto' />
             </div>
             {/* 타이머 및 프로그레스 바 */}
             {auctionItem && (
-              <div
-                id='timer-section'
-                className={`bg-white z-10 py-1 ${
-                  isTimerFixed ? 'fixed top-0 left-0 right-0' : ''
-                }`}
-              >
+              <div id='timer-section' className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}>
                 {isLoading ? (
-                  <div className='font-bold text-center text-gray-500'>
-                    로딩 중...
-                  </div>
+                  <div className='font-bold text-center text-gray-500'>로딩 중...</div>
                 ) : (
                   <ProgressBar
                     initialTimeRemaining={auctionItem.timeRemaining}
@@ -104,18 +86,14 @@ const AuctionDetail = () => {
             {/* 경매 아이템 제목 & 시작가 */}
             {auctionItem && (
               <div className='mb-4'>
-                <p className='mb-1 text-lg font-bold'>
-                  {auctionItem.name || '[ERROR] 이름이 등록되지 않았어요!'}
-                </p>
+                <p className='mb-1 text-lg font-bold'>{auctionItem.name || '[ERROR] 이름이 등록되지 않았어요!'}</p>
                 <p className='text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
                     <span className='mr-1'>
                       <img src={Price} alt='Price' />
                     </span>
                     시작가
-                    <span className='font-bold p'>
-                      {numberWithCommas(Number(auctionItem.minPrice))}원
-                    </span>
+                    <span className='font-bold p'>{numberWithCommas(Number(auctionItem.minPrice))}원</span>
                   </span>
                 </p>
               </div>
@@ -129,26 +107,16 @@ const AuctionDetail = () => {
                     <span className='ml-1'>나의 참여 금액</span>
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
-                    {auctionItem?.isParticipating
-                      ? `${numberWithCommas(Number(auctionItem.bidAmount))}원`
-                      : '참여 전'}
+                    {auctionItem?.isParticipating ? `${numberWithCommas(Number(auctionItem.bidAmount))}원` : '참여 전'}
                   </p>
                 </div>
                 <div className='h-full border-l border-gray-300' />
                 <div className='flex flex-col items-center flex-1 py-4 text-center'>
                   <div className='flex items-center mb-1 text-sm text-gray-400'>
-                    <img
-                      src={Participants}
-                      alt='Participants'
-                      className='w-4 h-4 mx-2 mb-1'
-                    />
+                    <img src={Participants} alt='Participants' className='w-4 h-4 mx-2 mb-1' />
                     <p className='mb-1 text-sm text-gray-500'>참여 인원</p>
                   </div>
-                  <p className='text-lg font-bold'>
-                    {auctionItem?.participantCount
-                      ? `${auctionItem.participantCount}명`
-                      : '0명'}
-                  </p>
+                  <p className='text-lg font-bold'>{auctionItem?.participantCount ? `${auctionItem.participantCount}명` : '0명'}</p>
                 </div>
               </div>
             </div>
@@ -162,10 +130,7 @@ const AuctionDetail = () => {
         {/* 화면 하단에 고정된 Footer */}
         <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
           {auctionItem && auctionItem.isSeller ? (
-            <SellersFooter
-              isSeller={auctionItem.isSeller}
-              status={auctionItem.status}
-            />
+            <SellersFooter isSeller={auctionItem.isSeller} status={auctionItem.status} />
           ) : (
             <BuyersFooter
               isSeller={auctionItem?.isSeller ?? false}
@@ -178,19 +143,11 @@ const AuctionDetail = () => {
         {/* 백드롭 */}
         {isMenuOpen && (
           <>
-            <div
-              className='absolute inset-0 z-40 bg-black bg-opacity-50'
-              onClick={closeMenu}
-              style={{ top: 0, bottom: 0 }}
-            />
+            <div className='absolute inset-0 z-40 bg-black bg-opacity-50' onClick={closeMenu} style={{ top: 0, bottom: 0 }} />
             {/* 메뉴 (아코디언) */}
             <div className='absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50'>
-              <button className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'>
-                수정하기
-              </button>
-              <button className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100'>
-                삭제하기
-              </button>
+              <button className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'>수정하기</button>
+              <button className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100'>삭제하기</button>
             </div>
           </>
         )}
