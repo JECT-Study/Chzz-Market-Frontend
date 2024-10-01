@@ -2,9 +2,9 @@ import Adidas from '@/assets/images/adidas_superstar.jpeg';
 import JordanBlue from '@/assets/images/jordan_blue.jpeg';
 import JordanRed from '@/assets/images/jordan_red.jpeg';
 import NewBalance from '@/assets/images/newbalance_993.jpeg';
-import type { NotificationType } from 'Notification';
+import type { INotification } from 'Notification';
 
-export const notificationData: NotificationType[] = [
+export const notificationData: INotification[] = [
   {
     id: 0,
     type: 'AUCTION_START',
