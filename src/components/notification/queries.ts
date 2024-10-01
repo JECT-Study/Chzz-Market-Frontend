@@ -9,7 +9,7 @@ export const useGetNotifications = () => {
   const getNotifications = async (): Promise<INotification[]> => {
     const response = await httpClient.get(`${API_END_POINT.NOTIFICATIONS}`);
 
-    return response.data;
+    return response.data.items;
   };
 
   const { data: notifications } = useSuspenseQuery({
