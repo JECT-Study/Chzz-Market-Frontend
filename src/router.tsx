@@ -6,7 +6,7 @@ import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 
 import AddressBook from './pages/AddressBook';
 import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
-import DetailPage from './pages/DetailPage';
+import DetailPage from './pages/AuctionDetail';
 import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
@@ -22,6 +22,7 @@ import User from './pages/User';
 import UserRegisteredList from './pages/UserRegisteredList';
 import PrivateRoute from './components/common/route/PrivateRoute';
 import PublicRoute from './components/common/route/PublicRoute';
+import PreAuction from './pages/PreAuction';
 
 const layoutWithNavRouteList = [
   {
@@ -99,7 +100,11 @@ export const router = createBrowserRouter([
         ),
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
-          element: <AsyncBoundary>{path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}</AsyncBoundary>,
+          element: (
+            <AsyncBoundary>
+              {path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}
+            </AsyncBoundary>
+          ),
         })),
       },
       ...privateRouteList.map(({ path, element, loader }) => ({
@@ -118,6 +123,10 @@ export const router = createBrowserRouter([
       {
         path: `${ROUTERS.AUCTION.ITEM}/:productId`,
         element: <DetailPage />,
+      },
+      {
+        path: `${ROUTERS.PRE_AUCTION.ITEM}/:productId`,
+        element: <PreAuction />,
       },
     ],
   },
