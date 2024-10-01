@@ -1,12 +1,12 @@
 declare module 'Notification' {
-  export interface RealTimeNotificationType {
+  export interface IRealTimeNotification {
     notificationId: number;
     message: string;
     type: string;
     auctionId?: number;
   }
 
-  export interface NotificationType {
+  export interface INotification {
     id: number;
     type: string;
     message: string;

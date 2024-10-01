@@ -1,5 +1,5 @@
 import { NOTIFICATION_CONTENTS } from '@/constants/notification';
-import type { RealTimeNotificationType } from 'Notification';
+import type { IRealTimeNotification } from 'Notification';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
 import { useReadNotification } from '../notification/queries';
@@ -8,7 +8,7 @@ const RealTimeNotification = ({
   notification,
   onClose,
 }: {
-  notification: RealTimeNotificationType;
+  notification: IRealTimeNotification;
   onClose: () => void;
 }) => {
   const navigate = useNavigate();
