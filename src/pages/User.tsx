@@ -6,7 +6,6 @@ import LoginProvider from '@/provider/loginProvider';
 
 const User = () => {
   const { profileData } = useProfile();
-  console.log(profileData);
 
   return (
     <LoginProvider>
