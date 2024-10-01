@@ -122,7 +122,11 @@ export const router = createBrowserRouter([
       },
       {
         path: `${ROUTERS.AUCTION.ITEM}/:productId`,
-        element: <AuctionDetail />,
+        element: (
+          <AsyncBoundary>
+            <AuctionDetail />
+          </AsyncBoundary>
+        ),
       },
       {
         path: `${ROUTERS.PRE_AUCTION.ITEM}/:productId`,
