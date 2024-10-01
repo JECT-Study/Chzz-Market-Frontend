@@ -1,5 +1,6 @@
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { usePatchBid, usePostBid } from '@/components/bid/queries';
 
 import AuctionItem from '@/components/common/item/AuctionItem';
 import BidCaution from '@/components/bid/BidCaution';
@@ -12,7 +13,6 @@ import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 import { useGetAuctionDetails } from '@/components/details/queries';
-import { usePostBid } from '@/components/bid/queries';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,6 +26,7 @@ const Bid = () => {
   const auctionId = useLoaderData() as number;
   const { auctionDetails } = useGetAuctionDetails(auctionId);
   const { mutate: postBid } = usePostBid(auctionId);
+  const { mutate: patchBid } = usePatchBid(auctionId);
 
   const {
     control,
@@ -44,18 +45,21 @@ const Bid = () => {
     getValues,
   });
 
-  const { cdnPath, name, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating } = auctionDetails;
+  const { imageList, name, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating, bidId } = auctionDetails;
 
   const buttonName = isSubmitting ? '제안 중...' : '제안하기';
   const title = isParticipating ? '금액 수정하기' : '경매 참여하기';
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onPostSubmit: SubmitHandler<FormFields> = async (data) => {
     const bidData = {
       auctionId: Number(auctionId),
       amount: convertCurrencyToNumber(data.minPrice),
     };
 
     postBid(bidData);
+  };
+  const onPatchSubmit = () => {
+    if (bidId) patchBid(bidId);
   };
 
   return (
@@ -64,7 +68,7 @@ const Bid = () => {
       <Layout.Main>
         <div className='flex flex-col gap-8'>
           <AuctionItem axis='row' label='입찰 상품'>
-            <AuctionItem.Image src={cdnPath} time={timeRemaining} />
+            <AuctionItem.Image src={imageList[0]} time={timeRemaining} />
             <AuctionItem.Main kind='register' name={name} count={participantCount} price={minPrice} />
           </AuctionItem>
           {isParticipating && (
@@ -102,14 +106,14 @@ const Bid = () => {
             color='cheeseYellow'
             className='w-full h-full transition-colors rounded text-button active:bg-black'
             aria-label='제안하기 버튼'
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onPostSubmit)}
             disabled={!check || isSubmitting}
           >
             {buttonName}
           </Button>
         ) : (
           <>
-            <Button type='button' color='white' className='flex-1 h-full transition-colors rounded text-button active:bg-black' onClick={() => navigate(-1)}>
+            <Button type='button' color='white' className='flex-1 h-full transition-colors rounded text-button active:bg-black' onClick={onPatchSubmit}>
               참여 취소
             </Button>
             <Button
@@ -117,7 +121,7 @@ const Bid = () => {
               color='cheeseYellow'
               className='flex-[2] h-full rounded text-button active:bg-black transition-colors'
               disabled={!check || isSubmitting}
-              onClick={handleSubmit(onSubmit)}
+              onClick={handleSubmit(onPostSubmit)}
             >
               금액 수정
               {isParticipating && remainingBidCount !== 0 ? `(${remainingBidCount}회 가능)` : '(소진)'}
