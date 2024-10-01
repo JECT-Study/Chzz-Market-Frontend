@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
 import FormField from '@/components/common/form/FormField';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useRef } from 'react';
@@ -9,8 +9,6 @@ import { useEditProfile } from '@/hooks/useProfile';
 import { UserProfile } from '@/@types/user';
 
 const ProfileEdit = () => {
-  const location = useLocation();
-  const { profileData: _UserProfile } = location.state;
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const { control, handleSubmit, handleEditProfile } = useEditProfile();

@@ -1,6 +1,5 @@
 import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import { getTimeColor } from '@/utils/getTimeColor';
-import { useEffect } from 'react';
 
 export interface ProductProps {
   id: number;
@@ -19,20 +18,12 @@ export interface ProductProps {
 const ProductItem = ({
   product,
   children,
-  onDelete,
 }: {
   product: ProductProps;
   children: React.ReactNode;
-  onDelete: (id: number) => void;
 }) => {
-  const remainHour = Math.floor(product.timeRemaining ?? 0 / 3600);
+  const remainHour = Math.floor((product.timeRemaining ?? 0) / 3600);
   const timeColor = getTimeColor(remainHour);
-
-  useEffect(() => {
-    if (product.timeRemaining === 0) {
-      onDelete(product.id);
-    }
-  }, [product.timeRemaining, onDelete, product.id]);
 
   return (
     <div key={product.id} className="mb-4">

@@ -21,8 +21,8 @@ const ProductList = () => {
   const { ongoingData, enrollData, fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage, refetchOngoingData, refetchEnrollData } =
     useProductList(activeTab, sortType, category);
 
-  const [ongoingItems] = useState<OngoingAuctionListItem[]>(ongoingData?.pages[0]?.items || []);
-  const [enrollItems] = useState<PreEnrollProductListItem[]>(enrollData?.pages[0]?.items || []);
+  const ongoingItems = ongoingData?.pages[0]?.items || [];
+  const enrollItems = enrollData?.pages[0]?.items || [];
 
   const handleObserver = useCallback(
     (entities: IntersectionObserverEntry[]) => {
@@ -66,14 +66,6 @@ const ProductList = () => {
       refetchEnrollData();
     }
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
-
-  // const handleDeleteOngoingProduct = (id: number) => {
-  //   setOngoingItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  // };
-
-  // const handleDeleteEnrollProduct = (id: number) => {
-  //   setEnrollItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  // };
 
   return (
     <Layout>

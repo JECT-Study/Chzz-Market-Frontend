@@ -11,7 +11,7 @@ import useMyAuctionList from '@/hooks/useMyAuctionList';
 const UserRegisteredList = () => {
   const location = useLocation();
   const sortType = location.state?.sortType;
-  const [activeTab, setActiveTab] = useState(sortType || true);
+  const [activeTab, setActiveTab] = useState(sortType === true ? true : false);
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
@@ -65,10 +65,10 @@ const UserRegisteredList = () => {
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
-    <div className='mx-[-32px] my-[-16px]'>
+    <div className="mx-[-32px] my-[-4px]">
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className='p-4 h-[calc(100vh-100px)] overflow-y-auto'>
-        {activeTab ? (
+      <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
+      {activeTab === true ? (
           <EmptyBoundary dataLength={ongoingItems.length} type='userRegisterAuction'>
             {ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
               <OngoingMyRegister product={product} key={product.id} />
