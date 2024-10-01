@@ -23,6 +23,7 @@ import UserRegisteredList from './pages/UserRegisteredList';
 import PrivateRoute from './components/common/route/PrivateRoute';
 import PublicRoute from './components/common/route/PublicRoute';
 import PreAuction from './pages/PreAuction';
+import AuctionDetail from './pages/AuctionDetail';
 
 const layoutWithNavRouteList = [
   {
@@ -122,7 +123,7 @@ export const router = createBrowserRouter([
       },
       {
         path: `${ROUTERS.AUCTION.ITEM}/:productId`,
-        element: <DetailPage />,
+        element: <AuctionDetail />,
       },
       {
         path: `${ROUTERS.PRE_AUCTION.ITEM}/:productId`,
