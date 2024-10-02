@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import AuctionItem from '@/components/common/item/AuctionItem';
 import { BIDDER_LIST_PRICE_FILTER } from '@/constants/filter';
@@ -11,7 +11,6 @@ import { useGetBidderList } from '@/components/bidderList/queries';
 import { useState } from 'react';
 
 const BidderList = () => {
-  const navigate = useNavigate();
   const auctionId = useLoaderData() as number;
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
   const handleFilterState = () =>
@@ -24,7 +23,7 @@ const BidderList = () => {
 
   return (
     <Layout>
-      <Layout.Header title='경매 참여자 목록' handleBack={() => navigate(-1)} />
+      <Layout.Header title='경매 참여자 목록' />
       <Layout.Main>
         <div className='flex flex-col gap-8 pt-4'>
           <AuctionItem axis='row' label='입찰자 목록 상품'>
