@@ -7,7 +7,7 @@ import { queryKeys } from '@/constants/queryKeys';
 
 export const useGetPreRegisterHeart = () => {
   const getPreRegisterHeart = async (): Promise<IPreAuctionItem[]> => {
-    const response = await httpClient.get(`${API_END_POINT.PRE_REGISTER}/history`);
+    const response = await httpClient.get(`${API_END_POINT.PRE_AUCTION}/history`);
 
     return response.data.items;
   };
@@ -25,7 +25,7 @@ export const useDeletePreRegisterHeart = (): {
 } => {
   const queryClient = useQueryClient();
   const deletePreRegisterHeart = async (id: number) => {
-    const response = await httpClient.delete(`${API_END_POINT.PRE_REGISTER}/${id}`);
+    const response = await httpClient.delete(`${API_END_POINT.PRE_AUCTION}/${id}`);
     return response.data.data;
   };
 

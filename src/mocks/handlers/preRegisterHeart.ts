@@ -5,12 +5,12 @@ import { preRegisterHeartData } from '../data/preRegisterHeartData';
 
 let curPreRegisterHeartData = [...preRegisterHeartData];
 
-export const preRegisterHeartHandler: HttpHandler = http.get(`${API_END_POINT.PRE_REGISTER}/history`, async () => {
+export const preRegisterHeartHandler: HttpHandler = http.get(`${API_END_POINT.PRE_AUCTION}/history`, async () => {
   await delay(1000);
   return HttpResponse.json(curPreRegisterHeartData);
 });
 
-export const preRegisterHeartDeleteHandler: HttpHandler = http.delete(`${API_END_POINT.PRE_REGISTER}/:id`, ({ params }) => {
+export const preRegisterHeartDeleteHandler: HttpHandler = http.delete(`${API_END_POINT.PRE_AUCTION}/:id`, ({ params }) => {
   const id = params.id as string;
   const heartId = parseInt(id, 10);
 
