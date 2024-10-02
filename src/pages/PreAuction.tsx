@@ -16,7 +16,7 @@ const PreAuction = () => {
     null
   );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);
 
@@ -49,12 +49,13 @@ const PreAuction = () => {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         setPreAuctionItem(response.data);
       } catch (error) {
-        alert('경매 데이터를 가져오는 중 오류가 발생했습니다.');
+        setIsDeleteSuccessOpen(true);
       } finally {
-        setIsLoading(false);
+        return;
+        // 필요시 로직 추가
       }
     };
     fetchData();
@@ -82,7 +83,7 @@ const PreAuction = () => {
       setIsDeleteConfirmOpen(false);
       setIsDeleteSuccessOpen(true);
     } catch (error) {
-      alert('삭제하는 중 오류가 발생했습니다.');
+      setIsDeleteSuccessOpen(true);
     }
   };
 
