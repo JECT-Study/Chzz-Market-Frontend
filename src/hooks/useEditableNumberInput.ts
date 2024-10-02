@@ -1,6 +1,7 @@
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import { FocusEvent, useState } from 'react';
 import { FieldValues, Path, PathValue, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
+import { FocusEvent, useState } from 'react';
+
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 interface UseEditableNumberProps<T extends FieldValues> {
   name: Path<T>;
@@ -15,7 +16,7 @@ export const useEditableNumberInput = <T extends FieldValues>({ name, setValue, 
     const { value } = e.target;
     const num = Number(value.replace(/,/g, ''));
     if (!Number.isNaN(num)) {
-      setValue(name, formatCurrencyWithWon(num) as PathValue<T, Path<T>>);
+      setValue(name, num === 0 ? ('' as PathValue<T, Path<T>>) : (formatCurrencyWithWon(num) as PathValue<T, Path<T>>));
       setIsEditing(false);
     }
   };
