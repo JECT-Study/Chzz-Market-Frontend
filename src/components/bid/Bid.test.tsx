@@ -18,7 +18,7 @@ vi.mocked(useGetAuctionDetails).mockReturnValue({
     isParticipating: false,
     isSeller: false,
     minPrice: 23000,
-    name: 'qwer 미니 2집',
+    productName: 'qwer 미니 2집',
     participantCount: 4,
     productId: 14,
     remainingBidCount: 0,

@@ -1,4 +1,4 @@
-import type { PreRegisterAuction, RegisterAuction } from 'Auction';
+import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
 
 import LikeCount from '../common/atomic/LikeCount';
 import MinPrice from '../common/atomic/MinPrice';
@@ -7,9 +7,7 @@ import TimeLabel from '../common/atomic/TimeLabel';
 import { truncateText } from '@/utils/truncateText';
 import { useNavigate } from 'react-router-dom';
 
-type HomeAuctionItemProps<T> = T extends 'pre-register'
-  ? { kind: 'pre-register'; auction: PreRegisterAuction }
-  : { kind: 'register'; auction: RegisterAuction };
+type HomeAuctionItemProps<T> = T extends 'pre-register' ? { kind: 'pre-register'; auction: IPreAuctionItem } : { kind: 'register'; auction: IAuctionItem };
 
 const HomeAuctionItem = <T extends 'pre-register' | 'register'>({ kind, auction }: HomeAuctionItemProps<T>) => {
   const navigate = useNavigate();

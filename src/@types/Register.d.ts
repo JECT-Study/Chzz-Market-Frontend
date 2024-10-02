@@ -1,5 +1,5 @@
 declare module 'Register' {
-  export interface RegisterType {
+  export interface IRegister {
     productName: string;
     description: string;
     minPrice: number;

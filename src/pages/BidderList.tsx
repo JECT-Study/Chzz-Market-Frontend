@@ -19,7 +19,7 @@ const BidderList = () => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
   const { bidderList } = useGetBidderList(auctionId, filterState.sort);
 
-  const { imageList, name, minPrice, participantCount } = auctionDetails;
+  const { imageList, productName, minPrice, participantCount } = auctionDetails;
 
   return (
     <Layout>
@@ -28,7 +28,7 @@ const BidderList = () => {
         <div className='flex flex-col gap-8 pt-4'>
           <AuctionItem axis='row' label='입찰자 목록 상품'>
             <AuctionItem.Image src={imageList[0]} />
-            <AuctionItem.Main kind='register' name={name} count={participantCount} price={minPrice} />
+            <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
           </AuctionItem>
           <div className='flex items-center justify-between'>
             <h2 className='text-heading2'>참여 가격</h2>

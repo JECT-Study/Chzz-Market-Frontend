@@ -1,9 +1,9 @@
-import { MyHistoryAuctionListItem } from '@/@types/productList';
-import { LuUsers } from 'react-icons/lu';
+import type { IUserAuctionHistoryItem } from 'AuctionItem';
 import { IoPricetagsOutline } from 'react-icons/io5';
+import { LuUsers } from 'react-icons/lu';
 import ProductItem from '../common/item/ProductItem';
 
-const OrderHistoryProduct = ({ product }: { product: MyHistoryAuctionListItem }) => {
+const OrderHistoryProduct = ({ product }: { product: IUserAuctionHistoryItem }) => {
   return (
     <ProductItem product={product}>
       <div className='flex'>
