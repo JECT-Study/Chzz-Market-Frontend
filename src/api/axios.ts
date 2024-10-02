@@ -11,6 +11,7 @@ interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
 interface ErrorResponseData {
   message: string;
   status: string;
+  name: string;
 }
 
 const handleTokenError = (message: string) => {
@@ -45,33 +46,41 @@ export const createClient = (config?: AxiosRequestConfig) => {
       if (!originalRequest) {
         return Promise.reject(error);
       }
+      if (!error.response) {
+        return Promise.reject(error);
+      }
 
       const { response } = error;
+      const errorName = response.data?.name;
+      if (errorName === 'AUTHENTICATION_REQUIRED') {
+        handleTokenError('로그인이 필요합니다.');
+      }
 
       if (response && response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
+        const errorMessage = response.data?.message[0];
 
-        try {
-          await refreshToken();
-          const newAccessToken = getToken();
+        if (errorMessage === '토큰이 만료되었습니다.') {
+          originalRequest._retry = true;
 
-          if (!newAccessToken) {
-            throw new Error('리프레시 토큰이 만료되었습니다.');
+          try {
+            await refreshToken();
+            const newAccessToken = getToken();
+  
+            if (!newAccessToken) {
+              throw new Error('리프레시 토큰이 만료되었습니다.');
+            }
+  
+            originalRequest.headers = originalRequest.headers || {};
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            setToken(newAccessToken);
+  
+            return await axiosInstance(originalRequest);
+          } catch (refreshError) {
+            handleTokenError('리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.');
+            return Promise.reject(refreshError);
           }
-
-          originalRequest.headers = originalRequest.headers || {};
-          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-          setToken(newAccessToken);
-
-          return await axiosInstance(originalRequest);
-        } catch (refreshError) {
-          handleTokenError('리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.');
-          return Promise.reject(refreshError);
         }
-      }
-
-      if (response && response.status === 403) {
-        return Promise.reject(error);
       }
 
       return Promise.reject(error);

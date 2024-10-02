@@ -4,7 +4,6 @@ import { API_END_POINT } from '@/constants/api';
 // eslint-disable-next-line import/no-cycle
 import { User } from '@/@types/user';
 import { httpClient } from '@/api/axios';
-import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { storeLogin } from '@/store/authSlice';
@@ -36,19 +35,15 @@ export const refreshToken = async () => {
 
     if (newAccessToken) {
       setToken(newAccessToken);
-    } else {
-      throw new Error('리프레시 토큰이 만료되었습니다.');
     }
 
     return newAccessToken;
   } catch (error) {
-    removeToken();
     throw error;
   }
 };
 
 export const useRefreshTokenOnSuccess = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const queryParams = new URLSearchParams(window.location.search);
   const status = queryParams.get('status');
@@ -62,7 +57,7 @@ export const useRefreshTokenOnSuccess = () => {
       }
     },
     onError: () => {
-      navigate('/login');
+      
     },
   });
 
