@@ -3,9 +3,9 @@ import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import jordanBlueImage from '@/assets/images/jordan_blue.jpeg';
 import jordanRedImage from '@/assets/images/jordan_red.jpeg';
 import newBalanceImage from '@/assets/images/newbalance_993.jpeg';
-import { PreRegisterAuction, RegisterAuction } from 'Auction';
+import { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
 
-export const bestAuctionsData: RegisterAuction[] = [
+export const bestAuctionsData: IAuctionItem[] = [
   {
     id: 0,
     name: '[나이키] 에어 조던 로우',
@@ -13,6 +13,7 @@ export const bestAuctionsData: RegisterAuction[] = [
     timeRemaining: 50_400,
     minPrice: 100_000,
     participantCount: 11,
+    isParticipating: true,
   },
   {
     id: 1,
@@ -21,6 +22,7 @@ export const bestAuctionsData: RegisterAuction[] = [
     timeRemaining: 25_200,
     minPrice: 120_000,
     participantCount: 8,
+    isParticipating: true,
   },
   {
     id: 2,
@@ -29,6 +31,7 @@ export const bestAuctionsData: RegisterAuction[] = [
     timeRemaining: 82_800,
     minPrice: 180_000,
     participantCount: 29,
+    isParticipating: true,
   },
   {
     id: 3,
@@ -37,6 +40,7 @@ export const bestAuctionsData: RegisterAuction[] = [
     timeRemaining: 360,
     minPrice: 230_000,
     participantCount: 32,
+    isParticipating: true,
   },
   {
     id: 4,
@@ -45,10 +49,11 @@ export const bestAuctionsData: RegisterAuction[] = [
     timeRemaining: 43_200,
     minPrice: 70_000,
     participantCount: 6,
+    isParticipating: true,
   },
 ];
 
-export const imminentAuctionsData: RegisterAuction[] = [
+export const imminentAuctionsData: IAuctionItem[] = [
   {
     id: 0,
     name: '[나이키] 조던 블랙',
@@ -56,6 +61,7 @@ export const imminentAuctionsData: RegisterAuction[] = [
     timeRemaining: 25_200,
     minPrice: 120_000,
     participantCount: 8,
+    isParticipating: true,
   },
   {
     id: 1,
@@ -64,6 +70,7 @@ export const imminentAuctionsData: RegisterAuction[] = [
     timeRemaining: 43_200,
     minPrice: 70_000,
     participantCount: 6,
+    isParticipating: true,
   },
   {
     id: 2,
@@ -72,6 +79,7 @@ export const imminentAuctionsData: RegisterAuction[] = [
     timeRemaining: 82_800,
     minPrice: 180_000,
     participantCount: 29,
+    isParticipating: true,
   },
   {
     id: 3,
@@ -80,6 +88,7 @@ export const imminentAuctionsData: RegisterAuction[] = [
     timeRemaining: 360,
     minPrice: 230_000,
     participantCount: 32,
+    isParticipating: true,
   },
   {
     id: 4,
@@ -88,16 +97,18 @@ export const imminentAuctionsData: RegisterAuction[] = [
     timeRemaining: 50_400,
     minPrice: 100_000,
     participantCount: 11,
+    isParticipating: true,
   },
 ];
 
-export const preRegisterAuctionsData: PreRegisterAuction[] = [
+export const preRegisterAuctionsData: IPreAuctionItem[] = [
   {
     id: 0,
     name: '[뉴발란스] 993',
     cdnPath: newBalanceImage,
     minPrice: 230_000,
     likeCount: 45,
+    isLiked: true,
   },
   {
     id: 1,
@@ -105,6 +116,7 @@ export const preRegisterAuctionsData: PreRegisterAuction[] = [
     cdnPath: jordanRedImage,
     minPrice: 100_000,
     likeCount: 30,
+    isLiked: true,
   },
   {
     id: 2,
@@ -112,6 +124,7 @@ export const preRegisterAuctionsData: PreRegisterAuction[] = [
     cdnPath: jordanBlueImage,
     minPrice: 180_000,
     likeCount: 18,
+    isLiked: true,
   },
   {
     id: 3,
@@ -119,6 +132,7 @@ export const preRegisterAuctionsData: PreRegisterAuction[] = [
     cdnPath: jordanBlackImage,
     minPrice: 120_000,
     likeCount: 12,
+    isLiked: true,
   },
 
   {
@@ -127,5 +141,6 @@ export const preRegisterAuctionsData: PreRegisterAuction[] = [
     cdnPath: adidasImage,
     minPrice: 70_000,
     likeCount: 1,
+    isLiked: true,
   },
 ];

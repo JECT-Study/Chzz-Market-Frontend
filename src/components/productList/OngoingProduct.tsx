@@ -1,11 +1,11 @@
 import Button from '../common/Button';
+import type { IAuctionItem } from 'AuctionItem';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import { LuUsers } from 'react-icons/lu';
-import { OngoingAuctionListItem } from '@/@types/productList';
 import ProductItem from '../common/item/ProductItem';
 import { useNavigate } from 'react-router-dom';
 
-const OngoingProduct = ({ product }: { product: OngoingAuctionListItem }) => {
+const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate(`/auctions/bid/${product.id}`);
   return (

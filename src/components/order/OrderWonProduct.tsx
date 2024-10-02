@@ -1,9 +1,9 @@
-import { MyWonAuctionListItem } from '@/@types/productList';
+import type { IUserAuctionWonItem } from 'AuctionItem';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import { LuUsers } from 'react-icons/lu';
 import ProductItem from '../common/item/ProductItem';
 
-const OrderWonProduct = ({ product }: { product: MyWonAuctionListItem }) => {
+const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   return (
     <ProductItem product={product}>
       <div className='flex'>

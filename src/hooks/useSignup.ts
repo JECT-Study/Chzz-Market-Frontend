@@ -36,7 +36,7 @@ export const useSignup = (): any => {
   const signupMutation = useMutation({
     mutationFn: (data: User) => postSignup(data),
     onSuccess: () => {
-      navigate('/user');
+      navigate('/');
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
@@ -78,6 +78,7 @@ export const useSignup = (): any => {
     watch,
     setValue,
     activeButtonSheet,
+    setError,
     setActiveButtonSheet,
     onCloseBottomSheet,
     onSubmit,

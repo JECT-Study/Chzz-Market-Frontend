@@ -1,20 +1,21 @@
-import type { PreRegisterAuction, RegisterAuction } from 'Auction';
-import { useSuspenseQueries } from '@tanstack/react-query';
+import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
+
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
+import { useSuspenseQueries } from '@tanstack/react-query';
 
 export const useGetHomeAuctions = () => {
-  const getBestAuctions = async (): Promise<RegisterAuction[]> => {
+  const getBestAuctions = async (): Promise<IAuctionItem[]> => {
     const response = await httpClient.get(`${API_END_POINT.BEST}`);
     return response.data;
   };
-  const getImminentAuctions = async (): Promise<RegisterAuction[]> => {
+  const getImminentAuctions = async (): Promise<IAuctionItem[]> => {
     const response = await httpClient.get(`${API_END_POINT.IMMINENT}`);
     return response.data;
   };
-  const getPreRegisterAuctions = async (): Promise<PreRegisterAuction[]> => {
-    const response = await httpClient.get(`${API_END_POINT.PRE_REGISTER}`);
+  const getPreRegisterAuctions = async (): Promise<IPreAuctionItem[]> => {
+    const response = await httpClient.get(`${API_END_POINT.PRE_AUCTION}`);
     return response.data.items;
   };
 

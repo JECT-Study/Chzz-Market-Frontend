@@ -23,6 +23,7 @@ const Signup = () => {
     setActiveButtonSheet,
     onCloseBottomSheet,
     onSubmit,
+    setError,
   } = useSignup();
 
   const handleSelectBank = (bank: string) => {
@@ -32,12 +33,22 @@ const Signup = () => {
   };
 
   const handleSubmitClick = () => {
+    const accountNumber = watch('accountNumber');
+
+    if (accountNumber.length < 10 || accountNumber.length > 15) {
+      setError('accountNumber', {
+        message: '10~15자리 숫자로 입력해주세요.',
+      });
+      return;
+    }
+
     if (formRef.current) {
       formRef.current.dispatchEvent(
         new Event('submit', { cancelable: true, bubbles: true }),
       );
     }
   };
+
 
   const nickname = watch('nickname');
   const Selectbank = watch('bankName');

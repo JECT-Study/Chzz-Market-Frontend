@@ -16,6 +16,7 @@ const ROUTERS = Object.freeze({
   },
   PRE_AUCTION: {
     ITEM: '/auctions/pre-auction',
+    EDIT: '/products',
   },
   ADDRESSBOOK: '/addressbook',
   BID: '/auctions/bid/:auctionId',

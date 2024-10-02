@@ -3,7 +3,7 @@ import { useDeletePreRegisterHeart, useGetPreRegisterHeart } from '@/components/
 import AuctionItem from '@/components/common/item/AuctionItem';
 import Button from '@/components/common/Button';
 import EmptyBoundary from '@/components/common/EmptyBoundary';
-import { PreRegisterAuction } from 'Auction';
+import type { IPreAuctionItem } from 'AuctionItem';
 import { useNavigate } from 'react-router-dom';
 
 const Heart = () => {
@@ -16,7 +16,7 @@ const Heart = () => {
   return (
     <EmptyBoundary dataLength={preRegisterHeartList.length} type='heart'>
       <ul className='grid items-center justify-center grid-cols-2 gap-4 px-10 py-5'>
-        {preRegisterHeartList.map((el: PreRegisterAuction) => (
+        {preRegisterHeartList.map((el: IPreAuctionItem) => (
           <li key={el.id} onClick={() => navigate(`/product/${el.id}`)} className='cursor-pointer'>
             <AuctionItem axis='column' label='좋아요 한 사전 경매 상품'>
               <AuctionItem.Image src={el.cdnPath} />

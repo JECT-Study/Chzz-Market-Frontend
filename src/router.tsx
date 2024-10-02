@@ -3,7 +3,7 @@ import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 
 import AddressBook from './pages/AddressBook';
 import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
-import AuctionDetail from './pages/AuctionDetail';
+import AuctionDetails from './pages/AuctionDetails';
 import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
@@ -18,7 +18,7 @@ import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
 import PublicRoute from './components/common/route/PublicRoute';
 import ROUTERS from '@/constants/route';
-import Register from './pages/Register';
+import Register, { loader as registerLoader } from './pages/Register';
 import Signup from './pages/Signup';
 import User from './pages/User';
 import UserRegisteredList from './pages/UserRegisteredList';
@@ -75,6 +75,11 @@ const privateRouteList = [
     element: <Register />,
   },
   {
+    path: `${ROUTERS.PRE_AUCTION.EDIT}/:preAuctionId`,
+    element: <Register />,
+    loader: registerLoader,
+  },
+  {
     path: ROUTERS.ADDRESSBOOK,
     element: <AddressBook />,
   },
@@ -124,7 +129,7 @@ export const router = createBrowserRouter([
         path: `${ROUTERS.AUCTION.ITEM}/:productId`,
         element: (
           <AsyncBoundary>
-            <AuctionDetail />
+            <AuctionDetails />
           </AsyncBoundary>
         ),
       },
