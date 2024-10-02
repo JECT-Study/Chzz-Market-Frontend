@@ -1,4 +1,4 @@
-import { OngoingAuctionRegisterdItem, PreEnrollProductRegisteredItem } from '@/@types/productList';
+import { IAuctionRegisteredItem, IPreAuctionRegisteredItem } from 'AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EmptyBoundary from '@/components/common/EmptyBoundary';
@@ -65,18 +65,18 @@ const UserRegisteredList = () => {
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
-    <div className="mx-[-32px] my-[-4px]">
+    <div className='mx-[-32px] my-[-4px]'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
-      {activeTab === true ? (
+      <div className='grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+        {activeTab === true ? (
           <EmptyBoundary dataLength={ongoingItems.length} type='userRegisterAuction'>
-            {ongoingItems.map((product: OngoingAuctionRegisterdItem) => (
+            {ongoingItems.map((product: IAuctionRegisteredItem) => (
               <OngoingMyRegister product={product} key={product.id} />
             ))}
           </EmptyBoundary>
         ) : (
           <EmptyBoundary dataLength={enrollItems.length} type='userPreRegisterAuction'>
-            {enrollItems.map((product: PreEnrollProductRegisteredItem) => (
+            {enrollItems.map((product: IPreAuctionRegisteredItem) => (
               <PreEnrollMyRegister product={product} key={product.id} />
             ))}
           </EmptyBoundary>

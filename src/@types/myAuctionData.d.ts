@@ -1,7 +1,7 @@
-import type { Auction } from 'Auction';
+import type { IAuctionItemBase } from 'AuctionItem';
 
 // 개별 제품의 인터페이스
-export interface AuctionItem extends Auction {
+export interface AuctionItem extends IAuctionItemBase {
   status: string;
   createdAt: string;
 }

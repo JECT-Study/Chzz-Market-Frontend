@@ -1,4 +1,4 @@
-import type { PreRegisterAuction, RegisterAuction } from 'Auction';
+import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
 
 import CategoryList from '@/components/home/CategoryList';
 import EmptyBoundary from '@/components/common/EmptyBoundary';
@@ -17,14 +17,14 @@ const Home = () => {
       <div className='flex flex-col gap-10'>
         <HomeItemList name='베스트 경매'>
           <EmptyBoundary dataLength={bestAuctions.length} type='best'>
-            {bestAuctions.map((auction: RegisterAuction) => (
+            {bestAuctions.map((auction: IAuctionItem) => (
               <HomeAuctionItem key={auction.id} kind='register' auction={auction} />
             ))}
           </EmptyBoundary>
         </HomeItemList>
         <HomeItemList name='종료 임박 경매'>
           <EmptyBoundary dataLength={imminentAuctions.length} type='imminent'>
-            {imminentAuctions.map((auction: RegisterAuction) => (
+            {imminentAuctions.map((auction: IAuctionItem) => (
               <HomeAuctionItem key={auction.id} kind='register' auction={auction} />
             ))}
           </EmptyBoundary>
@@ -34,7 +34,7 @@ const Home = () => {
         </HomeItemList>
         <HomeItemList name='사전 등록 경매'>
           <EmptyBoundary dataLength={preRegisterAuctions.length} type='preRegisterAuction'>
-            {preRegisterAuctions.map((auction: PreRegisterAuction) => (
+            {preRegisterAuctions.map((auction: IPreAuctionItem) => (
               <HomeAuctionItem key={auction.id} kind='pre-register' auction={auction} />
             ))}
           </EmptyBoundary>

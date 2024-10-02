@@ -3,7 +3,7 @@ import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 
 import AddressBook from './pages/AddressBook';
 import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
-import AuctionDetail from './pages/AuctionDetail';
+import AuctionDetails from './pages/AuctionDetails';
 import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
@@ -124,7 +124,7 @@ export const router = createBrowserRouter([
         path: `${ROUTERS.AUCTION.ITEM}/:productId`,
         element: (
           <AsyncBoundary>
-            <AuctionDetail />
+            <AuctionDetails />
           </AsyncBoundary>
         ),
       },

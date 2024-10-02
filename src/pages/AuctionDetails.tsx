@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import type { AuctionItem } from '@/components/details/AuctionItem';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import { CiCoins1 } from 'react-icons/ci';
 import Layout from '@/components/layout/Layout';
@@ -11,10 +10,11 @@ import Price from '@/assets/icons/price.svg';
 import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
 import axios from 'axios';
+import { IAuctionDetails } from 'AuctionDetails';
 
-const AuctionDetail = () => {
+const AuctionDetails = () => {
   const { productId } = useParams() as { productId: string };
-  const [auctionItem, setAuctionItem] = useState<AuctionItem | null>(null);
+  const [auctionItem, setAuctionItem] = useState<IAuctionDetails | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
@@ -64,7 +64,7 @@ const AuctionDetail = () => {
           {/* 상품 이미지 영역 */}
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
-              <img src={`${auctionItem?.imageList[0]}`} alt={auctionItem?.name} className='object-cover w-full h-auto' />
+              <img src={`${auctionItem?.imageList[0]}`} alt={auctionItem?.productName} className='object-cover w-full h-auto' />
             </div>
             {/* 타이머 및 프로그레스 바 */}
             {auctionItem && (
@@ -86,7 +86,7 @@ const AuctionDetail = () => {
             {/* 경매 아이템 제목 & 시작가 */}
             {auctionItem && (
               <div className='mb-4'>
-                <p className='mb-1 text-lg font-bold'>{auctionItem.name || '[ERROR] 이름이 등록되지 않았어요!'}</p>
+                <p className='mb-1 text-lg font-bold'>{auctionItem.productName || '[ERROR] 이름이 등록되지 않았어요!'}</p>
                 <p className='text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
                     <span className='mr-1'>
@@ -156,4 +156,4 @@ const AuctionDetail = () => {
   );
 };
 
-export default AuctionDetail;
+export default AuctionDetails;

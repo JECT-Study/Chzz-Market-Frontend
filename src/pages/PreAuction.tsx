@@ -5,13 +5,11 @@ import axios from 'axios';
 import ProgressBar from '@/components/details/ProgressBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import Price from '@/assets/icons/price.svg';
-import type { PreAuctionItem } from '@/components/details/AuctionItem';
+import { IPreAuctionDetails } from 'AuctionDetails';
 
 const PreAuction = () => {
   const { productId } = useParams() as { productId: string };
-  const [preAuctionItem, setPreAuctionItem] = useState<PreAuctionItem | null>(
-    null
-  );
+  const [preAuctionItem, setPreAuctionItem] = useState<IPreAuctionDetails | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
@@ -40,9 +38,7 @@ const PreAuction = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/v1/products/${productId}`
-        );
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/products/${productId}`);
         console.log(response.data);
         setPreAuctionItem(response.data);
       } catch (error) {
@@ -55,11 +51,7 @@ const PreAuction = () => {
 
   return (
     <Layout>
-      <Layout.Header
-        title='제품 상세'
-        handleBack={handleBackClick}
-        handleModal={toggleMenu}
-      />
+      <Layout.Header title='제품 상세' handleBack={handleBackClick} handleModal={toggleMenu} />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
         <Layout.Main>
@@ -67,25 +59,16 @@ const PreAuction = () => {
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
               <img
-                src={`https://chzz-cdn.s3.ap-northeast-2.amazonaws.com/${
-                  preAuctionItem?.imageUrls[0]
-                }`}
+                src={`https://chzz-cdn.s3.ap-northeast-2.amazonaws.com/${preAuctionItem?.imageList[0]}`}
                 alt={preAuctionItem?.productName}
                 className='object-cover w-full h-auto'
               />
             </div>
             {/* 타이머 및 프로그레스 바 */}
             {preAuctionItem && (
-              <div
-                id='timer-section'
-                className={`bg-white z-10 py-1 ${
-                  isTimerFixed ? 'fixed top-0 left-0 right-0' : ''
-                }`}
-              >
+              <div id='timer-section' className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}>
                 {isLoading ? (
-                  <div className='font-bold text-center text-gray-500'>
-                    로딩 중...
-                  </div>
+                  <div className='font-bold text-center text-gray-500'>로딩 중...</div>
                 ) : (
                   <ProgressBar
                     initialTimeRemaining={''}
@@ -101,19 +84,14 @@ const PreAuction = () => {
             {/* 경매 아이템 제목 & 시작가 */}
             {preAuctionItem && (
               <div className='mb-4'>
-                <p className='mb-1 text-lg font-bold'>
-                  {preAuctionItem.productName ||
-                    '[ERROR] 이름이 등록되지 않았어요!'}
-                </p>
+                <p className='mb-1 text-lg font-bold'>{preAuctionItem.productName || '[ERROR] 이름이 등록되지 않았어요!'}</p>
                 <p className='text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
                     <span className='mr-1'>
                       <img src={Price} alt='Price' />
                     </span>
                     시작가
-                    <span className='font-bold p'>
-                      {numberWithCommas(Number(preAuctionItem.minPrice))}원
-                    </span>
+                    <span className='font-bold p'>{numberWithCommas(Number(preAuctionItem.minPrice))}원</span>
                   </span>
                 </p>
               </div>
@@ -165,19 +143,11 @@ const PreAuction = () => {
         {/* 백드롭 */}
         {isMenuOpen && (
           <>
-            <div
-              className='absolute inset-0 z-40 bg-black bg-opacity-50'
-              onClick={closeMenu}
-              style={{ top: 0, bottom: 0 }}
-            />
+            <div className='absolute inset-0 z-40 bg-black bg-opacity-50' onClick={closeMenu} style={{ top: 0, bottom: 0 }} />
             {/* 메뉴 (아코디언) */}
             <div className='absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50'>
-              <button className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'>
-                수정하기
-              </button>
-              <button className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100'>
-                삭제하기
-              </button>
+              <button className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'>수정하기</button>
+              <button className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100'>삭제하기</button>
             </div>
           </>
         )}

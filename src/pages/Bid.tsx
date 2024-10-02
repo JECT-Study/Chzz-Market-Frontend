@@ -45,7 +45,7 @@ const Bid = () => {
     getValues,
   });
 
-  const { imageList, name, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating, bidId } = auctionDetails;
+  const { imageList, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating, bidId } = auctionDetails;
 
   const buttonName = isSubmitting ? '제안 중...' : '제안하기';
   const title = isParticipating ? '금액 수정하기' : '경매 참여하기';
@@ -69,7 +69,7 @@ const Bid = () => {
         <div className='flex flex-col gap-8'>
           <AuctionItem axis='row' label='입찰 상품'>
             <AuctionItem.Image src={imageList[0]} time={timeRemaining} />
-            <AuctionItem.Main kind='register' name={name} count={participantCount} price={minPrice} />
+            <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
           </AuctionItem>
           {isParticipating && (
             <div className='flex flex-col gap-2'>
