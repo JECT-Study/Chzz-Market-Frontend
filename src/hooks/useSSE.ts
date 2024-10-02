@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { getToken } from '@/utils/tokenUtils';
 import { isLoggedIn } from '@/store/authSlice';
+import { refreshToken } from '@/components/login/queries';
 import { useSelector } from 'react-redux';
 
 export const useSSE = <T>(url: string) => {
@@ -25,11 +26,10 @@ export const useSSE = <T>(url: string) => {
       eventSource.current.onopen = () => {};
 
       eventSource.current.onerror = () => {
+        refreshToken();
         eventSource.current?.close();
         setTimeout(fetchSSE, 3000);
       };
-
-      eventSource.current.addEventListener('init', () => {});
 
       eventSource.current.addEventListener('notification', (e) => {
         const data = JSON.parse(e.data);
