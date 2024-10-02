@@ -1,5 +1,6 @@
 import Bid, { loader as bidLoader } from './pages/Bid';
 import BidderList, { loader as bidderListLoader } from './pages/BidderList';
+import Register, { loader as registerLoader } from './pages/Register';
 
 import AddressBook from './pages/AddressBook';
 import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
@@ -18,7 +19,6 @@ import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
 import PublicRoute from './components/common/route/PublicRoute';
 import ROUTERS from '@/constants/route';
-import Register, { loader as registerLoader } from './pages/Register';
 import Signup from './pages/Signup';
 import User from './pages/User';
 import UserRegisteredList from './pages/UserRegisteredList';
@@ -54,11 +54,7 @@ const layoutWithNavRouteList = [
 const privateRouteList = [
   {
     path: ROUTERS.BID,
-    element: (
-      <AsyncBoundary>
-        <Bid />
-      </AsyncBoundary>
-    ),
+    element: <Bid />,
     loader: bidLoader,
   },
   {
@@ -114,7 +110,11 @@ export const router = createBrowserRouter([
       },
       ...privateRouteList.map(({ path, element, loader }) => ({
         path,
-        element: <PrivateRoute>{element}</PrivateRoute>,
+        element: (
+          <AsyncBoundary>
+            <PrivateRoute>{element}</PrivateRoute>
+          </AsyncBoundary>
+        ),
         ...(loader && { loader }),
       })),
       ...publicRouteList.map(({ path, element }) => ({
