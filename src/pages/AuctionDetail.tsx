@@ -16,7 +16,6 @@ const AuctionDetail = () => {
   const { productId } = useParams() as { productId: string };
   const [auctionItem, setAuctionItem] = useState<AuctionItem | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
   const [isPreAuction, _setIsPreAuction] = useState(false);
@@ -53,10 +52,9 @@ const AuctionDetail = () => {
             },
           }
         );
-        console.log(response.data);
         setAuctionItem(response.data);
-      } catch (error) {
-        alert('경매 데이터를 가져오는 중 오류가 발생했습니다.');
+      } catch (fetchError) {
+        console.error('경매 데이터를 가져오는 중 오류가 발생했습니다.');
       }
     };
     fetchData();
