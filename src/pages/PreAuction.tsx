@@ -2,22 +2,24 @@
 import { useEffect, useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import axios from 'axios';
-import ProgressBar from '@/components/details/ProgressBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import Price from '@/assets/icons/price.svg';
 import { IPreAuctionDetails } from 'AuctionDetails';
+
+// 삭제 확인 및 성공 메시지 모달 컴포넌트 임포트 (필요 시 직접 구현)
+import ConfirmationModal from '@/components/details/ConfirmationModal';
+import SuccessModal from '@/components/details/SuccessModal';
 
 const PreAuction = () => {
   const { productId } = useParams() as { productId: string };
   const [preAuctionItem, setPreAuctionItem] = useState<IPreAuctionDetails | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isTimerFixed, _setIsTimerFixed] = useState(false);
-  const [_interestCount, _setInterestCount] = useState(1);
-
-  const totalTime = 24 * 60 * 60;
+  // const [isLoading, setIsLoading] = useState(true);
+  const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+  const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);
 
   const navigate = useNavigate();
+
   const handleBackClick = () => {
     navigate('/');
   };
@@ -30,7 +32,6 @@ const PreAuction = () => {
     setIsMenuOpen(false);
   };
 
-  // 세자리 단위로 콤마를 찍어주는 함수
   const numberWithCommas = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
@@ -38,16 +39,50 @@ const PreAuction = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/products/${productId}`);
-        console.log(response.data);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/products/${productId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
+        // console.log(response.data);
         setPreAuctionItem(response.data);
       } catch (error) {
-        alert('경매 데이터를 가져오는 중 오류가 발생했습니다.');
+        setIsDeleteSuccessOpen(true);
+      } finally {
+        return;
+        // 필요시 로직 추가
       }
     };
     fetchData();
-    setIsLoading(false);
   }, [productId]);
+
+  const onDeleteButtonClickHandler = () => {
+    setIsDeleteConfirmOpen(true);
+    closeMenu();
+  };
+
+  const onModifyButtonClickHandler = () => {
+    navigate('/');
+  };
+
+  const onConfirmDeleteHandler = async () => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/products/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      setIsDeleteConfirmOpen(false);
+      setIsDeleteSuccessOpen(true);
+    } catch (error) {
+      setIsDeleteSuccessOpen(true);
+    }
+  };
+
+  const onCloseSuccessModalHandler = () => {
+    setIsDeleteSuccessOpen(false);
+    navigate('/');
+  };
 
   return (
     <Layout>
@@ -64,19 +99,6 @@ const PreAuction = () => {
                 className='object-cover w-full h-auto'
               />
             </div>
-            {/* 타이머 및 프로그레스 바 */}
-            {preAuctionItem && (
-              <div id='timer-section' className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}>
-                {isLoading ? (
-                  <div className='font-bold text-center text-gray-500'>로딩 중...</div>
-                ) : (
-                  <ProgressBar
-                    initialTimeRemaining={''}
-                    totalTime={totalTime} // Should be 86400
-                  />
-                )}
-              </div>
-            )}
           </div>
 
           {/* 경매 정보 영역 */}
@@ -96,39 +118,6 @@ const PreAuction = () => {
                 </p>
               </div>
             )}
-            {/* 나의 참여 금액 & 경매 참여인원 */}
-            {/* <div className='w-full mb-4 border border-gray-300 rounded-lg'>
-              <div className='flex items-center justify-between'>
-                <div className='flex flex-col items-center flex-1 py-4 text-center'>
-                  <div className='flex items-center mb-1 text-sm text-gray-400'>
-                    <CiCoins1 className='mx-1 text-xl' />
-                    <span className='ml-1'>나의 참여 금액</span>
-                  </div>
-                  <p className='text-xl font-bold text-gray-800'>
-                    {preAuctionItem?.isParticipating
-                      ? `${numberWithCommas(Number(preAuctionItem.bidAmount))}원`
-                      : '참여 전'}
-                  </p>
-                </div>
-                <div className='h-full border-l border-gray-300' />
-                <div className='flex flex-col items-center flex-1 py-4 text-center'>
-                  <div className='flex items-center mb-1 text-sm text-gray-400'>
-                    <img
-                      src={Participants}
-                      alt='Participants'
-                      className='w-4 h-4 mx-2 mb-1'
-                    />
-                    <p className='mb-1 text-sm text-gray-500'>참여 인원</p>
-                  </div>
-                  <p className='text-lg font-bold'>
-                    {preAuctionItem?.isLiked
-                      ? `${preAuctionItem.isLI}명`
-                      : '0명'}
-                  </p>
-                </div>
-              </div>
-            </div> 
-          */}
           </div>
 
           {/* 상품 설명 */}
@@ -143,15 +132,25 @@ const PreAuction = () => {
         {/* 백드롭 */}
         {isMenuOpen && (
           <>
-            <div className='absolute inset-0 z-40 bg-black bg-opacity-50' onClick={closeMenu} style={{ top: 0, bottom: 0 }} />
+            <div className='absolute inset-0 z-40 bg-black bg-opacity-50' onClick={closeMenu} />
             {/* 메뉴 (아코디언) */}
             <div className='absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50'>
-              <button className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'>수정하기</button>
-              <button className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100'>삭제하기</button>
+              <button className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200' onClick={onModifyButtonClickHandler}>
+                수정하기
+              </button>
+              <button className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100' onClick={onDeleteButtonClickHandler}>
+                삭제하기
+              </button>
             </div>
           </>
         )}
       </div>
+      {/* 삭제 확인 다이얼로그 */}
+      {isDeleteConfirmOpen && (
+        <ConfirmationModal message='정말 삭제하시겠습니까?' onConfirm={onConfirmDeleteHandler} onCancel={() => setIsDeleteConfirmOpen(false)} />
+      )}
+      {/* 삭제 성공 메시지 */}
+      {isDeleteSuccessOpen && <SuccessModal message='아이템이 삭제되었습니다.' onClose={onCloseSuccessModalHandler} />}
     </Layout>
   );
 };

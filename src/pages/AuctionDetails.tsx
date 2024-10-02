@@ -44,11 +44,14 @@ const AuctionDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/auctions/${productId}?viewType=FULL`);
-        console.log(response.data);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/auctions/${productId}?viewType=FULL`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
         setAuctionItem(response.data);
-      } catch (error) {
-        alert('경매 데이터를 가져오는 중 오류가 발생했습니다.');
+      } catch (fetchError) {
+        console.error('경매 데이터를 가져오는 중 오류가 발생했습니다.');
       }
     };
     fetchData();
@@ -57,7 +60,12 @@ const AuctionDetails = () => {
 
   return (
     <Layout>
-      <Layout.Header title='제품 상세' handleBack={handleBackClick} handleModal={toggleMenu} />
+      <Layout.Header
+        title='제품 상세'
+        handleBack={handleBackClick}
+        handleModal={toggleMenu}
+        isDisableMenuButton // 메뉴 버튼을 숨기고 싶을 때 true로 설정
+      />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
         <Layout.Main>
