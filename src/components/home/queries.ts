@@ -15,7 +15,7 @@ export const useGetHomeAuctions = () => {
     return response.data;
   };
   const getPreRegisterAuctions = async (): Promise<IPreAuctionItem[]> => {
-    const response = await httpClient.get(`${API_END_POINT.PRE_REGISTER}`);
+    const response = await httpClient.get(`${API_END_POINT.PRE_AUCTION}`);
     return response.data.items;
   };
 

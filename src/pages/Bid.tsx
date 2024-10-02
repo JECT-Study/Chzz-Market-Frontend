@@ -25,7 +25,7 @@ const Bid = () => {
   const { mutate: postBid } = usePostBid(auctionId);
   const { mutate: patchBid } = usePatchBid(auctionId);
 
-  const { imageList, name, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating, bidId } = auctionDetails;
+  const { imageList, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating, bidId } = auctionDetails;
   const title = isParticipating ? '금액 수정하기' : '경매 참여하기';
 
   const BidSchema = getBidSchema(minPrice);
@@ -48,7 +48,6 @@ const Bid = () => {
     getValues,
   });
 
-  const { imageList, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating, bidId } = auctionDetails;
   const onPostSubmit: SubmitHandler<FormFields> = async (data) => {
     const bidData = {
       auctionId: Number(auctionId),
