@@ -1,12 +1,13 @@
-import { OngoingAuctionListItem, PreEnrollProductListItem } from '@/@types/productList';
+import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
 import Layout from '@/components/layout/Layout';
 import OngoingProduct from '@/components/productList/OngoingProduct';
+import PreEnrollProduct from '@/components/productList/PreEnrollProduct';
 import ProductButtons from '@/components/productList/ProductButtons';
 import ProductListTabs from '@/components/productList/ProductListTabs';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import useProductList from '@/hooks/useProductList';
-import PreEnrollProduct from '@/components/productList/PreEnrollProduct';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
@@ -75,8 +76,8 @@ const ProductList = () => {
         <ProductButtons setSortType={setSortType} />
         <div className='grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
           {activeTab === 'ongoing'
-            ? ongoingItems?.map((product: OngoingAuctionListItem) => <OngoingProduct key={product.id} product={product} />)
-            : enrollItems?.map((product: PreEnrollProductListItem) => <PreEnrollProduct key={product.id} product={product} />)}
+            ? ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.id} product={product} />)
+            : enrollItems?.map((product: IPreAuctionItem) => <PreEnrollProduct key={product.id} product={product} />)}
           <div ref={loader} />
         </div>
       </Layout.Main>

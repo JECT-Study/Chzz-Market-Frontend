@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import AuctionItem from '@/components/common/item/AuctionItem';
 import { BIDDER_LIST_PRICE_FILTER } from '@/constants/filter';
@@ -11,7 +11,6 @@ import { useGetBidderList } from '@/components/bidderList/queries';
 import { useState } from 'react';
 
 const BidderList = () => {
-  const navigate = useNavigate();
   const auctionId = useLoaderData() as number;
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
   const handleFilterState = () =>
@@ -20,16 +19,16 @@ const BidderList = () => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
   const { bidderList } = useGetBidderList(auctionId, filterState.sort);
 
-  const { imageList, name, minPrice, participantCount } = auctionDetails;
+  const { imageList, productName, minPrice, participantCount } = auctionDetails;
 
   return (
     <Layout>
-      <Layout.Header title='경매 참여자 목록' handleBack={() => navigate(-1)} />
+      <Layout.Header title='경매 참여자 목록' />
       <Layout.Main>
         <div className='flex flex-col gap-8 pt-4'>
           <AuctionItem axis='row' label='입찰자 목록 상품'>
             <AuctionItem.Image src={imageList[0]} />
-            <AuctionItem.Main kind='register' name={name} count={participantCount} price={minPrice} />
+            <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
           </AuctionItem>
           <div className='flex items-center justify-between'>
             <h2 className='text-heading2'>참여 가격</h2>

@@ -45,4 +45,22 @@ export const AddressBookSchema = z.object({
   bank: z.string().min(1, '은행을 선택해주세요.'),
 });
 
-export const BidSchema = RegisterSchema.pick({ minPrice: true });
+export const getBidSchema = (minPrice: number) =>
+  z.object({
+    bidAmount: z.string().superRefine((value, ctx) => {
+      const num = Number(value.replace(/[^\d]/g, ''));
+      if (Number.isNaN(num) || num <= minPrice) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `시작가보다 높은 금액을 입력해주세요.`,
+        });
+      }
+
+      if (num % 1000 !== 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: '1000원 단위로 입력해 주세요.',
+        });
+      }
+    }),
+  });

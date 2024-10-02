@@ -1,9 +1,9 @@
-import { MyLostAuctionListItem } from '@/@types/productList';
+import type { IUserAuctionLostItem } from 'AuctionItem';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import { LuUsers } from 'react-icons/lu';
 import ProductItem from '../common/item/ProductItem';
 
-const OrderLostProduct = ({ product }: { product: MyLostAuctionListItem }) => {
+const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
   return (
     <ProductItem product={product}>
       <div className='flex'>

@@ -1,10 +1,10 @@
-import { PreEnrollProductListItem } from '@/@types/productList';
+import Button from '../common/Button';
 import { FaHeart } from 'react-icons/fa';
+import type { IPreAuctionItem } from 'AuctionItem';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import ProductItem from '../common/item/ProductItem';
-import Button from '../common/Button';
 
-const PreEnrollProduct = ({ product }: { product: PreEnrollProductListItem }) => {
+const PreEnrollProduct = ({ product }: { product: IPreAuctionItem }) => {
   return (
     <ProductItem product={product}>
       <div className='flex'>

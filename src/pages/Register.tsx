@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '@/components/common/Button';
 import FormField from '@/components/common/form/FormField';
+import type { IRegister } from 'Register';
 import ImageUploader from '@/components/register/ImageUploader';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/layout/Layout';
@@ -12,14 +13,13 @@ import RegisterLabel from '@/components/register/RegisterLabel';
 import { RegisterSchema } from '@/constants/schema';
 import { Textarea } from '@/components/ui/textarea';
 import { categories } from '@/constants/categories';
+import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 import { useNavigate } from 'react-router-dom';
+import { usePostRegister } from '@/components/register/quries';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { usePostRegister } from '@/components/register/quries';
-import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
-import type { RegisterType } from 'Register';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
@@ -71,7 +71,7 @@ const Register = () => {
     const { productName, category, description, minPrice } = data;
     const formData = new FormData();
 
-    const registerData: RegisterType = {
+    const registerData: IRegister = {
       productName,
       category,
       description,
