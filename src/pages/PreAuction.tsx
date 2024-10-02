@@ -62,7 +62,7 @@ const PreAuction = () => {
   };
 
   const onModifyButtonClickHandler = () => {
-    navigate('/');
+    navigate(`/auctions/edit/${preAuctionItem?.productId}`);
   };
 
   const onConfirmDeleteHandler = async () => {
