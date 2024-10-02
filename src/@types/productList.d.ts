@@ -26,3 +26,23 @@ export type PreEnrollProductRegisteredData = PaginationData<IPreAuctionRegistere
 export type MyWonAuctionListData = PaginationData<IUserAuctionWonItem>;
 export type MyHistoryAuctionListData = PaginationData<IUserAuctionLostItem>;
 export type MyLostAuctionListData = PaginationData<IUserAuctionHistoryItem>;
+
+// declare module 'AuctionList' {
+//   export interface PaginationData<T> {
+//     hasNext: boolean;
+//     items: T[];
+//     pageNumber: number;
+//     pageSize: number;
+//     totalPages: number;
+//     totalElements: number;
+//     last: boolean;
+//   }
+
+//   // export interface IAuctionList extends PaginationData<IAuctionItem> {}
+//   // export interface IPreAuctionList extends PaginationData<IPreAuctionItem> {}
+//   // export interface IAuctionRegisteredList extends PaginationData<IAuctionRegisteredItem> {}
+//   // export interface IPreAuctionRegisteredList extends PaginationData<IPreAuctionRegisteredItem> {}
+//   // export interface IUserAuctionWonList extends PaginationData<IUserAuctionWonItem> {}
+//   // export interface IUserAuctionHistoryList extends PaginationData<IUserAuctionLostItem> {}
+//   // export interface IUserAuctionLostList extends PaginationData<IUserAuctionHistoryItem> {}
+// }
