@@ -78,6 +78,7 @@ export const useSignup = (): any => {
     watch,
     setValue,
     activeButtonSheet,
+    setError,
     setActiveButtonSheet,
     onCloseBottomSheet,
     onSubmit,
