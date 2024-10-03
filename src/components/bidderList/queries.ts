@@ -6,7 +6,7 @@ import { IBidder } from 'Bid';
 
 export const useGetBidderList = (auctionId: number, sort: 'desc' | 'asc') => {
   const getBidderList = async (): Promise<IBidder[]> => {
-    const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/${auctionId}/bids/?sort=amount,${sort}`);
+    const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/${auctionId}/bids/?sort=bid-amount,${sort}`);
 
     return response.data;
   };
