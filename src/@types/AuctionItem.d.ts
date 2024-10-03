@@ -2,10 +2,8 @@ declare module 'AuctionItem' {
   interface IAuctionItemBase {
     productName: string;
     minPrice: number;
-    imgUrl: string;
+    imageUrl: string;
   }
-
-  export interface IProductItem {}
 
   export interface IAuctionItem extends IAuctionItemBase {
     auctionId: number;

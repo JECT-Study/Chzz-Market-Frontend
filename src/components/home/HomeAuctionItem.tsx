@@ -11,14 +11,14 @@ type HomeAuctionItemProps<T> = T extends 'preAuction' ? { kind: 'preAuction'; au
 
 const HomeAuctionItem = <T extends 'preAuction' | 'auction'>({ kind, auction }: HomeAuctionItemProps<T>) => {
   const navigate = useNavigate();
-  const { productName, imgUrl, minPrice } = auction;
+  const { productName, imageUrl, minPrice } = auction;
   const handleClick = () => navigate(kind === 'auction' ? `/auctions/auction/${auction.auctionId}` : `/auctions/pre-auction/${auction.productId}`);
   const name = truncateText(productName);
 
   return (
-    <figure className='flex flex-col min-w-[11rem] gap-2 border rounded text-body2 cursor-pointer' aria-label={kind} onClick={handleClick}>
+    <figure className='flex flex-col w-[11rem] gap-2 border rounded text-body2 cursor-pointer' aria-label={kind} onClick={handleClick}>
       <div className='relative'>
-        <img src={imgUrl} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' />
+        <img src={imageUrl} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' />
         {kind === 'auction' && <TimeLabel time={auction.timeRemaining} />}
       </div>
       <figcaption className='flex flex-col gap-2 p-2'>
