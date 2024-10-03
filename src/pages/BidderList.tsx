@@ -2,8 +2,8 @@ import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import AuctionItem from '@/components/common/item/AuctionItem';
 import { BIDDER_LIST_PRICE_FILTER } from '@/constants/filter';
-import type { Bidder } from 'Bid';
 import Button from '@/components/common/Button';
+import type { IBidder } from 'Bid';
 import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useGetAuctionDetails } from '@/components/details/queries';
@@ -19,7 +19,7 @@ const BidderList = () => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
   const { bidderList } = useGetBidderList(auctionId, filterState.sort);
 
-  const { imageList, productName, minPrice, participantCount } = auctionDetails;
+  const { imageUrls, productName, minPrice, participantCount } = auctionDetails;
 
   return (
     <Layout>
@@ -27,7 +27,7 @@ const BidderList = () => {
       <Layout.Main>
         <div className='flex flex-col gap-8 pt-4'>
           <AuctionItem axis='row' label='입찰자 목록 상품'>
-            <AuctionItem.Image src={imageList[0]} />
+            <AuctionItem.Image src={imageUrls[0]} />
             <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
           </AuctionItem>
           <div className='flex items-center justify-between'>
@@ -39,9 +39,12 @@ const BidderList = () => {
           </div>
           <hr className='border my-[-16px] border-gray3' />
           <ul className='flex flex-col gap-2'>
-            {bidderList.map((el: Bidder, idx: number) => (
-              <li key={el.id} className={`flex p-3 items-center justify-between text-gray1 ${idx === 0 && 'border border-cheeseYellow rounded-lg'}`}>
-                <span className='text-body1'>{el.nickname}</span>
+            {bidderList.map((el: IBidder, idx: number) => (
+              <li
+                key={el.bidderNickname}
+                className={`flex p-3 items-center justify-between text-gray1 ${idx === 0 && 'border border-cheeseYellow rounded-lg'}`}
+              >
+                <span className='text-body1'>{el.bidderNickname}</span>
                 <span className='text-body1Bold'>{formatCurrencyWithWon(el.bidAmount)}</span>
               </li>
             ))}

@@ -6,13 +6,9 @@ declare module 'Notification' {
     auctionId?: number;
   }
 
-  export interface INotification {
-    id: number;
-    type: string;
-    message: string;
-    cdnPath: string;
+  export interface INotification extends IRealTimeNotification {
+    imgUrl: string;
     isRead: boolean;
-    auctionId?: number;
     createdAt: string;
   }
 }

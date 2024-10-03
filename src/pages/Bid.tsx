@@ -25,8 +25,8 @@ const Bid = () => {
   const { mutate: postBid } = usePostBid(auctionId);
   const { mutate: patchBid } = usePatchBid(auctionId);
 
-  const { imageList, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipating, bidId } = auctionDetails;
-  const title = isParticipating ? '금액 수정하기' : '경매 참여하기';
+  const { imageUrls, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated, bidId } = auctionDetails;
+  const title = isParticipated ? '금액 수정하기' : '경매 참여하기';
 
   const BidSchema = getBidSchema(minPrice);
   type FormFields = z.infer<typeof BidSchema>;
@@ -66,10 +66,10 @@ const Bid = () => {
       <Layout.Main>
         <div className='flex flex-col gap-8'>
           <AuctionItem axis='row' label='입찰 상품'>
-            <AuctionItem.Image src={imageList[0]} time={timeRemaining} />
+            <AuctionItem.Image src={imageUrls[0]} time={timeRemaining} />
             <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
           </AuctionItem>
-          {isParticipating && (
+          {isParticipated && (
             <div className='flex flex-col gap-2'>
               <div className='text-heading3'>나의 참여 금액</div>
               <div aria-label='나의 참여 금액' className='text-body1Bold text-cheeseYellow'>
@@ -97,7 +97,7 @@ const Bid = () => {
           <BidCaution check={check} handleCheck={toggleCheckBox} />
         </div>
       </Layout.Main>
-      <Layout.Footer type={isParticipating ? 'double' : 'single'}>
+      <Layout.Footer type={isParticipated ? 'double' : 'single'}>
         <BidFooter remain={remainingBidCount} check={check} isSubmitting={isSubmitting} handlePatch={onPatchSubmit} handlePost={handleSubmit(onPostSubmit)} />
       </Layout.Footer>
     </Layout>
