@@ -22,12 +22,12 @@ const OngoingMyRegister = ({ product }: { product: IAuctionRegisteredItem }) => 
         <p className='ml-4 font-semibold'>{`${product.participantCount}명`}</p>
       </div>
       <Button
-        color={product.isParticipating ? 'black' : 'white'}
+        color={product.participantCount ? 'black' : 'white'}
         type='button'
         size='small'
-        className={`${product.isParticipating ? '' : ''} w-full h-[33px] rounded-sm`}
+        className={`${product.participantCount ? '' : ''} w-full h-[33px] rounded-sm`}
       >
-        {product.isParticipating ? '경매 참여하기' : '경매 중단하기'}
+        {product.participantCount ? '경매 참여하기' : '경매 중단하기'}
       </Button>
     </ProductItem>
   );

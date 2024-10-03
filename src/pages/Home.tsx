@@ -10,7 +10,7 @@ import { useScrollDetection } from '@/hooks/useScrollDetection';
 
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
-  const { bestAuctions, imminentAuctions, preRegisterAuctions } = useGetHomeAuctions();
+  const { bestAuctions, imminentAuctions, preAuctions } = useGetHomeAuctions();
 
   return (
     <div ref={elementRef} role='main' aria-label='main_area' className='relative flex flex-col justify-between w-full h-full gap-6 overflow-y-scroll'>
@@ -18,14 +18,14 @@ const Home = () => {
         <HomeItemList name='베스트 경매'>
           <EmptyBoundary dataLength={bestAuctions.length} type='best'>
             {bestAuctions.map((auction: IAuctionItem) => (
-              <HomeAuctionItem key={auction.id} kind='register' auction={auction} />
+              <HomeAuctionItem key={auction.auctionId} kind='auction' auction={auction} />
             ))}
           </EmptyBoundary>
         </HomeItemList>
         <HomeItemList name='종료 임박 경매'>
           <EmptyBoundary dataLength={imminentAuctions.length} type='imminent'>
             {imminentAuctions.map((auction: IAuctionItem) => (
-              <HomeAuctionItem key={auction.id} kind='register' auction={auction} />
+              <HomeAuctionItem key={auction.auctionId} kind='auction' auction={auction} />
             ))}
           </EmptyBoundary>
         </HomeItemList>
@@ -33,9 +33,9 @@ const Home = () => {
           <CategoryList />
         </HomeItemList>
         <HomeItemList name='사전 등록 경매'>
-          <EmptyBoundary dataLength={preRegisterAuctions.length} type='preRegisterAuction'>
-            {preRegisterAuctions.map((auction: IPreAuctionItem) => (
-              <HomeAuctionItem key={auction.id} kind='pre-register' auction={auction} />
+          <EmptyBoundary dataLength={preAuctions.length} type='preAuction'>
+            {preAuctions.map((auction: IPreAuctionItem) => (
+              <HomeAuctionItem key={auction.productId} kind='preAuction' auction={auction} />
             ))}
           </EmptyBoundary>
         </HomeItemList>

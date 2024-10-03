@@ -2,8 +2,8 @@ import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import { getTimeColor } from '@/utils/getTimeColor';
 
 export interface ProductProps {
-  id: number;
-  name: string;
+  auctionId?: number;
+  productName: string;
   minPrice: number;
   cdnPath?: string | null;
   timeRemaining?: number;
@@ -20,7 +20,7 @@ const ProductItem = ({ product, children }: { product: ProductProps; children: R
   const timeColor = getTimeColor(remainHour);
 
   return (
-    <div key={product.id} className='mb-4'>
+    <div key={product.auctionId} className='mb-4'>
       <div className='flex flex-col'>
         <div className='w-full h-auto mb-4'>
           <div className='relative'>
@@ -33,7 +33,7 @@ const ProductItem = ({ product, children }: { product: ProductProps; children: R
 
         <div className='flex flex-col gap-[8px]'>
           <div>
-            <p className='text-sm font-semibold'>{product.name}</p>
+            <p className='text-sm font-semibold'>{product.productName}</p>
           </div>
           <div className='flex flex-col'>{children}</div>
         </div>

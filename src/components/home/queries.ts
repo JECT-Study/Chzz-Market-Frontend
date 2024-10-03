@@ -14,12 +14,12 @@ export const useGetHomeAuctions = () => {
     const response = await httpClient.get(`${API_END_POINT.IMMINENT}`);
     return response.data;
   };
-  const getPreRegisterAuctions = async (): Promise<IPreAuctionItem[]> => {
+  const getPreAuctions = async (): Promise<IPreAuctionItem[]> => {
     const response = await httpClient.get(`${API_END_POINT.PRE_AUCTION}`);
     return response.data.items;
   };
 
-  const [bestAuctionsQuery, imminentAuctionsQuery, preRegisterAuctionsQuery] = useSuspenseQueries({
+  const [bestAuctionsQuery, imminentAuctionsQuery, preAuctionsQuery] = useSuspenseQueries({
     queries: [
       { queryKey: [queryKeys.BEST_AUCTIONS], queryFn: getBestAuctions },
       {
@@ -28,14 +28,14 @@ export const useGetHomeAuctions = () => {
       },
       {
         queryKey: [queryKeys.PRE_REGISTER_AUCTIONS],
-        queryFn: getPreRegisterAuctions,
+        queryFn: getPreAuctions,
       },
     ],
   });
 
   const bestAuctions = bestAuctionsQuery.data;
   const imminentAuctions = imminentAuctionsQuery.data;
-  const preRegisterAuctions = preRegisterAuctionsQuery.data;
+  const preAuctions = preAuctionsQuery.data;
 
-  return { bestAuctions, imminentAuctions, preRegisterAuctions };
+  return { bestAuctions, imminentAuctions, preAuctions };
 };

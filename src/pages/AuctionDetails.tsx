@@ -4,13 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import BuyersFooter from '@/components/details/BuyersFooter';
 import { CiCoins1 } from 'react-icons/ci';
+import { IAuctionDetails } from 'AuctionDetails';
 import Layout from '@/components/layout/Layout';
 import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
 import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
 import axios from 'axios';
-import { IAuctionDetails } from 'AuctionDetails';
 
 const AuctionDetails = () => {
   const { productId } = useParams() as { productId: string };
@@ -72,7 +72,7 @@ const AuctionDetails = () => {
           {/* 상품 이미지 영역 */}
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
-              <img src={`${auctionItem?.imageList[0]}`} alt={auctionItem?.productName} className='object-cover w-full h-auto' />
+              <img src={`${auctionItem?.imageUrls[0]}`} alt={auctionItem?.productName} className='object-cover w-full h-auto' />
             </div>
             {/* 타이머 및 프로그레스 바 */}
             {auctionItem && (
@@ -115,7 +115,7 @@ const AuctionDetails = () => {
                     <span className='ml-1'>나의 참여 금액</span>
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
-                    {auctionItem?.isParticipating ? `${numberWithCommas(Number(auctionItem.bidAmount))}원` : '참여 전'}
+                    {auctionItem?.isParticipated ? `${numberWithCommas(Number(auctionItem.bidAmount))}원` : '참여 전'}
                   </p>
                 </div>
                 <div className='h-full border-l border-gray-300' />
@@ -143,7 +143,7 @@ const AuctionDetails = () => {
             <BuyersFooter
               isSeller={auctionItem?.isSeller ?? false}
               status={auctionItem?.status ?? ''}
-              isParticipating={auctionItem?.isParticipating ?? false}
+              isParticipating={auctionItem?.isParticipated ?? false}
               remainingBidCount={auctionItem?.remainingBidCount ?? 0}
             />
           )}

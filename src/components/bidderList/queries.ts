@@ -1,14 +1,12 @@
 import { API_END_POINT } from '@/constants/api';
-import type { Bidder } from 'Bid';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { IBidder } from 'Bid';
 
 export const useGetBidderList = (auctionId: number, sort: 'desc' | 'asc') => {
-  const getBidderList = async (): Promise<Bidder[]> => {
-    const response = await httpClient.get(
-      `${API_END_POINT.AUCTIONS}/${auctionId}/bids/?sort=amount,${sort}`,
-    );
+  const getBidderList = async (): Promise<IBidder[]> => {
+    const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/${auctionId}/bids/?sort=amount,${sort}`);
 
     return response.data;
   };

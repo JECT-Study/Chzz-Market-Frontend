@@ -71,13 +71,13 @@ const UserRegisteredList = () => {
         {activeTab === true ? (
           <EmptyBoundary dataLength={ongoingItems.length} type='userRegisterAuction'>
             {ongoingItems.map((product: IAuctionRegisteredItem) => (
-              <OngoingMyRegister product={product} key={product.id} />
+              <OngoingMyRegister product={product} key={product.createdAt} />
             ))}
           </EmptyBoundary>
         ) : (
           <EmptyBoundary dataLength={enrollItems.length} type='userPreRegisterAuction'>
             {enrollItems.map((product: IPreAuctionRegisteredItem) => (
-              <PreEnrollMyRegister product={product} key={product.id} />
+              <PreEnrollMyRegister product={product} key={product.createdAt} />
             ))}
           </EmptyBoundary>
         )}

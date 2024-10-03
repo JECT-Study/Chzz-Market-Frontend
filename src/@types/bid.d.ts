@@ -1,7 +1,9 @@
 declare module 'Bid' {
-  export interface Bidder {
-    id: number;
-    nickname: string;
+  export interface IBidder {
+    isWinningBidder: boolean;
+    bidderNickname: string;
     bidAmount: number;
   }
+
+  export interface IBidderList extends PaginationData<IBidder> {}
 }

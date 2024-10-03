@@ -5,11 +5,7 @@ import Home from '@/pages/Home';
 import userEvent from '@testing-library/user-event';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
-import {
-  bestAuctionsData,
-  imminentAuctionsData,
-  preRegisterAuctionsData,
-} from '@/mocks/data/homeAuctionsData';
+import { bestAuctionsData, imminentAuctionsData, preRegisterAuctionsData } from '@/mocks/data/homeAuctionsData';
 import { getTimeColor } from '@/utils/getTimeColor';
 import { useGetNotifications } from '../notification/queries';
 import { useGetHomeAuctions } from './queries';
@@ -25,7 +21,7 @@ vi.mock('@/components/home/queries');
 vi.mocked(useGetHomeAuctions).mockReturnValue({
   bestAuctions: bestAuctionsData,
   imminentAuctions: imminentAuctionsData,
-  preRegisterAuctions: preRegisterAuctionsData,
+  preAuctions: preRegisterAuctionsData,
 });
 
 vi.mock('@/components/notification/queries');
@@ -40,10 +36,10 @@ describe('Home 테스트', () => {
       <MemoryRouter initialEntries={['/']}>
         <Routes>
           <Route element={<LayoutWithNav />}>
-            <Route path="/" element={<Home />} />
+            <Route path='/' element={<Home />} />
           </Route>
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
     const user = userEvent.setup();
 

@@ -1,39 +1,43 @@
 declare module 'AuctionItem' {
-  export interface IAuctionItemBase {
-    id: number;
-    name: string;
+  interface IAuctionItemBase {
+    productName: string;
     minPrice: number;
-    cdnPath: string;
+    imgUrl: string;
+  }
+
+  export interface IProductItem {}
+
+  export interface IAuctionItem extends IAuctionItemBase {
+    auctionId: number;
+    participantCount: number;
+    timeRemaining: number;
+    isParticipated: boolean;
+  }
+  export interface IAuctionRegisteredItem extends IAuctionItemBase {
+    status: string;
+    createdAt: string;
+    participantCount: number;
+    timeRemaining: number;
   }
 
   export interface IPreAuctionItem extends IAuctionItemBase {
+    productId: number;
     likeCount: number;
     isLiked: boolean;
   }
-
   export interface IPreAuctionRegisteredItem extends IPreAuctionItem {
-    createdAt: string;
-  }
-
-  export interface IAuctionItem extends IAuctionItemBase {
-    participantCount: number;
-    timeRemaining: number;
-    isParticipating: boolean;
-  }
-  export interface IAuctionRegisteredItem extends IAuctionItem {
-    status: string;
     createdAt: string;
   }
 
   export interface IUserAuctionWonItem extends IAuctionItemBase {
     endDateTime: string;
     winningBid: number;
+    auctionId: number;
   }
-
   export interface IUserAuctionLostItem extends IAuctionItemBase {
     endDateTime: string;
     highestBid: number;
+    auctionId: number;
   }
-
   export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipating'> {}
 }

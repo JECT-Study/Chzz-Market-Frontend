@@ -94,7 +94,7 @@ const PreAuction = () => {
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
               <img
-                src={`https://chzz-cdn.s3.ap-northeast-2.amazonaws.com/${preAuctionItem?.imageList[0]}`}
+                src={`https://chzz-cdn.s3.ap-northeast-2.amazonaws.com/${preAuctionItem?.imageUrls[0]}`}
                 alt={preAuctionItem?.productName}
                 className='object-cover w-full h-auto'
               />
