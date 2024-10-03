@@ -10,7 +10,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   {
     auctionId: 0,
     productName: '[나이키] 에어 조던 로우',
-    imgUrl: jordanRedImage,
+    imageUrl: jordanRedImage,
     timeRemaining: 50_400,
     minPrice: 100_000,
     participantCount: 11,
@@ -19,7 +19,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   {
     auctionId: 1,
     productName: '[나이키] 조던 블랙',
-    imgUrl: jordanBlackImage,
+    imageUrl: jordanBlackImage,
     timeRemaining: 25_200,
     minPrice: 120_000,
     participantCount: 8,
@@ -28,7 +28,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   {
     auctionId: 2,
     productName: '[나이키] 조던 블루',
-    imgUrl: jordanBlueImage,
+    imageUrl: jordanBlueImage,
     timeRemaining: 82_800,
     minPrice: 180_000,
     participantCount: 29,
@@ -37,7 +37,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   {
     auctionId: 3,
     productName: '[뉴발란스] 993',
-    imgUrl: newBalanceImage,
+    imageUrl: newBalanceImage,
     timeRemaining: 360,
     minPrice: 230_000,
     participantCount: 32,
@@ -46,7 +46,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   {
     auctionId: 4,
     productName: '[아디다스] 슈퍼스타',
-    imgUrl: adidasImage,
+    imageUrl: adidasImage,
     timeRemaining: 43_200,
     minPrice: 70_000,
     participantCount: 6,
@@ -58,7 +58,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   {
     auctionId: 0,
     productName: '[나이키] 조던 블랙',
-    imgUrl: jordanBlackImage,
+    imageUrl: jordanBlackImage,
     timeRemaining: 25_200,
     minPrice: 120_000,
     participantCount: 8,
@@ -67,7 +67,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   {
     auctionId: 1,
     productName: '[아디다스] 슈퍼스타',
-    imgUrl: adidasImage,
+    imageUrl: adidasImage,
     timeRemaining: 43_200,
     minPrice: 70_000,
     participantCount: 6,
@@ -76,7 +76,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   {
     auctionId: 2,
     productName: '[나이키] 조던 블루',
-    imgUrl: jordanBlueImage,
+    imageUrl: jordanBlueImage,
     timeRemaining: 82_800,
     minPrice: 180_000,
     participantCount: 29,
@@ -85,7 +85,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   {
     auctionId: 3,
     productName: '[뉴발란스] 993',
-    imgUrl: newBalanceImage,
+    imageUrl: newBalanceImage,
     timeRemaining: 360,
     minPrice: 230_000,
     participantCount: 32,
@@ -94,7 +94,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   {
     auctionId: 4,
     productName: '[나이키] 에어 조던 로우',
-    imgUrl: jordanRedImage,
+    imageUrl: jordanRedImage,
     timeRemaining: 50_400,
     minPrice: 100_000,
     participantCount: 11,
@@ -106,7 +106,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   {
     productId: 0,
     productName: '[뉴발란스] 993',
-    imgUrl: newBalanceImage,
+    imageUrl: newBalanceImage,
     minPrice: 230_000,
     likeCount: 45,
     isLiked: true,
@@ -114,7 +114,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   {
     productId: 1,
     productName: '[나이키] 에어 조던 로우',
-    imgUrl: jordanRedImage,
+    imageUrl: jordanRedImage,
     minPrice: 100_000,
     likeCount: 30,
     isLiked: true,
@@ -122,7 +122,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   {
     productId: 2,
     productName: '[나이키] 조던 블루',
-    imgUrl: jordanBlueImage,
+    imageUrl: jordanBlueImage,
     minPrice: 180_000,
     likeCount: 18,
     isLiked: true,
@@ -130,7 +130,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   {
     productId: 3,
     productName: '[나이키] 조던 블랙',
-    imgUrl: jordanBlackImage,
+    imageUrl: jordanBlackImage,
     minPrice: 120_000,
     likeCount: 12,
     isLiked: true,
@@ -139,7 +139,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   {
     productId: 4,
     productName: '[아디다스] 슈퍼스타',
-    imgUrl: adidasImage,
+    imageUrl: adidasImage,
     minPrice: 70_000,
     likeCount: 1,
     isLiked: true,

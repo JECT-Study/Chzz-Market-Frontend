@@ -7,7 +7,7 @@ export const preAuctionHeartData: IPreAuctionItem[] = [
   {
     productId: 0,
     productName: '조던 블루',
-    imgUrl: JordanBlue,
+    imageUrl: JordanBlue,
     minPrice: 200_000,
     likeCount: 30,
     isLiked: true,
@@ -15,7 +15,7 @@ export const preAuctionHeartData: IPreAuctionItem[] = [
   {
     productId: 1,
     productName: '조던 레드',
-    imgUrl: JordanRed,
+    imageUrl: JordanRed,
     minPrice: 350_000,
     likeCount: 12,
     isLiked: true,
@@ -23,7 +23,7 @@ export const preAuctionHeartData: IPreAuctionItem[] = [
   {
     productId: 2,
     productName: '조던 블랙',
-    imgUrl: JordanBlack,
+    imageUrl: JordanBlack,
     minPrice: 270_000,
     likeCount: 20,
     isLiked: true,
