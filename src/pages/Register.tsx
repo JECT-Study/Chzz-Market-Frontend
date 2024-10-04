@@ -36,7 +36,6 @@ const defaultValues: FormFields = {
 const Register = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  console.log(preAuctionDetails);
 
   if (preAuctionDetails) {
     const { productName, imageUrls, description, minPrice } = preAuctionDetails;
