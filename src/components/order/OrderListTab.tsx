@@ -35,10 +35,10 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
         onClick={() => setActiveTab('AuctionHistory')}
       >
         {isWidthScreen ? (
-          '진행중인 경매'
+          '참여한 경매'
         ) : (
           <>
-            진행중인
+            참여한
             <br />
             경매
           </>
