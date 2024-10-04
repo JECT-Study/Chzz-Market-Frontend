@@ -4,7 +4,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 
 interface SellersFooterProps {
   isSeller: boolean;
-  status: string;
+  status?: string;
 }
 
 const SellersFooter: React.FC<SellersFooterProps> = ({ isSeller, status }) => {
