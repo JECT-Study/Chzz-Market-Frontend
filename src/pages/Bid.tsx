@@ -25,7 +25,7 @@ const Bid = () => {
   const { mutate: postBid } = usePostBid(auctionId);
   const { mutate: patchBid } = usePatchBid(auctionId);
 
-  const { imageList, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated, bidId } = auctionDetails;
+  const { imageUrls, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated, bidId } = auctionDetails;
   const title = isParticipated ? '금액 수정하기' : '경매 참여하기';
 
   const BidSchema = getBidSchema(minPrice);
