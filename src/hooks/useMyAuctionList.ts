@@ -16,9 +16,9 @@ const useMyAuctionList = (activeTab: boolean, nickname: string): any => {
     hasNextPage: hasNextOngoingPage,
     refetch: refetchOngoingData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.MY_AUCTION_REGISTERD, nickname],
+    queryKey: [queryKeys.MY_AUCTION_REGISTERD],
     queryFn: () =>
-      getAuctionOngoingRegister({ pageNumber: 0, pageSize: 10, nickname }),
+      getAuctionOngoingRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;
@@ -37,9 +37,9 @@ const useMyAuctionList = (activeTab: boolean, nickname: string): any => {
     hasNextPage: hasNextEnrollPage,
     refetch: refetchEnrollData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.MY_PRODUCT_REGISTERD, nickname],
+    queryKey: [queryKeys.MY_PRODUCT_REGISTERD],
     queryFn: () =>
-      getAuctionPreEnrollRegister({ pageNumber: 0, pageSize: 10, nickname }),
+      getAuctionPreEnrollRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;

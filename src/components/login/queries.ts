@@ -22,7 +22,7 @@ export const postSignup = async (data: User) => {
 };
 
 export const logout = async () => {
-  await httpClient.post(API_END_POINT.LOGOUT, {}, { withCredentials: true });
+  await httpClient.post(API_END_POINT.LOGOUT, { withCredentials: true });
 
   removeToken();
 };

@@ -19,7 +19,7 @@ export const useProfile = () => {
 export const useEditProfile = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { nickname, bio } = location.state || {};
+  const { userNickname, userBio, userLink } = location.state || {};
 
   const {
     control,
@@ -28,8 +28,9 @@ export const useEditProfile = () => {
     formState: { errors },
   } = useForm<UserProfile>({
     defaultValues: {
-      nickname: nickname || '',
-      bio: bio || '',
+      nickname: userNickname || '',
+      bio: userBio || '',
+      link: userLink || '',
     }
   });
 

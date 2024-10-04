@@ -25,6 +25,7 @@ vi.mocked(useGetAuctionDetails).mockReturnValue({
     sellerNickname: 'aaron93',
     status: 'PROCEEDING',
     timeRemaining: 25816,
+    category: 'ELECTRONICS',
   },
 });
 const router = createMemoryRouter(

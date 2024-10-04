@@ -35,6 +35,8 @@ export const useGetAuctionDetails = (auctionId: number) => {
 };
 
 export const useGetPreAuctionDetails = (preAuctionId: number) => {
+  if (!preAuctionId) return { preAuctionDetails: undefined };
+
   const getPreAuctionDetails = async (): Promise<IPreAuctionDetails> => {
     const response = await httpClient.get(
       `${API_END_POINT.PRE_AUCTION}/${preAuctionId}`

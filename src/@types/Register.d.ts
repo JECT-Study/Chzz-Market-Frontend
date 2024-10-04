@@ -3,7 +3,7 @@ declare module 'Register' {
     productName: string;
     description: string;
     minPrice: number;
-    auctionRegisterType: string;
+    auctionRegisterType?: string;
     category: string;
   }
 }
