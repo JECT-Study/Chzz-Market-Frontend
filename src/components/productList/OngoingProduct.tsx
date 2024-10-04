@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/auctions/bid/${product.id}`);
+  const handleClick = () => navigate(`/auctions/bid/${product.auctionId}`);
   return (
     <ProductItem product={product}>
       <div className='flex'>

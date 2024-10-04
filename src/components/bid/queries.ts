@@ -4,18 +4,14 @@ import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
-
-interface IBidData {
-  auctionId: number;
-  amount: number;
-}
+import { IBidPostData } from 'Bid';
 
 export const usePostBid = (
   auctionId: number
 ): {
-  mutate: UseMutateFunction<void, Error, IBidData, unknown>;
+  mutate: UseMutateFunction<void, Error, IBidPostData, unknown>;
 } => {
-  const postBid = async (bidData: IBidData) => {
+  const postBid = async (bidData: IBidPostData) => {
     await httpClient.post(API_END_POINT.BID, bidData);
   };
 

@@ -51,7 +51,7 @@ const Bid = () => {
   const onPostSubmit: SubmitHandler<FormFields> = async (data) => {
     const bidData = {
       auctionId: Number(auctionId),
-      amount: convertCurrencyToNumber(data.bidAmount),
+      bidAmount: convertCurrencyToNumber(data.bidAmount),
     };
 
     postBid(bidData);
@@ -66,7 +66,7 @@ const Bid = () => {
       <Layout.Main>
         <div className='flex flex-col gap-8'>
           <AuctionItem axis='row' label='입찰 상품'>
-            <AuctionItem.Image src={imageList[0]} time={timeRemaining} />
+            <AuctionItem.Image src={imageUrls[0]} time={timeRemaining} />
             <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
           </AuctionItem>
           {isParticipated && (

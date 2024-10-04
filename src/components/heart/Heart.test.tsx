@@ -5,11 +5,11 @@ import { render, screen, waitFor } from '@testing-library/react';
 import Heart from '@/pages/Heart';
 import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
-import { preRegisterHeartData } from '@/mocks/data/preRegisterHeartData';
+import { preAuctionHeartData } from '@/mocks/data/preAuctionHeartData';
 import userEvent from '@testing-library/user-event';
 import { useGetNotifications } from '../notification/queries';
 import LayoutWithNav from '../layout/LayoutWithNav';
-import { useDeletePreRegisterHeart, useGetPreRegisterHeart } from './queries';
+import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from './queries';
 
 vi.mock('@/components/heart/queries', () => ({
   useGetPreRegisterHeart: vi.fn(),
@@ -24,12 +24,12 @@ vi.mocked(useGetNotifications).mockReturnValue({
   notifications: notificationData,
 });
 
-vi.mocked(useGetPreRegisterHeart).mockReturnValue({
-  preRegisterHeartList: preRegisterHeartData,
+vi.mocked(useGetPreAuctionHeartList).mockReturnValue({
+  preAuctionHeartList: preAuctionHeartData,
 });
 
 const mutateMock = vi.fn();
-vi.mocked(useDeletePreRegisterHeart).mockReturnValue({
+vi.mocked(useDeletePreAuctionHeart).mockReturnValue({
   mutate: mutateMock,
 });
 
@@ -39,10 +39,10 @@ describe('좋아요 페이지 테스트', () => {
       <MemoryRouter initialEntries={['/notification']}>
         <Routes>
           <Route element={<LayoutWithNav />}>
-            <Route path="/notification" element={<Heart />} />
+            <Route path='/notification' element={<Heart />} />
           </Route>
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
     const user = userEvent.setup();
 

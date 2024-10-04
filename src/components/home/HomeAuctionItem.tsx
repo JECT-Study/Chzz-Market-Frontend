@@ -6,30 +6,34 @@ import ParticipantCount from '../common/atomic/ParticipantCount';
 import TimeLabel from '../common/atomic/TimeLabel';
 import { truncateText } from '@/utils/truncateText';
 import { useNavigate } from 'react-router-dom';
+import { CarouselItem } from '../ui/carousel';
 
-type HomeAuctionItemProps<T> = T extends 'pre-register' ? { kind: 'pre-register'; auction: IPreAuctionItem } : { kind: 'register'; auction: IAuctionItem };
+type HomeAuctionItemProps<T> = T extends 'preAuction' ? { kind: 'preAuction'; auction: IPreAuctionItem } : { kind: 'auction'; auction: IAuctionItem };
 
-const HomeAuctionItem = <T extends 'pre-register' | 'register'>({ kind, auction }: HomeAuctionItemProps<T>) => {
+const HomeAuctionItem = <T extends 'preAuction' | 'auction'>({ kind, auction }: HomeAuctionItemProps<T>) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(kind === 'register' ? `/auctions/auction/${auction.id}` : `/auctions/pre-auction/${auction.id}`);
-  const name = truncateText(auction.name);
+  const { productName, imageUrl, minPrice } = auction;
+  const handleClick = () => navigate(kind === 'auction' ? `/auctions/auction/${auction.auctionId}` : `/auctions/pre-auction/${auction.productId}`);
+  const name = truncateText(productName);
 
   return (
-    <figure className='flex flex-col min-w-[11rem] gap-2 border rounded text-body2 cursor-pointer' aria-label={kind} onClick={handleClick}>
-      <div className='relative'>
-        <img src={auction.cdnPath} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' />
-        {kind === 'register' && <TimeLabel time={auction.timeRemaining} />}
-      </div>
-      <figcaption className='flex flex-col gap-2 p-2'>
-        <div aria-label={`${kind}_이름`} className='text-gray1'>
-          {name}
+    <CarouselItem className='basis-1/2 md:basis-1/3'>
+      <figure className='flex flex-col gap-2 border rounded cursor-pointer text-body2' aria-label={kind} onClick={handleClick}>
+        <div className='relative'>
+          <img src={imageUrl} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' />
+          {kind === 'auction' && <TimeLabel time={auction.timeRemaining} />}
         </div>
-        <div>
-          <MinPrice price={auction.minPrice} />
-          {kind === 'register' ? <ParticipantCount count={auction.participantCount} /> : <LikeCount count={auction.likeCount} />}
-        </div>
-      </figcaption>
-    </figure>
+        <figcaption className='flex flex-col gap-2 p-2'>
+          <div aria-label={`${kind}_이름`} className='text-gray1'>
+            {name}
+          </div>
+          <div>
+            <MinPrice price={minPrice} />
+            {kind === 'auction' ? <ParticipantCount count={auction.participantCount} /> : <LikeCount count={auction.likeCount} />}
+          </div>
+        </figcaption>
+      </figure>
+    </CarouselItem>
   );
 };
 

@@ -16,7 +16,7 @@ export const notificationReadHandler: HttpHandler = http.post(`${API_END_POINT.N
 
   const notificationId = parseInt(id, 10);
 
-  notifications = notifications.map((el: INotification) => (el.id === notificationId ? { ...el, isRead: true } : el));
+  notifications = notifications.map((el: INotification) => (el.auctionId === notificationId ? { ...el, isRead: true } : el));
 
   return HttpResponse.json({ data: notifications, status: 204 });
 });
@@ -26,7 +26,7 @@ export const notificationDeleteHandler: HttpHandler = http.delete(`${API_END_POI
 
   const notificationId = parseInt(id, 10);
 
-  notifications = notifications.filter((el) => el.id !== notificationId);
+  notifications = notifications.filter((el) => el.auctionId !== notificationId);
 
   return HttpResponse.json({ data: notifications, status: 204 });
 });

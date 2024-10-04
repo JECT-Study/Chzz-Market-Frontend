@@ -1,17 +1,17 @@
 declare module 'AuctionDetails' {
-  export interface IAuctionDetailsBase {
+  interface IAuctionDetailsBase {
     productId: number;
-    sellerName: string;
-    description: string;
+    sellerNickname: string;
     productName: string;
+    description: string;
     minPrice: number;
-    imageList: string[];
+    imageUrls: string[];
+    isSeller: boolean;
   }
 
   export interface IAuctionDetails extends IAuctionDetailsBase {
     timeRemaining: number;
     status: string;
-    isSeller: boolean;
     participantCount: number;
     isParticipated: boolean;
     bidId: number | null;

@@ -3,6 +3,7 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 export const usePostRegister = (): {
   mutate: UseMutateFunction<unknown, Error, FormData, unknown>;
@@ -19,7 +20,9 @@ export const usePostRegister = (): {
 
   const { mutate } = useMutation({
     mutationFn: postRegister,
-    onSuccess: () => navigate('/'),
+    onSuccess: () => {
+      navigate('/'), toast.success('경매가 등록되었습니다.');
+    },
   });
 
   return { mutate };

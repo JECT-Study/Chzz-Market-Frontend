@@ -1,3 +1,4 @@
+import { LoaderFunction, useNavigate } from 'react-router-dom';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -15,7 +16,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { categories } from '@/constants/categories';
 import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
-import { useNavigate } from 'react-router-dom';
 import { usePostRegister } from '@/components/register/quries';
 import { useState } from 'react';
 import { z } from 'zod';
@@ -32,6 +32,7 @@ const defaultValues = {
 };
 
 const Register = () => {
+  // const preAuctionId = useLoaderData() as number;
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
@@ -67,6 +68,7 @@ const Register = () => {
       setCaution(proceedType);
     })();
   };
+
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     const { productName, category, description, minPrice } = data;
     const formData = new FormData();
@@ -203,3 +205,9 @@ const Register = () => {
 };
 
 export default Register;
+
+export const loader: LoaderFunction<number> = async ({ params }) => {
+  const { preAuctionId } = params;
+
+  return preAuctionId;
+};

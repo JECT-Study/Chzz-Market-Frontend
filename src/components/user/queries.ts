@@ -1,9 +1,7 @@
+import { IAuctionRegisteredList, IPreAuctionRegisteredList } from 'AuctionList';
+
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
-import {
-  OngoingAuctionRegisteredData,
-  PreEnrollProductRegisteredData,
-} from '@/@types/productList';
 
 export interface GetAuctionProps {
   pageNumber: number;

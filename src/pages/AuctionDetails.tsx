@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
 import BuyersFooter from '@/components/details/BuyersFooter';
 import { CiCoins1 } from 'react-icons/ci';
@@ -9,14 +9,12 @@ import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
 import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
-import axios from 'axios';
-import { IAuctionDetails } from 'AuctionDetails';
+import { useGetAuctionDetails } from '@/components/details/queries';
 
 const AuctionDetails = () => {
-  const { productId } = useParams() as { productId: string };
-  const [auctionItem, setAuctionItem] = useState<IAuctionDetails | null>(null);
+  const auctionId = useLoaderData() as number;
+  const { auctionDetails } = useGetAuctionDetails(auctionId);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
   const [isPreAuction, _setIsPreAuction] = useState(false);
   const [_interestCount, _setInterestCount] = useState(1);
@@ -41,23 +39,6 @@ const AuctionDetails = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/auctions/${productId}?viewType=FULL`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        });
-        setAuctionItem(response.data);
-      } catch (fetchError) {
-        console.error('경매 데이터를 가져오는 중 오류가 발생했습니다.');
-      }
-    };
-    fetchData();
-    setIsLoading(false);
-  }, [productId]);
-
   return (
     <Layout>
       <Layout.Header
@@ -72,19 +53,15 @@ const AuctionDetails = () => {
           {/* 상품 이미지 영역 */}
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
-              <img src={`${auctionItem?.imageList[0]}`} alt={auctionItem?.productName} className='object-cover w-full h-auto' />
+              <img src={`${auctionDetails.imageUrls[0]}`} alt={auctionDetails.productName} className='object-cover w-full h-auto' />
             </div>
             {/* 타이머 및 프로그레스 바 */}
-            {auctionItem && (
+            {auctionDetails && (
               <div id='timer-section' className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}>
-                {isLoading ? (
-                  <div className='font-bold text-center text-gray-500'>로딩 중...</div>
-                ) : (
-                  <ProgressBar
-                    initialTimeRemaining={auctionItem.timeRemaining}
-                    totalTime={totalTime} // Should be 86400
-                  />
-                )}
+                <ProgressBar
+                  initialTimeRemaining={auctionDetails.timeRemaining}
+                  totalTime={totalTime} // Should be 86400
+                />
               </div>
             )}
           </div>
@@ -92,16 +69,16 @@ const AuctionDetails = () => {
           {/* 경매 정보 영역 */}
           <div className='px-4 my-4'>
             {/* 경매 아이템 제목 & 시작가 */}
-            {auctionItem && (
+            {auctionDetails && (
               <div className='mb-4'>
-                <p className='mb-1 text-lg font-bold'>{auctionItem.productName || '[ERROR] 이름이 등록되지 않았어요!'}</p>
+                <p className='mb-1 text-lg font-bold'>{auctionDetails.productName || '[ERROR] 이름이 등록되지 않았어요!'}</p>
                 <p className='text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
                     <span className='mr-1'>
                       <img src={Price} alt='Price' />
                     </span>
                     시작가
-                    <span className='font-bold p'>{numberWithCommas(Number(auctionItem.minPrice))}원</span>
+                    <span className='font-bold p'>{numberWithCommas(Number(auctionDetails.minPrice))}원</span>
                   </span>
                 </p>
               </div>
@@ -115,7 +92,7 @@ const AuctionDetails = () => {
                     <span className='ml-1'>나의 참여 금액</span>
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
-                    {auctionItem?.isParticipated ? `${numberWithCommas(Number(auctionItem.bidAmount))}원` : '참여 전'}
+                    {auctionDetails.isParticipated ? `${numberWithCommas(Number(auctionDetails.bidAmount))}원` : '참여 전'}
                   </p>
                 </div>
                 <div className='h-full border-l border-gray-300' />
@@ -124,7 +101,7 @@ const AuctionDetails = () => {
                     <img src={Participants} alt='Participants' className='w-4 h-4 mx-2 mb-1' />
                     <p className='mb-1 text-sm text-gray-500'>참여 인원</p>
                   </div>
-                  <p className='text-lg font-bold'>{auctionItem?.participantCount ? `${auctionItem.participantCount}명` : '0명'}</p>
+                  <p className='text-lg font-bold'>{auctionDetails.participantCount ? `${auctionDetails.participantCount}명` : '0명'}</p>
                 </div>
               </div>
             </div>
@@ -132,19 +109,20 @@ const AuctionDetails = () => {
 
           {/* 상품 설명 */}
           <div className='px-4 mb-4 overflow-y-auto text-sm text-gray-700'>
-            <p>{auctionItem?.description}</p>
+            <p>{auctionDetails.description}</p>
           </div>
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
         <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
-          {auctionItem && auctionItem.isSeller ? (
-            <SellersFooter isSeller={auctionItem.isSeller} status={auctionItem.status} />
+          {auctionDetails && auctionDetails.isSeller ? (
+            <SellersFooter isSeller={auctionDetails.isSeller} status={auctionDetails.status} />
           ) : (
             <BuyersFooter
-              isSeller={auctionItem?.isSeller ?? false}
-              status={auctionItem?.status ?? ''}
-              isParticipated={auctionItem?.isParticipated ?? false}
-              remainingBidCount={auctionItem?.remainingBidCount ?? 0}
+              auctionId={auctionId}
+              isSeller={auctionDetails.isSeller ?? false}
+              status={auctionDetails.status ?? ''}
+              isParticipated={auctionDetails.isParticipated ?? false}
+              remainingBidCount={auctionDetails.remainingBidCount ?? 0}
             />
           )}
         </Layout.Footer>
@@ -165,3 +143,9 @@ const AuctionDetails = () => {
 };
 
 export default AuctionDetails;
+
+export const loader: LoaderFunction<number> = async ({ params }) => {
+  const { auctionId } = params;
+
+  return auctionId;
+};
