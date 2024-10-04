@@ -108,9 +108,19 @@ const PreAuction = () => {
         {/* 화면 하단에 고정된 Footer */}
         <Layout.Footer type='double'>
           {preAuctionDetails && preAuctionDetails.isSeller ? (
-            <SellersFooter isSeller={preAuctionDetails.isSeller} status='PENDING' />
+            <SellersFooter
+              likeCount={preAuctionDetails.likeCount}
+              isSeller={preAuctionDetails.isSeller}
+              status='PENDING'
+            />
           ) : (
-            <BuyersFooter isSeller={preAuctionDetails?.isSeller} auctionId={preAuctionId} status='PENDING' isParticipated={preAuctionDetails?.isLiked} />
+            <BuyersFooter
+              isSeller={preAuctionDetails?.isSeller}
+              likeCount={preAuctionDetails.likeCount}
+              auctionId={preAuctionId}
+              status='PENDING'
+              isParticipated={preAuctionDetails?.isLiked}
+            />
           )}
         </Layout.Footer>
         {/* 백드롭 */}

@@ -1,10 +1,15 @@
-import React from 'react';
+/* eslint-disable prettier/prettier */
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '@/components/common/Button';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { useLikeAuctionItem } from '@/components/details/queries';
 
 interface BuyersFooterProps {
   auctionId: number;
   isSeller: boolean;
   status: string;
+  likeCount?: number;
   isParticipated: boolean;
   remainingBidCount?: number;
 }
@@ -13,41 +18,78 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
   auctionId,
   isSeller,
   status,
+  likeCount = 0,
   isParticipated,
   remainingBidCount,
 }) => {
   const navigate = useNavigate();
+  const { likeAuctionItem } = useLikeAuctionItem();
+
+  const [currentLikeCount, setCurrentLikeCount] = useState<number>(likeCount);
+  const [isLiked, setIsLiked] = useState<boolean>(isParticipated);
 
   const onMoveToBidHandler = () => {
     navigate(`/auctions/bid/${auctionId}`);
   };
 
-  // 판매자가 아닌 경우에만 footer 표시
+  const onToggleNotificationHandler = async () => {
+    try {
+      await likeAuctionItem(auctionId);
+      if (!isLiked) {
+        setCurrentLikeCount((prev) => prev + 1);
+        setIsLiked(true);
+      } else {
+        setCurrentLikeCount((prev) => (prev > 0 ? prev - 1 : 0));
+        setIsLiked(false);
+      }
+    } catch (error) {
+      console.error('Failed to toggle notification:', error);
+    }
+  };
+
+  const HeartIcon = isLiked ? AiFillHeart : AiOutlineHeart;
+  const heartColor = isLiked ? 'text-red-500' : 'text-gray-500';
+
   if (isSeller) return null;
 
-  // 1. 판매자가 아니면서 경매 아이템이 PENDING일 경우
   if (status === 'PENDING') {
     return (
-      <div className='p-2 text-center bg-gray-200 rounded-lg'>
-        오픈 알림 받기
+      <div className='flex items-center flex-1 h-full gap-2'>
+        <HeartIcon className={`text-xl ${heartColor}`} />
+        <span className='text-gray-600'>{`${currentLikeCount}명`}</span>
+        <Button
+          type='button'
+          className='flex-[2] h-full'
+          color='cheeseYellow'
+          onClick={onToggleNotificationHandler}
+        >
+          {isLiked ? '알림 신청 완료' : '오픈 알림 받기'}
+        </Button>
       </div>
     );
   }
 
-  // 2. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 아직 참여하지 않았을 경우
   if (status === 'PROCEEDING' && !isParticipated) {
     return (
-      <button
-        className='w-full px-4 py-2 text-white transition-colors bg-orange-500 rounded-lg hover:bg-orange-600'
-        onClick={onMoveToBidHandler}
-      >
-        경매 참여하기
-      </button>
+      <div className='flex items-center flex-1 h-full gap-2'>
+        <Button
+          type='button'
+          className='flex-[2] h-full'
+          color='cheeseYellow'
+          onClick={onMoveToBidHandler}
+        >
+          경매 참여하기
+        </Button>
+      </div>
     );
   }
 
-  // 3. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 경매에 참여했으면서 가격 수정 횟수가 남아있을 때
-  if (status === 'PROCEEDING' && isParticipated && remainingBidCount && remainingBidCount > 0) {
+  if (
+    status === 'PROCEEDING' &&
+    isParticipated &&
+    remainingBidCount &&
+    remainingBidCount > 0
+  ) {
     return (
       <div className='flex items-center justify-between p-2 rounded-lg'>
         <button className='px-4 py-2 text-gray-600 border border-gray-400 rounded-lg'>
@@ -60,7 +102,6 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
     );
   }
 
-  // 4. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 경매에 참여했으면서 가격 수정 횟수가 모두 소진됐을 때
   if (status === 'PROCEEDING' && isParticipated && remainingBidCount === 0) {
     return (
       <div className='flex items-center justify-between p-2 rounded-lg'>
@@ -74,7 +115,6 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
     );
   }
 
-  // 5. 경매가 종료되었을 때
   if (status === 'ENDED') {
     return (
       <div className='p-2 text-center bg-gray-300 rounded-lg'>종료된 경매</div>
