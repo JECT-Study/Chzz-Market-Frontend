@@ -13,7 +13,7 @@ declare module 'AuctionDetails' {
     status: string;
     isSeller: boolean;
     participantCount: number;
-    isParticipating: boolean;
+    isParticipated: boolean;
     bidId: number | null;
     bidAmount: number;
     remainingBidCount: number;

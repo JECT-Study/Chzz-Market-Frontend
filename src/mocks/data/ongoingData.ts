@@ -8,7 +8,7 @@ const ongoingProducts = {
       minPrice: 432523,
       participantCount: 1,
       id: 5213,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -18,7 +18,7 @@ const ongoingProducts = {
       minPrice: 12345,
       participantCount: 123,
       id: 1423,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -28,7 +28,7 @@ const ongoingProducts = {
       minPrice: 2344,
       participantCount: 13,
       id: 125,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -38,7 +38,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 116,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -48,7 +48,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 11234,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -58,7 +58,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 61343,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -68,7 +68,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 114621,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -78,7 +78,7 @@ const ongoingProducts = {
       minPrice: 120,
       participantCount: 120,
       id: 555,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -88,7 +88,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 15968,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -98,7 +98,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 1123,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -108,7 +108,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 43527,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -118,7 +118,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 11735,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -128,7 +128,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 1213,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -138,7 +138,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 13413,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -148,7 +148,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 17347,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -158,7 +158,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 11733,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -168,7 +168,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 143127,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -178,7 +178,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 114373,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -188,7 +188,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 17123,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -198,7 +198,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 138145,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -208,7 +208,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 157,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -218,7 +218,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 138345,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -228,7 +228,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 1781534,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -238,7 +238,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 11583,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -248,7 +248,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 17815,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -258,7 +258,7 @@ const ongoingProducts = {
       minPrice: 500000000,
       participantCount: 8,
       id: 153413,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -268,7 +268,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 113457,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -278,7 +278,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 115343,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -288,7 +288,7 @@ const ongoingProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 11737,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -298,7 +298,7 @@ const ongoingProducts = {
       minPrice: 50000000,
       participantCount: 1324,
       id: 11253,
-      isParticipating: false,
+      isParticipated: false,
     },
   ],
   pageNumber: 0,

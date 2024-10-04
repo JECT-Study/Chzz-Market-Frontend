@@ -9,7 +9,7 @@ export interface AuctionItem {
   status: string;
   isSeller: boolean;
   participantCount: number;
-  isParticipating: boolean;
+  isParticipated: boolean;
   bidAmount: number;
   remainingBidCount: number;
   imageList: string[];
@@ -36,7 +36,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: false,
     participantCount: 10,
-    isParticipating: true,
+    isParticipated: true,
     bidAmount: 1300,
     remainingBidCount: 2,
     imageList: [
@@ -55,7 +55,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: true,
     participantCount: 20,
-    isParticipating: false,
+    isParticipated: false,
     bidAmount: 0,
     remainingBidCount: 3,
     imageList: [
@@ -74,7 +74,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: false,
     participantCount: 15,
-    isParticipating: true,
+    isParticipated: true,
     bidAmount: 950,
     remainingBidCount: 1,
     imageList: [
@@ -94,7 +94,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: true,
     participantCount: 8,
-    isParticipating: true,
+    isParticipated: true,
     bidAmount: 1600,
     remainingBidCount: 2,
     imageList: [
@@ -113,7 +113,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: false,
     participantCount: 5,
-    isParticipating: true,
+    isParticipated: true,
     bidAmount: 370,
     remainingBidCount: 1,
     imageList: [
@@ -133,7 +133,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: true,
     participantCount: 12,
-    isParticipating: true,
+    isParticipated: true,
     bidAmount: 420,
     remainingBidCount: 2,
     imageList: [
@@ -152,7 +152,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: false,
     participantCount: 6,
-    isParticipating: true,
+    isParticipated: true,
     bidAmount: 620,
     remainingBidCount: 2,
     imageList: [
@@ -172,7 +172,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: false,
     participantCount: 5,
-    isParticipating: true,
+    isParticipated: true,
     bidAmount: 370,
     remainingBidCount: 2,
     imageList: [
@@ -192,7 +192,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: true,
     participantCount: 8,
-    isParticipating: false,
+    isParticipated: false,
     bidAmount: 0,
     remainingBidCount: 3,
     imageList: [
@@ -211,7 +211,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PROCEEDING',
     isSeller: true,
     participantCount: 7,
-    isParticipating: true,
+    isParticipated: true,
     bidAmount: 530,
     remainingBidCount: 2,
     imageList: [
@@ -231,7 +231,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PENDING',
     isSeller: false,
     participantCount: 0,
-    isParticipating: false,
+    isParticipated: false,
     bidAmount: 0,
     remainingBidCount: 5,
     imageList: [
@@ -251,7 +251,7 @@ const auctionDetailPageData: AuctionItem[] = [
     status: 'PENDING',
     isSeller: true,
     participantCount: 0,
-    isParticipating: false,
+    isParticipated: false,
     bidAmount: 0,
     remainingBidCount: 3,
     imageList: [

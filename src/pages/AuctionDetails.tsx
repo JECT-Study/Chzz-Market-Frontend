@@ -115,7 +115,7 @@ const AuctionDetails = () => {
                     <span className='ml-1'>나의 참여 금액</span>
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
-                    {auctionItem?.isParticipating ? `${numberWithCommas(Number(auctionItem.bidAmount))}원` : '참여 전'}
+                    {auctionItem?.isParticipated ? `${numberWithCommas(Number(auctionItem.bidAmount))}원` : '참여 전'}
                   </p>
                 </div>
                 <div className='h-full border-l border-gray-300' />
@@ -143,7 +143,7 @@ const AuctionDetails = () => {
             <BuyersFooter
               isSeller={auctionItem?.isSeller ?? false}
               status={auctionItem?.status ?? ''}
-              isParticipating={auctionItem?.isParticipating ?? false}
+              isParticipated={auctionItem?.isParticipated ?? false}
               remainingBidCount={auctionItem?.remainingBidCount ?? 0}
             />
           )}

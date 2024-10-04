@@ -4,14 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 interface BuyersFooterProps {
   isSeller: boolean;
   status: string;
-  isParticipating: boolean;
+  isParticipated: boolean;
   remainingBidCount: number;
 }
 
 const BuyersFooter: React.FC<BuyersFooterProps> = ({
   isSeller,
   status,
-  isParticipating,
+  isParticipated,
   remainingBidCount,
 }) => {
   const auctionId = useParams();
@@ -34,7 +34,7 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
   }
 
   // 2. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 아직 참여하지 않았을 경우
-  if (status === 'PROCEEDING' && !isParticipating) {
+  if (status === 'PROCEEDING' && !isParticipated) {
     return (
       <button
         className=' w-full bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-600 transition-colors'
@@ -46,7 +46,7 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
   }
 
   // 3. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 경매에 참여했으면서 가격 수정 횟수가 남아있을 때
-  if (status === 'PROCEEDING' && isParticipating && remainingBidCount > 0) {
+  if (status === 'PROCEEDING' && isParticipated && remainingBidCount > 0) {
     return (
       <div className='flex justify-between items-center p-2 rounded-lg'>
         <button className='border border-gray-400 text-gray-600 rounded-lg px-4 py-2'>
@@ -60,7 +60,7 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
   }
 
   // 4. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 경매에 참여했으면서 가격 수정 횟수가 모두 소진됐을 때
-  if (status === 'PROCEEDING' && isParticipating && remainingBidCount === 0) {
+  if (status === 'PROCEEDING' && isParticipated && remainingBidCount === 0) {
     return (
       <div className='flex justify-between items-center p-2 rounded-lg'>
         <button className='border border-gray-400 text-gray-600 rounded-lg px-4 py-2'>

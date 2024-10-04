@@ -13,7 +13,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     timeRemaining: 50_400,
     minPrice: 100_000,
     participantCount: 11,
-    isParticipating: true,
+    isParticipated: true,
   },
   {
     id: 1,
@@ -22,7 +22,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     timeRemaining: 25_200,
     minPrice: 120_000,
     participantCount: 8,
-    isParticipating: true,
+    isParticipated: true,
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     timeRemaining: 82_800,
     minPrice: 180_000,
     participantCount: 29,
-    isParticipating: true,
+    isParticipated: true,
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     timeRemaining: 360,
     minPrice: 230_000,
     participantCount: 32,
-    isParticipating: true,
+    isParticipated: true,
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     timeRemaining: 43_200,
     minPrice: 70_000,
     participantCount: 6,
-    isParticipating: true,
+    isParticipated: true,
   },
 ];
 
@@ -61,7 +61,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     timeRemaining: 25_200,
     minPrice: 120_000,
     participantCount: 8,
-    isParticipating: true,
+    isParticipated: true,
   },
   {
     id: 1,
@@ -70,7 +70,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     timeRemaining: 43_200,
     minPrice: 70_000,
     participantCount: 6,
-    isParticipating: true,
+    isParticipated: true,
   },
   {
     id: 2,
@@ -79,7 +79,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     timeRemaining: 82_800,
     minPrice: 180_000,
     participantCount: 29,
-    isParticipating: true,
+    isParticipated: true,
   },
   {
     id: 3,
@@ -88,7 +88,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     timeRemaining: 360,
     minPrice: 230_000,
     participantCount: 32,
-    isParticipating: true,
+    isParticipated: true,
   },
   {
     id: 4,
@@ -97,7 +97,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     timeRemaining: 50_400,
     minPrice: 100_000,
     participantCount: 11,
-    isParticipating: true,
+    isParticipated: true,
   },
 ];
 

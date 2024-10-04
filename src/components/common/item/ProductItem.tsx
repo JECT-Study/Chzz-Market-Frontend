@@ -8,7 +8,7 @@ export interface ProductProps {
   cdnPath?: string | null;
   timeRemaining?: number;
   participantCount?: number;
-  isParticipating?: boolean;
+  isParticipated?: boolean;
   likeCount?: number;
   isLiked?: boolean;
   status?: string;

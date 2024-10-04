@@ -8,7 +8,7 @@ const preEnrollProducts = {
       minPrice: 1000,
       participantCount: 6,
       id: 17,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
     {
@@ -18,7 +18,7 @@ const preEnrollProducts = {
       minPrice: 1000,
       participantCount: 8,
       id: 13,
-      isParticipating: true,
+      isParticipated: true,
       category: 'fashion',
     },
   ],
