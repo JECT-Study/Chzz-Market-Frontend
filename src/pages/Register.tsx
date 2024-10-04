@@ -28,7 +28,7 @@ type FormFields = z.infer<typeof RegisterSchema>;
 const defaultValues: FormFields = {
   productName: '',
   images: [],
-  category: '',
+  category: '카테고리를 선택하세요.',
   description: '',
   minPrice: '',
 };

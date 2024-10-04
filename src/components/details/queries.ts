@@ -3,8 +3,24 @@ import { IAuctionDetails, IPreAuctionDetails } from 'AuctionDetails';
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { UseMutateFunction, useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
+export const useLikeAuctionItem = (): { mutate: UseMutateFunction<any, Error, number, unknown> } => {
+  const likeAuctionItem = async (auctionId: number) => {
+    const response = await httpClient.post(`${API_END_POINT.PRE_AUCTION}/${auctionId}/likes`);
+    return response.data;
+  };
+
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: likeAuctionItem,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.PRE_AUCTION_DETAILS] });
+    },
+  });
+
+  return { mutate };
+};
 export const useGetAuctionDetails = (auctionId: number) => {
   const getAuctionDetails = async (): Promise<IAuctionDetails> => {
     const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/${auctionId}`);
@@ -32,7 +48,7 @@ export const useGetPreAuctionDetails = (preAuctionId: number) => {
   };
 
   const { data: preAuctionDetails } = useSuspenseQuery({
-    queryKey: [queryKeys.AUCTION_DETAILS, preAuctionId],
+    queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
     queryFn: getPreAuctionDetails,
   });
 

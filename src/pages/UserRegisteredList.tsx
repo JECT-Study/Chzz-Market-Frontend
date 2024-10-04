@@ -16,7 +16,7 @@ const UserRegisteredList = () => {
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
   const { ongoingData, enrollData, fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage, refetchOngoingData, refetchEnrollData } =
-    useMyAuctionList(activeTab, 'nickname');
+    useMyAuctionList(activeTab);
 
   const ongoingItems = ongoingData?.pages[0]?.items || [];
   const enrollItems = enrollData?.pages[0]?.items || [];

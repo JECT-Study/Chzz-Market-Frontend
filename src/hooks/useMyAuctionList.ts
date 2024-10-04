@@ -1,13 +1,10 @@
-import {
-  getAuctionOngoingRegister,
-  getAuctionPreEnrollRegister,
-} from '@/components/user/queries';
+import { getAuctionOngoingRegister, getAuctionPreEnrollRegister } from '@/components/user/queries';
 
 import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useMyAuctionList = (activeTab: boolean, nickname: string): any => {
+const useMyAuctionList = (activeTab: boolean): any => {
   const {
     data: ongoingData,
     isLoading: _ongoingLoading,
@@ -17,8 +14,7 @@ const useMyAuctionList = (activeTab: boolean, nickname: string): any => {
     refetch: refetchOngoingData,
   } = useInfiniteQuery({
     queryKey: [queryKeys.MY_AUCTION_REGISTERD],
-    queryFn: () =>
-      getAuctionOngoingRegister({ pageNumber: 0, pageSize: 10 }),
+    queryFn: () => getAuctionOngoingRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;
@@ -38,8 +34,7 @@ const useMyAuctionList = (activeTab: boolean, nickname: string): any => {
     refetch: refetchEnrollData,
   } = useInfiniteQuery({
     queryKey: [queryKeys.MY_PRODUCT_REGISTERD],
-    queryFn: () =>
-      getAuctionPreEnrollRegister({ pageNumber: 0, pageSize: 10 }),
+    queryFn: () => getAuctionPreEnrollRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;
