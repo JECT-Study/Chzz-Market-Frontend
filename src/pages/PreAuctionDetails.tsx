@@ -13,22 +13,11 @@ import ConfirmationModal from '@/components/details/ConfirmationModal';
 import SuccessModal from '@/components/details/SuccessModal';
 import { useGetPreAuctionDetails } from '@/components/details/queries';
 
-// interface PreAuctionDetails {
-//   productId: number;
-//   productName: string;
-//   sellerNickname: string;
-//   minPrice: number;
-//   createdAt: string;
-//   description: string;
-//   likeCount: number;
-//   isLiked: boolean;
-//   isSeller: boolean;
-//   imageUrls: string[];
-// }
-
 const PreAuction = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
+  if (!preAuctionDetails) return;
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);
@@ -61,6 +50,10 @@ const PreAuction = () => {
   const onDeleteButtonClickHandler = () => {
     setIsDeleteConfirmOpen(true);
     closeMenu();
+  };
+
+  const onModifyButtonClickHandler = () => {
+    navigate(`/auctions/pre-auction/edit/${preAuctionDetails.productId}`);
   };
 
   // 삭제 확인 다이얼로그에서 '삭제' 버튼 클릭 핸들러

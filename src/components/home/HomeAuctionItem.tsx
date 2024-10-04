@@ -6,6 +6,7 @@ import ParticipantCount from '../common/atomic/ParticipantCount';
 import TimeLabel from '../common/atomic/TimeLabel';
 import { truncateText } from '@/utils/truncateText';
 import { useNavigate } from 'react-router-dom';
+import ROUTERS from '@/constants/route';
 import { CarouselItem } from '../ui/carousel';
 
 type HomeAuctionItemProps<T> = T extends 'preAuction' ? { kind: 'preAuction'; auction: IPreAuctionItem } : { kind: 'auction'; auction: IAuctionItem };
@@ -13,7 +14,7 @@ type HomeAuctionItemProps<T> = T extends 'preAuction' ? { kind: 'preAuction'; au
 const HomeAuctionItem = <T extends 'preAuction' | 'auction'>({ kind, auction }: HomeAuctionItemProps<T>) => {
   const navigate = useNavigate();
   const { productName, imageUrl, minPrice } = auction;
-  const handleClick = () => navigate(kind === 'auction' ? `/auctions/auction/${auction.auctionId}` : `/auctions/pre-auction/${auction.productId}`);
+  const handleClick = () => navigate(kind === 'auction' ? `${ROUTERS.AUCTION.ITEM}/${auction.auctionId}` : `${ROUTERS.PRE_AUCTION.ITEM}/${auction.productId}`);
   const name = truncateText(productName);
 
   return (
