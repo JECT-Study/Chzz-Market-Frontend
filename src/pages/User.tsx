@@ -8,8 +8,8 @@ const User = () => {
 
   return (
     <div className="flex flex-col">
-      <UserProfile nickname={profileData?.nickname} bio={profileData?.bio} />
-      <UserOrder participationCount={profileData?.participationCount} preRegisterCount={profileData?.preRegisterCount} registeredAuctionCount={profileData?.registeredAuctionCount} />
+      <UserProfile nickname={profileData?.nickname} bio={profileData?.bio} link={profileData?.link} />
+      <UserOrder participantCount={profileData?.participantCount} preRegisterCount={profileData?.preRegisterCount} registeredAuctionCount={profileData?.registeredAuctionCount} />
       <UserOrderList />
     </div>
   );

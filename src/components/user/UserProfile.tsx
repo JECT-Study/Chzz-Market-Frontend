@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 interface Props {
   nickname?: string;
   bio?: string;
+  link?: string;
 }
 
-const UserProfile = ({ nickname, bio }: Props) => {
+const UserProfile = ({ nickname, bio, link }: Props) => {
   const navigator = useNavigate();
   const userNickname = nickname || null;
   const userBio = bio || null;
+  const userLink = link || null;
 
   return (
     <div className="flex items-center pb-8 my-10 border-b border-b-gray3">
@@ -23,7 +25,7 @@ const UserProfile = ({ nickname, bio }: Props) => {
           <button
             className="px-3 py-1 border border-gray2 rounded-md"
             onClick={() =>
-              navigator('profile/edit', { state: { userNickname, userBio } })
+              navigator('profile/edit', { state: { userNickname, userBio, userLink } })
             }
           >
             수정
