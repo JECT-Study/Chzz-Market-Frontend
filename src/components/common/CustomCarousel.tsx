@@ -8,6 +8,7 @@ const CustomCarousel = ({ contentStyle, length, children }: { contentStyle?: str
         align: 'start',
         dragFree: true,
         watchDrag: false,
+        loop: true,
       }}
       className='w-full overflow-scroll'
     >
