@@ -7,6 +7,7 @@ import HomeItemList from '@/components/home/HomeItemList';
 import HomeRegisterBtn from '@/components/home/HomeRegisterBtn';
 import { useGetHomeAuctions } from '@/components/home/queries';
 import { useScrollDetection } from '@/hooks/useScrollDetection';
+import CustomCarousel from '@/components/common/CustomCarousel';
 
 const Home = () => {
   const { isScrolled, elementRef } = useScrollDetection(0);
@@ -17,16 +18,20 @@ const Home = () => {
       <div className='flex flex-col gap-10'>
         <HomeItemList name='베스트 경매'>
           <EmptyBoundary dataLength={bestAuctions.length} type='best'>
-            {bestAuctions.map((auction: IAuctionItem) => (
-              <HomeAuctionItem key={auction.auctionId} kind='auction' auction={auction} />
-            ))}
+            <CustomCarousel length={bestAuctions.length}>
+              {bestAuctions.map((auction: IAuctionItem) => (
+                <HomeAuctionItem key={auction.auctionId} kind='auction' auction={auction} />
+              ))}
+            </CustomCarousel>
           </EmptyBoundary>
         </HomeItemList>
         <HomeItemList name='종료 임박 경매'>
           <EmptyBoundary dataLength={imminentAuctions.length} type='imminent'>
-            {imminentAuctions.map((auction: IAuctionItem) => (
-              <HomeAuctionItem key={auction.auctionId} kind='auction' auction={auction} />
-            ))}
+            <CustomCarousel length={imminentAuctions.length}>
+              {imminentAuctions.map((auction: IAuctionItem) => (
+                <HomeAuctionItem key={auction.auctionId} kind='auction' auction={auction} />
+              ))}
+            </CustomCarousel>
           </EmptyBoundary>
         </HomeItemList>
         <HomeItemList name='카테고리'>
@@ -34,9 +39,11 @@ const Home = () => {
         </HomeItemList>
         <HomeItemList name='사전 등록 경매'>
           <EmptyBoundary dataLength={preAuctions.length} type='preAuction'>
-            {preAuctions.map((auction: IPreAuctionItem) => (
-              <HomeAuctionItem key={auction.productId} kind='preAuction' auction={auction} />
-            ))}
+            <CustomCarousel length={preAuctions.length}>
+              {preAuctions.map((auction: IPreAuctionItem) => (
+                <HomeAuctionItem key={auction.productId} kind='preAuction' auction={auction} />
+              ))}
+            </CustomCarousel>
           </EmptyBoundary>
         </HomeItemList>
       </div>
