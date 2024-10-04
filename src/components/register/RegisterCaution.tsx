@@ -8,7 +8,6 @@ interface CautionProps {
 }
 
 const RegisterCaution = ({ kind, check, handleCheck }: CautionProps) => {
-  console.log(kind);
   return (
     <section className='flex flex-col pt-5 gap-[3rem]'>
       <h3 className='text-heading2'>{kind === 'REGISTER' ? REGISTER_CAUTION.HEADING : PRE_REGISTER_CAUTION.HEADING}</h3>
