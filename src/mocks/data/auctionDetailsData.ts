@@ -19,6 +19,7 @@ export const auctionDetailsData: IAuctionDetails[] = [
     sellerNickname: 'aaron93',
     status: 'PROCEEDING',
     timeRemaining: 25816,
+    category: 'ELECTRONICS',
   },
   {
     bidAmount: 0,
@@ -36,5 +37,6 @@ export const auctionDetailsData: IAuctionDetails[] = [
     sellerNickname: 'aaron93',
     status: 'PROCEEDING',
     timeRemaining: 25816,
+    category: 'ELECTRONICS',
   },
 ];

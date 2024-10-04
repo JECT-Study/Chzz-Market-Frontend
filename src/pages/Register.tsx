@@ -13,7 +13,7 @@ import RegisterCaution from '@/components/register/RegisterCaution';
 import RegisterLabel from '@/components/register/RegisterLabel';
 import { RegisterSchema } from '@/constants/schema';
 import { Textarea } from '@/components/ui/textarea';
-import { categories } from '@/constants/categories';
+import { CATEGORIES } from '@/constants/categories';
 import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
@@ -44,7 +44,7 @@ const Register = () => {
     defaultValues.images = imageUrls;
     defaultValues.description = description;
     defaultValues.minPrice = formatCurrencyWithWon(minPrice);
-    defaultValues.category = category;
+    defaultValues.category = CATEGORIES[category].value;
   }
 
   const navigate = useNavigate();
@@ -142,7 +142,7 @@ const Register = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup className='focus-visible:ring-cheeseYellow'>
-                      {Object.values(categories).map((el) => (
+                      {Object.values(CATEGORIES).map((el) => (
                         <SelectItem key={el.value} value={el.code}>
                           {el.value}
                         </SelectItem>
