@@ -14,6 +14,8 @@ const PreAuctionDetails = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
+  if (!preAuctionDetails) return;
+
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);
 
@@ -41,7 +43,7 @@ const PreAuctionDetails = () => {
   };
 
   const onModifyButtonClickHandler = () => {
-    navigate(`/auctions/edit/${preAuctionDetails.productId}`);
+    navigate(`/auctions/pre-auction/edit/${preAuctionDetails.productId}`);
   };
 
   const onConfirmDeleteHandler = async () => {

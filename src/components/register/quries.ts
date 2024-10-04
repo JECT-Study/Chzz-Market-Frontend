@@ -34,7 +34,7 @@ export const usePatchPreAuction = (): {
     void,
     Error,
     {
-      productId: number;
+      preAuctionId: number;
       formData: FormData;
     },
     unknown
@@ -42,8 +42,8 @@ export const usePatchPreAuction = (): {
 } => {
   const navigate = useNavigate();
 
-  const patchPreAuction = async ({ productId, formData }: { productId: number; formData: FormData }) => {
-    await httpClient.patch(`${API_END_POINT.PRE_AUCTION}/${productId}`, formData, {
+  const patchPreAuction = async ({ preAuctionId, formData }: { preAuctionId: number; formData: FormData }) => {
+    await httpClient.patch(`${API_END_POINT.PRE_AUCTION}/${preAuctionId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -7,6 +7,7 @@ declare module 'AuctionDetails' {
     minPrice: number;
     imageUrls: string[];
     isSeller: boolean;
+    category: string;
   }
 
   export interface IAuctionDetails extends IAuctionDetailsBase {
