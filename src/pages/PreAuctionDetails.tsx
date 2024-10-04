@@ -1,20 +1,19 @@
 /* eslint-disable prettier/prettier */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import Price from '@/assets/icons/price.svg';
-import { IPreAuctionDetails } from 'AuctionDetails';
 
 // 삭제 확인 및 성공 메시지 모달 컴포넌트 임포트 (필요 시 직접 구현)
 import ConfirmationModal from '@/components/details/ConfirmationModal';
 import SuccessModal from '@/components/details/SuccessModal';
+import { useGetPreAuctionDetails } from '@/components/details/queries';
 
-const PreAuction = () => {
-  const { productId } = useParams() as { productId: string };
-  const [preAuctionItem, setPreAuctionItem] = useState<IPreAuctionDetails | null>(null);
+const PreAuctionDetails = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [isLoading, setIsLoading] = useState(true);
+  const preAuctionId = useLoaderData() as number;
+  const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);
 
@@ -36,38 +35,18 @@ const PreAuction = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/products/${productId}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        });
-        // console.log(response.data);
-        setPreAuctionItem(response.data);
-      } catch (error) {
-        setIsDeleteSuccessOpen(true);
-      } finally {
-        return;
-        // 필요시 로직 추가
-      }
-    };
-    fetchData();
-  }, [productId]);
-
   const onDeleteButtonClickHandler = () => {
     setIsDeleteConfirmOpen(true);
     closeMenu();
   };
 
   const onModifyButtonClickHandler = () => {
-    navigate(`/auctions/edit/${preAuctionItem?.productId}`);
+    navigate(`/auctions/edit/${preAuctionDetails.productId}`);
   };
 
   const onConfirmDeleteHandler = async () => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/products/${productId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/products/${preAuctionDetails.productId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
@@ -93,23 +72,23 @@ const PreAuction = () => {
           {/* 상품 이미지 영역 */}
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
-              <img src={preAuctionItem?.imageUrls[0]} alt={preAuctionItem?.productName} className='object-cover w-full h-auto' />
+              <img src={preAuctionDetails.imageUrls[0]} alt={preAuctionDetails.productName} className='object-cover w-full h-auto' />
             </div>
           </div>
 
           {/* 경매 정보 영역 */}
           <div className='px-4 my-4'>
             {/* 경매 아이템 제목 & 시작가 */}
-            {preAuctionItem && (
+            {preAuctionDetails && (
               <div className='mb-4'>
-                <p className='mb-1 text-lg font-bold'>{preAuctionItem.productName || '[ERROR] 이름이 등록되지 않았어요!'}</p>
+                <p className='mb-1 text-lg font-bold'>{preAuctionDetails.productName || '[ERROR] 이름이 등록되지 않았어요!'}</p>
                 <p className='text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
                     <span className='mr-1'>
                       <img src={Price} alt='Price' />
                     </span>
                     시작가
-                    <span className='font-bold p'>{numberWithCommas(Number(preAuctionItem.minPrice))}원</span>
+                    <span className='font-bold p'>{numberWithCommas(Number(preAuctionDetails.minPrice))}원</span>
                   </span>
                 </p>
               </div>
@@ -118,7 +97,7 @@ const PreAuction = () => {
 
           {/* 상품 설명 */}
           <div className='px-4 mb-4 overflow-y-auto text-sm text-gray-700'>
-            <p>{preAuctionItem?.description}</p>
+            <p>{preAuctionDetails.description}</p>
           </div>
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
@@ -151,4 +130,10 @@ const PreAuction = () => {
   );
 };
 
-export default PreAuction;
+export default PreAuctionDetails;
+
+export const loader: LoaderFunction<number> = async ({ params }) => {
+  const { preAuctionId } = params;
+
+  return preAuctionId;
+};
