@@ -13,19 +13,6 @@ import ConfirmationModal from '@/components/details/ConfirmationModal';
 import SuccessModal from '@/components/details/SuccessModal';
 import { useGetPreAuctionDetails } from '@/components/details/queries';
 
-// interface PreAuctionDetails {
-//   productId: number;
-//   productName: string;
-//   sellerNickname: string;
-//   minPrice: number;
-//   createdAt: string;
-//   description: string;
-//   likeCount: number;
-//   isLiked: boolean;
-//   isSeller: boolean;
-//   imageUrls: string[];
-// }
-
 const PreAuction = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
@@ -141,12 +128,14 @@ const PreAuction = () => {
         <Layout.Footer type='double'>
           {preAuctionDetails && preAuctionDetails.isSeller ? (
             <SellersFooter
+              likeCount={preAuctionDetails.likeCount}
               isSeller={preAuctionDetails.isSeller}
               status='PENDING'
             />
           ) : (
             <BuyersFooter
               isSeller={preAuctionDetails?.isSeller}
+              likeCount={preAuctionDetails.likeCount}
               auctionId={preAuctionId}
               status='PENDING'
               isParticipated={preAuctionDetails?.isLiked}
