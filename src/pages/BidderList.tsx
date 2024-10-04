@@ -9,6 +9,7 @@ import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useGetAuctionDetails } from '@/components/details/queries';
 import { useGetBidderList } from '@/components/bidderList/queries';
 import { useState } from 'react';
+import EmptyBoundary from '@/components/common/EmptyBoundary';
 
 const BidderList = () => {
   const auctionId = useLoaderData() as number;
@@ -38,17 +39,19 @@ const BidderList = () => {
             </div>
           </div>
           <hr className='border my-[-16px] border-gray3' />
-          <ul className='flex flex-col gap-2'>
-            {bidderList.map((el: IBidder, idx: number) => (
-              <li
-                key={el.bidderNickname}
-                className={`flex p-3 items-center justify-between text-gray1 ${idx === 0 && 'border border-cheeseYellow rounded-lg'}`}
-              >
-                <span className='text-body1'>{el.bidderNickname}</span>
-                <span className='text-body1Bold'>{formatCurrencyWithWon(el.bidAmount)}</span>
-              </li>
-            ))}
-          </ul>
+          <EmptyBoundary dataLength={bidderList.length} type='best'>
+            <ul className='flex flex-col gap-2'>
+              {bidderList.map((el: IBidder, idx: number) => (
+                <li
+                  key={el.bidderNickname}
+                  className={`flex p-3 items-center justify-between text-gray1 ${idx === 0 && 'border border-cheeseYellow rounded-lg'}`}
+                >
+                  <span className='text-body1'>{el.bidderNickname}</span>
+                  <span className='text-body1Bold'>{formatCurrencyWithWon(el.bidAmount)}</span>
+                </li>
+              ))}
+            </ul>
+          </EmptyBoundary>
         </div>
       </Layout.Main>
       <Layout.Footer type='single'>

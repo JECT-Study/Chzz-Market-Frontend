@@ -51,7 +51,7 @@ const Bid = () => {
   const onPostSubmit: SubmitHandler<FormFields> = async (data) => {
     const bidData = {
       auctionId: Number(auctionId),
-      amount: convertCurrencyToNumber(data.bidAmount),
+      bidAmount: convertCurrencyToNumber(data.bidAmount),
     };
 
     postBid(bidData);
