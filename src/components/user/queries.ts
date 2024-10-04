@@ -7,20 +7,18 @@ export interface GetAuctionProps {
   pageNumber: number;
   pageSize: number;
   sortType?: string;
-  nickname: string;
 }
 
-export const getAuctionOngoingRegister = async ({ pageNumber, pageSize, sortType = 'newest', nickname }: GetAuctionProps): Promise<IAuctionRegisteredList> => {
-  const response = await httpClient.get(`${API_END_POINT.MY_ACUTION_ONGOING_REGISTER}/${nickname}?&sort=${sortType}&page=${pageNumber}&size=${pageSize}`);
+export const getAuctionOngoingRegister = async ({ pageNumber, pageSize, sortType = 'newest' }: GetAuctionProps): Promise<IAuctionRegisteredList> => {
+  const response = await httpClient.get(`${API_END_POINT.MY_ACUTION_ONGOING_REGISTER}?sort=${sortType}&page=${pageNumber}&size=${pageSize}`);
   return response.data;
 };
 
 export const getAuctionPreEnrollRegister = async ({
   pageNumber,
   pageSize,
-  sortType = 'newest',
-  nickname,
+  sortType = 'product-newest'
 }: GetAuctionProps): Promise<IPreAuctionRegisteredList> => {
-  const response = await httpClient.get(`${API_END_POINT.MY_ACUTION_PRE_ENROLL_REGISTER}/${nickname}?&sort=${sortType}&page=${pageNumber}&size=${pageSize}`);
+  const response = await httpClient.get(`${API_END_POINT.MY_ACUTION_PRE_ENROLL_REGISTER}?sort=${sortType}&page=${pageNumber}&size=${pageSize}`);
   return response.data;
 };

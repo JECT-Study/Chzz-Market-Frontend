@@ -13,14 +13,14 @@ interface ParticipationCountItmes {
 }
 
 interface Props {
-  participationCount?: ParticipationCountItmes;
+  participantCount?: ParticipationCountItmes;
   preRegisterCount?: number;
   registeredAuctionCount?: number;
 }
 
-const UserOrder = ({ participationCount, preRegisterCount, registeredAuctionCount}: Props) => {
+const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount}: Props) => {
   const navigate = useNavigate();
-  const $participationCount = participationCount || { failedAuctionCount: 0, ongoingAuctionCount: 0, successfulAuctionCount: 0 };
+  const $participantCount = participantCount || { failedAuctionCount: 0, ongoingAuctionCount: 0, successfulAuctionCount: 0 };
   const $preRegisterCount = preRegisterCount || 0;
   const $registeredAuctionCount = registeredAuctionCount || 0;
 
@@ -41,11 +41,11 @@ const UserOrder = ({ participationCount, preRegisterCount, registeredAuctionCoun
           >
             <img
               src={OnGoingIcon}
-              alt="진행중인 경매"
+              alt="참여한 경매"
               className="w-8 h-8 mb-2"
             />
-            <span className="text-sm font-semibold">진행중인 경매</span>
-            <span className="mt-1 text-lg text-orange-500">{$participationCount.ongoingAuctionCount} 건</span>
+            <span className="text-sm font-semibold">참여한 경매</span>
+            <span className="mt-1 text-lg text-orange-500">{$participantCount.ongoingAuctionCount} 건</span>
           </div>
 
           {/* 성공한 경매 */}
@@ -59,7 +59,7 @@ const UserOrder = ({ participationCount, preRegisterCount, registeredAuctionCoun
           >
             <img src={SuccessIcon} alt="성공한 경매" className="w-8 h-8 mb-2" />
             <span className="text-sm font-semibold">성공한 경매</span>
-            <span className="mt-1 text-lg text-orange-500">{$participationCount.successfulAuctionCount} 건</span>
+            <span className="mt-1 text-lg text-orange-500">{$participantCount.successfulAuctionCount} 건</span>
           </div>
 
           {/* 실패한 경매 */}
@@ -73,7 +73,7 @@ const UserOrder = ({ participationCount, preRegisterCount, registeredAuctionCoun
           >
             <img src={FailedIcon} alt="실패한 경매" className="w-8 h-8 mb-2" />
             <span className="text-sm font-semibold">실패한 경매</span>
-            <span className="mt-1 text-lg text-orange-500">{$participationCount.failedAuctionCount} 건</span>
+            <span className="mt-1 text-lg text-orange-500">{$participantCount.failedAuctionCount} 건</span>
           </div>
         </div>
       </div>
