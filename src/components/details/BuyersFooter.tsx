@@ -47,7 +47,7 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
   }
 
   // 3. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 경매에 참여했으면서 가격 수정 횟수가 남아있을 때
-  if (status === 'PROCEEDING' && isParticipated && remainingBidCount > 0) {
+  if (status === 'PROCEEDING' && isParticipated && remainingBidCount && remainingBidCount > 0) {
     return (
       <div className='flex items-center justify-between p-2 rounded-lg'>
         <button className='px-4 py-2 text-gray-600 border border-gray-400 rounded-lg'>
