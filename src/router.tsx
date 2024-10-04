@@ -4,7 +4,7 @@ import Register, { loader as registerLoader } from './pages/Register';
 
 import AddressBook from './pages/AddressBook';
 import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
-import AuctionDetails from './pages/AuctionDetails';
+import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
 import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
@@ -13,7 +13,7 @@ import Login from './pages/Login';
 import NotFound from './components/common/loadingAndError/NotFound';
 import Notification from './pages/Notification';
 import OrderHistory from './pages/UserParticipatedList';
-import PreAuction from './pages/PreAuction';
+import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import PrivateRoute from './components/common/route/PrivateRoute';
 import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
@@ -123,19 +123,29 @@ export const router = createBrowserRouter([
       })),
       {
         path: ROUTERS.PRODUCT_LIST,
-        element: <ProductList />,
+        element: (
+          <AsyncBoundary>
+            <ProductList />
+          </AsyncBoundary>
+        ),
       },
       {
-        path: `${ROUTERS.AUCTION.ITEM}/:productId`,
+        path: `${ROUTERS.AUCTION.ITEM}/:auctionId`,
         element: (
           <AsyncBoundary>
             <AuctionDetails />
           </AsyncBoundary>
         ),
+        loader: auctionDetailsLoader,
       },
       {
-        path: `${ROUTERS.PRE_AUCTION.ITEM}/:productId`,
-        element: <PreAuction />,
+        path: `${ROUTERS.PRE_AUCTION.ITEM}/:preAuctionId`,
+        element: (
+          <AsyncBoundary>
+            <PreAuctionDetails />
+          </AsyncBoundary>
+        ),
+        loader: preAuctionDetailsLoader,
       },
     ],
   },

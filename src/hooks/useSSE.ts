@@ -3,8 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import { getToken } from '@/utils/tokenUtils';
 import { isLoggedIn } from '@/store/authSlice';
-import { refreshToken } from '@/components/login/queries';
+import { logout, refreshToken } from '@/components/login/queries';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const useSSE = <T>(url: string) => {
   const [state, setState] = useState<T[]>([]);
@@ -12,6 +13,7 @@ export const useSSE = <T>(url: string) => {
   const eventSource = useRef<null | EventSource>(null);
   const accessToken = getToken();
   const isLogin = useSelector(isLoggedIn);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSSE = () => {
@@ -23,12 +25,15 @@ export const useSSE = <T>(url: string) => {
         withCredentials: true,
       });
 
-      eventSource.current.onopen = () => {};
-
-      eventSource.current.onerror = () => {
-        refreshToken();
-        eventSource.current?.close();
-        setTimeout(fetchSSE, 3000);
+      eventSource.current.onerror = async () => {
+        try {
+          await refreshToken();
+          eventSource.current?.close();
+          setTimeout(fetchSSE, 3000);
+        } catch (error) {
+          await logout();
+          navigate('/login');
+        }
       };
 
       eventSource.current.addEventListener('notification', (e) => {

@@ -1,11 +1,5 @@
 import type { IAuctionItemBase } from 'AuctionItem';
 
-// 개별 제품의 인터페이스
-export interface AuctionItem extends IAuctionItemBase {
-  status: string;
-  createdAt: string;
-}
-
 // 페이지 정보에 대한 인터페이스
 export interface Pageable {
   pageNumber: number;

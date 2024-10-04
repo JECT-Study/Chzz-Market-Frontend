@@ -1,24 +1,19 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface BuyersFooterProps {
+  auctionId: number;
   isSeller: boolean;
   status: string;
   isParticipating: boolean;
   remainingBidCount: number;
 }
 
-const BuyersFooter: React.FC<BuyersFooterProps> = ({
-  isSeller,
-  status,
-  isParticipating,
-  remainingBidCount,
-}) => {
-  const auctionId = useParams();
+const BuyersFooter: React.FC<BuyersFooterProps> = ({ auctionId, isSeller, status, isParticipating, remainingBidCount }) => {
   const navigate = useNavigate();
 
   const onMoveToBidHandler = () => {
-    navigate(`/auctions/bid/${auctionId.productId}`);
+    navigate(`/auctions/bid/${auctionId}`);
   };
 
   // 판매자가 아닌 경우에만 footer 표시
@@ -26,20 +21,13 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
 
   // 1. 판매자가 아니면서 경매 아이템이 PENDING일 경우
   if (status === 'PENDING') {
-    return (
-      <div className='bg-gray-200 text-center p-2 rounded-lg'>
-        오픈 알림 받기
-      </div>
-    );
+    return <div className='p-2 text-center bg-gray-200 rounded-lg'>오픈 알림 받기</div>;
   }
 
   // 2. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 아직 참여하지 않았을 경우
   if (status === 'PROCEEDING' && !isParticipating) {
     return (
-      <button
-        className=' w-full bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-600 transition-colors'
-        onClick={onMoveToBidHandler}
-      >
+      <button className='w-full px-4 py-2 text-white transition-colors bg-orange-500 rounded-lg hover:bg-orange-600' onClick={onMoveToBidHandler}>
         경매 참여하기
       </button>
     );
@@ -48,13 +36,9 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
   // 3. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 경매에 참여했으면서 가격 수정 횟수가 남아있을 때
   if (status === 'PROCEEDING' && isParticipating && remainingBidCount > 0) {
     return (
-      <div className='flex justify-between items-center p-2 rounded-lg'>
-        <button className='border border-gray-400 text-gray-600 rounded-lg px-4 py-2'>
-          참여 취소
-        </button>
-        <button className='bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-600 transition-colors'>
-          금액 수정({remainingBidCount}회 가능)
-        </button>
+      <div className='flex items-center justify-between p-2 rounded-lg'>
+        <button className='px-4 py-2 text-gray-600 border border-gray-400 rounded-lg'>참여 취소</button>
+        <button className='px-4 py-2 text-white transition-colors bg-orange-500 rounded-lg hover:bg-orange-600'>금액 수정({remainingBidCount}회 가능)</button>
       </div>
     );
   }
@@ -62,22 +46,16 @@ const BuyersFooter: React.FC<BuyersFooterProps> = ({
   // 4. 판매자가 아니면서 경매 아이템이 PROCEEDING이고, 경매에 참여했으면서 가격 수정 횟수가 모두 소진됐을 때
   if (status === 'PROCEEDING' && isParticipating && remainingBidCount === 0) {
     return (
-      <div className='flex justify-between items-center p-2 rounded-lg'>
-        <button className='border border-gray-400 text-gray-600 rounded-lg px-4 py-2'>
-          참여 취소
-        </button>
-        <button className='bg-gray-400 text-white rounded-lg px-4 py-2 cursor-not-allowed'>
-          금액 수정(소진)
-        </button>
+      <div className='flex items-center justify-between p-2 rounded-lg'>
+        <button className='px-4 py-2 text-gray-600 border border-gray-400 rounded-lg'>참여 취소</button>
+        <button className='px-4 py-2 text-white bg-gray-400 rounded-lg cursor-not-allowed'>금액 수정(소진)</button>
       </div>
     );
   }
 
   // 5. 경매가 종료되었을 때
   if (status === 'COMPLETED') {
-    return (
-      <div className='bg-gray-300 text-center p-2 rounded-lg'>종료된 경매</div>
-    );
+    return <div className='p-2 text-center bg-gray-300 rounded-lg'>종료된 경매</div>;
   }
 
   return null;

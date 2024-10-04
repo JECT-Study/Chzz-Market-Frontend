@@ -16,7 +16,7 @@ const Notification = () => {
     <EmptyBoundary dataLength={notifications.length} type='notification'>
       <div className='mx-[-32px] my-[-16px]'>
         {notifications.map((item: INotification) => (
-          <NotificationItem key={item.id} item={item} handleDelete={clickDelete} handleRead={clickRead} />
+          <NotificationItem key={item.notificationId} item={item} handleDelete={clickDelete} handleRead={clickRead} />
         ))}
       </div>
     </EmptyBoundary>

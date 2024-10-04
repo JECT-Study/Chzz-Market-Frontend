@@ -1,9 +1,9 @@
 import { HttpHandler, HttpResponse, delay, http } from 'msw';
 
 import { API_END_POINT } from '@/constants/api';
-import { preRegisterHeartData } from '../data/preRegisterHeartData';
+import { preAuctionHeartData } from '../data/preAuctionHeartData';
 
-let curPreRegisterHeartData = [...preRegisterHeartData];
+let curPreRegisterHeartData = [...preAuctionHeartData];
 
 export const preRegisterHeartHandler: HttpHandler = http.get(`${API_END_POINT.PRE_AUCTION}/history`, async () => {
   await delay(1000);
@@ -14,7 +14,7 @@ export const preRegisterHeartDeleteHandler: HttpHandler = http.delete(`${API_END
   const id = params.id as string;
   const heartId = parseInt(id, 10);
 
-  curPreRegisterHeartData = curPreRegisterHeartData.filter((el) => el.id !== heartId);
+  curPreRegisterHeartData = curPreRegisterHeartData.filter((el) => el.productId !== heartId);
 
   return HttpResponse.json({ data: curPreRegisterHeartData, status: 204 });
 });
