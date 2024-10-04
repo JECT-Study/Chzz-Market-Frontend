@@ -37,5 +37,5 @@ declare module 'AuctionItem' {
     highestBid: number;
     auctionId: number;
   }
-  export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipating'> {}
+  export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {}
 }
