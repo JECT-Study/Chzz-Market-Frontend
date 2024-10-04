@@ -6,17 +6,18 @@ import ParticipantCount from '../common/atomic/ParticipantCount';
 import TimeLabel from '../common/atomic/TimeLabel';
 import { truncateText } from '@/utils/truncateText';
 import { useNavigate } from 'react-router-dom';
+import ROUTERS from '@/constants/route';
 
 type HomeAuctionItemProps<T> = T extends 'preAuction' ? { kind: 'preAuction'; auction: IPreAuctionItem } : { kind: 'auction'; auction: IAuctionItem };
 
 const HomeAuctionItem = <T extends 'preAuction' | 'auction'>({ kind, auction }: HomeAuctionItemProps<T>) => {
   const navigate = useNavigate();
   const { productName, imageUrl, minPrice } = auction;
-  const handleClick = () => navigate(kind === 'auction' ? `/auctions/auction/${auction.auctionId}` : `/auctions/pre-auction/${auction.productId}`);
+  const handleClick = () => navigate(kind === 'auction' ? `${ROUTERS.AUCTION.ITEM}/${auction.auctionId}` : `${ROUTERS.PRE_AUCTION.ITEM}/${auction.productId}`);
   const name = truncateText(productName);
 
   return (
-    <figure className='flex flex-col w-[11rem] gap-2 border rounded text-body2 cursor-pointer' aria-label={kind} onClick={handleClick}>
+    <figure className='flex flex-col min-w-[11rem] gap-2 border rounded text-body2 cursor-pointer' aria-label={kind} onClick={handleClick}>
       <div className='relative'>
         <img src={imageUrl} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' />
         {kind === 'auction' && <TimeLabel time={auction.timeRemaining} />}

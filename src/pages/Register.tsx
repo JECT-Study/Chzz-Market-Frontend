@@ -1,4 +1,4 @@
-import { LoaderFunction, useNavigate } from 'react-router-dom';
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -20,10 +20,12 @@ import { usePostRegister } from '@/components/register/quries';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useGetPreAuctionDetails } from '@/components/details/queries';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
-const defaultValues = {
+const defaultValues: FormFields = {
   productName: '',
   images: [],
   category: '',
@@ -32,7 +34,18 @@ const defaultValues = {
 };
 
 const Register = () => {
-  // const preAuctionId = useLoaderData() as number;
+  const preAuctionId = useLoaderData() as number;
+  const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
+  console.log(preAuctionDetails);
+
+  if (preAuctionDetails) {
+    const { productName, imageUrls, description, minPrice } = preAuctionDetails;
+    defaultValues.productName = productName;
+    defaultValues.images = imageUrls;
+    defaultValues.description = description;
+    defaultValues.minPrice = formatCurrencyWithWon(minPrice);
+  }
+
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
