@@ -1,4 +1,4 @@
-import { LoaderFunction, useNavigate } from 'react-router-dom';
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -13,17 +13,19 @@ import RegisterCaution from '@/components/register/RegisterCaution';
 import RegisterLabel from '@/components/register/RegisterLabel';
 import { RegisterSchema } from '@/constants/schema';
 import { Textarea } from '@/components/ui/textarea';
-import { categories } from '@/constants/categories';
+import { CATEGORIES } from '@/constants/categories';
 import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
-import { usePostRegister } from '@/components/register/quries';
+import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
 import { useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useGetPreAuctionDetails } from '@/components/details/queries';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
-const defaultValues = {
+const defaultValues: FormFields = {
   productName: '',
   images: [],
   category: '',
@@ -32,7 +34,19 @@ const defaultValues = {
 };
 
 const Register = () => {
-  // const preAuctionId = useLoaderData() as number;
+  const preAuctionId = useLoaderData() as number;
+  const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
+  const { mutate: patchPreAuction } = usePatchPreAuction();
+
+  if (preAuctionDetails) {
+    const { productName, imageUrls, category, description, minPrice } = preAuctionDetails;
+    defaultValues.productName = productName;
+    defaultValues.images = imageUrls;
+    defaultValues.description = description;
+    defaultValues.minPrice = formatCurrencyWithWon(minPrice);
+    defaultValues.category = CATEGORIES[category].value;
+  }
+
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
@@ -56,7 +70,7 @@ const Register = () => {
     getValues,
   });
 
-  const title = caution === '' ? '경매 등록하기' : `주의사항`;
+  const title = caution === '' ? `${preAuctionId ? '사전 경매 수정하기' : '경매 등록하기'}` : `주의사항`;
   const cautionButton = caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
   const finalButton = isSubmitting ? '등록 중...' : cautionButton;
 
@@ -73,23 +87,25 @@ const Register = () => {
     const { productName, category, description, minPrice } = data;
     const formData = new FormData();
 
-    const registerData: IRegister = {
+    let submitData: IRegister = {
       productName,
       category,
       description,
       minPrice: convertCurrencyToNumber(minPrice),
-      auctionRegisterType: caution,
     };
+    if (!preAuctionId) submitData.auctionRegisterType = caution;
 
     formData.append(
       'request',
-      new Blob([JSON.stringify(registerData)], {
+      new Blob([JSON.stringify(submitData)], {
         type: 'application/json',
       })
     );
 
     files.forEach((file) => formData.append('images', file));
-    register(formData);
+
+    if (preAuctionId) patchPreAuction({ preAuctionId, formData });
+    else register(formData);
   };
 
   return (
@@ -126,7 +142,7 @@ const Register = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup className='focus-visible:ring-cheeseYellow'>
-                      {Object.values(categories).map((el) => (
+                      {Object.values(CATEGORIES).map((el) => (
                         <SelectItem key={el.value} value={el.code}>
                           {el.value}
                         </SelectItem>
@@ -177,7 +193,11 @@ const Register = () => {
         )}
       </Layout.Main>
       <Layout.Footer type={caution === '' ? 'double' : 'single'}>
-        {caution === '' ? (
+        {preAuctionId ? (
+          <Button disabled={isSubmitting} onClick={handleSubmit(onSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
+            수정 완료
+          </Button>
+        ) : caution === '' ? (
           <>
             <Button type='button' color='white' className='flex-1 h-full' onClick={() => handleProceed('PRE_REGISTER')}>
               사전 등록하기

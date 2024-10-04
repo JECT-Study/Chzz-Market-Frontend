@@ -1,4 +1,4 @@
-import { categories } from '../../constants/categories';
+import { CATEGORIES } from '../../constants/categories';
 import { useNavigate } from 'react-router-dom';
 
 const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: string }) => {
@@ -18,7 +18,7 @@ const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: 
 const CategoryList = () => {
   return (
     <ul className='flex flex-wrap items-center gap-5'>
-      {Object.values(categories).map((el) => (
+      {Object.values(CATEGORIES).map((el) => (
         <CategoryItem key={el.value} code={el.code} name={el.value} icon={el.icon} />
       ))}
     </ul>
