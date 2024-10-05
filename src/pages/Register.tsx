@@ -17,7 +17,7 @@ import { CATEGORIES } from '@/constants/categories';
 import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useGetPreAuctionDetails } from '@/components/details/queries';
@@ -28,7 +28,7 @@ type FormFields = z.infer<typeof RegisterSchema>;
 const defaultValues: FormFields = {
   productName: '',
   images: [],
-  category: '카테고리를 선택하세요.',
+  category: '',
   description: '',
   minPrice: '',
 };
@@ -37,22 +37,11 @@ const Register = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
   const { mutate: patchPreAuction } = usePatchPreAuction();
-
-  if (preAuctionDetails) {
-    const { productName, imageUrls, category, description, minPrice } = preAuctionDetails;
-    defaultValues.productName = productName;
-    defaultValues.images = imageUrls;
-    defaultValues.description = description;
-    defaultValues.minPrice = formatCurrencyWithWon(minPrice);
-    defaultValues.category = CATEGORIES[category].value;
-  }
-
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
   const [files, setFiles] = useState<File[]>([]);
   const { mutate: register } = usePostRegister();
-
   const {
     control,
     handleSubmit,
@@ -63,37 +52,32 @@ const Register = () => {
     defaultValues,
     resolver: zodResolver(RegisterSchema),
   });
-
   const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
     name: 'minPrice',
     setValue,
     getValues,
   });
 
-  const title = caution === '' ? `${preAuctionId ? '사전 경매 수정하기' : '경매 등록하기'}` : `주의사항`;
-  const cautionButton = caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
-  const finalButton = isSubmitting ? '등록 중...' : cautionButton;
+  const title = caution ? '주의사항' : preAuctionId ? '사전 경매 수정하기' : '경매 등록하기';
+  const finalButton = isSubmitting ? '등록 중...' : caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
 
   const toggleCheckBox = () => setCheck((state) => !state);
   const clickBack = () => (caution === '' ? navigate(-1) : setCaution(''));
   const handleProceed = (proceedType: 'PRE_REGISTER' | 'REGISTER') => {
-    handleSubmit(() => {
-      // 유효성 검사가 통과되면 실행.
-      setCaution(proceedType);
-    })();
+    handleSubmit(() => setCaution(proceedType))();
   };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     const { productName, category, description, minPrice } = data;
     const formData = new FormData();
 
-    let submitData: IRegister = {
+    const submitData: IRegister = {
       productName,
       category,
       description,
       minPrice: convertCurrencyToNumber(minPrice),
+      ...(preAuctionId ? {} : { auctionRegisterType: caution }),
     };
-    if (!preAuctionId) submitData.auctionRegisterType = caution;
 
     formData.append(
       'request',
@@ -101,12 +85,21 @@ const Register = () => {
         type: 'application/json',
       })
     );
-
     files.forEach((file) => formData.append('images', file));
 
-    if (preAuctionId) patchPreAuction({ preAuctionId, formData });
-    else register(formData);
+    preAuctionId ? patchPreAuction({ preAuctionId, formData }) : register(formData);
   };
+
+  useEffect(() => {
+    if (preAuctionDetails) {
+      const { productName, imageUrls, category, description, minPrice } = preAuctionDetails;
+      setValue('productName', productName);
+      setValue('images', imageUrls);
+      setValue('description', description);
+      setValue('minPrice', formatCurrencyWithWon(minPrice));
+      setValue('category', CATEGORIES[category].code); // 카테고리 기본 값 설정
+    }
+  }, [preAuctionDetails, setValue]);
 
   return (
     <Layout>
