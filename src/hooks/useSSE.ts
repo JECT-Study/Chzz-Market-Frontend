@@ -9,14 +9,15 @@ import { useNavigate } from 'react-router-dom';
 
 export const useSSE = <T>(url: string) => {
   const [state, setState] = useState<T[]>([]);
+  const navigate = useNavigate();
+  const isLogin = useSelector(isLoggedIn);
+
   const EventSource = EventSourcePolyfill || NativeEventSource;
   const eventSource = useRef<null | EventSource>(null);
-  const accessToken = getToken();
-  const isLogin = useSelector(isLoggedIn);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSSE = () => {
+      const accessToken = getToken();
       eventSource.current = new EventSource(`${import.meta.env.VITE_API_URL}${url}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -29,7 +30,7 @@ export const useSSE = <T>(url: string) => {
         try {
           await refreshToken();
           eventSource.current?.close();
-          setTimeout(fetchSSE, 3000);
+          setTimeout(fetchSSE, 1000);
         } catch (error) {
           await logout();
           navigate('/login');
