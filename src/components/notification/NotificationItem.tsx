@@ -1,7 +1,7 @@
-import type { INotification } from 'Notification';
-import { NOTIFICATION_CONTENTS } from '@/constants/notification';
 import XButtonIcon from '@/assets/icons/x_button.svg';
+import { NOTIFICATION_CONTENTS } from '@/constants/notification';
 import { getTimeAgo } from '@/utils/getTimeAgo';
+import type { INotification } from 'Notification';
 import { useNavigate } from 'react-router-dom';
 
 const NotificationItem = ({
@@ -14,7 +14,7 @@ const NotificationItem = ({
   handleRead: (id: number) => void;
 }) => {
   const navigate = useNavigate();
-  const { notificationId, isRead, imgUrl, message, createdAt, type, auctionId } = item;
+  const { notificationId, isRead, imageUrl, message, createdAt, type, auctionId } = item;
   const time = getTimeAgo(createdAt);
 
   const handleClick = () => {
@@ -35,7 +35,7 @@ const NotificationItem = ({
             {time}
           </div>
         </figcaption>
-        <img className='object-cover rounded size-24' src={imgUrl} alt={`알림 이미지_${item.notificationId}`} />
+        <img className='object-cover rounded size-24' src={imageUrl} alt={`알림 이미지_${item.notificationId}`} />
       </figure>
       <button aria-label={`알림 삭제 버튼_${item.notificationId}`} onClick={() => handleDelete(item.notificationId)}>
         <img className='p-2 rounded size-8 hover:bg-black/30 active:bg-black/60' src={XButtonIcon} alt='알림 삭제 아이콘' />
