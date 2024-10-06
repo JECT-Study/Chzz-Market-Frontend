@@ -1,4 +1,3 @@
-import Button from '../common/Button';
 import { FaHeart } from 'react-icons/fa';
 import type { IPreAuctionRegisteredItem } from 'AuctionItem';
 import { IoPricetagsOutline } from 'react-icons/io5';
@@ -21,9 +20,6 @@ const PreEnrollMyRegister = ({ product }: { product: IPreAuctionRegisteredItem }
         </div>
         <p className='ml-4 font-semibold'>{`${product.likeCount}`}</p>
       </div>
-      <Button color={product.isLiked ? 'black' : 'white'} type='button' size='small' className={`${product.isLiked ? '' : ''} w-full h-[33px] rounded-sm`}>
-        {product.isLiked ? '좋아요' : '안좋아요'}
-      </Button>
     </ProductItem>
   );
 };

@@ -1,7 +1,6 @@
 import { LuUsers } from 'react-icons/lu';
 import { IoPricetagsOutline } from 'react-icons/io5';
 import ProductItem from '../common/item/ProductItem';
-import Button from '../common/Button';
 import type { IAuctionRegisteredItem } from 'AuctionItem';
 
 const OngoingMyRegister = ({ product }: { product: IAuctionRegisteredItem }) => {
@@ -21,14 +20,6 @@ const OngoingMyRegister = ({ product }: { product: IAuctionRegisteredItem }) => 
         </div>
         <p className='ml-4 font-semibold'>{`${product.participantCount}명`}</p>
       </div>
-      <Button
-        color={product.participantCount ? 'black' : 'white'}
-        type='button'
-        size='small'
-        className={`${product.participantCount ? '' : ''} w-full h-[33px] rounded-sm`}
-      >
-        {product.participantCount ? '경매 참여하기' : '경매 중단하기'}
-      </Button>
     </ProductItem>
   );
 };

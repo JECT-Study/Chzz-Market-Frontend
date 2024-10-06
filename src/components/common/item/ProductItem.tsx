@@ -6,7 +6,7 @@ export interface ProductProps {
   auctionId?: number;
   productName: string;
   minPrice: number;
-  cdnPath?: string | null;
+  imageUrl?: string;
   timeRemaining?: number;
   participantCount?: number;
   isParticipating?: boolean;
@@ -22,7 +22,7 @@ const ProductItem = ({ product, children }: { product: ProductProps; children: R
       <div className='flex flex-col'>
         <div className='w-full h-auto mb-4'>
           <div className='relative'>
-            <img className='object-cover w-full h-[15rem] rounded-t' src={`${product.cdnPath ? product.cdnPath : jordanBlackImage}`} alt='Jordan Black Shoes' />
+            <img className='object-cover w-full h-[15rem] rounded-t' src={`${product.imageUrl ? product.imageUrl : jordanBlackImage}`} alt='Jordan Black Shoes' />
             {product.timeRemaining && <TimeLabel time={product.timeRemaining} />}
           </div>
         </div>

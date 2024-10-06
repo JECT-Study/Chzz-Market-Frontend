@@ -5,7 +5,6 @@ export interface ProductProps {
   id: number;
   name: string;
   minPrice: number;
-  cdnPath?: string | null;
   timeRemaining?: number;
   participantCount?: number;
   isParticipating?: boolean;
@@ -13,6 +12,7 @@ export interface ProductProps {
   isLiked?: boolean;
   status?: string;
   createdAt?: string;
+  imageUrl?: string;
 }
 
 const ProductItem = ({
@@ -32,7 +32,7 @@ const ProductItem = ({
           <div className="relative">
             <img
               className="object-cover w-full h-[10rem] rounded-t"
-              src={`${product.cdnPath ? product.cdnPath : jordanBlackImage}`}
+              src={`${product.imageUrl ? product.imageUrl : jordanBlackImage}`}
               alt="Jordan Black Shoes"
             />
             {remainHour && (

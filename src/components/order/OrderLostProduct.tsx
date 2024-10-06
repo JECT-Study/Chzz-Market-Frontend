@@ -32,7 +32,7 @@ const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
           <LuUsers className='text-gray-500' />
           <p className='text-sm text-gray-500'>가장 높은 금액</p>
         </div>
-        <p className='ml-4 font-semibold'>{`${(product.highestBid).toLocaleString()}원`}</p>
+        <p className='ml-4 font-semibold'>{`${(product.highestAmount).toLocaleString()}원`}</p>
       </div>
     </ProductItem>
   );
