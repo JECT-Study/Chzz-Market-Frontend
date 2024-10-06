@@ -49,7 +49,7 @@ export const getBidSchema = (minPrice: number) =>
   z.object({
     bidAmount: z.string().superRefine((value, ctx) => {
       const num = Number(value.replace(/[^\d]/g, ''));
-      if (Number.isNaN(num) || num <= minPrice) {
+      if (Number.isNaN(num) || num < minPrice) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: `시작가보다 높은 금액을 입력해주세요.`,
