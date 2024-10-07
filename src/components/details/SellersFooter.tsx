@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '@/components/common/Button';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { useConvertToAuction } from './queries';
+import { useNavigate } from 'react-router-dom';
 
 interface SellersFooterProps {
   isSeller: boolean;
@@ -18,8 +19,10 @@ const SellersFooter: React.FC<SellersFooterProps> = ({
   auctionId,
 }) => {
   const { mutate: convertToAuction } = useConvertToAuction();
+  const navigate = useNavigate();
   const onConvertClickHandler = () => {
     convertToAuction(auctionId);
+    navigate('/');
   };
 
   if (isSeller && status === 'PROCEEDING') {
