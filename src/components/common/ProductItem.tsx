@@ -1,4 +1,3 @@
-import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import TimeLabel from './atomic/TimeLabel';
 
 export interface ProductProps {
@@ -30,7 +29,7 @@ const ProductItem = ({
           <div className="relative">
             <img
               className="object-cover w-full h-[15rem] rounded-t"
-              src={`${product.imageUrl ? product.imageUrl : jordanBlackImage}`}
+              src={product.imageUrl}
               alt="Jordan Black Shoes"
             />
             {product.timeRemaining && <TimeLabel time={product.timeRemaining} />}
