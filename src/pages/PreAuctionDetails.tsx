@@ -73,7 +73,11 @@ const PreAuction = () => {
 
   return (
     <Layout>
-      <Layout.Header title='제품 상세' handleModal={toggleMenu} />
+      <Layout.Header
+        title='제품 상세'
+        handleModal={toggleMenu}
+        isDisableMenuButton={!preAuctionDetails.isSeller}
+      />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
         <Layout.Main>
