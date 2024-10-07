@@ -84,6 +84,10 @@ const privateRouteList = [
     path: ROUTERS.ADDRESSBOOK,
     element: <AddressBook />,
   },
+  {
+    path: ROUTERS.PAYMENT,
+    element: <Payment />,
+  },
 ];
 
 const publicRouteList = [

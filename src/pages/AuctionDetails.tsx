@@ -144,6 +144,7 @@ const AuctionDetails = () => {
         <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
           {auctionDetails && auctionDetails.isSeller ? (
             <SellersFooter
+              auctionId={auctionId}
               isSeller={auctionDetails.isSeller}
               status={auctionDetails.status}
             />

@@ -1,8 +1,4 @@
-import {
-  IAuctionDetails,
-  IAuctionRegisterRequest,
-  IPreAuctionDetails,
-} from 'AuctionDetails';
+import { IAuctionDetails, IPreAuctionDetails } from 'AuctionDetails';
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
@@ -37,7 +33,7 @@ export const useConvertToAuction = (): {
         queryKey: [queryKeys.PRE_AUCTION_DETAILS, productId],
       });
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.AUCTION_LIST],
+        queryKey: [queryKeys.AUCTION_LOST],
       });
     },
   });
