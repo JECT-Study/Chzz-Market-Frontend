@@ -5,10 +5,6 @@ declare module 'AuctionDetails' {
     productName: string;
     description: string;
     minPrice: number;
-    images: {
-      imageId: number;
-      imageUrl: string;
-    }[];
     isSeller: boolean;
     category: string;
   }
@@ -21,11 +17,16 @@ declare module 'AuctionDetails' {
     bidId: number | null;
     bidAmount: number;
     remainingBidCount: number;
+    imageUrls: string[];
   }
 
   export interface IPreAuctionDetails extends IAuctionDetailsBase {
     createdAt: string;
     likeCount: number;
     isLiked: boolean;
+    images: {
+      imageId: number;
+      imageUrl: string;
+    }[];
   }
 }
