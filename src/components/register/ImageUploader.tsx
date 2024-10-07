@@ -19,13 +19,13 @@ const ImageUploader = ({ files, setFiles, images, setImages }: ImageUploaderProp
   const { fileInputRef, deleteImage, handleImage, handleBoxClick } = useImageUploader(images, setImages, files, setFiles);
 
   return (
-    <div className='flex flex-col items-center w-full h-[8.5rem] gap-5 sm:flex-row'>
+    <div className='flex flex-col items-center w-full h-32 gap-5 sm:flex-row'>
       <AddImageButton handleBoxClick={handleBoxClick} length={images.length} />
       <CustomCarousel contentStyle='py-2' length={images.length}>
         {images.map((image: string, index: number) => (
           <CarouselItem className='basis-1/2 md:basis-1/3' key={image}>
             <div
-              className={`relative h-32 mr-3 transition-transform duration-400 min-w-32  ${index === hoveredIndex ? 'transform scale-105' : ''}`}
+              className={`relative h-32 transition-transform duration-400 w-36  ${index === hoveredIndex ? 'transform scale-105' : ''}`}
               draggable
               onDragStart={() => handleDragStart(index)}
               onDragOver={(e) => {

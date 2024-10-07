@@ -1,6 +1,7 @@
 import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from 'AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import EmptyBoundary from '@/components/common/EmptyBoundary';
 import OrderHistoryProduct from '@/components/order/OrderHistoryProduct';
 import OrderListTab from '@/components/order/OrderListTab';
 import OrderLostProduct from '@/components/order/OrderLostProduct';
@@ -81,14 +82,30 @@ const UserParticipatedList = () => {
   }, [activeTab, refetchHistoryData, refetchWonData, refetchLostData]);
 
   return (
-    <div className='mx-[-32px] my-[-4px]'>
+    <div className='mx-[-32px] my-[-4px] h-full'>
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className='grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
-        {activeTab === 'AuctionHistory' &&
-          historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)}
-        {activeTab === 'AuctionsWon' && wonItems.map((product: IUserAuctionWonItem) => <OrderWonProduct key={product.auctionId} product={product} />)}
-        {activeTab === 'AuctionsLost' && lostItems.map((product: IUserAuctionLostItem) => <OrderLostProduct key={product.auctionId} product={product} />)}
-      </div>
+      {activeTab === 'AuctionHistory' &&
+        <EmptyBoundary dataLength={historyItems.length} type='유저 참여 경매'>
+          <div className='grid gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+            {
+              historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)
+            }
+          </div>
+        </EmptyBoundary>
+      }
+      {activeTab === 'AuctionsWon' &&
+        <EmptyBoundary dataLength={wonItems.length} type='유저 성공 경매'>
+          <div className='grid gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+            {wonItems.map((product: IUserAuctionWonItem) => <OrderWonProduct key={product.auctionId} product={product} />)}
+          </div>
+        </EmptyBoundary>
+      }
+      {activeTab === 'AuctionsLost' &&
+        <EmptyBoundary dataLength={lostItems.length} type='유저 실패 경매'>
+          <div className='grid gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+            {lostItems.map((product: IUserAuctionLostItem) => <OrderLostProduct key={product.auctionId} product={product} />)}
+          </div>
+        </EmptyBoundary>}
     </div>
   );
 };

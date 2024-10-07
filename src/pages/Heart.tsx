@@ -14,7 +14,7 @@ const Heart = () => {
   const handleDelete = (id: number) => mutate(id);
 
   return (
-    <EmptyBoundary dataLength={preAuctionHeartList.length} type='heart'>
+    <EmptyBoundary dataLength={preAuctionHeartList.length} type='좋아요'>
       <ul className='grid items-center justify-center grid-cols-2 gap-4'>
         {preAuctionHeartList.map((el: IPreAuctionItem) => (
           <li key={el.productId} onClick={() => navigate(`/product/${el.productId}`)} className='cursor-pointer'>

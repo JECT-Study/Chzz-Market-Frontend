@@ -2,6 +2,7 @@ import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import EmptyBoundary from '@/components/common/EmptyBoundary';
 import Layout from '@/components/layout/Layout';
 import OngoingProduct from '@/components/productList/OngoingProduct';
 import PreEnrollProduct from '@/components/productList/PreEnrollProduct';
@@ -76,8 +77,14 @@ const ProductList = () => {
         <ProductButtons setSortType={setSortType} />
         <div className='grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
           {activeTab === 'ongoing'
-            ? ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.auctionId} product={product} />)
-            : enrollItems?.map((product: IPreAuctionItem) => <PreEnrollProduct key={product.productId} product={product} />)}
+            ? <EmptyBoundary dataLength={ongoingItems.length} type='카테고리'>
+              {ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.auctionId} product={product} />)}
+            </EmptyBoundary>
+            :
+            <EmptyBoundary dataLength={enrollItems.length} type='카테고리'>
+              {enrollItems?.map((product: IPreAuctionItem) => <PreEnrollProduct key={product.productId} product={product} />)}
+            </EmptyBoundary>
+          }
           <div ref={loader} />
         </div>
       </Layout.Main>
