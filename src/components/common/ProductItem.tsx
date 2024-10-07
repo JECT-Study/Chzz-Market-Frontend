@@ -1,5 +1,5 @@
 import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
-import { getTimeColor } from '@/utils/getTimeColor';
+import TimeLabel from './atomic/TimeLabel';
 
 export interface ProductProps {
   id: number;
@@ -22,8 +22,6 @@ const ProductItem = ({
   product: ProductProps;
   children: React.ReactNode;
 }) => {
-  const remainHour = Math.floor((product.timeRemaining ?? 0) / 3600);
-  const timeColor = getTimeColor(remainHour);
 
   return (
     <div key={product.id} className="mb-4">
@@ -31,17 +29,11 @@ const ProductItem = ({
         <div className="w-full h-auto mb-4">
           <div className="relative">
             <img
-              className="object-cover w-full h-[10rem] rounded-t"
+              className="object-cover w-full h-[15rem] rounded-t"
               src={`${product.imageUrl ? product.imageUrl : jordanBlackImage}`}
               alt="Jordan Black Shoes"
             />
-            {remainHour && (
-              <div
-                className={`absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 ${timeColor} border-b-2`}
-              >
-                {`${remainHour}시간 남음`}
-              </div>
-            )}
+            {product.timeRemaining && <TimeLabel time={product.timeRemaining} />}
           </div>
         </div>
 
