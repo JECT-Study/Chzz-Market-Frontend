@@ -27,7 +27,7 @@ export const useGetHomeAuctions = () => {
         queryFn: getImminentAuctions,
       },
       {
-        queryKey: [queryKeys.PRE_REGISTER_AUCTIONS],
+        queryKey: [queryKeys.PRE_AUCTIONS],
         queryFn: getPreAuctions,
       },
     ],
