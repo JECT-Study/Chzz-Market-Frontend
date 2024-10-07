@@ -1,27 +1,27 @@
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
+import NoticeIcon from '@/assets/icons/notice.svg';
 import Button from '@/components/common/Button';
 import FormField from '@/components/common/form/FormField';
-import type { IRegister } from 'Register';
-import ImageUploader from '@/components/register/ImageUploader';
-import { Input } from '@/components/ui/input';
+import { useGetPreAuctionDetails } from '@/components/details/queries';
 import Layout from '@/components/layout/Layout';
-import NoticeIcon from '@/assets/icons/notice.svg';
+import ImageUploader from '@/components/register/ImageUploader';
 import RegisterCaution from '@/components/register/RegisterCaution';
 import RegisterLabel from '@/components/register/RegisterLabel';
-import { RegisterSchema } from '@/constants/schema';
+import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
+import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { CATEGORIES } from '@/constants/categories';
-import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
+import { RegisterSchema } from '@/constants/schema';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
-import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
+import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { zodResolver } from '@hookform/resolvers/zod';
+import type { IRegister } from 'Register';
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useGetPreAuctionDetails } from '@/components/details/queries';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
@@ -36,16 +36,16 @@ const defaultValues: FormFields = {
 const Register = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  const { mutate: patchPreAuction } = usePatchPreAuction();
+  const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction();
+  const { mutate: register, isPending: postPending } = usePostRegister();
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
   const [files, setFiles] = useState<File[]>([]);
-  const { mutate: register } = usePostRegister();
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setValue,
     getValues,
   } = useForm<FormFields>({
@@ -59,7 +59,7 @@ const Register = () => {
   });
 
   const title = caution ? '주의사항' : preAuctionId ? '사전 경매 수정하기' : '경매 등록하기';
-  const finalButton = isSubmitting ? '등록 중...' : caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
+  const finalButton = caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
 
   const toggleCheckBox = () => setCheck((state) => !state);
   const clickBack = () => (caution === '' ? navigate(-1) : setCaution(''));
@@ -187,7 +187,7 @@ const Register = () => {
       </Layout.Main>
       <Layout.Footer type={caution === '' ? 'double' : 'single'}>
         {preAuctionId ? (
-          <Button disabled={isSubmitting} onClick={handleSubmit(onSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
+          <Button disabled={patchPending} loading={patchPending} onClick={handleSubmit(onSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
             수정 완료
           </Button>
         ) : caution === '' ? (
@@ -204,10 +204,10 @@ const Register = () => {
             type='button'
             color='cheeseYellow'
             className='w-full h-full'
-            disabled={!check || isSubmitting}
+            disabled={!check || postPending}
             onClick={handleSubmit(onSubmit)}
             aria-label='최종 등록 버튼'
-            loading={isSubmitting}
+            loading={postPending}
           >
             {finalButton}
           </Button>
