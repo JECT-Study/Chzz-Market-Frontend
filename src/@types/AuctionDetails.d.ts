@@ -5,7 +5,10 @@ declare module 'AuctionDetails' {
     productName: string;
     description: string;
     minPrice: number;
-    imageUrls: string[];
+    images: {
+      imageId: number;
+      imageUrl: string;
+    }[];
     isSeller: boolean;
     category: string;
   }

@@ -92,9 +92,9 @@ const Register = () => {
 
   useEffect(() => {
     if (preAuctionDetails) {
-      const { productName, imageUrls, category, description, minPrice } = preAuctionDetails;
+      const { productName, images, category, description, minPrice } = preAuctionDetails;
       setValue('productName', productName);
-      setValue('images', imageUrls);
+      setValue('images', images.map(el => el.imageUrl));
       setValue('description', description);
       setValue('minPrice', formatCurrencyWithWon(minPrice));
       setValue('category', CATEGORIES[category].code); // 카테고리 기본 값 설정
