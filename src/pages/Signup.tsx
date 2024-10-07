@@ -8,6 +8,9 @@ import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import { ChevronDown } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
+import { useQuery } from '@tanstack/react-query';
+import { queryKeys } from '@/constants/queryKeys';
+import { nicknameCheck } from '@/components/login/queries';
 
 const Signup = () => {
   const [selectBank, setSelectBank] = useState('');
@@ -25,6 +28,16 @@ const Signup = () => {
     onSubmit,
     setError,
   } = useSignup();
+  const nickname = watch('nickname');
+  const Selectbank = watch('bankName');
+  const accountNumber = watch('accountNumber');
+
+
+  const { refetch: checkNickname } = useQuery({
+    queryKey: [queryKeys.NICKNAME, nickname],
+    queryFn: () => nicknameCheck(nickname),
+    enabled: false,
+  });
 
   const handleSelectBank = (bank: string) => {
     setValue('bankName', bank);
@@ -48,11 +61,6 @@ const Signup = () => {
       );
     }
   };
-
-
-  const nickname = watch('nickname');
-  const Selectbank = watch('bankName');
-  const accountNumber = watch('accountNumber');
 
   useEffect(() => {
     setIsFormValid(!!(nickname && Selectbank && accountNumber));

@@ -41,10 +41,10 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount}
           >
             <img
               src={OnGoingIcon}
-              alt="참여한 경매"
+              alt="입찰중인 경매"
               className="w-8 h-8 mb-2"
             />
-            <span className="text-sm font-semibold">참여한 경매</span>
+            <span className="text-sm font-semibold">입찰중인 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$participantCount.ongoingAuctionCount} 건</span>
           </div>
 

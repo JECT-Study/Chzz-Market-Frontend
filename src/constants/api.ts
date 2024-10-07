@@ -5,6 +5,7 @@ export const API_END_POINT = {
     NAVER: '/auth/naver',
   },
   LOGOUT: '/api/v1/users/logout',
+  NICKNAME_CHECK: 'api/v1/users/check/nickname',
   REFRESH_TOKEN: '/api/v1/users/tokens/reissue',
   SIGNUP: '/api/v1/users',
   PROFILE: '/api/v1/users',

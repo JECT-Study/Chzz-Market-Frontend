@@ -43,6 +43,11 @@ export const refreshToken = async () => {
   }
 };
 
+export const nicknameCheck = async (nickname: string) => {
+  const response = await httpClient.get(`${API_END_POINT.NICKNAME_CHECK}/${nickname}`);
+  return response.data;
+}
+
 export const useRefreshTokenOnSuccess = () => {
   const dispatch = useDispatch();
   const queryParams = new URLSearchParams(window.location.search);

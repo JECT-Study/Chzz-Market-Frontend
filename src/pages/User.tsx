@@ -5,7 +5,7 @@ import { useProfile } from '@/hooks/useProfile';
 
 const User = () => {
   const { profileData } = useProfile();
-
+  
   return (
     <div className="flex flex-col">
       <UserProfile nickname={profileData?.nickname} bio={profileData?.bio} link={profileData?.link} />
