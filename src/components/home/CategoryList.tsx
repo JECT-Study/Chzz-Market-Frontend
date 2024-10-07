@@ -1,5 +1,5 @@
-import { CATEGORIES } from '../../constants/categories';
 import { useNavigate } from 'react-router-dom';
+import { CATEGORIES } from '../../constants/categories';
 
 const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: string }) => {
   const navigate = useNavigate();
@@ -17,11 +17,17 @@ const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: 
 
 const CategoryList = () => {
   return (
-    <ul className='flex flex-wrap items-center gap-5'>
-      {Object.values(CATEGORIES).map((el) => (
-        <CategoryItem key={el.value} code={el.code} name={el.value} icon={el.icon} />
-      ))}
-    </ul>
+    <section className='flex flex-col w-full gap-4'>
+      <label className='text-lg font-semibold'>카테고리</label>
+      <div className='flex gap-4'>
+        <ul className='flex flex-wrap items-center gap-5'>
+          {Object.values(CATEGORIES).map((el) => (
+            <CategoryItem key={el.value} code={el.code} name={el.value} icon={el.icon} />
+          ))}
+        </ul>
+      </div>
+    </section>
+
   );
 };
 
