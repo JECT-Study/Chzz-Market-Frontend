@@ -1,11 +1,11 @@
+import DeleteIcon from '@/assets/icons/delete.svg';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 import { useImageUploader } from '@/hooks/useImageUploader';
-import DeleteIcon from '@/assets/icons/delete.svg';
 import { Dispatch, SetStateAction } from 'react';
+import CustomCarousel from '../common/CustomCarousel';
+import { CarouselItem } from '../ui/carousel';
 import { Input } from '../ui/input';
 import AddImageButton from './AddImageButton';
-import { CarouselItem } from '../ui/carousel';
-import CustomCarousel from '../common/CustomCarousel';
 
 interface ImageUploaderProps {
   images: string[];
@@ -19,7 +19,7 @@ const ImageUploader = ({ files, setFiles, images, setImages }: ImageUploaderProp
   const { fileInputRef, deleteImage, handleImage, handleBoxClick } = useImageUploader(images, setImages, files, setFiles);
 
   return (
-    <div className='flex flex-col items-center w-full h-full gap-5 sm:flex-row'>
+    <div className='flex flex-col items-center w-full h-[8.5rem] gap-5 sm:flex-row'>
       <AddImageButton handleBoxClick={handleBoxClick} length={images.length} />
       <CustomCarousel contentStyle='py-2' length={images.length}>
         {images.map((image: string, index: number) => (
