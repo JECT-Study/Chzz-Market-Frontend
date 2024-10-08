@@ -1,7 +1,6 @@
 import { UserProfile } from '@/@types/user';
 import { getProfile, postEditProfile } from '@/components/profile/queries';
 import { queryKeys } from '@/constants/queryKeys';
-import { original } from '@reduxjs/toolkit';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';

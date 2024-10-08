@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
@@ -30,11 +30,10 @@ const Signup = () => {
   } = useSignup();
 
   const nickname = watch('nickname');
-  const Selectbank = watch('bankName');
   const accountNumber = watch('accountNumber');
 
 
-  const { data, refetch: checkNickname, isFetching } = useQuery({
+  const { refetch: checkNickname } = useQuery({
     queryKey: [queryKeys.NICKNAME, nickname],
     queryFn: () => nicknameCheck(nickname),
     enabled: false,
