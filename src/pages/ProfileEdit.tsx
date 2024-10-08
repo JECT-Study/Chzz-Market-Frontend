@@ -4,18 +4,22 @@ import FormField from '@/components/common/form/FormField';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useEditProfile } from '@/hooks/useProfile';
 import { UserProfile } from '@/@types/user';
 import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@/constants/queryKeys';
 import { nicknameCheck } from '@/components/login/queries';
+import ProfileImageUploader from '@/components/profile/ProfileImageUploader';
 
 const ProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
-  const { control, watch, handleSubmit, handleEditProfile, originalNickname } = useEditProfile();
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [profileFile, setProfileFile] = useState<File | null>(null);
+  const [useDefaultImage, setUseDefaultImage] = useState(false);
+  const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl } = useEditProfile();
   const nickname = watch('nickname');
 
   const { refetch: checkNickname } = useQuery({
@@ -33,8 +37,28 @@ const ProfileEdit = () => {
   };
 
   const onSubmit = (data: UserProfile) => {
+    const { nickname, bio, link } = data;
     if (isNicknameChecked || nickname === originalNickname) {
-      handleEditProfile(data);
+      const formData = new FormData();
+      const submitData = {
+        nickname,
+        bio,
+        link,
+        useDefaultImage
+      };
+
+      if (profileFile) {
+        formData.append('file', profileFile);
+        setUseDefaultImage(false);
+      } else {
+        setUseDefaultImage(true);
+      }
+      formData.append('request',
+        new Blob([JSON.stringify(submitData)], {
+          type: 'application/json',
+        })
+      );
+      handleEditProfile(formData);
     } else {
       // 에러 띄우기 닉네임 중복 확인을 해주세요.
       alert('닉네임바꿔');
@@ -62,6 +86,12 @@ const ProfileEdit = () => {
     }
   };
 
+  useEffect(() => {
+    if (userProfileImageUrl) {
+      setProfileImage(userProfileImageUrl);
+    }
+  }, [userProfileImageUrl]);
+
   return (
     <Layout>
       <Layout.Header title="프로필 수정" handleBack={() => navigate('/user')} />
@@ -72,6 +102,12 @@ const ProfileEdit = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <h2 className="pb-4 text-lg font-bold">프로필 정보</h2>
+          <ProfileImageUploader 
+            file={profileFile}
+            setFile={setProfileFile}
+            image={profileImage}
+            setImage={setProfileImage}
+          />
           <div className='flex items-end gap-4'>
             <div className='flex-1 w-4/5'>
               <FormField

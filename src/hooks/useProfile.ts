@@ -19,7 +19,7 @@ export const useProfile = () => {
 export const useEditProfile = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { userNickname: originalNickname, userBio, userLink } = location.state || {};
+  const { userNickname: originalNickname, userBio, userLink, userProfileImageUrl } = location.state || {};
 
   const {
     control,
@@ -35,27 +35,14 @@ export const useEditProfile = () => {
   });
 
   const profileMutation = useMutation({
-    mutationFn: (data: UserProfile) => postEditProfile(data),
+    mutationFn: (formData: FormData) => postEditProfile(formData),
     onSuccess: () => {
       navigate('/user');
     },
   });
 
-  const formLink = (link: string) => {
-    if (link && !link.startsWith('https://')) {
-      return `https://${link}`;
-    }
-    if (link && !link.startsWith('http://')) {
-      return `http://${link}`;
-    }
-    return link;
-  };
-
-  const handleEditProfile = (data: UserProfile) => {
-    const formattedLink = formLink(data.link);
-    const formattedData = { ...data, link: formattedLink };
-
-    profileMutation.mutate(formattedData);
+  const handleEditProfile = (formData: FormData) => {
+    profileMutation.mutate(formData);
   };
 
   return {
@@ -64,6 +51,7 @@ export const useEditProfile = () => {
     watch,
     handleSubmit,
     originalNickname,
+    userProfileImageUrl,
     errors,
   };
 };

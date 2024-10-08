@@ -8,7 +8,7 @@ const User = () => {
   
   return (
     <div className="flex flex-col">
-      <UserProfile nickname={profileData?.nickname} bio={profileData?.bio} link={profileData?.link} />
+      <UserProfile nickname={profileData?.nickname} bio={profileData?.bio} link={profileData?.link} profileImageUrl={profileData?.profileImageUrl} providerType={profileData?.providerType} />
       <UserOrder participantCount={profileData?.participantCount} preRegisterCount={profileData?.preRegisterCount} registeredAuctionCount={profileData?.registeredAuctionCount} />
       <UserOrderList />
     </div>
