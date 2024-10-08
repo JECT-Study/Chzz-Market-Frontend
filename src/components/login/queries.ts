@@ -22,9 +22,13 @@ export const postSignup = async (data: User) => {
 };
 
 export const logout = async () => {
-  await httpClient.post(API_END_POINT.LOGOUT, { withCredentials: true });
-
-  removeToken();
+  try {
+    await refreshToken();
+    await httpClient.post(API_END_POINT.LOGOUT, { withCredentials: true });
+    removeToken();
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const refreshToken = async () => {
