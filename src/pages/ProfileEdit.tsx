@@ -53,7 +53,7 @@ const ProfileEdit = () => {
     const { isAvailable } = data;
     setIsNicknameChecked(isAvailable);
     
-    if (isAvailable === true) {
+    if (isAvailable) {
       // 사용 가능한 닉네임입니다. 띄워주기
       alert('사용 가능')
     } else {
@@ -72,22 +72,26 @@ const ProfileEdit = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <h2 className="pb-4 text-lg font-bold">프로필 정보</h2>
-          <div className='flex items-end'>
-            <FormField
-              label="닉네임 *"
-              name="nickname"
-              control={control}
-              render={(field) => (
-                <Input
-                  id="닉네임 *"
-                  type="text"
-                  placeholder="닉네임을 입력해주세요 (공백 제외 15글자 이내)"
-                  className="focus-visible:ring-cheeseYellow"
-                  {...field}
-                />
-              )}
-            />
-            <Button type='button' size='medium' onClick={onNicknameCheck}>중복확인</Button>
+          <div className='flex items-end gap-4'>
+            <div className='flex-1 w-4/5'>
+              <FormField
+                label="닉네임 *"
+                name="nickname"
+                control={control}
+                render={(field) => (
+                  <Input
+                    id="닉네임 *"
+                    type="text"
+                    placeholder="닉네임을 입력해주세요 (공백 제외 15글자 이내)"
+                    className="focus-visible:ring-cheeseYellow"
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div>
+              <Button type='button' className='h-10' onClick={onNicknameCheck}>중복확인</Button>
+            </div>
           </div>
           <FormField
             label="자기소개"
