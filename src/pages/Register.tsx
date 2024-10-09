@@ -17,6 +17,7 @@ import { CATEGORIES } from '@/constants/categories';
 import { RegisterSchema } from '@/constants/schema';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
 import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
+import { dataURLtoFile } from '@/utils/dataURLToFile';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { IRegister } from 'Register';
@@ -41,7 +42,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
-  const [files, setFiles] = useState<File[]>([]);
+  const [existingImage, setExistingImage] = useState<{ imageId: number; imageUrl: string; firstIdx: number }[]>([])
   const {
     control,
     handleSubmit,
@@ -68,16 +69,34 @@ const Register = () => {
   };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const { productName, category, description, minPrice } = data;
+    const { productName, images, category, description, minPrice } = data;
     const formData = new FormData();
+
+    // 유저가 정한 최종 이미지 순서
+    const previewImageSequence = images.map((image, idx) => ({ id: idx + 1, image }))
+    // 새로 삽입한 이미지만 뽑기
+    const newFiles = previewImageSequence.filter((el) => el.image.split(':')[0] === 'data').map((el) => ({ id: el.id, file: dataURLtoFile(el.image) }))
+
+    // 기존의 이미지가 현재 어느 위치에 있는지 계산
+    let imageSequence = new Map<number, number>()
+    if (preAuctionId) existingImage.map((el) => {
+      for (const sequence of previewImageSequence) {
+        if (el.imageUrl === sequence.image) {
+          imageSequence.set(el.imageId, sequence.id)
+        }
+      }
+    }).filter(image => image)
 
     const submitData: IRegister = {
       productName,
       category,
       description,
       minPrice: convertCurrencyToNumber(minPrice),
-      ...(preAuctionId ? {} : { auctionRegisterType: caution }),
+      ...(preAuctionId ? { imageSequence } : { auctionRegisterType: caution }),
     };
+
+    console.log(submitData)
+    console.log(newFiles)
 
     formData.append(
       'request',
@@ -85,7 +104,9 @@ const Register = () => {
         type: 'application/json',
       })
     );
-    files.forEach((file) => formData.append('images', file));
+
+    if (preAuctionId) newFiles.forEach((newFile) => formData.append(String(newFile.id), newFile.file))
+    else newFiles.forEach((newFile) => formData.append('images', newFile.file))
 
     preAuctionId ? patchPreAuction({ preAuctionId, formData }) : register(formData);
   };
@@ -95,6 +116,7 @@ const Register = () => {
       const { productName, images, category, description, minPrice } = preAuctionDetails;
       setValue('productName', productName);
       setValue('images', images.map(el => el.imageUrl));
+      setExistingImage(images.map((image, idx) => ({ ...image, firstIdx: idx + 1 })))
       setValue('description', description);
       setValue('minPrice', formatCurrencyWithWon(minPrice));
       setValue('category', CATEGORIES[category].code); // 카테고리 기본 값 설정
@@ -113,7 +135,7 @@ const Register = () => {
               control={control}
               error={errors.images?.message}
               render={(field) => (
-                <ImageUploader files={files} setFiles={setFiles} images={field.value as string[]} setImages={(images: string[]) => field.onChange(images)} />
+                <ImageUploader images={field.value as string[]} setImages={(images: string[]) => field.onChange(images)} />
               )}
             />
             <FormField
