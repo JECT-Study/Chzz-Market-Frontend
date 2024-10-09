@@ -42,7 +42,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
-  const [existingImage, setExistingImage] = useState<{ imageId: number; imageUrl: string; firstIdx: number }[]>([])
+  const [existingImages, setExistingImages] = useState<{ imageId: number; imageUrl: string; firstIdx: number }[]>([])
   const {
     control,
     handleSubmit,
@@ -79,7 +79,7 @@ const Register = () => {
 
     // 기존의 이미지가 현재 어느 위치에 있는지 계산
     let imageSequence = new Map<number, number>()
-    if (preAuctionId) existingImage.map((el) => {
+    if (preAuctionId) existingImages.map((el) => {
       for (const sequence of previewImageSequence) {
         if (el.imageUrl === sequence.image) {
           imageSequence.set(el.imageId, sequence.id)
@@ -113,7 +113,7 @@ const Register = () => {
       const { productName, images, category, description, minPrice } = preAuctionDetails;
       setValue('productName', productName);
       setValue('images', images.map(el => el.imageUrl));
-      setExistingImage(images.map((image, idx) => ({ ...image, firstIdx: idx + 1 })))
+      setExistingImages(images.map((image, idx) => ({ ...image, firstIdx: idx + 1 })))
       setValue('description', description);
       setValue('minPrice', formatCurrencyWithWon(minPrice));
       setValue('category', CATEGORIES[category].code); // 카테고리 기본 값 설정
