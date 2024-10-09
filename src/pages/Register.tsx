@@ -95,9 +95,6 @@ const Register = () => {
       ...(preAuctionId ? { imageSequence } : { auctionRegisterType: caution }),
     };
 
-    console.log(submitData)
-    console.log(newFiles)
-
     formData.append(
       'request',
       new Blob([JSON.stringify(submitData)], {
