@@ -25,12 +25,4 @@ declare module 'AuctionDetails' {
     likeCount: number;
     isLiked: boolean;
   }
-
-  export interface IAuctionRegisterRequest {
-    productName: string;
-    description: string;
-    category: string;
-    minPrice: number;
-    auctionRegisterType: string;
-  }
 }
