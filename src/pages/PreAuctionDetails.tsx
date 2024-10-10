@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
 import { useState } from 'react';
 
-import Layout from '@/components/layout/Layout';
-import { useNavigate, LoaderFunction, useLoaderData } from 'react-router-dom';
 import Price from '@/assets/icons/price.svg';
+import Layout from '@/components/layout/Layout';
 import axios from 'axios';
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
 // 필요한 컴포넌트 임포트
-import SellersFooter from '@/components/details/SellersFooter';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import ConfirmationModal from '@/components/details/ConfirmationModal';
+import SellersFooter from '@/components/details/SellersFooter';
 import SuccessModal from '@/components/details/SuccessModal';
 import { useGetPreAuctionDetails } from '@/components/details/queries';
 
@@ -77,7 +77,7 @@ const PreAuction = () => {
           {/* 상품 이미지 영역 */}
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
-              <img src={preAuctionDetails?.imageUrls[0]} alt={preAuctionDetails?.productName} className='object-cover w-full h-auto' />
+              <img src={preAuctionDetails?.images.map(el => el.imageUrl)[0]} alt={preAuctionDetails?.productName} className='object-cover w-full h-auto' />
             </div>
           </div>
 
