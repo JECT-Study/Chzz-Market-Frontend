@@ -9,7 +9,7 @@ const MinPrice = ({ price }: { price: number }) => {
       className="flex items-center text-body2 text-gray2"
     >
       <img src={PriceIcon} alt="시작가" />
-      <span>
+      <span className='whitespace-nowrap'>
         시작가 <span className="text-black text-body2Bold">{formatted}</span>
       </span>
     </div>
