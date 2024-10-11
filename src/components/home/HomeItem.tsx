@@ -1,20 +1,27 @@
 import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
 
+import ROUTERS from '@/constants/route';
+import { truncateText } from '@/utils/truncateText';
+import { useNavigate } from 'react-router-dom';
 import LikeCount from '../common/atomic/LikeCount';
 import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
 import TimeLabel from '../common/atomic/TimeLabel';
-import { truncateText } from '@/utils/truncateText';
-import { useNavigate } from 'react-router-dom';
-import ROUTERS from '@/constants/route';
 import { CarouselItem } from '../ui/carousel';
 
-type HomeAuctionItemProps<T> = T extends 'preAuction' ? { kind: 'preAuction'; auction: IPreAuctionItem } : { kind: 'auction'; auction: IAuctionItem };
+interface HomeItemProps<T extends 'preAuction' | 'auction'> {
+  kind: string
+  item: T extends 'preAuction' ? IPreAuctionItem : IAuctionItem
+}
 
-const HomeAuctionItem = <T extends 'preAuction' | 'auction'>({ kind, auction }: HomeAuctionItemProps<T>) => {
+const HomeItem = <T extends 'preAuction' | 'auction'>({ kind, item }: HomeItemProps<T>) => {
   const navigate = useNavigate();
-  const { productName, imageUrl, minPrice } = auction;
-  const handleClick = () => navigate(kind === 'auction' ? `${ROUTERS.AUCTION.ITEM}/${auction.auctionId}` : `${ROUTERS.PRE_AUCTION.ITEM}/${auction.productId}`);
+  const { minPrice, productName, imageUrl } = item
+  const handleClick = () => navigate(
+    kind === 'auction'
+      ? `${ROUTERS.AUCTION.ITEM}/${(item as IAuctionItem).auctionId}`
+      : `${ROUTERS.PRE_AUCTION.ITEM}/${(item as IPreAuctionItem).productId}`
+  );
   const name = truncateText(productName);
 
   return (
@@ -22,7 +29,7 @@ const HomeAuctionItem = <T extends 'preAuction' | 'auction'>({ kind, auction }: 
       <figure className='flex flex-col gap-2 border rounded cursor-pointer text-body2' aria-label={kind} onClick={handleClick}>
         <div className='relative'>
           <img src={imageUrl} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' />
-          {kind === 'auction' && <TimeLabel time={auction.timeRemaining} />}
+          {kind === 'auction' && <TimeLabel time={(item as IAuctionItem).timeRemaining} />}
         </div>
         <figcaption className='flex flex-col gap-2 p-2'>
           <div aria-label={`${kind}_이름`} className='text-gray1'>
@@ -30,7 +37,9 @@ const HomeAuctionItem = <T extends 'preAuction' | 'auction'>({ kind, auction }: 
           </div>
           <div>
             <MinPrice price={minPrice} />
-            {kind === 'auction' ? <ParticipantCount count={auction.participantCount} /> : <LikeCount count={auction.likeCount} />}
+            {kind === 'auction'
+              ? <ParticipantCount count={(item as IAuctionItem).participantCount} />
+              : <LikeCount count={(item as IPreAuctionItem).likeCount} />}
           </div>
         </figcaption>
       </figure>
@@ -38,4 +47,4 @@ const HomeAuctionItem = <T extends 'preAuction' | 'auction'>({ kind, auction }: 
   );
 };
 
-export default HomeAuctionItem;
+export default HomeItem;

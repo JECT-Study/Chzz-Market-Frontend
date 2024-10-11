@@ -1,27 +1,28 @@
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
+import NoticeIcon from '@/assets/icons/notice.svg';
 import Button from '@/components/common/Button';
 import FormField from '@/components/common/form/FormField';
-import type { IRegister } from 'Register';
-import ImageUploader from '@/components/register/ImageUploader';
-import { Input } from '@/components/ui/input';
+import { useGetPreAuctionDetails } from '@/components/details/queries';
 import Layout from '@/components/layout/Layout';
-import NoticeIcon from '@/assets/icons/notice.svg';
+import ImageUploader from '@/components/register/ImageUploader';
 import RegisterCaution from '@/components/register/RegisterCaution';
 import RegisterLabel from '@/components/register/RegisterLabel';
-import { RegisterSchema } from '@/constants/schema';
+import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
+import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { CATEGORIES } from '@/constants/categories';
-import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
+import { RegisterSchema } from '@/constants/schema';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
-import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
+import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
+import { dataURLtoFile } from '@/utils/dataURLToFile';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { zodResolver } from '@hookform/resolvers/zod';
+import type { IRegister } from 'Register';
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useGetPreAuctionDetails } from '@/components/details/queries';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
@@ -36,16 +37,16 @@ const defaultValues: FormFields = {
 const Register = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  const { mutate: patchPreAuction } = usePatchPreAuction();
+  const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction();
+  const { mutate: register, isPending: postPending } = usePostRegister();
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
-  const [files, setFiles] = useState<File[]>([]);
-  const { mutate: register } = usePostRegister();
+  const [existingImages, setExistingImages] = useState<{ imageId: number; imageUrl: string; firstIdx: number }[]>([])
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setValue,
     getValues,
   } = useForm<FormFields>({
@@ -59,7 +60,7 @@ const Register = () => {
   });
 
   const title = caution ? '주의사항' : preAuctionId ? '사전 경매 수정하기' : '경매 등록하기';
-  const finalButton = isSubmitting ? '등록 중...' : caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
+  const finalButton = caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
 
   const toggleCheckBox = () => setCheck((state) => !state);
   const clickBack = () => (caution === '' ? navigate(-1) : setCaution(''));
@@ -68,15 +69,30 @@ const Register = () => {
   };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const { productName, category, description, minPrice } = data;
+    const { productName, images, category, description, minPrice } = data;
     const formData = new FormData();
+
+    // 유저가 정한 최종 이미지 순서
+    const previewImageSequence = images.map((image, idx) => ({ id: idx + 1, image }))
+    // 새로 삽입한 이미지만 뽑기
+    const newFiles = previewImageSequence.filter((el) => el.image.split(':')[0] === 'data').map((el) => ({ id: el.id, file: dataURLtoFile(el.image) }))
+
+    // 기존의 이미지가 현재 어느 위치에 있는지 계산
+    let imageSequence = new Map<number, number>()
+    if (preAuctionId) existingImages.map((el) => {
+      for (const sequence of previewImageSequence) {
+        if (el.imageUrl === sequence.image) {
+          imageSequence.set(el.imageId, sequence.id)
+        }
+      }
+    }).filter(image => image)
 
     const submitData: IRegister = {
       productName,
       category,
       description,
       minPrice: convertCurrencyToNumber(minPrice),
-      ...(preAuctionId ? {} : { auctionRegisterType: caution }),
+      ...(preAuctionId ? { imageSequence } : { auctionRegisterType: caution }),
     };
 
     formData.append(
@@ -85,16 +101,19 @@ const Register = () => {
         type: 'application/json',
       })
     );
-    files.forEach((file) => formData.append('images', file));
+
+    if (preAuctionId) newFiles.forEach((newFile) => formData.append(String(newFile.id), newFile.file))
+    else newFiles.forEach((newFile) => formData.append('images', newFile.file))
 
     preAuctionId ? patchPreAuction({ preAuctionId, formData }) : register(formData);
   };
 
   useEffect(() => {
     if (preAuctionDetails) {
-      const { productName, imageUrls, category, description, minPrice } = preAuctionDetails;
+      const { productName, images, category, description, minPrice } = preAuctionDetails;
       setValue('productName', productName);
-      setValue('images', imageUrls);
+      setValue('images', images.map(el => el.imageUrl));
+      setExistingImages(images.map((image, idx) => ({ ...image, firstIdx: idx + 1 })))
       setValue('description', description);
       setValue('minPrice', formatCurrencyWithWon(minPrice));
       setValue('category', CATEGORIES[category].code); // 카테고리 기본 값 설정
@@ -113,7 +132,7 @@ const Register = () => {
               control={control}
               error={errors.images?.message}
               render={(field) => (
-                <ImageUploader files={files} setFiles={setFiles} images={field.value as string[]} setImages={(images: string[]) => field.onChange(images)} />
+                <ImageUploader images={field.value as string[]} setImages={(images: string[]) => field.onChange(images)} />
               )}
             />
             <FormField
@@ -187,7 +206,7 @@ const Register = () => {
       </Layout.Main>
       <Layout.Footer type={caution === '' ? 'double' : 'single'}>
         {preAuctionId ? (
-          <Button disabled={isSubmitting} onClick={handleSubmit(onSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
+          <Button disabled={patchPending} loading={patchPending} onClick={handleSubmit(onSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
             수정 완료
           </Button>
         ) : caution === '' ? (
@@ -204,10 +223,10 @@ const Register = () => {
             type='button'
             color='cheeseYellow'
             className='w-full h-full'
-            disabled={!check || isSubmitting}
+            disabled={!check || postPending}
             onClick={handleSubmit(onSubmit)}
             aria-label='최종 등록 버튼'
-            loading={isSubmitting}
+            loading={postPending}
           >
             {finalButton}
           </Button>

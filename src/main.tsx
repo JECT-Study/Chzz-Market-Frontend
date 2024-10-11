@@ -1,11 +1,11 @@
 import './index.css';
 
-import App from './App';
-import { Provider } from 'react-redux';
-import ReactDOM from 'react-dom/client';
-import ReactQueryProvider from './provider/queryProvider';
-import { Toaster } from 'sonner';
 import { store } from '@/store';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { Toaster } from 'sonner';
+import App from './App';
+import ReactQueryProvider from './provider/queryProvider';
 import { storeLogin } from './store/authSlice';
 
 // async function enableMocking(): Promise<void> {
@@ -26,7 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <ReactQueryProvider showDevTools>
     <Provider store={store}>
       <App />
-      <Toaster richColors />
+      <Toaster richColors position='top-right' />
     </Provider>
   </ReactQueryProvider>
 );

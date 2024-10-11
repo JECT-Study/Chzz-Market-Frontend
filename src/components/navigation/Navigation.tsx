@@ -1,5 +1,6 @@
 import { navIcons } from '@/constants/navIcons';
 import { useNavigate } from 'react-router-dom';
+import { useGetNotifications } from '../notification/queries';
 
 const NavigationItem = ({
   name,
@@ -10,7 +11,7 @@ const NavigationItem = ({
   name: string;
   active: boolean;
   onClick: () => void;
-  unreadNotificationsCount?: number;
+  unreadNotificationsCount: number;
 }) => {
   const iconSrc = navIcons[name][active ? 'on' : 'off'];
   const notificationCondition = name === 'notification' && unreadNotificationsCount > 0;
@@ -26,30 +27,13 @@ const NavigationItem = ({
 };
 
 const Navigation = ({ active }: { active: string }) => {
-  // const token = getToken();
   const navigate = useNavigate();
-  // if (!token) {
-  //   return (
-  //     <nav className="flex items-center h-full">
-  //       {Object.entries(navIcons).map(([name, value]) => (
-  //         <NavigationItem
-  //           key={name}
-  //           name={name}
-  //           active={active === name}
-  //           onClick={() => {
-  //             navigate(value.path);
-  //           }}
-  //         />
-  //       ))}
-  //     </nav>
-  //   );
-  // }
+  const { notifications } = useGetNotifications();
 
-  // const { notifications } = useGetNotifications();
-  // const unreadNotificationsCount = notifications?.reduce(
-  //   (acc, cur) => (!cur.isRead ? acc + 1 : acc),
-  //   0,
-  // );
+  const unreadNotificationsCount = notifications ? notifications.reduce(
+    (acc, cur) => (!cur.isRead ? acc + 1 : acc),
+    0,
+  ) : 0
 
   return (
     <nav className='flex items-center h-full'>
@@ -61,6 +45,7 @@ const Navigation = ({ active }: { active: string }) => {
           onClick={() => {
             navigate(value.path);
           }}
+          unreadNotificationsCount={unreadNotificationsCount}
         />
       ))}
     </nav>

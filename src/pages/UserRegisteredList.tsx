@@ -5,8 +5,8 @@ import EmptyBoundary from '@/components/common/EmptyBoundary';
 import OngoingMyRegister from '@/components/user/OngoingMyRegister';
 import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 import UserOrderTab from '@/components/user/UserOrderTab';
-import { useLocation } from 'react-router-dom';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
+import { useLocation } from 'react-router-dom';
 
 const UserRegisteredList = () => {
   const location = useLocation();
@@ -65,23 +65,25 @@ const UserRegisteredList = () => {
   }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
-    <div className='mx-[-32px] my-[-4px]'>
+    <div className='mx-[-32px] my-[-4px] h-full'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto">
-        {activeTab === true ? (
-          <EmptyBoundary dataLength={ongoingItems.length} type='userRegisterAuction'>
+      {activeTab ? (
+        <EmptyBoundary dataLength={ongoingItems.length} type='유저 등록 경매'>
+          <div className={`grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto`}>
             {ongoingItems.map((product: IAuctionRegisteredItem) => (
               <OngoingMyRegister product={product} key={product.createdAt} />
             ))}
-          </EmptyBoundary>
-        ) : (
-          <EmptyBoundary dataLength={enrollItems.length} type='userPreRegisterAuction'>
+          </div>
+        </EmptyBoundary>
+      ) : (
+        <EmptyBoundary dataLength={enrollItems.length} type='유저 사전등록 경매'>
+          <div className={`grid grid-cols-2 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto`}>
             {enrollItems.map((product: IPreAuctionRegisteredItem) => (
               <PreEnrollMyRegister product={product} key={product.createdAt} />
             ))}
-          </EmptyBoundary>
-        )}
-      </div>
+          </div>
+        </EmptyBoundary>
+      )}
     </div>
   );
 };

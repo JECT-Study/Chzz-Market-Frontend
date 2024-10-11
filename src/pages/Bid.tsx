@@ -1,21 +1,21 @@
-import { LoaderFunction, useLoaderData } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { usePatchBid, usePostBid } from '@/components/bid/queries';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
-import AuctionItem from '@/components/common/item/AuctionItem';
 import BidCaution from '@/components/bid/BidCaution';
 import BidFooter from '@/components/bid/BidFooter';
 import FormField from '@/components/common/form/FormField';
-import { Input } from '@/components/ui/input';
+import AuctionItem from '@/components/common/item/AuctionItem';
+import { useGetAuctionDetails } from '@/components/details/queries';
 import Layout from '@/components/layout/Layout';
-import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { Input } from '@/components/ui/input';
 import { getBidSchema } from '@/constants/schema';
 import { useEditableNumberInput } from '@/hooks/useEditableNumberInput';
-import { useGetAuctionDetails } from '@/components/details/queries';
+import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 const Bid = () => {
   const [check, setCheck] = useState<boolean>(false);
@@ -86,7 +86,7 @@ const Bid = () => {
               <Input
                 id='가격 제안하기'
                 type={isEditing ? 'number' : 'text'}
-                placeholder={`최소 입찰가는 ${formatCurrencyWithWon(minPrice + 1000)} 입니다.`}
+                placeholder={`최소 입찰가는 ${formatCurrencyWithWon(minPrice)} 입니다.`}
                 className=' focus-visible:ring-cheeseYellow'
                 {...field}
                 onBlur={handleBlur}
