@@ -64,6 +64,33 @@ export const useLikeAuctionItem = (): {
   return { mutate };
 };
 
+export const useCancelBid = (): {
+  mutate: UseMutateFunction<any, Error, number, unknown>;
+} => {
+  const queryClient = useQueryClient();
+
+  const cancelBid = async (bidId: number) => {
+    const response = await httpClient.patch(
+      `${API_END_POINT.BID}/${bidId}/cancel`
+    );
+    return response.data;
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: cancelBid,
+    onSuccess: (_, bidId) => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.BIDDER_LIST, bidId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.AUCTION_DETAILS],
+      });
+    },
+  });
+
+  return { mutate };
+};
+
 export const useGetAuctionDetails = (auctionId: number) => {
   const getAuctionDetails = async (): Promise<IAuctionDetails> => {
     const response = await httpClient.get(

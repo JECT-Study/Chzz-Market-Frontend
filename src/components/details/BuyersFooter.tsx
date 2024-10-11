@@ -1,12 +1,12 @@
-/* eslint-disable prettier/prettier */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { useLikeAuctionItem } from '@/components/details/queries';
+import { useLikeAuctionItem, useCancelBid } from '@/components/details/queries';
 
 interface BuyersFooterProps {
   auctionId: number;
+  bidId: number;
   isSeller: boolean;
   status: string;
   likeCount?: number;
@@ -16,6 +16,7 @@ interface BuyersFooterProps {
 
 const BuyersFooter = ({
   auctionId,
+  bidId,
   isSeller,
   status,
   likeCount = 0,
@@ -23,7 +24,8 @@ const BuyersFooter = ({
   remainingBidCount,
 }: BuyersFooterProps) => {
   const navigate = useNavigate();
-  const { mutate } = useLikeAuctionItem();
+  const { mutate: likeAuctionItem } = useLikeAuctionItem();
+  const { mutate: cancelBid } = useCancelBid(); // Call the hook here
 
   const [currentLikeCount, setCurrentLikeCount] = useState<number>(likeCount);
   const [isLiked, setIsLiked] = useState<boolean>(isParticipated);
@@ -33,7 +35,7 @@ const BuyersFooter = ({
   };
 
   const onToggleNotificationHandler = () => {
-    mutate(auctionId);
+    likeAuctionItem(auctionId);
     if (!isLiked) {
       setCurrentLikeCount((prev) => prev + 1);
       setIsLiked(true);
@@ -41,6 +43,11 @@ const BuyersFooter = ({
       setCurrentLikeCount((prev) => (prev > 0 ? prev - 1 : 0));
       setIsLiked(false);
     }
+  };
+
+  const onCancelBidHandler = () => {
+    cancelBid(bidId);
+    navigate('/');
   };
 
   const HeartIcon = isLiked ? AiFillHeart : AiOutlineHeart;
@@ -88,9 +95,14 @@ const BuyersFooter = ({
   ) {
     return (
       <div className='flex items-center justify-between p-2 rounded-lg'>
-        <button className='px-4 py-2 text-gray-600 border border-gray-400 rounded-lg'>
+        <Button
+          type='button'
+          color='white'
+          className='flex-1 h-full'
+          onClick={onCancelBidHandler} // Call the handler here
+        >
           참여 취소
-        </button>
+        </Button>
         <Button
           type='button'
           className='flex-[2] h-full'

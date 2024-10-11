@@ -39,6 +39,8 @@ const AuctionDetails = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  console.log(auctionDetails);
+
   return (
     <Layout>
       <Layout.Header
@@ -151,6 +153,7 @@ const AuctionDetails = () => {
           ) : (
             <BuyersFooter
               auctionId={auctionId}
+              bidId={auctionDetails.bidId ?? 0}
               isSeller={auctionDetails.isSeller ?? false}
               status={auctionDetails.status ?? ''}
               isParticipated={auctionDetails.isParticipated ?? false}
