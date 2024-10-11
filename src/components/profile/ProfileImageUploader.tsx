@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { Input } from '../ui/input';
 import { useProfileImageUploader } from '@/hooks/useProfileImageUploader';
 import { Button } from '../ui/button';
+import ProfileEdit from '@/assets/icons/profile_edit.svg'
 
 interface ImageUploaderProps {
   image: string | null;
@@ -28,9 +29,9 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
           </Button>
         </div>
       ) : (
-        <button type='button' className="w-40 h-40 bg-gray-200 rounded-full" onClick={handleBoxClick}>
-          프로필 사진 추가
-        </button>
+        <div className="relative w-40 h-40" onClick={handleBoxClick}>
+          <img src={ProfileEdit} alt="프로필 사진" className="object-cover w-full h-full rounded-full" />
+        </div>
       )}
       <Input
         ref={fileInputRef}

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import ProfileImage from '@/assets/icons/profile.svg';
 
 interface Props {
   nickname?: string;
@@ -20,8 +21,7 @@ const UserProfile = ({ nickname, bio, link, profileImageUrl, providerType }: Pro
       {profileImageUrl ? (
         <img src={profileImageUrl} alt='프로필 이미지' className='w-20 h-20 rounded-full mr-4' />
       ) : (
-        // <img src={'기본이미지'} alt='기본 프로필 이미지' className='w-20 h-20 rounded-full mr-4' />
-        <div className="w-20 h-20 rounded-full bg-gray-300 mr-4" />
+        <img src={ProfileImage} alt='기본 프로필 이미지' className='w-20 h-20 rounded-full mr-4' />
       )} 
       <div className="flex-1">
         <div className="flex items-center justify-between">
