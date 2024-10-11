@@ -39,8 +39,6 @@ const AuctionDetails = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  console.log(auctionDetails);
-
   return (
     <Layout>
       <Layout.Header
@@ -56,7 +54,7 @@ const AuctionDetails = () => {
           <div className='relative w-full'>
             <div className='w-full mb-2'>
               <img
-                src={`${auctionDetails.imageUrls[0]}`}
+                src={auctionDetails.imageUrls[0]}
                 alt={auctionDetails.productName}
                 className='object-cover w-full h-auto'
               />
@@ -87,8 +85,7 @@ const AuctionDetails = () => {
                   </p>
                 </div>
                 <p className='mt-2 mb-2 text-2xl font-bold'>
-                  {auctionDetails.productName ||
-                    '[ERROR] 이름이 등록되지 않았어요!'}
+                  {auctionDetails.productName}
                 </p>
                 <p className='mt-2 mb-2 text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
