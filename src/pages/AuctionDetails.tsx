@@ -14,7 +14,7 @@ import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { auctionDetails } = useGetAuctionDetails(auctionId) || {};
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
   const [isPreAuction, _setIsPreAuction] = useState(false);
@@ -41,7 +41,7 @@ const AuctionDetails = () => {
         title='제품 상세'
         handleBack={handleBackClick}
         handleModal={toggleMenu}
-        isDisableMenuButton={!auctionDetails.isSeller}
+        isDisableMenuButton={!auctionDetails?.isSeller}
       />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
@@ -50,8 +50,8 @@ const AuctionDetails = () => {
           <div className='relative w-full'>
             <div className='w-full mb-2'>
               <img
-                src={auctionDetails.imageUrls[0]}
-                alt={auctionDetails.productName}
+                src={auctionDetails?.imageUrls?.[0] || ''}
+                alt={auctionDetails?.productName || ''}
                 className='object-cover w-full h-auto'
               />
             </div>
@@ -62,7 +62,7 @@ const AuctionDetails = () => {
                 className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}
               >
                 <ProgressBar
-                  initialTimeRemaining={auctionDetails.timeRemaining}
+                  initialTimeRemaining={auctionDetails?.timeRemaining || 0}
                   totalTime={totalTime} // Should be 86400
                 />
               </div>
@@ -77,11 +77,11 @@ const AuctionDetails = () => {
                 <div className='mt-2 mb-2 flex flex-row items-center'>
                   <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
                   <p className='ml-3 text-black'>
-                    {auctionDetails.sellerNickname}
+                    {auctionDetails?.sellerNickname || ''}
                   </p>
                 </div>
                 <p className='mt-2 mb-2 text-2xl font-bold'>
-                  {auctionDetails.productName}
+                  {auctionDetails?.productName || ''}
                 </p>
                 <p className='mt-2 mb-2 text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
@@ -90,7 +90,7 @@ const AuctionDetails = () => {
                     </span>
                     시작가
                     <span className='font-bold p'>
-                      {formatCurrencyWithWon(auctionDetails.minPrice)}원
+                      {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}원
                     </span>
                   </span>
                 </p>
@@ -105,8 +105,8 @@ const AuctionDetails = () => {
                     <span className='ml-1'>나의 참여 금액</span>
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
-                    {auctionDetails.isParticipated
-                      ? `${formatCurrencyWithWon(auctionDetails.bidAmount)}원`
+                    {auctionDetails?.isParticipated
+                      ? `${formatCurrencyWithWon(auctionDetails?.bidAmount || 0)}원`
                       : '참여 전'}
                   </p>
                 </div>
@@ -121,8 +121,8 @@ const AuctionDetails = () => {
                     <p className='mb-1 text-sm text-gray-500'>참여 인원</p>
                   </div>
                   <p className='text-lg font-bold'>
-                    {auctionDetails.participantCount
-                      ? `${auctionDetails.participantCount}명`
+                    {auctionDetails?.participantCount
+                      ? `${auctionDetails?.participantCount}명`
                       : '0명'}
                   </p>
                 </div>
@@ -132,7 +132,7 @@ const AuctionDetails = () => {
 
           {/* 상품 설명 */}
           <div className='px-4 mb-4 overflow-y-auto text-sm text-gray-700'>
-            <p>{auctionDetails.description}</p>
+            <p>{auctionDetails?.description || ''}</p>
           </div>
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
@@ -140,17 +140,17 @@ const AuctionDetails = () => {
           {auctionDetails && auctionDetails.isSeller ? (
             <SellersFooter
               auctionId={auctionId}
-              isSeller={auctionDetails.isSeller}
-              status={auctionDetails.status}
+              isSeller={auctionDetails?.isSeller || false}
+              status={auctionDetails?.status || ''}
             />
           ) : (
             <BuyersFooter
               auctionId={auctionId}
-              bidId={auctionDetails.bidId ?? 0}
-              isSeller={auctionDetails.isSeller ?? false}
-              status={auctionDetails.status ?? ''}
-              isParticipated={auctionDetails.isParticipated ?? false}
-              remainingBidCount={auctionDetails.remainingBidCount ?? 0}
+              bidId={auctionDetails?.bidId ?? 0}
+              isSeller={auctionDetails?.isSeller ?? false}
+              status={auctionDetails?.status ?? ''}
+              isParticipated={auctionDetails?.isParticipated ?? false}
+              remainingBidCount={auctionDetails?.remainingBidCount ?? 0}
             />
           )}
         </Layout.Footer>

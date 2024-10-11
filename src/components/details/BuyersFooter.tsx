@@ -6,7 +6,7 @@ import { useLikeAuctionItem, useCancelBid } from '@/components/details/queries';
 
 interface BuyersFooterProps {
   auctionId: number;
-  bidId: number;
+  bidId?: number;
   isSeller: boolean;
   status: string;
   likeCount?: number;
@@ -16,7 +16,7 @@ interface BuyersFooterProps {
 
 const BuyersFooter = ({
   auctionId,
-  bidId,
+  bidId = 0,
   isSeller,
   status,
   likeCount = 0,

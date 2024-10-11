@@ -12,11 +12,12 @@ import BuyersFooter from '@/components/details/BuyersFooter';
 import ConfirmationModal from '@/components/details/ConfirmationModal';
 import SuccessModal from '@/components/details/SuccessModal';
 import { useGetPreAuctionDetails } from '@/components/details/queries';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const PreAuction = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  if (!preAuctionDetails) return;
+  if (!preAuctionDetails) return null;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
@@ -30,11 +31,6 @@ const PreAuction = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  };
-
-  // 세자리 단위로 콤마를 찍어주는 함수
-  const numberWithCommas = (x: number) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
   // 삭제 버튼 클릭 핸들러
@@ -61,7 +57,7 @@ const PreAuction = () => {
       setIsDeleteConfirmOpen(false);
       setIsDeleteSuccessOpen(true);
     } catch (error) {
-      alert('삭제하는 중 오류가 발생했습니다.');
+      console.error('삭제하는 중 오류가 발생했습니다.');
     }
   };
 
@@ -108,7 +104,7 @@ const PreAuction = () => {
                     </span>
                     시작가
                     <span className='font-bold p'>
-                      {numberWithCommas(preAuctionDetails.minPrice)}원
+                      {formatCurrencyWithWon(preAuctionDetails.minPrice)}원
                     </span>
                   </span>
                 </p>
