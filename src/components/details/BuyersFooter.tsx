@@ -121,9 +121,9 @@ const BuyersFooter = ({
         <button className='px-4 py-2 text-gray-600 border border-gray-400 rounded-lg'>
           참여 취소
         </button>
-        <button className='px-4 py-2 text-white bg-gray-400 rounded-lg cursor-not-allowed'>
+        <Button type='button' className='px-4 py-2 text-gray-600disabled:'>
           금액 수정(소진)
-        </button>
+        </Button>
       </div>
     );
   }
