@@ -10,6 +10,7 @@ import Price from '@/assets/icons/price.svg';
 import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
 import { useGetAuctionDetails } from '@/components/details/queries';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
@@ -32,11 +33,6 @@ const AuctionDetails = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  };
-
-  // 세자리 단위로 콤마를 찍어주는 함수
-  const numberWithCommas = (x: number) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
   return (
@@ -94,7 +90,7 @@ const AuctionDetails = () => {
                     </span>
                     시작가
                     <span className='font-bold p'>
-                      {numberWithCommas(Number(auctionDetails.minPrice))}원
+                      {formatCurrencyWithWon(auctionDetails.minPrice)}원
                     </span>
                   </span>
                 </p>
@@ -110,7 +106,7 @@ const AuctionDetails = () => {
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
                     {auctionDetails.isParticipated
-                      ? `${numberWithCommas(Number(auctionDetails.bidAmount))}원`
+                      ? `${formatCurrencyWithWon(auctionDetails.bidAmount)}원`
                       : '참여 전'}
                   </p>
                 </div>
