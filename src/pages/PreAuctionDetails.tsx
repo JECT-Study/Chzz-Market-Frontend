@@ -1,17 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { useState } from 'react';
-
 import Layout from '@/components/layout/Layout';
-import { useNavigate, LoaderFunction, useLoaderData } from 'react-router-dom';
+import { useNavigate, useLoaderData, LoaderFunction } from 'react-router-dom';
 import Price from '@/assets/icons/price.svg';
-import axios from 'axios';
-
-// 필요한 컴포넌트 임포트
+import {
+  useDeletePreAuction,
+  useGetPreAuctionDetails,
+} from '@/components/details/queries';
 import SellersFooter from '@/components/details/SellersFooter';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import ConfirmationModal from '@/components/details/ConfirmationModal';
 import SuccessModal from '@/components/details/SuccessModal';
-import { useGetPreAuctionDetails } from '@/components/details/queries';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const PreAuction = () => {
@@ -24,16 +23,12 @@ const PreAuction = () => {
   const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { mutate: deletePreAuction } = useDeletePreAuction(); // Use the custom hook
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  // 삭제 버튼 클릭 핸들러
+  // Delete button click handler
   const onDeleteButtonClickHandler = () => {
     setIsDeleteConfirmOpen(true);
     closeMenu();
@@ -43,25 +38,20 @@ const PreAuction = () => {
     navigate(`/auctions/pre-auction/edit/${preAuctionDetails.productId}`);
   };
 
-  // 삭제 확인 다이얼로그에서 '삭제' 버튼 클릭 핸들러
-  const handleConfirmDelete = async () => {
-    try {
-      await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/v1/products/${preAuctionId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        }
-      );
-      setIsDeleteConfirmOpen(false);
-      setIsDeleteSuccessOpen(true);
-    } catch (error) {
-      console.error('삭제하는 중 오류가 발생했습니다.');
-    }
+  // Confirm delete handler
+  const handleConfirmDelete = () => {
+    deletePreAuction(preAuctionId, {
+      onSuccess: () => {
+        setIsDeleteConfirmOpen(false);
+        setIsDeleteSuccessOpen(true);
+      },
+      onError: (error) => {
+        console.error('Failed to delete pre-auction:', error);
+      },
+    });
   };
 
-  // 삭제 성공 메시지에서 '닫기' 버튼 클릭 핸들러
+  // Success modal close handler
   const handleCloseSuccessModal = () => {
     setIsDeleteSuccessOpen(false);
     navigate('/');
@@ -74,10 +64,8 @@ const PreAuction = () => {
         handleModal={toggleMenu}
         isDisableMenuButton={!preAuctionDetails.isSeller}
       />
-      {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
         <Layout.Main>
-          {/* 상품 이미지 영역 */}
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
               <img
@@ -87,10 +75,7 @@ const PreAuction = () => {
               />
             </div>
           </div>
-
-          {/* 경매 정보 영역 */}
           <div className='px-4 my-4'>
-            {/* 경매 아이템 제목 & 시작가 */}
             {preAuctionDetails && (
               <div className='mb-4'>
                 <p className='mb-1 text-lg font-bold'>
@@ -111,15 +96,12 @@ const PreAuction = () => {
               </div>
             )}
           </div>
-
-          {/* 상품 설명 */}
           <div className='px-4 mb-4 overflow-y-auto text-sm text-gray-700'>
             <p>{preAuctionDetails?.description}</p>
           </div>
         </Layout.Main>
-        {/* 화면 하단에 고정된 Footer */}
         <Layout.Footer type='double'>
-          {preAuctionDetails && preAuctionDetails.isSeller ? (
+          {preAuctionDetails.isSeller ? (
             <SellersFooter
               likeCount={preAuctionDetails.likeCount}
               isSeller={preAuctionDetails.isSeller}
@@ -136,14 +118,12 @@ const PreAuction = () => {
             />
           )}
         </Layout.Footer>
-        {/* 백드롭 */}
         {isMenuOpen && (
           <>
             <div
               className='absolute inset-0 z-40 bg-black bg-opacity-50'
               onClick={closeMenu}
             />
-            {/* 메뉴 (아코디언) */}
             <div className='absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50'>
               <button
                 className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'
@@ -161,7 +141,6 @@ const PreAuction = () => {
           </>
         )}
       </div>
-      {/* 삭제 확인 다이얼로그 */}
       {isDeleteConfirmOpen && (
         <ConfirmationModal
           message='정말 삭제하시겠습니까?'
@@ -169,7 +148,6 @@ const PreAuction = () => {
           onCancel={() => setIsDeleteConfirmOpen(false)}
         />
       )}
-      {/* 삭제 성공 메시지 */}
       {isDeleteSuccessOpen && (
         <SuccessModal
           message='아이템이 삭제되었습니다.'

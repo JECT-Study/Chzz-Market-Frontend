@@ -130,3 +130,30 @@ export const useGetPreAuctionDetails = (preAuctionId: number) => {
     preAuctionDetails,
   };
 };
+
+export const useDeletePreAuction = (): {
+  mutate: UseMutateFunction<any, Error, number, unknown>;
+} => {
+  const queryClient = useQueryClient();
+
+  const deletePreAuction = async (preAuctionId: number) => {
+    const response = await httpClient.delete(
+      `${API_END_POINT.PRE_AUCTION}/${preAuctionId}`,
+    );
+    return response.data;
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: deletePreAuction,
+    onSuccess: (_, preAuctionId) => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.AUCTION_LOST],
+      });
+    },
+  });
+
+  return { mutate };
+};
