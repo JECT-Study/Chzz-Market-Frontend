@@ -92,7 +92,7 @@ const Register = () => {
       category,
       description,
       minPrice: convertCurrencyToNumber(minPrice),
-      ...(preAuctionId ? { imageSequence } : { auctionRegisterType: caution }),
+      ...(preAuctionId ? { imageSequence: Object.fromEntries(imageSequence) } : { auctionRegisterType: caution }),
     };
 
     formData.append(
