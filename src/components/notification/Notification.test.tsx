@@ -1,10 +1,10 @@
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
 
+import { notificationData } from '@/mocks/data/notificationData';
 import Notification from '@/pages/Notification';
 import { mockedUseNavigate } from '@/setupTests';
-import { notificationData } from '@/mocks/data/notificationData';
 import userEvent from '@testing-library/user-event';
 import LayoutWithNav from '../layout/LayoutWithNav';
 import {

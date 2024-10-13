@@ -4,15 +4,17 @@ import { getTimeAgo } from '@/utils/getTimeAgo';
 import type { INotification } from 'Notification';
 import { useNavigate } from 'react-router-dom';
 
+interface INotificationItem {
+  item: INotification;
+  handleDelete: (id: number) => void;
+  handleRead: (id: number) => void;
+}
+
 const NotificationItem = ({
   item,
   handleDelete,
   handleRead,
-}: {
-  item: INotification;
-  handleDelete: (id: number) => void;
-  handleRead: (id: number) => void;
-}) => {
+}: INotificationItem) => {
   const navigate = useNavigate();
   const { notificationId, isRead, imageUrl, message, createdAt, type, auctionId } = item;
   const time = getTimeAgo(createdAt);
