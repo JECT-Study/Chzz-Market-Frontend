@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
 import classNames from 'classnames';
-import ButtonSpinner from './loadingAndError/ButtonSpinner';
+import { ReactNode } from 'react';
+import ButtonSpinner from './loading/ButtonSpinner';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
