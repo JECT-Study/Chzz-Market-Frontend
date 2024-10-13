@@ -18,7 +18,7 @@ const HomeItem = <T extends 'preAuction' | 'auction'>({ kind, item }: HomeItemPr
   const navigate = useNavigate();
   const { minPrice, productName, imageUrl } = item
   const handleClick = () => navigate(
-    kind === 'auction'
+    kind !== 'preAuction'
       ? `${ROUTERS.AUCTION.ITEM}/${(item as IAuctionItem).auctionId}`
       : `${ROUTERS.PRE_AUCTION.ITEM}/${(item as IPreAuctionItem).productId}`
   );
@@ -29,7 +29,7 @@ const HomeItem = <T extends 'preAuction' | 'auction'>({ kind, item }: HomeItemPr
       <figure className='flex flex-col gap-2 border rounded cursor-pointer text-body2' aria-label={kind} onClick={handleClick}>
         <div className='relative'>
           <img src={imageUrl} alt={`${kind}_이미지`} className='object-cover w-full h-[10rem] rounded-t' />
-          {kind === 'auction' && <TimeLabel time={(item as IAuctionItem).timeRemaining} />}
+          {kind !== 'preAuction' && <TimeLabel time={(item as IAuctionItem).timeRemaining} />}
         </div>
         <figcaption className='flex flex-col gap-2 p-2'>
           <div aria-label={`${kind}_이름`} className='text-gray1'>
@@ -37,7 +37,7 @@ const HomeItem = <T extends 'preAuction' | 'auction'>({ kind, item }: HomeItemPr
           </div>
           <div>
             <MinPrice price={minPrice} />
-            {kind === 'auction'
+            {kind !== 'preAuction'
               ? <ParticipantCount count={(item as IAuctionItem).participantCount} />
               : <LikeCount count={(item as IPreAuctionItem).likeCount} />}
           </div>
