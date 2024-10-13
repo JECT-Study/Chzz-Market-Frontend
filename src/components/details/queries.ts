@@ -1,13 +1,13 @@
-import { IAuctionDetails, IPreAuctionDetails } from 'AuctionDetails';
-import { API_END_POINT } from '@/constants/api';
-import { httpClient } from '@/api/axios';
-import { queryKeys } from '@/constants/queryKeys';
+import { IAuctionDetails, IPreAuctionDetails } from "AuctionDetails";
+import { API_END_POINT } from "@/constants/api";
+import { httpClient } from "@/api/axios";
+import { queryKeys } from "@/constants/queryKeys";
 import {
   UseMutateFunction,
   useMutation,
   useQueryClient,
   useSuspenseQuery,
-} from '@tanstack/react-query';
+} from "@tanstack/react-query";
 
 export const useConvertToAuction = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;
@@ -18,13 +18,7 @@ export const useConvertToAuction = (): {
     mutationFn: async (productId: number) => {
       const response = await httpClient.post(
         `${API_END_POINT.AUCTIONS}/start`,
-        { productId }, // 객체를 직접 전달
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        }
+        productId,
       );
       return response.data;
     },
@@ -46,7 +40,7 @@ export const useLikeAuctionItem = (): {
 } => {
   const likeAuctionItem = async (auctionId: number) => {
     const response = await httpClient.post(
-      `${API_END_POINT.PRE_AUCTION}/${auctionId}/likes`
+      `${API_END_POINT.PRE_AUCTION}/${auctionId}/likes`,
     );
     return response.data;
   };
@@ -71,7 +65,7 @@ export const useCancelBid = (): {
 
   const cancelBid = async (bidId: number) => {
     const response = await httpClient.patch(
-      `${API_END_POINT.BID}/${bidId}/cancel`
+      `${API_END_POINT.BID}/${bidId}/cancel`,
     );
     return response.data;
   };
@@ -94,7 +88,7 @@ export const useCancelBid = (): {
 export const useGetAuctionDetails = (auctionId: number) => {
   const getAuctionDetails = async (): Promise<IAuctionDetails> => {
     const response = await httpClient.get(
-      `${API_END_POINT.AUCTIONS}/${auctionId}`
+      `${API_END_POINT.AUCTIONS}/${auctionId}`,
     );
 
     return response.data;
@@ -115,7 +109,7 @@ export const useGetPreAuctionDetails = (preAuctionId: number) => {
 
   const getPreAuctionDetails = async (): Promise<IPreAuctionDetails> => {
     const response = await httpClient.get(
-      `${API_END_POINT.PRE_AUCTION}/${preAuctionId}`
+      `${API_END_POINT.PRE_AUCTION}/${preAuctionId}`,
     );
 
     return response.data;
