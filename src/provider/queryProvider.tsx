@@ -1,9 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { getErrorByCode } from '@/components/common/error/ErrorCode';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { toast } from 'sonner';
-import { useState } from 'react';
 import { AxiosError } from 'axios';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 interface ReactQueryProviderProps {
   children: React.ReactNode;
@@ -23,10 +24,9 @@ const ReactQueryProvider = ({ showDevTools = false, children }: ReactQueryProvid
         mutations: {
           throwOnError: false,
           onError: (error) => {
-            if (error instanceof AxiosError && error.response) {
-              toast.error(error.response.data.message);
-            } else {
-              toast.error('예기치 못한 에러 발생');
+            if (error instanceof AxiosError) {
+              const { message: { title } } = getErrorByCode(error)
+              toast.error(title);
             }
           },
         },
