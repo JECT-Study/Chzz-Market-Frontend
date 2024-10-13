@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import ParticipantCount from '../atomic/ParticipantCount';
 import LikeCount from '../atomic/LikeCount';
 import MinPrice from '../atomic/MinPrice';
+import ParticipantCount from '../atomic/ParticipantCount';
 import TimeLabel from '../atomic/TimeLabel';
 
 interface AuctionItemProps {
@@ -22,8 +22,8 @@ const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
 
 const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
   return (
-    <div className='relative border rounded'>
-      <img src={src} alt='이미지' className='object-cover w-full h-[12rem] rounded' />
+    <div className='relative border rounded basis-1/2'>
+      <img src={src} alt='이미지' className='object-cover rounded' />
       {time && <TimeLabel time={time} />}
     </div>
   );
