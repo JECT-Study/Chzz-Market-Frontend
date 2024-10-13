@@ -86,7 +86,7 @@ const PreAuction = () => {
                       <img src={Price} alt='Price' />
                     </span>
                     시작가
-                    <span className='font-bold p'>
+                    <span className='font-bold'>
                       {formatCurrencyWithWon(preAuctionDetails.minPrice)}원
                     </span>
                   </span>
