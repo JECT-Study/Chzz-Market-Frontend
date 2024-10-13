@@ -77,8 +77,7 @@ const PreAuction = () => {
             {preAuctionDetails && (
               <div className='mb-4'>
                 <p className='mb-1 text-lg font-bold'>
-                  {preAuctionDetails.productName ||
-                    '[ERROR] 이름이 등록되지 않았어요!'}
+                  {preAuctionDetails.productName}
                 </p>
                 <p className='text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
