@@ -1,8 +1,8 @@
 import { useDeleteNotification, useGetNotifications, useReadNotification } from '@/components/notification/queries';
 
-import EmptyBoundary from '@/components/common/EmptyBoundary';
-import type { INotification } from 'Notification';
+import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import NotificationItem from '@/components/notification/NotificationItem';
+import type { INotification } from 'Notification';
 
 const Notification = () => {
   const { notifications } = useGetNotifications();
@@ -13,7 +13,7 @@ const Notification = () => {
   const clickRead = (id: number) => readNotification(id);
 
   return (
-    <EmptyBoundary dataLength={notifications.length} type='알림'>
+    <EmptyBoundary length={notifications.length} name='notification'>
       <div className='mx-[-32px] my-[-16px]'>
         {notifications.map((item: INotification) => (
           <NotificationItem key={item.notificationId} item={item} handleDelete={clickDelete} handleRead={clickRead} />

@@ -1,7 +1,7 @@
 import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from '@/components/heart/queries';
 
 import Button from '@/components/common/Button';
-import EmptyBoundary from '@/components/common/EmptyBoundary';
+import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import AuctionItem from '@/components/common/item/AuctionItem';
 import type { IPreAuctionItem } from 'AuctionItem';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ const Heart = () => {
   const handleDelete = (id: number) => mutate(id);
 
   return (
-    <EmptyBoundary dataLength={preAuctionHeartList.length} type='좋아요'>
+    <EmptyBoundary length={preAuctionHeartList.length} name='heart'>
       <ul className='grid items-center justify-center grid-cols-2 gap-4'>
         {preAuctionHeartList.map((el: IPreAuctionItem) => (
           <li key={el.productId} onClick={() => navigate(`/auctions/pre-auction/${el.productId}`)} className='cursor-pointer'>
