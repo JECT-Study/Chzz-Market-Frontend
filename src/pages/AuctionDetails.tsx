@@ -14,7 +14,10 @@ import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
-  const { auctionDetails } = useGetAuctionDetails(auctionId) || {};
+  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  if (!auctionDetails) {
+    throw new Error('해당 물품을 찾을 수 없습니다.');
+  }
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
   const [isPreAuction, _setIsPreAuction] = useState(false);
@@ -89,7 +92,7 @@ const AuctionDetails = () => {
                       <img src={Price} alt='Price' />
                     </span>
                     시작가
-                    <span className='font-bold p'>
+                    <span className='font-bold'>
                       {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}원
                     </span>
                   </span>

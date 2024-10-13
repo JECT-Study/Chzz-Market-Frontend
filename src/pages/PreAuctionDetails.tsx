@@ -16,14 +16,16 @@ import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 const PreAuction = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  if (!preAuctionDetails) return null;
+  if (!preAuctionDetails) {
+    throw new Error('해당 사전 경매 정보를 찾을 수 없습니다.');
+  }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);
 
   const navigate = useNavigate();
-  const { mutate: deletePreAuction } = useDeletePreAuction(); // Use the custom hook
+  const { mutate: deletePreAuction } = useDeletePreAuction();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -38,15 +40,11 @@ const PreAuction = () => {
     navigate(`/auctions/pre-auction/edit/${preAuctionDetails.productId}`);
   };
 
-  // Confirm delete handler
   const handleConfirmDelete = () => {
     deletePreAuction(preAuctionId, {
       onSuccess: () => {
         setIsDeleteConfirmOpen(false);
         setIsDeleteSuccessOpen(true);
-      },
-      onError: (error) => {
-        console.error('Failed to delete pre-auction:', error);
       },
     });
   };
