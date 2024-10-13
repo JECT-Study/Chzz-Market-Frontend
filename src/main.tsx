@@ -8,10 +8,13 @@ import App from './App';
 import ReactQueryProvider from './provider/queryProvider';
 import { storeLogin } from './store/authSlice';
 
+export const serverAPI = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
+
 async function enableMocking(): Promise<void> {
   if (import.meta.env.MODE !== 'development') {
     return;
   }
+
   const { worker } = await import('./mocks/browser');
   await worker.start({
     onUnhandledRequest: (req) => {
