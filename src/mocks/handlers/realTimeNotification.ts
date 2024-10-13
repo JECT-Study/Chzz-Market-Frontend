@@ -1,12 +1,13 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
 import { API_END_POINT } from '@/constants/api';
+import { serverAPI } from '@/main';
 import { realTimeNotificationData } from '../data/realTimeNotificationData';
 
 // 문자열을 UTF-8 형식으로 인코딩하는 객체
 const encoder = new TextEncoder();
 
-export const realTimeNotificationsHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}${API_END_POINT.REALTIME_NOTIFICATIONS}`, () => {
+export const realTimeNotificationsHandler: HttpHandler = http.get(serverAPI(API_END_POINT.REALTIME_NOTIFICATIONS), () => {
   const stream = new ReadableStream({
     start(controller) {
       realTimeNotificationData.forEach((message, idx) => {
