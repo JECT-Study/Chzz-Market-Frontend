@@ -6,11 +6,11 @@ const MinPrice = ({ price }: { price: number }) => {
   return (
     <div
       aria-label="시작가"
-      className="flex items-center text-body2 text-gray2"
+      className="flex items-center text-xs sm:text-body2 text-gray2"
     >
       <img src={PriceIcon} alt="시작가" />
-      <span className='whitespace-nowrap'>
-        시작가 <span className="text-black text-body2Bold">{formatted}</span>
+      <span className='overflow-hidden whitespace-nowrap'>
+        시작가 <span className="text-xs text-black sm:text-body2Bold">{formatted}</span>
       </span>
     </div>
   );
