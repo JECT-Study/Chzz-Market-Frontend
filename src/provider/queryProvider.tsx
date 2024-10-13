@@ -25,7 +25,7 @@ const ReactQueryProvider = ({ showDevTools = false, children }: ReactQueryProvid
           throwOnError: false,
           onError: (error) => {
             if (error instanceof AxiosError) {
-              const { message: { title } } = getErrorByCode(error)
+              const { title } = getErrorByCode(error)
               toast.error(title);
             }
           },
