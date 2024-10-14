@@ -8,7 +8,7 @@ const ROUTERS = Object.freeze({
 
   SIGNUP: '/signup',
   LOGIN: '/login',
-  PROFILE_EDIT: 'user/profile/edit',
+  PROFILE_EDIT: '/user/profile/edit',
   PRODUCT_LIST: '/product/list',
   REGISTER: '/auctions/register',
   AUCTION: {

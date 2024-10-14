@@ -1,7 +1,7 @@
 import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from 'AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import EmptyBoundary from '@/components/common/EmptyBoundary';
+import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import OrderHistoryProduct from '@/components/order/OrderHistoryProduct';
 import OrderListTab from '@/components/order/OrderListTab';
 import OrderLostProduct from '@/components/order/OrderLostProduct';
@@ -85,7 +85,7 @@ const UserParticipatedList = () => {
     <div className='mx-[-32px] my-[-4px] h-full'>
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'AuctionHistory' &&
-        <EmptyBoundary dataLength={historyItems.length} type='유저 참여 경매'>
+        <EmptyBoundary length={historyItems.length} name='participated'>
           <div className='grid gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
             {
               historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)
@@ -94,14 +94,14 @@ const UserParticipatedList = () => {
         </EmptyBoundary>
       }
       {activeTab === 'AuctionsWon' &&
-        <EmptyBoundary dataLength={wonItems.length} type='유저 성공 경매'>
+        <EmptyBoundary length={wonItems.length} name='won'>
           <div className='grid gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
             {wonItems.map((product: IUserAuctionWonItem) => <OrderWonProduct key={product.auctionId} product={product} />)}
           </div>
         </EmptyBoundary>
       }
       {activeTab === 'AuctionsLost' &&
-        <EmptyBoundary dataLength={lostItems.length} type='유저 실패 경매'>
+        <EmptyBoundary length={lostItems.length} name='lost'>
           <div className='grid gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
             {lostItems.map((product: IUserAuctionLostItem) => <OrderLostProduct key={product.auctionId} product={product} />)}
           </div>

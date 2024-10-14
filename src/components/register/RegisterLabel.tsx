@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import ErrorMessage from '../common/loadingAndError/ErrorMessage';
+import ErrorMessage from '../common/error/ErrorMessage';
 
 const RegisterLabel = ({ label, children, error }: { label: string; children: ReactNode; error?: string }) => {
   return (

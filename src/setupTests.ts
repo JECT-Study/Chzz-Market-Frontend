@@ -12,13 +12,48 @@ export const mockedUseNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
   // importActual은 실제 모듈의 원래 구현을 가져오는 기능을 한다.
   // 일부 기능은 실제 동작을 그대로 유지하면서 useNavigate만 모킹하려는 경우에 유용하다.
-  const mod =
-    await vi.importActual<typeof import('react-router-dom')>(
-      'react-router-dom',
-    );
+  const mod = await vi.importActual<typeof import('react-router-dom')>('react-router-dom');
   return {
     ...mod,
     // useNavigate 훅이 호출될 때마다 mockedUseNavigate 라는 모의 함수가 호출된다.
     useNavigate: () => mockedUseNavigate,
   };
 });
+
+function mockWindowProperty(property: string, implementation: any) {
+  Object.defineProperty(window, property, {
+    writable: true,
+    value: vi.fn().mockImplementation(implementation),
+  });
+}
+
+// ResizeObserver 모킹
+mockWindowProperty('ResizeObserver', () => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
+// matchMedia 모킹
+let matchingMediaQueries: string[] = [];
+
+mockWindowProperty('matchMedia', (query: string) => ({
+  matches: matchingMediaQueries.includes(query),
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
+}));
+
+export function setMatchingMediaQuery(queries: string | string[]): void {
+  matchingMediaQueries = Array.isArray(queries) ? queries : [queries];
+}
+
+export function resetMatchingMediaQuery(): void {
+  matchingMediaQueries = [];
+}
+
+// IntersectionObserver 모킹
+mockWindowProperty('IntersectionObserver', () => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));

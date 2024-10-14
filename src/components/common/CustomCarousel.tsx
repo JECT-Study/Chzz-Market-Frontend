@@ -15,8 +15,8 @@ const CustomCarousel = ({ contentStyle, length, children }: { contentStyle?: str
       <CarouselContent className={`flex items-center h-full ${contentStyle}`}>{children}</CarouselContent>
       {length > 1 && (
         <>
-          <CarouselPrevious className='z-50 ml-14' />
-          <CarouselNext className='z-50 mr-14' />
+          <CarouselPrevious type='button' className='ml-14' />
+          <CarouselNext type='button' className='mr-14' />
         </>
       )}
     </Carousel>
