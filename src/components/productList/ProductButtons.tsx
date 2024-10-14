@@ -23,6 +23,19 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
     <div className="flex h-22px space-x-3 p-4">
       <Button
         size={buttonSize}
+        color={classNames(activeFilter === 'newest' ? 'black' : 'white')}
+        hoverColor="black"
+        type="button"
+        className="rounded-full"
+        onClick={() => {
+          setSortType('newest');
+          setActiveFilter('newest');
+        }}
+      >
+        최신순
+      </Button>
+      <Button
+        size={buttonSize}
         color={classNames(activeFilter === 'popularity' ? 'black' : 'white')}
         hoverColor="black"
         type="button"
@@ -59,19 +72,6 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
         }}
       >
         낮은 가격순
-      </Button>
-      <Button
-        size={buttonSize}
-        color={classNames(activeFilter === 'newest' ? 'black' : 'white')}
-        hoverColor="black"
-        type="button"
-        className="rounded-full"
-        onClick={() => {
-          setSortType('newest');
-          setActiveFilter('newest');
-        }}
-      >
-        최신순
       </Button>
     </div>
   );

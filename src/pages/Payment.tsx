@@ -1,11 +1,11 @@
-import PaymentForm from '@/components/payment/PaymentForm';
+// import PaymentForm from '@/components/payment/PaymentForm';
 
-const Payment = () => {
-  return (
-    <div>
-      <PaymentForm />
-    </div>
-  );
-};
+// const Payment = () => {
+//   return (
+//     <div>
+//       <PaymentForm />
+//     </div>
+//   );
+// };
 
-export default Payment;
+// export default Payment;

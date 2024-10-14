@@ -5,9 +5,9 @@
 // import { loadTossPayments } from '@tosspayments/tosspayments-sdk';
 // import { toast } from 'sonner';
 
-const PaymentForm: React.FC = () => {
-  return <></>;
-};
+// const PaymentForm: React.FC = () => {
+//   return <></>;
+// };
 //   const [amount, setAmount] = useState<number>(0);
 //   const [orderId, setOrderId] = useState<string>('');
 //   const [orderName, setOrderName] = useState<string>('');
@@ -89,4 +89,4 @@ const PaymentForm: React.FC = () => {
 //   });
 // };
 
-export default PaymentForm;
+// export default PaymentForm;
