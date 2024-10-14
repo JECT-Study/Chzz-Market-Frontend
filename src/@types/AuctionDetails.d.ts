@@ -21,7 +21,7 @@ declare module 'AuctionDetails' {
   }
 
   export interface IPreAuctionDetails extends IAuctionDetailsBase {
-    createdAt: string;
+    updatedAt: string;
     likeCount: number;
     isLiked: boolean;
     images: {
