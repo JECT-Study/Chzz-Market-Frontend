@@ -11,6 +11,8 @@ import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
 import { useGetAuctionDetails } from '@/components/details/queries';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import ImageList from '@/components/details/ImageList';
+import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
@@ -51,13 +53,13 @@ const AuctionDetails = () => {
         <Layout.Main>
           {/* 상품 이미지 영역 */}
           <div className='relative w-full'>
-            <div className='w-full mb-2'>
-              <img
-                src={auctionDetails?.imageUrls?.[0] || ''}
-                alt={auctionDetails?.productName || ''}
-                className='object-cover w-full h-auto'
+            <LocalAPIAsyncBoundary height={250}>
+              <ImageList
+                images={auctionDetails.imageUrls}
+                productName={auctionDetails.productName}
+                productId={auctionDetails.productId}
               />
-            </div>
+            </LocalAPIAsyncBoundary>
             {/* 타이머 및 프로그레스 바 */}
             {auctionDetails && (
               <div
