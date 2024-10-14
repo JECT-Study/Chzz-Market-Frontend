@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
@@ -8,23 +8,50 @@ import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import { ChevronDown } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
+import { useQuery } from '@tanstack/react-query';
+import { queryKeys } from '@/constants/queryKeys';
+import { nicknameCheck } from '@/components/login/queries';
 
 const Signup = () => {
   const [selectBank, setSelectBank] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const {
     control,
     setValue,
     watch,
-    formState: { errors },
+    formState: { errors, isValid },
     activeButtonSheet,
     setActiveButtonSheet,
     onCloseBottomSheet,
     onSubmit,
     setError,
   } = useSignup();
+
+  const nickname = watch('nickname');
+  const accountNumber = watch('accountNumber');
+
+
+  const { refetch: checkNickname } = useQuery({
+    queryKey: [queryKeys.NICKNAME, nickname],
+    queryFn: () => nicknameCheck(nickname),
+    enabled: false,
+  });
+
+  const onNicknameCheck = async () => {
+    const { data } = await checkNickname();
+    const { isAvailable } = data;
+    setIsNicknameChecked(isAvailable);
+    
+    if (isAvailable === true) {
+      // 사용 가능한 닉네임입니다. 띄워주기
+      alert('사용 가능')
+    } else {
+      // 이미 사용중인 닉네임입니다. 띄워주기
+      alert('이미 사용 중')
+    }
+  };
 
   const handleSelectBank = (bank: string) => {
     setValue('bankName', bank);
@@ -33,12 +60,14 @@ const Signup = () => {
   };
 
   const handleSubmitClick = () => {
-    const accountNumber = watch('accountNumber');
-
-    if (accountNumber.length < 10 || accountNumber.length > 15) {
+    if (!accountNumber || accountNumber.length < 10 || accountNumber.length > 15) {
       setError('accountNumber', {
         message: '10~15자리 숫자로 입력해주세요.',
       });
+      return;
+    }
+    if (!isNicknameChecked) {
+      alert('닉네임 중복 확인 해주세요.');
       return;
     }
 
@@ -48,15 +77,6 @@ const Signup = () => {
       );
     }
   };
-
-
-  const nickname = watch('nickname');
-  const Selectbank = watch('bankName');
-  const accountNumber = watch('accountNumber');
-
-  useEffect(() => {
-    setIsFormValid(!!(nickname && Selectbank && accountNumber));
-  }, [nickname, Selectbank, accountNumber]);
 
   return (
     <Layout>
@@ -68,21 +88,27 @@ const Signup = () => {
           className="flex flex-col px-2 py-4 space-y-4"
         >
           <h2 className="pb-4 text-lg font-bold">기본 정보 입력</h2>
-          <FormField
-            label="닉네임 *"
-            name="nickname"
-            control={control}
-            error={errors.nickname?.message}
-            render={(field) => (
-              <Input
-                id="닉네임 *"
-                type="text"
-                placeholder="닉네임을 입력해주세요 (공백 제외 15글자 이내)"
-                className="focus-visible:ring-cheeseYellow"
-                {...field}
+          <div className='flex items-end gap-4'>
+            <div className='flex-1 w-4/5'>
+              <FormField
+                label="닉네임 *"
+                name="nickname"
+                control={control}
+                render={(field) => (
+                  <Input
+                    id="닉네임 *"
+                    type="text"
+                    placeholder="닉네임을 입력해주세요 (공백 제외 15글자 이내)"
+                    className="focus-visible:ring-cheeseYellow"
+                    {...field}
+                  />
+                )}
               />
-            )}
-          />
+            </div>
+            <div>
+              <Button type='button' className='h-10' onClick={onNicknameCheck}>중복확인</Button>
+            </div>
+          </div>
           <div
             className="relative"
             onClick={() => setActiveButtonSheet(!activeButtonSheet)}
@@ -163,7 +189,7 @@ const Signup = () => {
         <Button
           type="submit"
           className="w-full h-[47px] rounded-lg"
-          color={isFormValid ? 'cheeseYellow' : 'gray2'}
+          color={isValid && isNicknameChecked ? 'cheeseYellow' : 'gray2'}
           onClick={handleSubmitClick}
         >
           회원 가입 완료

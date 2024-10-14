@@ -5,5 +5,6 @@ declare module 'Register' {
     minPrice: number;
     auctionRegisterType?: string;
     category: string;
+    imageSequence?: { [k: string]: number };
   }
 }

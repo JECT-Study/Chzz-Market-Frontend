@@ -20,6 +20,9 @@ module.exports = {
       },
     },
     extend: {
+      backgroundColor: {
+        error: '#f5f5f5'
+      },
       screens: {
         sm: '500px',
         lg: '750px',

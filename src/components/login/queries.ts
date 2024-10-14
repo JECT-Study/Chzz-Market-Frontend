@@ -22,9 +22,13 @@ export const postSignup = async (data: User) => {
 };
 
 export const logout = async () => {
-  await httpClient.post(API_END_POINT.LOGOUT, { withCredentials: true });
-
-  removeToken();
+  try {
+    await refreshToken();
+    await httpClient.post(API_END_POINT.LOGOUT, { withCredentials: true });
+    removeToken();
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const refreshToken = async () => {
@@ -42,6 +46,11 @@ export const refreshToken = async () => {
     throw error;
   }
 };
+
+export const nicknameCheck = async (nickname: string) => {
+  const response = await httpClient.get(`${API_END_POINT.NICKNAME_CHECK}/${nickname}`);
+  return response.data;
+}
 
 export const useRefreshTokenOnSuccess = () => {
   const dispatch = useDispatch();

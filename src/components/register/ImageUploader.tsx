@@ -1,31 +1,28 @@
+import DeleteIcon from '@/assets/icons/delete.svg';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 import { useImageUploader } from '@/hooks/useImageUploader';
-import DeleteIcon from '@/assets/icons/delete.svg';
-import { Dispatch, SetStateAction } from 'react';
+import CustomCarousel from '../common/CustomCarousel';
+import { CarouselItem } from '../ui/carousel';
 import { Input } from '../ui/input';
 import AddImageButton from './AddImageButton';
-import { CarouselItem } from '../ui/carousel';
-import CustomCarousel from '../common/CustomCarousel';
 
 interface ImageUploaderProps {
   images: string[];
   setImages: (value: string[]) => void;
-  files: File[];
-  setFiles: Dispatch<SetStateAction<File[]>>;
 }
 
-const ImageUploader = ({ files, setFiles, images, setImages }: ImageUploaderProps) => {
+const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
   const { handleDragStart, handleDragLeave, handleDragOver, handleDrop, hoveredIndex } = useDragAndDrop(images, setImages);
-  const { fileInputRef, deleteImage, handleImage, handleBoxClick } = useImageUploader(images, setImages, files, setFiles);
+  const { fileInputRef, deleteImage, handleImage, handleBoxClick } = useImageUploader(images, setImages);
 
   return (
-    <div className='flex flex-col items-center w-full h-full gap-5 sm:flex-row'>
+    <div className='flex flex-col items-center w-full h-full gap-5 sm:h-32 sm:flex-row'>
       <AddImageButton handleBoxClick={handleBoxClick} length={images.length} />
       <CustomCarousel contentStyle='py-2' length={images.length}>
         {images.map((image: string, index: number) => (
           <CarouselItem className='basis-1/2 md:basis-1/3' key={image}>
             <div
-              className={`relative h-32 mr-3 transition-transform duration-400 min-w-32  ${index === hoveredIndex ? 'transform scale-105' : ''}`}
+              className={`relative h-32 transition-transform duration-400 w-36  ${index === hoveredIndex ? 'transform scale-105' : ''}`}
               draggable
               onDragStart={() => handleDragStart(index)}
               onDragOver={(e) => {

@@ -8,7 +8,7 @@ const ROUTERS = Object.freeze({
 
   SIGNUP: '/signup',
   LOGIN: '/login',
-  PROFILE_EDIT: 'user/profile/edit',
+  PROFILE_EDIT: '/user/profile/edit',
   PRODUCT_LIST: '/product/list',
   REGISTER: '/auctions/register',
   AUCTION: {
@@ -18,7 +18,7 @@ const ROUTERS = Object.freeze({
     ITEM: '/auctions/pre-auction',
     EDIT: '/auctions/pre-auction/edit',
   },
-  ADDRESSBOOK: '/addressbook',
+  ADDRESSBOOK: '/auctions/:auctionId/shipping',
   BID: '/auctions/bid/:auctionId',
   FINAL_BIDDER_LIST: '/auctions/:auctionId/final-bidder-list',
   PAYMENT: '/payment/:auctionId'

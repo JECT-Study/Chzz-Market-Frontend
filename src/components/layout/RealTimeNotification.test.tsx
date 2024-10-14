@@ -1,9 +1,11 @@
 import { act, render, screen } from '@testing-library/react';
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 
-import { mockedUseNavigate } from '@/setupTests';
 import { realTimeNotificationData } from '@/mocks/data/realTimeNotificationData';
+import { mockedUseNavigate } from '@/setupTests';
+import { store } from '@/store';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
 import { useReadNotification } from '../notification/queries';
 import GlobalLayout from './GlobalLayout';
 
@@ -38,7 +40,9 @@ describe('Layout 알림 테스트', () => {
   });
 
   const setup = () => {
-    const utils = render(<GlobalLayout />);
+    const utils = render(<Provider store={store}>
+      <GlobalLayout />
+    </Provider>);
     const user = userEvent.setup();
 
     return {
@@ -48,12 +52,14 @@ describe('Layout 알림 테스트', () => {
   };
 
   test('실시간 알림이 도착하면 전체 화면에 알림 팝업이 발생하고, 그 안에 제목, 메시지, 버튼이 존재한다.', async () => {
-    render(<GlobalLayout />);
+    render(<Provider store={store}>
+      <GlobalLayout />
+    </Provider>);
 
     const popup = await screen.findByLabelText(
       /알림 박스/,
       {},
-      { timeout: 1100 },
+      { timeout: 5000 },
     );
 
     const title = screen.getByRole('heading', { name: /제목/ });

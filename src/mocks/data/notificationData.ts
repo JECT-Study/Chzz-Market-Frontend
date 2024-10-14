@@ -11,7 +11,7 @@ export const notificationData: INotification[] = [
     message: '좋아요를 누른 사전 등록 제품의 경매가 시작되었습니다!',
     createdAt: '2024-09-09T08:57:30.944646',
     isRead: false,
-    imgUrl: JordanBlue,
+    imageUrl: JordanBlue,
     auctionId: 59,
   },
   {
@@ -20,7 +20,7 @@ export const notificationData: INotification[] = [
     message: '경매에 올린 제품이 낙찰되었습니다!',
     createdAt: '2024-09-08T22:57:30.944646',
     isRead: true,
-    imgUrl: NewBalance,
+    imageUrl: NewBalance,
     auctionId: 59,
   },
   {
@@ -29,7 +29,7 @@ export const notificationData: INotification[] = [
     message: '경매에 올린 제품이 유찰되었습니다.',
     createdAt: '2024-09-08T14:57:30.944646',
     isRead: true,
-    imgUrl: JordanRed,
+    imageUrl: JordanRed,
   },
   {
     notificationId: 3,
@@ -37,7 +37,7 @@ export const notificationData: INotification[] = [
     message: '축하합니다! 입찰에 참여한 경매의 낙찰자로 선정되었습니다!',
     createdAt: '2024-09-08T07:57:30.944646',
     isRead: true,
-    imgUrl: Adidas,
+    imageUrl: Adidas,
     auctionId: 59,
   },
   {
@@ -46,7 +46,7 @@ export const notificationData: INotification[] = [
     message: '안타깝지만 입찰에 참여한 경매에 낙찰되지 못했습니다.',
     createdAt: '2024-09-01T22:57:30.944646',
     isRead: true,
-    imgUrl: JordanBlue,
+    imageUrl: JordanBlue,
   },
   {
     notificationId: 5,
@@ -54,6 +54,6 @@ export const notificationData: INotification[] = [
     message: '좋아요를 누른 사전 등록 제품이 판매자에 의해 취소되었습니다.',
     createdAt: '2024-08-24T16:57:30.944646',
     isRead: true,
-    imgUrl: NewBalance,
+    imageUrl: NewBalance,
   },
 ];

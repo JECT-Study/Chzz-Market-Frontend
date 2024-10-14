@@ -1,33 +1,31 @@
+import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
 import Bid, { loader as bidLoader } from './pages/Bid';
 import BidderList, { loader as bidderListLoader } from './pages/BidderList';
+import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import Register, { loader as registerLoader } from './pages/Register';
-
-import AddressBook from './pages/AddressBook';
-import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
-import AuctionDetails, {
-  loader as auctionDetailsLoader,
-} from './pages/AuctionDetails';
+import ROUTERS from '@/constants/route';
+import ProductList from '@/pages/ProductList';
+import { createBrowserRouter } from 'react-router-dom';
+import APIAsyncBoundary from './components/common/boundary/APIAsyncBoundary';
+import GlobalAsyncBoundary from './components/common/boundary/GlobalAsyncBoundary';
+import RouteErrorBoundary from './components/common/boundary/RouteErrorBoundary';
+import PrivateRoute from './components/common/route/PrivateRoute';
+import PublicRoute from './components/common/route/PublicRoute';
 import GlobalLayout from './components/layout/GlobalLayout';
+import LayoutWithNav from './components/layout/LayoutWithNav';
+import AddressBook from './pages/AddressBook';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
-import LayoutWithNav from './components/layout/LayoutWithNav';
 import Login from './pages/Login';
-import NotFound from './components/common/loadingAndError/NotFound';
 import Notification from './pages/Notification';
-import OrderHistory from './pages/UserParticipatedList';
 import Payment from './pages/Payment';
-import PreAuctionDetails, {
-  loader as preAuctionDetailsLoader,
-} from './pages/PreAuctionDetails';
 import PrivateRoute from './components/common/route/PrivateRoute';
 import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
-import PublicRoute from './components/common/route/PublicRoute';
-import ROUTERS from '@/constants/route';
 import Signup from './pages/Signup';
 import User from './pages/User';
+import OrderHistory from './pages/UserParticipatedList';
 import UserRegisteredList from './pages/UserRegisteredList';
-import { createBrowserRouter } from 'react-router-dom';
 
 const layoutWithNavRouteList = [
   {
@@ -103,14 +101,16 @@ const publicRouteList = [
 
 export const router = createBrowserRouter([
   {
-    element: <GlobalLayout />,
-    errorElement: <NotFound />,
+    // Global Boundary
+    element: <GlobalAsyncBoundary>
+      <GlobalLayout />
+    </GlobalAsyncBoundary>,
+    errorElement: <RouteErrorBoundary />,
     children: [
       {
+        // LayoutWithNav Boundary
         element: (
-          <AsyncBoundary>
-            <LayoutWithNav />
-          </AsyncBoundary>
+          <LayoutWithNav />
         ),
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
@@ -121,42 +121,37 @@ export const router = createBrowserRouter([
           ),
         })),
       },
+
       ...privateRouteList.map(({ path, element, loader }) => ({
         path,
         element: (
-          <AsyncBoundary>
-            <PrivateRoute>{element}</PrivateRoute>
-          </AsyncBoundary>
+          <PrivateRoute>{element}</PrivateRoute>
         ),
         ...(loader && { loader }),
       })),
+
       ...publicRouteList.map(({ path, element }) => ({
         path,
         element: <PublicRoute>{element}</PublicRoute>,
       })),
+
       {
         path: ROUTERS.PRODUCT_LIST,
         element: (
-          <AsyncBoundary>
-            <ProductList />
-          </AsyncBoundary>
+          <ProductList />
         ),
       },
       {
         path: `${ROUTERS.AUCTION.ITEM}/:auctionId`,
         element: (
-          <AsyncBoundary>
-            <AuctionDetails />
-          </AsyncBoundary>
+          <AuctionDetails />
         ),
         loader: auctionDetailsLoader,
       },
       {
         path: `${ROUTERS.PRE_AUCTION.ITEM}/:preAuctionId`,
         element: (
-          <AsyncBoundary>
-            <PreAuctionDetails />
-          </AsyncBoundary>
+          <PreAuctionDetails />
         ),
         loader: preAuctionDetailsLoader,
       },

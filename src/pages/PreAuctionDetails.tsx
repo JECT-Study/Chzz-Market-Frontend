@@ -10,6 +10,7 @@ import {
 import SellersFooter from '@/components/details/SellersFooter';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import ConfirmationModal from '@/components/details/ConfirmationModal';
+import SellersFooter from '@/components/details/SellersFooter';
 import SuccessModal from '@/components/details/SuccessModal';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 

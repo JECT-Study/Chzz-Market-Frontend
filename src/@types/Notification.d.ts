@@ -7,7 +7,7 @@ declare module 'Notification' {
   }
 
   export interface INotification extends IRealTimeNotification {
-    imgUrl: string;
+    imageUrl: string;
     isRead: boolean;
     createdAt: string;
   }
