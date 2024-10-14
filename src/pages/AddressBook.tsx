@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import BlackShose from '@/assets/images/jordan_black.jpeg';
 import { z } from 'zod';
@@ -8,7 +8,7 @@ import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import { ChevronDown } from 'lucide-react';
 import SelectBank from '@/components/profile/SelectBank';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
 
 type FormFields = z.infer<typeof AddressBookSchema>;
@@ -21,6 +21,8 @@ const defaultValues = {
 
 const AddressBook = () => {
   const navigate = useNavigate();
+  const formRef = useRef<HTMLFormElement>(null);
+  const { auctionId } = useParams<{ auctionId: string }>();
   const [bank, setBank] = useState('');
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);
 
@@ -34,6 +36,18 @@ const AddressBook = () => {
   const onCloseBottomSheet = () => {
     setActiveButtonSheet(!activeButtonSheet);
   };
+
+  const handleSubmitClick = () => {
+    if (formRef.current) {
+      formRef.current.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true }),
+      );
+    }
+  };
+
+  const onSubmit = () => {
+    navigate(`/payment/${auctionId}`);
+  }
 
   return (
     <Layout>
@@ -59,7 +73,10 @@ const AddressBook = () => {
           </div>
 
           {/* 수령자 정보 입력 */}
-          <form className="flex flex-col gap-6">
+          <form
+            ref={formRef}
+            className="flex flex-col gap-6"
+            onSubmit={onSubmit}>
             <FormField
               label="이름*"
               name="name"
@@ -163,8 +180,9 @@ const AddressBook = () => {
           type="submit"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
+          onClick={handleSubmitClick}
         >
-          입력 완료
+          결제 하기
         </Button>
       </Layout.Footer>
     </Layout>
