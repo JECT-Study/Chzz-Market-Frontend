@@ -4,9 +4,7 @@ import Register, { loader as registerLoader } from './pages/Register';
 
 import AddressBook from './pages/AddressBook';
 import AsyncBoundary from './components/common/loadingAndError/AsyncBoundary';
-import AuctionDetails, {
-  loader as auctionDetailsLoader,
-} from './pages/AuctionDetails';
+import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
 import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
@@ -15,10 +13,7 @@ import Login from './pages/Login';
 import NotFound from './components/common/loadingAndError/NotFound';
 import Notification from './pages/Notification';
 import OrderHistory from './pages/UserParticipatedList';
-import Payment from './pages/Payment';
-import PreAuctionDetails, {
-  loader as preAuctionDetailsLoader,
-} from './pages/PreAuctionDetails';
+import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import PrivateRoute from './components/common/route/PrivateRoute';
 import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
@@ -84,10 +79,6 @@ const privateRouteList = [
     path: ROUTERS.ADDRESSBOOK,
     element: <AddressBook />,
   },
-  {
-    path: ROUTERS.PAYMENT,
-    element: <Payment />,
-  },
 ];
 
 const publicRouteList = [
@@ -114,11 +105,7 @@ export const router = createBrowserRouter([
         ),
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
-          element: (
-            <AsyncBoundary>
-              {path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}
-            </AsyncBoundary>
-          ),
+          element: <AsyncBoundary>{path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}</AsyncBoundary>,
         })),
       },
       ...privateRouteList.map(({ path, element, loader }) => ({
@@ -159,9 +146,6 @@ export const router = createBrowserRouter([
           </AsyncBoundary>
         ),
         loader: preAuctionDetailsLoader,
-      },
-      {
-        path: `${ROUTERS.PAYMENT}/:auctionId`,
       },
     ],
   },
