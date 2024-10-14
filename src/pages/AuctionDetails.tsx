@@ -44,7 +44,7 @@ const AuctionDetails = () => {
         title='제품 상세'
         handleBack={handleBackClick}
         handleModal={toggleMenu}
-        isDisableMenuButton={!auctionDetails?.isSeller}
+        isDisableMenuButton
       />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
@@ -93,7 +93,7 @@ const AuctionDetails = () => {
                     </span>
                     시작가
                     <span className='font-bold'>
-                      {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}원
+                      {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}
                     </span>
                   </span>
                 </p>
