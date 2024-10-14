@@ -21,6 +21,7 @@ const ROUTERS = Object.freeze({
   ADDRESSBOOK: '/auctions/:auctionId/shipping',
   BID: '/auctions/bid/:auctionId',
   FINAL_BIDDER_LIST: '/auctions/:auctionId/final-bidder-list',
+  PAYMENT: '/payment/:auctionId'
 });
 
 export default ROUTERS;

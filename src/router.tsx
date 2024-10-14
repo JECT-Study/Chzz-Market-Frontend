@@ -3,7 +3,6 @@ import Bid, { loader as bidLoader } from './pages/Bid';
 import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import Register, { loader as registerLoader } from './pages/Register';
-
 import ROUTERS from '@/constants/route';
 import ProductList from '@/pages/ProductList';
 import { createBrowserRouter } from 'react-router-dom';
@@ -19,6 +18,9 @@ import Heart from './pages/Heart';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
+import Payment from './pages/Payment';
+import PrivateRoute from './components/common/route/PrivateRoute';
+import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
 import Signup from './pages/Signup';
 import User from './pages/User';
@@ -80,6 +82,10 @@ const privateRouteList = [
     path: ROUTERS.ADDRESSBOOK,
     element: <AddressBook />,
   },
+  {
+    path: ROUTERS.PAYMENT,
+    element: <Payment />,
+  },
 ];
 
 const publicRouteList = [
@@ -108,7 +114,11 @@ export const router = createBrowserRouter([
         ),
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
-          element: <APIAsyncBoundary>{path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}</APIAsyncBoundary>,
+          element: (
+            <AsyncBoundary>
+              {path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}
+            </AsyncBoundary>
+          ),
         })),
       },
 
@@ -144,6 +154,9 @@ export const router = createBrowserRouter([
           <PreAuctionDetails />
         ),
         loader: preAuctionDetailsLoader,
+      },
+      {
+        path: `${ROUTERS.PAYMENT}/:auctionId`,
       },
     ],
   },
