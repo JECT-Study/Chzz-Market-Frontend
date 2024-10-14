@@ -1,8 +1,3 @@
-import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
-import Bid, { loader as bidLoader } from './pages/Bid';
-import BidderList, { loader as bidderListLoader } from './pages/BidderList';
-import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
-import Register, { loader as registerLoader } from './pages/Register';
 import ROUTERS from '@/constants/route';
 import ProductList from '@/pages/ProductList';
 import { createBrowserRouter } from 'react-router-dom';
@@ -14,14 +9,17 @@ import PublicRoute from './components/common/route/PublicRoute';
 import GlobalLayout from './components/layout/GlobalLayout';
 import LayoutWithNav from './components/layout/LayoutWithNav';
 import AddressBook from './pages/AddressBook';
+import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
+import Bid, { loader as bidLoader } from './pages/Bid';
+import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
 import Payment from './pages/Payment';
-import PrivateRoute from './components/common/route/PrivateRoute';
-import ProductList from '@/pages/ProductList';
+import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import ProfileEdit from './pages/ProfileEdit';
+import Register, { loader as registerLoader } from './pages/Register';
 import Signup from './pages/Signup';
 import User from './pages/User';
 import OrderHistory from './pages/UserParticipatedList';
@@ -115,9 +113,9 @@ export const router = createBrowserRouter([
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
           element: (
-            <AsyncBoundary>
+            <APIAsyncBoundary>
               {path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}
-            </AsyncBoundary>
+            </APIAsyncBoundary>
           ),
         })),
       },
