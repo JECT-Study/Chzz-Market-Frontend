@@ -7,7 +7,6 @@ import {
   useDeletePreAuction,
   useGetPreAuctionDetails,
 } from '@/components/details/queries';
-import SellersFooter from '@/components/details/SellersFooter';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import ConfirmationModal from '@/components/details/ConfirmationModal';
 import SellersFooter from '@/components/details/SellersFooter';
@@ -68,7 +67,7 @@ const PreAuction = () => {
           <div className='relative w-full bg-yellow-300'>
             <div className='w-full mb-2'>
               <img
-                src={preAuctionDetails?.imageUrls[0]}
+                src={preAuctionDetails?.images[0].imageUrl}
                 alt={preAuctionDetails?.productName}
                 className='object-cover w-full h-auto'
               />
