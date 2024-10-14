@@ -80,10 +80,6 @@ const privateRouteList = [
     path: ROUTERS.ADDRESSBOOK,
     element: <AddressBook />,
   },
-  {
-    path: ROUTERS.PAYMENT,
-    element: <Payment />,
-  },
 ];
 
 const publicRouteList = [
@@ -152,9 +148,6 @@ export const router = createBrowserRouter([
           <PreAuctionDetails />
         ),
         loader: preAuctionDetailsLoader,
-      },
-      {
-        path: `${ROUTERS.PAYMENT}/:auctionId`,
       },
     ],
   },
