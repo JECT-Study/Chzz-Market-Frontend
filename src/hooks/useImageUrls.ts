@@ -24,7 +24,7 @@ const useImageUrls = (images: ImageData): NormalizedImage[] => {
       }));
     } // 이미지가 Object인 경우 (PreAuctionDetails)
     return (images as ImageObject[]).map((image) => ({
-      key: image.imageUrl,
+      key: image.imageId,
       imageUrl: image.imageUrl,
     }));
   }, [images]);
