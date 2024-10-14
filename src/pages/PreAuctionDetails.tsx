@@ -49,7 +49,6 @@ const PreAuction = () => {
     });
   };
 
-  // Success modal close handler
   const handleCloseSuccessModal = () => {
     setIsDeleteSuccessOpen(false);
     navigate('/');
