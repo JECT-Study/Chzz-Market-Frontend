@@ -22,9 +22,10 @@ const useImageUrls = (images: ImageData): NormalizedImage[] => {
         key: idx + 1,
         imageUrl: id,
       }));
-    } // 이미지가 Object인 경우 (PreAuctionDetails)
-    return (images as ImageObject[]).map((image) => ({
-      key: image.imageId,
+    }
+    // 이미지가 Object인 경우 (PreAuctionDetails)
+    return (images as ImageObject[]).map((image, idx) => ({
+      key: image.imageId || idx + 1,
       imageUrl: image.imageUrl,
     }));
   }, [images]);

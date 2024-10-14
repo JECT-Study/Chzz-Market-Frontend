@@ -1,4 +1,3 @@
-import type { IAuctionDetails, IPreAuctionDetails } from 'AuctionDetails';
 import { CarouselItem } from '../ui/carousel';
 interface ImageItemProps {
   url: string;

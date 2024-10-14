@@ -1,6 +1,6 @@
 import useImageUrls from '@/hooks/useImageUrls';
 import CustomCarousel from '../common/CustomCarousel';
-import { CarouselItem } from '../ui/carousel'; // CarouselItem을 import합니다.
+import { CarouselItem } from '../ui/carousel';
 import ImageItem from './ImageItem';
 
 interface ImageListProps {
