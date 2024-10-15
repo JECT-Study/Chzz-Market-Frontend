@@ -16,6 +16,7 @@ const ProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [profileFile, setProfileFile] = useState<File | null>(null);
   const [useDefaultImage, setUseDefaultImage] = useState(false);
@@ -61,15 +62,18 @@ const ProfileEdit = () => {
       handleEditProfile(formData);
     } else {
       // 에러 띄우기 닉네임 중복 확인을 해주세요.
-      alert('닉네임바꿔');
+      setNicknameError('닉네임 중복 확인을 해주세요.');
     }
   };
 
   const onNicknameCheck = async () => {
+    if (!nickname || nickname.trim() === '') {
+      setNicknameError('닉네임을 입력해주세요.');
+      return;
+    }
     if (nickname === originalNickname) {
       setIsNicknameChecked(true);
-      // 띄우기
-      alert('닉네임 변경 안됨');
+      setNicknameError('기존 닉네임입니다. 사용가능합니다.');
       return;
     }
 
@@ -78,11 +82,9 @@ const ProfileEdit = () => {
     setIsNicknameChecked(isAvailable);
     
     if (isAvailable) {
-      // 사용 가능한 닉네임입니다. 띄워주기
-      alert('사용 가능')
+      setNicknameError('사용 가능한 닉네임입니다.');
     } else {
-      // 이미 사용중인 닉네임입니다. 띄워주기
-      alert('이미 사용 중')
+      setNicknameError('이미 사용중인 닉네임입니다.');
     }
   };
 
@@ -129,6 +131,11 @@ const ProfileEdit = () => {
               <Button type='button' className='h-10' onClick={onNicknameCheck}>중복확인</Button>
             </div>
           </div>
+          {nicknameError && (
+            <p className='text-red-500'>
+              {nicknameError}
+            </p>
+          )}
           <FormField
             label="자기소개"
             name="bio"

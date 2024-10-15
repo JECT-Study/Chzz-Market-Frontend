@@ -39,6 +39,7 @@ export const postPayment = () => {
 
   // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
   const requestPayment = async (auctionId: string, orderId: string) => {
+    const { addressData } = usePostOrderId(auctionId);
     if (!payment) {
       console.error("Payment not initialized");
       return;
@@ -49,12 +50,12 @@ export const postPayment = () => {
         method: "CARD", // 카드 결제
         amount,
         orderId,
-        orderName: "토스 티셔츠 외 2건",
+        orderName: addressData.productName,
         successUrl: window.location.origin + `/payment/success?auctionId=${auctionId}&orderId=${orderId}`,
         failUrl: window.location.origin + "/fail",
         customerEmail: "customer123@gmail.com",
         customerName: "김토스",
-        customerMobilePhone: "01012341234",
+        customerMobilePhone: "010-1234-5678",
         card: {
           useEscrow: false,
           flowMode: "DEFAULT",

@@ -15,6 +15,7 @@ import { nicknameCheck } from '@/components/login/queries';
 const Signup = () => {
   const [selectBank, setSelectBank] = useState('');
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const [nicknameError, setNicknameError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const {
@@ -40,16 +41,19 @@ const Signup = () => {
   });
 
   const onNicknameCheck = async () => {
+    if (!nickname || nickname.trim() === '') {
+      setNicknameError('닉네임을 입력해주세요.');
+      return;
+    }
+
     const { data } = await checkNickname();
     const { isAvailable } = data;
     setIsNicknameChecked(isAvailable);
     
     if (isAvailable === true) {
-      // 사용 가능한 닉네임입니다. 띄워주기
-      alert('사용 가능')
+      setNicknameError('사용 가능한 닉네임입니다.')
     } else {
-      // 이미 사용중인 닉네임입니다. 띄워주기
-      alert('이미 사용 중')
+      setNicknameError('이미 사용중인 닉네임입니다.')
     }
   };
 
@@ -64,10 +68,6 @@ const Signup = () => {
       setError('accountNumber', {
         message: '10~15자리 숫자로 입력해주세요.',
       });
-      return;
-    }
-    if (!isNicknameChecked) {
-      alert('닉네임 중복 확인 해주세요.');
       return;
     }
 
@@ -109,6 +109,11 @@ const Signup = () => {
               <Button type='button' className='h-10' onClick={onNicknameCheck}>중복확인</Button>
             </div>
           </div>
+          {nicknameError && (
+            <p className='text-red-500'>
+              {nicknameError}
+            </p>
+          )}
           <div
             className="relative"
             onClick={() => setActiveButtonSheet(!activeButtonSheet)}
