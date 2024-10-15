@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
@@ -13,16 +13,18 @@ import { queryKeys } from '@/constants/queryKeys';
 import { nicknameCheck } from '@/components/login/queries';
 
 const Signup = () => {
-  const [selectBank, setSelectBank] = useState('');
+  const [selectBankDisplay, setSelectBankDisplay] = useState('');
+  const [selectBankServer, setSelectBankServer] = useState(''); 
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
   const [nicknameError, setNicknameError] = useState<string | null>(null);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const {
     control,
     setValue,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
     activeButtonSheet,
     setActiveButtonSheet,
     onCloseBottomSheet,
@@ -32,6 +34,7 @@ const Signup = () => {
 
   const nickname = watch('nickname');
   const accountNumber = watch('accountNumber');
+  const bankname = watch('bankName');
 
 
   const { refetch: checkNickname } = useQuery({
@@ -57,9 +60,10 @@ const Signup = () => {
     }
   };
 
-  const handleSelectBank = (bank: string) => {
-    setValue('bankName', bank);
-    setSelectBank(bank);
+  const handleSelectBank = (displayName: string, serverName: string) => {
+    setSelectBankDisplay(displayName);
+    setSelectBankServer(serverName);
+    setValue('bankName', serverName);
     setActiveButtonSheet(false);
   };
 
@@ -77,6 +81,14 @@ const Signup = () => {
       );
     }
   };
+
+  useEffect(() => {
+    if (nickname && bankname && accountNumber && isNicknameChecked) {
+      setIsSubmitEnabled(true);
+    } else {
+      setIsSubmitEnabled(false);
+    }
+  }, [nickname, bankname, accountNumber, isNicknameChecked])
 
   return (
     <Layout>
@@ -110,7 +122,7 @@ const Signup = () => {
             </div>
           </div>
           {nicknameError && (
-            <p className='text-red-500'>
+            <p className='text-red-500 ml-2'>
               {nicknameError}
             </p>
           )}
@@ -129,7 +141,7 @@ const Signup = () => {
                   placeholder="은행을 선택해주세요"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
-                  value={selectBank}
+                  value={selectBankDisplay}
                 />
               )}
             />
@@ -194,8 +206,9 @@ const Signup = () => {
         <Button
           type="submit"
           className="w-full h-[47px] rounded-lg"
-          color={isValid && isNicknameChecked ? 'cheeseYellow' : 'gray2'}
+          color={isSubmitEnabled ? 'cheeseYellow' : 'gray2'}
           onClick={handleSubmitClick}
+          disabled={!isSubmitEnabled}
         >
           회원 가입 완료
         </Button>

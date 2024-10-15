@@ -40,7 +40,7 @@ export const useSignup = (): any => {
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
-      if (error.repsonse && error.repsonse.status === 400) {
+      if (error.response && error.response.status === 400) {
         const errorMessage = error.response.data?.message || '';
         if (errorMessage.includes('닉네임이 중복되었습니다.')) {
           setError('nickname', { message: '이미 사용 중인 닉네임입니다.' });
