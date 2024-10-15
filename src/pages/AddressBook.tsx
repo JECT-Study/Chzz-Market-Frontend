@@ -10,7 +10,7 @@ import { ChevronDown } from 'lucide-react';
 import SelectBank from '@/components/profile/SelectBank';
 import { useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
-import { usePostOrderId } from '@/hooks/usePayment';
+// import { usePostOrderId } from '@/hooks/usePayment';
 
 type FormFields = z.infer<typeof AddressBookSchema>;
 
@@ -23,7 +23,7 @@ const defaultValues = {
 const AddressBook = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
-  const {mutate: postOrderId} = usePostOrderId();
+  // const { mutate: postOrderId } = usePostOrderId();
   const { auctionId } = useParams<{ auctionId: string }>();
   const [bank, setBank] = useState('');
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);

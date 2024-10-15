@@ -22,7 +22,7 @@ const ROUTERS = Object.freeze({
   BID: '/auctions/bid/:auctionId',
   FINAL_BIDDER_LIST: '/auctions/:auctionId/final-bidder-list',
   PAYMENT: '/payment/:auctionId',
-  PAYMENT_SUCCESS: '/success',
+  PAYMENT_SUCCESS: '/payment/success',
 });
 
 export default ROUTERS;

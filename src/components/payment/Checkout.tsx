@@ -1,4 +1,4 @@
-import { loadTossPayments, ANONYMOUS, TossPaymentsPayment } from "@tosspayments/tosspayments-sdk";
+import { loadTossPayments, TossPaymentsPayment } from "@tosspayments/tosspayments-sdk";
 import { useEffect, useState } from "react";
 
 // ------  SDK 초기화 ------
@@ -15,13 +15,13 @@ const amount = {
   value: 50000,
 };
 
-const PaymentCheckoutPage = ({auctionId} : {auctionId : string}) => {
+const CheckoutPage = ({ auctionId } : {auctionId : string}) => {
   const [payment, setPayment] = useState<TossPaymentsPayment>();
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>();
+  // const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>();
 
-  function selectPaymentMethod(method: any) {
-    setSelectedPaymentMethod(method);
-  }
+  // function selectPaymentMethod(method: any) {
+  //   setSelectedPaymentMethod(method);
+  // }
 
   useEffect(() => {
     async function fetchPayment() {
@@ -53,7 +53,7 @@ const PaymentCheckoutPage = ({auctionId} : {auctionId : string}) => {
       amount,
       orderId: generateRandomString(),
       orderName: "토스 티셔츠 외 2건",
-      successUrl: window.location.origin + "/payment/success",
+      successUrl: window.location.origin + `/payment/success?auctionId=${auctionId}`,
       failUrl: window.location.origin + "/fail",
       customerEmail: "customer123@gmail.com",
       customerName: "김토스",
@@ -82,4 +82,4 @@ function generateRandomString() {
   return window.btoa(Math.random().toString()).slice(0, 20);
 }
 
-export default PaymentCheckoutPage;
+export default CheckoutPage;
