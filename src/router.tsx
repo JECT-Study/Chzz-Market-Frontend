@@ -16,7 +16,6 @@ import Heart from './pages/Heart';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
-import Payment from './pages/Payment';
 import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import ProfileEdit from './pages/ProfileEdit';
 import Register, { loader as registerLoader } from './pages/Register';
@@ -80,10 +79,6 @@ const privateRouteList = [
   {
     path: ROUTERS.ADDRESSBOOK,
     element: <AddressBook />,
-  },
-  {
-    path: ROUTERS.PAYMENT,
-    element: <Payment />,
   },
   {
     path: ROUTERS.PAYMENT_SUCCESS,
@@ -157,9 +152,6 @@ export const router = createBrowserRouter([
           <PreAuctionDetails />
         ),
         loader: preAuctionDetailsLoader,
-      },
-      {
-        path: `${ROUTERS.PAYMENT}/:auctionId`,
       },
     ],
   },

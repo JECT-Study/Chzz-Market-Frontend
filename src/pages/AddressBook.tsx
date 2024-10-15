@@ -10,7 +10,7 @@ import { ChevronDown } from 'lucide-react';
 import SelectBank from '@/components/profile/SelectBank';
 import { useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
-// import { usePostOrderId } from '@/hooks/usePayment';
+import { usePostOrderId } from '@/hooks/usePayment';
 
 type FormFields = z.infer<typeof AddressBookSchema>;
 
@@ -23,8 +23,10 @@ const defaultValues = {
 const AddressBook = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
-  // const { mutate: postOrderId } = usePostOrderId();
   const { auctionId } = useParams<{ auctionId: string }>();
+
+  const { mutate: postOrderId } = usePostOrderId(auctionId);
+
   const [bank, setBank] = useState('');
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);
 
@@ -48,14 +50,12 @@ const AddressBook = () => {
   };
 
   const onSubmit = () => {
-    // postOrderId();
-    // orderId, orderName, amount, paymentKey, auctionId
-    navigate(`/payment/${auctionId}`, { state: { auctionId : auctionId }});
-  }
+    postOrderId();
+  };
 
   return (
     <Layout>
-      <Layout.Header title="배송 정보 입력" handleBack={() => navigate('/')} />
+      <Layout.Header title="결제하기" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="space-y-6">
           {/* 기본 정보 입력 */}

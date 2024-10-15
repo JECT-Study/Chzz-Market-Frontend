@@ -1,4 +1,5 @@
 import { httpClient } from "@/api/axios";
+import Layout from "@/components/layout/Layout";
 import { API_END_POINT } from "@/constants/api";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -13,11 +14,11 @@ interface RequestData {
 const PaymentSuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const auctionId = searchParams.get("auctionId");
+  console.log(searchParams.get("orderId"));
 
   useEffect(() => {
     const requestData: RequestData = {
-      auctionId: auctionId,
+      auctionId: searchParams.get("auctionId"),
       orderId: searchParams.get("orderId"),
       amount: searchParams.get("amount"),
       paymentKey: searchParams.get("paymentKey"),
@@ -42,16 +43,21 @@ const PaymentSuccess = () => {
   }, [searchParams, navigate]);
 
   return (
-    <div className="result wrapper">
-      <div className="box_section">
-        <h2>결제 성공</h2>
-        <p>{`주문번호: ${searchParams.get("orderId")}`}</p>
-        <p>{`결제 금액: ${Number(
-          searchParams.get("amount")
-        ).toLocaleString()}원`}</p>
-        <p>{`paymentKey: ${searchParams.get("paymentKey")}`}</p>
+    <Layout>
+    <Layout.Header title="결제 성공 페이지" />
+    <Layout.Main>
+      <div className="result wrapper">
+        <div className="box_section">
+          <h2>결제 성공</h2>
+          <p>{`주문번호: ${searchParams.get("orderId")}`}</p>
+          <p>{`결제 금액: ${Number(
+            searchParams.get("amount")
+          ).toLocaleString()}원`}</p>
+          <p>{`paymentKey: ${searchParams.get("paymentKey")}`}</p>
+        </div>
       </div>
-    </div>
+    </Layout.Main>
+    </Layout>
   );
 }
 export default PaymentSuccess;
