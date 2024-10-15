@@ -1,103 +1,76 @@
-import { useEffect, useRef, useState } from "react";
-import { PaymentWidgetInstance, loadPaymentWidget, ANONYMOUS } from "@tosspayments/payment-widget-sdk";
-import { nanoid } from "nanoid";
-import { useQuery } from "@tanstack/react-query";
+import { loadTossPayments, ANONYMOUS, TossPaymentsPayment } from "@tosspayments/tosspayments-sdk";
+import { useEffect, useState } from "react";
 
-const selector = "#payment-widget";
+// ------  SDK 초기화 ------
+// TODO: clientKey는 개발자센터의 API 개별 연동 키 > 결제창 연동에 사용하려할 MID > 클라이언트 키로 바꾸세요.
+// TODO: server.js 의 secretKey 또한 결제위젯 연동 키가 아닌 API 개별 연동 키의 시크릿 키로 변경해야 합니다.
+// TODO: 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요. 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
+// @docs https://docs.tosspayments.com/sdk/v2/js#토스페이먼츠-초기화
+const clientKey = 'test_ck_P9BRQmyarYleDvqAJl9vVJ07KzLN';
+// const clientKey = `${import.meta.env.VITE_TOSS_CLIENT_KEY}`;
+const customerKey = generateRandomString();
 
-// TODO: clientKey는 개발자센터의 결제위젯 연동 키 > 클라이언트 키로 바꾸세요.
-// TODO: customerKey는 구매자와 1:1 관계로 무작위한 고유값을 생성하세요.
-// @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화
-const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
-const customerKey = nanoid();
+const amount = {
+  currency: "KRW",
+  value: 50000,
+};
 
-const CheckoutPage = () => {
-  const { data: paymentWidget } = usePaymentWidget(clientKey, customerKey);
-  // const paymentWidget = usePaymentWidget(clientKey, ANONYMOUS); // 비회원 결제
-  const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance["renderPaymentMethods"]> | null>(null);
-  const [price, setPrice] = useState(1);
-  const [paymentMethodsWidgetReady, isPaymentMethodsWidgetReady] = useState(false);
+const PaymentCheckoutPage = ({auctionId} : {auctionId : string}) => {
+  const [payment, setPayment] = useState<TossPaymentsPayment>();
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>();
+
+  function selectPaymentMethod(method: any) {
+    setSelectedPaymentMethod(method);
+  }
 
   useEffect(() => {
-    if (paymentWidget == null) {
-      return;
+    async function fetchPayment() {
+      try {
+        const tossPayments = await loadTossPayments(clientKey);
+
+        // 회원 결제
+        // @docs https://docs.tosspayments.com/sdk/v2/js#tosspaymentspayment
+        const payment = tossPayments.payment({
+          customerKey,
+        });
+        // 비회원 결제
+        // const payment = tossPayments.payment({ customerKey: ANONYMOUS });
+
+        setPayment(payment);
+      } catch (error) {
+        console.error("Error fetching payment:", error);
+      }
     }
 
-    // ------  결제 UI 렌더링 ------
-    // @docs https://docs.tosspayments.com/reference/widget-sdk#renderpaymentmethods선택자-결제-금액-옵션
-    const paymentMethodsWidget = paymentWidget.renderPaymentMethods(selector, { value: price }, { variantKey: "DEFAULT" });
+    fetchPayment();
+  }, [clientKey, customerKey]);
 
-    // ------  이용약관 UI 렌더링 ------
-    // @docs https://docs.tosspayments.com/reference/widget-sdk#renderagreement선택자-옵션
-    paymentWidget.renderAgreement("#agreement", { variantKey: "AGREEMENT" });
-
-    //  ------  결제 UI 렌더링 완료 이벤트 ------
-    paymentMethodsWidget.on("ready", () => {
-      paymentMethodsWidgetRef.current = paymentMethodsWidget;
-      isPaymentMethodsWidgetReady(true);
+  // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
+  // @docs https://docs.tosspayments.com/sdk/v2/js#paymentrequestpayment
+  async function requestPayment() {
+    await payment?.requestPayment({
+      method: "TRANSFER", // 계좌이체 결제
+      amount,
+      orderId: generateRandomString(),
+      orderName: "토스 티셔츠 외 2건",
+      successUrl: window.location.origin + "/payment/success",
+      failUrl: window.location.origin + "/fail",
+      customerEmail: "customer123@gmail.com",
+      customerName: "김토스",
+      customerMobilePhone: "01012341234",
+      transfer: {
+        cashReceipt: {
+          type: "소득공제",
+        },
+        useEscrow: false,
+      },
     });
-  }, [paymentWidget]);
-
-  useEffect(() => {
-    const paymentMethodsWidget = paymentMethodsWidgetRef.current;
-
-    if (paymentMethodsWidget == null) {
-      return;
-    }
-
-    // ------ 금액 업데이트 ------
-    // @docs https://docs.tosspayments.com/reference/widget-sdk#updateamount결제-금액
-    paymentMethodsWidget.updateAmount(price);
-  }, [price]);
+  }
 
   return (
     <div className="wrapper">
       <div className="box_section">
-        <div id="payment-widget" />
-        <div id="agreement" />
-        <div style={{ paddingLeft: "24px" }}>
-          <div className="checkable typography--p">
-            <label htmlFor="coupon-box" className="checkable__label typography--regular">
-              <input
-                id="coupon-box"
-                className="checkable__input"
-                type="checkbox"
-                aria-checked="true"
-                disabled={!paymentMethodsWidgetReady}
-                onChange={(event) => {
-                  setPrice(event.target.checked ? price - 5_000 : price + 5_000);
-                }}
-              />
-              <span className="checkable__label-text">5,000원 쿠폰 적용</span>
-            </label>
-          </div>
-        </div>
-
-        <button
-          className="button"
-          style={{ marginTop: "30px" }}
-          disabled={!paymentMethodsWidgetReady}
-          onClick={async () => {
-            // TODO: 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
-            // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
-            try {
-              // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
-              // @docs https://docs.tosspayments.com/reference/widget-sdk#requestpayment결제-정보
-              await paymentWidget?.requestPayment({
-                orderId: nanoid(),
-                orderName: "토스 티셔츠 외 2건",
-                customerName: "김토스",
-                customerEmail: "customer123@gmail.com",
-                customerMobilePhone: "01012341234",
-                successUrl: `${window.location.origin}/success`,
-                failUrl: `${window.location.origin}/fail`,
-              });
-            } catch (error) {
-              // 에러 처리하기
-              console.error(error);
-            }
-          }}
-        >
+        <button className="button" onClick={() => requestPayment()}>
           결제하기
         </button>
       </div>
@@ -105,15 +78,8 @@ const CheckoutPage = () => {
   );
 }
 
-function usePaymentWidget(clientKey: string, customerKey: string) {
-  return useQuery({
-    queryKey: ["payment-widget", clientKey, customerKey],
-    queryFn: () => {
-      // ------  결제위젯 초기화 ------
-      // @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화
-      return loadPaymentWidget(clientKey, customerKey);
-    },
-  });
+function generateRandomString() {
+  return window.btoa(Math.random().toString()).slice(0, 20);
 }
 
-export default CheckoutPage;
+export default PaymentCheckoutPage;

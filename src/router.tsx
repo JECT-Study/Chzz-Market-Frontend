@@ -24,6 +24,7 @@ import Signup from './pages/Signup';
 import User from './pages/User';
 import OrderHistory from './pages/UserParticipatedList';
 import UserRegisteredList from './pages/UserRegisteredList';
+import PaymentSuccess from './pages/PaymentSuccess';
 
 const layoutWithNavRouteList = [
   {
@@ -84,6 +85,10 @@ const privateRouteList = [
     path: ROUTERS.PAYMENT,
     element: <Payment />,
   },
+  {
+    path: ROUTERS.PAYMENT_SUCCESS,
+    element: <PaymentSuccess />
+  }
 ];
 
 const publicRouteList = [
