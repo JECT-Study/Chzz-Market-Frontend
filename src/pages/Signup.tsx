@@ -11,10 +11,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@/constants/queryKeys';
 import { nicknameCheck } from '@/components/login/queries';
+import ErrorMessage from '@/components/common/error/ErrorMessage';
 
 const Signup = () => {
   const [selectBankDisplay, setSelectBankDisplay] = useState('');
-  const [selectBankServer, setSelectBankServer] = useState(''); 
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
   const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
@@ -62,7 +62,6 @@ const Signup = () => {
 
   const handleSelectBank = (displayName: string, serverName: string) => {
     setSelectBankDisplay(displayName);
-    setSelectBankServer(serverName);
     setValue('bankName', serverName);
     setActiveButtonSheet(false);
   };
@@ -70,7 +69,7 @@ const Signup = () => {
   const handleSubmitClick = () => {
     if (!accountNumber || accountNumber.length < 10 || accountNumber.length > 15) {
       setError('accountNumber', {
-        message: '10~15자리 숫자로 입력해주세요.',
+        message: '계좌번호는 10자리 이상 15자리 이하로 입력해주세요.',
       });
       return;
     }
@@ -122,9 +121,7 @@ const Signup = () => {
             </div>
           </div>
           {nicknameError && (
-            <p className='text-red-500 ml-2'>
-              {nicknameError}
-            </p>
+            <ErrorMessage message={nicknameError} />
           )}
           <div
             className="relative"
@@ -164,7 +161,7 @@ const Signup = () => {
             render={(field) => (
               <Input
                 id="계좌번호 *"
-                type="number"
+                type="text"
                 placeholder="계좌번호를 입력해주세요"
                 className="focus-visible:ring-cheeseYellow"
                 {...field}

@@ -4,7 +4,7 @@ import { postSignup } from '@/components/login/queries';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { z } from 'zod';
 
 type FormFields = z.infer<typeof SignupFormSchema>;
@@ -29,6 +29,7 @@ export const useSignup = (): any => {
     watch,
     formState: { errors },
     setError,
+    clearErrors,
   } = useForm<FormFields>({
     defaultValues,
   });
@@ -62,6 +63,20 @@ export const useSignup = (): any => {
     }
     return link;
   };
+  const accountNumber = watch('accountNumber');
+  useEffect(() => {
+    if (accountNumber && accountNumber.length < 10) {
+      setError('accountNumber', {
+        message: '계좌번호는 최소 10자리 이상이어야 합니다.',
+      });
+    } else if (accountNumber && accountNumber.length > 15) {
+      setError('accountNumber', {
+        message: '계좌번호는 최대 15자리 이하여야 합니다.',
+      });
+    } else {
+      clearErrors('accountNumber');
+    }
+  }, [accountNumber, setError, clearErrors]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = handleSubmit((data: any) => {
@@ -79,6 +94,7 @@ export const useSignup = (): any => {
     setValue,
     activeButtonSheet,
     setError,
+    clearErrors,
     setActiveButtonSheet,
     onCloseBottomSheet,
     onSubmit,

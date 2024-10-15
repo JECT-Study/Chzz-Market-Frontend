@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@/constants/queryKeys';
 import { nicknameCheck } from '@/components/login/queries';
 import ProfileImageUploader from '@/components/profile/ProfileImageUploader';
+import ErrorMessage from '@/components/common/error/ErrorMessage';
 
 const ProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -132,9 +133,7 @@ const ProfileEdit = () => {
             </div>
           </div>
           {nicknameError && (
-            <p className='text-red-500'>
-              {nicknameError}
-            </p>
+            <ErrorMessage message={nicknameError} />
           )}
           <FormField
             label="자기소개"
