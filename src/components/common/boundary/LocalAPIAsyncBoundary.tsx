@@ -2,10 +2,10 @@ import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 import ErrorIcon from '@/assets/icons/error.svg';
-import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import Button from '../Button';
-import GlobalSpinner from '../loading/GlobalSpinner';
+import LocalSpinner from '../loading/LocalSpinner';
 
 interface FallbackComponentProps extends FallbackProps {
   height: number
@@ -29,14 +29,15 @@ const FallbackComponent = ({ error, resetErrorBoundary, height }: FallbackCompon
 };
 
 const LocalAPIAsyncBoundary = ({ children, height }: { children: ReactNode, height: number }) => {
-  const { reset } = useQueryErrorResetBoundary()
 
   return (
-    <ErrorBoundary onReset={reset} FallbackComponent={(props) => <FallbackComponent height={height} {...props} />}>
-      <Suspense fallback={<GlobalSpinner />}>
-        {children}
-      </Suspense>
-    </ErrorBoundary>
+    <QueryErrorResetBoundary>
+      {({ reset }) => (<ErrorBoundary onReset={reset} FallbackComponent={(props) => <FallbackComponent height={height} {...props} />}>
+        <Suspense fallback={<LocalSpinner height={height} />}>
+          {children}
+        </Suspense>
+      </ErrorBoundary>)}
+    </QueryErrorResetBoundary>
   );
 };
 
