@@ -17,7 +17,7 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
   return (
     <div className="flex flex-col items-center gap-4">
       {image ? (
-        <div className="relative w-40 h-40">
+        <div className="relative w-40 h-40 cursor-pointer">
           <img src={image} alt="프로필 사진" className="object-cover w-full h-full rounded-full" />
           <Button
             type='button'
@@ -29,7 +29,7 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
           </Button>
         </div>
       ) : (
-        <div className="relative w-40 h-40" onClick={handleBoxClick}>
+        <div className="relative w-40 h-40 cursor-pointer" onClick={handleBoxClick}>
           <img src={ProfileEdit} alt="프로필 사진" className="object-cover w-full h-full rounded-full" />
         </div>
       )}

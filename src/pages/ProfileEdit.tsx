@@ -20,7 +20,8 @@ const ProfileEdit = () => {
   const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [profileFile, setProfileFile] = useState<File | null>(null);
-  const [useDefaultImage, setUseDefaultImage] = useState(false);
+  const [_useDefaultImage, setUseDefaultImage] = useState(false);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl } = useEditProfile();
   const nickname = watch('nickname');
 
@@ -46,7 +47,7 @@ const ProfileEdit = () => {
         nickname,
         bio,
         link,
-        useDefaultImage
+        useDefaultImage: !profileFile
       };
 
       if (profileFile) {
@@ -94,6 +95,14 @@ const ProfileEdit = () => {
       setProfileImage(userProfileImageUrl);
     }
   }, [userProfileImageUrl]);
+
+  useEffect(() => {
+    if (nickname && isNicknameChecked) {
+      setIsSubmitEnabled(true);
+    } else {
+      setIsSubmitEnabled(false);
+    }
+  }, [nickname, isNicknameChecked])
 
   return (
     <Layout>
@@ -168,8 +177,9 @@ const ProfileEdit = () => {
         <Button
           type="submit"
           className="w-full h-[47px] rounded-lg"
-          color="cheeseYellow"
+          color={isSubmitEnabled ? 'cheeseYellow' : 'gray2'}
           onClick={handleSubmitClick}
+          disabled={!isSubmitEnabled}
         >
           프로필 수정 완료
         </Button>

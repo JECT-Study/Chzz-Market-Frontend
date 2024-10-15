@@ -22,9 +22,9 @@ const UserProfile = ({ nickname, bio, link, profileImageUrl, providerType }: Pro
   return (
     <div className="flex items-center pb-8 my-10 gap-5 border-b border-b-gray3">
       {profileImageUrl ? (
-        <img src={profileImageUrl} alt='프로필 이미지' className='w-35 h-35 rounded-full mr-4' />
+        <img src={profileImageUrl} alt='프로필 이미지' className='w-[130px] h-[130px] rounded-full mr-4 object-conver' />
       ) : (
-        <img src={ProfileImage} alt='기본 프로필 이미지' className='w-35 h-35 rounded-full mr-4' />
+        <img src={ProfileImage} alt='기본 프로필 이미지' className='w-[130px] h-[130px] rounded-full mr-4' />
       )} 
       <div className="flex-1">
         <div className="flex items-center justify-between">
