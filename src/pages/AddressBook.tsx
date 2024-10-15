@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/components/common/Button';
-import BlackShose from '@/assets/images/jordan_black.jpeg';
 import { z } from 'zod';
 import { AddressBookSchema } from '@/constants/schema';
 import { useForm } from 'react-hook-form';
@@ -25,7 +24,7 @@ const AddressBook = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const { auctionId } = useParams<{ auctionId: string }>();
 
-  const { mutate: postOrderId } = usePostOrderId(auctionId);
+  const { mutate: postOrderId, addressData } = usePostOrderId(auctionId);
 
   const [bank, setBank] = useState('');
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);
@@ -62,16 +61,16 @@ const AddressBook = () => {
           <div className="p-4 space-y-2 rounded-lg">
             <h2 className="text-lg font-semibold">기본 정보 입력</h2>
             {/* 상품 정보 */}
-            <div className="flex items-center p-2 space-x-4">
+            <div className="flex p-2 space-x-4">
               <img
-                src={BlackShose}
+                src={addressData.imageUrl}
                 alt="product"
                 className="object-cover rounded-md w-28 h-28 xs:w-24 xs:h-24"
               />
               <div>
-                <p className="font-semibold">[나이키] 신발</p>
-                <p className="text-sm text-gray-600">시작가 10,000원</p>
-                <p className="text-sm text-gray-600">❤️ 30개</p>
+                <p className="font-bold">{addressData.productName}</p>
+                <p className="heading3 font-semibold">{`시작가: ${addressData.minPrice}원`}</p>
+                <p className="heading3 font-semibold"> {`참여자 수: ${addressData.participantCount}명`}</p>
               </div>
             </div>
           </div>

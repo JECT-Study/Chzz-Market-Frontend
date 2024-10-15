@@ -1,8 +1,17 @@
 import { httpClient } from "@/api/axios";
+import { useGetAddressDetail } from "@/components/address/queries";
 import { API_END_POINT } from "@/constants/api";
-import { UseMutateFunction, useMutation } from "@tanstack/react-query";
+import { queryKeys } from "@/constants/queryKeys";
+import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
 import { TossPaymentsPayment, loadTossPayments } from "@tosspayments/tosspayments-sdk";
 import { useEffect, useState } from "react";
+
+interface AddressData {
+  imageUrl: string;
+  productName: string;
+  minPrice: number;
+  participantCount: number;
+}
 
 const clientKey = `${import.meta.env.VITE_TOSS_CLIENT_KEY}`;
 const customerKey = generateRandomString();
@@ -65,7 +74,7 @@ function generateRandomString() {
   return window.btoa(Math.random().toString()).slice(0, 20);
 }
 
-export const usePostOrderId = (auctionId: string | undefined): { mutate: UseMutateFunction } => {
+export const usePostOrderId = (auctionId: string | undefined): { mutate: UseMutateFunction, addressData: AddressData } => {
   const { requestPayment } = postPayment();
   const createOrderId = async () => {
     const response = await httpClient.post(`${API_END_POINT.CREATE_ORDERID}`);
@@ -81,5 +90,10 @@ export const usePostOrderId = (auctionId: string | undefined): { mutate: UseMuta
     }
   });
 
-  return { mutate };
+  const { data: addressData } = useQuery({
+    queryKey: [queryKeys.AUCTION],
+    queryFn: () => useGetAddressDetail(auctionId)
+  });
+
+  return { mutate, addressData };
 };
