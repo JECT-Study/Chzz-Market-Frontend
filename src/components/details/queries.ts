@@ -1,13 +1,13 @@
-import { IAuctionDetails, IPreAuctionDetails } from "AuctionDetails";
-import { API_END_POINT } from "@/constants/api";
-import { httpClient } from "@/api/axios";
-import { queryKeys } from "@/constants/queryKeys";
+import { IAuctionDetails, IPreAuctionDetails } from 'AuctionDetails';
+import { API_END_POINT } from '@/constants/api';
+import { httpClient } from '@/api/axios';
+import { queryKeys } from '@/constants/queryKeys';
 import {
   UseMutateFunction,
   useMutation,
   useQueryClient,
   useSuspenseQuery,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 
 export const useConvertToAuction = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;
@@ -18,16 +18,24 @@ export const useConvertToAuction = (): {
     mutationFn: async (productId: number) => {
       const response = await httpClient.post(
         `${API_END_POINT.AUCTIONS}/start`,
-        productId,
+        productId
       );
       return response.data;
     },
     onSuccess: (_, productId) => {
+      // 경매로 전환될 시에도 몇몇 데이터를 그대로 사용하기 때문에 필요할 수 있겠다는 판단으로 넣음
+      // 불필요시 제거
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_DETAILS, productId],
+        queryKey: [queryKeys.PRE_AUCTIONS, productId],
       });
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.AUCTION_LOST],
+        queryKey: [queryKeys.PRE_AUCTIONS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.PRE_AUCTION_LIST],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.AUCTION_LIST],
       });
     },
   });
@@ -40,7 +48,7 @@ export const useLikeAuctionItem = (): {
 } => {
   const likeAuctionItem = async (auctionId: number) => {
     const response = await httpClient.post(
-      `${API_END_POINT.PRE_AUCTION}/${auctionId}/likes`,
+      `${API_END_POINT.PRE_AUCTION}/${auctionId}/likes`
     );
     return response.data;
   };
@@ -51,6 +59,9 @@ export const useLikeAuctionItem = (): {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [queryKeys.PRE_AUCTION_DETAILS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.PRE_AUCTION_HEART_LIST],
       });
     },
   });
@@ -65,7 +76,7 @@ export const useCancelBid = (): {
 
   const cancelBid = async (bidId: number) => {
     const response = await httpClient.patch(
-      `${API_END_POINT.BID}/${bidId}/cancel`,
+      `${API_END_POINT.BID}/${bidId}/cancel`
     );
     return response.data;
   };
@@ -88,7 +99,7 @@ export const useCancelBid = (): {
 export const useGetAuctionDetails = (auctionId: number) => {
   const getAuctionDetails = async (): Promise<IAuctionDetails> => {
     const response = await httpClient.get(
-      `${API_END_POINT.AUCTIONS}/${auctionId}`,
+      `${API_END_POINT.AUCTIONS}/${auctionId}`
     );
 
     return response.data;
@@ -109,7 +120,7 @@ export const useGetPreAuctionDetails = (preAuctionId: number) => {
 
   const getPreAuctionDetails = async (): Promise<IPreAuctionDetails> => {
     const response = await httpClient.get(
-      `${API_END_POINT.PRE_AUCTION}/${preAuctionId}`,
+      `${API_END_POINT.PRE_AUCTION}/${preAuctionId}`
     );
 
     return response.data;
@@ -132,7 +143,7 @@ export const useDeletePreAuction = (): {
 
   const deletePreAuction = async (preAuctionId: number) => {
     const response = await httpClient.delete(
-      `${API_END_POINT.PRE_AUCTION}/${preAuctionId}`,
+      `${API_END_POINT.PRE_AUCTION}/${preAuctionId}`
     );
     return response.data;
   };
@@ -144,7 +155,7 @@ export const useDeletePreAuction = (): {
         queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
       });
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.AUCTION_LOST],
+        queryKey: [queryKeys.PRE_AUCTION_LIST],
       });
     },
   });
