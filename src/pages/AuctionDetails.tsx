@@ -11,6 +11,8 @@ import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
 import { useGetAuctionDetails } from '@/components/details/queries';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import ImageList from '@/components/details/ImageList';
+import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
@@ -44,20 +46,20 @@ const AuctionDetails = () => {
         title='제품 상세'
         handleBack={handleBackClick}
         handleModal={toggleMenu}
-        isDisableMenuButton={!auctionDetails?.isSeller}
+        isDisableMenuButton
       />
       {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
       <div className='relative flex flex-col h-screen overflow-hidden'>
         <Layout.Main>
           {/* 상품 이미지 영역 */}
           <div className='relative w-full'>
-            <div className='w-full mb-2'>
-              <img
-                src={auctionDetails?.imageUrls?.[0] || ''}
-                alt={auctionDetails?.productName || ''}
-                className='object-cover w-full h-auto'
+            <LocalAPIAsyncBoundary height={250}>
+              <ImageList
+                images={auctionDetails.imageUrls}
+                productName={auctionDetails.productName}
+                productId={auctionDetails.productId}
               />
-            </div>
+            </LocalAPIAsyncBoundary>
             {/* 타이머 및 프로그레스 바 */}
             {auctionDetails && (
               <div
@@ -93,7 +95,7 @@ const AuctionDetails = () => {
                     </span>
                     시작가
                     <span className='font-bold'>
-                      {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}원
+                      {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}
                     </span>
                   </span>
                 </p>

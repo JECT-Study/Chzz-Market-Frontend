@@ -47,7 +47,6 @@ const PreAuction = () => {
     });
   };
 
-  // Success modal close handler
   const handleCloseSuccessModal = () => {
     setIsDeleteSuccessOpen(false);
     navigate('/');
@@ -62,18 +61,24 @@ const PreAuction = () => {
       />
       <div className='relative flex flex-col h-screen overflow-hidden'>
         <Layout.Main>
-          <div className='relative w-full bg-yellow-300'>
-            <div className='w-full mb-2'>
-              <img
-                src={preAuctionDetails?.images[0].imageUrl}
-                alt={preAuctionDetails?.productName}
-                className='object-cover w-full h-auto'
+          <div className='relative w-full'>
+            <LocalAPIAsyncBoundary height={250}>
+              <ImageList
+                images={preAuctionDetails.images}
+                productName={preAuctionDetails.productName}
+                productId={preAuctionDetails.productId}
               />
-            </div>
+            </LocalAPIAsyncBoundary>
           </div>
           <div className='px-4 my-4'>
             {preAuctionDetails && (
               <div className='mb-4'>
+                <div className='mt-2 mb-2 flex flex-row items-center'>
+                  <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
+                  <p className='ml-3 text-black'>
+                    {preAuctionDetails?.sellerNickname || ''}
+                  </p>
+                </div>
                 <p className='mb-1 text-lg font-bold'>
                   {preAuctionDetails.productName}
                 </p>
