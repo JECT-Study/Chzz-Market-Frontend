@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
 import Button from '@/components/common/Button';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { useConvertToAuction } from './queries';
+import React from 'react';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { useConvertToAuction } from './queries';
 
 interface SellersFooterProps {
   isSeller: boolean;
@@ -25,9 +25,12 @@ const SellersFooter: React.FC<SellersFooterProps> = ({
     navigate('/');
   };
 
+  const HeartIcon = likeCount ? AiFillHeart : AiOutlineHeart;
+  const heartColor = likeCount ? "text-red-500" : "text-gray-500";
+
   if (isSeller && status === 'PROCEEDING') {
     return (
-      <div className='bg-gray-300 text-gray-600 p-4 rounded-lg text-center border border-dashed border-blue-200'>
+      <div className='p-4 text-center text-gray-600 bg-gray-300 border border-blue-200 border-dashed rounded-lg'>
         내가 올린 경매
       </div>
     );
@@ -35,18 +38,20 @@ const SellersFooter: React.FC<SellersFooterProps> = ({
 
   if (isSeller && status === 'PENDING') {
     return (
-      <div className='flex items-center flex-1 h-full gap-2'>
-        <AiOutlineHeart className='text-xl text-gray-500' />
-        <span className='text-gray-600'>{`${likeCount}명`}</span>
+      <>
+        <div className="flex items-center h-full gap-2 basis-1/3">
+          <HeartIcon className={`${heartColor} size-6`} />
+          <span className="pt-1 text-gray1 text-heading3">{`${likeCount}명`}</span>
+        </div>
         <Button
-          type='button'
-          className='flex-[2] h-full'
-          color='cheeseYellow'
+          type="button"
+          className="h-full basis-4/5"
+          color={likeCount ? 'white' : "cheeseYellow"}
           onClick={onConvertClickHandler}
         >
           경매로 전환하기
         </Button>
-      </div>
+      </>
     );
   }
 

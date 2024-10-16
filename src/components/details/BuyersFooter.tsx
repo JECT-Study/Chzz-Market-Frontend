@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { useLikeAuctionItem, useCancelBid } from "@/components/details/queries";
+import { useCancelBid, useLikeAuctionItem } from "@/components/details/queries";
+import { useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 interface BuyersFooterProps {
   auctionId: number;
@@ -57,18 +57,20 @@ const BuyersFooter = ({
 
   if (status === "PENDING") {
     return (
-      <div className="flex items-center flex-1 h-full gap-2">
-        <HeartIcon className={`text-xl ${heartColor}`} />
-        <span className="text-gray-600">{`${currentLikeCount}명`}</span>
+      <>
+        <div className="flex items-center h-full gap-2 basis-1/3">
+          <HeartIcon className={`${heartColor} size-6`} />
+          <span className="pt-1 text-gray1 text-heading3">{`${currentLikeCount}명`}</span>
+        </div>
         <Button
           type="button"
-          className="flex-[2] h-full"
-          color="cheeseYellow"
+          className="h-full basis-4/5"
+          color={isLiked ? 'white' : "cheeseYellow"}
           onClick={onToggleNotificationHandler}
         >
-          {isLiked ? "알림 신청 완료" : "오픈 알림 받기"}
+          {isLiked ? "좋아요 취소" : "좋아요"}
         </Button>
-      </div>
+      </>
     );
   }
 
