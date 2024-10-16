@@ -1,36 +1,28 @@
-/* eslint-disable prettier/prettier */
-import { useState } from 'react';
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
-import BuyersFooter from '@/components/details/BuyersFooter';
-import { CiCoins1 } from 'react-icons/ci';
-import Layout from '@/components/layout/Layout';
 import Participants from '@/assets/icons/participants.svg';
 import Price from '@/assets/icons/price.svg';
+import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
+import BuyersFooter from '@/components/details/BuyersFooter';
+import ImageList from '@/components/details/ImageList';
 import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
 import { useGetAuctionDetails } from '@/components/details/queries';
+import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import ImageList from '@/components/details/ImageList';
-import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
+import { useState } from 'react';
+import { CiCoins1 } from 'react-icons/ci';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
   const { auctionDetails } = useGetAuctionDetails(auctionId);
-  if (!auctionDetails) {
-    throw new Error('해당 물품을 찾을 수 없습니다.');
-  }
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
   const [isPreAuction, _setIsPreAuction] = useState(false);
   const [_interestCount, _setInterestCount] = useState(1);
 
   const totalTime = 24 * 60 * 60;
-
-  const navigate = useNavigate();
-  const handleBackClick = () => {
-    navigate('/');
-  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -44,7 +36,6 @@ const AuctionDetails = () => {
     <Layout>
       <Layout.Header
         title='제품 상세'
-        handleBack={handleBackClick}
         handleModal={toggleMenu}
         isDisableMenuButton
       />
@@ -79,7 +70,7 @@ const AuctionDetails = () => {
             {/* 경매 아이템 제목 & 시작가 */}
             {auctionDetails && (
               <div className='mb-4'>
-                <div className='mt-2 mb-2 flex flex-row items-center'>
+                <div className='flex flex-row items-center mt-2 mb-2'>
                   <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
                   <p className='ml-3 text-black'>
                     {auctionDetails?.sellerNickname || ''}
