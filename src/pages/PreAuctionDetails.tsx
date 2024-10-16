@@ -5,8 +5,10 @@ import {
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
 import Price from '@/assets/icons/price.svg';
+import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import ConfirmationModal from '@/components/details/ConfirmationModal';
+import ImageList from '@/components/details/ImageList';
 import SellersFooter from '@/components/details/SellersFooter';
 import SuccessModal from '@/components/details/SuccessModal';
 import Layout from '@/components/layout/Layout';
@@ -73,7 +75,7 @@ const PreAuction = () => {
           <div className='px-4 my-4'>
             {preAuctionDetails && (
               <div className='mb-4'>
-                <div className='mt-2 mb-2 flex flex-row items-center'>
+                <div className='flex flex-row items-center mt-2 mb-2'>
                   <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
                   <p className='ml-3 text-black'>
                     {preAuctionDetails?.sellerNickname || ''}
