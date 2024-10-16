@@ -2,15 +2,16 @@ import { removeToken, setToken } from '@/utils/tokenUtils';
 
 import { API_END_POINT } from '@/constants/api';
 // eslint-disable-next-line import/no-cycle
-import { User } from '@/@types/user';
+import type { User } from '@/@types/user';
 import { httpClient } from '@/api/axios';
-import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import { storeLogin } from '@/store/authSlice';
+import { toast } from 'sonner';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
 export const postSignup = async (data: User) => {
-  const response = await httpClient.post(API_END_POINT.SIGNUP, { ...data }, { withCredentials: true });
+  const response = await httpClient.post(API_END_POINT.SIGNUP, { ...data });
 
   const accessToken = response.headers.authorization?.split(' ')[1];
 
@@ -22,23 +23,19 @@ export const postSignup = async (data: User) => {
 };
 
 export const logout = async () => {
-  try {
-    await refreshToken();
-    await httpClient.post(API_END_POINT.LOGOUT, { withCredentials: true });
-    removeToken();
-  } catch (error) {
-    throw error;
-  }
+  await refreshToken();
+  await httpClient.post(API_END_POINT.LOGOUT);
+  removeToken();
 };
 
 export const refreshToken = async () => {
   try {
-    const response = await httpClient.post(API_END_POINT.REFRESH_TOKEN, {}, { withCredentials: true });
-
+    const response = await httpClient.post(API_END_POINT.REFRESH_TOKEN);
     const newAccessToken = response.headers.authorization?.split(' ')[1];
 
     if (newAccessToken) {
       setToken(newAccessToken);
+      toast.success('로그인 되었습니다.');
     }
 
     return newAccessToken;
@@ -50,7 +47,7 @@ export const refreshToken = async () => {
 export const nicknameCheck = async (nickname: string) => {
   const response = await httpClient.get(`${API_END_POINT.NICKNAME_CHECK}/${nickname}`);
   return response.data;
-}
+};
 
 export const useRefreshTokenOnSuccess = () => {
   const dispatch = useDispatch();
@@ -65,9 +62,7 @@ export const useRefreshTokenOnSuccess = () => {
         dispatch(storeLogin({ token: newAccessToken }));
       }
     },
-    onError: () => {
-      
-    },
+    onError: () => {},
   });
 
   useEffect(() => {

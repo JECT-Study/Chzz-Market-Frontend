@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { getToken, removeToken, setToken } from '@/utils/tokenUtils';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 import { refreshToken } from '@/components/login/queries';
 import { toast } from 'sonner';
@@ -66,25 +66,27 @@ export const createClient = (config?: AxiosRequestConfig) => {
           try {
             await refreshToken();
             const newAccessToken = getToken();
-  
+
             if (!newAccessToken) {
               throw new Error('리프레시 토큰이 만료되었습니다.');
             }
-  
+
             originalRequest.headers = originalRequest.headers || {};
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
             setToken(newAccessToken);
-  
+
             return await axiosInstance(originalRequest);
           } catch (refreshError) {
             handleTokenError('리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.');
             return Promise.reject(refreshError);
           }
+        } else {
+          removeToken();
         }
       }
 
       return Promise.reject(error);
-    },
+    }
   );
 
   return axiosInstance;

@@ -2,7 +2,7 @@ import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 import ErrorIcon from '@/assets/icons/error.svg';
-import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useLocation } from 'react-router-dom';
 import Button from '../Button';
@@ -29,14 +29,15 @@ const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
 
 const APIAsyncBoundary = ({ children }: { children: ReactNode }) => {
   const { pathname, key } = useLocation();
-  const { reset } = useQueryErrorResetBoundary()
 
   return (
-    <ErrorBoundary onReset={reset} FallbackComponent={FallbackComponent} resetKeys={[pathname, key]}>
-      <Suspense fallback={<GlobalSpinner />}>
-        {children}
-      </Suspense>
-    </ErrorBoundary>
+    <QueryErrorResetBoundary>
+      {({ reset }) => (<ErrorBoundary onReset={reset} FallbackComponent={FallbackComponent} resetKeys={[pathname, key]}>
+        <Suspense fallback={<GlobalSpinner />}>
+          {children}
+        </Suspense>
+      </ErrorBoundary>)}
+    </QueryErrorResetBoundary>
   );
 };
 

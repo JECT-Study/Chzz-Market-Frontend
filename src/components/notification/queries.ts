@@ -1,4 +1,4 @@
-import { UseMutateFunction, useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
 import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
@@ -9,8 +9,25 @@ import { useSelector } from 'react-redux';
 
 export const useGetNotifications = () => {
   const isLogin = useSelector(isLoggedIn);
-  if (!isLogin) return { notifications: [] };
 
+  const getNotifications = async (): Promise<INotification[]> => {
+    const response = await httpClient.get(`${API_END_POINT.NOTIFICATIONS}`);
+    if (!response.data || !response.data.items) {
+      throw new Error('No items found in the response');
+    }
+    return response.data.items;
+  };
+
+  const { data: notifications } = useQuery({
+    queryKey: [queryKeys.NOTIFICATIONS],
+    queryFn: getNotifications,
+    enabled: isLogin,
+  });
+
+  return { notifications };
+};
+
+export const useGetNotificationsWithSuspense = () => {
   const getNotifications = async (): Promise<INotification[]> => {
     const response = await httpClient.get(`${API_END_POINT.NOTIFICATIONS}`);
     if (!response.data || !response.data.items) {

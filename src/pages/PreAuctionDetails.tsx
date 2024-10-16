@@ -1,26 +1,23 @@
-/* eslint-disable prettier/prettier */
-import { useState } from 'react';
-import Layout from '@/components/layout/Layout';
-import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
-import ImageList from '@/components/details/ImageList';
-import { useNavigate, useLoaderData, LoaderFunction } from 'react-router-dom';
-import Price from '@/assets/icons/price.svg';
 import {
   useDeletePreAuction,
-  useGetPreAuctionDetails,
+  useGetPreAuctionDetailsWithSuspense
 } from '@/components/details/queries';
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
+
+import Price from '@/assets/icons/price.svg';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import ConfirmationModal from '@/components/details/ConfirmationModal';
 import SellersFooter from '@/components/details/SellersFooter';
 import SuccessModal from '@/components/details/SuccessModal';
+import Layout from '@/components/layout/Layout';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+/* eslint-disable prettier/prettier */
+import { useState } from 'react';
 
 const PreAuction = () => {
   const preAuctionId = useLoaderData() as number;
-  const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  if (!preAuctionDetails) {
-    throw new Error('해당 사전 경매 정보를 찾을 수 없습니다.');
-  }
+  const { preAuctionDetails } = useGetPreAuctionDetailsWithSuspense(preAuctionId);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);

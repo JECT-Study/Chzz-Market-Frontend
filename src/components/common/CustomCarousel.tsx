@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
 import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from '../ui/carousel';
+
+import { ReactNode } from 'react';
 
 const CustomCarousel = ({ contentStyle, length, children }: { contentStyle?: string; length: number; children: ReactNode }) => {
   return (
@@ -8,7 +9,6 @@ const CustomCarousel = ({ contentStyle, length, children }: { contentStyle?: str
         align: 'start',
         dragFree: true,
         watchDrag: false,
-        loop: true,
       }}
       className='w-full overflow-scroll'
     >

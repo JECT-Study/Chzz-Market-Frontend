@@ -1,11 +1,11 @@
-import { useDeleteNotification, useGetNotifications, useReadNotification } from '@/components/notification/queries';
+import { useDeleteNotification, useGetNotificationsWithSuspense, useReadNotification } from '@/components/notification/queries';
 
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import NotificationItem from '@/components/notification/NotificationItem';
 import type { INotification } from 'Notification';
 
 const Notification = () => {
-  const { notifications } = useGetNotifications();
+  const { notifications } = useGetNotificationsWithSuspense();
   const { mutate: deleteNotification } = useDeleteNotification();
   const { mutate: readNotification } = useReadNotification();
 
