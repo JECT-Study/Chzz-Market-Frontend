@@ -15,9 +15,9 @@ export interface ProductProps {
   createdAt?: string;
 }
 
-const ProductItem = ({ product, children }: { product: ProductProps; children: ReactNode }) => {
+const ProductItem = ({ product, children, onClick }: { product: ProductProps; children: ReactNode, onClick?: () => void }) => {
   return (
-    <div key={product.auctionId} className='mb-4'>
+    <div key={product.auctionId} className='mb-4 p-1 cursor-pointer border rounded-md' onClick={onClick}>
       <div className='flex flex-col'>
         <div className='w-full h-auto mb-4'>
           <div className='relative'>
