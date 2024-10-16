@@ -22,8 +22,6 @@ const AuctionDetails = () => {
   const [isPreAuction, _setIsPreAuction] = useState(false);
   const [_interestCount, _setInterestCount] = useState(1);
 
-  const totalTime = 24 * 60 * 60;
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -58,8 +56,7 @@ const AuctionDetails = () => {
                 className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}
               >
                 <ProgressBar
-                  initialTimeRemaining={auctionDetails?.timeRemaining || 0}
-                  totalTime={totalTime} // Should be 86400
+                  initialTimeRemaining={auctionDetails.timeRemaining}
                 />
               </div>
             )}
@@ -73,11 +70,11 @@ const AuctionDetails = () => {
                 <div className='flex flex-row items-center mt-2 mb-2'>
                   <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
                   <p className='ml-3 text-black'>
-                    {auctionDetails?.sellerNickname || ''}
+                    {auctionDetails.sellerNickname}
                   </p>
                 </div>
                 <p className='mt-2 mb-2 text-2xl font-bold'>
-                  {auctionDetails?.productName || ''}
+                  {auctionDetails.productName}
                 </p>
                 <p className='mt-2 mb-2 text-sm text-gray-500'>
                   <span className='inline-flex items-center'>
@@ -86,7 +83,7 @@ const AuctionDetails = () => {
                     </span>
                     시작가
                     <span className='font-bold'>
-                      {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}
+                      {formatCurrencyWithWon(auctionDetails.minPrice)}
                     </span>
                   </span>
                 </p>
@@ -102,7 +99,7 @@ const AuctionDetails = () => {
                   </div>
                   <p className='text-xl font-bold text-gray-800'>
                     {auctionDetails?.isParticipated
-                      ? `${formatCurrencyWithWon(auctionDetails?.bidAmount || 0)}원`
+                      ? `${formatCurrencyWithWon(auctionDetails.bidAmount)}`
                       : '참여 전'}
                   </p>
                 </div>
@@ -117,9 +114,7 @@ const AuctionDetails = () => {
                     <p className='mb-1 text-sm text-gray-500'>참여 인원</p>
                   </div>
                   <p className='text-lg font-bold'>
-                    {auctionDetails?.participantCount
-                      ? `${auctionDetails?.participantCount}명`
-                      : '0명'}
+                    {`${auctionDetails.participantCount}명`}
                   </p>
                 </div>
               </div>
@@ -133,20 +128,20 @@ const AuctionDetails = () => {
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
         <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
-          {auctionDetails && auctionDetails.isSeller ? (
+          {auctionDetails.isSeller ? (
             <SellersFooter
               auctionId={auctionId}
-              isSeller={auctionDetails?.isSeller || false}
-              status={auctionDetails?.status || ''}
+              isSeller={auctionDetails.isSeller}
+              status={auctionDetails.status}
             />
           ) : (
             <BuyersFooter
               auctionId={auctionId}
-              bidId={auctionDetails?.bidId ?? 0}
-              isSeller={auctionDetails?.isSeller ?? false}
-              status={auctionDetails?.status ?? ''}
-              isParticipated={auctionDetails?.isParticipated ?? false}
-              remainingBidCount={auctionDetails?.remainingBidCount ?? 0}
+              bidId={auctionDetails.bidId ?? 0}
+              isSeller={auctionDetails.isSeller}
+              status={auctionDetails.status}
+              isParticipated={auctionDetails.isParticipated}
+              remainingBidCount={auctionDetails.remainingBidCount}
             />
           )}
         </Layout.Footer>

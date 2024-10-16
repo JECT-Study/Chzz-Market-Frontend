@@ -4,7 +4,6 @@ import {
 } from '@/components/details/queries';
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
-import Price from '@/assets/icons/price.svg';
 import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import ConfirmationModal from '@/components/details/ConfirmationModal';
@@ -12,8 +11,8 @@ import ImageList from '@/components/details/ImageList';
 import SellersFooter from '@/components/details/SellersFooter';
 import SuccessModal from '@/components/details/SuccessModal';
 import Layout from '@/components/layout/Layout';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 /* eslint-disable prettier/prettier */
+import MinPrice from '@/components/common/atomic/MinPrice';
 import { useState } from 'react';
 
 const PreAuction = () => {
@@ -78,23 +77,13 @@ const PreAuction = () => {
                 <div className='flex flex-row items-center mt-2 mb-2'>
                   <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
                   <p className='ml-3 text-black'>
-                    {preAuctionDetails?.sellerNickname || ''}
+                    {preAuctionDetails.sellerNickname}
                   </p>
                 </div>
                 <p className='mb-1 text-lg font-bold'>
                   {preAuctionDetails.productName}
                 </p>
-                <p className='text-sm text-gray-500'>
-                  <span className='inline-flex items-center'>
-                    <span className='mr-1'>
-                      <img src={Price} alt='Price' />
-                    </span>
-                    시작가
-                    <span className='font-bold'>
-                      {formatCurrencyWithWon(preAuctionDetails.minPrice)}원
-                    </span>
-                  </span>
-                </p>
+                <MinPrice price={preAuctionDetails.minPrice} />
               </div>
             )}
           </div>
@@ -112,11 +101,11 @@ const PreAuction = () => {
             />
           ) : (
             <BuyersFooter
-              isSeller={preAuctionDetails?.isSeller}
+              isSeller={preAuctionDetails.isSeller}
               likeCount={preAuctionDetails.likeCount}
               auctionId={preAuctionId}
               status='PENDING'
-              isParticipated={preAuctionDetails?.isLiked}
+              isParticipated={preAuctionDetails.isLiked}
             />
           )}
         </Layout.Footer>
