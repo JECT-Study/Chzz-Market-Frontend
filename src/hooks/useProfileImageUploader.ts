@@ -5,6 +5,7 @@ export const useProfileImageUploader = (
   setState: Dispatch<SetStateAction<string | null>>,
   file: File | null,
   setFile: Dispatch<SetStateAction<File | null>>,
+  setOnMenu: Dispatch<SetStateAction<boolean>>
 ) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -43,6 +44,7 @@ export const useProfileImageUploader = (
   const deleteImage = () => {
     setFile(null);
     setState(null);
+    setOnMenu(false);
   };
 
   const handleBoxClick = () => {
