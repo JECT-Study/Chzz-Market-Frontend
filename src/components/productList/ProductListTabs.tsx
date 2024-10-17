@@ -12,7 +12,7 @@ const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
         className={classNames(
           'flex justify-center items-center w-full py-2 cursor-pointer text-sm',
           activeTab === 'ongoing'
-            ? 'border-b-2 border-cheeseYellow'
+            ? 'border-b-2 border-cheeseYellow cursor-pointer font-bold'
             : 'border-b-2 border-gray-300',
         )}
         onClick={() => setActiveTab('ongoing')}
@@ -23,7 +23,7 @@ const ProductListTabs = ({ activeTab, setActiveTab }: ProductListTabsProps) => {
         className={classNames(
           'flex justify-center w-full items-center py-2 cursor-pointer text-sm',
           activeTab === 'pre-enroll'
-            ? 'border-b-2 border-cheeseYellow'
+            ? 'border-b-2 border-cheeseYellow cursor-pointer font-bold'
             : 'border-b-2 border-gray-300',
         )}
         onClick={() => setActiveTab('pre-enroll')}

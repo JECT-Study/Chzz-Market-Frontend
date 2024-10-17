@@ -26,4 +26,6 @@ export const API_END_POINT = {
   PRE_AUCTION_ITEM: '/api/v1/pre-auction/:auctionId',
 
   BID: '/api/v1/bids',
+  PAYMENT: '/api/v1/payments/approval',
+  CREATE_ORDERID: '/api/v1/payments/order-id',
 };

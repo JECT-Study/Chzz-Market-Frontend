@@ -16,6 +16,7 @@ declare module 'AuctionItem' {
     createdAt: string;
     participantCount: number;
     timeRemaining: number;
+    auctionId: number;
   }
 
   export interface IPreAuctionItem extends IAuctionItemBase {
@@ -37,5 +38,7 @@ declare module 'AuctionItem' {
     highestAmount: number;
     auctionId: number;
   }
-  export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {}
+  export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {
+    auctionId: number;
+  }
 }
