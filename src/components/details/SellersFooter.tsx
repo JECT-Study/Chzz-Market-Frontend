@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
+import HeartOffIcon from '@/assets/icons/heart_off.svg';
+import HeartOnIcon from '@/assets/icons/heart_on.svg';
 import Button from '@/components/common/Button';
 import React from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useConvertAuction } from './queries';
 import Layout from '../layout/Layout';
+import { useConvertAuction } from './queries';
 
 interface SellersFooterProps {
   likeCount?: number;
@@ -19,7 +20,7 @@ const SellersFooter: React.FC<SellersFooterProps> = ({
   const { mutate: convertToAuction, isPending } = useConvertAuction();
   const onConvertClickHandler = () => convertToAuction(auctionId)
 
-  const HeartIcon = likeCount ? AiFillHeart : AiOutlineHeart;
+  const HeartIcon = likeCount ? HeartOnIcon : HeartOffIcon;
   const heartColor = likeCount ? "text-redNotice" : "text-gray2";
 
   if (status === 'PROCEEDING') {
@@ -36,7 +37,7 @@ const SellersFooter: React.FC<SellersFooterProps> = ({
     return (
       <Layout.Footer type='double'>
         <div className="flex items-center h-full gap-2 basis-1/3">
-          <HeartIcon className={`${heartColor} size-6`} />
+          <img src={HeartIcon} className={`${heartColor} size-6`} alt='하트 아이콘' />
           <span className="pt-1 text-gray1 text-heading3">{`${likeCount}명`}</span>
         </div>
         <Button
