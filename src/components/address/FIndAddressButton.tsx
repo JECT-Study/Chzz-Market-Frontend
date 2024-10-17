@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
 import Button from '../common/Button';
-
-interface Props {
-  onCompleted: (roadAddress: string, jibun: string, zonecode: string) => void;
-}
+import { useNavigate } from 'react-router-dom';
 
 const SCRIPT_URL =
   '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
 
-const FindAddressButton = ({ onCompleted }: Props) => {
+const FindAddressButton = () => {
+  const navigate = useNavigate();
   // script load
 
   // handler
@@ -22,7 +20,7 @@ const FindAddressButton = ({ onCompleted }: Props) => {
         const { jibunAddress } = data;
         const { zonecode } = data;
 
-        onCompleted(roadAddress, jibunAddress, zonecode);
+        navigate('/')
       },
     }).open();
   };
