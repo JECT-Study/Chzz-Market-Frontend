@@ -1,11 +1,14 @@
 import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DeliveryAddressAdd = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { roadAddress, jibunAddress, zonecode } = location.state;
   const formRef = useRef<HTMLFormElement>(null);
+  console.log(roadAddress, jibunAddress, zonecode);
 
   const handleSubmitClick = () => {
     if (formRef.current) {
@@ -17,7 +20,7 @@ const DeliveryAddressAdd = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 목록" handleBack={() => navigate('/')} />
+      <Layout.Header title="배송지 추가" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div></div>
       </Layout.Main>

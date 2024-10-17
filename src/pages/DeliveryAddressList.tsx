@@ -27,7 +27,7 @@ const DeliveryAddressList = () => {
         const { jibunAddress } = data;
         const { zonecode } = data;
 
-        navigate('/')
+        navigate('/auctions/address-add', { state: {roadAddress: roadAddress, jibunAddress: jibunAddress, zonecode: zonecode }});
       },
     }).open();
   };

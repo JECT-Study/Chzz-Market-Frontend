@@ -20,7 +20,7 @@ const ROUTERS = Object.freeze({
   },
   AUCTION_PAYMENT: '/auctions/:auctionId/payment',
   // delivery_address_list 라우터 재설정 필요
-  DELIVERY_ADDRESS_LIST: '/auctions/address-list',
+  DELIVERY_ADDRESS_LIST: '/auctions/:auctionId/address-list',
   DELIVERY_ADDRESS_ADD: '/auctions/address-add',
 
   BID: '/auctions/bid/:auctionId',
