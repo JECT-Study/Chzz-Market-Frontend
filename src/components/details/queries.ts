@@ -131,26 +131,22 @@ export const useGetPreAuctionDetailsWithSuspense = (preAuctionId: number) => {
 
 export const useDeletePreAuction = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;
+  isPending: boolean;
 } => {
-  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const deletePreAuction = async (preAuctionId: number) => {
-    const response = await httpClient.delete(`${API_END_POINT.PRE_AUCTION}/${preAuctionId}`);
-
-    return response.data;
+    await httpClient.delete(`${API_END_POINT.PRE_AUCTION}/${preAuctionId}`);
+    return;
   };
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: deletePreAuction,
-    onSuccess: (_, preAuctionId) => {
-      queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_LIST],
-      });
+    onSuccess: () => {
+      navigate('/');
+      toast.success('사전 경매가 삭제되었습니다.');
     },
   });
 
-  return { mutate };
+  return { mutate, isPending };
 };
