@@ -1,9 +1,7 @@
 import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
 import Bid, { loader as bidLoader } from './pages/Bid';
 import BidderList, { loader as bidderListLoader } from './pages/BidderList';
-import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import Register, { loader as registerLoader } from './pages/Register';
-
 import ROUTERS from '@/constants/route';
 import ProductList from '@/pages/ProductList';
 import { createBrowserRouter } from 'react-router-dom';
@@ -155,9 +153,6 @@ export const router = createBrowserRouter([
           <PreAuctionDetails />
         ),
         loader: preAuctionDetailsLoader,
-      },
-      {
-        path: `${ROUTERS.PAYMENT}/:auctionId`,
       },
       {
         path: `/test`,
