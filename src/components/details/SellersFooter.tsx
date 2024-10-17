@@ -2,43 +2,39 @@
 import Button from '@/components/common/Button';
 import React from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
-import { useConvertToAuction } from './queries';
+import { useConvertAuction } from './queries';
+import Layout from '../layout/Layout';
 
 interface SellersFooterProps {
-  isSeller: boolean;
   likeCount?: number;
   status?: string;
   auctionId: number;
 }
 
 const SellersFooter: React.FC<SellersFooterProps> = ({
-  isSeller,
   status,
   likeCount = 0,
   auctionId,
 }) => {
-  const { mutate: convertToAuction } = useConvertToAuction();
-  const navigate = useNavigate();
-  const onConvertClickHandler = () => {
-    convertToAuction(auctionId);
-    navigate('/');
-  };
+  const { mutate: convertToAuction, isPending } = useConvertAuction();
+  const onConvertClickHandler = () => convertToAuction(auctionId)
 
   const HeartIcon = likeCount ? AiFillHeart : AiOutlineHeart;
-  const heartColor = likeCount ? "text-red-500" : "text-gray-500";
+  const heartColor = likeCount ? "text-redNotice" : "text-gray2";
 
-  if (isSeller && status === 'PROCEEDING') {
+  if (status === 'PROCEEDING') {
     return (
-      <div className='p-4 text-center text-gray-600 bg-gray-300 border border-blue-200 border-dashed rounded-lg'>
-        내가 올린 경매
-      </div>
+      <Layout.Footer type='single'>
+        <Button type='button' disabled className='w-full h-full'>
+          내가 올린 경매
+        </Button>
+      </Layout.Footer>
     );
   }
 
-  if (isSeller && status === 'PENDING') {
+  if (status === 'PENDING') {
     return (
-      <>
+      <Layout.Footer type='double'>
         <div className="flex items-center h-full gap-2 basis-1/3">
           <HeartIcon className={`${heartColor} size-6`} />
           <span className="pt-1 text-gray1 text-heading3">{`${likeCount}명`}</span>
@@ -46,12 +42,14 @@ const SellersFooter: React.FC<SellersFooterProps> = ({
         <Button
           type="button"
           className="h-full basis-4/5"
-          color={likeCount ? 'white' : "cheeseYellow"}
+          color="cheeseYellow"
           onClick={onConvertClickHandler}
+          disabled={isPending}
+          loading={isPending}
         >
           경매로 전환하기
         </Button>
-      </>
+      </Layout.Footer>
     );
   }
 

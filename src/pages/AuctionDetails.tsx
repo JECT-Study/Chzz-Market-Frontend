@@ -19,7 +19,6 @@ const AuctionDetails = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTimerFixed, _setIsTimerFixed] = useState(false);
-  const [isPreAuction, _setIsPreAuction] = useState(false);
   const [_interestCount, _setInterestCount] = useState(1);
 
   const toggleMenu = () => {
@@ -127,24 +126,20 @@ const AuctionDetails = () => {
           </div>
         </Layout.Main>
         {/* 화면 하단에 고정된 Footer */}
-        <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
-          {auctionDetails.isSeller ? (
-            <SellersFooter
-              auctionId={auctionId}
-              isSeller={auctionDetails.isSeller}
-              status={auctionDetails.status}
-            />
-          ) : (
-            <BuyersFooter
-              auctionId={auctionId}
-              bidId={auctionDetails.bidId ?? 0}
-              isSeller={auctionDetails.isSeller}
-              status={auctionDetails.status}
-              isParticipated={auctionDetails.isParticipated}
-              remainingBidCount={auctionDetails.remainingBidCount}
-            />
-          )}
-        </Layout.Footer>
+        {auctionDetails.isSeller ? (
+          <SellersFooter
+            auctionId={auctionId}
+            status={auctionDetails.status}
+          />
+        ) : (
+          <BuyersFooter
+            isParticipated={auctionDetails.isParticipated}
+            auctionId={auctionId}
+            bidId={auctionDetails.bidId ?? 0}
+            status={auctionDetails.status}
+            remainingBidCount={auctionDetails.remainingBidCount}
+          />
+        )}
         {/* 백드롭 */}
         {isMenuOpen && (
           <>

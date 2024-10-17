@@ -91,24 +91,19 @@ const PreAuction = () => {
             <p>{preAuctionDetails?.description}</p>
           </div>
         </Layout.Main>
-        <Layout.Footer type='double'>
-          {preAuctionDetails.isSeller ? (
-            <SellersFooter
-              likeCount={preAuctionDetails.likeCount}
-              isSeller={preAuctionDetails.isSeller}
-              auctionId={preAuctionDetails.productId}
-              status='PENDING'
-            />
-          ) : (
-            <BuyersFooter
-              isSeller={preAuctionDetails.isSeller}
-              likeCount={preAuctionDetails.likeCount}
-              auctionId={preAuctionId}
-              status='PENDING'
-              isParticipated={preAuctionDetails.isLiked}
-            />
-          )}
-        </Layout.Footer>
+        {preAuctionDetails.isSeller ? (
+          <SellersFooter
+            likeCount={preAuctionDetails.likeCount}
+            auctionId={preAuctionDetails.productId}
+            status='PENDING'
+          />
+        ) : (
+          <BuyersFooter
+            likeCount={preAuctionDetails.likeCount}
+            auctionId={preAuctionId}
+            status='PENDING'
+          />
+        )}
         {isMenuOpen && (
           <>
             <div
