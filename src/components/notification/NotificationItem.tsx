@@ -19,7 +19,7 @@ const NotificationItem = ({ item }: { item: INotification }) => {
 
   return (
     <div className={`p-5 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} `} aria-label={`알림 배경_${notificationId}`}>
-      <figure onClick={handleClick} className={`flex w-full ${!isRead && 'cursor-pointer'}`} aria-label={`알림_${notificationId}`}>
+      <figure onClick={handleClick} className={`flex w-full ${auctionId ? 'cursor-pointer' : (isRead) ? '' : 'cursor-pointer'}`} aria-label={`알림_${notificationId}`}>
         <figcaption className='flex flex-col flex-1 justify-between min-h-[6rem] p-3'>
           <h4 className='text-body1' aria-label={`알림 제목${notificationId}`}>
             {message}
