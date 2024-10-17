@@ -14,7 +14,6 @@ interface RequestData {
 const PaymentSuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get("orderId"));
 
   useEffect(() => {
     const requestData: RequestData = {
@@ -35,7 +34,7 @@ const PaymentSuccess = () => {
         // 결제 성공 비지니스 로직 구현
 
       } catch (error) {
-        console.error(error);
+        throw error;
       }
     }
 

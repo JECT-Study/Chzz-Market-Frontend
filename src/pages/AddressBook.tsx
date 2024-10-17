@@ -23,7 +23,9 @@ const AddressBook = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   const { auctionId } = useParams<{ auctionId: string }>();
-
+  if (!auctionId) {
+    return;
+  }
   const { mutate: postOrderId, addressData } = usePostOrderId(auctionId);
 
   const [bank, setBank] = useState('');

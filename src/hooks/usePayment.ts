@@ -30,7 +30,7 @@ export const postPayment = () => {
         const payment = tossPayments.payment({ customerKey });
         setPayment(payment);
       } catch (error) {
-        console.error("Error fetching payment:", error);
+        throw error;
       }
     };
 
@@ -41,7 +41,6 @@ export const postPayment = () => {
   const requestPayment = async (auctionId: string, orderId: string) => {
     const { addressData } = usePostOrderId(auctionId);
     if (!payment) {
-      console.error("Payment not initialized");
       return;
     }
 
@@ -64,7 +63,7 @@ export const postPayment = () => {
         },
       });
     } catch (error) {
-      console.error("Error during payment request:", error);
+      throw error;
     }
   };
 
@@ -75,7 +74,7 @@ function generateRandomString() {
   return window.btoa(Math.random().toString()).slice(0, 20);
 }
 
-export const usePostOrderId = (auctionId: string | undefined): { mutate: UseMutateFunction, addressData: AddressData } => {
+export const usePostOrderId = (auctionId: string): { mutate: UseMutateFunction, addressData: AddressData } => {
   const { requestPayment } = postPayment();
   const createOrderId = async () => {
     const response = await httpClient.post(`${API_END_POINT.CREATE_ORDERID}`);
@@ -92,7 +91,7 @@ export const usePostOrderId = (auctionId: string | undefined): { mutate: UseMuta
   });
 
   const { data: addressData } = useQuery({
-    queryKey: [queryKeys.AUCTION],
+    queryKey: [queryKeys.AUCTION_ADDRESS_DETAIL],
     queryFn: () => useGetAddressDetail(auctionId)
   });
 
