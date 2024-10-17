@@ -1,5 +1,4 @@
 import type { IUserAuctionWonItem } from 'AuctionItem';
-import { IoPricetagsOutline } from 'react-icons/io5';
 import { LuUsers } from 'react-icons/lu';
 import ProductItem from '../common/item/ProductItem';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
