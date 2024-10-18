@@ -1,11 +1,14 @@
 /* eslint-disable prettier/prettier */
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import type { IAuctionDetails } from 'AuctionDetails';
 import { useEffect, useState } from 'react';
 
 const totalTime = 24 * 60 ** 2
 
 const ProgressBar = ({
   initialTimeRemaining,
-}: { initialTimeRemaining: number }) => {
+  refetch
+}: { initialTimeRemaining: number; refetch: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<IAuctionDetails, Error>> }) => {
   const [timeRemaining, setTimeRemaining] = useState<number>(initialTimeRemaining);
 
   useEffect(() => {
@@ -14,6 +17,7 @@ const ProgressBar = ({
     const interval = setInterval(() => {
       setTimeRemaining((prevTime) => {
         if (prevTime <= 1) {
+          refetch()
           clearInterval(interval);
           return 0;
         }

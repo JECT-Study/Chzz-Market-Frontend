@@ -1,4 +1,4 @@
-import { UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import type { IAuctionDetails, IPreAuctionDetails } from 'AuctionDetails';
 
 import { httpClient } from '@/api/axios';
@@ -77,20 +77,23 @@ export const useCancelBid = (): {
   return { mutate };
 };
 
-export const useGetAuctionDetails = (auctionId: number) => {
+export const useGetAuctionDetails = (
+  auctionId: number
+): { auctionDetails: IAuctionDetails; refetch: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<IAuctionDetails, Error>> } => {
   const getAuctionDetails = async (): Promise<IAuctionDetails> => {
     const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/${auctionId}`);
 
     return response.data;
   };
 
-  const { data: auctionDetails } = useSuspenseQuery({
+  const { data: auctionDetails, refetch } = useSuspenseQuery({
     queryKey: [queryKeys.AUCTION_DETAILS, auctionId],
     queryFn: getAuctionDetails,
   });
 
   return {
     auctionDetails,
+    refetch,
   };
 };
 

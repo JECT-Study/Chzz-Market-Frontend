@@ -15,7 +15,7 @@ import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { auctionDetails, refetch } = useGetAuctionDetails(auctionId);
   const { imageUrls, productName, productId, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, bidId, remainingBidCount, status, isSeller, description, participantCount, category, sellerProfileImageUrl } = auctionDetails
 
   return (
@@ -33,6 +33,7 @@ const AuctionDetails = () => {
               productId={productId}
             />
             <ProgressBar
+              refetch={refetch}
               initialTimeRemaining={timeRemaining}
             />
           </div>
