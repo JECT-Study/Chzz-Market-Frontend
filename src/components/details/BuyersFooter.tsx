@@ -1,5 +1,5 @@
 import HeartOffIcon from '@/assets/icons/heart_off.svg';
-import HeartOnIcon from '@/assets/icons/heart_on.svg';
+import HeartOnIcon from '@/assets/icons/like_heart.svg';
 import Button from "@/components/common/Button";
 import { useCancelBid, useLikeAuctionItem } from "@/components/details/queries";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ const BuyersFooter = ({
       <Layout.Footer type="double">
         <div className="flex items-center h-full gap-2 basis-1/3">
           <img src={HeartIcon} className={`${heartColor} size-6`} alt='하트 아이콘' />
-          <span className="pt-1 text-gray1 text-heading3">{`${likeCount}명`}</span>
+          <span className="pt-[2px] text-gray1 text-heading3">{`${likeCount} 명`}</span>
         </div>
         <Button
           type="button"
