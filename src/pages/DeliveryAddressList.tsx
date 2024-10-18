@@ -4,9 +4,6 @@ import { useEffect, useRef } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-const SCRIPT_URL =
-  '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
-
 const DeliveryAddressList = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
@@ -24,17 +21,16 @@ const DeliveryAddressList = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onComplete: (data: any) => {
         const roadAddress = data.address;
-        const { jibunAddress } = data;
         const { zonecode } = data;
 
-        navigate('/auctions/address-add', { state: {roadAddress: roadAddress, jibunAddress: jibunAddress, zonecode: zonecode }});
+        navigate('/auctions/address-add', { state: {roadAddress: roadAddress, zonecode: zonecode }});
       },
     }).open();
   };
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = SCRIPT_URL;
+    script.src = import.meta.env.VITE_SCRIPT_URL;
     script.async = true;
     document.head.appendChild(script);
 
