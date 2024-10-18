@@ -54,7 +54,7 @@ const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
         type='file'
         id='사진'
         className='hidden'
-        accept='image/*'
+        accept='image/jpeg, image/png, image/webp'
         multiple
         onChange={handleImage}
         aria-label='사진 업로드 인풋'
