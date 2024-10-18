@@ -35,7 +35,6 @@ export const refreshToken = async () => {
 
     if (newAccessToken) {
       setToken(newAccessToken);
-      toast.success('로그인 되었습니다.');
     }
 
     return newAccessToken;
