@@ -3,7 +3,7 @@ import ProfileDefaultImage from '@/assets/icons/profile.svg';
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import Participants from '@/assets/icons/participants.svg';
-import Price from '@/assets/icons/price.svg';
+import MinPrice from '@/components/common/atomic/MinPrice';
 import BuyersFooter from '@/components/details/BuyersFooter';
 import ImageList from '@/components/details/ImageList';
 import ProgressBar from '@/components/details/ProgressBar';
@@ -12,7 +12,6 @@ import { useGetAuctionDetails } from '@/components/details/queries';
 import Layout from '@/components/layout/Layout';
 import { CATEGORIES } from '@/constants/categories';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import MinPrice from '@/components/common/atomic/MinPrice';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
