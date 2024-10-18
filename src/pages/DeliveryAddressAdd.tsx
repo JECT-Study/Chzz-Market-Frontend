@@ -8,7 +8,6 @@ const DeliveryAddressAdd = () => {
   const location = useLocation();
   const { roadAddress, jibunAddress, zonecode } = location.state;
   const formRef = useRef<HTMLFormElement>(null);
-  console.log(roadAddress, jibunAddress, zonecode);
 
   const handleSubmitClick = () => {
     if (formRef.current) {
@@ -22,7 +21,11 @@ const DeliveryAddressAdd = () => {
     <Layout>
       <Layout.Header title="배송지 추가" handleBack={() => navigate('/')} />
       <Layout.Main>
-        <div></div>
+        <div>
+          {roadAddress}
+          {jibunAddress}
+          {zonecode}
+        </div>
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
