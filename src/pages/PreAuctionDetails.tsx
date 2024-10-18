@@ -1,3 +1,5 @@
+import DeleteIcon from '@/assets/icons/modal_cancel.svg';
+import EditIcon from '@/assets/icons/modal_edit.svg';
 import ProfileDefaultImage from '@/assets/icons/profile.svg';
 import {
   useDeletePreAuction,
@@ -89,10 +91,14 @@ const PreAuctionDetails = () => {
         isMenuOpen && (
           <div className='absolute inset-0 bg-black/30' onClick={toggleMenu}>
             <div onClick={(e) => e.stopPropagation()} className='absolute flex flex-col w-1/5 bg-white rounded-lg sm:text-body1 text-body2 top-3 right-3'>
-              <button onClick={clickEdit} className='px-2 py-4 transition-colors hover:bg-black/10'>
-                수정하기
+              <button onClick={clickEdit} className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10'>
+                <span>수정하기</span>
+                <img src={EditIcon} alt="수정 아이콘" className='size-5 mb-[2px]' />
               </button>
-              <button className='px-2 py-4 transition-colors hover:bg-black/10 text-redNotice' onClick={clickDelete}>삭제하기</button>
+              <button className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10 text-redNotice' onClick={clickDelete}>
+                <span>삭제하기</span>
+                <img src={DeleteIcon} alt="삭제 아이콘" className='size-5 mb-[2px]' />
+              </button>
             </div>
           </div>)
       }
