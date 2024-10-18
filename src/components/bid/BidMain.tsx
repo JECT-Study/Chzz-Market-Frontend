@@ -21,7 +21,7 @@ const BidMain = ({ auctionId }: { auctionId: number }) => {
   const [check, setCheck] = useState<boolean>(false);
   const toggleCheckBox = () => setCheck((state) => !state);
 
-  const { imageUrls, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = auctionDetails;
+  const { images, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = auctionDetails;
   const BidSchema = getBidSchema(minPrice);
   type FormFields = z.infer<typeof BidSchema>;
 
@@ -55,7 +55,7 @@ const BidMain = ({ auctionId }: { auctionId: number }) => {
       <Layout.Main>
         <div className='flex flex-col gap-8'>
           <AuctionItem axis='row' label='입찰 상품'>
-            <AuctionItem.Image src={imageUrls[0]} time={timeRemaining} />
+            <AuctionItem.Image src={images[0].imageUrl} time={timeRemaining} />
             <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
           </AuctionItem>
           {isParticipated && (

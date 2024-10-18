@@ -8,6 +8,10 @@ declare module 'AuctionDetails' {
     isSeller: boolean;
     category: string;
     sellerProfileImageUrl: string;
+    images: {
+      imageId: number;
+      imageUrl: string;
+    }[];
   }
 
   export interface IAuctionDetails extends IAuctionDetailsBase {
@@ -18,16 +22,12 @@ declare module 'AuctionDetails' {
     bidId: number | null;
     bidAmount: number;
     remainingBidCount: number;
-    imageUrls: string[];
+    isCancelled: boolean;
   }
 
   export interface IPreAuctionDetails extends IAuctionDetailsBase {
     updatedAt: string;
     likeCount: number;
     isLiked: boolean;
-    images: {
-      imageId: number;
-      imageUrl: string;
-    }[];
   }
 }

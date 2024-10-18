@@ -9,11 +9,12 @@ import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
 import Button from '@/components/common/Button';
 import ConfirmModal from '@/components/common/ConfirmModal';
+import CustomCarousel from '@/components/common/CustomCarousel';
 import MinPrice from '@/components/common/atomic/MinPrice';
 import BuyersFooter from '@/components/details/BuyersFooter';
-import ImageList from '@/components/details/ImageList';
 import SellersFooter from '@/components/details/SellersFooter';
 import Layout from '@/components/layout/Layout';
+import { CarouselItem } from '@/components/ui/carousel';
 import { CATEGORIES } from '@/constants/categories';
 import { useState } from 'react';
 
@@ -49,11 +50,13 @@ const PreAuctionDetails = () => {
       />
       <Layout.Main>
         <div className='flex flex-col gap-5'>
-          <ImageList
-            images={images}
-            productName={productName}
-            productId={productId}
-          />
+          <CustomCarousel length={images.length} loop>
+            {images.map((img) => (
+              <CarouselItem key={img.imageId}>
+                <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
+              </CarouselItem>
+            ))}
+          </CustomCarousel>
           <div className='flex flex-col gap-2'>
             <div className='flex items-center gap-2'>
               <img src={sellerProfileImageUrl ?? ProfileDefaultImage} alt="판매자 프로필" className='border rounded-full size-10' />

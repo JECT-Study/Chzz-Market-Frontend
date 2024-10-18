@@ -12,6 +12,7 @@ interface BuyersFooterProps {
   likeCount?: number;
   isParticipated?: boolean;
   remainingBidCount?: number;
+  isCancelled?: boolean
 }
 
 const BuyersFooter = ({
@@ -21,6 +22,7 @@ const BuyersFooter = ({
   likeCount,
   isParticipated,
   remainingBidCount,
+  isCancelled
 }: BuyersFooterProps) => {
   const navigate = useNavigate();
   const { mutate: likeAuctionItem } = useLikeAuctionItem();
@@ -35,6 +37,15 @@ const BuyersFooter = ({
   const HeartIcon = likeCount ? HeartOnIcon : HeartOffIcon;
   const heartColor = likeCount ? "text-redNotice" : "text-gray2";
 
+  if (isCancelled) {
+    return (
+      <Layout.Footer type="single">
+        <Button type='button' disabled className='w-full h-full'>
+          참여 취소한 경매
+        </Button>
+      </Layout.Footer>
+    );
+  }
 
   if (status === "PENDING") {
     return (

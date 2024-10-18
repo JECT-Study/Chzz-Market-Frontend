@@ -3,20 +3,21 @@ import ProfileDefaultImage from '@/assets/icons/profile.svg';
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import Participants from '@/assets/icons/participants.svg';
+import CustomCarousel from '@/components/common/CustomCarousel';
 import MinPrice from '@/components/common/atomic/MinPrice';
 import BuyersFooter from '@/components/details/BuyersFooter';
-import ImageList from '@/components/details/ImageList';
 import ProgressBar from '@/components/details/ProgressBar';
 import SellersFooter from '@/components/details/SellersFooter';
 import { useGetAuctionDetails } from '@/components/details/queries';
 import Layout from '@/components/layout/Layout';
+import { CarouselItem } from '@/components/ui/carousel';
 import { CATEGORIES } from '@/constants/categories';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
   const { auctionDetails, refetch } = useGetAuctionDetails(auctionId);
-  const { imageUrls, productName, productId, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, bidId, remainingBidCount, status, isSeller, description, participantCount, category, sellerProfileImageUrl } = auctionDetails
+  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, bidId, remainingBidCount, status, isSeller, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
 
   return (
     <Layout>
@@ -27,11 +28,13 @@ const AuctionDetails = () => {
       <Layout.Main>
         <div className='flex flex-col gap-5'>
           <div className='flex flex-col gap-2'>
-            <ImageList
-              images={imageUrls}
-              productName={productName}
-              productId={productId}
-            />
+            <CustomCarousel length={images.length} loop>
+              {images.map((img) => (
+                <CarouselItem key={img.imageId}>
+                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
+                </CarouselItem>
+              ))}
+            </CustomCarousel>
             <ProgressBar
               refetch={refetch}
               initialTimeRemaining={timeRemaining}
@@ -60,7 +63,7 @@ const AuctionDetails = () => {
                 <p className='text-body1Bold text-gray1'>
                   {isParticipated
                     ? `${formatCurrencyWithWon(bidAmount)}`
-                    : '참여 전'}
+                    : (isCancelled ? '참여 취소' : '참여 전')}
                 </p>
               </div>
               <div className='h-full border-l border-gray-300' />
@@ -97,6 +100,7 @@ const AuctionDetails = () => {
           bidId={bidId ?? 0}
           status={status}
           remainingBidCount={remainingBidCount}
+          isCancelled={isCancelled}
         />
       )}
     </Layout>
