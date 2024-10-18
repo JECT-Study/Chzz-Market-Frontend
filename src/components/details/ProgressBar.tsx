@@ -38,15 +38,15 @@ const ProgressBar = ({
 
 
   return (
-    <div className='flex flex-col gap-1'>
+    <div className='flex flex-col gap-1 rounded-lg'>
       <div
         className={`text-center text-lg font-bold ${textColor}`}
       >
         {timeRemaining !== 0 ? formattedTime : '경매 종료'}
       </div>
-      <div className='w-full h-2 bg-gray-200'>
+      <div className='w-full h-2 bg-gray-200 rounded-lg'>
         <div
-          className={`h-full ${progressBarColor}`}
+          className={`h-full rounded-lg ${progressBarColor}`}
           style={{ width: `${progressBarWidth}%` }}
         />
       </div>
