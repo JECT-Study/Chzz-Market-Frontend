@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
+import { toast } from 'sonner';
 
 export const useProfileImageUploader = (
   _state: string | null,
@@ -38,6 +39,13 @@ export const useProfileImageUploader = (
     if (!e.target.files || e.target.files.length === 0) return;
 
     const newFile = e.target.files[0];
+
+    const maxSize = 10 * 1024 * 1024;
+    if (newFile.size > maxSize) {
+      toast.error('파일 크기는 10MB를 초과할 수 없습니다.');
+      return;
+    }
+
     addImage(newFile);
   };
 

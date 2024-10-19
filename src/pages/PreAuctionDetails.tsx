@@ -1,166 +1,116 @@
+import DeleteIcon from '@/assets/icons/modal_cancel.svg';
+import EditIcon from '@/assets/icons/modal_edit.svg';
 import {
   useDeletePreAuction,
   useGetPreAuctionDetailsWithSuspense
 } from '@/components/details/queries';
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
-import Price from '@/assets/icons/price.svg';
-import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
-import BuyersFooter from '@/components/details/BuyersFooter';
-import ConfirmationModal from '@/components/details/ConfirmationModal';
-import ImageList from '@/components/details/ImageList';
-import SellersFooter from '@/components/details/SellersFooter';
-import SuccessModal from '@/components/details/SuccessModal';
+import BoxEditIcon from '@/assets/icons/in_box_edit_time.svg';
+import BoxLikeIcon from '@/assets/icons/in_box_like.svg';
+import Button from '@/components/common/Button';
+import ConfirmModal from '@/components/common/ConfirmModal';
+import CustomCarousel from '@/components/common/CustomCarousel';
+import DetailsBasic from '@/components/details/DetailsBasic';
+import PreAuctionDetailsFooter from '@/components/details/PreAuctionDetailsFooter';
 import Layout from '@/components/layout/Layout';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-/* eslint-disable prettier/prettier */
+import { CarouselItem } from '@/components/ui/carousel';
+import { getTimeAgo } from '@/utils/getTimeAgo';
 import { useState } from 'react';
 
-const PreAuction = () => {
+const PreAuctionDetails = () => {
+  const navigate = useNavigate();
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetailsWithSuspense(preAuctionId);
-
+  const { images, productName, productId, likeCount, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
-  const [isDeleteSuccessOpen, setIsDeleteSuccessOpen] = useState(false);
+  const { mutate: deletePreAuction, isPending } = useDeletePreAuction();
 
-  const navigate = useNavigate();
-  const { mutate: deletePreAuction } = useDeletePreAuction();
+  const updatedTime = getTimeAgo(updatedAt)
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
-
-  // Delete button click handler
-  const onDeleteButtonClickHandler = () => {
-    setIsDeleteConfirmOpen(true);
-    closeMenu();
-  };
-
-  const onEditButtonClickHandler = () => {
-    navigate(`/auctions/pre-auction/edit/${preAuctionDetails.productId}`);
-  };
-
-  const handleConfirmDelete = () => {
-    deletePreAuction(preAuctionId, {
-      onSuccess: () => {
-        setIsDeleteConfirmOpen(false);
-        setIsDeleteSuccessOpen(true);
-      },
-    });
-  };
-
-  const handleCloseSuccessModal = () => {
-    setIsDeleteSuccessOpen(false);
-    navigate('/');
-  };
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleConfirm = () => setIsDeleteConfirmOpen((prev) => !prev)
+  const clickDelete = () => {
+    toggleMenu()
+    toggleConfirm()
+  }
+  const clickEdit = () => navigate(`/auctions/pre-auction/edit/${productId}`);
+  const confirmDelete = () => deletePreAuction(preAuctionId);
 
   return (
     <Layout>
       <Layout.Header
         title='제품 상세'
         handleModal={toggleMenu}
-        isDisableMenuButton={!preAuctionDetails.isSeller}
+        isDisableMenuButton={!isSeller}
       />
-      <div className='relative flex flex-col h-screen overflow-hidden'>
-        <Layout.Main>
-          <div className='relative w-full'>
-            <LocalAPIAsyncBoundary height={250}>
-              <ImageList
-                images={preAuctionDetails.images}
-                productName={preAuctionDetails.productName}
-                productId={preAuctionDetails.productId}
-              />
-            </LocalAPIAsyncBoundary>
-          </div>
-          <div className='px-4 my-4'>
-            {preAuctionDetails && (
-              <div className='mb-4'>
-                <div className='flex flex-row items-center mt-2 mb-2'>
-                  <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
-                  <p className='ml-3 text-black'>
-                    {preAuctionDetails?.sellerNickname || ''}
-                  </p>
-                </div>
-                <p className='mb-1 text-lg font-bold'>
-                  {preAuctionDetails.productName}
-                </p>
-                <p className='text-sm text-gray-500'>
-                  <span className='inline-flex items-center'>
-                    <span className='mr-1'>
-                      <img src={Price} alt='Price' />
-                    </span>
-                    시작가
-                    <span className='font-bold'>
-                      {formatCurrencyWithWon(preAuctionDetails.minPrice)}원
-                    </span>
-                  </span>
-                </p>
+      <Layout.Main>
+        <div className='flex flex-col gap-5'>
+          <CustomCarousel length={images.length} loop>
+            {images.map((img) => (
+              <CarouselItem className='flex items-center justify-center' key={img.imageId}>
+                <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
+              </CarouselItem>
+            ))}
+          </CustomCarousel>
+          <DetailsBasic profileImg={sellerProfileImageUrl} nickname={sellerNickname} productName={productName} minPrice={minPrice} category={category} />
+
+          <div className='flex items-center justify-between border rounded-lg border-gray3'>
+            <div aria-label="수정 시간" className='flex flex-col items-center w-full gap-1 py-4'>
+              <div className='flex items-center gap-1 text-body2 text-gray2'>
+                <img src={BoxEditIcon} alt="수정 시간" className='size-5' />
+                <span className='pt-[2px]'>수정 시간</span>
               </div>
-            )}
-          </div>
-          <div className='px-4 mb-4 overflow-y-auto text-sm text-gray-700'>
-            <p>{preAuctionDetails?.description}</p>
-          </div>
-        </Layout.Main>
-        <Layout.Footer type='double'>
-          {preAuctionDetails.isSeller ? (
-            <SellersFooter
-              likeCount={preAuctionDetails.likeCount}
-              isSeller={preAuctionDetails.isSeller}
-              auctionId={preAuctionDetails.productId}
-              status='PENDING'
-            />
-          ) : (
-            <BuyersFooter
-              isSeller={preAuctionDetails?.isSeller}
-              likeCount={preAuctionDetails.likeCount}
-              auctionId={preAuctionId}
-              status='PENDING'
-              isParticipated={preAuctionDetails?.isLiked}
-            />
-          )}
-        </Layout.Footer>
-        {isMenuOpen && (
-          <>
-            <div
-              className='absolute inset-0 z-40 bg-black bg-opacity-50'
-              onClick={closeMenu}
-            />
-            <div className='absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50'>
-              <button
-                className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'
-                onClick={onEditButtonClickHandler}
-              >
-                수정하기
+              <p className='text-body1Bold text-gray1'>
+                {updatedTime}
+              </p>
+            </div>
+            <div aria-label="좋아요"
+              className="flex flex-col items-center w-full gap-1 py-4">
+              <div className='flex items-center gap-1 text-body2 text-gray2'>
+                <img src={BoxLikeIcon} alt='좋아요' className='size-4' />
+                <span className='pt-[2px]'>좋아요</span>
+              </div>
+              <p className='text-body1Bold text-gray1'>
+                {`${likeCount} 명`}
+              </p>
+            </div>
+          </div >
+          <p className='overflow-y-auto text-body2 text-gray1'>
+            {description}
+          </p>
+        </div>
+      </Layout.Main>
+      <PreAuctionDetailsFooter likeCount={likeCount} preAuctionId={preAuctionId} isSeller={isSeller} />
+      {
+        isMenuOpen && (
+          <div className='absolute inset-0 bg-black/30' onClick={toggleMenu}>
+            <div onClick={(e) => e.stopPropagation()} className='absolute flex flex-col w-1/5 bg-white rounded-lg sm:text-body1 text-body2 top-3 right-3'>
+              <button onClick={clickEdit} className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10'>
+                <span>수정하기</span>
+                <img src={EditIcon} alt="수정 아이콘" className='size-5 mb-[2px]' />
               </button>
-              <button
-                className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100'
-                onClick={onDeleteButtonClickHandler}
-              >
-                삭제하기
+              <button className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10 text-redNotice' onClick={clickDelete}>
+                <span>삭제하기</span>
+                <img src={DeleteIcon} alt="삭제 아이콘" className='size-5 mb-[2px]' />
               </button>
             </div>
-          </>
-        )}
-      </div>
-      {isDeleteConfirmOpen && (
-        <ConfirmationModal
-          message='정말 삭제하시겠습니까?'
-          onConfirm={handleConfirmDelete}
-          onCancel={() => setIsDeleteConfirmOpen(false)}
-        />
-      )}
-      {isDeleteSuccessOpen && (
-        <SuccessModal
-          message='아이템이 삭제되었습니다.'
-          onClose={handleCloseSuccessModal}
-        />
-      )}
-    </Layout>
-  );
-};
+          </div>)
+      }
+      {
+        isDeleteConfirmOpen &&
+        <ConfirmModal title='사전 경매를 삭제하시겠어요?' description='사전 경매 참여자들에게 경매 취소 알림이 발송됩니다.' close={toggleConfirm} >
+          <Button disabled={isPending} loading={isPending} type='button' color='cheeseYellow' className='w-full' onClick={confirmDelete}>
+            삭제
+          </Button>
+        </ConfirmModal>
+      }
+    </Layout >)
 
-export default PreAuction;
+}
+
+export default PreAuctionDetails;
 
 export const loader: LoaderFunction<number> = async ({ params }) => {
   const { preAuctionId } = params;

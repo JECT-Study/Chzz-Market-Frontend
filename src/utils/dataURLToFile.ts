@@ -1,3 +1,5 @@
+import { toast } from 'sonner';
+
 export const dataURLtoFile = (dataURL: string): File => {
   // DataURL에서 Base64와 MIME 타입 추출
   const arr = dataURL.split(',');
@@ -18,11 +20,15 @@ export const dataURLtoFile = (dataURL: string): File => {
   const mimeToExtensionMap: { [key: string]: string } = {
     'image/jpeg': 'jpg',
     'image/png': 'png',
+    'image/webp': 'webp',
   };
 
   // MIME 타입이 지도된 확장자가 있는 경우에만 파일 생성
   const extension = mimeToExtensionMap[mime];
-  if (!extension) throw new Error(`${mime}은 지원되지 않는 MIME 타입입니다.`);
+  if (!extension) {
+    toast.error(`${mime}은 지원되지 않는 MIME 타입입니다.`);
+    throw new Error(`${mime}은 지원되지 않는 MIME 타입입니다.`);
+  }
 
   const fileName = `image.${extension}`; // idx를 사용한 파일 이름
 

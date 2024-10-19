@@ -1,184 +1,78 @@
-/* eslint-disable prettier/prettier */
-import { useState } from 'react';
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
-import BuyersFooter from '@/components/details/BuyersFooter';
-import { CiCoins1 } from 'react-icons/ci';
-import Layout from '@/components/layout/Layout';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
+
+import ParticipantAmount from '@/assets/icons/my_participation_amount.svg';
 import Participants from '@/assets/icons/participants.svg';
-import Price from '@/assets/icons/price.svg';
+import CustomCarousel from '@/components/common/CustomCarousel';
+import AuctionDetailsFooter from '@/components/details/AuctionDetailsFooter';
+import DetailsBasic from '@/components/details/DetailsBasic';
 import ProgressBar from '@/components/details/ProgressBar';
-import SellersFooter from '@/components/details/SellersFooter';
 import { useGetAuctionDetails } from '@/components/details/queries';
+import Layout from '@/components/layout/Layout';
+import { CarouselItem } from '@/components/ui/carousel';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import ImageList from '@/components/details/ImageList';
-import LocalAPIAsyncBoundary from '@/components/common/boundary/LocalAPIAsyncBoundary';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
-  if (!auctionDetails) {
-    throw new Error('해당 물품을 찾을 수 없습니다.');
-  }
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isTimerFixed, _setIsTimerFixed] = useState(false);
-  const [isPreAuction, _setIsPreAuction] = useState(false);
-  const [_interestCount, _setInterestCount] = useState(1);
-
-  const totalTime = 24 * 60 * 60;
-
-  const navigate = useNavigate();
-  const handleBackClick = () => {
-    navigate('/');
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const { auctionDetails, refetch } = useGetAuctionDetails(auctionId);
+  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, bidId, remainingBidCount, status, description, isSeller, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
 
   return (
     <Layout>
       <Layout.Header
         title='제품 상세'
-        handleBack={handleBackClick}
-        handleModal={toggleMenu}
         isDisableMenuButton
       />
-      {/* 메인 컨텐츠가 스크롤 가능하도록 수정 */}
-      <div className='relative flex flex-col h-screen overflow-hidden'>
-        <Layout.Main>
-          {/* 상품 이미지 영역 */}
-          <div className='relative w-full'>
-            <LocalAPIAsyncBoundary height={250}>
-              <ImageList
-                images={auctionDetails.imageUrls}
-                productName={auctionDetails.productName}
-                productId={auctionDetails.productId}
-              />
-            </LocalAPIAsyncBoundary>
-            {/* 타이머 및 프로그레스 바 */}
-            {auctionDetails && (
-              <div
-                id='timer-section'
-                className={`bg-white z-10 py-1 ${isTimerFixed ? 'fixed top-0 left-0 right-0' : ''}`}
-              >
-                <ProgressBar
-                  initialTimeRemaining={auctionDetails?.timeRemaining || 0}
-                  totalTime={totalTime} // Should be 86400
-                />
-              </div>
-            )}
+      <Layout.Main>
+        <div className='flex flex-col gap-5'>
+          <div className='flex flex-col gap-2'>
+            <CustomCarousel length={images.length} loop>
+              {images.map((img) => (
+                <CarouselItem className='flex items-center justify-center min-h-56' key={img.imageId}>
+                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
+                </CarouselItem>
+              ))}
+            </CustomCarousel>
+            <ProgressBar
+              refetch={refetch}
+              initialTimeRemaining={timeRemaining}
+            />
           </div>
+          <DetailsBasic profileImg={sellerProfileImageUrl} nickname={sellerNickname} productName={productName} minPrice={minPrice} category={category} />
 
-          {/* 경매 정보 영역 */}
-          <div className='px-4 my-4'>
-            {/* 경매 아이템 제목 & 시작가 */}
-            {auctionDetails && (
-              <div className='mb-4'>
-                <div className='mt-2 mb-2 flex flex-row items-center'>
-                  <div className='rounded-[50%] w-8 h-8 bg-slate-500' />
-                  <p className='ml-3 text-black'>
-                    {auctionDetails?.sellerNickname || ''}
-                  </p>
-                </div>
-                <p className='mt-2 mb-2 text-2xl font-bold'>
-                  {auctionDetails?.productName || ''}
-                </p>
-                <p className='mt-2 mb-2 text-sm text-gray-500'>
-                  <span className='inline-flex items-center'>
-                    <span className='mr-1'>
-                      <img src={Price} alt='Price' />
-                    </span>
-                    시작가
-                    <span className='font-bold'>
-                      {formatCurrencyWithWon(auctionDetails?.minPrice || 0)}
-                    </span>
-                  </span>
-                </p>
+          <div className='flex items-center justify-between border rounded-lg border-gray3'>
+            <div aria-label="참여 금액" className='flex flex-col items-center w-full gap-1 py-4'>
+              <div className='flex items-center gap-1 text-body2 text-gray2'>
+                <img src={ParticipantAmount} alt="나의 참여 금액" className='size-5' />
+                <span className='pt-[2px]'>나의 참여 금액</span>
               </div>
-            )}
-            {/* 나의 참여 금액 & 경매 참여인원 */}
-            <div className='w-full mb-4 border border-gray-300 rounded-lg'>
-              <div className='flex items-center justify-between'>
-                <div className='flex flex-col items-center flex-1 py-4 text-center'>
-                  <div className='flex items-center mb-1 text-sm text-gray-400'>
-                    <CiCoins1 className='mx-1 text-xl' />
-                    <span className='ml-1'>나의 참여 금액</span>
-                  </div>
-                  <p className='text-xl font-bold text-gray-800'>
-                    {auctionDetails?.isParticipated
-                      ? `${formatCurrencyWithWon(auctionDetails?.bidAmount || 0)}원`
-                      : '참여 전'}
-                  </p>
-                </div>
-                <div className='h-full border-l border-gray-300' />
-                <div className='flex flex-col items-center flex-1 py-4 text-center'>
-                  <div className='flex items-center mb-1 text-sm text-gray-400'>
-                    <img
-                      src={Participants}
-                      alt='Participants'
-                      className='w-4 h-4 mx-2 mb-1'
-                    />
-                    <p className='mb-1 text-sm text-gray-500'>참여 인원</p>
-                  </div>
-                  <p className='text-lg font-bold'>
-                    {auctionDetails?.participantCount
-                      ? `${auctionDetails?.participantCount}명`
-                      : '0명'}
-                  </p>
-                </div>
+              <p className='text-body1Bold text-gray1'>
+                {isParticipated
+                  ? `${formatCurrencyWithWon(bidAmount)}`
+                  : (isCancelled ? '참여 취소' : '참여 전')}
+              </p>
+            </div>
+            <div aria-label="참여 인원"
+              className="flex flex-col items-center w-full gap-1 py-4">
+              <div className='flex items-center gap-2 text-body2 text-gray2'>
+                <img src={Participants} alt='참여 인원' className='size-4' />
+                <span className='pt-[2px]'>참여 인원</span>
               </div>
+              <p className='text-body1Bold text-gray1'>
+                {`${participantCount} 명`}
+              </p>
             </div>
-          </div>
-
-          {/* 상품 설명 */}
-          <div className='px-4 mb-4 overflow-y-auto text-sm text-gray-700'>
-            <p>{auctionDetails?.description || ''}</p>
-          </div>
-        </Layout.Main>
-        {/* 화면 하단에 고정된 Footer */}
-        <Layout.Footer type={isPreAuction ? 'double' : 'single'}>
-          {auctionDetails && auctionDetails.isSeller ? (
-            <SellersFooter
-              auctionId={auctionId}
-              isSeller={auctionDetails?.isSeller || false}
-              status={auctionDetails?.status || ''}
-            />
-          ) : (
-            <BuyersFooter
-              auctionId={auctionId}
-              bidId={auctionDetails?.bidId ?? 0}
-              isSeller={auctionDetails?.isSeller ?? false}
-              status={auctionDetails?.status ?? ''}
-              isParticipated={auctionDetails?.isParticipated ?? false}
-              remainingBidCount={auctionDetails?.remainingBidCount ?? 0}
-            />
-          )}
-        </Layout.Footer>
-        {/* 백드롭 */}
-        {isMenuOpen && (
-          <>
-            <div
-              className='absolute inset-0 z-40 bg-black bg-opacity-50'
-              onClick={closeMenu}
-              style={{ top: 0, bottom: 0 }}
-            />
-            {/* 메뉴 (아코디언) */}
-            <div className='absolute top-[10px] right-2 bg-white shadow-lg rounded-md z-50'>
-              <button className='flex items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-200'>
-                수정하기
-              </button>
-              <button className='flex items-center w-full px-4 py-2 text-left text-red-600 hover:bg-red-100'>
-                삭제하기
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+          </div >
+          <p className='overflow-y-auto text-body2 text-gray1'>
+            {description}
+          </p>
+        </div>
+      </Layout.Main>
+      <AuctionDetailsFooter auctionId={auctionId}
+        bidId={bidId}
+        status={status}
+        remainingBidCount={remainingBidCount}
+        isCancelled={isCancelled} isSeller={isSeller} />
     </Layout>
   );
 };

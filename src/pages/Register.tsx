@@ -63,7 +63,10 @@ const Register = () => {
   const finalButton = caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
 
   const toggleCheckBox = () => setCheck((state) => !state);
-  const clickBack = () => (caution === '' ? navigate(-1) : setCaution(''));
+  const clickBack = () => {
+    (caution === '' ? navigate(-1) : setCaution(''));
+    toggleCheckBox()
+  }
   const handleProceed = (proceedType: 'PRE_REGISTER' | 'REGISTER') => {
     handleSubmit(() => setCaution(proceedType))();
   };

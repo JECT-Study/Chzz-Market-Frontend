@@ -5,10 +5,9 @@ import { API_END_POINT } from '@/constants/api';
 import type { User } from '@/@types/user';
 import { httpClient } from '@/api/axios';
 import { storeLogin } from '@/store/authSlice';
-import { toast } from 'sonner';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const postSignup = async (data: User) => {
   const response = await httpClient.post(API_END_POINT.SIGNUP, { ...data });
@@ -35,7 +34,6 @@ export const refreshToken = async () => {
 
     if (newAccessToken) {
       setToken(newAccessToken);
-      toast.success('로그인 되었습니다.');
     }
 
     return newAccessToken;

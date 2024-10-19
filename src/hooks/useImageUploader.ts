@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef } from 'react';
+import { toast } from 'sonner';
 
 export const useImageUploader = (state: string[], setState: (images: string[]) => void) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -29,6 +30,13 @@ export const useImageUploader = (state: string[], setState: (images: string[]) =
     if (!e.target.files) return;
 
     const curFiles = Array.from(e.target.files);
+    const maxSize = 10 * 1024 * 1024;
+    for (let file of curFiles) {
+      if (file.size > maxSize) {
+        toast.error('파일 크기는 10MB를 초과할 수 없습니다.');
+        return;
+      }
+    }
 
     addImages(curFiles);
   };
