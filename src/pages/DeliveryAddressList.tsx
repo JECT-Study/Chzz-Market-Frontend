@@ -4,6 +4,27 @@ import { useEffect, useRef } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
+const addressList = [
+  {
+    zonecode: '12345',
+    address: '서울특별시 중구 회현동 소공로 51',
+    addressDetail: '세인빌딩 1층 102호',
+    defaultAddress: true,
+  },
+  {
+    zonecode: '67890',
+    address: '경기도 수원시 장안구 영화동 320-2',
+    addressDetail: '프라이어상가 B동 203호',
+    defaultAddress: false,
+  },
+  {
+    zonecode: '12523',
+    address: '경기도 수원시 장안동 영화동 320-2',
+    addressDetail: '프라이어상가 B동 203호',
+    defaultAddress: false,
+  },
+]
+
 const DeliveryAddressList = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
@@ -55,6 +76,16 @@ const DeliveryAddressList = () => {
                 placeholder="지번, 도로명, 건물명으로 검색"
               />
             </div>            
+          </div>
+          <div>
+            <div className="border-b-8 border-gray-100 ml-[-32px] mr-[-32px] my-5" />
+            <ul>
+              {addressList.map(item => (
+                <li key={item.zonecode}>
+                  hi
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </Layout.Main>
