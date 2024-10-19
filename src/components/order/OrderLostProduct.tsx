@@ -3,7 +3,7 @@ import { LuUsers } from 'react-icons/lu';
 import ProductItem from '../common/item/ProductItem';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import MinPrice from '../common/atomic/MinPrice';
-import CreatedAt from '../common/atomic/Created';
+import CreatedAt from '../common/atomic/CreatedAt';
 
 const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
   const formattedHighPrice = formatCurrencyWithWon(product.highestAmount);

@@ -3,7 +3,7 @@ import type { IAuctionOngoingRegisteredItem } from 'AuctionItem';
 import { useNavigate } from 'react-router-dom';
 import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
-import CreatedAt from '../common/atomic/Created';
+import CreatedAt from '../common/atomic/CreatedAt';
 
 const OngoingMyRegister = ({ product }: { product: IAuctionOngoingRegisteredItem }) => {
   const navigate = useNavigate();

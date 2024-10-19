@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import CreatedAt from '../common/atomic/Created';
+import CreatedAt from '../common/atomic/CreatedAt';
 
 const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
   const navigate = useNavigate();
