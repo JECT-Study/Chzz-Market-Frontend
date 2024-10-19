@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/components/common/Button';
-import BlackShose from '@/assets/images/jordan_black.jpeg';
 import { z } from 'zod';
 import { AddressBookSchema } from '@/constants/schema';
 import { useForm } from 'react-hook-form';
@@ -8,8 +7,9 @@ import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import { ChevronDown } from 'lucide-react';
 import SelectBank from '@/components/profile/SelectBank';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
+import { usePostOrderId } from '@/hooks/usePayment';
 
 type FormFields = z.infer<typeof AddressBookSchema>;
 
@@ -21,6 +21,13 @@ const defaultValues = {
 
 const AddressBook = () => {
   const navigate = useNavigate();
+  const formRef = useRef<HTMLFormElement>(null);
+  const { auctionId } = useParams<{ auctionId: string }>();
+  if (!auctionId) {
+    return;
+  }
+  const { mutate: postOrderId, addressData } = usePostOrderId(auctionId);
+
   const [bank, setBank] = useState('');
   const [activeButtonSheet, setActiveButtonSheet] = useState(false);
 
@@ -35,31 +42,46 @@ const AddressBook = () => {
     setActiveButtonSheet(!activeButtonSheet);
   };
 
+  const handleSubmitClick = () => {
+    if (formRef.current) {
+      formRef.current.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true }),
+      );
+    }
+  };
+
+  const onSubmit = () => {
+    postOrderId();
+  };
+
   return (
     <Layout>
-      <Layout.Header title="배송 정보 입력" handleBack={() => navigate('/')} />
+      <Layout.Header title="결제하기" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="space-y-6">
           {/* 기본 정보 입력 */}
           <div className="p-4 space-y-2 rounded-lg">
             <h2 className="text-lg font-semibold">기본 정보 입력</h2>
             {/* 상품 정보 */}
-            <div className="flex items-center p-2 space-x-4">
+            <div className="flex p-2 space-x-4">
               <img
-                src={BlackShose}
+                src={addressData.imageUrl}
                 alt="product"
                 className="object-cover rounded-md w-28 h-28 xs:w-24 xs:h-24"
               />
               <div>
-                <p className="font-semibold">[나이키] 신발</p>
-                <p className="text-sm text-gray-600">시작가 10,000원</p>
-                <p className="text-sm text-gray-600">❤️ 30개</p>
+                <p className="font-bold">{addressData.productName}</p>
+                <p className="heading3 font-semibold">{`시작가: ${addressData.minPrice}원`}</p>
+                <p className="heading3 font-semibold"> {`참여자 수: ${addressData.participantCount}명`}</p>
               </div>
             </div>
           </div>
 
           {/* 수령자 정보 입력 */}
-          <form className="flex flex-col gap-6">
+          <form
+            ref={formRef}
+            className="flex flex-col gap-6"
+            onSubmit={onSubmit}>
             <FormField
               label="이름*"
               name="name"
@@ -163,8 +185,9 @@ const AddressBook = () => {
           type="submit"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
+          onClick={handleSubmitClick}
         >
-          입력 완료
+          결제 하기
         </Button>
       </Layout.Footer>
     </Layout>

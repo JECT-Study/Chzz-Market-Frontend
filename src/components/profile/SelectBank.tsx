@@ -5,13 +5,13 @@ import Modal from './Modal';
 
 interface Props {
   onClose: () => void;
-  onSelect: (bank: string) => void;
+  onSelect: (displayName: string, serverName: string) => void;
 }
 
 const SelectBank = ({ onClose, onSelect }: Props) => {
   return (
     <Modal isOpen onClose={onClose}>
-      <div className="">
+      <div>
         <div className="relative flex justify-center mb-4">
           <h2 className="text-2xl font-bold">은행</h2>
           <button
@@ -31,16 +31,16 @@ const SelectBank = ({ onClose, onSelect }: Props) => {
                 className="flex flex-col items-center justify-center w-24 h-24 transition duration-300 border rounded-lg shadow-sm border-gary-300 hover:bg-gray-100"
                 color="gray3"
                 onClick={() => {
-                  onSelect(item.name);
+                  onSelect(item.displayName, item.serverName);
                   onClose();
                 }}
               >
                 <img
                   src={item.img}
-                  alt={item.name}
+                  alt={item.displayName}
                   className="w-10 h-10 mb-2"
                 />
-                <p className="text-sm font-medium text-black">{item.name}</p>
+                <p className="text-sm font-medium text-black">{item.displayName}</p>
               </Button>
             ))}
           </div>

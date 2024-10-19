@@ -10,7 +10,7 @@ const UserOrderTab = ({ activeTab, setActiveTab }: UserOrderTabProps) => {
     <div className="flex justify-center w-full mt-3">
       <div
         className={classNames(
-          'flex justify-center items-center w-full py-2 cursor-pointer text-sm',
+          'flex justify-center items-center w-full py-2 cursor-pointer font-bold',
           activeTab === true
             ? 'border-b-2 border-cheeseYellow'
             : 'border-b-2 border-gray-300',
@@ -21,7 +21,7 @@ const UserOrderTab = ({ activeTab, setActiveTab }: UserOrderTabProps) => {
       </div>
       <div
         className={classNames(
-          'flex justify-center w-full items-center py-2 cursor-pointer text-sm',
+          'flex justify-center w-full items-center py-2 cursor-pointer font-bold',
           activeTab === false
             ? 'border-b-2 border-cheeseYellow'
             : 'border-b-2 border-gray-300',
