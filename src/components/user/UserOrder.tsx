@@ -98,7 +98,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount}
           <div
             className="flex flex-col items-center w-1/2 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: 'preEnroll' } })
+              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: 'preAuction' } })
             }
           >
             <img

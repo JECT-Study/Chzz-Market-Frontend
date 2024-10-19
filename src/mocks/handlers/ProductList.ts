@@ -70,47 +70,4 @@ export const getOngoingProductList: HttpHandler = http.get(`${API_END_POINT.AUCT
   );
 });
 
-// export const getEnrollProductList: HttpHandler = http.get(
-//   `${API_END_POINT.UPCOMING_PRODUCT_LIST}`,
-//   ({ request }) => {
-//     const url = new URL(request.url);
-//     const page = url.searchParams.get('page') || '0';
-//     const limit = url.searchParams.get('limit') || '10';
-//     const category = url.searchParams.get('category') || 'fashion';
-//     const sortType = url.searchParams.get('type') || 'newest';
-
-//     const pageNumber = Number(page);
-//     const pageSize = Number(limit);
-
-//     // 해당 카테고리의 상품 필터링
-//     let filteredProducts = preEnrollProducts.items.filter(
-//       (item) => item.category === category,
-//     );
-
-//     // 페이지네이션 적용
-//     const start = pageNumber * pageSize;
-//     const paginatedUpcomingProducts = filteredProducts.slice(start, start + pageSize);
-
-//     // 페이지네이션 정보 계산
-//     const totalPages = Math.ceil(filteredProducts.length / pageSize);
-//     const last = pageNumber >= totalPages - 1;
-
-//     return new HttpResponse(
-//       JSON.stringify({
-//         items: paginatedUpcomingProducts,
-//         pageNumber,
-//         pageSize,
-//         totalPages,
-//         totalElements: filteredProducts.length,
-//         last,
-//         message: 'success',
-//       }),
-//       {
-//         status: 200,
-//         statusText: 'OK',
-//       },
-//     );
-//   },
-// );
-
 export default { getOngoingProductList };

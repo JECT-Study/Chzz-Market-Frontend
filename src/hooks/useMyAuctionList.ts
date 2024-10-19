@@ -62,7 +62,7 @@ const useMyAuctionList = (activeTab: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'preEnroll',
+    enabled: activeTab === 'preAuction',
   });
 
   return {

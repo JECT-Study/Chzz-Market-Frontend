@@ -33,11 +33,11 @@ const UserOrderTab = ({ activeTab, setActiveTab }: UserOrderTabProps) => {
       <div
         className={classNames(
           'flex justify-center w-full items-center py-2 cursor-pointer font-bold',
-          activeTab === 'preEnroll'
+          activeTab === 'preAuction'
             ? 'border-b-2 border-cheeseYellow'
             : 'border-b-2 border-gray-300',
         )}
-        onClick={() => setActiveTab('preEnroll')}
+        onClick={() => setActiveTab('preAuction')}
       >
         사전 경매
       </div>

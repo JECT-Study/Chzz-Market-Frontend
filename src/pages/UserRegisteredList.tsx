@@ -92,7 +92,7 @@ const UserRegisteredList = () => {
           </div>
         </EmptyBoundary>
       }
-      {activeTab === 'preEnroll' &&
+      {activeTab === 'preAuction' &&
         <EmptyBoundary length={enrollItems.length} name='userPreAuction'>
           <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto`}>
             {enrollItems.map((product: IPreAuctionRegisteredItem) => (
