@@ -77,13 +77,13 @@ const ProductList = () => {
         <ProductButtons setSortType={setSortType} />
         {activeTab === 'ongoing'
           ? <EmptyBoundary length={ongoingItems.length} name='category'>
-            <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+            <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
               {ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.auctionId} product={product} />)}
             </div>
           </EmptyBoundary>
           :
           <EmptyBoundary length={enrollItems.length} name='category'>
-            <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+            <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
               {enrollItems?.map((product: IPreAuctionItem) => <PreEnrollProduct key={product.productId} product={product} />)}
             </div>
           </EmptyBoundary>
