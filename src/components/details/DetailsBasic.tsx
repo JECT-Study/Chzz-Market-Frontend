@@ -1,5 +1,6 @@
 import ProfileDefaultImage from '@/assets/icons/profile.svg';
 import { CATEGORIES } from '@/constants/categories';
+import { useNavigate } from 'react-router-dom';
 import MinPrice from '../common/atomic/MinPrice';
 
 interface DetailsBasicProps {
@@ -7,6 +8,12 @@ interface DetailsBasicProps {
 }
 
 const DetailsBasic = ({ profileImg, nickname, productName, category, minPrice }: DetailsBasicProps) => {
+  const navigate = useNavigate();
+
+  const onClickCategory = () => {
+    navigate(`/product/list?category=${CATEGORIES[category].lowerCode}`);
+  };
+
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex items-center gap-2'>
@@ -18,7 +25,9 @@ const DetailsBasic = ({ profileImg, nickname, productName, category, minPrice }:
       <p className='text-heading2'>
         {productName}
       </p>
-      <span className='inline underline cursor-pointer text-gray2 text-body2'>{CATEGORIES[category].value}</span>
+      <span className='inline-flex'>
+        <button onClick={onClickCategory} className='underline cursor-pointer shrink-0 grow-0 text-gray2 text-body2'>{CATEGORIES[category].value}</button>
+      </span>
       <MinPrice price={minPrice} />
     </div>
 
