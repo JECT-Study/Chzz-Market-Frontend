@@ -53,7 +53,7 @@ const Main = forwardRef<
 >(({ children, style }, ref) => {
   return (
     <main
-      className='flex flex-col flex-grow w-full min-h-0 px-8 py-6 overflow-y-scroll'
+      className='relative flex flex-col flex-grow w-full min-h-0 px-8 py-6 overflow-y-scroll'
       style={style}
       ref={ref}
     >
