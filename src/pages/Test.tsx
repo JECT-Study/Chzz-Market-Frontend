@@ -10,7 +10,7 @@ const Test = () => {
   const navigate = useNavigate()
 
   const clickButton = async () => {
-    await httpClient.post(`/api/v1/auctions/test?minutes=${state}`)
+    await httpClient.post(`/api/v1/auctions/test?seconds=${state}`)
     navigate('/')
   }
   return (
