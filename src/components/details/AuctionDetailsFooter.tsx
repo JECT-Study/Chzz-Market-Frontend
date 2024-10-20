@@ -84,14 +84,14 @@ const AuctionDetailsFooter = ({ isSeller, bidId, auctionId, isCancelled, status,
               color="cheeseYellow"
               onClick={clickBid}
             >
-              금액 수정 {remainingBidCount > 0 ? `${remainingBidCount}회 가능` : '(소진)'}
+              금액 수정 {remainingBidCount > 0 ? `(${remainingBidCount}회 가능)` : '(소진)'}
             </Button>
           </>
         }
       </Layout.Footer>
       {
         confirm &&
-        <ConfirmModal title='입찰을 취소하시겠어요?' description='입찰을 취소하면 다시 입찰하지 못합니다.' close={toggleConfirm} >
+        <ConfirmModal title='경매 참여를 취소하시겠어요?' description='경매 참여를 취소하면 다시 참여하지 못합니다.' close={toggleConfirm} >
           <Button type='button' color='cheeseYellow' className='w-full' onClick={clickCancel}>
             참여 취소
           </Button>
