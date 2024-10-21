@@ -35,6 +35,7 @@ const DeliveryAddressAdd = () => {
     formState: { errors },
     setValue,
     handleSubmit,
+    setError,
   } = useForm<AddressProps>({
     defaultValues: {
       recipientName: '',
@@ -62,6 +63,11 @@ const DeliveryAddressAdd = () => {
   };
 
   const onSubmit = handleSubmit((data: AddressProps) => {
+    if (!data.phoneNumber.startsWith("010")) {
+      setError("phoneNumber", {
+        message: "010으로 시작하는 번호여야 합니다",
+      })
+    }
     const finalData = {
       ...data,
       isDefault: isChecked,

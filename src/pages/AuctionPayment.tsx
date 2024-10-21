@@ -9,7 +9,6 @@ import Layout from '@/components/layout/Layout';
 import { AuctionPaymentSchema } from '@/constants/schema';
 import { usePostPayment } from '@/hooks/usePayment';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import { useGetAddresses } from '@/hooks/useAddress';
 
 type FormFields = z.infer<typeof AuctionPaymentSchema>;
 
