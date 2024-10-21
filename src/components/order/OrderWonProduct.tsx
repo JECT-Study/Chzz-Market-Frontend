@@ -4,12 +4,18 @@ import ProductItem from '../common/item/ProductItem';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import MinPrice from '../common/atomic/MinPrice';
 import CreatedAt from '../common/atomic/CreatedAt';
+import { usePostOrderId } from '@/hooks/usePayment';
 
 const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const formattedWinningPrice = formatCurrencyWithWon(product.winningAmount);
+  const { createId } = usePostOrderId(product.auctionId);
+
+  const handleClick = () => {
+    createId();
+  }
 
   return (
-    <ProductItem product={product}>
+    <ProductItem product={product} onClick={handleClick}>
       <MinPrice price={product.minPrice} />
       <CreatedAt createAt={product.endDateTime} />
       <div className='flex'>
