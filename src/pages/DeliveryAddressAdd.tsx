@@ -1,19 +1,33 @@
-import { AddresDetail } from "@/@types/Address";
 import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
 import Layout from "@/components/layout/Layout";
 import { Input } from "@/components/ui/input";
+import { useAddress } from "@/hooks/useAddress";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+interface AddressProps {
+  recipientName: string,
+  phoneNumber: string,
+  zipcode: string,
+  roadAddress: string,
+  jibun: string,
+  detailAddress: string,
+}
 
 const DeliveryAddressAdd = () => {
   const navigate = useNavigate();
+  const { auctionId } = useParams<{ auctionId: string}>();
   const location = useLocation();
-  const { roadAddress, zonecode } = location.state;
+  const { roadAddress, zonecode, jibunAddress } = location.state;
   const formRef = useRef<HTMLFormElement>(null);
-  const [isChecked, _setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  if (!auctionId) {
+    return;
+  }
+  const { mutate } = useAddress(auctionId);
 
   const {
     control,
@@ -21,13 +35,14 @@ const DeliveryAddressAdd = () => {
     formState: { errors },
     setValue,
     handleSubmit,
-  } = useForm<AddresDetail>({
+  } = useForm<AddressProps>({
     defaultValues: {
-      name: '',
+      recipientName: '',
       phoneNumber: '',
-      zonecode: zonecode,
-      address: roadAddress,
-      addressDetail: '',
+      zipcode: zonecode,
+      roadAddress: roadAddress,
+      detailAddress: '',
+      jibun: jibunAddress,
     }
   });
 
@@ -43,12 +58,16 @@ const DeliveryAddressAdd = () => {
 
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
+    setIsChecked(checked);
     // 코드 다시 손봐야함
-    setValue('defaultAddress', checked ? 'true' : 'false');
   };
 
-  const onSubmit = handleSubmit((data: AddresDetail) => {
-    console.log(data);
+  const onSubmit = handleSubmit((data: AddressProps) => {
+    const finalData = {
+      ...data,
+      isDefault: isChecked,
+    };
+    mutate(finalData);
   });
 
   const handleOpenAddress = () => {
@@ -57,8 +76,8 @@ const DeliveryAddressAdd = () => {
         const roadAddress = data.address;
         const { zonecode } = data;
 
-        setValue('zonecode', zonecode);
-        setValue('address', roadAddress);
+        setValue('zipcode', zonecode);
+        setValue('roadAddress', roadAddress);
 
         navigate('/auctions/address-add', { state: { roadAddress, zonecode } });
       },
@@ -89,9 +108,9 @@ const DeliveryAddressAdd = () => {
           <form ref={formRef} className="flex flex-col gap-6" onSubmit={onSubmit}>
             <FormField
               label="이름"
-              name="name"
+              name="recipientName"
               control={control}
-              error={errors.address?.message}
+              error={errors.recipientName?.message}
               render={(field) => (
                 <Input
                   id="이름"
@@ -105,7 +124,7 @@ const DeliveryAddressAdd = () => {
               label="연락처"
               name="phoneNumber"
               control={control}
-              error={errors.address?.message}
+              error={errors.phoneNumber?.message}
               render={(field) => (
                 <Input
                   id="연락처"
@@ -130,9 +149,9 @@ const DeliveryAddressAdd = () => {
             </div>
             <FormField
               label="주소지"
-              name="address"
+              name="roadAddress"
               control={control}
-              error={errors.address?.message}
+              error={errors.roadAddress?.message}
               render={(field) => (
                 <Input
                   id="주소지"
@@ -144,9 +163,9 @@ const DeliveryAddressAdd = () => {
             />
             <FormField
               label="상세주소"
-              name="addressDetail"
+              name="detailAddress"
               control={control}
-              error={errors.address?.message}
+              error={errors.detailAddress?.message}
               render={(field) => (
                 <Input
                   id="상세주소"

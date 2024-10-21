@@ -2,7 +2,7 @@ import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
 import { useEffect, useRef, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
 
 interface Props {
@@ -44,6 +44,7 @@ const addressList = [
 const DeliveryAddressList = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
+  const { auctionId } = useParams<{ auctionId: string}>();
   const [selectAddress, setSelectAddress] = useState<Props>();
 
   const handleSubmitClick = () => {
@@ -60,9 +61,10 @@ const DeliveryAddressList = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onComplete: (data: any) => {
         const roadAddress = data.address;
+        const jibunAddress = data.jibunAddress;
         const { zonecode } = data;
 
-        navigate('/auctions/address-add', { state: {roadAddress: roadAddress, zonecode: zonecode }});
+        navigate(`/auctions/${auctionId}/address-add`, { state: {roadAddress: roadAddress, zonecode: zonecode, jibunAddress: jibunAddress }});
       },
     }).open();
   };
