@@ -1,8 +1,10 @@
-import { addAddress } from "@/components/address/queries";
-import { UseMutateFunction, useMutation } from "@tanstack/react-query"
+import { AddressDetail } from "@/@types/Address";
+import { addAddress, deleteAddress, getAddresses } from "@/components/address/queries";
+import { queryKeys } from "@/constants/queryKeys";
+import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom";
 
-export const useAddress = (auctionId: string) => {
+export const usePostAddress = (auctionId: string): {mutate: UseMutateFunction<any, Error, AddressDetail, unknown>;} => {
   const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationFn: addAddress,
@@ -12,4 +14,21 @@ export const useAddress = (auctionId: string) => {
   });
 
   return { mutate };
+}
+
+export const useGetAddresses = () => {
+  const { data: addressData } = useQuery({
+    queryKey: [queryKeys.ADDRESSES],
+    queryFn: () => getAddresses()
+  });
+
+  return { addressData };
+}
+
+export const useDeleteAddress = () => {
+  const { mutate: deleteData } = useMutation({
+    mutationFn: deleteAddress,
+  });
+
+  return { deleteData };
 }

@@ -2,7 +2,7 @@ import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
 import Layout from "@/components/layout/Layout";
 import { Input } from "@/components/ui/input";
-import { useAddress } from "@/hooks/useAddress";
+import { usePostAddress } from "@/hooks/useAddress";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -27,7 +27,7 @@ const DeliveryAddressAdd = () => {
   if (!auctionId) {
     return;
   }
-  const { mutate } = useAddress(auctionId);
+  const { mutate } = usePostAddress(auctionId);
 
   const {
     control,
@@ -59,7 +59,6 @@ const DeliveryAddressAdd = () => {
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     setIsChecked(checked);
-    // 코드 다시 손봐야함
   };
 
   const onSubmit = handleSubmit((data: AddressProps) => {

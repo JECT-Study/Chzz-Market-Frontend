@@ -9,6 +9,7 @@ import Layout from '@/components/layout/Layout';
 import { AuctionPaymentSchema } from '@/constants/schema';
 import { usePostPayment } from '@/hooks/usePayment';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { useGetAddresses } from '@/hooks/useAddress';
 
 type FormFields = z.infer<typeof AuctionPaymentSchema>;
 
@@ -22,7 +23,7 @@ const AuctionPayment = () => {
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const orderId = location.state.orderId.orderId;
-  const { auctionData, addressData, isLoading, postPayment} = usePostPayment(auctionId || '', orderId);
+  const { auctionData, DefaultAddressData, isLoading, postPayment} = usePostPayment(auctionId || '', orderId);
   const {
     control,
     handleSubmit,
@@ -50,8 +51,11 @@ const AuctionPayment = () => {
     }
   };
 
+  const handleClickAddressList = () => {
+    navigate(`/auctions/${auctionId}/address-list`);
+  }
+
   const onSubmit = (formData: FormFields) => {
-    console.log(formData);
     postPayment();
   };
 
@@ -81,7 +85,7 @@ const AuctionPayment = () => {
           <span className='text-heading3'>수령지 입력</span>
           <div className='flex gap-2'>
             <div className='flex justify-center items-center p-4'>기본 배송지</div>
-            <Button type='button' size='large' color='black' onClick={() => navigate(`/auctions/${auctionId}/address-list`)}>배송지 목록</Button>
+            <Button type='button' size='large' color='black' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
           <div

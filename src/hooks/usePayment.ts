@@ -15,7 +15,7 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
     queryFn: () => useGetAddressDetail(auctionId)
   });
 
-  const { data: addressData } = useQuery({
+  const { data: DefaultAddressData } = useQuery({
     queryKey: [queryKeys.ADDRESS],
     queryFn: () => getAddress()
   });
@@ -61,10 +61,10 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
     throw error;
   }
 
-  return { auctionData, isLoading, postPayment, addressData };
+  return { auctionData, isLoading, postPayment, DefaultAddressData };
 };
 
-export const usePostOrderId = (auctionId: number) => {
+export const usePostOrderId = (auctionId: number): { createId: UseMutateFunction} => {
   const navigate = useNavigate();
 
   const { mutate: createId } = useMutation({
