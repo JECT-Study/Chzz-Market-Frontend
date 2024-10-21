@@ -1,3 +1,4 @@
+import DefaultImage from '@/assets/icons/default_image.svg';
 import XButtonIcon from '@/assets/icons/x_button.svg';
 import { NOTIFICATION_CONTENTS } from '@/constants/notification';
 import { getTimeAgo } from '@/utils/getTimeAgo';
@@ -28,7 +29,7 @@ const NotificationItem = ({ item }: { item: INotification }) => {
             {time}
           </div>
         </figcaption>
-        <img className='object-cover rounded size-24' src={imageUrl} alt={`알림 이미지_${item.notificationId}`} />
+        <img className='object-cover rounded size-24' src={imageUrl ?? DefaultImage} alt={`알림 이미지_${item.notificationId}`} />
       </figure>
       <button aria-label={`알림 삭제 버튼_${item.notificationId}`} onClick={() => deleteNotification(notificationId)}>
         <img className='p-2 rounded size-8 hover:bg-black/30 active:bg-black/60' src={XButtonIcon} alt='알림 삭제 아이콘' />

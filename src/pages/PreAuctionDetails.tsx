@@ -81,31 +81,31 @@ const PreAuctionDetails = () => {
             {description}
           </p>
         </div>
+        {
+          isMenuOpen && (
+            <div className='absolute inset-0 bg-black/30' onClick={toggleMenu}>
+              <div onClick={(e) => e.stopPropagation()} className='absolute flex flex-col w-1/5 bg-white rounded-lg sm:text-body1 text-body2 top-3 right-3'>
+                <button onClick={clickEdit} className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10'>
+                  <span>수정하기</span>
+                  <img src={EditIcon} alt="수정 아이콘" className='size-5 mb-[2px]' />
+                </button>
+                <button className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10 text-redNotice' onClick={clickDelete}>
+                  <span>삭제하기</span>
+                  <img src={DeleteIcon} alt="삭제 아이콘" className='size-5 mb-[2px]' />
+                </button>
+              </div>
+            </div>)
+        }
+        {
+          isDeleteConfirmOpen &&
+          <ConfirmModal title='사전 경매를 삭제하시겠어요?' description='사전 경매 참여자들에게 경매 취소 알림이 발송됩니다.' close={toggleConfirm} >
+            <Button disabled={isPending} loading={isPending} type='button' color='cheeseYellow' className='w-full' onClick={confirmDelete}>
+              삭제
+            </Button>
+          </ConfirmModal>
+        }
       </Layout.Main>
       <PreAuctionDetailsFooter likeCount={likeCount} preAuctionId={preAuctionId} isSeller={isSeller} />
-      {
-        isMenuOpen && (
-          <div className='absolute inset-0 bg-black/30' onClick={toggleMenu}>
-            <div onClick={(e) => e.stopPropagation()} className='absolute flex flex-col w-1/5 bg-white rounded-lg sm:text-body1 text-body2 top-3 right-3'>
-              <button onClick={clickEdit} className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10'>
-                <span>수정하기</span>
-                <img src={EditIcon} alt="수정 아이콘" className='size-5 mb-[2px]' />
-              </button>
-              <button className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10 text-redNotice' onClick={clickDelete}>
-                <span>삭제하기</span>
-                <img src={DeleteIcon} alt="삭제 아이콘" className='size-5 mb-[2px]' />
-              </button>
-            </div>
-          </div>)
-      }
-      {
-        isDeleteConfirmOpen &&
-        <ConfirmModal title='사전 경매를 삭제하시겠어요?' description='사전 경매 참여자들에게 경매 취소 알림이 발송됩니다.' close={toggleConfirm} >
-          <Button disabled={isPending} loading={isPending} type='button' color='cheeseYellow' className='w-full' onClick={confirmDelete}>
-            삭제
-          </Button>
-        </ConfirmModal>
-      }
     </Layout >)
 
 }

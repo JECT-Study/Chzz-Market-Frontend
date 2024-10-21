@@ -67,7 +67,7 @@ export const useCancelBid = (): {
   const { mutate } = useMutation({
     mutationFn: cancelBid,
     onSuccess: () => {
-      toast.success('입찰이 취소되었습니다.');
+      toast.success('경매 참여를 취소했습니다.');
       queryClient.invalidateQueries({
         queryKey: [queryKeys.AUCTION_DETAILS],
       });

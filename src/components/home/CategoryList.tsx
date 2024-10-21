@@ -5,7 +5,7 @@ const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: 
   const navigate = useNavigate();
 
   const onClickCategory = () => {
-    navigate(`/product/list?category=${code.toLocaleLowerCase().replaceAll('_', '-')}`);
+    navigate(`/product/list?category=${code}`);
   };
   return (
     <li className='flex flex-col items-center w-full h-full gap-3 cursor-pointer' onClick={onClickCategory}>
@@ -21,7 +21,7 @@ const CategoryList = () => {
       <label className='text-heading3'>카테고리</label>
       <ul className='grid items-center justify-center grid-cols-2 gap-3 sm:gap-5 sm:grid-cols-4'>
         {Object.values(CATEGORIES).map((el) => (
-          <CategoryItem key={el.value} code={el.code} name={el.value} icon={el.icon} />
+          <CategoryItem key={el.value} code={el.lowerCode} name={el.value} icon={el.icon} />
         ))}
       </ul>
     </section>
