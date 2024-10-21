@@ -1,8 +1,9 @@
 export interface AddresDetail {
-  name: string,
+  recipientName: string,
   phoneNumber: string,
-  zonecode: string,
-  address: string,
-  addressDetail: string,
-  defaultAddress: string,
+  zipcode: string,
+  roadAddress: string,
+  jibun: string,
+  detailAddress: string,
+  isDefault: boolean,
 }

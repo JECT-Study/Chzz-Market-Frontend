@@ -25,4 +25,8 @@ export const ROUTE_INFO: {
     title: '내가 등록한 경매 내역',
     active: 'user',
   },
+  '/user/list/pre-registered': {
+    title: '내가 등록한 사전경매 내역',
+    active: 'user',
+  }
 });

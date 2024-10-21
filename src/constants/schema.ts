@@ -40,9 +40,7 @@ export const RegisterSchema = z.object({
 });
 
 export const AuctionPaymentSchema = z.object({
-  name: z.string().min(1, '이름을 입력해주세요.'),
-  address: z.string().min(1, '주소를 입력해주세요.'),
-  bank: z.string().min(1, '은행을 선택해주세요.'),
+  memo: z.string()
 });
 
 export const getBidSchema = (minPrice: number) =>
