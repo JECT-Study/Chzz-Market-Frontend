@@ -27,6 +27,7 @@ import PaymentSuccess from './pages/PaymentSuccess';
 import AuctionPayment from './pages/AuctionPayment';
 import DeliveryAddressList from './pages/DeliveryAddressList';
 import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
+import UserPreRegisteredList from './pages/UserPreRegisteredList';
 
 const layoutWithNavRouteList = [
   {
@@ -48,6 +49,10 @@ const layoutWithNavRouteList = [
   {
     path: ROUTERS.REGISTERED_LIST,
     element: <UserRegisteredList />,
+  },
+  {
+    path: ROUTERS.PRE_REGISTERED_LIST,
+    element: <UserPreRegisteredList />,
   },
   {
     path: ROUTERS.PARTICIPATED_LIST,

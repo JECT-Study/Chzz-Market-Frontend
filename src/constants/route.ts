@@ -4,6 +4,7 @@ const ROUTERS = Object.freeze({
   NOTIFICATION: '/notification',
   USER: '/user',
   REGISTERED_LIST: '/user/list/registered',
+  PRE_REGISTERED_LIST: '/user/list/pre-registered',
   PARTICIPATED_LIST: '/user/list/participated',
 
   SIGNUP: '/signup',
