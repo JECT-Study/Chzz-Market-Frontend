@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import rocation_on from '@/assets/icons/rocation_on.svg';
 import { AuctionPaymentSchema } from '@/constants/schema';
@@ -26,6 +26,8 @@ const AuctionPayment = () => {
   const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData = { items: [] }, postPayment} = usePostPayment(auctionId || '', orderId);
   const address = location.state?.address || (DefaultAddressData.items.length > 0 ? DefaultAddressData.items[0] : { recipientName: '', phoneNumber: '', roadAddress: '', detailAddress: '' });
 
+  const [isChecked, setIsChecked] = useState(false);
+
   useEffect(() => {
     if (auctionId) {
       createId();
@@ -40,7 +42,6 @@ const AuctionPayment = () => {
     defaultValues,
   });
 
-  const memo = watch('memo');
   const formattedAmount = formatCurrencyWithWon(auctionData.winningAmount);
 
   const handleSubmitClick = () => {
@@ -55,8 +56,12 @@ const AuctionPayment = () => {
     navigate(`/auctions/${auctionId}/address-list`);
   }
 
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+  };
+
   const onSubmit = (formData: FormFields) => {
-    postPayment();
+    postPayment(formData, address);
   };
 
   return (
@@ -115,7 +120,7 @@ const AuctionPayment = () => {
               <Input
                 id="배송메모"
                 type="text"
-                placeholder="링크를 입력해주세요"
+                placeholder="배송 메모를 입력해주세요"
                 className="focus-visible:ring-cheeseYellow"
                 {...field}
               />
@@ -131,7 +136,7 @@ const AuctionPayment = () => {
           </div>
           
           <div className="flex items-center">
-            <input type="checkbox" id="agree" className="mr-2" />
+            <input type="checkbox" id="agree" className="mr-2" checked={isChecked} onChange={handleCheckboxChange} />
             <label htmlFor="agree" className="text-sm">
               주의사항을 모두 확인하였으며 위 내용에 동의합니다.
             </label>
@@ -142,8 +147,9 @@ const AuctionPayment = () => {
         <Button
           type="submit"
           className="w-full h-[47px] rounded-lg"
-          color="cheeseYellow"
+          color={isChecked ? 'cheeseYellow' : 'gray3'}
           onClick={handleSubmitClick}
+          disabled={!isChecked}
         >
           결제 하기
         </Button>

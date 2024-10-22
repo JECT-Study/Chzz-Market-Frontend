@@ -38,9 +38,12 @@ declare module 'AuctionItem' {
   }
 
   export interface IUserAuctionWonItem extends IAuctionItemBase {
+    auctionId: number;
     endDateTime: string;
     winningAmount: number;
-    auctionId: number;
+    isOrdered: boolean;
+    orderId: number;
+    participantCount: number;
   }
   export interface IUserAuctionLostItem extends IAuctionItemBase {
     endDateTime: string;
