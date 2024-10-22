@@ -50,9 +50,9 @@ const Button = ({
 
   return (
     <button className={combinedClasses} disabled={disabled} onClick={onClick} type={type} aria-label={ariaLabel}>
-      <div className='flex items-center justify-center w-full gap-3'>
+      <div className='flex items-center justify-center w-full gap-2'>
+        <span className='pt-[2px]'>{children}</span>
         {loading && <ButtonSpinner />}
-        <span className='pt-[.125rem]'>{children}</span>
       </div>
     </button>
   );
