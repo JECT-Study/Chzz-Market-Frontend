@@ -12,7 +12,7 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
 
 
   const handleClick = () => {
-    navigate(`/auctions/${product.auctionId}/payment`);
+    navigate(`/auctions/${product.auctionId}/shipping`);
   }
 
   return (

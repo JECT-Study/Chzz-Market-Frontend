@@ -7,24 +7,38 @@ import { Input } from '@/components/ui/input';
 import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import rocation_on from '@/assets/icons/rocation_on.svg';
-import { AuctionPaymentSchema } from '@/constants/schema';
+import { AuctionShippingSchema } from '@/constants/schema';
 import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
-type FormFields = z.infer<typeof AuctionPaymentSchema>;
+type FormFields = z.infer<typeof AuctionShippingSchema>;
 
 const defaultValues = {
   memo: ''
 };
 
-const AuctionPayment = () => {
+const AuctionShipping = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId } = usePostOrderId();
-  const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData = { items: [] }, postPayment} = usePostPayment(auctionId || '', orderId);
-  const address = location.state?.address || (DefaultAddressData.items.length > 0 ? DefaultAddressData.items[0] : { recipientName: '', phoneNumber: '', roadAddress: '', detailAddress: '' });
+  const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment} = usePostPayment(auctionId || '', orderId);
+  let address = {
+    id: '',
+    recipientName: '',
+    phoneNumber: '',
+    zipcode: '',
+    roadAddress: '',
+    jibun: '',
+    detailAddress: '',
+    isDefault: false,
+  }
+  if (DefaultAddressData || location.state?.address) {
+    const selectedAddress = location.state?.address || DefaultAddressData.items[0];
+
+    address = {...selectedAddress}
+  }
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -36,7 +50,6 @@ const AuctionPayment = () => {
   
   const {
     control,
-    watch,
     handleSubmit,
   } = useForm<FormFields>({
     defaultValues,
@@ -93,21 +106,25 @@ const AuctionPayment = () => {
             <Button type='button' size='large' color='white' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
-          <div
-            className='flex p-4 rounded-md mb-4'
-          >
-            <div className="flex items-center">
-            <img src={rocation_on} className="text-cheeseYellow mr-2" alt="위치 아이콘" />
-            </div>
-            <div className="flex flex-col gap-2 mb-2">
-              <span className="text-cheeseYellow text-body2 font-semibold">기본배송지</span>
-              <span className="font-bold">{address.recipientName} / {address.phoneNumber}</span>
-              <div className="text-gray2">
-                <p>{address.roadAddress}</p>
-                <p>{address.detailAddress}</p>
+          {address ? (
+            <div
+              className='flex p-4 rounded-md mb-4'
+            >
+              <div className="flex items-center">
+              <img src={rocation_on} className="text-cheeseYellow mr-2" alt="위치 아이콘" />
+              </div>
+              <div className="flex flex-col gap-2 mb-2">
+                <span className="text-cheeseYellow text-body2 font-semibold">기본배송지</span>
+                <span className="font-bold">{address.recipientName} / {address.phoneNumber}</span>
+                <div className="text-gray2">
+                  <p>{address.roadAddress}</p>
+                  <p>{address.detailAddress}</p>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div>기본 배송지가 없습니다. 배송지 목록에서 배송지를 추가해주세요.</div>
+          )}
           <form
           ref={formRef}
           className="flex flex-col gap-6"
@@ -158,4 +175,4 @@ const AuctionPayment = () => {
   );
 };
 
-export default AuctionPayment;
+export default AuctionShipping;

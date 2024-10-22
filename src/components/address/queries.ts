@@ -27,6 +27,10 @@ export const getAddresses = async () => {
   return response.data;
 };
 
+export const editAddress = async (data: AddressDetail) => {
+  await httpClient.put(API_END_POINT.ADDRESS, { ...data });
+}
+
 export const addAddress = async (data: AddressDetail) => {
   await httpClient.post(API_END_POINT.ADDRESS, { ...data });
 };

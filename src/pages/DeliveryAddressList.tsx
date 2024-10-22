@@ -1,6 +1,6 @@
 import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
@@ -15,7 +15,6 @@ interface Props extends AddressDetail {
 
 const DeliveryAddressList = () => {
   const navigate = useNavigate();
-  const formRef = useRef<HTMLFormElement>(null);
   const { auctionId } = useParams<{ auctionId: string}>();
   const { addressData: initialAddressData } = useGetAddresses();
   const [addressData, setAddressData] = useState(initialAddressData);
@@ -31,21 +30,21 @@ const DeliveryAddressList = () => {
     }
   }, [initialAddressData]);
 
-  // const handleDelete = (id: string) => {
-  //   deleteData(id, {
-  //     onSuccess: () => {
-  //       const updatedAddressData = {
-  //         ...addressData,
-  //         items: addressData.items.filter((item: Props) => item.id !== id)
-  //       };
-  //       setAddressData(updatedAddressData);
+  const handleDelete = (id: string) => {
+    deleteData(id, {
+      onSuccess: () => {
+        const updatedAddressData = {
+          ...addressData,
+          items: addressData.items.filter((item: Props) => item.id !== id)
+        };
+        setAddressData(updatedAddressData);
         
-  //       if (selectAddress?.id === id) {
-  //         setSelectAddress(updatedAddressData.items[0] || null);
-  //       }
-  //     },
-  //   });
-  // };
+        if (selectAddress?.id === id) {
+          setSelectAddress(updatedAddressData.items[0] || null);
+        }
+      },
+    });
+  };
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -59,7 +58,7 @@ const DeliveryAddressList = () => {
   }, []);
 
   const handleSubmitClick = () => {
-    navigate(`/auctions/${auctionId}/payment`, { state: { address: selectAddress }})
+    navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress }})
   };
 
   const handleOpenAddress = () => {

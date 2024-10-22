@@ -6,7 +6,7 @@ import MinPrice from '../common/atomic/MinPrice';
 import CreatedAt from '../common/atomic/CreatedAt';
 
 const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
-  const formattedHighPrice = formatCurrencyWithWon(product.highestAmount);
+  const formattedHighPrice = formatCurrencyWithWon(product.bidAmount);
   
 
   return (

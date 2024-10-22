@@ -39,7 +39,7 @@ export const RegisterSchema = z.object({
   description: z.string().min(5, '상품 설명은 최소 5자 이상 입력해 주세요.').max(1000, '상품 설명은 최대 1000자 이하로 입력해 주세요.').or(z.literal('')),
 });
 
-export const AuctionPaymentSchema = z.object({
+export const AuctionShippingSchema = z.object({
   memo: z.string()
 });
 

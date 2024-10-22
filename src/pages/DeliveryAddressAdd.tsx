@@ -24,6 +24,7 @@ const DeliveryAddressAdd = () => {
   const { roadAddress, zonecode, jibunAddress } = location.state;
   const formRef = useRef<HTMLFormElement>(null);
   const [isChecked, setIsChecked] = useState(false);
+  const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
   }
@@ -46,8 +47,9 @@ const DeliveryAddressAdd = () => {
       jibun: jibunAddress,
     }
   });
-
+  const recipientName = watch('recipientName');
   const phoneNumber = watch('phoneNumber');
+  const detailAddress = watch('detailAddress');
 
   const handleSubmitClick = () => {
     if (formRef.current) {
@@ -103,7 +105,10 @@ const DeliveryAddressAdd = () => {
   useEffect(() => {
     const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
     setValue('phoneNumber', formattedPhoneNumber);
-  }, [phoneNumber, setValue]);
+    if (recipientName && phoneNumber && detailAddress) {
+      setIsVaild(true);
+    }
+  }, [phoneNumber, setValue, detailAddress, recipientName]);
 
   return (
     <Layout>
@@ -197,7 +202,13 @@ const DeliveryAddressAdd = () => {
         </div>
       </Layout.Main>
       <Layout.Footer type="single">
-        <Button type="submit" className="w-full h-[47px] rounded-lg" color="cheeseYellow" onClick={handleSubmitClick}>
+        <Button 
+          type="submit" 
+          className="w-full h-[47px] rounded-lg" 
+          color={isVaild ? "cheeseYellow" : "gray3"}
+          onClick={handleSubmitClick}
+          disabled={!isVaild}
+        >
           저장하기
         </Button>
       </Layout.Footer>

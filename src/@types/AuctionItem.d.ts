@@ -47,8 +47,9 @@ declare module 'AuctionItem' {
   }
   export interface IUserAuctionLostItem extends IAuctionItemBase {
     endDateTime: string;
-    highestAmount: number;
+    bidAmount: number;
     auctionId: number;
+    participantCount: number;
   }
   export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {
     auctionId: number;

@@ -86,7 +86,7 @@ const privateRouteList = [
     loader: registerLoader,
   },
   {
-    path: ROUTERS.AUCTION_PAYMENT,
+    path: ROUTERS.AUCTION_SHIPPING,
     element: <AuctionPayment />,
   },
   {
