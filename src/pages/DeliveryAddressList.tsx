@@ -5,6 +5,8 @@ import { IoIosSearch } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
 import { AddressDetail } from "@/@types/Address";
+import rocation_on from '@/assets/icons/rocation_on.svg';
+import rocation_off from '@/assets/icons/rocation_off.svg';
 import { useDeleteAddress, useGetAddresses } from "@/hooks/useAddress";
 
 interface Props extends AddressDetail {
@@ -29,21 +31,21 @@ const DeliveryAddressList = () => {
     }
   }, [initialAddressData]);
 
-  const handleDelete = (id: string) => {
-    deleteData(id, {
-      onSuccess: () => {
-        const updatedAddressData = {
-          ...addressData,
-          items: addressData.items.filter((item: Props) => item.id !== id)
-        };
-        setAddressData(updatedAddressData);
+  // const handleDelete = (id: string) => {
+  //   deleteData(id, {
+  //     onSuccess: () => {
+  //       const updatedAddressData = {
+  //         ...addressData,
+  //         items: addressData.items.filter((item: Props) => item.id !== id)
+  //       };
+  //       setAddressData(updatedAddressData);
         
-        if (selectAddress?.id === id) {
-          setSelectAddress(updatedAddressData.items[0] || null);
-        }
-      },
-    });
-  };
+  //       if (selectAddress?.id === id) {
+  //         setSelectAddress(updatedAddressData.items[0] || null);
+  //       }
+  //     },
+  //   });
+  // };
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -57,11 +59,7 @@ const DeliveryAddressList = () => {
   }, []);
 
   const handleSubmitClick = () => {
-    if (formRef.current) {
-      formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true }),
-      );
-    }
+    navigate(`/auctions/${auctionId}/payment`, { state: { address: selectAddress }})
   };
 
   const handleOpenAddress = () => {
@@ -106,9 +104,9 @@ const DeliveryAddressList = () => {
               >
                 <div className="flex items-center">
                   {selectAddress?.zipcode === item.zipcode ? (
-                    <span className="text-cheeseYellow mr-2">📍</span>
+                    <img src={rocation_on} className="text-cheeseYellow mr-2" alt="위치 아이콘" />
                   ) : (
-                    <span className="text-gray2 mr-2">📍</span>
+                    <img src={rocation_off} className="text-gray2 mr-2" alt="위치 아이콘" />
                   )}
                 </div>
                 <div className="flex flex-col gap-2 mb-2">
@@ -124,7 +122,6 @@ const DeliveryAddressList = () => {
                 <div className={`absolute ${item.isDefault ? 'right-4 top-16' : 'right-4 top-14'}`}>
                   {selectAddress?.zipcode === item.zipcode && <FaCheck />}
                 </div>
-                <button onClick={() => handleDelete(item.id)}>삭제</button>
               </li>
             ))}
             </ul>

@@ -3,14 +3,12 @@ import { queryKeys } from "@/constants/queryKeys";
 import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
 import { TossPaymentsPayment, loadTossPayments } from "@tosspayments/tosspayments-sdk";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const clientKey = `${import.meta.env.VITE_TOSS_CLIENT_KEY}`;
 
 export const usePostPayment = (auctionId: string, orderId: string) => {
   const [payment, setPayment] = useState<TossPaymentsPayment | null>(null);
-
-  const { data: auctionData, isLoading } = useQuery({
+  const { data: auctionData } = useQuery({
     queryKey: [queryKeys.AUCTION_ADDRESS_DETAIL],
     queryFn: () => useGetAddressDetail(auctionId)
   });
@@ -59,20 +57,19 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
     });
   } catch (error) {
     throw error;
-  }
+  };
 
-  return { auctionData, isLoading, postPayment, DefaultAddressData };
+  return { auctionData, postPayment, DefaultAddressData };
 };
 
-export const usePostOrderId = (auctionId: number): { createId: UseMutateFunction} => {
-  const navigate = useNavigate();
-
+export const usePostOrderId = (): { createId: UseMutateFunction, orderId: string} => {
+  const [orderId, setOrderId] = useState<string>('');
   const { mutate: createId } = useMutation({
     mutationFn: createOrderId,
     onSuccess: (data) => {
-      navigate(`/auctions/${auctionId}/payment`, {state : { orderId: data }});
+      setOrderId(data.orderId);
     }
   });
 
-  return { createId };
+  return { createId, orderId };
 };

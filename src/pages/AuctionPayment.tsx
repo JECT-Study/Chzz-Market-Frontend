@@ -4,10 +4,11 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Layout from '@/components/layout/Layout';
+import rocation_on from '@/assets/icons/rocation_on.svg';
 import { AuctionPaymentSchema } from '@/constants/schema';
-import { usePostPayment } from '@/hooks/usePayment';
+import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 type FormFields = z.infer<typeof AuctionPaymentSchema>;
@@ -21,25 +22,25 @@ const AuctionPayment = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
-  const orderId = location.state.orderId.orderId;
-  const { auctionData, DefaultAddressData, isLoading, postPayment} = usePostPayment(auctionId || '', orderId);
+  const { createId, orderId } = usePostOrderId();
+  const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData = { items: [] }, postPayment} = usePostPayment(auctionId || '', orderId);
+  const address = location.state?.address || (DefaultAddressData.items.length > 0 ? DefaultAddressData.items[0] : { recipientName: '', phoneNumber: '', roadAddress: '', detailAddress: '' });
+
+  useEffect(() => {
+    if (auctionId) {
+      createId();
+    }
+  }, [createId]);
+  
   const {
     control,
+    watch,
     handleSubmit,
   } = useForm<FormFields>({
     defaultValues,
   });
-  
-  if (!auctionId || isLoading || !auctionData) {
-    return (
-      <Layout>
-        <Layout.Header title="결제하기" handleBack={() => navigate('/')} />
-        <Layout.Main>
-          <p>로딩 중...</p>
-        </Layout.Main>
-      </Layout>
-    );
-  }
+
+  const memo = watch('memo');
   const formattedAmount = formatCurrencyWithWon(auctionData.winningAmount);
 
   const handleSubmitClick = () => {
@@ -83,22 +84,22 @@ const AuctionPayment = () => {
           {/* 수령지 입력 */}
           <span className='text-heading3'>수령지 입력</span>
           <div className='flex gap-2'>
-            <div className='flex justify-center items-center p-4'>기본 배송지</div>
-            <Button type='button' size='large' color='black' onClick={handleClickAddressList}>배송지 목록</Button>
+            <Button type='button' size='large' color='black'>기본 배송지</Button>
+            <Button type='button' size='large' color='white' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
           <div
             className='flex p-4 rounded-md mb-4'
           >
             <div className="flex items-center">
-              <span className="text-cheeseYellow mr-2">📍</span>
+            <img src={rocation_on} className="text-cheeseYellow mr-2" alt="위치 아이콘" />
             </div>
             <div className="flex flex-col gap-2 mb-2">
               <span className="text-cheeseYellow text-body2 font-semibold">기본배송지</span>
-              <span className="font-bold">{'김철수'} / {'010-1234-5678'}</span>
+              <span className="font-bold">{address.recipientName} / {address.phoneNumber}</span>
               <div className="text-gray2">
-                <p>{'서울특별시 중구 회현동 소공로 51'}</p>
-                <p>{'세임빌딩 1층 102호'}</p>
+                <p>{address.roadAddress}</p>
+                <p>{address.detailAddress}</p>
               </div>
             </div>
           </div>
