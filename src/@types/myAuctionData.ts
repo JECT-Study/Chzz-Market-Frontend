@@ -1,4 +1,4 @@
-import type { IAuctionItemBase } from 'AuctionItem';
+import { AuctionItem } from '@/mocks/data/auctionDetailPageData';
 
 // 페이지 정보에 대한 인터페이스
 export interface Pageable {
