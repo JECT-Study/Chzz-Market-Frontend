@@ -11,7 +11,7 @@ const OrderHistoryProduct = ({ product }: { product: IUserAuctionHistoryItem }) 
   
   return (
     <ProductItem product={product} onClick={() => navigate(`/auctions/bid/${product.auctionId}`)}>
-       <div
+      <div
         aria-label="시작가"
         className="flex items-center text-xs sm:text-body2 text-gray2"
       >
