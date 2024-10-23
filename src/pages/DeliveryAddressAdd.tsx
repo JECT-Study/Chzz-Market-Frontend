@@ -1,13 +1,13 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { usePostAddress } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
-import Layout from "@/components/layout/Layout";
 import { Input } from "@/components/ui/input";
+import Layout from "@/components/layout/Layout";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { useForm } from "react-hook-form";
+import { usePostAddress } from "@/components/address/queries";
 
 interface AddressProps {
   recipientName: string,
@@ -94,7 +94,7 @@ const DeliveryAddressAdd = () => {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = import.meta.env.VITE_SCRIPT_URL;
+    script.src = import.meta.env.VITE_ADDRESS_SCRIPT_URL;
     script.async = true;
     document.head.appendChild(script);
 

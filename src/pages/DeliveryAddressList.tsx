@@ -1,15 +1,15 @@
-import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
+import Button from "@/components/common/Button";
+import { FaCheck } from "react-icons/fa6";
 import type { IAddressDetail } from "@/@types/Address";
+import { IoIosSearch } from "react-icons/io";
+import Layout from "@/components/layout/Layout";
 import rocation_off from '@/assets/icons/rocation_off.svg';
 import rocation_on from '@/assets/icons/rocation_on.svg';
+import { useEffect } from "react";
 import { useGetAddresses } from "@/components/address/queries";
-import Button from "@/components/common/Button";
-import Layout from "@/components/layout/Layout";
 import { useState } from "react";
-import { FaCheck } from "react-icons/fa6";
-import { IoIosSearch } from "react-icons/io";
-import { useNavigate, useParams } from "react-router-dom";
 
 interface Props extends IAddressDetail {
   id: string;
@@ -32,7 +32,7 @@ const DeliveryAddressList = () => {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = import.meta.env.VITE_SCRIPT_URL;
+    script.src = import.meta.env.VITE_ADDRESS_SCRIPT_URL;
     script.async = true;
     document.head.appendChild(script);
 
