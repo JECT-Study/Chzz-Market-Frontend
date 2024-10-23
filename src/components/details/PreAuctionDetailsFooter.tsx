@@ -23,7 +23,7 @@ const PreAuctionDetailsFooter = ({ likeCount, preAuctionId, isSeller }: PreAucti
         <Button
           type="button"
           className="w-full h-full"
-          color={likeCount ? 'white' : "cheeseYellow"}
+          color={likeCount ? 'disabled' : "cheeseYellow"}
           onClick={() => likeAuctionItem(preAuctionId)}
         >
           {likeCount ? "좋아요 취소" : "좋아요"}
