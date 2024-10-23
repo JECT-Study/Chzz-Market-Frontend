@@ -8,6 +8,7 @@ import Layout from "@/components/layout/Layout";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { useEditAddress } from "@/components/address/queries";
 import { useForm } from "react-hook-form";
+import { ADDRESS_SCRIPT_URL } from "@/constants/address";
 
 interface AddressProps {
   recipientName: string,
@@ -97,7 +98,7 @@ const DeliveryAddressEdit = () => {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = import.meta.env.VITE_ADDRESS_SCRIPT_URL;
+    script.src = ADDRESS_SCRIPT_URL;
     script.async = true;
     document.head.appendChild(script);
 
