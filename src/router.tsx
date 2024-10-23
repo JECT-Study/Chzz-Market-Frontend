@@ -4,30 +4,30 @@ import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import Register, { loader as registerLoader } from './pages/Register';
 
-import ROUTES from '@/constants/routes';
-import ProductList from '@/pages/ProductList';
-import { createBrowserRouter } from 'react-router-dom';
 import APIAsyncBoundary from './components/common/boundary/APIAsyncBoundary';
-import GlobalAsyncBoundary from './components/common/boundary/GlobalAsyncBoundary';
-import RouteErrorBoundary from './components/common/boundary/RouteErrorBoundary';
-import PrivateRoute from './components/common/route/PrivateRoute';
-import PublicRoute from './components/common/route/PublicRoute';
-import GlobalLayout from './components/layout/GlobalLayout';
-import LayoutWithNav from './components/layout/LayoutWithNav';
 import AuctionPayment from './pages/AuctionPayment';
 import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
 import DeliveryAddressList from './pages/DeliveryAddressList';
+import GlobalAsyncBoundary from './components/common/boundary/GlobalAsyncBoundary';
+import GlobalLayout from './components/layout/GlobalLayout';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
+import LayoutWithNav from './components/layout/LayoutWithNav';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
+import OrderHistory from './pages/UserParticipatedList';
 import PaymentSuccess from './pages/PaymentSuccess';
+import PrivateRoute from './components/common/route/PrivateRoute';
+import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
+import PublicRoute from './components/common/route/PublicRoute';
+import ROUTES from '@/constants/routes';
+import RouteErrorBoundary from './components/common/boundary/RouteErrorBoundary';
 import Signup from './pages/Signup';
 import Test from './pages/Test';
 import User from './pages/User';
-import OrderHistory from './pages/UserParticipatedList';
 import UserRegisteredList from './pages/UserRegisteredList';
+import { createBrowserRouter } from 'react-router-dom';
 
 const layoutWithNavRouteList = [
   {
@@ -81,7 +81,7 @@ const privateRouteList = [
     loader: registerLoader,
   },
   {
-    path: ROUTES.AUCTION_PAYMENT,
+    path: ROUTES.AUCTION_SHIPPING,
     element: <AuctionPayment />,
   },
   {

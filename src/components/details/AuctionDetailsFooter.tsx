@@ -57,7 +57,7 @@ const AuctionDetailsFooter = ({ isOrdered = false, isWinner, isSeller, bidId, au
               </Button>
               :
               // 결제 이전
-              <Button type='button' onClick={() => navigate(ROUTES.getAuctionPaymentRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
+              <Button type='button' onClick={() => navigate(ROUTES.getAuctionShippingRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
                 결제하기
               </Button>)
             :

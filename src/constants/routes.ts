@@ -5,6 +5,7 @@ const ROUTES = Object.freeze({
   USER: '/user',
   REGISTERED_LIST: '/user/list/registered',
   PARTICIPATED_LIST: '/user/list/participated',
+  PRE_REGISTERED_LIST: '/user/list/pre-registered',
 
   SIGNUP: '/signup',
   LOGIN: '/login',
@@ -21,11 +22,13 @@ const ROUTES = Object.freeze({
   PRE_AUCTION_EDIT: '/auctions/pre-auction/edit',
   getPreAuctionEditRoute: (preAuctionId: number) => `/auctions/pre-auction/edit/${preAuctionId}`,
 
-  AUCTION_PAYMENT: '/auctions/:auctionId/payment',
-  getAuctionPaymentRoute: (auctionId: number) => `/auctions/${auctionId}/payment`,
+  AUCTION_SHIPPING: '/auctions/:auctionId/shipping',
+  getAuctionShippingRoute: (auctionId: number) => `/auctions/${auctionId}/shipping`,
   // delivery_address_list 라우터 재설정 필요
   DELIVERY_ADDRESS_LIST: '/auctions/:auctionId/address-list',
-  DELIVERY_ADDRESS_ADD: '/auctions/address-add',
+  DELIVERY_ADDRESS_ADD: '/auctions/:auctionId/address-add',
+  DELIVERY_ADDRESS_EDIT: '/auctions/:auctionId/address-edit',
+  EDIT_ADDRESS: '/auctions/:auctionId/edit-address',
 
   BID: '/auctions/bid/:auctionId',
   getBidRoute: (auctionId: number) => `/auctions/bid/${auctionId}`,
