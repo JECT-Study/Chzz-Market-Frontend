@@ -1,21 +1,18 @@
 import { ReactNode, forwardRef } from 'react';
 
 import BackArrowIcon from '@/assets/icons/back_arrow.svg';
-import ThreeDotsIcon from '@/assets/icons/three_dots.svg';
 import { useNavigate } from 'react-router';
 
 interface HeaderProps {
   title: string;
   handleBack?: () => void;
-  handleModal?: () => void;
-  isDisableMenuButton?: boolean;
+  option?: ReactNode
 }
 
 const Header = ({
   title,
   handleBack,
-  handleModal = undefined,
-  isDisableMenuButton = true,
+  option
 }: HeaderProps) => {
   const navigate = useNavigate();
   if (!handleBack) handleBack = () => navigate(-1);
@@ -33,15 +30,7 @@ const Header = ({
           </button>
         )}
         <h2 className='text-heading2 text-gray1'>{title}</h2>
-        {handleModal && !isDisableMenuButton && (
-          <button
-            aria-label='옵션'
-            onClick={handleModal}
-            className='absolute right-2'
-          >
-            <img src={ThreeDotsIcon} alt='옵션 아이콘' className='size-5' />
-          </button>
-        )}
+        {option}
       </div>
     </header>
   );

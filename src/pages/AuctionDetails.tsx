@@ -1,4 +1,3 @@
-
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import ParticipantAmount from '@/assets/icons/my_participation_amount.svg';
@@ -15,14 +14,11 @@ import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
   const { auctionDetails, refetch } = useGetAuctionDetails(auctionId);
-  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, bidId, remainingBidCount, status, description, isSeller, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
+  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, bidId, remainingBidCount, status, description, isSeller, participantCount, category, sellerProfileImageUrl, isCancelled, isWon } = auctionDetails
 
   return (
     <Layout>
-      <Layout.Header
-        title='제품 상세'
-        isDisableMenuButton
-      />
+      <Layout.Header title='제품 상세' />
       <Layout.Main>
         <div className='flex flex-col gap-5'>
           <div className='flex flex-col gap-2'>
@@ -68,11 +64,15 @@ const AuctionDetails = () => {
           </p>
         </div>
       </Layout.Main>
-      <AuctionDetailsFooter auctionId={auctionId}
+      <AuctionDetailsFooter
+        auctionId={auctionId}
         bidId={bidId}
         status={status}
         remainingBidCount={remainingBidCount}
-        isCancelled={isCancelled} isSeller={isSeller} />
+        isCancelled={isCancelled}
+        isSeller={isSeller}
+        isWon={isWon}
+      />
     </Layout>
   );
 };
