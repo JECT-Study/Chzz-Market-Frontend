@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import type { IAddressDetail } from "@/@types/Address";
@@ -7,7 +8,6 @@ import { useGetAddresses } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
 import { ADDRESS_SCRIPT_URL } from "@/constants/address";
-import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
 
@@ -50,12 +50,15 @@ const DeliveryAddressList = () => {
   }
 
   const handleOpenAddress = () => {
+    const popupWidth = 500;
+    const popupHeight = 600;
+
+    const left = window.innerWidth / 2 - popupWidth / 2 + window.screenLeft;
+    const top = window.innerHeight / 2 - popupHeight / 2 + window.screenTop;
+
     new window.daum.Postcode({
-      width: 500,
-      height: 430,
-      left: Math.ceil((window.screen.width - 500) / 2),
-      top: Math.ceil((window.screen.height - 600) / 2),
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      width: popupWidth,
+      height: popupHeight,
       onComplete: (data: any) => {
         const roadAddress = data.address;
         const jibunAddress = data.jibunAddress;
@@ -63,7 +66,10 @@ const DeliveryAddressList = () => {
 
         navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
       },
-    }).open();
+    }).open({
+      left,
+      top,
+    });
   };
 
   return (

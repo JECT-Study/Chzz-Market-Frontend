@@ -1,14 +1,14 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import { usePostAddress } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
-import { Input } from "@/components/ui/input";
 import Layout from "@/components/layout/Layout";
+import { Input } from "@/components/ui/input";
+import { ADDRESS_SCRIPT_URL } from "@/constants/address";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { useForm } from "react-hook-form";
-import { usePostAddress } from "@/components/address/queries";
-import { ADDRESS_SCRIPT_URL } from "@/constants/address";
 
 interface AddressProps {
   recipientName: string,
@@ -80,7 +80,16 @@ const DeliveryAddressAdd = () => {
   });
 
   const handleOpenAddress = () => {
+    const popupWidth = 500;
+    const popupHeight = 600;
+
+    // 현재 모니터의 중앙을 기준으로 팝업 위치 계산
+    const left = window.innerWidth / 2 - popupWidth / 2 + window.screenLeft;
+    const top = window.innerHeight / 2 - popupHeight / 2 + window.screenTop;
+
     new window.daum.Postcode({
+      width: popupWidth,
+      height: popupHeight,
       onComplete: (data: any) => {
         const roadAddress = data.address;
         const { zonecode } = data;
@@ -90,7 +99,10 @@ const DeliveryAddressAdd = () => {
 
         navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
       },
-    }).open();
+    }).open({
+      left,
+      top,
+    });
   };
 
   useEffect(() => {
