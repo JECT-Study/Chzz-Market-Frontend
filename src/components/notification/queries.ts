@@ -4,7 +4,7 @@ import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
 import { queryKeys } from '@/constants/queryKeys';
 import { isLoggedIn } from '@/store/authSlice';
-import type { INotification } from 'Notification';
+import type { INotification } from '@/@types/Notification';
 import { useSelector } from 'react-redux';
 
 export const useGetNotifications = () => {

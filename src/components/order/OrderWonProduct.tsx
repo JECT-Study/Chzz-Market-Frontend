@@ -1,9 +1,9 @@
-import type { IUserAuctionWonItem } from 'AuctionItem';
+import CreatedAt from '../common/atomic/CreatedAt';
+import type { IUserAuctionWonItem } from '@/@types/AuctionItem';
 import { LuUsers } from 'react-icons/lu';
+import MinPrice from '../common/atomic/MinPrice';
 import ProductItem from '../common/item/ProductItem';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import MinPrice from '../common/atomic/MinPrice';
-import CreatedAt from '../common/atomic/CreatedAt';
 
 const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const formattedWinningPrice = formatCurrencyWithWon(product.winningAmount);

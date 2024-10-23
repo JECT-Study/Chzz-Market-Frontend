@@ -1,11 +1,11 @@
 import Button from '../common/Button';
-import type { IPreAuctionItem } from 'AuctionItem';
+import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import ProductItem from '../common/item/ProductItem';
 import MinPrice from '../common/atomic/MinPrice';
 import LikeCount from '../common/atomic/LikeCount';
 
 const PreEnrollProduct = ({ product }: { product: IPreAuctionItem }) => {
-  
+
   return (
     <ProductItem product={product}>
       <MinPrice price={product.minPrice} />

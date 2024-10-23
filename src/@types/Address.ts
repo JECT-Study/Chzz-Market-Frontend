@@ -1,7 +1,7 @@
 export interface IAddressDetail {
   name: string;
   phoneNumber: string;
-  zoneCode: string;
+  zonecode: string;
   address: string;
   addressDetail: string;
   defaultAddress: string;

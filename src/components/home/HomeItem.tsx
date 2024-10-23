@@ -1,4 +1,4 @@
-import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
+import type { IAuctionItem, IPreAuctionItem } from '@/@types/AuctionItem';
 
 import ROUTERS from '@/constants/route';
 import { truncateText } from '@/utils/truncateText';

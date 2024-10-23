@@ -1,5 +1,5 @@
 import Button from '../common/Button';
-import type { IAuctionItem } from 'AuctionItem';
+import type { IAuctionItem } from '@/@types/AuctionItem';
 import ProductItem from '../common/item/ProductItem';
 import { useNavigate } from 'react-router-dom';
 import MinPrice from '../common/atomic/MinPrice';

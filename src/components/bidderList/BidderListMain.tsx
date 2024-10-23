@@ -1,6 +1,6 @@
 import { BIDDER_LIST_PRICE_FILTER } from "@/constants/filter";
 import { formatCurrencyWithWon } from "@/utils/formatCurrencyWithWon";
-import type { IBidder } from "Bid";
+import type { IBidder } from "@/@types/Bid";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
