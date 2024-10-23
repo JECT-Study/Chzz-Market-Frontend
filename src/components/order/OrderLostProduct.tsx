@@ -1,25 +1,25 @@
-import CreatedAt from '../common/atomic/CreatedAt';
 import type { IUserAuctionLostItem } from '@/@types/AuctionItem';
-import { LuUsers } from 'react-icons/lu';
-import MinPrice from '../common/atomic/MinPrice';
-import ProductItem from '../common/item/ProductItem';
+import PriceIcon from '@/assets/icons/price.svg';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import ParticipantCount from '../common/atomic/ParticipantCount';
+import ProductItem from '../common/item/ProductItem';
 
 const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
-  const formattedHighPrice = formatCurrencyWithWon(product.highestAmount);
+  const formattedHighPrice = formatCurrencyWithWon(product.bidAmount);
 
 
   return (
     <ProductItem product={product}>
-      <MinPrice price={product.minPrice} />
-      <CreatedAt createAt={product.endDateTime} />
-      <div className='flex'>
-        <div className='flex gap-2'>
-          <LuUsers className='text-gray-500' />
-          <p className='text-sm text-gray-500'>가장 높은 금액</p>
-        </div>
-        <p className='ml-4 font-semibold'>{formattedHighPrice}</p>
+      <div
+        aria-label="시작가"
+        className="flex items-center text-xs sm:text-body2 text-gray2"
+      >
+        <img src={PriceIcon} alt="나의 참여 금액" />
+        <span className='overflow-hidden whitespace-nowrap pt-[2px]'>
+          나의 참여 금액 <span className="ml-1 text-xs text-black sm:text-body2Bold">{formattedHighPrice}</span>
+        </span>
       </div>
+      <ParticipantCount count={product.participantCount} />
     </ProductItem>
   );
 };

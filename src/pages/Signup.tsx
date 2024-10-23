@@ -56,7 +56,7 @@ const Signup = () => {
     if (isAvailable === true) {
       setNicknameError('사용 가능한 닉네임입니다.')
     } else {
-      setNicknameError('이미 사용중인 닉네임입니다.')
+      setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.')
     }
   };
 

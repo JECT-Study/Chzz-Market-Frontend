@@ -1,54 +1,34 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
+import type { IAddressDetail } from "@/@types/Address";
+import rocation_off from '@/assets/icons/rocation_off.svg';
+import rocation_on from '@/assets/icons/rocation_on.svg';
+import { useGetAddresses } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
+import { useState } from "react";
+import { FaCheck } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const addressList = [
-  {
-    zonecode: '12345',
-    address: '서울특별시 중구 회현동 소공로 51',
-    addressDetail: '세인빌딩 1층 102호',
-    defaultAddress: true,
-  },
-  {
-    zonecode: '67890',
-    address: '경기도 수원시 장안구 영화동 320-2',
-    addressDetail: '프라이어상가 B동 203호',
-    defaultAddress: false,
-  },
-  {
-    zonecode: '12523',
-    address: '경기도 수원시 장안동 영화동 320-2',
-    addressDetail: '프라이어상가 B동 203호',
-    defaultAddress: false,
-  },
-]
+interface Props extends IAddressDetail {
+  id: string;
+}
 
 const DeliveryAddressList = () => {
   const navigate = useNavigate();
-  const formRef = useRef<HTMLFormElement>(null);
+  const { auctionId } = useParams<{ auctionId: string }>();
+  const { addressData: initialAddressData } = useGetAddresses();
+  const [addressData, setAddressData] = useState(initialAddressData);
+  const [selectAddress, setSelectAddress] = useState<Props | null>(null);
+  const addressItems = addressData?.items || [];
 
-  const handleSubmitClick = () => {
-    if (formRef.current) {
-      formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true }),
-      );
+  useEffect(() => {
+    if (initialAddressData?.items && initialAddressData.items.length > 0) {
+      setAddressData(initialAddressData);
+      setSelectAddress(initialAddressData.items[0]);
     }
-  };
-
-  const handleOpenAddress = () => {
-    new window.daum.Postcode({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onComplete: (data: any) => {
-        const roadAddress = data.address;
-        const { zonecode } = data;
-
-        navigate('/auctions/address-add', { state: { roadAddress: roadAddress, zonecode: zonecode } });
-      },
-    }).open();
-  };
+  }, [initialAddressData]);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -61,9 +41,31 @@ const DeliveryAddressList = () => {
     };
   }, []);
 
+  const handleSubmitClick = () => {
+    navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress } })
+  };
+
+  const handleEditButtonClick = () => {
+    navigate(`/auctions/${auctionId}/edit-address`);
+  }
+
+  const handleOpenAddress = () => {
+    new window.daum.Postcode({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      onComplete: (data: any) => {
+        const roadAddress = data.address;
+        const jibunAddress = data.jibunAddress;
+        const { zonecode } = data;
+
+        navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
+      },
+    }).open();
+  };
+
   return (
     <Layout>
       <Layout.Header title="배송지 목록" handleBack={() => navigate('/')} />
+      <span className="absolute text-xl cursor-pointer top-3 right-5" onClick={handleEditButtonClick}>편집</span>
       <Layout.Main>
         <div>
           <div className="flex flex-col gap-5 pt-10">
@@ -81,9 +83,33 @@ const DeliveryAddressList = () => {
           <div>
             <div className="border-b-8 border-gray-100 ml-[-32px] mr-[-32px] my-5" />
             <ul>
-              {addressList.map(item => (
-                <li key={item.zonecode}>
-                  hi
+              {addressItems.map((item: Props) => (
+                <li
+                  key={item.id}
+                  onClick={() => setSelectAddress(item)}
+                  className={`relative flex p-4 rounded-md mb-4 cursor-pointer border
+                ${selectAddress?.zipcode === item.zipcode ? 'border-cheeseYellow' : 'border-white'}`}
+                >
+                  <div className="flex items-center">
+                    {selectAddress?.zipcode === item.zipcode ? (
+                      <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
+                    ) : (
+                      <img src={rocation_off} className="mr-2 text-gray2" alt="위치 아이콘" />
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-2 mb-2">
+                    {item.isDefault && (
+                      <span className="font-semibold text-cheeseYellow text-body2">기본배송지</span>
+                    )}
+                    <span className="font-bold">{item.recipientName} / {item.phoneNumber}</span>
+                    <div className="text-gray2">
+                      <p>{item.roadAddress}</p>
+                      <p>{item.detailAddress}</p>
+                    </div>
+                  </div>
+                  <div className={`absolute ${item.isDefault ? 'right-4 top-16' : 'right-4 top-14'}`}>
+                    {selectAddress?.zipcode === item.zipcode && <FaCheck />}
+                  </div>
                 </li>
               ))}
             </ul>

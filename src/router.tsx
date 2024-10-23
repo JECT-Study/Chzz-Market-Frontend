@@ -4,30 +4,33 @@ import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import Register, { loader as registerLoader } from './pages/Register';
 
+import ROUTES from '@/constants/routes';
+import ProductList from '@/pages/ProductList';
+import { createBrowserRouter } from 'react-router-dom';
 import APIAsyncBoundary from './components/common/boundary/APIAsyncBoundary';
-import AuctionPayment from './pages/AuctionPayment';
-import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
-import DeliveryAddressList from './pages/DeliveryAddressList';
 import GlobalAsyncBoundary from './components/common/boundary/GlobalAsyncBoundary';
+import RouteErrorBoundary from './components/common/boundary/RouteErrorBoundary';
+import PrivateRoute from './components/common/route/PrivateRoute';
+import PublicRoute from './components/common/route/PublicRoute';
 import GlobalLayout from './components/layout/GlobalLayout';
+import LayoutWithNav from './components/layout/LayoutWithNav';
+import AuctionShipping from './pages/AuctionShipping';
+import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
+import DeliveryAddressEdit from './pages/DeliveryAddressEdit';
+import DeliveryAddressList from './pages/DeliveryAddressList';
+import EditAddress from './pages/EditAddress';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
-import LayoutWithNav from './components/layout/LayoutWithNav';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
-import OrderHistory from './pages/UserParticipatedList';
 import PaymentSuccess from './pages/PaymentSuccess';
-import PrivateRoute from './components/common/route/PrivateRoute';
-import ProductList from '@/pages/ProductList';
 import ProfileEdit from './pages/ProfileEdit';
-import PublicRoute from './components/common/route/PublicRoute';
-import ROUTES from '@/constants/routes';
-import RouteErrorBoundary from './components/common/boundary/RouteErrorBoundary';
 import Signup from './pages/Signup';
 import Test from './pages/Test';
 import User from './pages/User';
+import OrderHistory from './pages/UserParticipatedList';
+import UserPreRegisteredList from './pages/UserPreRegisteredList';
 import UserRegisteredList from './pages/UserRegisteredList';
-import { createBrowserRouter } from 'react-router-dom';
 
 const layoutWithNavRouteList = [
   {
@@ -49,6 +52,10 @@ const layoutWithNavRouteList = [
   {
     path: ROUTES.REGISTERED_LIST,
     element: <UserRegisteredList />,
+  },
+  {
+    path: ROUTES.PRE_REGISTERED_LIST,
+    element: <UserPreRegisteredList />,
   },
   {
     path: ROUTES.PARTICIPATED_LIST,
@@ -82,7 +89,7 @@ const privateRouteList = [
   },
   {
     path: ROUTES.AUCTION_SHIPPING,
-    element: <AuctionPayment />,
+    element: <AuctionShipping />,
   },
   {
     path: ROUTES.PAYMENT_SUCCESS,
@@ -95,6 +102,14 @@ const privateRouteList = [
   {
     path: ROUTES.DELIVERY_ADDRESS_ADD,
     element: <DeliveryAddressAdd />
+  },
+  {
+    path: ROUTES.DELIVERY_ADDRESS_EDIT,
+    element: <DeliveryAddressEdit />
+  },
+  {
+    path: ROUTES.EDIT_ADDRESS,
+    element: <EditAddress />
   }
 ];
 

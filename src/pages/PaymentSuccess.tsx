@@ -1,14 +1,21 @@
-import { httpClient } from "@/api/axios";
-import Layout from "@/components/layout/Layout";
-import { API_END_POINT } from "@/constants/api";
-import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+
+import { API_END_POINT } from "@/constants/api";
+import Layout from "@/components/layout/Layout";
+import { httpClient } from "@/api/axios";
+import { useEffect } from "react";
+
+interface Props {
+  addressId: number | null;
+  memo: string | null;
+}
 
 interface RequestData {
   orderId: string | null;
-  amount: string | null;
+  amount: number | null;
   paymentKey: string | null;
   auctionId: string | null;
+  shippingAddressRequest: Props | null;
 }
 
 const PaymentSuccess = () => {
@@ -19,8 +26,12 @@ const PaymentSuccess = () => {
     const requestData: RequestData = {
       auctionId: searchParams.get("auctionId"),
       orderId: searchParams.get("orderId"),
-      amount: searchParams.get("amount"),
+      amount: Number(searchParams.get("amount")),
       paymentKey: searchParams.get("paymentKey"),
+      shippingAddressRequest: {
+        memo: searchParams.get("memo"),
+        addressId: Number(searchParams.get("addressId"))
+      },
     };
 
     const confirm = async () => {
@@ -43,19 +54,19 @@ const PaymentSuccess = () => {
 
   return (
     <Layout>
-    <Layout.Header title="결제 성공 페이지" />
-    <Layout.Main>
-      <div className="result wrapper">
-        <div className="box_section">
-          <h2>결제 성공</h2>
-          <p>{`주문번호: ${searchParams.get("orderId")}`}</p>
-          <p>{`결제 금액: ${Number(
-            searchParams.get("amount")
-          ).toLocaleString()}원`}</p>
-          <p>{`paymentKey: ${searchParams.get("paymentKey")}`}</p>
+      <Layout.Header title="결제 성공 페이지" handleBack={() => navigate('/')} />
+      <Layout.Main>
+        <div className="result wrapper">
+          <div className="box_section">
+            <h2>결제 성공</h2>
+            <p>{`주문번호: ${searchParams.get("orderId")}`}</p>
+            <p>{`결제 금액: ${Number(
+              searchParams.get("amount")
+            ).toLocaleString()}원`}</p>
+            <p>{`paymentKey: ${searchParams.get("paymentKey")}`}</p>
+          </div>
         </div>
-      </div>
-    </Layout.Main>
+      </Layout.Main>
     </Layout>
   );
 }

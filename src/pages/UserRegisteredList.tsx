@@ -1,13 +1,12 @@
-import { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem, IPreAuctionRegisteredItem } from '@/@types/AuctionItem';
+import { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from '@/@types/AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import EndMyRegister from '@/components/user/EndMyRegister';
 import OngoingMyRegister from '@/components/user/OngoingMyRegister';
-import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 import UserOrderTab from '@/components/user/UserOrderTab';
-import { useLocation } from 'react-router-dom';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
+import { useLocation } from 'react-router-dom';
 
 const UserRegisteredList = () => {
   const location = useLocation();
@@ -16,12 +15,11 @@ const UserRegisteredList = () => {
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
-  const { ongoingData, endData, enrollData, fetchNextOngoingPage, fetchNextEndPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEndPage, hasNextEnrollPage, refetchOngoingData, refetchEndData, refetchEnrollData } =
+  const { ongoingData, endData, fetchNextOngoingPage, fetchNextEndPage, hasNextOngoingPage, hasNextEndPage, refetchOngoingData, refetchEndData } =
     useMyAuctionList(activeTab);
 
   const ongoingItems = ongoingData?.pages[0]?.items || [];
   const endItems = endData?.pages[0]?.items || [];
-  const enrollItems = enrollData?.pages[0]?.items || [];
 
   const handleObserver = useCallback(
     (entities: IntersectionObserverEntry[]) => {
@@ -33,12 +31,9 @@ const UserRegisteredList = () => {
         if (hasNextEndPage) {
           fetchNextEndPage();
         }
-        if (hasNextEnrollPage) {
-          fetchNextEnrollPage();
-        }
       }
     },
-    [fetchNextOngoingPage, fetchNextEndPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEndPage, hasNextEnrollPage]
+    [fetchNextOngoingPage, fetchNextEndPage, hasNextOngoingPage, hasNextEndPage]
   );
 
   useEffect(() => {
@@ -59,24 +54,22 @@ const UserRegisteredList = () => {
         observer.unobserve(currentLoader);
       }
     };
-  }, [fetchNextOngoingPage, fetchNextEndPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEndPage, hasNextEnrollPage, handleObserver]);
+  }, [fetchNextOngoingPage, fetchNextEndPage, hasNextOngoingPage, hasNextEndPage, handleObserver]);
 
   useEffect(() => {
     if (activeTab === 'ongoing') {
       refetchOngoingData();
     } else if (activeTab === 'end') {
       refetchEndData();
-    } else {
-      refetchEnrollData();
     }
-  }, [activeTab, refetchOngoingData, refetchEndData, refetchEnrollData]);
+  }, [activeTab, refetchOngoingData, refetchEndData]);
 
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'ongoing' &&
         <EmptyBoundary length={ongoingItems.length} name='userAuction'>
-          <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto`}>
+          <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto`}>
             {ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
               <OngoingMyRegister product={product} key={product.auctionId} />
             ))}
@@ -85,18 +78,9 @@ const UserRegisteredList = () => {
       }
       {activeTab === 'end' &&
         <EmptyBoundary length={ongoingItems.length} name='userAuction'>
-          <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto`}>
+          <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto`}>
             {endItems.map((product: IAuctionEndRegisteredItem) => (
               <EndMyRegister product={product} key={product.auctionId} />
-            ))}
-          </div>
-        </EmptyBoundary>
-      }
-      {activeTab === 'preAuction' &&
-        <EmptyBoundary length={enrollItems.length} name='userPreAuction'>
-          <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto`}>
-            {enrollItems.map((product: IPreAuctionRegisteredItem) => (
-              <PreEnrollMyRegister product={product} key={product.productId} />
             ))}
           </div>
         </EmptyBoundary>

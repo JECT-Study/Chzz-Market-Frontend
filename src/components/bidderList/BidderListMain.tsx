@@ -1,13 +1,13 @@
-import { BIDDER_LIST_PRICE_FILTER } from "@/constants/filter";
-import { formatCurrencyWithWon } from "@/utils/formatCurrencyWithWon";
-import type { IBidder } from "@/@types/Bid";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "../common/Button";
 import AuctionItem from "../common/item/AuctionItem";
-import { useGetAuctionDetails } from "../details/queries";
+import { BIDDER_LIST_PRICE_FILTER } from "@/constants/filter";
+import Button from "../common/Button";
+import type { IBidder } from "@/@types/Bid";
 import Layout from "../layout/Layout";
+import { formatCurrencyWithWon } from "@/utils/formatCurrencyWithWon";
+import { useGetAuctionDetails } from "../details/queries";
 import { useGetBidderList } from "./queries";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const BidderListMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);

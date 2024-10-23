@@ -3,10 +3,11 @@ import Button from '@/components/common/Button';
 import classNames from 'classnames';
 
 interface ProductButtonsProps {
-  setSortType: (sortType: string) => void;
+  setOngoingSortType: (sortType: string) => void;
+  setPreAuctionSortType: (sortType: string) => void;
 }
 
-const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
+const ProductButtons = ({ setOngoingSortType, setPreAuctionSortType }: ProductButtonsProps) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [activeFilter, setActiveFilter] = useState('newest');
 
@@ -28,7 +29,8 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
         type="button"
         className="rounded-full"
         onClick={() => {
-          setSortType('newest');
+          setOngoingSortType('newest');
+          setPreAuctionSortType('product-newest');
           setActiveFilter('newest');
         }}
       >
@@ -41,7 +43,8 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
         type="button"
         className="rounded-full"
         onClick={() => {
-          setSortType('popularity');
+          setOngoingSortType('popularity');
+          setPreAuctionSortType('most-liked');
           setActiveFilter('popularity');
         }}
       >
@@ -54,7 +57,8 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
         type="button"
         className="rounded-full"
         onClick={() => {
-          setSortType('expensive');
+          setOngoingSortType('expensive');
+          setPreAuctionSortType('expensive');
           setActiveFilter('expensive');
         }}
       >
@@ -67,7 +71,8 @@ const ProductButtons = ({ setSortType }: ProductButtonsProps) => {
         type="button"
         className="rounded-full"
         onClick={() => {
-          setSortType('cheap');
+          setOngoingSortType('cheap');
+          setPreAuctionSortType('cheap');
           setActiveFilter('cheap');
         }}
       >

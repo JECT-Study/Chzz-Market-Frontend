@@ -1,13 +1,12 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-
-import { usePostAddress } from "@/components/address/queries";
+import { useEditAddress } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
 import Layout from "@/components/layout/Layout";
 import { Input } from "@/components/ui/input";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 interface AddressProps {
   recipientName: string,
@@ -18,18 +17,20 @@ interface AddressProps {
   detailAddress: string,
 }
 
-const DeliveryAddressAdd = () => {
+const DeliveryAddressEdit = () => {
   const navigate = useNavigate();
-  const { auctionId } = useParams<{ auctionId: string }>();
+  const { auctionId } = useParams<{ auctionId: string}>();
   const location = useLocation();
-  const { roadAddress, zonecode, jibunAddress } = location.state;
+  const addressItem = location.state?.addressItem;
+  const roadAddress = location.state?.roadAddress;
+  const zonecode = location.state?.zonecode;
   const formRef = useRef<HTMLFormElement>(null);
   const [isChecked, setIsChecked] = useState(false);
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
   }
-  const { mutate } = usePostAddress(auctionId);
+  const { mutate } = useEditAddress(auctionId);
 
   const {
     control,
@@ -40,14 +41,15 @@ const DeliveryAddressAdd = () => {
     setError,
   } = useForm<AddressProps>({
     defaultValues: {
-      recipientName: '',
-      phoneNumber: '',
-      zipcode: zonecode,
-      roadAddress: roadAddress,
-      detailAddress: '',
-      jibun: jibunAddress,
+      recipientName: addressItem?.recipientName || '',
+      phoneNumber: addressItem?.phoneNumber || '',
+      zipcode: zonecode ? zonecode : addressItem?.zipcode,
+      roadAddress: roadAddress ? roadAddress : addressItem?.roadAddress,
+      detailAddress: addressItem?.detailAddress || '',
+      jibun: addressItem?.jibun || '',
     }
   });
+
   const recipientName = watch('recipientName');
   const phoneNumber = watch('phoneNumber');
   const detailAddress = watch('detailAddress');
@@ -75,7 +77,7 @@ const DeliveryAddressAdd = () => {
       ...data,
       isDefault: isChecked,
     };
-    mutate(finalData);
+    mutate({ addressId: addressItem.id, data: finalData });
   });
 
   const handleOpenAddress = () => {
@@ -87,7 +89,7 @@ const DeliveryAddressAdd = () => {
         setValue('zipcode', zonecode);
         setValue('roadAddress', roadAddress);
 
-        navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
+        navigate(`/auctions/${auctionId}/address-edit`, { state: { addressItem: addressItem, roadAddress, zonecode } });
       },
     }).open();
   };
@@ -113,7 +115,7 @@ const DeliveryAddressAdd = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 추가" handleBack={() => navigate('/')} />
+      <Layout.Header title="배송지 수정" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="flex flex-col">
           <form ref={formRef} className="flex flex-col gap-6" onSubmit={onSubmit}>
@@ -145,12 +147,12 @@ const DeliveryAddressAdd = () => {
                 />
               )}
             />
-            <div className="flex gap-6 item-center">
+            <div className="flex item-center gap-6">
               <label className="flex items-center w-[100px] font-bold">우편번호</label>
               <Input
                 id="우편번호"
                 type="text"
-                value={zonecode}
+                value={zonecode ? zonecode : addressItem.zipcode}
                 className="focus-visible:ring-cheeseYellow bg-gray3"
                 readOnly
               />
@@ -193,9 +195,9 @@ const DeliveryAddressAdd = () => {
                 type="checkbox"
                 checked={isChecked}
                 onChange={handleCheckboxChange}
-                className="w-4 h-4 border-gray-300 rounded text-cheeseYellow focus:ring-cheeseYellow"
+                className="w-4 h-4 text-cheeseYellow border-gray-300 rounded focus:ring-cheeseYellow"
               />
-              <label htmlFor="defaultAddress" className="text-lg text-center text-gray-3">
+              <label htmlFor="defaultAddress" className="text-lg text-gray-3 text-center">
                 기본 배송지로 설정
               </label>
             </div>
@@ -203,18 +205,18 @@ const DeliveryAddressAdd = () => {
         </div>
       </Layout.Main>
       <Layout.Footer type="single">
-        <Button
-          type="submit"
-          className="w-full h-[47px] rounded-lg"
+        <Button 
+          type="submit" 
+          className="w-full h-[47px] rounded-lg" 
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}
           disabled={!isVaild}
         >
-          저장하기
+        저장하기
         </Button>
       </Layout.Footer>
     </Layout>
   );
 };
 
-export default DeliveryAddressAdd;
+export default DeliveryAddressEdit;
