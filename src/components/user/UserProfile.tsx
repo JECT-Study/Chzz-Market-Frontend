@@ -3,20 +3,14 @@ import ProfileImage from '@/assets/icons/profile.svg';
 import { SiNaver } from 'react-icons/si';
 import { RiKakaoTalkFill } from "react-icons/ri";
 import Button from '../common/Button';
+import type { IProfileProps } from '@/@types/user';
 
-interface Props {
-  nickname?: string;
-  bio?: string;
-  link?: string;
-  profileImageUrl?: string;
-  providerType?: string;
-}
 
-const UserProfile = ({ nickname, bio, link, profileImageUrl, providerType }: Props) => {
+
+const UserProfile = ({ nickname, bio, profileImageUrl, providerType }: IProfileProps) => {
   const navigator = useNavigate();
   const userNickname = nickname || null;
   const userBio = bio || null;
-  const userLink = link || null;
   const userProfileImageUrl = profileImageUrl || null;
 
   return (
@@ -38,7 +32,7 @@ const UserProfile = ({ nickname, bio, link, profileImageUrl, providerType }: Pro
             size='medium'
             className="px-3 py-1 border border-gray2 rounded-md"
             onClick={() =>
-              navigator('profile/edit', { state: { userNickname, userBio, userLink, userProfileImageUrl } })
+              navigator('profile/edit', { state: { userNickname, userBio, userProfileImageUrl } })
             }
           >
             수정

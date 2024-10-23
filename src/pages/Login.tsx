@@ -19,24 +19,27 @@ const Login = () => {
       <Layout.Header title="로그인" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="flex flex-col items-center h-full">
-          <div className="w-full h-2/5 flex flex-col justify-center items-center mt-10">
-            <img src={ChizzImage} alt="logo" className="w-52 h-52" />
-            <h2 className="text-center pt-5 text-5xl font-bold">치즈 마켓</h2>
+          <div className="w-full h-2/5 flex flex-col justify-center items-center lg:mt-10">
+            <img 
+              src={ChizzImage} 
+              alt="logo" 
+              className="w-32 h-32 sm:w-[76px] sm:h-[69px] lg:w-40 lg:h-40 2xl:w-48 2xl:h-48" />
+            <h2 className="text-center pt-5 sm:text-2xl lg:text-4xl font-semibold">치즈 마켓</h2>
           </div>
 
-          <div className="flex flex-col gap-4 items-center w-full mt-20">
-            <div className="w-[320px] h-12">
+          <div className="flex flex-col gap-4 items-center w-full mt-5 lg:mt-10">
+            <div className="sm:w-[280px] lg:w-[320px] h-12">
               <img
                 src={kakaoImage}
                 alt="kakaoButton"
-                className="w-full h-full object-cover cursor-pointer rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-[#c8b612] focus:outline-none"
+                className="flex justify-center w-full h-full object-contain cursor-pointer rounded-lg hover:bg-[#F4DC00] focus:ring-2 focus:ring-offset-2 focus:ring-[#F4DC00] focus:outline-none"
                 onClick={handleKakaoLogin}
               />
             </div>
-            <div className="w-[320px] h-12 ">
+            <div className="flex justify-center sm:w-[280px] lg:w-[320px] h-12 ">
               <button
                 onClick={handleNaverLogin}
-                className="w-full h-12 bg-[#1ec800] text-white text-lg rounded-lg flex items-center cursor-pointer hover:bg-[#17b000] focus:ring-2 focus:ring-offset-2 focus:ring-[#17b000] focus:outline-none"
+                className="w-full h-12 bg-[#1ec800] text-white text-base sm:text-lg  rounded-lg flex items-center cursor-pointer hover:bg-[#17b000] focus:ring-2 focus:ring-offset-2 focus:ring-[#17b000] focus:outline-none"
                 aria-label="네이버 로그인"
               >
                 <div className="flex items-center justify-center w-12 h-full rounded-l-lg">
