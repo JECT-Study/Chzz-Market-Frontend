@@ -1,15 +1,15 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import Button from '@/components/common/Button';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import FormField from '@/components/common/form/FormField';
-import { Input } from '@/components/ui/input';
-import { useEffect, useRef, useState } from 'react';
-import Layout from '@/components/layout/Layout';
 import rocation_on from '@/assets/icons/rocation_on.svg';
+import Button from '@/components/common/Button';
+import FormField from '@/components/common/form/FormField';
+import Layout from '@/components/layout/Layout';
+import { Input } from '@/components/ui/input';
 import { AuctionShippingSchema } from '@/constants/schema';
 import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { z } from 'zod';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
 
@@ -23,7 +23,7 @@ const AuctionShipping = () => {
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId } = usePostOrderId();
-  const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment} = usePostPayment(auctionId || '', orderId);
+  const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment } = usePostPayment(auctionId || '', orderId);
   let address = {
     id: '',
     recipientName: '',
@@ -37,7 +37,7 @@ const AuctionShipping = () => {
   if (DefaultAddressData || location.state?.address) {
     const selectedAddress = location.state?.address || DefaultAddressData.items[0];
 
-    address = {...selectedAddress}
+    address = { ...selectedAddress }
   }
 
   const [isChecked, setIsChecked] = useState(false);
@@ -47,7 +47,7 @@ const AuctionShipping = () => {
       createId();
     }
   }, [createId]);
-  
+
   const {
     control,
     handleSubmit,
@@ -83,7 +83,7 @@ const AuctionShipping = () => {
       <Layout.Main>
         <div className="space-y-6">
           {/* 기본 정보 입력 */}
-          <div className="p-4 space-y-2 rounded-lg">
+          <div className="py-4 space-y-2 rounded-lg">
             <h2 className="text-lg font-semibold">기본 정보 입력</h2>
             {/* 상품 정보 */}
             <div className="flex p-2 space-x-4">
@@ -95,10 +95,10 @@ const AuctionShipping = () => {
               <div>
                 <p className="font-bold">{auctionData?.productName}</p>
                 <p>결제 금액</p>
-                <p className="text-cheeseYellow heading3 font-semibold">{formattedAmount}</p>
+                <p className="font-semibold text-cheeseYellow heading3">{formattedAmount}</p>
               </div>
             </div>
-          </div>    
+          </div>
           {/* 수령지 입력 */}
           <span className='text-heading3'>수령지 입력</span>
           <div className='flex gap-2'>
@@ -108,13 +108,13 @@ const AuctionShipping = () => {
           {/* 배송지 */}
           {address ? (
             <div
-              className='flex p-4 rounded-md mb-4'
+              className='flex p-4 mb-4 rounded-md'
             >
               <div className="flex items-center">
-              <img src={rocation_on} className="text-cheeseYellow mr-2" alt="위치 아이콘" />
+                <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
               </div>
               <div className="flex flex-col gap-2 mb-2">
-                <span className="text-cheeseYellow text-body2 font-semibold">기본배송지</span>
+                <span className="font-semibold text-cheeseYellow text-body2">기본배송지</span>
                 <span className="font-bold">{address.recipientName} / {address.phoneNumber}</span>
                 <div className="text-gray2">
                   <p>{address.roadAddress}</p>
@@ -126,23 +126,23 @@ const AuctionShipping = () => {
             <div>기본 배송지가 없습니다. 배송지 목록에서 배송지를 추가해주세요.</div>
           )}
           <form
-          ref={formRef}
-          className="flex flex-col gap-6"
-          onSubmit={handleSubmit(onSubmit)}>
+            ref={formRef}
+            className="flex flex-col gap-6"
+            onSubmit={handleSubmit(onSubmit)}>
             <FormField
-            label="배송메모"
-            name="memo"
-            control={control}
-            render={(field) => (
-              <Input
-                id="배송메모"
-                type="text"
-                placeholder="배송 메모를 입력해주세요"
-                className="focus-visible:ring-cheeseYellow"
-                {...field}
-              />
-            )}
-          />
+              label="배송메모"
+              name="memo"
+              control={control}
+              render={(field) => (
+                <Input
+                  id="배송메모"
+                  type="text"
+                  placeholder="배송 메모를 입력해주세요"
+                  className="focus-visible:ring-cheeseYellow"
+                  {...field}
+                />
+              )}
+            />
           </form>
 
           <h3 className="text-heading3">결제 방법</h3>
@@ -151,7 +151,7 @@ const AuctionShipping = () => {
               토스로 결제
             </Button>
           </div>
-          
+
           <div className="flex items-center">
             <input type="checkbox" id="agree" className="mr-2" checked={isChecked} onChange={handleCheckboxChange} />
             <label htmlFor="agree" className="text-sm">

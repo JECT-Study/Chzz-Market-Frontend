@@ -12,6 +12,8 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const formattedWinningPrice = formatCurrencyWithWon(product.winningAmount);
   const formatted = formatCurrencyWithWon(product.minPrice);
 
+  const handleProductClick = () => navigate(`/auctions/auction/${product.auctionId}`)
+
   const handleButtonClick = () => {
     if (!product.isOrdered) {
       navigate(`/auctions/${product.auctionId}/shipping`);
@@ -21,7 +23,7 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   }
 
   return (
-    <ProductItem product={product}>
+    <ProductItem product={product} onClick={handleProductClick}>
       <div
         aria-label="시작가"
         className="flex items-center text-xs sm:text-body2 text-gray2"

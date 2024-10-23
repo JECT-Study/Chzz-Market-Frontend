@@ -24,7 +24,7 @@ const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
   return (
     <div className='relative border rounded basis-1/2'>
       <img src={src} alt='이미지' className='object-cover w-full rounded' />
-      {time && <TimeLabel time={time} />}
+      {time !== undefined && <TimeLabel time={time} />}
     </div>
   );
 };
