@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
-import { AddressDetail } from "@/@types/Address";
+import type { IAddressDetail } from "@/@types/Address";
 import rocation_on from '@/assets/icons/rocation_on.svg';
 import rocation_off from '@/assets/icons/rocation_off.svg';
-import { useDeleteAddress, useGetAddresses } from "@/hooks/useAddress";
+import { useDeleteAddress, useGetAddresses } from "@/components/address/queries";
 
-interface Props extends AddressDetail {
+interface Props extends IAddressDetail {
   id: string;
 }
 

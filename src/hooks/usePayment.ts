@@ -1,11 +1,11 @@
-import { AddressDetail } from "@/@types/Address";
+import type { IAddressDetail } from "@/@types/Address";
 import { createOrderId, getAddress, getCustomerKey, useGetAddressDetail } from "@/components/address/queries";
 import { queryKeys } from "@/constants/queryKeys";
 import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
 import { loadTossPayments } from "@tosspayments/tosspayments-sdk";
 import { useState } from "react";
 
-interface Props extends AddressDetail {
+interface Props extends IAddressDetail {
   id: string;
 }
 

@@ -7,7 +7,7 @@ interface UserOrderTabProps {
 
 const UserOrderTab = ({ activeTab, setActiveTab }: UserOrderTabProps) => {
   return (
-    <div className="flex justify-center w-full">
+    <div className='flex justify-center w-full'>
       <div
         className={classNames(
           'flex justify-center items-center w-full py-2 cursor-pointer font-bold',

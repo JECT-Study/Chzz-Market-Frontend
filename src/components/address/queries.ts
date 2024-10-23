@@ -1,6 +1,9 @@
-import { AddressDetail } from "@/@types/Address";
+import { IAddressDetail } from "@/@types/Address";
 import { httpClient } from "@/api/axios";
 import { API_END_POINT } from "@/constants/api";
+import { queryKeys } from "@/constants/queryKeys";
+import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const useGetAddressDetail = async (auctionId: string) => {
   const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/${auctionId}/winning-bid`);
@@ -27,14 +30,55 @@ export const getAddresses = async () => {
   return response.data;
 };
 
-export const editAddress = async (data: AddressDetail) => {
+export const editAddress = async (data: IAddressDetail) => {
   await httpClient.put(API_END_POINT.ADDRESS, { ...data });
 }
 
-export const addAddress = async (data: AddressDetail) => {
+export const addAddress = async (data: IAddressDetail) => {
   await httpClient.post(API_END_POINT.ADDRESS, { ...data });
 };
 
 export const deleteAddress = async (addressId: string) => {
   await httpClient.delete(`${API_END_POINT.ADDRESS}/${addressId}`);
 };
+
+export const usePostAddress = (auctionId: string): {mutate: UseMutateFunction<any, Error, IAddressDetail, unknown>;} => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: addAddress,
+    onSuccess: () => {
+      navigate(`/auctions/${auctionId}/address-list`)
+    }
+  });
+
+  return { mutate };
+}
+
+export const useEditAddress = (auctionId: string): {mutate: UseMutateFunction<any, Error, IAddressDetail, unknown>;} => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: editAddress,
+    onSuccess: () => {
+      navigate(`/auctions/${auctionId}/address-list`)
+    }
+  });
+
+  return { mutate };
+}
+
+export const useGetAddresses = () => {
+  const { data: addressData } = useQuery({
+    queryKey: [queryKeys.ADDRESSES],
+    queryFn: () => getAddresses()
+  });
+
+  return { addressData };
+}
+
+export const useDeleteAddress = () => {
+  const { mutate: deleteData } = useMutation({
+    mutationFn: deleteAddress,
+  });
+
+  return { deleteData };
+}

@@ -1,8 +1,8 @@
+import { usePostAddress } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
 import Layout from "@/components/layout/Layout";
 import { Input } from "@/components/ui/input";
-import { usePostAddress } from "@/hooks/useAddress";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";

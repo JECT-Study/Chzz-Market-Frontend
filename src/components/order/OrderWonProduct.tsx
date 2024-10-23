@@ -12,8 +12,6 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const formattedWinningPrice = formatCurrencyWithWon(product.winningAmount);
   const formatted = formatCurrencyWithWon(product.minPrice);
 
-  console.log(product);
-
   const handleButtonClick = () => {
     if (product.isOrdered) {
       navigate(`/auctions/${product.auctionId}/shipping`);
