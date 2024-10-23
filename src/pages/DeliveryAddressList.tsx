@@ -1,13 +1,15 @@
+import { useEffect } from "react";
+
+import type { IAddressDetail } from "@/@types/Address";
+import rocation_off from '@/assets/icons/rocation_off.svg';
+import rocation_on from '@/assets/icons/rocation_on.svg';
+import { useGetAddresses } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { FaCheck } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
-import { FaCheck } from "react-icons/fa6";
-import type { IAddressDetail } from "@/@types/Address";
-import rocation_on from '@/assets/icons/rocation_on.svg';
-import rocation_off from '@/assets/icons/rocation_off.svg';
-import { useGetAddresses } from "@/components/address/queries";
 
 interface Props extends IAddressDetail {
   id: string;
@@ -15,7 +17,7 @@ interface Props extends IAddressDetail {
 
 const DeliveryAddressList = () => {
   const navigate = useNavigate();
-  const { auctionId } = useParams<{ auctionId: string}>();
+  const { auctionId } = useParams<{ auctionId: string }>();
   const { addressData: initialAddressData } = useGetAddresses();
   const [addressData, setAddressData] = useState(initialAddressData);
   const [selectAddress, setSelectAddress] = useState<Props | null>(null);
@@ -40,7 +42,7 @@ const DeliveryAddressList = () => {
   }, []);
 
   const handleSubmitClick = () => {
-    navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress }})
+    navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress } })
   };
 
   const handleEditButtonClick = () => {
@@ -55,7 +57,7 @@ const DeliveryAddressList = () => {
         const jibunAddress = data.jibunAddress;
         const { zonecode } = data;
 
-        navigate(`/auctions/${auctionId}/address-add`, { state: {roadAddress: roadAddress, zonecode: zonecode, jibunAddress: jibunAddress }});
+        navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
       },
     }).open();
   };
@@ -63,10 +65,10 @@ const DeliveryAddressList = () => {
   return (
     <Layout>
       <Layout.Header title="배송지 목록" handleBack={() => navigate('/')} />
-      <span className="absolute top-3 right-5 text-xl cursor-pointer" onClick={handleEditButtonClick}>편집</span>
+      <span className="absolute text-xl cursor-pointer top-3 right-5" onClick={handleEditButtonClick}>편집</span>
       <Layout.Main>
         <div>
-          <div className="flex flex-col pt-10 gap-5">
+          <div className="flex flex-col gap-5 pt-10">
             <h1 className="text-2xl font-semibold">배송지 추가</h1>
             <div onClick={handleOpenAddress} className="relative flex items-center w-full">
               <IoIosSearch className="absolute left-3 text-muted-foreground" />
@@ -76,40 +78,40 @@ const DeliveryAddressList = () => {
                 autoComplete="off"
                 placeholder="지번, 도로명, 건물명으로 검색"
               />
-            </div>            
+            </div>
           </div>
           <div>
             <div className="border-b-8 border-gray-100 ml-[-32px] mr-[-32px] my-5" />
             <ul>
-            {addressItems.map((item: Props) => (
-              <li
-                key={item.id}
-                onClick={() => setSelectAddress(item)}
-                className={`relative flex p-4 rounded-md mb-4 cursor-pointer border
+              {addressItems.map((item: Props) => (
+                <li
+                  key={item.id}
+                  onClick={() => setSelectAddress(item)}
+                  className={`relative flex p-4 rounded-md mb-4 cursor-pointer border
                 ${selectAddress?.zipcode === item.zipcode ? 'border-cheeseYellow' : 'border-white'}`}
-              >
-                <div className="flex items-center">
-                  {selectAddress?.zipcode === item.zipcode ? (
-                    <img src={rocation_on} className="text-cheeseYellow mr-2" alt="위치 아이콘" />
-                  ) : (
-                    <img src={rocation_off} className="text-gray2 mr-2" alt="위치 아이콘" />
-                  )}
-                </div>
-                <div className="flex flex-col gap-2 mb-2">
-                  {item.isDefault && (
-                    <span className="text-cheeseYellow text-body2 font-semibold">기본배송지</span>
-                  )}
-                  <span className="font-bold">{item.recipientName} / {item.phoneNumber}</span>
-                  <div className="text-gray2">
-                    <p>{item.roadAddress}</p>
-                    <p>{item.detailAddress}</p>
+                >
+                  <div className="flex items-center">
+                    {selectAddress?.zipcode === item.zipcode ? (
+                      <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
+                    ) : (
+                      <img src={rocation_off} className="mr-2 text-gray2" alt="위치 아이콘" />
+                    )}
                   </div>
-                </div>
-                <div className={`absolute ${item.isDefault ? 'right-4 top-16' : 'right-4 top-14'}`}>
-                  {selectAddress?.zipcode === item.zipcode && <FaCheck />}
-                </div>
-              </li>
-            ))}
+                  <div className="flex flex-col gap-2 mb-2">
+                    {item.isDefault && (
+                      <span className="font-semibold text-cheeseYellow text-body2">기본배송지</span>
+                    )}
+                    <span className="font-bold">{item.recipientName} / {item.phoneNumber}</span>
+                    <div className="text-gray2">
+                      <p>{item.roadAddress}</p>
+                      <p>{item.detailAddress}</p>
+                    </div>
+                  </div>
+                  <div className={`absolute ${item.isDefault ? 'right-4 top-16' : 'right-4 top-14'}`}>
+                    {selectAddress?.zipcode === item.zipcode && <FaCheck />}
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

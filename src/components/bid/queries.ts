@@ -1,10 +1,10 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
-import { IBidPostData } from 'Bid';
-import { useNavigate } from 'react-router-dom';
+import type { IBidPostData } from '@/@types/Bid';
+import { httpClient } from '@/api/axios';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 export const usePostBid = (
   auctionId: number

@@ -27,7 +27,9 @@ vi.mocked(useGetAuctionDetails).mockReturnValue({
     status: 'PROCEEDING',
     timeRemaining: 25816,
     category: 'ELECTRONICS',
-    sellerProfileImageUrl: ''
+    sellerProfileImageUrl: '',
+    isWinner: false,
+    isWon: false
   },
   refetch: vi.fn().mockResolvedValue({ // refetch 추가
     data: {

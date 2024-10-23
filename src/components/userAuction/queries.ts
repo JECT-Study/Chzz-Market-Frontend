@@ -1,6 +1,6 @@
 import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
-import { IUserAuctionHistoryList, IUserAuctionLostList } from 'AuctionList';
+import { IUserAuctionHistoryList, IUserAuctionLostList } from '@/@types/AuctionList';
 
 export interface GetProductParams {
   pageNumber: number;

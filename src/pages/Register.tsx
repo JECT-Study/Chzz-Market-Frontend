@@ -20,7 +20,7 @@ import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { dataURLtoFile } from '@/utils/dataURLToFile';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { IRegister } from 'Register';
+import type { IRegister } from '@/@types/Register';
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
 

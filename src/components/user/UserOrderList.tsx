@@ -1,4 +1,4 @@
-import ROUTERS from '@/constants/route';
+import ROUTERS from '@/constants/routes';
 import { useAuth } from '@/hooks/useAuth';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';

@@ -1,14 +1,14 @@
-import type { IUserAuctionHistoryItem } from 'AuctionItem';
-import ProductItem from '../common/item/ProductItem';
-import { useNavigate } from 'react-router-dom';
+import type { IUserAuctionHistoryItem } from '@/@types/AuctionItem';
 import PriceIcon from '@/assets/icons/price.svg';
-import ParticipantCount from '../common/atomic/ParticipantCount';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { useNavigate } from 'react-router-dom';
+import ParticipantCount from '../common/atomic/ParticipantCount';
+import ProductItem from '../common/item/ProductItem';
 
 const OrderHistoryProduct = ({ product }: { product: IUserAuctionHistoryItem }) => {
   const navigate = useNavigate();
   const formatted = formatCurrencyWithWon(product.minPrice);
-  
+
   return (
     <ProductItem product={product} onClick={() => navigate(`/auctions/bid/${product.auctionId}`)}>
       <div

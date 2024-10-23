@@ -1,5 +1,5 @@
+import type { IAuctionDetails, IPreAuctionDetails } from '@/@types/AuctionDetails';
 import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-import type { IAuctionDetails, IPreAuctionDetails } from 'AuctionDetails';
 
 import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';

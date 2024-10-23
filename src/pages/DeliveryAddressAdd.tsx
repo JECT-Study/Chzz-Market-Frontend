@@ -1,12 +1,13 @@
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 import { usePostAddress } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
 import Layout from "@/components/layout/Layout";
 import { Input } from "@/components/ui/input";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 interface AddressProps {
   recipientName: string,
@@ -19,7 +20,7 @@ interface AddressProps {
 
 const DeliveryAddressAdd = () => {
   const navigate = useNavigate();
-  const { auctionId } = useParams<{ auctionId: string}>();
+  const { auctionId } = useParams<{ auctionId: string }>();
   const location = useLocation();
   const { roadAddress, zonecode, jibunAddress } = location.state;
   const formRef = useRef<HTMLFormElement>(null);
@@ -144,7 +145,7 @@ const DeliveryAddressAdd = () => {
                 />
               )}
             />
-            <div className="flex item-center gap-6">
+            <div className="flex gap-6 item-center">
               <label className="flex items-center w-[100px] font-bold">우편번호</label>
               <Input
                 id="우편번호"
@@ -192,9 +193,9 @@ const DeliveryAddressAdd = () => {
                 type="checkbox"
                 checked={isChecked}
                 onChange={handleCheckboxChange}
-                className="w-4 h-4 text-cheeseYellow border-gray-300 rounded focus:ring-cheeseYellow"
+                className="w-4 h-4 border-gray-300 rounded text-cheeseYellow focus:ring-cheeseYellow"
               />
-              <label htmlFor="defaultAddress" className="text-lg text-gray-3 text-center">
+              <label htmlFor="defaultAddress" className="text-lg text-center text-gray-3">
                 기본 배송지로 설정
               </label>
             </div>
@@ -202,9 +203,9 @@ const DeliveryAddressAdd = () => {
         </div>
       </Layout.Main>
       <Layout.Footer type="single">
-        <Button 
-          type="submit" 
-          className="w-full h-[47px] rounded-lg" 
+        <Button
+          type="submit"
+          className="w-full h-[47px] rounded-lg"
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}
           disabled={!isVaild}

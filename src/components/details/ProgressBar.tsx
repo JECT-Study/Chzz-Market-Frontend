@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
-import type { IAuctionDetails } from 'AuctionDetails';
 import { useEffect, useState } from 'react';
+
+import type { IAuctionDetails } from '@/@types/AuctionDetails';
 
 const totalTime = 24 * 60 ** 2
 

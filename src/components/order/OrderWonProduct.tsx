@@ -1,11 +1,11 @@
-import type { IUserAuctionWonItem } from 'AuctionItem';
-import { LuUsers } from 'react-icons/lu';
-import ProductItem from '../common/item/ProductItem';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import type { IUserAuctionWonItem } from '@/@types/AuctionItem';
 import PriceIcon from '@/assets/icons/price.svg';
-import CreatedAt from '../common/atomic/CreatedAt';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { LuUsers } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
+import CreatedAt from '../common/atomic/CreatedAt';
+import ProductItem from '../common/item/ProductItem';
 
 const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const navigate = useNavigate();

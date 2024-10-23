@@ -1,11 +1,11 @@
-import ProductItem from '../common/item/ProductItem';
-import type { IAuctionEndRegisteredItem } from 'AuctionItem';
-import { useNavigate } from 'react-router-dom';
+import type { IAuctionEndRegisteredItem } from '@/@types/AuctionItem';
 import PriceIcon from '@/assets/icons/price.svg';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { useNavigate } from 'react-router-dom';
+import CreatedAt from '../common/atomic/CreatedAt';
 import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import CreatedAt from '../common/atomic/CreatedAt';
+import ProductItem from '../common/item/ProductItem';
 
 const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
   const navigate = useNavigate();

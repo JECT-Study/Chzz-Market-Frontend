@@ -1,8 +1,8 @@
 import { useGetNotificationsWithSuspense } from '@/components/notification/queries';
 
+import type { INotification } from '@/@types/Notification';
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import NotificationItem from '@/components/notification/NotificationItem';
-import type { INotification } from 'Notification';
 
 const Notification = () => {
   const { notifications } = useGetNotificationsWithSuspense();

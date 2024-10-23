@@ -1,9 +1,9 @@
-import Button from '../common/Button';
-import type { IPreAuctionItem } from 'AuctionItem';
-import ProductItem from '../common/item/ProductItem';
-import MinPrice from '../common/atomic/MinPrice';
-import LikeCount from '../common/atomic/LikeCount';
+import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import { useNavigate } from 'react-router-dom';
+import Button from '../common/Button';
+import LikeCount from '../common/atomic/LikeCount';
+import MinPrice from '../common/atomic/MinPrice';
+import ProductItem from '../common/item/ProductItem';
 import { useDeletePreAuctionHeart } from '../heart/queries';
 
 const PreEnrollProduct = ({ product }: { product: IPreAuctionItem }) => {
@@ -16,8 +16,7 @@ const PreEnrollProduct = ({ product }: { product: IPreAuctionItem }) => {
     <ProductItem product={product} onClick={handleProductClick}>
       <MinPrice price={product.minPrice} />
       <LikeCount count={product.likeCount} />
-      <Button onClick={(event) => 
-      {
+      <Button onClick={(event) => {
         event.stopPropagation();
         confirmDelete();
       }} color={product.isLiked ? 'black' : 'white'} type='button' size='small'>

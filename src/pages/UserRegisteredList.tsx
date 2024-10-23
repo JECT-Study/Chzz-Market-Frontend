@@ -1,12 +1,12 @@
-import { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from 'AuctionItem';
+import { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from '@/@types/AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
+import EndMyRegister from '@/components/user/EndMyRegister';
 import OngoingMyRegister from '@/components/user/OngoingMyRegister';
 import UserOrderTab from '@/components/user/UserOrderTab';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
 import { useLocation } from 'react-router-dom';
-import EndMyRegister from '@/components/user/EndMyRegister';
 
 const UserRegisteredList = () => {
   const location = useLocation();
@@ -67,7 +67,7 @@ const UserRegisteredList = () => {
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'ongoing' && 
+      {activeTab === 'ongoing' &&
         <EmptyBoundary length={ongoingItems.length} name='userAuction'>
           <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto`}>
             {ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (

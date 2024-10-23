@@ -1,6 +1,6 @@
+import type { IAuctionDetails } from '@/@types/AuctionDetails';
 import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
 import jordanRedImage from '@/assets/images/jordan_red.jpeg';
-import { IAuctionDetails } from 'AuctionDetails';
 
 export const auctionDetailsData: IAuctionDetails[] = [
   {
@@ -22,6 +22,8 @@ export const auctionDetailsData: IAuctionDetails[] = [
     timeRemaining: 25816,
     category: 'ELECTRONICS',
     sellerProfileImageUrl: '',
+    isWinner: false,
+    isWon: false,
   },
   {
     bidAmount: 0,
@@ -42,5 +44,7 @@ export const auctionDetailsData: IAuctionDetails[] = [
     timeRemaining: 25816,
     category: 'ELECTRONICS',
     sellerProfileImageUrl: '',
+    isWinner: false,
+    isWon: false,
   },
 ];

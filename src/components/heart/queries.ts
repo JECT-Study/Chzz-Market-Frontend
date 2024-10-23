@@ -3,7 +3,7 @@ import { UseMutateFunction, useMutation, useQueryClient, useSuspenseQuery } from
 import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
 import { queryKeys } from '@/constants/queryKeys';
-import { IPreAuctionItem } from 'AuctionItem';
+import { IPreAuctionItem } from '@/@types/AuctionItem';
 import { toast } from 'sonner';
 
 export const useGetPreAuctionHeartList = () => {

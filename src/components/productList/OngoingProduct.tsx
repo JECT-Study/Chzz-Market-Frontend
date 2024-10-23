@@ -1,9 +1,9 @@
-import Button from '../common/Button';
-import type { IAuctionItem } from 'AuctionItem';
-import ProductItem from '../common/item/ProductItem';
+import type { IAuctionItem } from '@/@types/AuctionItem';
 import { useNavigate } from 'react-router-dom';
+import Button from '../common/Button';
 import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
+import ProductItem from '../common/item/ProductItem';
 
 const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
   const navigate = useNavigate();

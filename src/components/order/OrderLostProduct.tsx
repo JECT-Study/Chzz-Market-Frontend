@@ -1,12 +1,12 @@
-import type { IUserAuctionLostItem } from 'AuctionItem';
-import ProductItem from '../common/item/ProductItem';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import type { IUserAuctionLostItem } from '@/@types/AuctionItem';
 import PriceIcon from '@/assets/icons/price.svg';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import ParticipantCount from '../common/atomic/ParticipantCount';
+import ProductItem from '../common/item/ProductItem';
 
 const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
   const formattedHighPrice = formatCurrencyWithWon(product.bidAmount);
-  
+
 
   return (
     <ProductItem product={product}>

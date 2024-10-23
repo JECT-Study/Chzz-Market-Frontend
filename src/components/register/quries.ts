@@ -2,6 +2,7 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
 import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
+import ROUTES from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -50,7 +51,7 @@ export const usePatchPreAuction = (
     mutationFn: patchPreAuction,
     onSuccess: () => {
       toast.success('사전 경매가 수정되었습니다.');
-      navigate(`/auctions/pre-auction/${preAuctionId}`);
+      navigate(ROUTES.getPreAuctionItemRoute(preAuctionId));
     },
   });
 

@@ -1,11 +1,11 @@
-import { IPreAuctionRegisteredItem } from 'AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
+import type { IPreAuctionRegisteredItem } from '@/@types/AuctionItem';
 import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
-import useMyAuctionList from '@/hooks/useMyAuctionList';
-import { useLocation } from 'react-router-dom';
 import UserPreOrderTab from '@/components/user/UserPreOrderTab';
+import { useLocation } from 'react-router-dom';
+import useMyAuctionList from '@/hooks/useMyAuctionList';
 
 const UserPreRegisteredList = () => {
   const location = useLocation();
@@ -54,7 +54,7 @@ const UserPreRegisteredList = () => {
   useEffect(() => {
     if (activeTab === 'end') {
       refetchEnrollData();
-    } 
+    }
   }, [activeTab, refetchEnrollData]);
 
   return (
