@@ -17,7 +17,7 @@ export const NOTIFICATION_CONTENTS: Record<string, NotificationContent> = Object
   AUCTION_WINNER: {
     title: '입찰 성공 알림',
     buttonName: '구매 확정하러 가기',
-    link: (auctionId: number) => `/auctions/${auctionId}/payment`,
+    link: (auctionId: number) => `/auctions/${auctionId}/shipping`,
   },
   AUCTION_NON_WINNER: {
     title: '입찰 실패 알림',
