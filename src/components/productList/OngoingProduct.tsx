@@ -1,13 +1,14 @@
-import Button from '../common/Button';
 import type { IAuctionItem } from '@/@types/AuctionItem';
-import ProductItem from '../common/item/ProductItem';
+import ROUTES from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
+import Button from '../common/Button';
 import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
+import ProductItem from '../common/item/ProductItem';
 
 const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/auctions/bid/${product.auctionId}`);
+  const handleClick = () => navigate(ROUTES.getBidRoute(product.auctionId));
 
   return (
     <ProductItem product={product}>

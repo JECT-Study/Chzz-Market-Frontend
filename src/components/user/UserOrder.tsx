@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import OnGoingIcon from '@/assets/icons/ongoing_auction.svg';
-import SuccessIcon from '@/assets/icons/successful_auction.svg';
-import FailedIcon from '@/assets/icons/failed_auction.svg';
 import AuctionIcon from '@/assets/icons/auction.svg';
+import FailedIcon from '@/assets/icons/failed_auction.svg';
+import OnGoingIcon from '@/assets/icons/ongoing_auction.svg';
 import PreAuctionIcon from '@/assets/icons/pre_auction.svg';
-import ROUTERS from '@/constants/route';
+import SuccessIcon from '@/assets/icons/successful_auction.svg';
+import ROUTERS from '@/constants/routes';
+import { useNavigate } from 'react-router-dom';
 
 interface ParticipationCountItmes {
   failedAuctionCount?: number;
@@ -18,7 +18,7 @@ interface Props {
   registeredAuctionCount?: number;
 }
 
-const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount}: Props) => {
+const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount }: Props) => {
   const navigate = useNavigate();
   const $participantCount = participantCount || { failedAuctionCount: 0, ongoingAuctionCount: 0, successfulAuctionCount: 0 };
   const $preRegisterCount = preRegisterCount || 0;

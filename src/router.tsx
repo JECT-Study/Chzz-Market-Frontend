@@ -1,3 +1,9 @@
+import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
+import Bid, { loader as bidLoader } from './pages/Bid';
+import BidderList, { loader as bidderListLoader } from './pages/BidderList';
+import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
+import Register, { loader as registerLoader } from './pages/Register';
+
 import ROUTES from '@/constants/routes';
 import ProductList from '@/pages/ProductList';
 import { createBrowserRouter } from 'react-router-dom';
@@ -8,10 +14,7 @@ import PrivateRoute from './components/common/route/PrivateRoute';
 import PublicRoute from './components/common/route/PublicRoute';
 import GlobalLayout from './components/layout/GlobalLayout';
 import LayoutWithNav from './components/layout/LayoutWithNav';
-import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
 import AuctionPayment from './pages/AuctionPayment';
-import Bid, { loader as bidLoader } from './pages/Bid';
-import BidderList, { loader as bidderListLoader } from './pages/BidderList';
 import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
 import DeliveryAddressList from './pages/DeliveryAddressList';
 import Heart from './pages/Heart';
@@ -19,9 +22,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
 import PaymentSuccess from './pages/PaymentSuccess';
-import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
 import ProfileEdit from './pages/ProfileEdit';
-import Register, { loader as registerLoader } from './pages/Register';
 import Signup from './pages/Signup';
 import Test from './pages/Test';
 import User from './pages/User';
@@ -75,7 +76,7 @@ const privateRouteList = [
     element: <Register />,
   },
   {
-    path: `${ROUTES.PRE_AUCTION.EDIT}/:preAuctionId`,
+    path: `${ROUTES.PRE_AUCTION_EDIT}/:preAuctionId`,
     element: <Register />,
     loader: registerLoader,
   },
@@ -151,14 +152,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: `${ROUTES.AUCTION.ITEM}/:auctionId`,
+        path: `${ROUTES.AUCTION_ITEM}/:auctionId`,
         element: (
           <AuctionDetails />
         ),
         loader: auctionDetailsLoader,
       },
       {
-        path: `${ROUTES.PRE_AUCTION.ITEM}/:preAuctionId`,
+        path: `${ROUTES.PRE_AUCTION_ITEM}/:preAuctionId`,
         element: (
           <PreAuctionDetails />
         ),
