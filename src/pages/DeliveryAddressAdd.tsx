@@ -86,7 +86,7 @@ const DeliveryAddressAdd = () => {
         setValue('zipcode', zonecode);
         setValue('roadAddress', roadAddress);
 
-        navigate('/auctions/address-add', { state: { roadAddress, zonecode } });
+        navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
       },
     }).open();
   };

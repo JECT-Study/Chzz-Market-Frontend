@@ -28,5 +28,5 @@ export const ROUTE_INFO: {
   '/user/list/pre-registered': {
     title: '내가 등록한 사전경매 내역',
     active: 'user',
-  }
+  },
 });

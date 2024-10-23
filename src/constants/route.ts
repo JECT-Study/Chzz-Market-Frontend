@@ -24,6 +24,7 @@ const ROUTERS = Object.freeze({
   DELIVERY_ADDRESS_LIST: '/auctions/:auctionId/address-list',
   DELIVERY_ADDRESS_ADD: '/auctions/:auctionId/address-add',
   DELIVERY_ADDRESS_EDIT: '/auctions/:auctionId/address-edit',
+  EDIT_ADDRESS: '/auctions/:auctionId/edit-address',
 
   BID: '/auctions/bid/:auctionId',
   FINAL_BIDDER_LIST: '/auctions/:auctionId/final-bidder-list',

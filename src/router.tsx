@@ -29,6 +29,7 @@ import DeliveryAddressList from './pages/DeliveryAddressList';
 import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
 import UserPreRegisteredList from './pages/UserPreRegisteredList';
 import DeliveryAddressEdit from './pages/DeliveryAddressEdit';
+import EditAddress from './pages/EditAddress';
 
 const layoutWithNavRouteList = [
   {
@@ -104,6 +105,10 @@ const privateRouteList = [
   {
     path: ROUTERS.DELIVERY_ADDRESS_EDIT,
     element: <DeliveryAddressEdit />
+  },
+  {
+    path: ROUTERS.EDIT_ADDRESS,
+    element: <EditAddress />
   }
 ];
 

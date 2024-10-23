@@ -30,8 +30,8 @@ export const getAddresses = async () => {
   return response.data;
 };
 
-export const editAddress = async (data: IAddressDetail) => {
-  await httpClient.put(API_END_POINT.ADDRESS, { ...data });
+export const editAddress = async ({addressId, data }: { addressId: string, data: IAddressDetail }) => {
+  await httpClient.put(`${API_END_POINT.ADDRESS}/${addressId}`, { ...data });
 }
 
 export const addAddress = async (data: IAddressDetail) => {
@@ -54,10 +54,10 @@ export const usePostAddress = (auctionId: string): {mutate: UseMutateFunction<an
   return { mutate };
 }
 
-export const useEditAddress = (auctionId: string): {mutate: UseMutateFunction<any, Error, IAddressDetail, unknown>;} => {
+export const useEditAddress = (auctionId: string): {mutate: UseMutateFunction<any, Error, { addressId: string, data: IAddressDetail }, unknown>;} => {
   const navigate = useNavigate();
   const { mutate } = useMutation({
-    mutationFn: editAddress,
+    mutationFn: ({ addressId, data }: { addressId: string, data: IAddressDetail }) => editAddress({ addressId, data }),
     onSuccess: () => {
       navigate(`/auctions/${auctionId}/address-list`)
     }

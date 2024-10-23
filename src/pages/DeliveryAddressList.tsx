@@ -7,7 +7,7 @@ import { FaCheck } from "react-icons/fa6";
 import type { IAddressDetail } from "@/@types/Address";
 import rocation_on from '@/assets/icons/rocation_on.svg';
 import rocation_off from '@/assets/icons/rocation_off.svg';
-import { useDeleteAddress, useGetAddresses } from "@/components/address/queries";
+import { useGetAddresses } from "@/components/address/queries";
 
 interface Props extends IAddressDetail {
   id: string;
@@ -19,8 +19,6 @@ const DeliveryAddressList = () => {
   const { addressData: initialAddressData } = useGetAddresses();
   const [addressData, setAddressData] = useState(initialAddressData);
   const [selectAddress, setSelectAddress] = useState<Props | null>(null);
-
-  const { deleteData } = useDeleteAddress();
   const addressItems = addressData?.items || [];
 
   useEffect(() => {
@@ -29,22 +27,6 @@ const DeliveryAddressList = () => {
       setSelectAddress(initialAddressData.items[0]);
     }
   }, [initialAddressData]);
-
-  const handleDelete = (id: string) => {
-    deleteData(id, {
-      onSuccess: () => {
-        const updatedAddressData = {
-          ...addressData,
-          items: addressData.items.filter((item: Props) => item.id !== id)
-        };
-        setAddressData(updatedAddressData);
-        
-        if (selectAddress?.id === id) {
-          setSelectAddress(updatedAddressData.items[0] || null);
-        }
-      },
-    });
-  };
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -60,6 +42,10 @@ const DeliveryAddressList = () => {
   const handleSubmitClick = () => {
     navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress }})
   };
+
+  const handleEditButtonClick = () => {
+    navigate(`/auctions/${auctionId}/edit-address`);
+  }
 
   const handleOpenAddress = () => {
     new window.daum.Postcode({
@@ -77,6 +63,7 @@ const DeliveryAddressList = () => {
   return (
     <Layout>
       <Layout.Header title="배송지 목록" handleBack={() => navigate('/')} />
+      <span className="absolute top-3 right-5 text-xl cursor-pointer" onClick={handleEditButtonClick}>편집</span>
       <Layout.Main>
         <div>
           <div className="flex flex-col pt-10 gap-5">

@@ -1,4 +1,4 @@
-import { usePostAddress } from "@/components/address/queries";
+import { useEditAddress } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
 import Layout from "@/components/layout/Layout";
@@ -21,15 +21,16 @@ const DeliveryAddressEdit = () => {
   const navigate = useNavigate();
   const { auctionId } = useParams<{ auctionId: string}>();
   const location = useLocation();
-  const { roadAddress, zonecode, jibunAddress } = location.state;
+  const addressItem = location.state?.addressItem;
+  const roadAddress = location.state?.roadAddress;
+  const zonecode = location.state?.zonecode;
   const formRef = useRef<HTMLFormElement>(null);
   const [isChecked, setIsChecked] = useState(false);
   const [isVaild, setIsVaild] = useState(false);
-
   if (!auctionId) {
     return;
   }
-  const { mutate } = usePostAddress(auctionId);
+  const { mutate } = useEditAddress(auctionId);
 
   const {
     control,
@@ -40,12 +41,12 @@ const DeliveryAddressEdit = () => {
     setError,
   } = useForm<AddressProps>({
     defaultValues: {
-      recipientName: '',
-      phoneNumber: '',
-      zipcode: zonecode,
-      roadAddress: roadAddress,
-      detailAddress: '',
-      jibun: jibunAddress,
+      recipientName: addressItem?.recipientName || '',
+      phoneNumber: addressItem?.phoneNumber || '',
+      zipcode: zonecode ? zonecode : addressItem?.zipcode,
+      roadAddress: roadAddress ? roadAddress : addressItem?.roadAddress,
+      detailAddress: addressItem?.detailAddress || '',
+      jibun: addressItem?.jibun || '',
     }
   });
 
@@ -76,7 +77,7 @@ const DeliveryAddressEdit = () => {
       ...data,
       isDefault: isChecked,
     };
-    mutate(finalData);
+    mutate({ addressId: addressItem.id, data: finalData });
   });
 
   const handleOpenAddress = () => {
@@ -88,7 +89,7 @@ const DeliveryAddressEdit = () => {
         setValue('zipcode', zonecode);
         setValue('roadAddress', roadAddress);
 
-        navigate('/auctions/address-add', { state: { roadAddress, zonecode } });
+        navigate(`/auctions/${auctionId}/address-edit`, { state: { addressItem: addressItem, roadAddress, zonecode } });
       },
     }).open();
   };
@@ -151,7 +152,7 @@ const DeliveryAddressEdit = () => {
               <Input
                 id="우편번호"
                 type="text"
-                value={zonecode}
+                value={zonecode ? zonecode : addressItem.zipcode}
                 className="focus-visible:ring-cheeseYellow bg-gray3"
                 readOnly
               />
