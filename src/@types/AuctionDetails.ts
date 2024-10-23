@@ -22,6 +22,9 @@ export interface IAuctionDetails extends IAuctionDetailsBase {
   bidAmount: number;
   remainingBidCount: number;
   isCancelled: boolean;
+  isWinner: boolean;
+  isWon: boolean;
+  isOrdered?: boolean;
 }
 
 export interface IPreAuctionDetails extends IAuctionDetailsBase {

@@ -1,10 +1,10 @@
-
 import Button from "@/components/common/Button";
 import { useCancelBid } from "@/components/details/queries";
 import { MAX_BID_COUNT } from "@/constants/bid";
-import { useState } from "react";
+import ROUTES from "@/constants/routes";
 import { useNavigate } from "react-router-dom";
-import ConfirmModal from "../common/ConfirmModal";
+import Confirm from "../common/Confirm";
+import Modal from "../common/Modal";
 import Layout from "../layout/Layout";
 
 interface AuctionDetailsFooterProps {
@@ -14,47 +14,85 @@ interface AuctionDetailsFooterProps {
   status: string
   remainingBidCount: number
   isSeller: boolean
+  isWon: boolean
+  isWinner: boolean
+  isOrdered?: boolean
 }
 
-const AuctionDetailsFooter = ({ isSeller, bidId, auctionId, isCancelled, status, remainingBidCount }: AuctionDetailsFooterProps) => {
+const AuctionDetailsFooter = ({ isOrdered = false, isWinner, isSeller, bidId, auctionId, isCancelled, status, remainingBidCount, isWon }: AuctionDetailsFooterProps) => {
   const navigate = useNavigate();
-  const [confirm, setConfirm] = useState(false)
-  const toggleConfirm = () => setConfirm((prev) => !prev)
   const { mutate: cancelBid } = useCancelBid()
   const remainFlag = remainingBidCount === MAX_BID_COUNT
-  const clickBid = () => navigate(`/auctions/bid/${auctionId}`)
+  const disabledFlag = remainingBidCount === 0
+  const clickBid = () => navigate(ROUTES.getBidRoute(auctionId))
   const clickCancel = () => cancelBid(bidId || 0)
 
-  if (status !== 'PROCEEDING') {
+  // 경매 종료
+  if (status === 'ENDED') {
     return (
       <Layout.Footer type="single">
-        <Button type='button' disabled className='w-full h-full'>
-          종료된 경매
-        </Button>
+        {isSeller
+          ?
+          // 판매자
+          (isWon
+            ?
+            // 낙찰
+            <Button type='button' onClick={() => navigate(ROUTES.getFinalBidderListRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
+              참여자 내역 보기
+            </Button>
+            :
+            // 유찰
+            <Button type='button' disabled color="disabled" className='w-full h-full'>
+              참여자 내역 보기
+            </Button>)
+          :
+          // 낙찰 성공
+          (isWinner
+            ?
+            (isOrdered
+              ?
+              // 결제 완료
+              <Button type='button' color="cheeseYellow" className='w-full h-full'>
+                결제 내역 보기
+              </Button>
+              :
+              // 결제 이전
+              <Button type='button' onClick={() => navigate(ROUTES.getAuctionPaymentRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
+                결제하기
+              </Button>)
+            :
+            // 낙찰 실패
+            <Button type='button' disabled color="disabled" className='w-full h-full'>
+              종료된 경매
+            </Button>)
+        }
       </Layout.Footer>
     );
   }
 
+  // 경매 진행 중
   if (isCancelled) {
     return (
       <Layout.Footer type="single">
-        <Button type='button' disabled className='w-full h-full'>
+        <Button type='button' disabled color="disabled" className='w-full h-full'>
           참여 취소 한 경매
         </Button>
       </Layout.Footer>
     );
   }
 
+  // 판매자
   if (isSeller) {
     return (
       <Layout.Footer type="single">
-        <Button type='button' disabled className='w-full h-full'>
+        <Button type='button' disabled color="disabled" className='w-full h-full'>
           내가 등록한 경매
         </Button>
       </Layout.Footer>
     );
   }
 
+  // 구매자
   return (
     <>
       <Layout.Footer type={remainFlag ? 'single' : 'double'}>
@@ -70,18 +108,28 @@ const AuctionDetailsFooter = ({ isSeller, bidId, auctionId, isCancelled, status,
           </Button>
           :
           <>
-            <Button
-              type="button"
-              color="white"
-              className="flex-1 h-full transition-colors rounded text-button active:bg-black"
-              onClick={toggleConfirm}
-            >
-              참여 취소
-            </Button>
+            <Modal>
+              <Modal.Open name="cancelBid">
+                <Button
+                  type="button"
+                  className="flex-1 h-full transition-colors rounded text-button active:bg-black"
+                >
+                  참여 취소
+                </Button>
+              </Modal.Open>
+              <Modal.Window name="cancelBid">
+                <Confirm type="cancelBid" >
+                  <Button type='button' color='cheeseYellow' className='w-full' onClick={clickCancel}>
+                    참여 취소
+                  </Button>
+                </Confirm>
+              </Modal.Window>
+            </Modal>
             <Button
               type="button"
               className="flex-[2] h-full"
-              color="cheeseYellow"
+              disabled={disabledFlag}
+              color={`${disabledFlag ? 'disabled' : 'cheeseYellow'}`}
               onClick={clickBid}
             >
               금액 수정 {remainingBidCount > 0 ? `(${remainingBidCount}회 가능)` : '(소진)'}
@@ -89,14 +137,7 @@ const AuctionDetailsFooter = ({ isSeller, bidId, auctionId, isCancelled, status,
           </>
         }
       </Layout.Footer>
-      {
-        confirm &&
-        <ConfirmModal title='경매 참여를 취소하시겠어요?' description='경매 참여를 취소하면 다시 참여하지 못합니다.' close={toggleConfirm} >
-          <Button type='button' color='cheeseYellow' className='w-full' onClick={clickCancel}>
-            참여 취소
-          </Button>
-        </ConfirmModal>
-      }
+
     </>
   );
 }

@@ -14,7 +14,7 @@ import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
   const { auctionDetails, refetch } = useGetAuctionDetails(auctionId);
-  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, bidId, remainingBidCount, status, description, isSeller, participantCount, category, sellerProfileImageUrl, isCancelled, isWon } = auctionDetails
+  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, bidId, remainingBidCount, status, description, isSeller, participantCount, category, sellerProfileImageUrl, isCancelled, isWon, isWinner, isOrdered } = auctionDetails
 
   return (
     <Layout>
@@ -72,6 +72,8 @@ const AuctionDetails = () => {
         isCancelled={isCancelled}
         isSeller={isSeller}
         isWon={isWon}
+        isWinner={isWinner}
+        isOrdered={isOrdered}
       />
     </Layout>
   );
