@@ -3,7 +3,7 @@ import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from '@/component
 import Button from '@/components/common/Button';
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import AuctionItem from '@/components/common/item/AuctionItem';
-import type { IPreAuctionItem } from 'AuctionItem';
+import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import { useNavigate } from 'react-router-dom';
 
 const Heart = () => {

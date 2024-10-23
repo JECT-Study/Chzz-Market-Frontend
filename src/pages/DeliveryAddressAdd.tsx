@@ -1,4 +1,4 @@
-import { AddresDetail } from "@/@types/Address";
+import type { IAddressDetail } from "@/@types/Address";
 import Button from "@/components/common/Button";
 import FormField from "@/components/common/form/FormField";
 import Layout from "@/components/layout/Layout";
@@ -21,7 +21,7 @@ const DeliveryAddressAdd = () => {
     formState: { errors },
     setValue,
     handleSubmit,
-  } = useForm<AddresDetail>({
+  } = useForm<IAddressDetail>({
     defaultValues: {
       name: '',
       phoneNumber: '',
@@ -47,7 +47,7 @@ const DeliveryAddressAdd = () => {
     setValue('defaultAddress', checked ? 'true' : 'false');
   };
 
-  const onSubmit = handleSubmit((data: AddresDetail) => {
+  const onSubmit = handleSubmit((data: IAddressDetail) => {
     console.log(data);
   });
 

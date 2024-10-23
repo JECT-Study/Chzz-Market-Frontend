@@ -1,6 +1,7 @@
+import { useEffect, useRef } from "react";
+
 import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
-import { useEffect, useRef } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
@@ -44,7 +45,7 @@ const DeliveryAddressList = () => {
         const roadAddress = data.address;
         const { zonecode } = data;
 
-        navigate('/auctions/address-add', { state: {roadAddress: roadAddress, zonecode: zonecode }});
+        navigate('/auctions/address-add', { state: { roadAddress: roadAddress, zonecode: zonecode } });
       },
     }).open();
   };
@@ -65,7 +66,7 @@ const DeliveryAddressList = () => {
       <Layout.Header title="배송지 목록" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div>
-          <div className="flex flex-col pt-10 gap-5">
+          <div className="flex flex-col gap-5 pt-10">
             <h1 className="text-2xl font-semibold">배송지 추가</h1>
             <div onClick={handleOpenAddress} className="relative flex items-center w-full">
               <IoIosSearch className="absolute left-3 text-muted-foreground" />
@@ -75,7 +76,7 @@ const DeliveryAddressList = () => {
                 autoComplete="off"
                 placeholder="지번, 도로명, 건물명으로 검색"
               />
-            </div>            
+            </div>
           </div>
           <div>
             <div className="border-b-8 border-gray-100 ml-[-32px] mr-[-32px] my-5" />
