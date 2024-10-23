@@ -3,7 +3,7 @@ import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from '@/component
 import Button from '@/components/common/Button';
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import AuctionItem from '@/components/common/item/AuctionItem';
-import type { IPreAuctionItem } from 'AuctionItem';
+import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import { useNavigate } from 'react-router-dom';
 
 const Heart = () => {
@@ -22,7 +22,7 @@ const Heart = () => {
               <AuctionItem.Image src={el.imageUrl} />
               <AuctionItem.Main name={el.productName} count={el.likeCount} price={el.minPrice} kind='pre-register' />
               <AuctionItem.Button>
-                <Button onClick={() => handleDelete(el.productId)} type='button' color='black' hoverColor='black' className='w-full'>
+                <Button onClick={() => handleDelete(el.productId)} type='button' color='white' className='w-full'>
                   좋아요 취소
                 </Button>
               </AuctionItem.Button>

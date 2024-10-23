@@ -20,7 +20,7 @@ import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { dataURLtoFile } from '@/utils/dataURLToFile';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { IRegister } from 'Register';
+import type { IRegister } from '@/@types/Register';
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
 
@@ -37,7 +37,7 @@ const defaultValues: FormFields = {
 const Register = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction();
+  const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction(preAuctionId);
   const { mutate: register, isPending: postPending } = usePostRegister();
   const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
@@ -63,7 +63,10 @@ const Register = () => {
   const finalButton = caution === 'REGISTER' ? '바로 등록하기' : '사전 등록하기';
 
   const toggleCheckBox = () => setCheck((state) => !state);
-  const clickBack = () => (caution === '' ? navigate(-1) : setCaution(''));
+  const clickBack = () => {
+    (caution === '' ? navigate(-1) : setCaution(''));
+    toggleCheckBox()
+  }
   const handleProceed = (proceedType: 'PRE_REGISTER' | 'REGISTER') => {
     handleSubmit(() => setCaution(proceedType))();
   };
@@ -105,7 +108,7 @@ const Register = () => {
     if (preAuctionId) newFiles.forEach((newFile) => formData.append(String(newFile.id), newFile.file))
     else newFiles.forEach((newFile) => formData.append('images', newFile.file))
 
-    preAuctionId ? patchPreAuction({ preAuctionId, formData }) : register(formData);
+    preAuctionId ? patchPreAuction(formData) : register(formData);
   };
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
 import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
+import ROUTES from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -30,21 +31,15 @@ export const usePostRegister = (): {
   return { mutate, isPending };
 };
 
-export const usePatchPreAuction = (): {
-  mutate: UseMutateFunction<
-    void,
-    Error,
-    {
-      preAuctionId: number;
-      formData: FormData;
-    },
-    unknown
-  >;
+export const usePatchPreAuction = (
+  preAuctionId: number
+): {
+  mutate: UseMutateFunction<void, Error, FormData, unknown>;
   isPending: boolean;
 } => {
   const navigate = useNavigate();
 
-  const patchPreAuction = async ({ preAuctionId, formData }: { preAuctionId: number; formData: FormData }) => {
+  const patchPreAuction = async (formData: FormData) => {
     await httpClient.patch(`${API_END_POINT.PRE_AUCTION}/${preAuctionId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -56,7 +51,7 @@ export const usePatchPreAuction = (): {
     mutationFn: patchPreAuction,
     onSuccess: () => {
       toast.success('사전 경매가 수정되었습니다.');
-      navigate('/');
+      navigate(ROUTES.getPreAuctionItemRoute(preAuctionId));
     },
   });
 

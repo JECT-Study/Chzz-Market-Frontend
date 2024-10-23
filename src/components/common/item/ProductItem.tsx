@@ -1,11 +1,12 @@
-import TimeLabel from '../atomic/TimeLabel';
 import { ReactNode } from 'react';
+import TimeLabel from '../atomic/TimeLabel';
 
 export interface ProductProps {
+  id?: number;
   auctionId?: number;
-  productName: string;
+  name?: string;
+  productName?: string;
   minPrice: number;
-  imageUrl?: string;
   timeRemaining?: number;
   participantCount?: number;
   isParticipating?: boolean;
@@ -13,24 +14,40 @@ export interface ProductProps {
   isLiked?: boolean;
   status?: string;
   createdAt?: string;
+  imageUrl?: string;
 }
 
-const ProductItem = ({ product, children }: { product: ProductProps; children: ReactNode }) => {
+const ProductItem = ({
+  product,
+  children,
+  onClick,
+}: {
+  product: ProductProps;
+  children: ReactNode;
+  onClick?: () => void;
+}) => {
+  const displayName = product.productName || product.name;
+  const productId = product.auctionId || product.id;
+
   return (
-    <div key={product.auctionId} className='mb-4'>
-      <div className='flex flex-col'>
-        <div className='w-full h-auto mb-4'>
-          <div className='relative'>
-            <img className='object-cover w-full h-[15rem] rounded-t' src={product.imageUrl} alt='제품 사진' />
+    <div key={productId} className="p-1 mb-4 cursor-pointer" onClick={onClick}>
+      <div className="flex flex-col">
+        <div className="w-full h-auto mb-4">
+          <div className="relative">
+            <img
+              className="object-cover w-full h-[15rem] rounded-t"
+              src={product.imageUrl}
+              alt={displayName || '제품 사진'}
+            />
             {product.timeRemaining && <TimeLabel time={product.timeRemaining} />}
           </div>
         </div>
 
-        <div className='flex flex-col gap-[8px]'>
+        <div className="flex flex-col gap-[8px]">
           <div>
-            <p className='text-sm font-semibold'>{product.productName}</p>
+            <p className="text-sm font-semibold">{displayName}</p>
           </div>
-          <div className='flex flex-col'>{children}</div>
+          <div className="flex flex-col">{children}</div>
         </div>
       </div>
     </div>

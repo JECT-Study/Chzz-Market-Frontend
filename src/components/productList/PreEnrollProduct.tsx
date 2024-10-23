@@ -1,31 +1,26 @@
+import type { IPreAuctionItem } from '@/@types/AuctionItem';
+import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
-import { FaHeart } from 'react-icons/fa';
-import type { IPreAuctionItem } from 'AuctionItem';
-import { IoPricetagsOutline } from 'react-icons/io5';
+import LikeCount from '../common/atomic/LikeCount';
+import MinPrice from '../common/atomic/MinPrice';
 import ProductItem from '../common/item/ProductItem';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { useDeletePreAuctionHeart } from '../heart/queries';
 
 const PreEnrollProduct = ({ product }: { product: IPreAuctionItem }) => {
-  const formattedPrice = formatCurrencyWithWon(product.minPrice);
-  
+  const navigate = useNavigate();
+  const { mutate: deletePreAuction } = useDeletePreAuctionHeart();
+  const handleProductClick = () => navigate(`/auctions/pre-auction/${product.productId}`)
+  const confirmDelete = () => deletePreAuction(product.productId);
+
   return (
-    <ProductItem product={product}>
-      <div className='flex'>
-        <div className='flex gap-2'>
-          <IoPricetagsOutline className='text-gray-500' />
-          <p className='text-sm text-gray-500'>시작가</p>
-        </div>
-        <p className='ml-4 font-semibold'>{formattedPrice}</p>
-      </div>
-      <div className='flex'>
-        <div className='flex gap-2'>
-          <FaHeart className='text-gray-500' />
-          <p className='text-sm text-gray-500'>좋아요</p>
-        </div>
-        <p className='ml-4 font-semibold'>{`${product.likeCount}`}</p>
-      </div>
-      <Button color={product.isLiked ? 'black' : 'white'} type='button' size='small' className={`${product.isLiked ? '' : ''} w-full h-[33px] rounded-sm`}>
-        {product.isLiked ? '좋아요' : '안좋아요'}
+    <ProductItem product={product} onClick={handleProductClick}>
+      <MinPrice price={product.minPrice} />
+      <LikeCount count={product.likeCount} />
+      <Button onClick={(event) => {
+        event.stopPropagation();
+        confirmDelete();
+      }} color={product.isLiked ? 'black' : 'white'} type='button' size='small'>
+        {product.isLiked ? '좋아요 취소' : '좋아요'}
       </Button>
     </ProductItem>
   );

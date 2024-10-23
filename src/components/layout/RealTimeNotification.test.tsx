@@ -51,7 +51,7 @@ describe('Layout 알림 테스트', () => {
     };
   };
 
-  test('실시간 알림이 도착하면 전체 화면에 알림 팝업이 발생하고, 그 안에 제목, 메시지, 버튼이 존재한다.', async () => {
+  test('실시간 알림이 도착하면 전체 화면에 알림 모달이 발생하고, 그 안에 제목, 메시지, 버튼이 존재한다.', async () => {
     render(<Provider store={store}>
       <GlobalLayout />
     </Provider>);
@@ -73,7 +73,7 @@ describe('Layout 알림 테스트', () => {
     expect(popup).toContainElement(button);
   });
 
-  test('팝업이 발생하고 바깥 배경을 클릭하면 팝업이 사라진다.', async () => {
+  test('모달이 발생하고 바깥 배경을 클릭하면 모달이 사라진다.', async () => {
     const { user } = setup();
 
     const popup = await screen.findByLabelText(
@@ -82,7 +82,7 @@ describe('Layout 알림 테스트', () => {
       { timeout: 1100 },
     );
 
-    const popupBackground = screen.getByLabelText('팝업 배경');
+    const popupBackground = screen.getByLabelText('모달 배경');
     await user.click(popupBackground);
 
     expect(popup).not.toBeInTheDocument();
@@ -90,18 +90,18 @@ describe('Layout 알림 테스트', () => {
 
   describe('알림의 종류에 따라 알림 확인 여부를 달리한다.', () => {
     test(
-      '팝업 버튼이 확인 버튼인 경우 버튼 클릭시 팝업이 사라진다.',
+      '모달 버튼이 확인 버튼인 경우 버튼 클릭시 모달이 사라진다.',
       { timeout: 8000 },
       async () => {
         const { user } = setup();
 
-        // 이전 팝업 삭제
+        // 이전 모달 삭제
         const popup = await screen.findByLabelText(
           /알림 박스/,
           {},
           { timeout: 1100 },
         );
-        const popupBackground = screen.getByLabelText('팝업 배경');
+        const popupBackground = screen.getByLabelText('모달 배경');
         await user.click(popupBackground);
 
         await act(async () => {
@@ -119,7 +119,7 @@ describe('Layout 알림 테스트', () => {
       },
     );
 
-    test('팝업 버튼이 아닌 확인 버튼이 아닌 경우, 버튼 클릭시 특정 화면으로 이동한다.', async () => {
+    test('모달 버튼이 아닌 확인 버튼이 아닌 경우, 버튼 클릭시 특정 화면으로 이동한다.', async () => {
       const { user } = setup();
 
       await screen.findByLabelText(/알림 박스/, {}, { timeout: 1100 });
@@ -134,7 +134,7 @@ describe('Layout 알림 테스트', () => {
   });
 
   test(
-    '알림 확인 도중 또 다른 실시간 알림 발생시 팝업을 닫자마자 새로운 팝업이 발생한다.',
+    '알림 확인 도중 또 다른 실시간 알림 발생시 모달을 닫자마자 새로운 모달이 발생한다.',
     { timeout: 8000 },
     async () => {
       const { user } = setup();

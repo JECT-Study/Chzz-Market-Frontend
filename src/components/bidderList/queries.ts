@@ -1,8 +1,8 @@
-import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
+import { IBidder } from '@/@types/Bid';
+import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { IBidder } from 'Bid';
 
 export const useGetBidderList = (auctionId: number) => {
   const getBidderList = async (): Promise<IBidder[]> => {

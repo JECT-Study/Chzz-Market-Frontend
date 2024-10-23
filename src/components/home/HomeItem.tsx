@@ -1,6 +1,6 @@
-import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
+import type { IAuctionItem, IPreAuctionItem } from '@/@types/AuctionItem';
 
-import ROUTERS from '@/constants/route';
+import ROUTES from '@/constants/routes';
 import { truncateText } from '@/utils/truncateText';
 import { useNavigate } from 'react-router-dom';
 import LikeCount from '../common/atomic/LikeCount';
@@ -18,9 +18,9 @@ const HomeItem = <T extends 'preAuction' | 'auction'>({ kind, item }: HomeItemPr
   const navigate = useNavigate();
   const { minPrice, productName, imageUrl } = item
   const handleClick = () => navigate(
-    kind !== 'preAuction'
-      ? `${ROUTERS.AUCTION.ITEM}/${(item as IAuctionItem).auctionId}`
-      : `${ROUTERS.PRE_AUCTION.ITEM}/${(item as IPreAuctionItem).productId}`
+    kind === 'preAuction'
+      ? ROUTES.getPreAuctionItemRoute((item as IPreAuctionItem).productId)
+      : ROUTES.getAuctionItemRoute((item as IAuctionItem).auctionId)
   );
   const name = truncateText(productName);
 

@@ -23,8 +23,8 @@ const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
 const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
   return (
     <div className='relative border rounded basis-1/2'>
-      <img src={src} alt='이미지' className='object-cover rounded' />
-      {time && <TimeLabel time={time} />}
+      <img src={src} alt='이미지' className='object-cover w-full rounded' />
+      {time !== undefined && <TimeLabel time={time} />}
     </div>
   );
 };

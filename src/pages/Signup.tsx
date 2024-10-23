@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
@@ -11,17 +11,20 @@ import { Textarea } from '@/components/ui/textarea';
 import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@/constants/queryKeys';
 import { nicknameCheck } from '@/components/login/queries';
+import ErrorMessage from '@/components/common/error/ErrorMessage';
 
 const Signup = () => {
-  const [selectBank, setSelectBank] = useState('');
+  const [selectBankDisplay, setSelectBankDisplay] = useState('');
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const [nicknameError, setNicknameError] = useState<string | null>(null);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const {
     control,
     setValue,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
     activeButtonSheet,
     setActiveButtonSheet,
     onCloseBottomSheet,
@@ -31,6 +34,7 @@ const Signup = () => {
 
   const nickname = watch('nickname');
   const accountNumber = watch('accountNumber');
+  const bankname = watch('bankName');
 
 
   const { refetch: checkNickname } = useQuery({
@@ -40,34 +44,33 @@ const Signup = () => {
   });
 
   const onNicknameCheck = async () => {
+    if (!nickname || nickname.trim() === '') {
+      setNicknameError('닉네임을 입력해주세요.');
+      return;
+    }
+
     const { data } = await checkNickname();
     const { isAvailable } = data;
     setIsNicknameChecked(isAvailable);
     
     if (isAvailable === true) {
-      // 사용 가능한 닉네임입니다. 띄워주기
-      alert('사용 가능')
+      setNicknameError('사용 가능한 닉네임입니다.')
     } else {
-      // 이미 사용중인 닉네임입니다. 띄워주기
-      alert('이미 사용 중')
+      setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.')
     }
   };
 
-  const handleSelectBank = (bank: string) => {
-    setValue('bankName', bank);
-    setSelectBank(bank);
+  const handleSelectBank = (displayName: string, serverName: string) => {
+    setSelectBankDisplay(displayName);
+    setValue('bankName', serverName);
     setActiveButtonSheet(false);
   };
 
   const handleSubmitClick = () => {
     if (!accountNumber || accountNumber.length < 10 || accountNumber.length > 15) {
       setError('accountNumber', {
-        message: '10~15자리 숫자로 입력해주세요.',
+        message: '계좌번호는 10자리 이상 15자리 이하로 입력해주세요.',
       });
-      return;
-    }
-    if (!isNicknameChecked) {
-      alert('닉네임 중복 확인 해주세요.');
       return;
     }
 
@@ -77,6 +80,14 @@ const Signup = () => {
       );
     }
   };
+
+  useEffect(() => {
+    if (nickname && bankname && accountNumber && isNicknameChecked) {
+      setIsSubmitEnabled(true);
+    } else {
+      setIsSubmitEnabled(false);
+    }
+  }, [nickname, bankname, accountNumber, isNicknameChecked])
 
   return (
     <Layout>
@@ -109,6 +120,9 @@ const Signup = () => {
               <Button type='button' className='h-10' onClick={onNicknameCheck}>중복확인</Button>
             </div>
           </div>
+          {nicknameError && (
+            <ErrorMessage message={nicknameError} />
+          )}
           <div
             className="relative"
             onClick={() => setActiveButtonSheet(!activeButtonSheet)}
@@ -124,7 +138,7 @@ const Signup = () => {
                   placeholder="은행을 선택해주세요"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
-                  value={selectBank}
+                  value={selectBankDisplay}
                 />
               )}
             />
@@ -147,7 +161,7 @@ const Signup = () => {
             render={(field) => (
               <Input
                 id="계좌번호 *"
-                type="number"
+                type="text"
                 placeholder="계좌번호를 입력해주세요"
                 className="focus-visible:ring-cheeseYellow"
                 {...field}
@@ -189,8 +203,9 @@ const Signup = () => {
         <Button
           type="submit"
           className="w-full h-[47px] rounded-lg"
-          color={isValid && isNicknameChecked ? 'cheeseYellow' : 'gray2'}
+          color={isSubmitEnabled ? 'cheeseYellow' : 'gray2'}
           onClick={handleSubmitClick}
+          disabled={!isSubmitEnabled}
         >
           회원 가입 완료
         </Button>

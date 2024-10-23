@@ -1,4 +1,4 @@
-import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from 'AuctionItem';
+import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from '@/@types/AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
@@ -86,7 +86,7 @@ const UserParticipatedList = () => {
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'AuctionHistory' &&
         <EmptyBoundary length={historyItems.length} name='participated'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
             {
               historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)
             }
@@ -95,14 +95,14 @@ const UserParticipatedList = () => {
       }
       {activeTab === 'AuctionsWon' &&
         <EmptyBoundary length={wonItems.length} name='won'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
             {wonItems.map((product: IUserAuctionWonItem) => <OrderWonProduct key={product.auctionId} product={product} />)}
           </div>
         </EmptyBoundary>
       }
       {activeTab === 'AuctionsLost' &&
         <EmptyBoundary length={lostItems.length} name='lost'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
             {lostItems.map((product: IUserAuctionLostItem) => <OrderLostProduct key={product.auctionId} product={product} />)}
           </div>
         </EmptyBoundary>}

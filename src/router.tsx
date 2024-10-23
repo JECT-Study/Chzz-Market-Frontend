@@ -1,4 +1,10 @@
-import ROUTERS from '@/constants/route';
+import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
+import Bid, { loader as bidLoader } from './pages/Bid';
+import BidderList, { loader as bidderListLoader } from './pages/BidderList';
+import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
+import Register, { loader as registerLoader } from './pages/Register';
+
+import ROUTES from '@/constants/routes';
 import ProductList from '@/pages/ProductList';
 import { createBrowserRouter } from 'react-router-dom';
 import APIAsyncBoundary from './components/common/boundary/APIAsyncBoundary';
@@ -8,91 +14,112 @@ import PrivateRoute from './components/common/route/PrivateRoute';
 import PublicRoute from './components/common/route/PublicRoute';
 import GlobalLayout from './components/layout/GlobalLayout';
 import LayoutWithNav from './components/layout/LayoutWithNav';
-import AddressBook from './pages/AddressBook';
-import AuctionDetails, { loader as auctionDetailsLoader } from './pages/AuctionDetails';
-import Bid, { loader as bidLoader } from './pages/Bid';
-import BidderList, { loader as bidderListLoader } from './pages/BidderList';
+import AuctionShipping from './pages/AuctionShipping';
+import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
+import DeliveryAddressEdit from './pages/DeliveryAddressEdit';
+import DeliveryAddressList from './pages/DeliveryAddressList';
+import EditAddress from './pages/EditAddress';
 import Heart from './pages/Heart';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
-import Payment from './pages/Payment';
-import PreAuctionDetails, { loader as preAuctionDetailsLoader } from './pages/PreAuctionDetails';
+import PaymentSuccess from './pages/PaymentSuccess';
 import ProfileEdit from './pages/ProfileEdit';
-import Register, { loader as registerLoader } from './pages/Register';
 import Signup from './pages/Signup';
+import Test from './pages/Test';
 import User from './pages/User';
 import OrderHistory from './pages/UserParticipatedList';
+import UserPreRegisteredList from './pages/UserPreRegisteredList';
 import UserRegisteredList from './pages/UserRegisteredList';
 
 const layoutWithNavRouteList = [
   {
-    path: ROUTERS.HOME,
+    path: ROUTES.HOME,
     element: <Home />,
   },
   {
-    path: ROUTERS.NOTIFICATION,
+    path: ROUTES.NOTIFICATION,
     element: <Notification />,
   },
   {
-    path: ROUTERS.HEART,
+    path: ROUTES.HEART,
     element: <Heart />,
   },
   {
-    path: ROUTERS.USER,
+    path: ROUTES.USER,
     element: <User />,
   },
   {
-    path: ROUTERS.REGISTERED_LIST,
+    path: ROUTES.REGISTERED_LIST,
     element: <UserRegisteredList />,
   },
   {
-    path: ROUTERS.PARTICIPATED_LIST,
+    path: ROUTES.PRE_REGISTERED_LIST,
+    element: <UserPreRegisteredList />,
+  },
+  {
+    path: ROUTES.PARTICIPATED_LIST,
     element: <OrderHistory />,
   },
 ];
 
 const privateRouteList = [
   {
-    path: ROUTERS.BID,
+    path: ROUTES.BID,
     element: <Bid />,
     loader: bidLoader,
   },
   {
-    path: ROUTERS.FINAL_BIDDER_LIST,
+    path: ROUTES.FINAL_BIDDER_LIST,
     element: <BidderList />,
     loader: bidderListLoader,
   },
   {
-    path: ROUTERS.PROFILE_EDIT,
+    path: ROUTES.PROFILE_EDIT,
     element: <ProfileEdit />,
   },
   {
-    path: ROUTERS.REGISTER,
+    path: ROUTES.REGISTER,
     element: <Register />,
   },
   {
-    path: `${ROUTERS.PRE_AUCTION.EDIT}/:preAuctionId`,
+    path: `${ROUTES.PRE_AUCTION_EDIT}/:preAuctionId`,
     element: <Register />,
     loader: registerLoader,
   },
   {
-    path: ROUTERS.ADDRESSBOOK,
-    element: <AddressBook />,
+    path: ROUTES.AUCTION_SHIPPING,
+    element: <AuctionShipping />,
   },
   {
-    path: ROUTERS.PAYMENT,
-    element: <Payment />,
+    path: ROUTES.PAYMENT_SUCCESS,
+    element: <PaymentSuccess />
   },
+  {
+    path: ROUTES.DELIVERY_ADDRESS_LIST,
+    element: <DeliveryAddressList />
+  },
+  {
+    path: ROUTES.DELIVERY_ADDRESS_ADD,
+    element: <DeliveryAddressAdd />
+  },
+  {
+    path: ROUTES.DELIVERY_ADDRESS_EDIT,
+    element: <DeliveryAddressEdit />
+  },
+  {
+    path: ROUTES.EDIT_ADDRESS,
+    element: <EditAddress />
+  }
 ];
 
 const publicRouteList = [
   {
-    path: ROUTERS.SIGNUP,
+    path: ROUTES.SIGNUP,
     element: <Signup />,
   },
   {
-    path: ROUTERS.LOGIN,
+    path: ROUTES.LOGIN,
     element: <Login />,
   },
 ];
@@ -134,27 +161,28 @@ export const router = createBrowserRouter([
       })),
 
       {
-        path: ROUTERS.PRODUCT_LIST,
+        path: ROUTES.PRODUCT_LIST,
         element: (
           <ProductList />
         ),
       },
       {
-        path: `${ROUTERS.AUCTION.ITEM}/:auctionId`,
+        path: `${ROUTES.AUCTION_ITEM}/:auctionId`,
         element: (
           <AuctionDetails />
         ),
         loader: auctionDetailsLoader,
       },
       {
-        path: `${ROUTERS.PRE_AUCTION.ITEM}/:preAuctionId`,
+        path: `${ROUTES.PRE_AUCTION_ITEM}/:preAuctionId`,
         element: (
           <PreAuctionDetails />
         ),
         loader: preAuctionDetailsLoader,
       },
       {
-        path: `${ROUTERS.PAYMENT}/:auctionId`,
+        path: `/test`,
+        element: <Test />
       },
     ],
   },

@@ -1,4 +1,4 @@
-import type { IAuctionItem, IPreAuctionItem } from 'AuctionItem';
+import type { IAuctionItem, IPreAuctionItem } from '@/@types/AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -12,7 +12,8 @@ import useProductList from '@/hooks/useProductList';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
-  const [sortType, setSortType] = useState('newest');
+  const [ongoingSortType, setOngoingSortType] = useState('newest');
+  const [preAuctionSortType, setPreAuctionSortType] = useState('product-newest');
   const navigate = useNavigate();
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
@@ -21,7 +22,7 @@ const ProductList = () => {
   const category = searchParams.get('category') || 'all';
 
   const { ongoingData, enrollData, fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage, refetchOngoingData, refetchEnrollData } =
-    useProductList(activeTab, sortType, category);
+    useProductList(activeTab, ongoingSortType, preAuctionSortType, category);
 
   const ongoingItems = ongoingData?.pages[0]?.items || [];
   const enrollItems = enrollData?.pages[0]?.items || [];
@@ -74,16 +75,16 @@ const ProductList = () => {
       <Layout.Header title='상품 경매 목록' handleBack={() => navigate('/')} />
       <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }} ref={mainContainerRef}>
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        <ProductButtons setSortType={setSortType} />
+        <ProductButtons setOngoingSortType={setOngoingSortType} setPreAuctionSortType={setPreAuctionSortType} />
         {activeTab === 'ongoing'
           ? <EmptyBoundary length={ongoingItems.length} name='category'>
-            <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+            <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
               {ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.auctionId} product={product} />)}
             </div>
           </EmptyBoundary>
           :
           <EmptyBoundary length={enrollItems.length} name='category'>
-            <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 h-[calc(100vh-100px)] overflow-y-auto'>
+            <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
               {enrollItems?.map((product: IPreAuctionItem) => <PreEnrollProduct key={product.productId} product={product} />)}
             </div>
           </EmptyBoundary>

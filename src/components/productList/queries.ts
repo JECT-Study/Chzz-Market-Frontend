@@ -1,4 +1,4 @@
-import { IAuctionList, IPreAuctionList } from 'AuctionList';
+import { IAuctionList, IPreAuctionList } from '@/@types/AuctionList';
 
 import { API_END_POINT } from '@/constants/api';
 import { httpClient } from '@/api/axios';

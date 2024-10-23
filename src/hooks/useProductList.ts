@@ -4,7 +4,7 @@ import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useProductList = (activeTab: string, sortType: string, category: string): any => {
+const useProductList = (activeTab: string, ongoingSortType: string, preAuctionSortType: string, category: string): any => {
   const {
     data: ongoingData,
     isLoading: _ongoingLoading,
@@ -13,12 +13,12 @@ const useProductList = (activeTab: string, sortType: string, category: string): 
     hasNextPage: hasNextOngoingPage,
     refetch: refetchOngoingData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.AUCTION_LIST, sortType, category],
+    queryKey: [queryKeys.AUCTION_LIST, ongoingSortType, category],
     queryFn: () =>
       getOngoingProductList({
         pageNumber: 0,
         pageSize: 10,
-        sortType,
+        sortType: ongoingSortType,
         category,
       }),
     getNextPageParam: (lastPage) => {
@@ -39,8 +39,8 @@ const useProductList = (activeTab: string, sortType: string, category: string): 
     hasNextPage: hasNextEnrollPage,
     refetch: refetchEnrollData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.PRE_AUCTION_LIST, sortType, category],
-    queryFn: () => getEnrollProductList({ pageNumber: 0, pageSize: 10, sortType, category }),
+    queryKey: [queryKeys.PRE_AUCTION_LIST, preAuctionSortType, category],
+    queryFn: () => getEnrollProductList({ pageNumber: 0, pageSize: 10, sortType: preAuctionSortType, category }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;

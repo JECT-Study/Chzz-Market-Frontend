@@ -1,9 +1,9 @@
+import { logout, refreshToken } from '@/components/login/queries';
 import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
 
-import { getToken } from '@/utils/tokenUtils';
 import { isLoggedIn } from '@/store/authSlice';
-import { logout, refreshToken } from '@/components/login/queries';
+import { getToken } from '@/utils/tokenUtils';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,7 +22,7 @@ export const useSSE = <T>(url: string) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        heartbeatTimeout: 2_100_000,
+        heartbeatTimeout: 120_000,
         withCredentials: true,
       });
 

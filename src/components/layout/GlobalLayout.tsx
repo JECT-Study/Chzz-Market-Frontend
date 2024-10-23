@@ -1,24 +1,17 @@
 import { useEffect, useState } from 'react';
 
 import { API_END_POINT } from '@/constants/api';
-import { Outlet } from 'react-router-dom';
-import type { IRealTimeNotification } from 'Notification';
 import { useSSE } from '@/hooks/useSSE';
-import Popup from '../common/Popup';
+import type { IRealTimeNotification } from '@/@types/Notification';
+import { Outlet } from 'react-router-dom';
+import Modal from '../common/Modal';
 import RealTimeNotification from './RealTimeNotification';
-import { useReadNotification } from '../notification/queries';
 
 const GlobalLayout = () => {
   const { state: notifications, setState: setNotifications } = useSSE<IRealTimeNotification>(`${API_END_POINT.REALTIME_NOTIFICATIONS}`);
-
   const [currentNotification, setCurrentNotification] = useState<IRealTimeNotification | null>(null);
 
-  const { mutate: readNotification } = useReadNotification();
-
-  const closePopup = () => {
-    if (currentNotification && !currentNotification.auctionId) readNotification(currentNotification.notificationId);
-    setCurrentNotification(null);
-  };
+  const closeModal = () => setCurrentNotification(null)
 
   useEffect(() => {
     const showNextNotification = () => {
@@ -35,9 +28,11 @@ const GlobalLayout = () => {
       <div className='relative w-[46rem] min-w-[23rem] h-full'>
         <Outlet />
         {currentNotification && (
-          <Popup onClose={closePopup}>
-            <RealTimeNotification onClose={closePopup} notification={currentNotification} />
-          </Popup>
+          <Modal>
+            <Modal.Window>
+              <RealTimeNotification onClose={closeModal} notification={currentNotification} />
+            </Modal.Window>
+          </Modal>
         )}
       </div>
     </div>

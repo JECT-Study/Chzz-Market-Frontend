@@ -1,15 +1,17 @@
-import { BIDDER_LIST_PRICE_FILTER } from "@/constants/filter";
-import { formatCurrencyWithWon } from "@/utils/formatCurrencyWithWon";
-import type { IBidder } from "Bid";
-import { useState } from "react";
-import Button from "../common/Button";
 import AuctionItem from "../common/item/AuctionItem";
-import { useGetAuctionDetails } from "../details/queries";
+import { BIDDER_LIST_PRICE_FILTER } from "@/constants/filter";
+import Button from "../common/Button";
+import type { IBidder } from "@/@types/Bid";
 import Layout from "../layout/Layout";
+import { formatCurrencyWithWon } from "@/utils/formatCurrencyWithWon";
+import { useGetAuctionDetails } from "../details/queries";
 import { useGetBidderList } from "./queries";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const BidderListMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
+  const navigate = useNavigate()
 
   const handleFilterState = () =>
     setFilterState((prev) => (prev.name === BIDDER_LIST_PRICE_FILTER.HIGH.name ? BIDDER_LIST_PRICE_FILTER.LOW : BIDDER_LIST_PRICE_FILTER.HIGH));
@@ -19,14 +21,14 @@ const BidderListMain = ({ auctionId }: { auctionId: number }) => {
   const { bidderList } = useGetBidderList(auctionId);
 
   const filteredBidderList = filterState.sort === 'desc' ? bidderList : bidderList.sort((a, b) => a.bidAmount - b.bidAmount)
-  const { imageUrls, productName, minPrice, participantCount } = auctionDetails;
+  const { images, productName, minPrice, participantCount } = auctionDetails;
 
   return (
     <>
       <Layout.Main>
         <div className='flex flex-col gap-8 pt-4'>
           <AuctionItem axis='row' label='입찰자 목록 상품'>
-            <AuctionItem.Image src={imageUrls[0]} />
+            <AuctionItem.Image src={images[0].imageUrl} />
             <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
           </AuctionItem>
           <div className='flex items-center justify-between'>
@@ -51,7 +53,7 @@ const BidderListMain = ({ auctionId }: { auctionId: number }) => {
         </div>
       </Layout.Main>
       <Layout.Footer type='single'>
-        <Button type='button' color='cheeseYellow' className='w-full h-full' aria-label='최종 판매 버튼'>
+        <Button type='button' onClick={() => navigate(-1)} color='cheeseYellow' className='w-full h-full' aria-label='최종 판매 버튼'>
           확인 완료
         </Button>
       </Layout.Footer></>

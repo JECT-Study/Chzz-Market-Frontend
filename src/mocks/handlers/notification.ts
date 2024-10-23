@@ -2,7 +2,7 @@ import { HttpHandler, HttpResponse, delay, http } from 'msw';
 
 import { API_END_POINT } from '@/constants/api';
 import { serverAPI } from '@/main';
-import type { INotification } from 'Notification';
+import type { INotification } from '@/@types/Notification';
 import { notificationData } from '../data/notificationData';
 
 let notifications = [...notificationData];
