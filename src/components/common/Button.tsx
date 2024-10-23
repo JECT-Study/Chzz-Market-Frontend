@@ -1,6 +1,6 @@
-import classNames from 'classnames';
-import { ReactNode } from 'react';
 import ButtonSpinner from './loading/ButtonSpinner';
+import { ReactNode } from 'react';
+import classNames from 'classnames';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -25,13 +25,14 @@ const Button = ({
   ariaLabel = '',
   loading = false,
 }: ButtonProps) => {
-  const baseClasses = 'focus:outline-none rounded-lg transition-colors box-border';
+  const baseClasses = 'focus:outline-none rounded-lg transition-colors box-border ';
   const colorClasses = classNames({
     'bg-black text-white border border-black': color === 'black',
     'bg-white text-black border border-black': color === 'white',  // 동일한 border 유지
     'bg-gray text-white border border-gray': color === 'gray',
     'bg-gray2 text-white border border-gray2': color === 'gray2',
     'bg-gray3 text-white border border-gray3': color === 'gray3',
+    'bg-gray3 text-gray1': color === 'disabled',
     'bg-cheeseYellow text-white border border-cheeseYellow': color === 'cheeseYellow',
   });
   const sizeClasses = classNames({
