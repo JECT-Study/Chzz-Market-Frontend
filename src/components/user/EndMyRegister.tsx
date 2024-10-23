@@ -1,5 +1,6 @@
 import type { IAuctionEndRegisteredItem } from '@/@types/AuctionItem';
 import PriceIcon from '@/assets/icons/price.svg';
+import ROUTES from '@/constants/routes';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
 import CreatedAt from '../common/atomic/CreatedAt';
@@ -13,7 +14,7 @@ const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
   const formattedWinningBid = formatCurrencyWithWon(winningBidAmount);
 
   return (
-    <ProductItem product={product} onClick={() => navigate(`/auctions/bid/${product.auctionId}`)}>
+    <ProductItem product={product} onClick={() => navigate(ROUTES.getAuctionItemRoute(product.auctionId))}>
       <MinPrice price={product.minPrice} />
       <ParticipantCount count={product.participantCount} />
       <div
