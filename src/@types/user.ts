@@ -1,13 +1,32 @@
-export interface User {
+export interface IUser {
   nickname: string;
-  bankName: string | null;
-  accountNumber: string | null;
   bio?: string | null;
-  link?: string | null;
 }
 
-export interface UserProfile {
+export interface IUserProfile {
   nickname: string;
   bio: string;
-  link: string;
+}
+
+export interface IProfileProps {
+  nickname?: string;
+  bio?: string;
+  profileImageUrl?: string;
+  providerType?: string;
+}
+
+export interface IParticipantCountItems {
+  failedAuctionCount?: number;
+  ongoingAuctionCount?: number;
+  successfulAuctionCount?: number;
+}
+
+export interface IProfileData {
+  nickname: string;
+  bio: string;
+  participantCount?: IParticipantCountItems;
+  preRegisterCount?: number;
+  registeredAuctionCount?: number;
+  profileImageUrl: string;
+  providerType: string;
 }

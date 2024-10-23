@@ -1,3 +1,4 @@
+import { IParticipantCountItems } from '@/@types/user';
 import AuctionIcon from '@/assets/icons/auction.svg';
 import FailedIcon from '@/assets/icons/failed_auction.svg';
 import OnGoingIcon from '@/assets/icons/ongoing_auction.svg';
@@ -6,14 +7,8 @@ import SuccessIcon from '@/assets/icons/successful_auction.svg';
 import ROUTERS from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
 
-interface ParticipationCountItmes {
-  failedAuctionCount?: number;
-  ongoingAuctionCount?: number;
-  successfulAuctionCount?: number;
-}
-
 interface Props {
-  participantCount?: ParticipationCountItmes;
+  participantCount?: IParticipantCountItems;
   preRegisterCount?: number;
   registeredAuctionCount?: number;
 }

@@ -1,48 +1,27 @@
-import { UserProfile } from '@/@types/user';
-import { getProfile, postEditProfile } from '@/components/profile/queries';
-import { queryKeys } from '@/constants/queryKeys';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { IUserProfile } from '@/@types/user';
+import { useProfile } from '@/components/profile/queries';
 import { useForm } from 'react-hook-form';
-import { useLocation, useNavigate } from 'react-router-dom';
-
-export const useProfile = () => {
-  const { data: profileData } = useQuery({
-    queryKey: [queryKeys.PROFILE],
-    queryFn: () => getProfile(),
-  });
-
-  return {
-    profileData,
-  };
-};
+import { useLocation } from 'react-router-dom';
 
 export const useEditProfile = () => {
-  const navigate = useNavigate();
   const location = useLocation();
-  const { userNickname: originalNickname, userBio, userLink, userProfileImageUrl } = location.state || {};
+  const { userNickname: originalNickname, userBio, userProfileImageUrl } = location.state || {};
+  const { profileMutation, isPending } = useProfile();
 
   const {
     control,
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserProfile>({
+  } = useForm<IUserProfile>({
     defaultValues: {
       nickname: originalNickname || '',
       bio: userBio || '',
-      link: userLink || '',
     }
   });
 
-  const profileMutation = useMutation({
-    mutationFn: (formData: FormData) => postEditProfile(formData),
-    onSuccess: () => {
-      navigate('/user');
-    },
-  });
-
   const handleEditProfile = (formData: FormData) => {
-    profileMutation.mutate(formData);
+    profileMutation(formData);
   };
 
   return {
@@ -53,5 +32,6 @@ export const useEditProfile = () => {
     originalNickname,
     userProfileImageUrl,
     errors,
+    isPending,
   };
 };
