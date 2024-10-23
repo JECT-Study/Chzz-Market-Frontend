@@ -30,7 +30,7 @@ const ProductItem = ({
   const productId = product.auctionId || product.id;
 
   return (
-    <div key={productId} className="mb-4 p-1 cursor-pointer border rounded-md" onClick={onClick}>
+    <div key={productId} className="p-1 mb-4 cursor-pointer" onClick={onClick}>
       <div className="flex flex-col">
         <div className="w-full h-auto mb-4">
           <div className="relative">
