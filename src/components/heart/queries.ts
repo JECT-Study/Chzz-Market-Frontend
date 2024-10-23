@@ -27,6 +27,7 @@ export const useDeletePreAuctionHeart = (): {
   const queryClient = useQueryClient();
   const deletePreAuctionHeart = async (productId: number) => {
     await httpClient.post(`${API_END_POINT.PRE_AUCTION}/${productId}/likes`);
+
   };
 
   const { mutate } = useMutation({
@@ -37,6 +38,9 @@ export const useDeletePreAuctionHeart = (): {
       });
       queryClient.invalidateQueries({
         queryKey: [queryKeys.PRE_AUCTION_DETAILS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.PRE_AUCTION_LIST] 
       });
       toast.success('좋아요 취소되었습니다.');
     },
