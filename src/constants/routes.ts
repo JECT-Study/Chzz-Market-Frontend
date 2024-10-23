@@ -1,4 +1,4 @@
-const ROUTERS = Object.freeze({
+const ROUTES = Object.freeze({
   HOME: '/',
   HEART: '/heart',
   NOTIFICATION: '/notification',
@@ -24,8 +24,12 @@ const ROUTERS = Object.freeze({
   DELIVERY_ADDRESS_ADD: '/auctions/address-add',
 
   BID: '/auctions/bid/:auctionId',
+  getBidRoute: (auctionId: number) => `/auctions/bid/${auctionId}`,
+
   FINAL_BIDDER_LIST: '/auctions/:auctionId/final-bidder-list',
+  getFinalBidderListRoute: (auctionId: number) => `/auctions/${auctionId}/final-bidder-list`,
+
   PAYMENT_SUCCESS: '/payment/success',
 });
 
-export default ROUTERS;
+export default ROUTES;
