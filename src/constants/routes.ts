@@ -13,7 +13,7 @@ const ROUTES = Object.freeze({
   REGISTER: '/auctions/register',
 
   AUCTION_ITEM: '/auctions/auction',
-  getAuctionItemRoute: (auctionId: number) => `/auctions/pre-auction/${auctionId}`,
+  getAuctionItemRoute: (auctionId: number) => `/auctions/auction/${auctionId}`,
 
   PRE_AUCTION_ITEM: '/auctions/pre-auction',
   getPreAuctionItemRoute: (preAuctionId: number) => `/auctions/pre-auction/${preAuctionId}`,

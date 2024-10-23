@@ -18,9 +18,9 @@ const HomeItem = <T extends 'preAuction' | 'auction'>({ kind, item }: HomeItemPr
   const navigate = useNavigate();
   const { minPrice, productName, imageUrl } = item
   const handleClick = () => navigate(
-    kind !== 'preAuction'
-      ? ROUTES.getAuctionItemRoute((item as IAuctionItem).auctionId)
-      : ROUTES.getPreAuctionItemRoute((item as IPreAuctionItem).productId)
+    kind === 'preAuction'
+      ? ROUTES.getPreAuctionItemRoute((item as IPreAuctionItem).productId)
+      : ROUTES.getAuctionItemRoute((item as IAuctionItem).auctionId)
   );
   const name = truncateText(productName);
 
