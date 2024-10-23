@@ -7,10 +7,11 @@ import ParticipantCount from '../common/atomic/ParticipantCount';
 
 const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/auctions/bid/${product.auctionId}`);
+  const handleProductClick = () => navigate(`/auctions/auction/${product.auctionId}`);
+  const handleButtonClick = () => navigate(`/auctions/bid/${product.auctionId}`);
 
   return (
-    <ProductItem product={product}>
+    <ProductItem product={product} onClick={handleProductClick}>
       <MinPrice price={product.minPrice} />
       <ParticipantCount count={product.participantCount} />
       <Button
@@ -18,7 +19,7 @@ const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
         type='button'
         size='small'
         className={`${product.isParticipated ? '' : ''} w-full h-[33px] rounded-sm`}
-        onClick={handleClick}
+        onClick={handleButtonClick}
       >
         경매 참여하기
       </Button>

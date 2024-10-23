@@ -4,11 +4,17 @@ import { API_END_POINT } from "@/constants/api";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+interface Props {
+  addressId: number | null;
+  memo: string | null;
+}
+
 interface RequestData {
   orderId: string | null;
-  amount: string | null;
+  amount: number | null;
   paymentKey: string | null;
   auctionId: string | null;
+  shippingAddressRequest: Props | null;
 }
 
 const PaymentSuccess = () => {
@@ -19,8 +25,12 @@ const PaymentSuccess = () => {
     const requestData: RequestData = {
       auctionId: searchParams.get("auctionId"),
       orderId: searchParams.get("orderId"),
-      amount: searchParams.get("amount"),
+      amount: Number(searchParams.get("amount")),
       paymentKey: searchParams.get("paymentKey"),
+      shippingAddressRequest: {
+        memo: searchParams.get("memo"),
+        addressId: Number(searchParams.get("addressId"))
+      },
     };
 
     const confirm = async () => {

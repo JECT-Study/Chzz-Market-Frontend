@@ -27,6 +27,9 @@ import PaymentSuccess from './pages/PaymentSuccess';
 import AuctionPayment from './pages/AuctionPayment';
 import DeliveryAddressList from './pages/DeliveryAddressList';
 import DeliveryAddressAdd from './pages/DeliveryAddressAdd';
+import UserPreRegisteredList from './pages/UserPreRegisteredList';
+import DeliveryAddressEdit from './pages/DeliveryAddressEdit';
+import EditAddress from './pages/EditAddress';
 
 const layoutWithNavRouteList = [
   {
@@ -48,6 +51,10 @@ const layoutWithNavRouteList = [
   {
     path: ROUTERS.REGISTERED_LIST,
     element: <UserRegisteredList />,
+  },
+  {
+    path: ROUTERS.PRE_REGISTERED_LIST,
+    element: <UserPreRegisteredList />,
   },
   {
     path: ROUTERS.PARTICIPATED_LIST,
@@ -80,7 +87,7 @@ const privateRouteList = [
     loader: registerLoader,
   },
   {
-    path: ROUTERS.AUCTION_PAYMENT,
+    path: ROUTERS.AUCTION_SHIPPING,
     element: <AuctionPayment />,
   },
   {
@@ -94,6 +101,14 @@ const privateRouteList = [
   {
     path: ROUTERS.DELIVERY_ADDRESS_ADD,
     element: <DeliveryAddressAdd />
+  },
+  {
+    path: ROUTERS.DELIVERY_ADDRESS_EDIT,
+    element: <DeliveryAddressEdit />
+  },
+  {
+    path: ROUTERS.EDIT_ADDRESS,
+    element: <EditAddress />
   }
 ];
 

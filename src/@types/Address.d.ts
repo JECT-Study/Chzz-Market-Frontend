@@ -1,8 +1,13 @@
-export interface AddresDetail {
-  name: string,
+import { PaginationData } from "AuctionList";
+
+export interface IAddressDetail {
+  recipientName: string,
   phoneNumber: string,
-  zonecode: string,
-  address: string,
-  addressDetail: string,
-  defaultAddress: string,
+  zipcode: string,
+  roadAddress: string,
+  jibun: string,
+  detailAddress: string,
+  isDefault: boolean,
 }
+
+export interface IAddressData extends PaginationData<IAddressDetail> {}
