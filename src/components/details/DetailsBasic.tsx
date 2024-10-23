@@ -15,7 +15,7 @@ const DetailsBasic = ({ profileImg, nickname, productName, category, minPrice }:
   };
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex flex-col gap-2 sm:gap-4'>
       <div className='flex items-center gap-2'>
         <img src={profileImg ?? ProfileDefaultImage} alt="판매자 프로필" className='border rounded-full size-10' />
         <p className='text-body2'>
