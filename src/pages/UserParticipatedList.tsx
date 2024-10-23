@@ -1,4 +1,4 @@
-import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from 'AuctionItem';
+import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from '@/@types/AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
