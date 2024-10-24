@@ -8,7 +8,6 @@ import ProductItem from '../common/item/ProductItem';
 const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
   const navigate = useNavigate();
   const handleProductClick = () => navigate(`/auctions/auction/${product.auctionId}`);
-  const handleButtonClick = () => navigate(`/auctions/bid/${product.auctionId}`);
 
   return (
     <ProductItem product={product} onClick={handleProductClick}>
@@ -19,7 +18,10 @@ const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
         type='button'
         size='small'
         className={`${product.isParticipated ? '' : ''} w-full h-[33px] rounded-sm`}
-        onClick={handleButtonClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate(`/auctions/bid/${product.auctionId}`);
+        }}
       >
         경매 참여하기
       </Button>

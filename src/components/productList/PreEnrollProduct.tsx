@@ -11,19 +11,21 @@ import { toast } from 'sonner';
 
 const PreEnrollProduct = ({ product }: { product: IPreAuctionItem }) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { mutate: deletePreAuction } = useDeletePreAuctionHeart();
   const handleProductClick = () => navigate(`/auctions/pre-auction/${product.productId}`)
   const confirmDelete = () => {
-    const queryClient = useQueryClient();
-
-    deletePreAuction(product.productId), {
+    deletePreAuction(product.productId, {
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [queryKeys.PRE_AUCTION_LIST]
-        });
-        toast.success('좋아요 추가되었습니다.');
+        queryClient.invalidateQueries({ queryKey: [queryKeys.PRE_AUCTION_LIST] });
+
+        if (product.isLiked) {
+          toast.success('좋아요 취소되었습니다.');
+        } else {
+          toast.success('좋아요 추가되었습니다.');
+        }
       }
-    }
+    });
   };
 
   return (
