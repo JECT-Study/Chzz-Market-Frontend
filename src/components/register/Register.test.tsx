@@ -1,4 +1,3 @@
-import { describe, expect, test } from 'vitest';
 import {
   act,
   fireEvent,
@@ -6,11 +5,12 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
+import { describe, expect, test } from 'vitest';
 
 import { BrowserRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-import { mockedUseNavigate } from '@/setupTests';
 import Register from '../../pages/Register';
+import { mockedUseNavigate } from '@/setupTests';
+import userEvent from '@testing-library/user-event';
 
 /* jsdom이 지원하지 않는 메서드 hasPointerCapture, setPointerCapture, scrollIntoView를 모킹한다.
   테스트 중에 이러한 메서드가 호출될 때 발생하는 에러를 방지한다.
@@ -25,10 +25,10 @@ Object.defineProperty(Element.prototype, 'hasPointerCapture', {
   // 프로퍼티가 변경 가능한 지 여부
 });
 Object.defineProperty(Element.prototype, 'setPointerCapture', {
-  value: () => {},
+  value: () => { },
 });
 Object.defineProperty(Element.prototype, 'scrollIntoView', {
-  value: () => {},
+  value: () => { },
 });
 
 const fillFormWithValidData = async (
@@ -469,7 +469,7 @@ describe('주의사항.', () => {
     await user.click(preButton);
 
     const checkboxSpan = screen.getByRole('checkbox', {
-      name: '주의사항 체크박스',
+      name: '체크박스',
     });
     expect(checkboxSpan).not.toBeChecked();
 
@@ -491,7 +491,7 @@ describe('주의사항.', () => {
     await user.click(enrollBtn);
 
     const checkboxSpan = screen.getByRole('checkbox', {
-      name: '주의사항 체크박스',
+      name: '체크박스',
     });
     expect(checkboxSpan).not.toBeChecked();
 

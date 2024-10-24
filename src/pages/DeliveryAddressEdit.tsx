@@ -1,14 +1,15 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import { ADDRESS_SCRIPT_URL } from "@/constants/address";
 import Button from "@/components/common/Button";
+import Checkbox from "@/components/common/Checkbox";
 import FormField from "@/components/common/form/FormField";
 import { Input } from "@/components/ui/input";
 import Layout from "@/components/layout/Layout";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import { useEditAddress } from "@/components/address/queries";
 import { useForm } from "react-hook-form";
-import { ADDRESS_SCRIPT_URL } from "@/constants/address";
 
 interface AddressProps {
   recipientName: string,
@@ -28,6 +29,7 @@ const DeliveryAddressEdit = () => {
   const zonecode = location.state?.zonecode;
   const formRef = useRef<HTMLFormElement>(null);
   const [isChecked, setIsChecked] = useState(false);
+  const toggleCheckbox = () => setIsChecked((prev) => !prev)
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
@@ -62,11 +64,6 @@ const DeliveryAddressEdit = () => {
         new Event('submit', { cancelable: true, bubbles: true }),
       );
     }
-  };
-
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    setIsChecked(checked);
   };
 
   const onSubmit = handleSubmit((data: AddressProps) => {
@@ -190,19 +187,7 @@ const DeliveryAddressEdit = () => {
                 />
               )}
             />
-            {/* 기본 배송지 체크박스는 직접 처리 */}
-            <div className="flex items-center space-x-3">
-              <input
-                id="defaultAddress"
-                type="checkbox"
-                checked={isChecked}
-                onChange={handleCheckboxChange}
-                className="w-4 h-4 border-gray-300 rounded text-cheeseYellow focus:ring-cheeseYellow"
-              />
-              <label htmlFor="defaultAddress" className="text-lg text-center text-gray-3">
-                기본 배송지로 설정
-              </label>
-            </div>
+            <Checkbox title="기본 배송지로 설정" check={isChecked} handleCheck={toggleCheckbox} />
           </form>
         </div>
       </Layout.Main>

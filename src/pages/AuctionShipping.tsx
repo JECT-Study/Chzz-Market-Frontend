@@ -1,14 +1,16 @@
-import rocation_on from '@/assets/icons/rocation_on.svg';
-import Button from '@/components/common/Button';
-import FormField from '@/components/common/form/FormField';
-import Layout from '@/components/layout/Layout';
-import { Input } from '@/components/ui/input';
-import { AuctionShippingSchema } from '@/constants/schema';
-import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
+
+import { AuctionShippingSchema } from '@/constants/schema';
+import Button from '@/components/common/Button';
+import Checkbox from '@/components/common/Checkbox';
+import FormField from '@/components/common/form/FormField';
+import { Input } from '@/components/ui/input';
+import Layout from '@/components/layout/Layout';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import rocation_on from '@/assets/icons/rocation_on.svg';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
@@ -41,6 +43,7 @@ const AuctionShipping = () => {
   }
 
   const [isChecked, setIsChecked] = useState(false);
+  const toggleCheckbox = () => setIsChecked((prev) => !prev)
 
   useEffect(() => {
     if (auctionId) {
@@ -68,10 +71,6 @@ const AuctionShipping = () => {
   const handleClickAddressList = () => {
     navigate(`/auctions/${auctionId}/address-list`);
   }
-
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked);
-  };
 
   const onSubmit = (formData: FormFields) => {
     postPayment(formData, address);
@@ -152,12 +151,7 @@ const AuctionShipping = () => {
             </Button>
           </div>
 
-          <div className="flex items-center">
-            <input type="checkbox" id="agree" className="mr-2" checked={isChecked} onChange={handleCheckboxChange} />
-            <label htmlFor="agree" className="text-sm">
-              주의사항을 모두 확인하였으며 위 내용에 동의합니다.
-            </label>
-          </div>
+          <Checkbox title='주의사항을 모두 확인하였으며 위 내용에 동의합니다.' check={isChecked} handleCheck={toggleCheckbox} />
         </div>
       </Layout.Main>
       <Layout.Footer type="single">

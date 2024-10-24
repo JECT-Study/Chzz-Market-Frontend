@@ -1,7 +1,6 @@
-import { CONFIRM_MESSAGE } from "@/constants/confirmMessage";
-import { useOutsideClick } from "@/hooks/useOutsideClick";
-import { ReactNode } from "react";
 import Button from "./Button";
+import { CONFIRM_MESSAGE } from "@/constants/confirmMessage";
+import { ReactNode } from "react";
 
 interface ConfirmProps {
   type: string
@@ -11,10 +10,9 @@ interface ConfirmProps {
 
 const Confirm = ({ type, children, onCloseModal }: ConfirmProps) => {
   const { title, description } = CONFIRM_MESSAGE[type]
-  const ref = useOutsideClick(onCloseModal)
 
   return (
-    <div ref={ref} className='min-w-[17rem] w-2/5 max-w-[23rem] flex items-center justify-center p-8 bg-white rounded-lg sm:text-body1 text-body2'>
+    <div onClick={(e) => e.stopPropagation()} className='min-w-[17rem] w-2/5 max-w-[23rem] flex items-center justify-center p-8 bg-white rounded-lg sm:text-body1 text-body2'>
       <div className="flex flex-col gap-3">
         <h3 className="sm:text-heading3 text-body2Bold">{title}</h3>
         <p className='sm:text-body2 text-caption'>{description}</p>
