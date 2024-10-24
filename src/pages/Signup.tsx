@@ -29,6 +29,7 @@ const Signup = () => {
     if (nickname.length > 15) {
       setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
       setIsSubmitEnabled(false);
+      setIsNameValid(false);
     } else {
       setNicknameError(null);
       setIsSubmitEnabled(false);
@@ -39,6 +40,7 @@ const Signup = () => {
     if (!nickname || nickname.trim() === '') {
       setNicknameError('닉네임을 입력해주세요.');
       setIsNameValid(false);
+      setIsSubmitEnabled(false);
       return;
     }
 
@@ -74,8 +76,8 @@ const Signup = () => {
           className="flex flex-col px-2 py-4 space-y-4"
         >
           <h2 className="pb-4 text-heading3">기본 정보 입력</h2>
-          <div className='flex items-end'>
-            <div className='flex-1 w-4/5'>
+          <div className='flex items-end gap-6'>
+            <div className='flex-1'>
               <FormField
                 label="닉네임 *"
                 name="nickname"

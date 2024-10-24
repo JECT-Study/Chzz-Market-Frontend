@@ -2,11 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import ProfileImage from '@/assets/icons/profile.svg';
 import Button from '../common/Button';
 import type { IProfileProps } from '@/@types/user';
-import naverIcon from '@/assets/icons/btnG_naver_icon.svg';
-import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.svg';
+import naverIcon from '@/assets/icons/btnG_naverIcon.png';
+import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.png';
 import ButtonSpinner from '../common/loading/ButtonSpinner';
-
-
 
 const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }: IProfileProps) => {
   const navigator = useNavigate();
