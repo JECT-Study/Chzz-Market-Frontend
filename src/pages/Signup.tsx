@@ -10,7 +10,6 @@ import NoticeRed from '@/assets/icons/notice_red.svg';
 import { useCheckNickname } from '@/components/profile/queries';
 
 const Signup = () => {
-  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
   const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [isNameValid, setIsNameValid] = useState(false);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
@@ -32,7 +31,6 @@ const Signup = () => {
       setIsSubmitEnabled(false);
     } else {
       setNicknameError(null);
-      setIsNicknameChecked(false);
       setIsSubmitEnabled(false);
     }
   }, [nickname]);
@@ -46,7 +44,6 @@ const Signup = () => {
 
     const { data } = await checkNickname();
     const { isAvailable } = data;
-    setIsNicknameChecked(isAvailable);
     
     if (isAvailable === true) {
       setNicknameError('사용 가능한 닉네임입니다.');

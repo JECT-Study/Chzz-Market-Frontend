@@ -71,6 +71,7 @@ const ProfileEdit = () => {
     if (nickname === originalNickname) {
       setIsNicknameChecked(true);
       setNicknameError('기존 닉네임입니다. 사용가능합니다.');
+      setIsSubmitEnabled(true);
       return;
     }
 
@@ -81,9 +82,11 @@ const ProfileEdit = () => {
     if (isAvailable) {
       setNicknameError('사용 가능한 닉네임입니다.');
       setIsNicknameChecked(true);
+      setIsSubmitEnabled(true);
     } else {
       setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
       setIsNicknameChecked(false);
+      setIsSubmitEnabled(true);
     }
   };
 
@@ -98,18 +101,12 @@ const ProfileEdit = () => {
       setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
       setIsSubmitEnabled(false);
       setIsNicknameChecked(false);
-    }
-    if (nickname === originalNickname) {
-      setIsSubmitEnabled(true);
-      return;
-    }
-
-    if (nickname && isNicknameChecked) {
+    } else if (nickname === originalNickname) {
       setIsSubmitEnabled(true);
     } else {
       setIsSubmitEnabled(false);
     }
-  }, [nickname, isNicknameChecked])
+  }, [nickname])
 
   return (
     <Layout>
