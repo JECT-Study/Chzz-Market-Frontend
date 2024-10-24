@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
 
 import { AuctionShippingSchema } from '@/constants/schema';
 import Button from '@/components/common/Button';
-import Checkbox from '@/components/common/Checkbox';
 import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import Layout from '@/components/layout/Layout';
@@ -41,9 +40,6 @@ const AuctionShipping = () => {
 
     address = { ...selectedAddress }
   }
-
-  const [isChecked, setIsChecked] = useState(false);
-  const toggleCheckbox = () => setIsChecked((prev) => !prev)
 
   useEffect(() => {
     if (auctionId) {
@@ -153,7 +149,6 @@ const AuctionShipping = () => {
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}
-          disabled={!isChecked}
         >
           결제 하기
         </Button>
