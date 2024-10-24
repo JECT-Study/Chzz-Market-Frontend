@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import ProfileImage from '@/assets/icons/profile.svg';
 import Button from '../common/Button';
 import type { IProfileProps } from '@/@types/user';
-import naverImage from '@/assets/icons/btnG_아이콘사각.png';
-import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.png';
+import naverIcon from '@/assets/icons/btnG_naver_icon.svg';
+import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.svg';
 import ButtonSpinner from '../common/loading/ButtonSpinner';
 
 
@@ -34,7 +34,7 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
             {providerType === 'KAKAO' ? (
               <img src={kakaoImage} alt="카카오이미지" className='w-7 h-7' />
             ) : (
-              <img src={naverImage} alt="네이버이미지" className='w-7 h-7'/>
+              <img src={naverIcon} alt="네이버이미지" className='w-7 h-7'/>
             )}
           </div>
           <Button
