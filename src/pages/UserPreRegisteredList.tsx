@@ -3,14 +3,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import type { IPreAuctionRegisteredItem } from '@/@types/AuctionItem';
 import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
-import UserPreOrderTab from '@/components/user/UserPreOrderTab';
 import { useLocation } from 'react-router-dom';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
 
 const UserPreRegisteredList = () => {
   const location = useLocation();
   const sortType = location.state?.sortType;
-  const [activeTab, setActiveTab] = useState(sortType);
+  const [activeTab, _setActiveTab] = useState(sortType);
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
@@ -59,7 +58,6 @@ const UserPreRegisteredList = () => {
 
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>
-      <UserPreOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'preAuction' &&
         <EmptyBoundary length={enrollItems.length} name='userPreAuction'>
           <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto`}>
