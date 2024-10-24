@@ -1,5 +1,6 @@
 import { PRE_REGISTER_CAUTION, REGISTER_CAUTION } from '@/constants/caution';
-import CautionCheck from '../common/CautionCheck';
+
+import Checkbox from '../common/Checkbox';
 
 interface CautionProps {
   kind: string;
@@ -32,7 +33,7 @@ const RegisterCaution = ({ kind, check, handleCheck }: CautionProps) => {
             ))}
           </div>
         )}
-        <CautionCheck check={check} handleCheck={handleCheck} />
+        <Checkbox title='주의사항을 모두 확인하였으며 위 내용에 동의합니다.' check={check} handleCheck={handleCheck} />
       </div>
     </section>
   );

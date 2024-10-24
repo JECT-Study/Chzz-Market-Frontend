@@ -1,7 +1,7 @@
 import type { IAuctionItem, IPreAuctionItem } from '@/@types/AuctionItem';
 
-import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
+import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
@@ -30,7 +30,7 @@ export const useGetImminentAuctions = () => {
 };
 export const useGetPreAuctions = () => {
   const getPreAuctions = async (): Promise<IPreAuctionItem[]> => {
-    const response = await httpClient.get(`${API_END_POINT.PRE_AUCTION}?sort=most-liked&page=0&size=5`);
+    const response = await httpClient.get(`${API_END_POINT.PRE_AUCTION}?sort=most-liked,product-newest&page=0&size=5`);
     if (!response.data || !response.data.items) {
       throw new Error('No items found in the response');
     }

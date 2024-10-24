@@ -1,11 +1,11 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
 import Bid from '@/pages/Bid';
 import { mockedUseNavigate } from '@/setupTests';
-import userEvent from '@testing-library/user-event';
 import { useGetAuctionDetails } from '../details/queries';
+import userEvent from '@testing-library/user-event';
 
 vi.mock('@/components/details/queries');
 vi.mocked(useGetAuctionDetails).mockReturnValue({
@@ -140,7 +140,7 @@ describe('입찰가 수정 테스트', () => {
     expect(submitBtn).toBeDisabled();
 
     const checkbox = screen.getByRole('checkbox', {
-      name: '주의사항 체크박스',
+      name: '체크박스',
     });
     expect(checkbox).not.toBeChecked();
 
@@ -161,7 +161,7 @@ describe('입찰가 수정 테스트', () => {
     expect(submitBtn).toBeDisabled();
 
     const checkbox = await screen.findByRole('checkbox', {
-      name: '주의사항 체크박스',
+      name: '체크박스',
     });
     expect(checkbox).not.toBeChecked();
 

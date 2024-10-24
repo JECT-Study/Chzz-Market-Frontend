@@ -1,11 +1,11 @@
 import Button from "@/components/common/Button";
-import { useCancelBid } from "@/components/details/queries";
-import { MAX_BID_COUNT } from "@/constants/bid";
-import ROUTES from "@/constants/routes";
-import { useNavigate } from "react-router-dom";
 import Confirm from "../common/Confirm";
-import Modal from "../common/Modal";
 import Layout from "../layout/Layout";
+import { MAX_BID_COUNT } from "@/constants/bid";
+import Modal from "../common/Modal";
+import ROUTES from "@/constants/routes";
+import { useCancelBid } from "@/components/details/queries";
+import { useNavigate } from "react-router-dom";
 
 interface AuctionDetailsFooterProps {
   bidId: number | null;
@@ -109,7 +109,7 @@ const AuctionDetailsFooter = ({ isOrdered = false, isWinner, isSeller, bidId, au
           :
           <>
             <Modal>
-              <Modal.Open name="cancelBid">
+              <Modal.Open>
                 <Button
                   type="button"
                   className="flex-1 h-full transition-colors rounded text-button active:bg-black"
@@ -117,7 +117,7 @@ const AuctionDetailsFooter = ({ isOrdered = false, isWinner, isSeller, bidId, au
                   참여 취소
                 </Button>
               </Modal.Open>
-              <Modal.Window name="cancelBid">
+              <Modal.Window>
                 <Confirm type="cancelBid" >
                   <Button type='button' color='cheeseYellow' className='w-full' onClick={clickCancel}>
                     참여 취소

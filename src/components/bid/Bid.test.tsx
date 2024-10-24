@@ -131,7 +131,7 @@ describe('입찰 테스트', () => {
     expect(submitBtn).toBeDisabled();
 
     const checkbox = screen.getByRole('checkbox', {
-      name: '주의사항 체크박스',
+      name: '체크박스',
     });
     expect(checkbox).not.toBeChecked();
 
@@ -152,7 +152,7 @@ describe('입찰 테스트', () => {
     expect(submitBtn).toBeDisabled();
 
     const checkbox = await screen.findByRole('checkbox', {
-      name: '주의사항 체크박스',
+      name: '체크박스',
     });
     expect(checkbox).not.toBeChecked();
 

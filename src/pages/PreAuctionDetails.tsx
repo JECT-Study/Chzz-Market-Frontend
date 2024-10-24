@@ -34,7 +34,7 @@ const PreAuctionDetails = () => {
         title='제품 상세'
         option={isSeller && (
           <Modal>
-            <Modal.Open name='option'>
+            <Modal.Open>
               <button
                 aria-label='옵션'
                 className='absolute right-2'
@@ -42,7 +42,7 @@ const PreAuctionDetails = () => {
                 <img src={ThreeDotsIcon} alt='옵션 아이콘' className='size-5' />
               </button>
             </Modal.Open>
-            <Modal.Window name='option'>
+            <Modal.Window>
               <DetailsOption clickEdit={clickEdit} confirmDelete={confirmDelete} isPending={isPending} />
             </Modal.Window>
           </Modal>)}
