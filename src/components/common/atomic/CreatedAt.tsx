@@ -10,12 +10,12 @@ const CreatedAt = ({ createAt }: { createAt: string }) => {
 
   return (
     <div
-      aria-label="마감된 날짜"
+      aria-label="마감 날짜"
       className="flex items-center text-xs sm:text-body2 text-gray2"
     >
-      <img src={PriceIcon} alt="마감된 날짜" />
+      <img src={PriceIcon} alt="마감 날짜" />
       <span className='whitespace-nowrap'>
-        {`마감된 날짜 `}
+        {`마감 날짜 `}
         <span className="text-xs text-black sm:text-body2Bold">{formattedDate}</span>
       </span>
     </div>

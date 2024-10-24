@@ -36,7 +36,7 @@ const HomeItem = <T extends 'preAuction' | 'auction'>({ kind, item }: HomeItemPr
             {name}
           </div>
           <div>
-            <MinPrice price={minPrice} />
+            <MinPrice title='시작가' price={minPrice} />
             {kind !== 'preAuction'
               ? <ParticipantCount count={(item as IAuctionItem).participantCount} />
               : <LikeCount count={(item as IPreAuctionItem).likeCount} />}

@@ -10,7 +10,7 @@ const OngoingMyRegister = ({ product }: { product: IAuctionOngoingRegisteredItem
 
   return (
     <ProductItem product={product} onClick={() => navigate(`/auctions/auction/${product.auctionId}`)}>
-      <MinPrice price={product.minPrice} />
+      <MinPrice title='시작가' price={product.minPrice} />
       <ParticipantCount count={product.participantCount} />
       <CreatedAt createAt={product.createdAt} />
     </ProductItem>

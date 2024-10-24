@@ -69,7 +69,7 @@ const UserRegisteredList = () => {
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'ongoing' &&
         <EmptyBoundary length={ongoingItems.length} name='userAuction'>
-          <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto`}>
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
             {ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
               <OngoingMyRegister product={product} key={product.auctionId} />
             ))}
@@ -78,7 +78,7 @@ const UserRegisteredList = () => {
       }
       {activeTab === 'end' &&
         <EmptyBoundary length={ongoingItems.length} name='userAuction'>
-          <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto`}>
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
             {endItems.map((product: IAuctionEndRegisteredItem) => (
               <EndMyRegister product={product} key={product.auctionId} />
             ))}

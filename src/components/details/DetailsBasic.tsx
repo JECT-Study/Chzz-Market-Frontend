@@ -28,7 +28,7 @@ const DetailsBasic = ({ profileImg, nickname, productName, category, minPrice }:
       <span className='inline-flex'>
         <button onClick={onClickCategory} className='underline cursor-pointer shrink-0 grow-0 text-gray2 text-body2'>{CATEGORIES[category].value}</button>
       </span>
-      <MinPrice price={minPrice} />
+      <MinPrice title='시작가' price={minPrice} />
     </div>
 
   );

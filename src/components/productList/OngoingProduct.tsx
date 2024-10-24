@@ -11,7 +11,7 @@ const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
 
   return (
     <ProductItem product={product} onClick={handleProductClick}>
-      <MinPrice price={product.minPrice} />
+      <MinPrice title='시작가' price={product.minPrice} />
       <ParticipantCount count={product.participantCount} />
       <Button
         color={product.isParticipated ? 'black' : 'white'}

@@ -87,9 +87,7 @@ const UserParticipatedList = () => {
       {activeTab === 'AuctionHistory' &&
         <EmptyBoundary length={historyItems.length} name='participated'>
           <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {
-              historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)
-            }
+            {historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)}
           </div>
         </EmptyBoundary>
       }

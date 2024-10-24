@@ -60,7 +60,7 @@ const UserPreRegisteredList = () => {
     <div className='mx-[-32px] my-[-4px] h-full'>
       {activeTab === 'preAuction' &&
         <EmptyBoundary length={enrollItems.length} name='userPreAuction'>
-          <div className={`grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto`}>
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
             {enrollItems.map((product: IPreAuctionRegisteredItem) => (
               <PreEnrollMyRegister product={product} key={product.productId} />
             ))}

@@ -1,6 +1,6 @@
 import type { IAuctionItem, IPreAuctionItem } from '@/@types/AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import Layout from '@/components/layout/Layout';
@@ -15,6 +15,8 @@ const ProductList = () => {
   const [ongoingSortType, setOngoingSortType] = useState('newest');
   const [preAuctionSortType, setPreAuctionSortType] = useState('product-newest');
   const navigate = useNavigate();
+  const location = useLocation();
+  const categoryName = location.state.category;
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
@@ -72,7 +74,7 @@ const ProductList = () => {
 
   return (
     <Layout>
-      <Layout.Header title='상품 경매 목록' handleBack={() => navigate('/')} />
+      <Layout.Header title={`${categoryName} 경매 목록`} handleBack={() => navigate('/')} />
       <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }} ref={mainContainerRef}>
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <ProductButtons setOngoingSortType={setOngoingSortType} setPreAuctionSortType={setPreAuctionSortType} />

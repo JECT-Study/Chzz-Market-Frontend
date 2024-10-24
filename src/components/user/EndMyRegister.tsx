@@ -15,7 +15,7 @@ const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
 
   return (
     <ProductItem product={product} onClick={() => navigate(ROUTES.getAuctionItemRoute(product.auctionId))}>
-      <MinPrice price={product.minPrice} />
+      <MinPrice title='시작가' price={product.minPrice} />
       <ParticipantCount count={product.participantCount} />
       <div
         aria-label="낙찰 금액"

@@ -30,7 +30,7 @@ const PreEnrollProduct = ({ product }: { product: IPreAuctionItem }) => {
 
   return (
     <ProductItem product={product} onClick={handleProductClick}>
-      <MinPrice price={product.minPrice} />
+      <MinPrice title='시작가' price={product.minPrice} />
       <LikeCount count={product.likeCount} />
       <Button onClick={(event) => {
         event.stopPropagation();

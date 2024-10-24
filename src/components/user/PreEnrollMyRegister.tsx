@@ -11,7 +11,7 @@ const PreEnrollMyRegister = ({ product }: { product: IPreAuctionRegisteredItem }
 
   return (
     <ProductItem product={product} onClick={clickProduct}>
-      <MinPrice price={product.minPrice} />
+      <MinPrice title='시작가' price={product.minPrice} />
       <LikeCount count={product.likeCount} />
     </ProductItem>
   );
