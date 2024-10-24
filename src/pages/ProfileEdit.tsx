@@ -94,6 +94,11 @@ const ProfileEdit = () => {
   }, [userProfileImageUrl]);
 
   useEffect(() => {
+    if (nickname.length > 15) {
+      setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
+      setIsSubmitEnabled(false);
+      setIsNicknameChecked(false);
+    }
     if (nickname === originalNickname) {
       setIsSubmitEnabled(true);
       return;
@@ -144,8 +149,13 @@ const ProfileEdit = () => {
             </div>
           </div>
           {nicknameError && (
-            <div className={`flex items-center gap-2 ${isNicknameChecked ? 'text-green-500' : 'text-redNotice'}`}>
-              <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+            <div className={`flex items-center gap-2 ${isNicknameChecked ? 'text-customBlue' : 'text-redNotice'}`}>
+              {isNicknameChecked ? (
+                // 파랑 아이콘 추가
+                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+              ) : (
+                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+              )}
               <span className="text-body2">{nicknameError}</span>
             </div>
           )}

@@ -26,6 +26,17 @@ const Signup = () => {
   const nickname = formValues.nickname || '';
   const { checkNickname } = useCheckNickname({ nickname });
 
+  useEffect(() => {
+    if (nickname.length > 15) {
+      setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
+      setIsSubmitEnabled(false);
+    } else {
+      setNicknameError(null);
+      setIsNicknameChecked(false);
+      setIsSubmitEnabled(false);
+    }
+  }, [nickname]);
+
   const onNicknameCheck = async () => {
     if (!nickname || nickname.trim() === '') {
       setNicknameError('닉네임을 입력해주세요.');
@@ -40,9 +51,11 @@ const Signup = () => {
     if (isAvailable === true) {
       setNicknameError('사용 가능한 닉네임입니다.');
       setIsNameValid(true);
+      setIsSubmitEnabled(true);
     } else {
       setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.')
       setIsNameValid(false);
+      setIsSubmitEnabled(false);
     }
   };
 
@@ -53,14 +66,6 @@ const Signup = () => {
       );
     }
   };
-
-  useEffect(() => {
-    if (nickname && isNicknameChecked) {
-      setIsSubmitEnabled(true);
-    } else {
-      setIsSubmitEnabled(false);
-    }
-  }, [nickname, isNicknameChecked])
 
   return (
     <Layout>
@@ -94,8 +99,13 @@ const Signup = () => {
             </div>
           </div>
           {nicknameError && (
-            <div className={`flex items-center gap-2 ${isNameValid ? 'text-green-500' : 'text-redNotice'}`}>
-              <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+            <div className={`flex items-center gap-2 ${isNameValid ? 'text-customBlue' : 'text-redNotice'}`}>
+              {isNameValid ? (
+                // 파랑 아이콘 추가
+                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+              ) : (
+                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+              )}
               <span className="text-body2">{nicknameError}</span>
             </div>
           )}
