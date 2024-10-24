@@ -56,7 +56,7 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
               </span>
             </div>
             <ParticipantCount count={product.participantCount} />
-            <Button
+            <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
@@ -67,13 +67,15 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
                 }
               }}
               className={
-                product.isOrdered
-                  ? 'bg-[#D9D9D9] border-none'
+                `focus:outline-none rounded-lg transition-colors box-border sm:px-4 sm:py-2 px-2 py-2 sm:text-button text-sm
+                ${product.isOrdered
+                  ? 'bg-gray3 border-none'
                   : 'bg-gray1 text-white border-none'
-              }
+                }
+              `}
             >
               {product.isOrdered ? '결제 내역 보기' : '결제하기'}
-            </Button>
+            </button>
           </div>
         </div>
       </div>

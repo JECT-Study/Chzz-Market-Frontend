@@ -17,22 +17,22 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
   }
 
   return (
-    <div className="flex pb-8 my-10 gap-5 border-b border-b-gray3">
+    <div className="flex pb-8 my-10 lg:gap-5 border-b border-b-gray3">
       {profileImageUrl ? (
-        <img src={profileImageUrl} alt='프로필 이미지' className='w-[130px] h-[130px] rounded-full mr-4 object-conver' />
+        <img src={profileImageUrl} alt='프로필 이미지' className='w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] rounded-full mr-4 object-conver' />
       ) : (
-        <img src={ProfileImage} alt='기본 프로필 이미지' className='w-[130px] h-[130px] rounded-full mr-4' />
+        <img src={ProfileImage} alt='기본 프로필 이미지' className='w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] rounded-full mr-4' />
       )} 
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <div className="flex">
-            <p className="text-2xl font-bold mr-2 pr-2">
+            <p className="text-heading2 lg:text-2xl font-bold mr-2 pr-2">
               {userNickname}
             </p>
             {providerType === 'KAKAO' ? (
-              <img src={kakaoImage} alt="카카오이미지" className='w-7 h-7' />
+              <img src={kakaoImage} alt="카카오이미지" className='w-5 h-5 lg:w-7 lg:h-7' />
             ) : (
-              <img src={naverIcon} alt="네이버이미지" className='w-7 h-7'/>
+              <img src={naverIcon} alt="네이버이미지" className='w-5 h-5 lg:w-7 lg:h-7'/>
             )}
           </div>
           <Button
@@ -49,8 +49,8 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
         <div className="mt-2">
           {userBio && userBio.trim().length > 0 && (
             <>
-              <div className="text-heading3 mb-2">자기소개</div>
-              <div>{userBio}</div>
+              <div className="text-body1 sm:font-semibold lg:text-heading3 mb-2">자기소개</div>
+              <div className='sm:text-sm'>{userBio}</div>
             </>
           )}
         </div>
