@@ -21,15 +21,36 @@ const ProfileEdit = () => {
   const [profileFile, setProfileFile] = useState<File | null>(userProfileImageUrl);
   const [_useDefaultImage, setUseDefaultImage] = useState(false);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-  const nickname = watch('nickname');
+  const [isNicknameCheckDisabled, setIsNicknameCheckDisabled] = useState(false);
+  const nickname = watch('nickname')?.trim();
   const { checkNickname } = useCheckNickname({ nickname });
 
-  const handleSubmitClick = () => {
-    if (formRef.current) {
-      formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true }),
-      );
+  const handleNicknameValidation = (nickname: string, isAvailable: boolean) => {
+    if (!nickname || nickname === '') {
+      setNicknameError('닉네임을 입력해주세요.');
+      setIsNicknameChecked(false);
+      setIsSubmitEnabled(false);
+    } else if (isAvailable) {
+      setNicknameError('사용 가능한 닉네임입니다.');
+      setIsNicknameChecked(true);
+      setIsSubmitEnabled(true);
+    } else {
+      setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
+      setIsNicknameChecked(false);
+      setIsSubmitEnabled(false);
     }
+  };
+
+  const onNicknameCheck = async () => {
+    if (nickname === originalNickname) {
+      setNicknameError('기존 닉네임입니다. 사용가능합니다.');
+      setIsNicknameChecked(true);
+      setIsSubmitEnabled(true);
+      return;
+    }
+
+    const { data } = await checkNickname();
+    handleNicknameValidation(nickname, data.isAvailable);
   };
 
   const onSubmit = (data: IUserProfile) => {
@@ -55,40 +76,9 @@ const ProfileEdit = () => {
       );
       handleEditProfile(formData);
     } else {
-      // 에러 띄우기 닉네임 중복 확인을 해주세요.
       setNicknameError('닉네임 중복 확인을 해주세요.');
       setIsNicknameChecked(false);
       setIsSubmitEnabled(false);
-    }
-  };
-
-  const onNicknameCheck = async () => {
-    if (!nickname || nickname.trim() === '') {
-      setNicknameError('닉네임을 입력해주세요.');
-      setIsSubmitEnabled(false);
-      setIsNicknameChecked(false);
-      return;
-    }
-
-    if (nickname === originalNickname) {
-      setNicknameError('기존 닉네임입니다. 사용가능합니다.');
-      setIsNicknameChecked(true);
-      setIsSubmitEnabled(true);
-      return;
-    }
-
-    const { data } = await checkNickname();
-    const { isAvailable } = data;
-    setIsNicknameChecked(isAvailable);
-    
-    if (isAvailable) {
-      setNicknameError('사용 가능한 닉네임입니다.');
-      setIsNicknameChecked(true);
-      setIsSubmitEnabled(true);
-    } else {
-      setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
-      setIsNicknameChecked(false);
-      setIsSubmitEnabled(true);
     }
   };
 
@@ -103,10 +93,14 @@ const ProfileEdit = () => {
       setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
       setIsSubmitEnabled(false);
       setIsNicknameChecked(false);
-    } else if (nickname === originalNickname) {
-      setIsSubmitEnabled(true);
+      setIsNicknameCheckDisabled(true);
     } else {
-      setIsSubmitEnabled(false);
+      setIsNicknameCheckDisabled(false);
+      if (nickname === originalNickname) {
+        setIsSubmitEnabled(true);
+      } else {
+        setIsSubmitEnabled(false);
+      }
     }
   }, [nickname]);
 
@@ -144,7 +138,7 @@ const ProfileEdit = () => {
               />
             </div>
             <div>
-              <Button type='button' className='h-10' onClick={onNicknameCheck}>중복확인</Button>
+              <Button type='button' className='h-10' onClick={onNicknameCheck} disabled={isNicknameCheckDisabled}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
@@ -175,10 +169,10 @@ const ProfileEdit = () => {
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
-          type="submit"
+          type="button"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
-          onClick={handleSubmitClick}
+          onClick={() => formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
           disabled={!isSubmitEnabled || isPending}
           loading={isPending}
         >

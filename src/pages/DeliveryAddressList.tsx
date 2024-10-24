@@ -128,7 +128,7 @@ const DeliveryAddressList = () => {
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
-          type="submit"
+          type="button"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}

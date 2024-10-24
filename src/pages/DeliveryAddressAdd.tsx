@@ -203,7 +203,7 @@ const DeliveryAddressAdd = () => {
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
-          type="submit"
+          type="button"
           className="w-full h-[47px] rounded-lg"
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}

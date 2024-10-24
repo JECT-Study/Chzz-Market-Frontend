@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
@@ -8,63 +8,75 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import NoticeRed from '@/assets/icons/notice_red.svg';
 import { useCheckNickname } from '@/components/profile/queries';
+import { IUser } from '@/@types/user';
 
 const Signup = () => {
   const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [isNameValid, setIsNameValid] = useState(false);
+  const [isNicknameChecked, setIsNicknameChecked] = useState();
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const {
     control,
     watch,
-    onSubmit,
     isPending,
+    handleSubmit,
+    signupMutation
   } = useSignup();
   const formValues = watch();
-  const nickname = formValues.nickname || '';
+  const nickname = formValues.nickname?.trim() || '';
   const { checkNickname } = useCheckNickname({ nickname });
 
-  useEffect(() => {
+  const validateNickname = () => {
     if (nickname.length > 15) {
       setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
-      setIsSubmitEnabled(false);
       setIsNameValid(false);
-    } else {
-      setNicknameError(null);
       setIsSubmitEnabled(false);
+      return false;
     }
+    setNicknameError(null);
+    setIsNameValid(false);
+    setIsSubmitEnabled(false);
+    return true;
+  };
+
+  useEffect(() => {
+    validateNickname();
   }, [nickname]);
 
   const onNicknameCheck = async () => {
-    if (!nickname || nickname.trim() === '') {
+    if (!validateNickname()) return;
+
+    if (!nickname) {
       setNicknameError('닉네임을 입력해주세요.');
-      setIsNameValid(false);
-      setIsSubmitEnabled(false);
       return;
     }
 
     const { data } = await checkNickname();
     const { isAvailable } = data;
     
-    if (isAvailable === true) {
-      setNicknameError('사용 가능한 닉네임입니다.');
-      setIsNameValid(true);
-      setIsSubmitEnabled(true);
-    } else {
-      setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.')
-      setIsNameValid(false);
-      setIsSubmitEnabled(false);
+    setNicknameError(isAvailable ? '사용 가능한 닉네임입니다.' : '이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
+    setIsNameValid(isAvailable);
+    setIsSubmitEnabled(isAvailable);
+    setIsNicknameChecked(isAvailable);
+  };
+
+  const onSubmit = (data: IUser) => {
+    if (!isNicknameChecked) {
+      setNicknameError('닉네임 중복 확인을 해주세요.');
+      return;
+    }
+    signupMutation(data);
+  };
+
+  const handleEnterKey = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' && !isNicknameChecked) {
+      event.preventDefault();
+      setNicknameError('닉네임 중복 확인을 해주세요.');
     }
   };
 
-  const handleSubmitClick = () => {
-    if (formRef.current) {
-      formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true }),
-      );
-    }
-  };
 
   return (
     <Layout>
@@ -72,7 +84,8 @@ const Signup = () => {
       <Layout.Main>
         <form
           ref={formRef}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit(onSubmit)}
+          onKeyDown={handleEnterKey}
           className="flex flex-col px-2 py-4 space-y-4"
         >
           <h2 className="pb-4 text-heading3">기본 정보 입력</h2>
@@ -125,10 +138,10 @@ const Signup = () => {
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
-          type="submit"
+          type="button"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
-          onClick={handleSubmitClick}
+          onClick={() => formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
           disabled={!isSubmitEnabled || isPending}
           loading={isPending}
         >

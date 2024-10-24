@@ -1,5 +1,4 @@
 import { SignupFormSchema } from '@/constants/schema';
-import type { IUser } from '@/@types/user';
 import { usePostSignup } from '@/components/login/queries';
 import { Control, UseFormHandleSubmit, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -11,7 +10,6 @@ interface IUseSignupReturn {
   handleSubmit: UseFormHandleSubmit<FormFields>;
   watch: () => Partial<FormFields>;
   setValue: (name: keyof FormFields, value: any) => void;
-  onSubmit: () => void;
   signupMutation: ReturnType<typeof usePostSignup>['signupMutation'];
   isPending: boolean;
 }
@@ -33,16 +31,11 @@ export const useSignup = (): IUseSignupReturn => {
     defaultValues,
   });
 
-  const onSubmit = handleSubmit((data: IUser) => {
-    signupMutation(data);
-  });
-
   return {
     control,
     handleSubmit,
     watch,
     setValue,
-    onSubmit,
     signupMutation,
     isPending
   };
