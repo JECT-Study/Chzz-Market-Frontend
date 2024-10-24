@@ -107,6 +107,7 @@ module.exports = {
       colors: {
         mainCheeseYellow: '#FFC558',
         cheeseYellow: '#FD6A10',
+        customBlue: '#448AFF',
         gray1: '#454545',
         gray2: '#888888',
         gray3: '#D9D9D9',

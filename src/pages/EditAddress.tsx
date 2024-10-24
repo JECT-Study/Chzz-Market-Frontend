@@ -70,7 +70,7 @@ const EditAddress = () => {
                 </div>
                 {item.isDefault ? (
                   <div>
-                    <Button type="button" size="small" className="rounded-xl border-gray3">수정</Button>
+                    <Button type="button" size="small" className="rounded-xl border-gray3" onClick={() => handleEdit(item)}>수정</Button>
                   </div>
                 ): (
                   <div className="flex gap-3">

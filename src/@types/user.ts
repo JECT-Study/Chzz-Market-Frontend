@@ -13,6 +13,7 @@ export interface IProfileProps {
   bio?: string;
   profileImageUrl?: string;
   providerType?: string;
+  isLoading?: boolean;
 }
 
 export interface IParticipantCountItems {

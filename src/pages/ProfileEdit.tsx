@@ -71,6 +71,7 @@ const ProfileEdit = () => {
     if (nickname === originalNickname) {
       setIsNicknameChecked(true);
       setNicknameError('기존 닉네임입니다. 사용가능합니다.');
+      setIsSubmitEnabled(true);
       return;
     }
 
@@ -81,9 +82,11 @@ const ProfileEdit = () => {
     if (isAvailable) {
       setNicknameError('사용 가능한 닉네임입니다.');
       setIsNicknameChecked(true);
+      setIsSubmitEnabled(true);
     } else {
       setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
       setIsNicknameChecked(false);
+      setIsSubmitEnabled(true);
     }
   };
 
@@ -94,17 +97,16 @@ const ProfileEdit = () => {
   }, [userProfileImageUrl]);
 
   useEffect(() => {
-    if (nickname === originalNickname) {
-      setIsSubmitEnabled(true);
-      return;
-    }
-
-    if (nickname && isNicknameChecked) {
+    if (nickname.length > 15) {
+      setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
+      setIsSubmitEnabled(false);
+      setIsNicknameChecked(false);
+    } else if (nickname === originalNickname) {
       setIsSubmitEnabled(true);
     } else {
       setIsSubmitEnabled(false);
     }
-  }, [nickname, isNicknameChecked])
+  }, [nickname])
 
   return (
     <Layout>
@@ -144,8 +146,13 @@ const ProfileEdit = () => {
             </div>
           </div>
           {nicknameError && (
-            <div className={`flex items-center gap-2 ${isNicknameChecked ? 'text-green-500' : 'text-redNotice'}`}>
-              <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+            <div className={`flex items-center gap-2 ${isNicknameChecked ? 'text-customBlue' : 'text-redNotice'}`}>
+              {isNicknameChecked ? (
+                // 파랑 아이콘 추가
+                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+              ) : (
+                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+              )}
               <span className="text-body2">{nicknameError}</span>
             </div>
           )}

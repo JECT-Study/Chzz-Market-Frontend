@@ -28,11 +28,11 @@ const Login = () => {
           </div>
 
           <div className="flex flex-col gap-4 items-center w-full mt-5 lg:mt-10">
-            <div className="sm:w-[280px] lg:w-[320px] h-12">
+            <div className="sm:w-[280px] lg:w-[320px] h-12 cursor-pointer rounded-lg hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-600 focus:outline-none">
               <img
                 src={kakaoImage}
                 alt="kakaoButton"
-                className="flex justify-center w-full h-full object-contain cursor-pointer rounded-lg hover:bg-[#F4DC00] focus:ring-2 focus:ring-offset-2 focus:ring-[#F4DC00] focus:outline-none"
+                className="h-full object-cover opacity-90"
                 onClick={handleKakaoLogin}
               />
             </div>
