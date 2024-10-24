@@ -1,3 +1,4 @@
+import { IParticipantCountItems } from '@/@types/user';
 import AuctionIcon from '@/assets/icons/auction.svg';
 import FailedIcon from '@/assets/icons/failed_auction.svg';
 import OnGoingIcon from '@/assets/icons/ongoing_auction.svg';
@@ -6,14 +7,8 @@ import SuccessIcon from '@/assets/icons/successful_auction.svg';
 import ROUTERS from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
 
-interface ParticipationCountItmes {
-  failedAuctionCount?: number;
-  ongoingAuctionCount?: number;
-  successfulAuctionCount?: number;
-}
-
 interface Props {
-  participantCount?: ParticipationCountItmes;
+  participantCount?: IParticipantCountItems;
   preRegisterCount?: number;
   registeredAuctionCount?: number;
 }
@@ -41,10 +36,10 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
           >
             <img
               src={OnGoingIcon}
-              alt="입찰중인 경매"
+              alt="참여중인 경매"
               className="w-8 h-8 mb-2"
             />
-            <span className="text-sm font-semibold">입찰중인 경매</span>
+            <span className="text-sm font-semibold">참여중인 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$participantCount.ongoingAuctionCount} 건</span>
           </div>
 

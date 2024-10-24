@@ -24,8 +24,9 @@ module.exports = {
         error: '#f5f5f5'
       },
       screens: {
-        sm: '500px',
+        sm: '350px',
         lg: '750px',
+        '2xl': '1250px',
       },
       boxShadow: {
         top: '0 0 8px rgba(0, 0, 0, 0.08)',
@@ -106,6 +107,7 @@ module.exports = {
       colors: {
         mainCheeseYellow: '#FFC558',
         cheeseYellow: '#FD6A10',
+        customBlue: '#448AFF',
         gray1: '#454545',
         gray2: '#888888',
         gray3: '#D9D9D9',

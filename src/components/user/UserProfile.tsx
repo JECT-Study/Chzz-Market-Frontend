@@ -1,26 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import ProfileImage from '@/assets/icons/profile.svg';
-import { SiNaver } from 'react-icons/si';
-import { RiKakaoTalkFill } from "react-icons/ri";
 import Button from '../common/Button';
+import type { IProfileProps } from '@/@types/user';
+import naverImage from '@/assets/icons/btnG_아이콘사각.png';
+import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.png';
+import ButtonSpinner from '../common/loading/ButtonSpinner';
 
-interface Props {
-  nickname?: string;
-  bio?: string;
-  link?: string;
-  profileImageUrl?: string;
-  providerType?: string;
-}
 
-const UserProfile = ({ nickname, bio, link, profileImageUrl, providerType }: Props) => {
+
+const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }: IProfileProps) => {
   const navigator = useNavigate();
   const userNickname = nickname || null;
   const userBio = bio || null;
-  const userLink = link || null;
   const userProfileImageUrl = profileImageUrl || null;
 
+  if (isLoading) {
+    return <ButtonSpinner />
+  }
+
   return (
-    <div className="flex items-center pb-8 my-10 gap-5 border-b border-b-gray3">
+    <div className="flex pb-8 my-10 gap-5 border-b border-b-gray3">
       {profileImageUrl ? (
         <img src={profileImageUrl} alt='프로필 이미지' className='w-[130px] h-[130px] rounded-full mr-4 object-conver' />
       ) : (
@@ -28,38 +27,34 @@ const UserProfile = ({ nickname, bio, link, profileImageUrl, providerType }: Pro
       )} 
       <div className="flex-1">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <div className="flex">
             <p className="text-2xl font-bold mr-2 pr-2">
               {userNickname}
             </p>
+            {providerType === 'KAKAO' ? (
+              <img src={kakaoImage} alt="카카오이미지" className='w-7 h-7' />
+            ) : (
+              <img src={naverImage} alt="네이버이미지" className='w-7 h-7'/>
+            )}
           </div>
           <Button
             type='button'
             size='medium'
             className="px-3 py-1 border border-gray2 rounded-md"
             onClick={() =>
-              navigator('profile/edit', { state: { userNickname, userBio, userLink, userProfileImageUrl } })
+              navigator('profile/edit', { state: { userNickname, userBio, userProfileImageUrl } })
             }
           >
             수정
           </Button>
         </div>
-        {providerType === 'KAKAO' ? (
-          <div className="w-52 h-9 flex items-center gap-3 bg-yellow-400 text-xl text-black py-1.5 px-5 my-1 rounded-full">
-            <RiKakaoTalkFill size={24} />
-            <span>카카오톡과 연결</span>
-          </div>
-        ) : (
-          <div className="w-48 h-9 flex items-center gap-5 bg-green-500 text-xl text-white py-1.5 px-5 my-1 rounded-full">
-            <SiNaver size={20} />
-            <span className='items-center'>네이버와 연결</span>
-          </div>
-        )}
         <div className="mt-2">
-          <div className="text-xl font-bold mb-2">자기소개</div>
-          <div>
-            {userBio}
-          </div>
+          {userBio && userBio.trim().length > 0 && (
+            <>
+              <div className="text-heading3 mb-2">자기소개</div>
+              <div>{userBio}</div>
+            </>
+          )}
         </div>
       </div>
     </div>

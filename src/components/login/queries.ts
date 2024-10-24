@@ -2,14 +2,15 @@ import { removeToken, setToken } from '@/utils/tokenUtils';
 
 import { API_END_POINT } from '@/constants/api';
 // eslint-disable-next-line import/no-cycle
-import type { User } from '@/@types/user';
+import type { IUser } from '@/@types/user';
 import { httpClient } from '@/api/axios';
 import { storeLogin } from '@/store/authSlice';
-import { useMutation } from '@tanstack/react-query';
+import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-export const postSignup = async (data: User) => {
+export const postSignup = async (data: IUser) => {
   const response = await httpClient.post(API_END_POINT.SIGNUP, { ...data });
 
   const accessToken = response.headers.authorization?.split(' ')[1];
@@ -71,3 +72,19 @@ export const useRefreshTokenOnSuccess = () => {
 
   return { isSuccess };
 };
+
+export const usePostSignup = (): {
+  signupMutation: UseMutateFunction<any, Error, IUser, unknown>;
+  isPending: boolean;
+} => {
+  const navigate = useNavigate();
+
+  const { mutate: signupMutation, isPending } = useMutation({
+    mutationFn: (data: IUser) => postSignup(data),
+    onSuccess: () => {
+      navigate('/');
+    },
+  });
+
+  return { signupMutation, isPending };
+}

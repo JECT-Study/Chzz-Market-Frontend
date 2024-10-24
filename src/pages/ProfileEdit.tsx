@@ -6,17 +6,15 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useEffect, useRef, useState } from 'react';
 import { useEditProfile } from '@/hooks/useProfile';
-import { UserProfile } from '@/@types/user';
-import { useQuery } from '@tanstack/react-query';
-import { queryKeys } from '@/constants/queryKeys';
-import { nicknameCheck } from '@/components/login/queries';
+import { IUserProfile } from '@/@types/user';
 import ProfileImageUploader from '@/components/profile/ProfileImageUploader';
-import ErrorMessage from '@/components/common/error/ErrorMessage';
+import NoticeRed from '@/assets/icons/notice_red.svg';
+import { useCheckNickname } from '@/components/profile/queries';
 
 const ProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
-  const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl } = useEditProfile();
+  const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl, isPending } = useEditProfile();
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
   const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -24,12 +22,7 @@ const ProfileEdit = () => {
   const [_useDefaultImage, setUseDefaultImage] = useState(false);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const nickname = watch('nickname');
-
-  const { refetch: checkNickname } = useQuery({
-    queryKey: [queryKeys.NICKNAME, nickname],
-    queryFn: () => nicknameCheck(nickname),
-    enabled: false,
-  });
+  const { checkNickname } = useCheckNickname({ nickname });
 
   const handleSubmitClick = () => {
     if (formRef.current) {
@@ -39,14 +32,13 @@ const ProfileEdit = () => {
     }
   };
 
-  const onSubmit = (data: UserProfile) => {
-    const { nickname, bio, link } = data;
+  const onSubmit = (data: IUserProfile) => {
+    const { nickname, bio } = data;
     if (isNicknameChecked || nickname === originalNickname) {
       const formData = new FormData();
       const submitData = {
         nickname,
         bio,
-        link,
         useDefaultImage: !profileFile,
       };
 
@@ -65,17 +57,21 @@ const ProfileEdit = () => {
     } else {
       // 에러 띄우기 닉네임 중복 확인을 해주세요.
       setNicknameError('닉네임 중복 확인을 해주세요.');
+      setIsNicknameChecked(false);
     }
   };
 
   const onNicknameCheck = async () => {
     if (!nickname || nickname.trim() === '') {
       setNicknameError('닉네임을 입력해주세요.');
+      setIsNicknameChecked(false);
       return;
     }
+
     if (nickname === originalNickname) {
       setIsNicknameChecked(true);
       setNicknameError('기존 닉네임입니다. 사용가능합니다.');
+      setIsSubmitEnabled(true);
       return;
     }
 
@@ -85,8 +81,12 @@ const ProfileEdit = () => {
     
     if (isAvailable) {
       setNicknameError('사용 가능한 닉네임입니다.');
+      setIsNicknameChecked(true);
+      setIsSubmitEnabled(true);
     } else {
       setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
+      setIsNicknameChecked(false);
+      setIsSubmitEnabled(true);
     }
   };
 
@@ -97,12 +97,16 @@ const ProfileEdit = () => {
   }, [userProfileImageUrl]);
 
   useEffect(() => {
-    if (nickname && isNicknameChecked) {
+    if (nickname.length > 15) {
+      setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
+      setIsSubmitEnabled(false);
+      setIsNicknameChecked(false);
+    } else if (nickname === originalNickname) {
       setIsSubmitEnabled(true);
     } else {
       setIsSubmitEnabled(false);
     }
-  }, [nickname, isNicknameChecked])
+  }, [nickname])
 
   return (
     <Layout>
@@ -142,7 +146,15 @@ const ProfileEdit = () => {
             </div>
           </div>
           {nicknameError && (
-            <ErrorMessage message={nicknameError} />
+            <div className={`flex items-center gap-2 ${isNicknameChecked ? 'text-customBlue' : 'text-redNotice'}`}>
+              {isNicknameChecked ? (
+                // 파랑 아이콘 추가
+                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+              ) : (
+                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+              )}
+              <span className="text-body2">{nicknameError}</span>
+            </div>
           )}
           <FormField
             label="자기소개"
@@ -157,29 +169,16 @@ const ProfileEdit = () => {
               />
             )}
           />
-          <FormField
-            label="링크"
-            name="link"
-            control={control}
-            render={(field) => (
-              <Input
-                id="링크"
-                type="text"
-                placeholder="링크를 입력해주세요"
-                className="focus-visible:ring-cheeseYellow"
-                {...field}
-              />
-            )}
-          />
         </form>
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
           type="submit"
           className="w-full h-[47px] rounded-lg"
-          color={isSubmitEnabled ? 'cheeseYellow' : 'gray2'}
+          color="cheeseYellow"
           onClick={handleSubmitClick}
-          disabled={!isSubmitEnabled}
+          disabled={!isSubmitEnabled || isPending}
+          loading={isPending}
         >
           프로필 수정 완료
         </Button>

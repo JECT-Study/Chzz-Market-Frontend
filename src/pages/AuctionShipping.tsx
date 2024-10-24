@@ -106,7 +106,7 @@ const AuctionShipping = () => {
             <Button type='button' size='large' color='white' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
-          {address ? (
+          {Object.keys(address).length > 0 ? (
             <div
               className='flex p-4 mb-4 rounded-md'
             >
