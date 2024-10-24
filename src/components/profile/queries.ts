@@ -25,10 +25,11 @@ export const useProfile = (): {
   profileData: IProfileData;
   profileMutation: UseMutateFunction<any, Error, FormData, unknown>;
   isPending: boolean;
+  isLoading: boolean;
 } => {
   const navigate = useNavigate();
 
-  const { data: profileData } = useQuery({
+  const { data: profileData, isLoading } = useQuery({
     queryKey: [queryKeys.PROFILE],
     queryFn: () => getProfile(),
   });
@@ -40,7 +41,7 @@ export const useProfile = (): {
     },
   });
 
-  return { profileData, profileMutation, isPending };
+  return { profileData, profileMutation, isPending, isLoading };
 };
 
 export const useCheckNickname = ({ nickname }: { nickname: string }): {
