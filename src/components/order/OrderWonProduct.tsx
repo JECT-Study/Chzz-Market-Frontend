@@ -14,14 +14,6 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
 
   const handleProductClick = () => navigate(`/auctions/auction/${product.auctionId}`)
 
-  const handleButtonClick = () => {
-    if (!product.isOrdered) {
-      navigate(`/auctions/${product.auctionId}/shipping`);
-    } else {
-      navigate(`/payment/success?auctionId=${product.auctionId}`);
-    }
-  }
-
   return (
     <ProductItem product={product} onClick={handleProductClick}>
       <div
@@ -41,7 +33,14 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
         </div>
         <p className='ml-4 font-semibold'>{formattedWinningPrice}</p>
       </div>
-      <Button type='button' onClick={handleButtonClick} color={product.isOrdered ? 'black' : 'white'}>
+      <Button type='button' onClick={(e) => {
+        e.stopPropagation();
+        if (!product.isOrdered) {
+          navigate(`/auctions/${product.auctionId}/shipping`);
+        } else {
+          navigate(`/payment/success?auctionId=${product.auctionId}`);
+        }
+      }} color={product.isOrdered ? 'black' : 'white'}>
         {product.isOrdered ? '결제 내역 보기' : '결제하기'}
       </Button>
     </ProductItem>

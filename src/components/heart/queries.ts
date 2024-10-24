@@ -39,9 +39,6 @@ export const useDeletePreAuctionHeart = (): {
       queryClient.invalidateQueries({
         queryKey: [queryKeys.PRE_AUCTION_DETAILS],
       });
-      queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_LIST] 
-      });
       toast.success('좋아요 취소되었습니다.');
     },
   });

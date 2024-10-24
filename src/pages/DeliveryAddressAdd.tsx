@@ -142,13 +142,13 @@ const DeliveryAddressAdd = () => {
               )}
             />
             <FormField
-              label="연락처"
+              label="휴대폰 번호"
               name="phoneNumber"
               control={control}
               error={errors.phoneNumber?.message}
               render={(field) => (
                 <Input
-                  id="연락처"
+                  id="휴대폰 번호"
                   type="text"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}

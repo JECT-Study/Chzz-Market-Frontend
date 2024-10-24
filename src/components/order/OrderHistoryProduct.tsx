@@ -7,7 +7,7 @@ import ProductItem from '../common/item/ProductItem';
 
 const OrderHistoryProduct = ({ product }: { product: IUserAuctionHistoryItem }) => {
   const navigate = useNavigate();
-  const formatted = formatCurrencyWithWon(product.minPrice);
+  const formatted = formatCurrencyWithWon(product.bidAmount);
 
   return (
     <ProductItem product={product} onClick={() => navigate(`/auctions/bid/${product.auctionId}`)}>

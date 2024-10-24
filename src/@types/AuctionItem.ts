@@ -52,4 +52,5 @@ export interface IUserAuctionLostItem extends IAuctionItemBase {
 }
 export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {
   auctionId: number;
+  bidAmount: number;
 }

@@ -74,7 +74,7 @@ const DeliveryAddressList = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 목록" handleBack={() => navigate('/')} />
+      <Layout.Header title="배송지 목록" />
       <span className="absolute text-xl cursor-pointer top-3 right-5" onClick={handleEditButtonClick}>편집</span>
       <Layout.Main>
         <div>
@@ -98,10 +98,10 @@ const DeliveryAddressList = () => {
                   key={item.id}
                   onClick={() => setSelectAddress(item)}
                   className={`relative flex p-4 rounded-md mb-4 cursor-pointer border
-                ${selectAddress?.zipcode === item.zipcode ? 'border-cheeseYellow' : 'border-white'}`}
+                ${selectAddress?.isDefault ? 'border-cheeseYellow' : 'border-white'}`}
                 >
                   <div className="flex items-center">
-                    {selectAddress?.zipcode === item.zipcode ? (
+                    {selectAddress?.isDefault ? (
                       <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
                     ) : (
                       <img src={rocation_off} className="mr-2 text-gray2" alt="위치 아이콘" />
@@ -118,7 +118,7 @@ const DeliveryAddressList = () => {
                     </div>
                   </div>
                   <div className={`absolute ${item.isDefault ? 'right-4 top-16' : 'right-4 top-14'}`}>
-                    {selectAddress?.zipcode === item.zipcode && <FaCheck />}
+                    {selectAddress?.isDefault && <FaCheck />}
                   </div>
                 </li>
               ))}

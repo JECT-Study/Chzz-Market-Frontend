@@ -80,7 +80,16 @@ const DeliveryAddressEdit = () => {
   });
 
   const handleOpenAddress = () => {
+    const popupWidth = 500;
+    const popupHeight = 600;
+
+    // 현재 모니터의 중앙을 기준으로 팝업 위치 계산
+    const left = window.innerWidth / 2 - popupWidth / 2 + window.screenLeft;
+    const top = window.innerHeight / 2 - popupHeight / 2 + window.screenTop;
+
     new window.daum.Postcode({
+      width: popupWidth,
+      height: popupHeight,
       onComplete: (data: any) => {
         const roadAddress = data.address;
         const { zonecode } = data;
@@ -90,7 +99,10 @@ const DeliveryAddressEdit = () => {
 
         navigate(`/auctions/${auctionId}/address-edit`, { state: { addressItem: addressItem, roadAddress, zonecode } });
       },
-    }).open();
+    }).open({
+      left,
+      top,
+    });
   };
 
   useEffect(() => {
@@ -133,13 +145,13 @@ const DeliveryAddressEdit = () => {
               )}
             />
             <FormField
-              label="연락처"
+              label="휴대폰 번호"
               name="phoneNumber"
               control={control}
               error={errors.phoneNumber?.message}
               render={(field) => (
                 <Input
-                  id="연락처"
+                  id="휴대폰 번호"
                   type="text"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}

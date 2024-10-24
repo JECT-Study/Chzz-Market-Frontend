@@ -113,7 +113,9 @@ const AuctionShipping = () => {
                 <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
               </div>
               <div className="flex flex-col gap-2 mb-2">
-                <span className="font-semibold text-cheeseYellow text-body2">기본배송지</span>
+                {address.isDefault && (
+                  <span className="font-semibold text-cheeseYellow text-body2">기본배송지</span>
+                )}
                 <span className="font-bold">{address.recipientName} / {address.phoneNumber}</span>
                 <div className="text-gray2">
                   <p>{address.roadAddress}</p>
@@ -143,22 +145,13 @@ const AuctionShipping = () => {
               )}
             />
           </form>
-
-          <h3 className="text-heading3">결제 방법</h3>
-          <div className="flex">
-            <Button type="button" color="black">
-              토스로 결제
-            </Button>
-          </div>
-
-          <Checkbox title='주의사항을 모두 확인하였으며 위 내용에 동의합니다.' check={isChecked} handleCheck={toggleCheckbox} />
         </div>
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
           type="submit"
           className="w-full h-[47px] rounded-lg"
-          color={isChecked ? 'cheeseYellow' : 'gray3'}
+          color="cheeseYellow"
           onClick={handleSubmitClick}
           disabled={!isChecked}
         >
