@@ -7,6 +7,7 @@ import FormField from '@/components/common/form/FormField';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import NoticeRed from '@/assets/icons/notice_red.svg';
+import NoticeBlue from '@/assets/icons/blue_notice.svg';
 import { useCheckNickname } from '@/components/profile/queries';
 import { IUser } from '@/@types/user';
 
@@ -113,8 +114,7 @@ const Signup = () => {
           {nicknameError && (
             <div className={`flex items-center gap-2 ${isNameValid ? 'text-customBlue' : 'text-redNotice'}`}>
               {isNameValid ? (
-                // 파랑 아이콘 추가
-                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+                <img src={NoticeBlue} alt="notice_red" className="mb-[2px] size-3" />
               ) : (
                 <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
               )}

@@ -41,7 +41,7 @@ const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
       >
         <img src={PriceIcon} alt="참여자" />
         <span className='whitespace-nowrap'>
-          결제 여부 <span className="text-xs text-black sm:text-body2Bold">{product.isPaid ? '결제 완료' : '미결제'}</span>
+          결제 여부 <span className="text-xs text-black sm:text-body2Bold">{product.isOrdered ? '결제 완료' : '미결제'}</span>
         </span>
       </div>
       <CreatedAt createAt={product.createAt} />

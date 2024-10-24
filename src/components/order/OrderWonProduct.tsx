@@ -2,7 +2,6 @@ import type { IUserAuctionWonItem } from '@/@types/AuctionItem';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
 import trophyImage from '@/assets/icons/successful_auction_win.svg';
-import Button from '../common/Button';
 import ParticipantCount from '../common/atomic/ParticipantCount';
 
 const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {

@@ -9,6 +9,7 @@ import { useEditProfile } from '@/hooks/useProfile';
 import { IUserProfile } from '@/@types/user';
 import ProfileImageUploader from '@/components/profile/ProfileImageUploader';
 import NoticeRed from '@/assets/icons/notice_red.svg';
+import NoticeBlue from '@/assets/icons/blue_notice.svg';
 import { useCheckNickname } from '@/components/profile/queries';
 
 const ProfileEdit = () => {
@@ -144,8 +145,7 @@ const ProfileEdit = () => {
           {nicknameError && (
             <div className={`flex items-center gap-2 ${isNicknameChecked ? 'text-customBlue' : 'text-redNotice'}`}>
               {isNicknameChecked ? (
-                // 파랑 아이콘 추가
-                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+                <img src={NoticeBlue} alt="notice_red" className="mb-[2px] size-3" />
               ) : (
                 <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
               )}

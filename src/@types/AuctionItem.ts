@@ -23,7 +23,7 @@ export interface IAuctionEndRegisteredItem extends IAuctionItemBase {
   participantCount: number;
   winningBidAmount: number;
   isWon: boolean;
-  isPaid: boolean;
+  isOrdered: boolean;
   createAt: string;
 }
 
