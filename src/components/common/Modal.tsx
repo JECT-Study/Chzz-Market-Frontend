@@ -1,51 +1,52 @@
-import { ReactElement, ReactNode, cloneElement, createContext, useContext, useState } from 'react';
+import { Dispatch, ReactElement, ReactNode, SetStateAction, cloneElement, createContext, useContext, useState } from 'react';
 
 import { createPortal } from 'react-dom';
 
-interface IModalContext {
-  flag: boolean
-  open: () => void
+interface ModalContextValues {
+  openName: string;
+  open: Dispatch<SetStateAction<string>>
   close: () => void
 }
 
 const defaultValues = {
-  flag: false,
+  openName: '',
   open: () => { },
   close: () => { }
 }
 
-const ModalContext = createContext<IModalContext>(defaultValues)
+const ModalContext = createContext<ModalContextValues>(defaultValues)
 
 const Modal = ({ children }: { children: ReactNode }) => {
-  const [flag, setFlag] = useState(false)
-  const close = () => setFlag(false)
-  const open = () => setFlag(true)
+  const [openName, setOpenName] = useState('')
+  const close = () => setOpenName('')
+  const open = setOpenName;
 
-  return <ModalContext.Provider value={{ flag, open, close }}>
+  return <ModalContext.Provider value={{ openName, open, close }}>
     {children}
   </ModalContext.Provider>
 }
 
-const Open = ({ children }: { children: ReactElement }) => {
+const Open = ({ children, name }: { children: ReactElement, name: string }) => {
   const { open } = useContext(ModalContext)
 
-  return cloneElement(children, { onClick: open })
+  return cloneElement(children, { onClick: () => open(name) })
 }
 
-const Window = ({ children }: { children: ReactElement }) => {
-  const { flag, close } = useContext(ModalContext)
-  if (!flag) return null
+const Window = ({ children, name = '' }: { children: ReactElement, name?: string }) => {
+  const { openName, close } = useContext(ModalContext)
+
+  if (openName !== name) return null
 
   return createPortal(
-    <div className='absolute inset-0 flex items-center justify-center' onClick={close}>
+    <div className="absolute inset-0 z-50 flex items-center justify-center" onClick={close}>
       <div
-        className='w-[46rem] relative min-w-[23rem] z-50 h-full flex items-center justify-center bg-black/50'
+        className="w-[46rem] relative min-w-[23rem] h-full z-50 flex items-center justify-center bg-black/50"
         aria-label="모달 배경"
       >
         {cloneElement(children, { onCloseModal: close })}
       </div>
     </div >,
-    document.body
+    document.body,
   );
 };
 
