@@ -71,7 +71,7 @@ const AuctionShipping = () => {
   const onSubmit = (formData: FormFields) => {
     postPayment(formData, address);
   };
-
+  
   return (
     <Layout>
       <Layout.Header title="결제하기" handleBack={() => navigate('/')} />

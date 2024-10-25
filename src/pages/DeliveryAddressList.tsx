@@ -98,10 +98,10 @@ const DeliveryAddressList = () => {
                   key={item.id}
                   onClick={() => setSelectAddress(item)}
                   className={`relative flex p-4 rounded-md mb-4 cursor-pointer border
-                ${selectAddress?.isDefault ? 'border-cheeseYellow' : 'border-white'}`}
+                ${selectAddress?.id === item.id ? 'border-cheeseYellow' : 'border-white'}`}
                 >
                   <div className="flex items-center">
-                    {selectAddress?.isDefault ? (
+                    {item?.isDefault ? (
                       <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
                     ) : (
                       <img src={rocation_off} className="mr-2 text-gray2" alt="위치 아이콘" />
@@ -117,8 +117,8 @@ const DeliveryAddressList = () => {
                       <p>{item.detailAddress}</p>
                     </div>
                   </div>
-                  <div className={`absolute ${item.isDefault ? 'right-4 top-16' : 'right-4 top-14'}`}>
-                    {selectAddress?.isDefault && <FaCheck />}
+                  <div className={`absolute ${selectAddress?.id === item.id ? 'right-4 top-16' : 'right-4 top-14'}`}>
+                    {selectAddress?.id === item.id && <FaCheck />}
                   </div>
                 </li>
               ))}

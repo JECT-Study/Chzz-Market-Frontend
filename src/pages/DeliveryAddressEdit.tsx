@@ -28,8 +28,13 @@ const DeliveryAddressEdit = () => {
   const roadAddress = location.state?.roadAddress;
   const zonecode = location.state?.zonecode;
   const formRef = useRef<HTMLFormElement>(null);
-  const [isChecked, setIsChecked] = useState(false);
-  const toggleCheckbox = () => setIsChecked((prev) => !prev)
+  const [isChecked, setIsChecked] = useState(addressItem.isDefault);
+  const toggleCheckbox = () => {
+    if (addressItem.isDefault) {
+      return;
+    }
+    setIsChecked((prev: boolean) => !prev);
+  }
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
@@ -126,7 +131,7 @@ const DeliveryAddressEdit = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 수정" handleBack={() => navigate('/')} />
+      <Layout.Header title="배송지 수정" />
       <Layout.Main>
         <div className="flex flex-col">
           <form ref={formRef} className="flex flex-col gap-6" onSubmit={onSubmit}>
