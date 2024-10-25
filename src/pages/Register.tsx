@@ -1,6 +1,6 @@
 import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ const defaultValues: FormFields = {
 const Register = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  if (!preAuctionDetails?.isSeller) {
+  if (preAuctionId && !preAuctionDetails?.isSeller) {
     return <AccessDenied />
   }
 
@@ -72,6 +72,21 @@ const Register = () => {
     (caution === '' ? navigate(-1) : setCaution(''));
     toggleCheckBox()
   }
+
+  const preventInvalidInput = (event: ChangeEvent<HTMLInputElement>) => {
+    // 숫자가 아닌 입력값과 한글 입력 필터링
+    if (/[^0-9]/g.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^0-9]/g, '');
+    }
+  };
+
+  const preventArrowKeys = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+      event.preventDefault();
+    }
+  };
+
+
   const handleProceed = (proceedType: 'PRE_REGISTER' | 'REGISTER') => {
     handleSubmit(() => setCaution(proceedType))();
   };
@@ -186,6 +201,8 @@ const Register = () => {
                   {...field}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
+                  onInput={preventInvalidInput}
+                  onKeyDown={preventArrowKeys}
                 />
               )}
             />
