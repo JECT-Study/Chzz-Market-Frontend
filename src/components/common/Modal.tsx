@@ -32,13 +32,17 @@ const Open = ({ children, name }: { children: ReactElement, name: string }) => {
   return cloneElement(children, { onClick: () => open(name) })
 }
 
-const Window = ({ children, name = '' }: { children: ReactElement, name?: string }) => {
+const Window = ({ children, name = '', closeModal }: { children: ReactElement, name?: string, closeModal?: () => void }) => {
   const { openName, close } = useContext(ModalContext)
 
   if (openName !== name) return null
+  const handleClose = () => {
+    closeModal?.();
+    close()
+  }
 
   return createPortal(
-    <div className="absolute inset-0 z-50 flex items-center justify-center" onClick={close}>
+    <div className="absolute inset-0 z-50 flex items-center justify-center" onClick={handleClose}>
       <div
         className="w-[46rem] relative min-w-[23rem] h-full z-50 flex items-center justify-center bg-black/50"
         aria-label="모달 배경"
