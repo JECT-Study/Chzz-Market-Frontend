@@ -2,6 +2,7 @@ import { IAddressDetail } from "@/@types/Address";
 import { httpClient } from "@/api/axios";
 import { API_END_POINT } from "@/constants/api";
 import { queryKeys } from "@/constants/queryKeys";
+import ROUTES from "@/constants/routes";
 import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
@@ -47,7 +48,7 @@ export const usePostAddress = (auctionId: string): {mutate: UseMutateFunction<an
   const { mutate } = useMutation({
     mutationFn: addAddress,
     onSuccess: () => {
-      navigate(`/auctions/${auctionId}/address-list`)
+      navigate(ROUTES.getDeliveryAddressListRoute(auctionId));
     }
   });
 
@@ -59,7 +60,7 @@ export const useEditAddress = (auctionId: string): {mutate: UseMutateFunction<an
   const { mutate } = useMutation({
     mutationFn: ({ addressId, data }: { addressId: string, data: IAddressDetail }) => editAddress({ addressId, data }),
     onSuccess: () => {
-      navigate(`/auctions/${auctionId}/address-list`)
+      navigate(ROUTES.getDeliveryAddressListRoute(auctionId));
     }
   });
 

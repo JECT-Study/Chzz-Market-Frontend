@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import LikeCount from '../atomic/LikeCount';
-import MinPrice from '../atomic/MinPrice';
 import ParticipantCount from '../atomic/ParticipantCount';
 import TimeLabel from '../atomic/TimeLabel';
+import Price from '../atomic/Price';
 
 interface AuctionItemProps {
   label: string;
@@ -43,7 +43,7 @@ const Main = ({ kind, name, price, count }: MainProps) => {
         {name}
       </h3>
       <div>
-        <MinPrice title='시작가' price={price} />
+        <Price title='시작가' price={price} />
         {kind === 'register' ? <ParticipantCount count={count} /> : <LikeCount count={count} />}
       </div>
     </figcaption>

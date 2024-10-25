@@ -5,6 +5,7 @@ import type { IBidPostData } from '@/@types/Bid';
 import { httpClient } from '@/api/axios';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import ROUTES from '@/constants/routes';
 
 export const usePostBid = (
   auctionId: number
@@ -20,7 +21,7 @@ export const usePostBid = (
     mutationFn: postBid,
     onSuccess: () => {
       toast.success('입찰 성공!');
-      navigate(`/auctions/auction/${auctionId}`);
+      navigate(ROUTES.getAuctionItemRoute(auctionId));
     },
   });
 

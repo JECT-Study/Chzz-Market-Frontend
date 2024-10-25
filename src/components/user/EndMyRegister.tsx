@@ -4,9 +4,9 @@ import ROUTES from '@/constants/routes';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
 import CreatedAt from '../common/atomic/CreatedAt';
-import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
 import ProductItem from '../common/item/ProductItem';
+import Price from '../common/atomic/Price';
 
 const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
 
   return (
     <ProductItem product={product} onClick={() => navigate(ROUTES.getAuctionItemRoute(product.auctionId))}>
-      <MinPrice title='시작가' price={product.minPrice} />
+      <Price title='시작가' price={product.minPrice} />
       <ParticipantCount count={product.participantCount} />
       <div
         aria-label="낙찰 금액"

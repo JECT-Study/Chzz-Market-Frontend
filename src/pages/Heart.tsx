@@ -5,28 +5,16 @@ import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import AuctionItem from '@/components/common/item/AuctionItem';
 import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import { useNavigate } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 
 const Heart = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { preAuctionHeartList } = useGetPreAuctionHeartList();
   const { mutate } = useDeletePreAuctionHeart();
 
   const handleDelete = (id: number) => {
-    mutate(id, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [queryKeys.PRE_AUCTION_HEART_LIST],
-        });
-        queryClient.invalidateQueries({
-          queryKey: [queryKeys.PRE_AUCTION_DETAILS],
-        });
-        toast.success('좋아요 취소되었습니다.')
-      },
-    });
+    mutate(id);
+    toast.success('좋아요 취소되었습니다.');
   };
 
   return (

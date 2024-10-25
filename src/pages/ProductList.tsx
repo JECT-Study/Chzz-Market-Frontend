@@ -5,10 +5,10 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import Layout from '@/components/layout/Layout';
 import OngoingProduct from '@/components/productList/OngoingProduct';
-import PreEnrollProduct from '@/components/productList/PreEnrollProduct';
 import ProductButtons from '@/components/productList/ProductButtons';
 import ProductListTabs from '@/components/productList/ProductListTabs';
 import useProductList from '@/hooks/useProductList';
+import PreAuctionProduct from '@/components/productList/PreAuctionProduct';
 
 const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
@@ -87,7 +87,7 @@ const ProductList = () => {
           :
           <EmptyBoundary length={enrollItems.length} name='category'>
             <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
-              {enrollItems?.map((product: IPreAuctionItem) => <PreEnrollProduct key={product.productId} product={product} />)}
+              {enrollItems?.map((product: IPreAuctionItem) => <PreAuctionProduct key={product.productId} product={product} />)}
             </div>
           </EmptyBoundary>
         }

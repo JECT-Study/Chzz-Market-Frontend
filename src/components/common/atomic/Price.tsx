@@ -1,7 +1,7 @@
 import PriceIcon from '@/assets/icons/price.svg';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
-const MinPrice = ({ title, price }: { title: string, price: number }) => {
+const Price = ({ title, price }: { title: string, price: number }) => {
   const formatted = formatCurrencyWithWon(price);
 
   return (
@@ -17,4 +17,4 @@ const MinPrice = ({ title, price }: { title: string, price: number }) => {
   );
 };
 
-export default MinPrice;
+export default Price;

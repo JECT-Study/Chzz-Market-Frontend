@@ -4,10 +4,10 @@ import ROUTES from '@/constants/routes';
 import { truncateText } from '@/utils/truncateText';
 import { useNavigate } from 'react-router-dom';
 import LikeCount from '../common/atomic/LikeCount';
-import MinPrice from '../common/atomic/MinPrice';
 import ParticipantCount from '../common/atomic/ParticipantCount';
 import TimeLabel from '../common/atomic/TimeLabel';
 import { CarouselItem } from '../ui/carousel';
+import Price from '../common/atomic/Price';
 
 interface HomeItemProps<T extends 'preAuction' | 'auction'> {
   kind: string
@@ -36,7 +36,7 @@ const HomeItem = <T extends 'preAuction' | 'auction'>({ kind, item }: HomeItemPr
             {name}
           </div>
           <div>
-            <MinPrice title='시작가' price={minPrice} />
+            <Price title='시작가' price={minPrice} />
             {kind !== 'preAuction'
               ? <ParticipantCount count={(item as IAuctionItem).participantCount} />
               : <LikeCount count={(item as IPreAuctionItem).likeCount} />}

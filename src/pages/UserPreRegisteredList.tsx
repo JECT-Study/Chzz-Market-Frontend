@@ -2,9 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import type { IPreAuctionRegisteredItem } from '@/@types/AuctionItem';
-import PreEnrollMyRegister from '@/components/user/PreEnrollMyRegister';
 import { useLocation } from 'react-router-dom';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
+import PreAuctionMyRegister from '@/components/user/PreAuctionMyRegister';
 
 const UserPreRegisteredList = () => {
   const location = useLocation();
@@ -62,7 +62,7 @@ const UserPreRegisteredList = () => {
         <EmptyBoundary length={enrollItems.length} name='userPreAuction'>
           <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
             {enrollItems.map((product: IPreAuctionRegisteredItem) => (
-              <PreEnrollMyRegister product={product} key={product.productId} />
+              <PreAuctionMyRegister product={product} key={product.productId} />
             ))}
           </div>
         </EmptyBoundary>

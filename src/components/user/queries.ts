@@ -19,7 +19,7 @@ export const getAuctionEndRegister = async ({ pageNumber, pageSize, sortType = '
   return response.data;
 };
 
-export const getAuctionPreEnrollRegister = async ({
+export const getAuctionPreAuctionRegister = async ({
   pageNumber,
   pageSize,
   sortType = 'product-newest',

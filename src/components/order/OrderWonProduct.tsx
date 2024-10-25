@@ -3,12 +3,22 @@ import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
 import trophyImage from '@/assets/icons/successful_auction_win.svg';
 import ParticipantCount from '../common/atomic/ParticipantCount';
+import ROUTES from '@/constants/routes';
 
 const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const navigate = useNavigate();
   const formatted = formatCurrencyWithWon(product.winningAmount);
 
-  const handleProductClick = () => navigate(`/auctions/auction/${product.auctionId}`);
+  const handleProductClick = () => navigate(ROUTES.getAuctionItemRoute(product.auctionId));
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!product.isOrdered) {
+      navigate(ROUTES.getAuctionShippingRoute(product.auctionId));
+    } else {
+      navigate(`/payment/success?auctionId=${product.auctionId}`);
+    }
+  }
 
   return (
     <div key={product.auctionId} className="p-1 mb-4 cursor-pointer" onClick={handleProductClick}>
@@ -57,14 +67,7 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
             <ParticipantCount count={product.participantCount} />
             <button
               type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (!product.isOrdered) {
-                  navigate(`/auctions/${product.auctionId}/shipping`);
-                } else {
-                  navigate(`/payment/success?auctionId=${product.auctionId}`);
-                }
-              }}
+              onClick={handleButtonClick}
               className={
                 `focus:outline-none rounded-lg transition-colors box-border sm:px-4 sm:py-2 px-2 py-2 sm:text-button text-sm
                 ${product.isOrdered
