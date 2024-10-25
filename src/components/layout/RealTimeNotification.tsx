@@ -1,7 +1,7 @@
+import Button from '../common/Button';
 import type { IRealTimeNotification } from '@/@types/Notification';
 import { NOTIFICATION_CONTENTS } from '@/constants/notification';
 import { useNavigate } from 'react-router-dom';
-import Button from '../common/Button';
 import { useReadNotification } from '../notification/queries';
 
 const RealTimeNotification = ({
@@ -18,7 +18,7 @@ const RealTimeNotification = ({
 
   const handleClick = () => {
     if (NOTIFICATION_CONTENTS[type]?.link && auctionId) {
-      navigate(NOTIFICATION_CONTENTS[type].link!(auctionId));
+      navigate(NOTIFICATION_CONTENTS[type].link!(auctionId), { replace: true });
     }
     readNotification(notificationId);
     onClose();
@@ -40,7 +40,6 @@ const RealTimeNotification = ({
       <Button
         ariaLabel={buttonName}
         type="button"
-        hoverColor="black"
         className="w-full py-3"
         color="cheeseYellow"
         onClick={handleClick}
