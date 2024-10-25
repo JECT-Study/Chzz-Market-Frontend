@@ -118,6 +118,7 @@ module.exports = {
         notificationBgColor: '#FFEFD1',
         categoryColor: '#FFF7E1',
         buttonGrayWhite: '#F3F5F6',
+        disabledGrayWhite: '#E9E9E9',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
