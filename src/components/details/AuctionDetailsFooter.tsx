@@ -1,5 +1,6 @@
+import { useCancelBid, useGetAuctionDetails } from "@/components/details/queries";
+
 import Button from "@/components/common/Button";
-import { useCancelBid } from "@/components/details/queries";
 import { MAX_BID_COUNT } from "@/constants/bid";
 import ROUTES from "@/constants/routes";
 import { useNavigate } from "react-router-dom";
@@ -8,27 +9,24 @@ import Modal from "../common/Modal";
 import Layout from "../layout/Layout";
 
 interface AuctionDetailsFooterProps {
-  bidId: number | null;
   auctionId: number
-  isCancelled: boolean
-  status: string
-  remainingBidCount: number
-  isSeller: boolean
-  isWon: boolean
-  isWinner: boolean
-  isOrdered?: boolean
+  curStatus: string
 }
 
-const AuctionDetailsFooter = ({ isOrdered = false, isWinner, isSeller, bidId, auctionId, isCancelled, status, remainingBidCount, isWon }: AuctionDetailsFooterProps) => {
+const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProps) => {
   const navigate = useNavigate();
   const { mutate: cancelBid } = useCancelBid()
+  const { auctionDetails } = useGetAuctionDetails(auctionId);
+
+  const { isOrdered, isWinner, isSeller, bidId, isCancelled, remainingBidCount, isWon } = auctionDetails
   const remainFlag = remainingBidCount === MAX_BID_COUNT
   const disabledFlag = remainingBidCount === 0
+
   const clickBid = () => navigate(ROUTES.getBidRoute(auctionId))
   const clickCancel = () => cancelBid(bidId || 0)
 
   // 경매 종료
-  if (status === 'ENDED') {
+  if (curStatus === 'ENDED') {
     return (
       <Layout.Footer type="single">
         {isSeller
@@ -129,7 +127,7 @@ const AuctionDetailsFooter = ({ isOrdered = false, isWinner, isSeller, bidId, au
               type="button"
               className="flex-[2] h-full"
               disabled={disabledFlag}
-              color={`${disabledFlag ? 'disabled' : 'cheeseYellow'}`}
+              color='cheeseYellow'
               onClick={clickBid}
             >
               금액 수정 {remainingBidCount > 0 ? `(${remainingBidCount}회 가능)` : '(소진)'}
