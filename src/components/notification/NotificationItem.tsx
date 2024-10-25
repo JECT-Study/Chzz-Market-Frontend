@@ -1,8 +1,8 @@
+import type { INotification } from '@/@types/Notification';
 import DefaultImage from '@/assets/icons/default_image.svg';
 import XButtonIcon from '@/assets/icons/x_button.svg';
 import { NOTIFICATION_CONTENTS } from '@/constants/notification';
 import { getTimeAgo } from '@/utils/getTimeAgo';
-import type { INotification } from '@/@types/Notification';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteNotification, useReadNotification } from './queries';
 
@@ -14,7 +14,7 @@ const NotificationItem = ({ item }: { item: INotification }) => {
   const time = getTimeAgo(createdAt);
 
   const handleClick = () => {
-    readNotification(notificationId)
+    if (!isRead) readNotification(notificationId)
     if (NOTIFICATION_CONTENTS[type]?.link && auctionId) navigate(NOTIFICATION_CONTENTS[type].link!(auctionId))
   };
 
