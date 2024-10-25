@@ -1,33 +1,37 @@
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import { MAX_BID_COUNT } from "@/constants/bid";
 import { getBidSchema } from "@/constants/schema";
 import { useEditableNumberInput } from "@/hooks/useEditableNumberInput";
 import { convertCurrencyToNumber } from "@/utils/convertCurrencyToNumber";
 import { formatCurrencyWithWon } from "@/utils/formatCurrencyWithWon";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import Button from "../common/Button";
 import FormField from "../common/form/FormField";
 import AuctionItem from "../common/item/AuctionItem";
 import { useGetAuctionDetails } from "../details/queries";
 import Layout from "../layout/Layout";
 import { Input } from "../ui/input";
 import BidCaution from "./BidCaution";
-import BidFooter from "./BidFooter";
 import { usePostBid } from "./queries";
 
 const BidMain = ({ auctionId }: { auctionId: number }) => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
-  const { mutate: postBid } = usePostBid(auctionId);
+  const { mutate: postBid, isPending } = usePostBid(auctionId);
   const [check, setCheck] = useState<boolean>(false);
   const toggleCheckBox = () => setCheck((state) => !state);
 
   const { images, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = auctionDetails;
   const BidSchema = getBidSchema(minPrice);
   type FormFields = z.infer<typeof BidSchema>;
+  const maxFlag = remainingBidCount === MAX_BID_COUNT
+  const zeroFlag = remainingBidCount === 0
 
   const {
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setValue,
     getValues,
     handleSubmit,
@@ -87,7 +91,17 @@ const BidMain = ({ auctionId }: { auctionId: number }) => {
         </div>
       </Layout.Main>
       <Layout.Footer type={isParticipated ? 'double' : 'single'}>
-        <BidFooter remain={remainingBidCount} check={check} isSubmitting={isSubmitting} handlePost={handleSubmit(onPostSubmit)} />
+        <Button
+          type='button'
+          color='cheeseYellow'
+          className='w-full h-full transition-colors rounded text-button active:bg-black'
+          aria-label={maxFlag ? '제안하기' : '수정하기'}
+          onClick={handleSubmit(onPostSubmit)}
+          disabled={zeroFlag || !check || isPending}
+          loading={isPending}
+        >
+          {maxFlag ? '제안하기' : `금액 수정 ${zeroFlag ? '(소진)' : `(${remainingBidCount}회 가능)`}`}
+        </Button>
       </Layout.Footer>
     </>
   );
