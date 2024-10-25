@@ -6,6 +6,7 @@ import { API_END_POINT } from '@/constants/api';
 import { queryKeys } from '@/constants/queryKeys';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import ROUTES from '@/constants/routes';
 
 export const useConvertAuction = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;
@@ -22,7 +23,7 @@ export const useConvertAuction = (): {
   const { mutate, isPending } = useMutation({
     mutationFn: convertAuction,
     onSuccess: (data) => {
-      navigate(`/auctions/auction/${data.auctionId}`, { replace: true });
+      navigate(ROUTES.getAuctionItemRoute(data.auctionId), { replace: true });
       toast.success('경매로 전환되었습니다.');
     },
   });
