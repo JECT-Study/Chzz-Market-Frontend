@@ -1,16 +1,19 @@
+import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
+import type { IRegister } from '@/@types/Register';
 import NoticeIcon from '@/assets/icons/notice.svg';
 import Button from '@/components/common/Button';
+import AccessDenied from '@/components/common/error/AccessDenied';
 import FormField from '@/components/common/form/FormField';
 import { useGetPreAuctionDetails } from '@/components/details/queries';
 import Layout from '@/components/layout/Layout';
 import ImageUploader from '@/components/register/ImageUploader';
 import RegisterCaution from '@/components/register/RegisterCaution';
 import RegisterLabel from '@/components/register/RegisterLabel';
-import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { CATEGORIES } from '@/constants/categories';
@@ -20,8 +23,6 @@ import { convertCurrencyToNumber } from '@/utils/convertCurrencyToNumber';
 import { dataURLtoFile } from '@/utils/dataURLToFile';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { IRegister } from '@/@types/Register';
-import { useEffect, useState } from 'react';
 import { z } from 'zod';
 
 type FormFields = z.infer<typeof RegisterSchema>;
@@ -37,6 +38,10 @@ const defaultValues: FormFields = {
 const Register = () => {
   const preAuctionId = useLoaderData() as number;
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
+  if (!preAuctionDetails?.isSeller) {
+    return <AccessDenied />
+  }
+
   const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction(preAuctionId);
   const { mutate: register, isPending: postPending } = usePostRegister();
   const navigate = useNavigate();
