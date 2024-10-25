@@ -72,16 +72,42 @@ const DeliveryAddressEdit = () => {
   };
 
   const onSubmit = handleSubmit((data: AddressProps) => {
-    if (!data.phoneNumber.startsWith("010")) {
+    let hasError = false;
+    if (!data.phoneNumber.startsWith("010") || data.phoneNumber.length > 13) {
       setError("phoneNumber", {
-        message: "010으로 시작하는 번호여야 합니다",
-      })
+        message: "휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.",
+      });
     }
-    const finalData = {
-      ...data,
-      isDefault: isChecked,
-    };
-    mutate({ addressId: addressItem.id, data: finalData });
+    if (!data.recipientName.trim()) {
+      setError("recipientName", {
+        type: "manual",
+        message: "이름을 입력해주세요.",
+      });
+      hasError = true;
+    }
+  
+    if (!data.roadAddress.trim()) {
+      setError("roadAddress", {
+        type: "manual",
+        message: "주소지를 입력해주세요.",
+      });
+      hasError = true;
+    }
+  
+    if (!data.detailAddress.trim()) {
+      setError("detailAddress", {
+        type: "manual",
+        message: "상세주소를 입력해주세요.",
+      });
+      hasError = true;
+    }
+    if (!hasError) {
+      const finalData = {
+        ...data,
+        isDefault: isChecked,
+      };
+      mutate({ addressId: addressItem.id, data: finalData });
+    }
   });
 
   const handleOpenAddress = () => {
@@ -187,6 +213,7 @@ const DeliveryAddressEdit = () => {
                   type="text"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
+                  readOnly
                 />
               )}
             />

@@ -31,7 +31,7 @@ const Signup = () => {
 
   const validateNickname = () => {
     if (nickname.length > 15) {
-      setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
+      setNicknameError('닉네임 15자 미만으로 입력해주세요.');
       setIsNameValid(false);
       setIsSubmitEnabled(false);
       return false;
