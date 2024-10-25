@@ -1,19 +1,19 @@
+import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 import {
   useDeletePreAuction,
   useGetPreAuctionDetailsWithSuspense
 } from '@/components/details/queries';
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
 import BoxEditIcon from '@/assets/icons/in_box_edit_time.svg';
 import BoxLikeIcon from '@/assets/icons/in_box_like.svg';
-import ThreeDotsIcon from '@/assets/icons/three_dots.svg';
+import { CarouselItem } from '@/components/ui/carousel';
 import CustomCarousel from '@/components/common/CustomCarousel';
-import Modal from '@/components/common/Modal';
 import DetailsBasic from '@/components/details/DetailsBasic';
 import DetailsOption from '@/components/details/DetailsOption';
-import PreAuctionDetailsFooter from '@/components/details/PreAuctionDetailsFooter';
 import Layout from '@/components/layout/Layout';
-import { CarouselItem } from '@/components/ui/carousel';
+import Modal from '@/components/common/Modal';
+import PreAuctionDetailsFooter from '@/components/details/PreAuctionDetailsFooter';
+import ThreeDotsIcon from '@/assets/icons/three_dots.svg';
 import { getTimeAgo } from '@/utils/getTimeAgo';
 
 const PreAuctionDetails = () => {
@@ -22,7 +22,7 @@ const PreAuctionDetails = () => {
   const { preAuctionDetails } = useGetPreAuctionDetailsWithSuspense(preAuctionId);
   const { mutate: deletePreAuction, isPending } = useDeletePreAuction();
 
-  const { images, productName, productId, likeCount, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
+  const { images, productName, productId, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
   const updatedTime = getTimeAgo(updatedAt)
 
   const clickEdit = () => navigate(`/auctions/pre-auction/edit/${productId}`);
@@ -84,7 +84,7 @@ const PreAuctionDetails = () => {
           </p>
         </div>
       </Layout.Main>
-      <PreAuctionDetailsFooter likeCount={likeCount} preAuctionId={preAuctionId} isSeller={isSeller} />
+      <PreAuctionDetailsFooter isLiked={isLiked} preAuctionId={preAuctionId} isSeller={isSeller} />
     </Layout >)
 }
 

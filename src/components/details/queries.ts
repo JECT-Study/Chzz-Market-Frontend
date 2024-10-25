@@ -1,11 +1,11 @@
 import type { IAuctionDetails, IPreAuctionDetails } from '@/@types/AuctionDetails';
 import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
-import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
+import { httpClient } from '@/api/axios';
 import { queryKeys } from '@/constants/queryKeys';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 export const useConvertAuction = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;
@@ -41,12 +41,35 @@ export const useLikeAuctionItem = (): {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: likeAuctionItem,
+    onMutate: async (auctionId: number) => {
+      await queryClient.cancelQueries({ queryKey: [queryKeys.PRE_AUCTION_DETAILS, auctionId] });
+
+      const previousData = queryClient.getQueryData([queryKeys.PRE_AUCTION_DETAILS, auctionId]);
+
+      queryClient.setQueryData([queryKeys.PRE_AUCTION_DETAILS, auctionId], (oldData: IPreAuctionDetails) => {
+        if (!oldData) return oldData;
+        return {
+          ...oldData,
+          isLiked: !oldData.isLiked,
+          likeCount: oldData.isLiked ? oldData.likeCount - 1 : oldData.likeCount + 1,
+        };
+      });
+
+      return { previousData };
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_DETAILS],
-      });
-      queryClient.invalidateQueries({
         queryKey: [queryKeys.PRE_AUCTION_HEART_LIST],
+      });
+    },
+    onError: (_err, auctionId, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData([queryKeys.PRE_AUCTION_DETAILS, auctionId], context.previousData);
+      }
+    },
+    onSettled: (_res, _err, auctionId: number) => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.PRE_AUCTION_DETAILS, auctionId],
       });
     },
   });
