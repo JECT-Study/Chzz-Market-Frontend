@@ -57,7 +57,7 @@ export const AuctionShippingSchema = z.object({
   memo: z.string(),
 });
 
-export const getBidSchema = (minPrice: number) =>
+export const getBidSchema = (minPrice: number, curBidAmount: number) =>
   z.object({
     bidAmount: z.string().superRefine((value, ctx) => {
       const num = Number(value.replace(/[^\d]/g, ''));
@@ -72,6 +72,13 @@ export const getBidSchema = (minPrice: number) =>
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: '1000원 단위로 입력해 주세요.',
+        });
+      }
+
+      if (num === curBidAmount) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: '현재 참여 금액과 다른 금액을 입력해주세요.',
         });
       }
     }),

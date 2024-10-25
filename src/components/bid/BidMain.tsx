@@ -24,7 +24,7 @@ const BidMain = ({ auctionId }: { auctionId: number }) => {
   const toggleCheckBox = () => setCheck((state) => !state);
 
   const { images, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = auctionDetails;
-  const BidSchema = getBidSchema(minPrice);
+  const BidSchema = getBidSchema(minPrice, bidAmount);
   type FormFields = z.infer<typeof BidSchema>;
   const maxFlag = remainingBidCount === MAX_BID_COUNT
   const zeroFlag = remainingBidCount === 0
