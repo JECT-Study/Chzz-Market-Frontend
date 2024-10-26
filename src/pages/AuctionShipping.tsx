@@ -1,5 +1,5 @@
 import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import rocation_on from '@/assets/icons/rocation_on.svg';
@@ -71,7 +71,7 @@ const AuctionShipping = () => {
   const onSubmit = (formData: FormFields) => {
     postPayment(formData, address);
   };
-  
+
   return (
     <Layout>
       <Layout.Header title="결제하기" />
