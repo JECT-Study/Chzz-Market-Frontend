@@ -1,14 +1,14 @@
-import { useEffect, useRef } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { AuctionShippingSchema } from '@/constants/schema';
+import rocation_on from '@/assets/icons/rocation_on.svg';
 import Button from '@/components/common/Button';
 import FormField from '@/components/common/form/FormField';
-import { Input } from '@/components/ui/input';
 import Layout from '@/components/layout/Layout';
+import { Input } from '@/components/ui/input';
+import { AuctionShippingSchema } from '@/constants/schema';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import rocation_on from '@/assets/icons/rocation_on.svg';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 

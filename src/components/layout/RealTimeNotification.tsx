@@ -18,7 +18,7 @@ const RealTimeNotification = ({
 
   const handleClick = () => {
     if (NOTIFICATION_CONTENTS[type]?.link && auctionId) {
-      navigate(NOTIFICATION_CONTENTS[type].link!(auctionId));
+      navigate(NOTIFICATION_CONTENTS[type].link!(auctionId), { replace: true });
     }
     readNotification(notificationId);
     onClose();
@@ -27,27 +27,27 @@ const RealTimeNotification = ({
   return (
     <div
       aria-label="알림 박스"
-      className="p-7 w-[20rem] h-[15rem] flex flex-col justify-between gap-5 bg-white rounded-lg"
+      className="min-w-[17rem] min-h-[13.5rem] w-2/5 max-w-[23rem] flex items-center flex-col justify-between p-8 bg-white rounded-lg sm:text-body1 text-body2"
+      onClick={(e) => e.stopPropagation()}
     >
-      <div className="flex flex-col gap-5">
-        <h2 aria-label="알림 제목" className="text-heading2">
+      <div className="flex flex-col w-full gap-3">
+        <h2 aria-label="알림 제목" className="sm:text-heading3 text-body2Bold">
           {title}
         </h2>
-        <div aria-label="알림 메시지" className="text-body1">
+        <p aria-label="알림 메시지" className="sm:text-body2 text-caption">
           {message}
-        </div>
+        </p>
       </div>
       <Button
         ariaLabel={buttonName}
         type="button"
-        hoverColor="black"
         className="w-full py-3"
         color="cheeseYellow"
         onClick={handleClick}
       >
         {buttonName}
       </Button>
-    </div>
+    </div >
   );
 };
 

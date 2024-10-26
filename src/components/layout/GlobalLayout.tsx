@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
+import type { IRealTimeNotification } from '@/@types/Notification';
 import { API_END_POINT } from '@/constants/api';
 import { useSSE } from '@/hooks/useSSE';
-import type { IRealTimeNotification } from '@/@types/Notification';
 import { Outlet } from 'react-router-dom';
 import Modal from '../common/Modal';
 import RealTimeNotification from './RealTimeNotification';
@@ -29,7 +29,7 @@ const GlobalLayout = () => {
         <Outlet />
         {currentNotification && (
           <Modal>
-            <Modal.Window>
+            <Modal.Window closeModal={closeModal}>
               <RealTimeNotification onClose={closeModal} notification={currentNotification} />
             </Modal.Window>
           </Modal>
