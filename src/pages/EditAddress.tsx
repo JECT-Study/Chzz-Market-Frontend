@@ -46,7 +46,7 @@ const EditAddress = () => {
   }
   return (
     <Layout>
-      <Layout.Header title="주소 편집" handleBack={() => navigate(-1)} />
+      <Layout.Header title="주소 편집" />
       <Layout.Main>
         <div>
           <ul>

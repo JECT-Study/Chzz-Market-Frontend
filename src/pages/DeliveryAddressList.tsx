@@ -42,7 +42,7 @@ const DeliveryAddressList = () => {
   }, []);
 
   const handleSubmitClick = () => {
-    navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress } })
+    navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress }, replace: true })
   };
 
   const handleEditButtonClick = () => {

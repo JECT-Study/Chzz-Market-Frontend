@@ -149,7 +149,7 @@ const DeliveryAddressAdd = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 추가" handleBack={() => navigate('/')} />
+      <Layout.Header title="배송지 추가" />
       <Layout.Main>
         <div className="flex flex-col">
           <form ref={formRef} className="flex flex-col gap-6" onSubmit={onSubmit}>

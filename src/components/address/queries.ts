@@ -48,7 +48,7 @@ export const usePostAddress = (auctionId: string): {mutate: UseMutateFunction<an
   const { mutate } = useMutation({
     mutationFn: addAddress,
     onSuccess: () => {
-      navigate(ROUTES.getDeliveryAddressListRoute(auctionId));
+      navigate(ROUTES.getDeliveryAddressListRoute(auctionId), { replace: true });
     }
   });
 
@@ -60,7 +60,7 @@ export const useEditAddress = (auctionId: string): {mutate: UseMutateFunction<an
   const { mutate } = useMutation({
     mutationFn: ({ addressId, data }: { addressId: string, data: IAddressDetail }) => editAddress({ addressId, data }),
     onSuccess: () => {
-      navigate(ROUTES.getDeliveryAddressListRoute(auctionId));
+      navigate(ROUTES.getDeliveryAddressListRoute(auctionId), { replace: true });
     }
   });
 
