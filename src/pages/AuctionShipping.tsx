@@ -9,6 +9,7 @@ import Layout from '@/components/layout/Layout';
 import { Input } from '@/components/ui/input';
 import { AuctionShippingSchema } from '@/constants/schema';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import trophyImage from '@/assets/icons/successful_auction_win.svg';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -89,15 +90,24 @@ const AuctionShipping = () => {
               />
               <div>
                 <p className="font-bold">{auctionData?.productName}</p>
-                <p>결제 금액</p>
-                <p className="font-semibold text-cheeseYellow heading3">{formattedAmount}</p>
+                <div
+                  aria-label="시작가"
+                  className="flex items-center text-xs sm:text-body2 text-gray2"
+                >
+                  <img src={trophyImage} alt="트로피" className="w-[20px] h-[19px]" />
+                  <span className="overflow-hidden whitespace-nowrap pt-[2px]">
+                    <span className="ml-1 text-xs text-black sm:text-body2Bold">
+                      {formattedAmount}
+                    </span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
           {/* 수령지 입력 */}
           <span className='text-heading3'>수령지 입력</span>
           <div className='flex gap-2'>
-            <Button type='button' size='large' color='black'>기본 배송지</Button>
+            <Button type='button' size='large' color={address.isDefault ? 'black' : 'white'} className='cursor-auto'>기본 배송지</Button>
             <Button type='button' size='large' color='white' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
