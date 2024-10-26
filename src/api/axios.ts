@@ -80,6 +80,8 @@ export const createClient = (config?: AxiosRequestConfig) => {
             handleTokenError('리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.');
             return Promise.reject(refreshError);
           }
+        } else {
+          removeToken();
         }
       }
 
