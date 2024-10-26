@@ -11,42 +11,45 @@ import ProfileImageUploader from '@/components/profile/ProfileImageUploader';
 import NoticeRed from '@/assets/icons/notice_red.svg';
 import NoticeBlue from '@/assets/icons/blue_notice.svg';
 import { useCheckNickname } from '@/components/profile/queries';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { setIsNicknameCheckDisabled, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '@/store/profileEditSlice';
 
 const ProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl, isPending } = useEditProfile();
-  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
-  const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [profileFile, setProfileFile] = useState<File | null>(userProfileImageUrl);
   const [_useDefaultImage, setUseDefaultImage] = useState(false);
-  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-  const [isNicknameCheckDisabled, setIsNicknameCheckDisabled] = useState(false);
+
+  const dispatch = useDispatch();
+  const { nicknameError, isNicknameChecked, isSubmitEnabled, isNicknameCheckDisabled } = useSelector((state: RootState) => state.profileEdit);
+
   const nickname = watch('nickname')?.trim();
   const { checkNickname } = useCheckNickname({ nickname });
 
   const handleNicknameValidation = (nickname: string, isAvailable: boolean) => {
     if (!nickname || nickname === '') {
-      setNicknameError('닉네임을 입력해주세요.');
-      setIsNicknameChecked(false);
-      setIsSubmitEnabled(false);
+      dispatch(setNicknameError('닉네임을 입력해주세요.'));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsSubmitEnabled(false));
     } else if (isAvailable) {
-      setNicknameError('사용 가능한 닉네임입니다.');
-      setIsNicknameChecked(true);
-      setIsSubmitEnabled(true);
+      dispatch(setNicknameError('사용 가능한 닉네임입니다.'));
+      dispatch(setIsNicknameChecked(true));
+      dispatch(setIsSubmitEnabled(true));
     } else {
-      setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
-      setIsNicknameChecked(false);
-      setIsSubmitEnabled(false);
+      dispatch(setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.'));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsSubmitEnabled(false));
     }
   };
 
   const onNicknameCheck = async () => {
     if (nickname === originalNickname) {
-      setNicknameError('기존 닉네임입니다. 사용가능합니다.');
-      setIsNicknameChecked(true);
-      setIsSubmitEnabled(true);
+      dispatch(setNicknameError('기존 닉네임입니다. 사용가능합니다.'));
+      dispatch(setIsNicknameChecked(true));
+      dispatch(setIsSubmitEnabled(true));
       return;
     }
 
@@ -77,9 +80,9 @@ const ProfileEdit = () => {
       );
       handleEditProfile(formData);
     } else {
-      setNicknameError('닉네임 중복 확인을 해주세요.');
-      setIsNicknameChecked(false);
-      setIsSubmitEnabled(false);
+      dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsSubmitEnabled(false));
     }
   };
 
@@ -91,16 +94,16 @@ const ProfileEdit = () => {
 
   useEffect(() => {
     if (nickname.length > 15) {
-      setNicknameError('닉네임 15자 미만으로 입력해주세요.');
-      setIsSubmitEnabled(false);
-      setIsNicknameChecked(false);
-      setIsNicknameCheckDisabled(true);
+      dispatch(setNicknameError('닉네임 15자 미만으로 입력해주세요.'));
+      dispatch(setIsSubmitEnabled(false));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsNicknameCheckDisabled(true));
     } else {
-      setIsNicknameCheckDisabled(false);
+      dispatch(setIsNicknameCheckDisabled(false));
       if (nickname === originalNickname) {
-        setIsSubmitEnabled(true);
+        dispatch(setIsSubmitEnabled(true));
       } else {
-        setIsSubmitEnabled(false);
+        dispatch(setIsSubmitEnabled(false));
       }
     }
   }, [nickname]);

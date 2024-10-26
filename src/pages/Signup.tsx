@@ -1,4 +1,4 @@
-import { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { KeyboardEvent, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import Button from '@/components/common/Button';
@@ -10,14 +10,21 @@ import NoticeRed from '@/assets/icons/notice_red.svg';
 import NoticeBlue from '@/assets/icons/blue_notice.svg';
 import { useCheckNickname } from '@/components/profile/queries';
 import { IUser } from '@/@types/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { setIsNameValid, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '@/store/signupSlice';
+
 
 const Signup = () => {
-  const [nicknameError, setNicknameError] = useState<string | null>(null);
-  const [isNameValid, setIsNameValid] = useState(false);
-  const [isNicknameChecked, setIsNicknameChecked] = useState();
-  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const nicknameError = useSelector((state: RootState) => state.signup.nicknameError);
+  const isNameValid = useSelector((state: RootState) => state.signup.isNameValid);
+  const isNicknameChecked = useSelector((state: RootState) => state.signup.isNicknameChecked);
+  const isSubmitEnabled = useSelector((state: RootState) => state.signup.isSubmitEnabled);
+
   const {
     control,
     watch,
@@ -31,14 +38,14 @@ const Signup = () => {
 
   const validateNickname = () => {
     if (nickname.length > 15) {
-      setNicknameError('닉네임 15자 미만으로 입력해주세요.');
-      setIsNameValid(false);
-      setIsSubmitEnabled(false);
+      dispatch(setNicknameError('닉네임 15자 미만으로 입력해주세요.'));
+      dispatch(setIsNameValid(false));
+      dispatch(setIsSubmitEnabled(false));
       return false;
     }
-    setNicknameError(null);
-    setIsNameValid(false);
-    setIsSubmitEnabled(false);
+    dispatch(setNicknameError(null));
+    dispatch(setIsNameValid(false));
+    dispatch(setIsSubmitEnabled(false));
     return true;
   };
 
@@ -50,22 +57,22 @@ const Signup = () => {
     if (!validateNickname()) return;
 
     if (!nickname) {
-      setNicknameError('닉네임을 입력해주세요.');
+      dispatch(setNicknameError('닉네임을 입력해주세요.'));
       return;
     }
 
     const { data } = await checkNickname();
     const { isAvailable } = data;
     
-    setNicknameError(isAvailable ? '사용 가능한 닉네임입니다.' : '이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
-    setIsNameValid(isAvailable);
-    setIsSubmitEnabled(isAvailable);
-    setIsNicknameChecked(isAvailable);
+    dispatch(setNicknameError(isAvailable ? '사용 가능한 닉네임입니다.' : '이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.'));
+    dispatch(setIsNameValid(isAvailable));
+    dispatch(setIsSubmitEnabled(isAvailable));
+    dispatch(setIsNicknameChecked(isAvailable));
   };
 
   const onSubmit = (data: IUser) => {
     if (!isNicknameChecked) {
-      setNicknameError('닉네임 중복 확인을 해주세요.');
+      dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
       return;
     }
     signupMutation(data);
@@ -74,7 +81,7 @@ const Signup = () => {
   const handleEnterKey = (event: KeyboardEvent) => {
     if (event.key === 'Enter' && !isNicknameChecked) {
       event.preventDefault();
-      setNicknameError('닉네임 중복 확인을 해주세요.');
+      dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
     }
   };
 
