@@ -43,28 +43,34 @@ export const deleteAddress = async (addressId: string) => {
   await httpClient.delete(`${API_END_POINT.ADDRESS}/${addressId}`);
 };
 
-export const usePostAddress = (auctionId: string): {mutate: UseMutateFunction<any, Error, IAddressDetail, unknown>;} => {
+export const usePostAddress = (auctionId: string): {
+  mutate: UseMutateFunction<any, Error, IAddressDetail, unknown>;
+  isPending: boolean;
+} => {
   const navigate = useNavigate();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: addAddress,
     onSuccess: () => {
       navigate(ROUTES.getDeliveryAddressListRoute(auctionId), { replace: true });
     }
   });
 
-  return { mutate };
+  return { mutate, isPending };
 }
 
-export const useEditAddress = (auctionId: string): {mutate: UseMutateFunction<any, Error, { addressId: string, data: IAddressDetail }, unknown>;} => {
+export const useEditAddress = (auctionId: string): {
+  mutate: UseMutateFunction<any, Error, { addressId: string, data: IAddressDetail }, unknown>;
+  isPending: boolean;
+} => {
   const navigate = useNavigate();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ addressId, data }: { addressId: string, data: IAddressDetail }) => editAddress({ addressId, data }),
     onSuccess: () => {
       navigate(ROUTES.getDeliveryAddressListRoute(auctionId), { replace: true });
     }
   });
 
-  return { mutate };
+  return { mutate, isPending };
 }
 
 export const useGetAddresses = () => {

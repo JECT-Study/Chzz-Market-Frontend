@@ -32,7 +32,7 @@ const DeliveryAddressAdd = () => {
   if (!auctionId) {
     return;
   }
-  const { mutate } = usePostAddress(auctionId);
+  const { mutate, isPending } = usePostAddress(auctionId);
 
   const {
     control,
@@ -235,6 +235,7 @@ const DeliveryAddressAdd = () => {
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}
           disabled={!isVaild}
+          loading={isPending}
         >
           저장하기
         </Button>

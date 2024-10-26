@@ -63,14 +63,14 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
   return { auctionData, postPayment, DefaultAddressData };
 };
 
-export const usePostOrderId = (): { createId: UseMutateFunction, orderId: string} => {
+export const usePostOrderId = (): { createId: UseMutateFunction, orderId: string, isPending: boolean} => {
   const [orderId, setOrderId] = useState<string>('');
-  const { mutate: createId } = useMutation({
+  const { mutate: createId, isPending } = useMutation({
     mutationFn: createOrderId,
     onSuccess: (data) => {
       setOrderId(data.orderId);
     }
   });
 
-  return { createId, orderId };
+  return { createId, orderId, isPending };
 };

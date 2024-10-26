@@ -24,7 +24,7 @@ const AuctionShipping = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
-  const { createId, orderId } = usePostOrderId();
+  const { createId, orderId, isPending } = usePostOrderId();
   const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment } = usePostPayment(auctionId || '', orderId);
   let address = {
     id: '',
@@ -159,6 +159,7 @@ const AuctionShipping = () => {
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}
+          loading={isPending}
         >
           결제 하기
         </Button>

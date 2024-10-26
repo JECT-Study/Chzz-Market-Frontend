@@ -39,7 +39,7 @@ const DeliveryAddressEdit = () => {
   if (!auctionId) {
     return;
   }
-  const { mutate } = useEditAddress(auctionId);
+  const { mutate, isPending } = useEditAddress(auctionId);
 
   const {
     control,
@@ -242,6 +242,7 @@ const DeliveryAddressEdit = () => {
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}
           disabled={!isVaild}
+          loading={isPending}
         >
           저장하기
         </Button>
