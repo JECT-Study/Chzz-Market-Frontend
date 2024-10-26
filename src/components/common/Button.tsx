@@ -34,6 +34,8 @@ const Button = ({
     'bg-gray3 text-white border border-gray3': color === 'gray3',
     'bg-gray3 text-gray1': color === 'disabled',
     'bg-cheeseYellow text-white border border-cheeseYellow': color === 'cheeseYellow',
+    'bg-buttonGrayWhite text-gray1': color === 'grayWhite',
+    'bg-disabledGrayWhite text-gray1': color === 'disabled',
   });
   const sizeClasses = classNames({
     'px-2 py-0.5 text-xs': size === 'xsmall',

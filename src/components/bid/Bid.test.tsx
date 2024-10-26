@@ -1,11 +1,11 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
 import Bid from '@/pages/Bid';
 import { mockedUseNavigate } from '@/setupTests';
-import userEvent from '@testing-library/user-event';
 import { useGetAuctionDetails } from '../details/queries';
+import userEvent from '@testing-library/user-event';
 
 vi.mock('@/components/details/queries');
 vi.mocked(useGetAuctionDetails).mockReturnValue({
@@ -31,21 +31,6 @@ vi.mocked(useGetAuctionDetails).mockReturnValue({
     isWinner: false,
     isWon: false
   },
-  refetch: vi.fn().mockResolvedValue({ // refetch 추가
-    data: {
-      bidAmount: 1000,
-      bidId: null,
-      description: 'Test auction',
-      imageUrls: ['test-image.jpg'],
-      isParticipated: false,
-      isSeller: false,
-      minPrice: 500,
-      productName: 'Test product',
-      participantCount: 5,
-      sellerProfileImageUrl: 'seller-image.jpg',
-    },
-    error: null,
-  }),
 });
 
 /**
