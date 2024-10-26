@@ -10,6 +10,7 @@ import Layout from "@/components/layout/Layout";
 import { ADDRESS_SCRIPT_URL } from "@/constants/address";
 import { FaCheck } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
+import ROUTES from "@/constants/routes";
 
 interface Props extends IAddressDetail {
   id: string;
@@ -42,11 +43,15 @@ const DeliveryAddressList = () => {
   }, []);
 
   const handleSubmitClick = () => {
-    navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress }, replace: true })
+    if (auctionId) {
+      navigate(ROUTES.getAuctionShippingRoute(auctionId), { state: { address: selectAddress }, replace: true });
+    }
   };
 
   const handleEditButtonClick = () => {
-    navigate(`/auctions/${auctionId}/edit-address`);
+    if (auctionId) {
+      navigate(ROUTES.getEditAddressRoute(auctionId))
+    }
   }
 
   const handleOpenAddress = () => {
@@ -63,8 +68,9 @@ const DeliveryAddressList = () => {
         const roadAddress = data.address;
         const jibunAddress = data.jibunAddress;
         const { zonecode } = data;
-
-        navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
+        if (auctionId) {
+          navigate(ROUTES.getDeliveryAddressAddRoute(auctionId), { state: { roadAddress, zonecode, jibunAddress } });
+        }
       },
     }).open({
       left,

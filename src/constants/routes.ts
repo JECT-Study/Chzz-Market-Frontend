@@ -23,18 +23,18 @@ const ROUTES = Object.freeze({
   getPreAuctionEditRoute: (preAuctionId: number) => `/auctions/pre-auction/edit/${preAuctionId}`,
 
   AUCTION_SHIPPING: '/auctions/:auctionId/shipping',
-  getAuctionShippingRoute: (auctionId: number) => `/auctions/${auctionId}/shipping`,
+  getAuctionShippingRoute: (auctionId: string | number) => `/auctions/${auctionId}/shipping`,
   DELIVERY_ADDRESS_LIST: '/auctions/:auctionId/address-list',
   getDeliveryAddressListRoute: (auctionId: string) => `/auctions/${auctionId}/address-list`,
 
   DELIVERY_ADDRESS_ADD: '/auctions/:auctionId/address-add',
-  getDeliveryAddressAddRoute: (auctionId: number) => `/auctions/${auctionId}/address-add`,
+  getDeliveryAddressAddRoute: (auctionId: string | number) => `/auctions/${auctionId}/address-add`,
 
   DELIVERY_ADDRESS_EDIT: '/auctions/:auctionId/address-edit',
   getDeliveryAddressEditRoute: (auctionId: number) => `/auctions/${auctionId}/address-edit`,
 
   EDIT_ADDRESS: '/auctions/:auctionId/edit-address',
-  getEditAddressRoute: (auctionId: number) => `/auctions/${auctionId}/edit-address`,
+  getEditAddressRoute: (auctionId: string | number) => `/auctions/${auctionId}/edit-address`,
 
   BID: '/auctions/bid/:auctionId',
   getBidRoute: (auctionId: number) => `/auctions/bid/${auctionId}`,
