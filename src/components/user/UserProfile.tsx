@@ -4,7 +4,6 @@ import Button from '../common/Button';
 import type { IProfileProps } from '@/@types/user';
 import naverIcon from '@/assets/icons/btnG_naverIcon.png';
 import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.png';
-import ButtonSpinner from '../common/loading/ButtonSpinner';
 
 const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }: IProfileProps) => {
   const navigator = useNavigate();
@@ -13,7 +12,11 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
   const userProfileImageUrl = profileImageUrl || null;
 
   if (isLoading) {
-    return <ButtonSpinner />
+    return (
+      <div className='flex justify-center items-center sm:h-[10rem] lg:h-[12.5rem]'>
+        <div className='w-[2rem] h-[2rem] border-2 border-[#F6F8F8] border-opacity-60 rounded-full size-4 border-b-cheeseYellow animate-spin' />
+      </div>
+    )
   }
 
   return (

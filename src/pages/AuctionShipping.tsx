@@ -75,7 +75,7 @@ const AuctionShipping = () => {
 
   return (
     <Layout>
-      <Layout.Header title="결제하기" />
+      <Layout.Header title="결제하기" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="space-y-6">
           {/* 기본 정보 입력 */}
