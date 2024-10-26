@@ -10,6 +10,7 @@ import Layout from "@/components/layout/Layout";
 import { ADDRESS_SCRIPT_URL } from "@/constants/address";
 import { FaCheck } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
+import ROUTES from "@/constants/routes";
 
 interface Props extends IAddressDetail {
   id: string;
@@ -42,11 +43,15 @@ const DeliveryAddressList = () => {
   }, []);
 
   const handleSubmitClick = () => {
-    navigate(`/auctions/${auctionId}/shipping`, { state: { address: selectAddress } })
+    if (auctionId) {
+      navigate(ROUTES.getAuctionShippingRoute(auctionId), { state: { address: selectAddress }, replace: true });
+    }
   };
 
   const handleEditButtonClick = () => {
-    navigate(`/auctions/${auctionId}/edit-address`);
+    if (auctionId) {
+      navigate(ROUTES.getEditAddressRoute(auctionId))
+    }
   }
 
   const handleOpenAddress = () => {
@@ -63,8 +68,9 @@ const DeliveryAddressList = () => {
         const roadAddress = data.address;
         const jibunAddress = data.jibunAddress;
         const { zonecode } = data;
-
-        navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
+        if (auctionId) {
+          navigate(ROUTES.getDeliveryAddressAddRoute(auctionId), { state: { roadAddress, zonecode, jibunAddress } });
+        }
       },
     }).open({
       left,
@@ -74,7 +80,7 @@ const DeliveryAddressList = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 목록" handleBack={() => navigate('/')} />
+      <Layout.Header title="배송지 목록" />
       <span className="absolute text-xl cursor-pointer top-3 right-5" onClick={handleEditButtonClick}>편집</span>
       <Layout.Main>
         <div>
@@ -97,11 +103,11 @@ const DeliveryAddressList = () => {
                 <li
                   key={item.id}
                   onClick={() => setSelectAddress(item)}
-                  className={`relative flex p-4 rounded-md mb-4 cursor-pointer border
-                ${selectAddress?.zipcode === item.zipcode ? 'border-cheeseYellow' : 'border-white'}`}
+                  className={`relative flex p-4 rounded-md mb-4 gap-4 cursor-pointer
+                ${selectAddress?.id === item.id ? 'border border-cheeseYellow' : 'border-b border-gray3'}`}
                 >
                   <div className="flex items-center">
-                    {selectAddress?.zipcode === item.zipcode ? (
+                    {item?.isDefault ? (
                       <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
                     ) : (
                       <img src={rocation_off} className="mr-2 text-gray2" alt="위치 아이콘" />
@@ -117,8 +123,8 @@ const DeliveryAddressList = () => {
                       <p>{item.detailAddress}</p>
                     </div>
                   </div>
-                  <div className={`absolute ${item.isDefault ? 'right-4 top-16' : 'right-4 top-14'}`}>
-                    {selectAddress?.zipcode === item.zipcode && <FaCheck />}
+                  <div className={`absolute ${selectAddress?.id === item.id ? 'right-4 top-16' : 'right-4 top-14'}`}>
+                    {selectAddress?.id === item.id && <FaCheck />}
                   </div>
                 </li>
               ))}
@@ -128,7 +134,7 @@ const DeliveryAddressList = () => {
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
-          type="submit"
+          type="button"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}

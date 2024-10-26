@@ -1,4 +1,4 @@
-import { getAuctionEndRegister, getAuctionOngoingRegister, getAuctionPreEnrollRegister } from '@/components/user/queries';
+import { getAuctionEndRegister, getAuctionOngoingRegister, getAuctionPreAuctionRegister } from '@/components/user/queries';
 
 import { queryKeys } from '@/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -54,7 +54,7 @@ const useMyAuctionList = (activeTab: string): any => {
     refetch: refetchEnrollData,
   } = useInfiniteQuery({
     queryKey: [queryKeys.USER_PRE_AUCTION_REGISTERED],
-    queryFn: () => getAuctionPreEnrollRegister({ pageNumber: 0, pageSize: 10 }),
+    queryFn: () => getAuctionPreAuctionRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;

@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/Layout';
 import { useNavigate } from 'react-router-dom';
-import kakaoImage from '@/assets/images/kakao_login_large_wide.png';
 import ChizzImage from '@/assets/icons/main_cheese_icon.svg';
+import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from 'react-icons/si';
 import { useAuth } from '@/hooks/useAuth';
 import { useRefreshTokenOnSuccess } from '@/components/login/queries';
@@ -19,7 +19,7 @@ const Login = () => {
       <Layout.Header title="로그인" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="flex flex-col items-center h-full">
-          <div className="w-full h-2/5 flex flex-col justify-center items-center lg:mt-10">
+          <div className="w-full h-2/5 flex flex-col justify-center items-center">
             <img 
               src={ChizzImage} 
               alt="logo" 
@@ -27,16 +27,20 @@ const Login = () => {
             <h2 className="text-center pt-5 sm:text-2xl lg:text-4xl font-semibold">치즈 마켓</h2>
           </div>
 
-          <div className="flex flex-col gap-4 items-center w-full mt-5 lg:mt-10">
-            <div className="sm:w-[280px] lg:w-[320px] h-12 cursor-pointer rounded-lg hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-600 focus:outline-none">
-              <img
-                src={kakaoImage}
-                alt="kakaoButton"
-                className="h-full object-cover opacity-90"
+          <div className="flex flex-col gap-4 items-center w-full">
+            <div className="flex justify-center sm:w-[280px] lg:w-[450px] h-12 ">
+              <button
                 onClick={handleKakaoLogin}
-              />
+                className="w-full h-12 bg-[#FEEA1C] text-black text-base sm:text-lg  rounded-lg flex items-center cursor-pointer hover:bg-[#F4DC00] focus:ring-2 focus:ring-offset-2 focus:ring-[#F4DC00] focus:outline-none"
+                aria-label="네이버 로그인"
+              >
+                <div className="flex items-center justify-center w-12 h-full rounded-l-lg">
+                  <RiKakaoTalkFill size={36} />
+                </div>
+                <span className="flex-grow mr-6">카카오 로그인</span>
+              </button>
             </div>
-            <div className="flex justify-center sm:w-[280px] lg:w-[320px] h-12 ">
+            <div className="flex justify-center sm:w-[280px] lg:w-[450px] h-12 ">
               <button
                 onClick={handleNaverLogin}
                 className="w-full h-12 bg-[#1ec800] text-white text-base sm:text-lg  rounded-lg flex items-center cursor-pointer hover:bg-[#17b000] focus:ring-2 focus:ring-offset-2 focus:ring-[#17b000] focus:outline-none"

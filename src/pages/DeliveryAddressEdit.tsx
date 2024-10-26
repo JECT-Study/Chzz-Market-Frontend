@@ -28,8 +28,13 @@ const DeliveryAddressEdit = () => {
   const roadAddress = location.state?.roadAddress;
   const zonecode = location.state?.zonecode;
   const formRef = useRef<HTMLFormElement>(null);
-  const [isChecked, setIsChecked] = useState(false);
-  const toggleCheckbox = () => setIsChecked((prev) => !prev)
+  const [isChecked, setIsChecked] = useState(addressItem.isDefault);
+  const toggleCheckbox = () => {
+    if (addressItem.isDefault) {
+      return;
+    }
+    setIsChecked((prev: boolean) => !prev);
+  }
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
@@ -67,20 +72,55 @@ const DeliveryAddressEdit = () => {
   };
 
   const onSubmit = handleSubmit((data: AddressProps) => {
-    if (!data.phoneNumber.startsWith("010")) {
+    let hasError = false;
+    if (!data.phoneNumber.startsWith("010") || data.phoneNumber.length > 13) {
       setError("phoneNumber", {
-        message: "010으로 시작하는 번호여야 합니다",
-      })
+        message: "휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.",
+      });
     }
-    const finalData = {
-      ...data,
-      isDefault: isChecked,
-    };
-    mutate({ addressId: addressItem.id, data: finalData });
+    if (!data.recipientName.trim()) {
+      setError("recipientName", {
+        type: "manual",
+        message: "이름을 입력해주세요.",
+      });
+      hasError = true;
+    }
+  
+    if (!data.roadAddress.trim()) {
+      setError("roadAddress", {
+        type: "manual",
+        message: "주소지를 입력해주세요.",
+      });
+      hasError = true;
+    }
+  
+    if (!data.detailAddress.trim()) {
+      setError("detailAddress", {
+        type: "manual",
+        message: "상세주소를 입력해주세요.",
+      });
+      hasError = true;
+    }
+    if (!hasError) {
+      const finalData = {
+        ...data,
+        isDefault: isChecked,
+      };
+      mutate({ addressId: addressItem.id, data: finalData });
+    }
   });
 
   const handleOpenAddress = () => {
+    const popupWidth = 500;
+    const popupHeight = 600;
+
+    // 현재 모니터의 중앙을 기준으로 팝업 위치 계산
+    const left = window.innerWidth / 2 - popupWidth / 2 + window.screenLeft;
+    const top = window.innerHeight / 2 - popupHeight / 2 + window.screenTop;
+
     new window.daum.Postcode({
+      width: popupWidth,
+      height: popupHeight,
       onComplete: (data: any) => {
         const roadAddress = data.address;
         const { zonecode } = data;
@@ -90,7 +130,10 @@ const DeliveryAddressEdit = () => {
 
         navigate(`/auctions/${auctionId}/address-edit`, { state: { addressItem: addressItem, roadAddress, zonecode } });
       },
-    }).open();
+    }).open({
+      left,
+      top,
+    });
   };
 
   useEffect(() => {
@@ -114,7 +157,7 @@ const DeliveryAddressEdit = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 수정" handleBack={() => navigate('/')} />
+      <Layout.Header title="배송지 수정" />
       <Layout.Main>
         <div className="flex flex-col">
           <form ref={formRef} className="flex flex-col gap-6" onSubmit={onSubmit}>
@@ -133,13 +176,13 @@ const DeliveryAddressEdit = () => {
               )}
             />
             <FormField
-              label="연락처"
+              label="휴대폰 번호"
               name="phoneNumber"
               control={control}
               error={errors.phoneNumber?.message}
               render={(field) => (
                 <Input
-                  id="연락처"
+                  id="휴대폰 번호"
                   type="text"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
@@ -170,6 +213,7 @@ const DeliveryAddressEdit = () => {
                   type="text"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
+                  readOnly
                 />
               )}
             />
@@ -193,7 +237,7 @@ const DeliveryAddressEdit = () => {
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
-          type="submit"
+          type="button"
           className="w-full h-[47px] rounded-lg"
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}

@@ -9,27 +9,52 @@ import { useEditProfile } from '@/hooks/useProfile';
 import { IUserProfile } from '@/@types/user';
 import ProfileImageUploader from '@/components/profile/ProfileImageUploader';
 import NoticeRed from '@/assets/icons/notice_red.svg';
+import NoticeBlue from '@/assets/icons/blue_notice.svg';
 import { useCheckNickname } from '@/components/profile/queries';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { setIsNicknameCheckDisabled, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '@/store/profileEditSlice';
 
 const ProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl, isPending } = useEditProfile();
-  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
-  const [nicknameError, setNicknameError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [profileFile, setProfileFile] = useState<File | null>(userProfileImageUrl);
   const [_useDefaultImage, setUseDefaultImage] = useState(false);
-  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-  const nickname = watch('nickname');
+
+  const dispatch = useDispatch();
+  const { nicknameError, isNicknameChecked, isSubmitEnabled, isNicknameCheckDisabled } = useSelector((state: RootState) => state.profileEdit);
+
+  const nickname = watch('nickname')?.trim();
   const { checkNickname } = useCheckNickname({ nickname });
 
-  const handleSubmitClick = () => {
-    if (formRef.current) {
-      formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true }),
-      );
+  const handleNicknameValidation = (nickname: string, isAvailable: boolean) => {
+    if (!nickname || nickname === '') {
+      dispatch(setNicknameError('닉네임을 입력해주세요.'));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsSubmitEnabled(false));
+    } else if (isAvailable) {
+      dispatch(setNicknameError('사용 가능한 닉네임입니다.'));
+      dispatch(setIsNicknameChecked(true));
+      dispatch(setIsSubmitEnabled(true));
+    } else {
+      dispatch(setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.'));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsSubmitEnabled(false));
     }
+  };
+
+  const onNicknameCheck = async () => {
+    if (nickname === originalNickname) {
+      dispatch(setNicknameError('기존 닉네임입니다. 사용가능합니다.'));
+      dispatch(setIsNicknameChecked(true));
+      dispatch(setIsSubmitEnabled(true));
+      return;
+    }
+
+    const { data } = await checkNickname();
+    handleNicknameValidation(nickname, data.isAvailable);
   };
 
   const onSubmit = (data: IUserProfile) => {
@@ -55,38 +80,9 @@ const ProfileEdit = () => {
       );
       handleEditProfile(formData);
     } else {
-      // 에러 띄우기 닉네임 중복 확인을 해주세요.
-      setNicknameError('닉네임 중복 확인을 해주세요.');
-      setIsNicknameChecked(false);
-    }
-  };
-
-  const onNicknameCheck = async () => {
-    if (!nickname || nickname.trim() === '') {
-      setNicknameError('닉네임을 입력해주세요.');
-      setIsNicknameChecked(false);
-      return;
-    }
-
-    if (nickname === originalNickname) {
-      setIsNicknameChecked(true);
-      setNicknameError('기존 닉네임입니다. 사용가능합니다.');
-      setIsSubmitEnabled(true);
-      return;
-    }
-
-    const { data } = await checkNickname();
-    const { isAvailable } = data;
-    setIsNicknameChecked(isAvailable);
-    
-    if (isAvailable) {
-      setNicknameError('사용 가능한 닉네임입니다.');
-      setIsNicknameChecked(true);
-      setIsSubmitEnabled(true);
-    } else {
-      setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
-      setIsNicknameChecked(false);
-      setIsSubmitEnabled(true);
+      dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsSubmitEnabled(false));
     }
   };
 
@@ -98,15 +94,19 @@ const ProfileEdit = () => {
 
   useEffect(() => {
     if (nickname.length > 15) {
-      setNicknameError('닉네임은 15자를 초과할 수 없습니다.');
-      setIsSubmitEnabled(false);
-      setIsNicknameChecked(false);
-    } else if (nickname === originalNickname) {
-      setIsSubmitEnabled(true);
+      dispatch(setNicknameError('닉네임 15자 미만으로 입력해주세요.'));
+      dispatch(setIsSubmitEnabled(false));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsNicknameCheckDisabled(true));
     } else {
-      setIsSubmitEnabled(false);
+      dispatch(setIsNicknameCheckDisabled(false));
+      if (nickname === originalNickname) {
+        dispatch(setIsSubmitEnabled(true));
+      } else {
+        dispatch(setIsSubmitEnabled(false));
+      }
     }
-  }, [nickname])
+  }, [nickname]);
 
   return (
     <Layout>
@@ -142,14 +142,13 @@ const ProfileEdit = () => {
               />
             </div>
             <div>
-              <Button type='button' className='h-10' onClick={onNicknameCheck}>중복확인</Button>
+              <Button type='button' className='h-10' onClick={onNicknameCheck} disabled={isNicknameCheckDisabled}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
             <div className={`flex items-center gap-2 ${isNicknameChecked ? 'text-customBlue' : 'text-redNotice'}`}>
               {isNicknameChecked ? (
-                // 파랑 아이콘 추가
-                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+                <img src={NoticeBlue} alt="notice_red" className="mb-[2px] size-3" />
               ) : (
                 <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
               )}
@@ -173,10 +172,10 @@ const ProfileEdit = () => {
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
-          type="submit"
+          type="button"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
-          onClick={handleSubmitClick}
+          onClick={() => formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
           disabled={!isSubmitEnabled || isPending}
           loading={isPending}
         >

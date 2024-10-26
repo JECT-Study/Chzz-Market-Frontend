@@ -1,4 +1,4 @@
-const preEnrollProducts = {
+const preAuctionProducts = {
   hasNext: false,
   items: [
     {
@@ -29,4 +29,4 @@ const preEnrollProducts = {
   last: false,
 };
 
-export default preEnrollProducts;
+export default preAuctionProducts;

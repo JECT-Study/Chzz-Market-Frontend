@@ -4,7 +4,6 @@ import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
 import { queryKeys } from '@/constants/queryKeys';
 import { IPreAuctionItem } from '@/@types/AuctionItem';
-import { toast } from 'sonner';
 
 export const useGetPreAuctionHeartList = () => {
   const getPreAuctionHeartList = async (): Promise<IPreAuctionItem[]> => {
@@ -40,9 +39,8 @@ export const useDeletePreAuctionHeart = (): {
         queryKey: [queryKeys.PRE_AUCTION_DETAILS],
       });
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_LIST] 
+        queryKey: [queryKeys.PRE_AUCTION_LIST]
       });
-      toast.success('좋아요 취소되었습니다.');
     },
   });
 

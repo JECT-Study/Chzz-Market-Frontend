@@ -39,7 +39,7 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
   return (
     <div className="flex flex-col items-center gap-4">
       {image ? (
-        <div className="relative w-40 h-40 cursor-pointer" onClick={onClickImage}>
+        <div className="relative w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] cursor-pointer" onClick={onClickImage}>
           <img src={image} alt="프로필 사진" className="object-cover w-full h-full rounded-full" />
           <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-14 h-14 absolute bottom-0 right-0' />
           {onMenu && 
@@ -49,7 +49,7 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
           }
         </div>
       ) : (
-        <div className="relative w-40 h-40 cursor-pointer" onClick={handleBoxClick}>
+        <div className="relative w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] cursor-pointer" onClick={handleBoxClick}>
           <img src={Profile} alt="프로필 사진" className="relative object-cover w-full h-full rounded-full" />
           <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-14 h-14 absolute bottom-0 right-0' />
         </div>

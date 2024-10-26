@@ -23,7 +23,7 @@ export interface IAuctionEndRegisteredItem extends IAuctionItemBase {
   participantCount: number;
   winningBidAmount: number;
   isWon: boolean;
-  isPaid: boolean;
+  isOrdered: boolean;
   createAt: string;
 }
 
@@ -52,4 +52,5 @@ export interface IUserAuctionLostItem extends IAuctionItemBase {
 }
 export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {
   auctionId: number;
+  bidAmount: number;
 }

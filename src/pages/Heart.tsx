@@ -5,13 +5,17 @@ import EmptyBoundary from '@/components/common/boundary/EmptyBoundary';
 import AuctionItem from '@/components/common/item/AuctionItem';
 import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const Heart = () => {
   const navigate = useNavigate();
   const { preAuctionHeartList } = useGetPreAuctionHeartList();
   const { mutate } = useDeletePreAuctionHeart();
 
-  const handleDelete = (id: number) => mutate(id);
+  const handleDelete = (id: number) => {
+    mutate(id);
+    toast.success('좋아요 취소되었습니다.');
+  };
 
   return (
     <EmptyBoundary length={preAuctionHeartList.length} name='heart'>
