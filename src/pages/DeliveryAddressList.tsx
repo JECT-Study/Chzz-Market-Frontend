@@ -97,8 +97,8 @@ const DeliveryAddressList = () => {
                 <li
                   key={item.id}
                   onClick={() => setSelectAddress(item)}
-                  className={`relative flex p-4 rounded-md mb-4 cursor-pointer border
-                ${selectAddress?.id === item.id ? 'border-cheeseYellow' : 'border-white'}`}
+                  className={`relative flex p-4 rounded-md mb-4 gap-4 cursor-pointer
+                ${selectAddress?.id === item.id ? 'border border-cheeseYellow' : 'border-b border-gray3'}`}
                 >
                   <div className="flex items-center">
                     {item?.isDefault ? (

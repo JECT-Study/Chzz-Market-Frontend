@@ -54,7 +54,7 @@ const EditAddress = () => {
             <li
               key={item.id}
               onClick={() => setSelectAddress(item)}
-              className="relative flex p-4 rounded-md mb-4"
+              className="relative flex p-4 rounded-md mb-4 gap-4 border-b border-gray3"
             >
               <div className="flex items-center">
                 <img src={rocation_off} className="text-gray2 mr-2" alt="위치 아이콘" />
