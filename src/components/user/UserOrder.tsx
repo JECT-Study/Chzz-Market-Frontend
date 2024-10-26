@@ -39,7 +39,8 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
               alt="참여중인 경매"
               className="w-8 h-8 mb-2"
             />
-            <span className="text-sm font-semibold">참여중인 경매</span>
+            <span className="text-body2 text-center block lg:hidden">참여중인 <br /> 경매</span>
+            <span className="text-heading3 hidden lg:block">참여중인 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$participantCount.ongoingAuctionCount} 건</span>
           </div>
 
@@ -53,7 +54,8 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
             }
           >
             <img src={SuccessIcon} alt="성공한 경매" className="w-8 h-8 mb-2" />
-            <span className="text-sm font-semibold">성공한 경매</span>
+            <span className="text-body2 text-center block lg:hidden">성공한 <br /> 경매</span>
+            <span className="text-heading3 hidden lg:block">성공한 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$participantCount.successfulAuctionCount} 건</span>
           </div>
 
@@ -67,7 +69,8 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
             }
           >
             <img src={FailedIcon} alt="실패한 경매" className="w-8 h-8 mb-2" />
-            <span className="text-sm font-semibold">실패한 경매</span>
+            <span className="text-body2 text-center block lg:hidden">실패한 <br /> 경매</span>
+            <span className="text-heading3 hidden lg:block">실패한 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$participantCount.failedAuctionCount} 건</span>
           </div>
         </div>
@@ -85,7 +88,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
             }
           >
             <img src={AuctionIcon} alt="정식 경매" className="w-8 h-8 mb-2" />
-            <span className="text-sm font-semibold">정식 경매</span>
+            <span className="lg:text-heading3">정식 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$registeredAuctionCount} 건</span>
           </div>
 
@@ -101,7 +104,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
               alt="사전 경매"
               className="w-8 h-8 mb-2"
             />
-            <span className="text-sm font-semibold">사전 경매</span>
+            <span className="lg:text-heading3">사전 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$preRegisterCount} 건</span>
           </div>
         </div>

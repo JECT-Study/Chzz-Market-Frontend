@@ -5,7 +5,7 @@ const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: 
   const navigate = useNavigate();
 
   const onClickCategory = () => {
-    navigate(`/product/list?category=${code}`);
+    navigate(`/product/list?category=${code}`, { state: { category: name }});
   };
   return (
     <li className='flex flex-col items-center h-full gap-3 cursor-pointer' onClick={onClickCategory}>

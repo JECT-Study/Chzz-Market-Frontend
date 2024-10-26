@@ -64,16 +64,42 @@ const DeliveryAddressAdd = () => {
   };
 
   const onSubmit = handleSubmit((data: AddressProps) => {
-    if (!data.phoneNumber.startsWith("010")) {
+    let hasError = false;
+    if (!data.phoneNumber.startsWith("010") || data.phoneNumber.length > 13) {
       setError("phoneNumber", {
-        message: "010으로 시작하는 번호여야 합니다",
-      })
+        message: "휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.",
+      });
     }
-    const finalData = {
-      ...data,
-      isDefault: isChecked,
-    };
-    mutate(finalData);
+    if (!data.recipientName.trim()) {
+      setError("recipientName", {
+        type: "manual",
+        message: "이름을 입력해주세요.",
+      });
+      hasError = true;
+    }
+  
+    if (!data.roadAddress.trim()) {
+      setError("roadAddress", {
+        type: "manual",
+        message: "주소지를 입력해주세요.",
+      });
+      hasError = true;
+    }
+  
+    if (!data.detailAddress.trim()) {
+      setError("detailAddress", {
+        type: "manual",
+        message: "상세주소를 입력해주세요.",
+      });
+      hasError = true;
+    }
+    if (!hasError) {
+      const finalData = {
+        ...data,
+        isDefault: isChecked,
+      };
+      mutate(finalData);
+    }
   });
 
   const handleOpenAddress = () => {
@@ -123,12 +149,12 @@ const DeliveryAddressAdd = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 추가" handleBack={() => navigate('/')} />
+      <Layout.Header title="배송지 추가" />
       <Layout.Main>
         <div className="flex flex-col">
           <form ref={formRef} className="flex flex-col gap-6" onSubmit={onSubmit}>
             <FormField
-              label="이름"
+              label="이름 *"
               name="recipientName"
               control={control}
               error={errors.recipientName?.message}
@@ -142,13 +168,13 @@ const DeliveryAddressAdd = () => {
               )}
             />
             <FormField
-              label="연락처"
+              label="휴대폰 번호 *"
               name="phoneNumber"
               control={control}
               error={errors.phoneNumber?.message}
               render={(field) => (
                 <Input
-                  id="연락처"
+                  id="휴대폰 번호"
                   type="text"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
@@ -158,7 +184,7 @@ const DeliveryAddressAdd = () => {
             <div className="flex gap-6 item-center">
               <label className="flex items-center w-[100px] font-bold">우편번호</label>
               <Input
-                id="우편번호"
+                id="우편번호 *"
                 type="text"
                 value={zonecode}
                 className="focus-visible:ring-cheeseYellow bg-gray3"
@@ -169,7 +195,7 @@ const DeliveryAddressAdd = () => {
               </Button>
             </div>
             <FormField
-              label="주소지"
+              label="주소지 *"
               name="roadAddress"
               control={control}
               error={errors.roadAddress?.message}
@@ -179,11 +205,12 @@ const DeliveryAddressAdd = () => {
                   type="text"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
+                  readOnly
                 />
               )}
             />
             <FormField
-              label="상세주소"
+              label="상세주소 *"
               name="detailAddress"
               control={control}
               error={errors.detailAddress?.message}
@@ -203,7 +230,7 @@ const DeliveryAddressAdd = () => {
       </Layout.Main>
       <Layout.Footer type="single">
         <Button
-          type="submit"
+          type="button"
           className="w-full h-[47px] rounded-lg"
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}

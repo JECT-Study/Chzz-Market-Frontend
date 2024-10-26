@@ -27,7 +27,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
       'Content-Type': 'application/json',
     },
     withCredentials: true,
-    timeout: 5000,
+    timeout: 10000,
     ...config,
   });
 

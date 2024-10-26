@@ -1,7 +1,7 @@
 import ProfileDefaultImage from '@/assets/icons/profile.svg';
 import { CATEGORIES } from '@/constants/categories';
 import { useNavigate } from 'react-router-dom';
-import MinPrice from '../common/atomic/MinPrice';
+import Price from '../common/atomic/Price';
 
 interface DetailsBasicProps {
   profileImg: string, nickname: string, productName: string, category: string, minPrice: number
@@ -28,7 +28,7 @@ const DetailsBasic = ({ profileImg, nickname, productName, category, minPrice }:
       <span className='inline-flex'>
         <button onClick={onClickCategory} className='underline cursor-pointer shrink-0 grow-0 text-gray2 text-body2'>{CATEGORIES[category].value}</button>
       </span>
-      <MinPrice price={minPrice} />
+      <Price title='시작가' price={minPrice} />
     </div>
 
   );

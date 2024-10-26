@@ -1,50 +1,87 @@
 import type { IUserAuctionWonItem } from '@/@types/AuctionItem';
-import PriceIcon from '@/assets/icons/price.svg';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
-import { LuUsers } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
-import Button from '../common/Button';
-import CreatedAt from '../common/atomic/CreatedAt';
-import ProductItem from '../common/item/ProductItem';
+import trophyImage from '@/assets/icons/successful_auction_win.svg';
+import ParticipantCount from '../common/atomic/ParticipantCount';
+import ROUTES from '@/constants/routes';
 
 const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const navigate = useNavigate();
-  const formattedWinningPrice = formatCurrencyWithWon(product.winningAmount);
-  const formatted = formatCurrencyWithWon(product.minPrice);
+  const formatted = formatCurrencyWithWon(product.winningAmount);
 
-  const handleProductClick = () => navigate(`/auctions/auction/${product.auctionId}`)
+  const handleProductClick = () => navigate(ROUTES.getAuctionItemRoute(product.auctionId));
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!product.isOrdered) {
-      navigate(`/auctions/${product.auctionId}/shipping`);
+      navigate(ROUTES.getAuctionShippingRoute(product.auctionId));
     } else {
       navigate(`/payment/success?auctionId=${product.auctionId}`);
     }
   }
 
   return (
-    <ProductItem product={product} onClick={handleProductClick}>
-      <div
-        aria-label="시작가"
-        className="flex items-center text-xs sm:text-body2 text-gray2"
-      >
-        <img src={PriceIcon} alt="시작가" />
-        <span className='overflow-hidden whitespace-nowrap pt-[2px]'>
-          <span className="ml-1 text-xs text-black sm:text-body2Bold">{formatted}</span>
-        </span>
-      </div>
-      <CreatedAt createAt={product.endDateTime} />
-      <div className='flex'>
-        <div className='flex gap-2'>
-          <LuUsers className='text-gray-500' />
-          <p className='text-sm text-gray-500'>최종 낙찰금액</p>
+    <div key={product.auctionId} className="p-1 mb-4 cursor-pointer" onClick={handleProductClick}>
+      <div className="flex flex-col">
+        <div className="w-full h-auto mb-4">
+          <div className="relative">
+            <img
+              className="object-cover w-full h-[15rem] rounded-t"
+              src={product.imageUrl}
+              alt={product.productName || "제품 사진"}
+            />
+            {product.isOrdered ? (
+              <div
+                aria-label="시간"
+                className="absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 text-timeColor3 border-b-2 text-body1"
+              >
+                <p className="text-timeColor3">결제 완료</p>
+              </div>
+            ) : (
+              <div
+                aria-label="시간"
+                className="absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 text-timeColor1 border-b-2 text-body1"
+              >
+                <p className="text-redNotice">결제 전</p>
+              </div>
+            )}
+          </div>
         </div>
-        <p className='ml-4 font-semibold'>{formattedWinningPrice}</p>
+
+        <div className="flex flex-col gap-[8px]">
+          <div>
+            <p className="text-sm font-semibold">{product.productName}</p>
+          </div>
+          <div className="flex flex-col">
+            <div
+              aria-label="시작가"
+              className="flex items-center text-xs sm:text-body2 text-gray2"
+            >
+              <img src={trophyImage} alt="트로피" className="w-[20px] h-[19px]" />
+              <span className="overflow-hidden whitespace-nowrap pt-[2px]">
+                <span className="ml-1 text-xs text-black sm:text-body2Bold">
+                  {formatted}
+                </span>
+              </span>
+            </div>
+            <ParticipantCount count={product.participantCount} />
+            <button
+              type="button"
+              onClick={handleButtonClick}
+              className={
+                `focus:outline-none rounded-lg transition-colors box-border sm:px-4 sm:py-2 px-2 py-2 sm:text-button text-sm
+                ${product.isOrdered
+                  ? 'bg-gray3 border-none'
+                  : 'bg-gray1 text-white border-none'
+                }
+              `}
+            >
+              {product.isOrdered ? '결제 내역 보기' : '결제하기'}
+            </button>
+          </div>
+        </div>
       </div>
-      <Button type='button' onClick={handleButtonClick} color={product.isOrdered ? 'black' : 'white'}>
-        {product.isOrdered ? '결제 내역 보기' : '결제하기'}
-      </Button>
-    </ProductItem>
+    </div>
   );
 };
 
