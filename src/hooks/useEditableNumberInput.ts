@@ -1,4 +1,4 @@
-import { FocusEvent, useState } from 'react';
+import { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
 import { FieldValues, Path, PathValue, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
 
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
@@ -28,9 +28,21 @@ export const useEditableNumberInput = <T extends FieldValues>({ name, setValue, 
     setIsEditing(true);
   };
 
+  const preventInvalidInput = (event: ChangeEvent<HTMLInputElement>) => {
+    event.target.value = event.target.value.replace(/[^0-9]/g, ''); // 숫자가 아닌 문자 필터링
+  };
+
+  const preventArrowKeys = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.preventDefault();
+    }
+  };
+
   return {
     isEditing,
     handleBlur,
     handleFocus,
+    preventInvalidInput,
+    preventArrowKeys,
   };
 };

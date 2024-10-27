@@ -40,7 +40,7 @@ const BidMain = ({ auctionId }: { auctionId: number }) => {
     resolver: zodResolver(BidSchema),
   });
 
-  const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
+  const { isEditing, handleBlur, handleFocus, preventArrowKeys, preventInvalidInput } = useEditableNumberInput({
     name: 'bidAmount',
     setValue,
     getValues,
@@ -84,6 +84,8 @@ const BidMain = ({ auctionId }: { auctionId: number }) => {
                 {...field}
                 onBlur={handleBlur}
                 onFocus={handleFocus}
+                onKeyDown={preventArrowKeys}
+                onInput={preventInvalidInput}
               />
             )}
           />

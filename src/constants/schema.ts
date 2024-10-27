@@ -25,10 +25,17 @@ export const RegisterSchema = z.object({
   category: z.string().min(1, '카테고리를 선택해 주세요.'),
   minPrice: z.string().superRefine((value, ctx) => {
     const num = Number(value.replace(/[^\d]/g, ''));
-    if (Number.isNaN(num) || num < 1000) {
+    if (num < 1000) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: '최소 1000원 이상 입력해 주세요.',
+      });
+    }
+
+    if (num > 2_000_000) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '2,000,000원 이하로 입력해 주세요.',
       });
     }
 
@@ -43,16 +50,17 @@ export const RegisterSchema = z.object({
     .string()
     .superRefine((value, ctx) => {
       const name = value.replaceAll(' ', '');
-      if (name.length === 0 || name.length < 5) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: '상품 설명은 공백을 제외하고 5자 이상 입력해 주세요.',
-        });
-      }
+      const newLineCount = (value.match(/\n/g) || []).length;
       if (name.length > 1000) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: '상품 설명은 최대 1000자 이하로 입력해 주세요.',
+        });
+      }
+      if (newLineCount > 10) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: '상품 설명은 줄바꿈을 10개 이하로 입력해 주세요.',
         });
       }
     })
@@ -67,10 +75,17 @@ export const getBidSchema = (minPrice: number, curBidAmount: number) =>
   z.object({
     bidAmount: z.string().superRefine((value, ctx) => {
       const num = Number(value.replace(/[^\d]/g, ''));
-      if (Number.isNaN(num) || num < minPrice) {
+      if (num < minPrice) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: `시작가보다 높은 금액을 입력해주세요.`,
+        });
+      }
+
+      if (num > 2_000_000) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: '2,000,000원 이하로 입력해 주세요.',
         });
       }
 

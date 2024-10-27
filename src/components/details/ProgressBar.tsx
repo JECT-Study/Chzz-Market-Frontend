@@ -1,14 +1,14 @@
-import { queryKeys } from '@/constants/queryKeys';
-import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+
+import { useEndAuction } from '@/hooks/useEndAuction';
 
 const totalTime = 24 * 60 ** 2;
 
-interface ProgressBarProps { initialTimeRemaining: number; recordStatus: (cur: string) => void; auctionId: number }
+interface ProgressBarProps { initialTimeRemaining: number; auctionId: number }
 
-const ProgressBar = ({ initialTimeRemaining, recordStatus, auctionId }: ProgressBarProps) => {
+const ProgressBar = ({ initialTimeRemaining, auctionId }: ProgressBarProps) => {
   const [timeRemaining, setTimeRemaining] = useState<number>(initialTimeRemaining);
-  const queryClient = useQueryClient()
+  const { endAuction } = useEndAuction()
 
   useEffect(() => {
     setTimeRemaining(initialTimeRemaining);
@@ -17,8 +17,7 @@ const ProgressBar = ({ initialTimeRemaining, recordStatus, auctionId }: Progress
       setTimeRemaining((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(interval);
-          recordStatus('ENDED')
-          queryClient.invalidateQueries({ queryKey: [queryKeys.AUCTION_DETAILS, auctionId] })
+          endAuction(auctionId)
           return 0;
         }
         return prevTime - 1;

@@ -8,17 +8,12 @@ import Confirm from "../common/Confirm";
 import Modal from "../common/Modal";
 import Layout from "../layout/Layout";
 
-interface AuctionDetailsFooterProps {
-  auctionId: number
-  curStatus: string
-}
-
-const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProps) => {
+const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
-  const { mutate: cancelBid } = useCancelBid()
+  const { mutate: cancelBid, isPending } = useCancelBid()
   const { auctionDetails } = useGetAuctionDetails(auctionId);
 
-  const { isOrdered, isWinner, isSeller, bidId, isCancelled, remainingBidCount, isWon } = auctionDetails
+  const { isOrdered, isWinner, status, isSeller, bidId, isCancelled, remainingBidCount, isWon } = auctionDetails
   const remainFlag = remainingBidCount === MAX_BID_COUNT
   const disabledFlag = remainingBidCount === 0
 
@@ -26,7 +21,7 @@ const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProp
   const clickCancel = () => cancelBid(bidId || 0)
 
   // 경매 종료
-  if (curStatus === 'ENDED') {
+  if (status === 'ENDED') {
     return (
       <Layout.Footer type="single">
         {isSeller
@@ -117,7 +112,7 @@ const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProp
               </Modal.Open>
               <Modal.Window name="cancelBid">
                 <Confirm type="cancelBid" >
-                  <Button type='button' color='cheeseYellow' className='w-full' onClick={clickCancel}>
+                  <Button type='button' disabled={isPending} loading={isPending} color='cheeseYellow' className='w-full' onClick={clickCancel}>
                     참여 취소
                   </Button>
                 </Confirm>

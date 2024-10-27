@@ -1,10 +1,10 @@
 import { UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
+import type { INotification } from '@/@types/Notification';
 import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
 import { queryKeys } from '@/constants/queryKeys';
 import { isLoggedIn } from '@/store/authSlice';
-import type { INotification } from '@/@types/Notification';
 import { useSelector } from 'react-redux';
 
 export const useGetNotifications = () => {
@@ -72,15 +72,32 @@ export const useDeleteNotification = (): {
   const queryClient = useQueryClient();
 
   const deleteNotification = async (id: number) => {
-    const response = await httpClient.delete(`${API_END_POINT.NOTIFICATIONS}/${id}`);
-
-    return response.data.data;
+    await httpClient.delete(`${API_END_POINT.NOTIFICATIONS}/${id}`);
+    return;
   };
 
   const { mutate } = useMutation({
     mutationFn: deleteNotification,
-    onSuccess: (data) => {
-      queryClient.setQueryData([queryKeys.NOTIFICATIONS], data);
+    onMutate: async (id: number) => {
+      await queryClient.cancelQueries({ queryKey: [queryKeys.NOTIFICATIONS] });
+      const previousData = queryClient.getQueryData([queryKeys.NOTIFICATIONS]);
+      queryClient.setQueryData([queryKeys.NOTIFICATIONS], (oldData: INotification[]) => {
+        if (!oldData) return oldData;
+
+        return oldData.filter((el: INotification) => el.notificationId !== id);
+      });
+
+      return { previousData };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.NOTIFICATIONS] });
+    },
+    onError: (_err, _var, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData([queryKeys.NOTIFICATIONS], context.previousData);
+      }
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [queryKeys.NOTIFICATIONS] });
     },
   });
