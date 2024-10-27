@@ -28,7 +28,7 @@ const Login = () => {
           </div>
 
           <div className="flex flex-col gap-4 items-center w-full">
-            <div className="flex justify-center sm:w-[280px] lg:w-[450px] h-12 ">
+            <div className="flex justify-center sm:w-[280px] lg:w-[450px] h-12 sm:mt-[150px] lg:mt-[200px]">
               <button
                 onClick={handleKakaoLogin}
                 className="w-full h-12 bg-[#FEEA1C] text-black text-base sm:text-lg  rounded-lg flex items-center cursor-pointer hover:bg-[#F4DC00] focus:ring-2 focus:ring-offset-2 focus:ring-[#F4DC00] focus:outline-none"
