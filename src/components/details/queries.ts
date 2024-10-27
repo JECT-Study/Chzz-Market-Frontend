@@ -1,12 +1,12 @@
 import type { IAuctionDetails, IPreAuctionDetails } from '@/@types/AuctionDetails';
 import { UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
-import { httpClient } from '@/api/axios';
 import { API_END_POINT } from '@/constants/api';
-import { queryKeys } from '@/constants/queryKeys';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import ROUTES from '@/constants/routes';
+import { httpClient } from '@/api/axios';
+import { queryKeys } from '@/constants/queryKeys';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 export const useConvertAuction = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;
@@ -80,6 +80,7 @@ export const useLikeAuctionItem = (): {
 
 export const useCancelBid = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;
+  isPending: boolean
 } => {
   const queryClient = useQueryClient();
 
@@ -88,7 +89,7 @@ export const useCancelBid = (): {
     return;
   };
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: cancelBid,
     onSuccess: () => {
       toast.success('경매 참여를 취소했습니다.');
@@ -98,7 +99,7 @@ export const useCancelBid = (): {
     },
   });
 
-  return { mutate };
+  return { mutate, isPending };
 };
 
 export const useGetAuctionDetails = (auctionId: number): { auctionDetails: IAuctionDetails } => {
