@@ -51,12 +51,6 @@ export const RegisterSchema = z.object({
     .superRefine((value, ctx) => {
       const name = value.replaceAll(' ', '');
       const newLineCount = (value.match(/\n/g) || []).length;
-      if (name.length === 0 || name.length < 5) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: '상품 설명은 공백을 제외하고 5자 이상 입력해 주세요.',
-        });
-      }
       if (name.length > 1000) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
