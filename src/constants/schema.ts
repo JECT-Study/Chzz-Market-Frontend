@@ -50,6 +50,7 @@ export const RegisterSchema = z.object({
     .string()
     .superRefine((value, ctx) => {
       const name = value.replaceAll(' ', '');
+      const newLineCount = (value.match(/\n/g) || []).length;
       if (name.length === 0 || name.length < 5) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
@@ -60,6 +61,12 @@ export const RegisterSchema = z.object({
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: '상품 설명은 최대 1000자 이하로 입력해 주세요.',
+        });
+      }
+      if (newLineCount > 10) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: '상품 설명은 줄바꿈을 10개 이하로 입력해 주세요.',
         });
       }
     })
