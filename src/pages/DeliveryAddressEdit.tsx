@@ -30,9 +30,6 @@ const DeliveryAddressEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [isChecked, setIsChecked] = useState(addressItem.isDefault);
   const toggleCheckbox = () => {
-    if (addressItem.isDefault) {
-      return;
-    }
     setIsChecked((prev: boolean) => !prev);
   }
   const [isVaild, setIsVaild] = useState(false);
