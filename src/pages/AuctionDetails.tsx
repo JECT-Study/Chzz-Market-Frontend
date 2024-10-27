@@ -10,14 +10,11 @@ import Participants from '@/assets/icons/participants.svg';
 import ProgressBar from '@/components/details/ProgressBar';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useGetAuctionDetails } from '@/components/details/queries';
-import { useState } from 'react';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
   const { auctionDetails } = useGetAuctionDetails(auctionId);
-  const { images, productName, status, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
-  const [curStatus, setStatus] = useState(status)
-  const recordStatus = (cur: string) => setStatus(cur)
+  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
 
   return (
     <Layout>
@@ -35,7 +32,6 @@ const AuctionDetails = () => {
             <ProgressBar
               initialTimeRemaining={timeRemaining}
               auctionId={auctionId}
-              recordStatus={recordStatus}
             />
           </div>
           <DetailsBasic profileImg={sellerProfileImageUrl} nickname={sellerNickname} productName={productName} minPrice={minPrice} category={category} />
@@ -70,7 +66,6 @@ const AuctionDetails = () => {
       </Layout.Main>
       <AuctionDetailsFooter
         auctionId={auctionId}
-        curStatus={curStatus}
       />
     </Layout>
   );
