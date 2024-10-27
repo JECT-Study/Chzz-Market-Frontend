@@ -1,15 +1,15 @@
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
-import AuctionDetailsFooter from '@/components/details/AuctionDetailsFooter';
-import { CarouselItem } from '@/components/ui/carousel';
-import CustomCarousel from '@/components/common/CustomCarousel';
-import DetailsBasic from '@/components/details/DetailsBasic';
-import Layout from '@/components/layout/Layout';
 import ParticipantAmount from '@/assets/icons/my_participation_amount.svg';
 import Participants from '@/assets/icons/participants.svg';
+import CustomCarousel from '@/components/common/CustomCarousel';
+import AuctionDetailsFooter from '@/components/details/AuctionDetailsFooter';
+import DetailsBasic from '@/components/details/DetailsBasic';
 import ProgressBar from '@/components/details/ProgressBar';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useGetAuctionDetails } from '@/components/details/queries';
+import Layout from '@/components/layout/Layout';
+import { CarouselItem } from '@/components/ui/carousel';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
@@ -59,7 +59,7 @@ const AuctionDetails = () => {
               </p>
             </div>
           </div >
-          <p className='overflow-y-auto text-body2 text-gray1'>
+          <p className='overflow-y-auto whitespace-pre-wrap text-body2 text-gray1'>
             {description}
           </p>
         </div>
