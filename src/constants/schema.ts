@@ -5,6 +5,40 @@ export const SignupFormSchema = z.object({
   bio: z.string().optional(),
 });
 
+export const ProfileEditFormSchema = z.object({
+  nickname: z.string().superRefine((value, ctx) => {
+    const trimmedNickname = value.trim();
+    if (trimmedNickname === '') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '닉네임을 입력해주세요.',
+      });
+    }
+    if (trimmedNickname.length > 15) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '닉네임은 15자 이하로 입력해 주세요.',
+      });
+    }
+  }),
+  bio: z.string().superRefine((value, ctx) => {
+    const bio = value.replaceAll(' ', '');
+    const newLineCount = (value.match(/\n/g) || []).length;
+    if (bio.length > 100) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '자기소개는 최대 100자 이하로 입력해 주세요.',
+      });
+    }
+    if (newLineCount > 5) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '자기소개는 줄바꿈을 5줄 이하로 입력해 주세요.'
+      });
+    }
+  })
+});
+
 export const RegisterSchema = z.object({
   productName: z.string().superRefine((value, ctx) => {
     const name = value.replaceAll(' ', '');
