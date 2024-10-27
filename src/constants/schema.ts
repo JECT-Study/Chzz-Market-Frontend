@@ -60,7 +60,8 @@ export const RegisterSchema = z.object({
 });
 
 export const AuctionShippingSchema = z.object({
-  memo: z.string(),
+  memoSelect: z.string(),
+  memoInput: z.string(),
 });
 
 export const getBidSchema = (minPrice: number, curBidAmount: number) =>

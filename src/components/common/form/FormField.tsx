@@ -5,7 +5,7 @@ import ErrorMessage from '../error/ErrorMessage';
 interface FormFieldProps<T extends FieldValues> {
   name: Path<T>;
   control: Control<T>;
-  label: string;
+  label?: string;
   render: (field: ControllerRenderProps<T>) => ReactElement;
   error?: string;
 }

@@ -6,23 +6,27 @@ import rocation_on from '@/assets/icons/rocation_on.svg';
 import Button from '@/components/common/Button';
 import FormField from '@/components/common/form/FormField';
 import Layout from '@/components/layout/Layout';
-import { Input } from '@/components/ui/input';
 import { AuctionShippingSchema } from '@/constants/schema';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import trophyImage from '@/assets/icons/successful_auction_win.svg';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { addressMemo } from '@/constants/address';
+import { Input } from '@/components/ui/input';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
 
 const defaultValues = {
-  memo: ''
+  memoSelect: addressMemo[0],
+  memoInput: ''
 };
 
 const AuctionShipping = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   const [isVaild, setIsVaild] = useState<boolean>();
+  const [isMemoSelectDisabled, setMemoSelectDisabled] = useState(false);
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId, isPending } = usePostOrderId();
@@ -43,24 +47,15 @@ const AuctionShipping = () => {
     address = { ...selectedAddress }
   }
 
-  useEffect(() => {
-    if (Object.keys(address).length > 0) {
-      setIsVaild(false);
-    } else {
-      setIsVaild(true);
-    }
-    if (auctionId) {
-      createId();
-    }
-  }, [createId, isVaild]);
-
   const {
     control,
+    watch,
     handleSubmit,
   } = useForm<FormFields>({
     defaultValues,
   });
 
+  const memoInputValue = watch('memoInput');
   const formattedAmount = formatCurrencyWithWon(auctionData.winningAmount);
 
   const handleSubmitClick = () => {
@@ -76,8 +71,31 @@ const AuctionShipping = () => {
   }
 
   const onSubmit = (formData: FormFields) => {
-    postPayment(formData, address);
+    const memo = {
+      memo: formData.memoSelect || formData.memoInput || ''
+    }
+    postPayment(memo, address);
   };
+
+
+  useEffect(() => {
+    if (Object.keys(address).length > 0) {
+      setIsVaild(false);
+    } else {
+      setIsVaild(true);
+    }
+    if (memoInputValue) {
+      setMemoSelectDisabled(true);
+    } else {
+      setMemoSelectDisabled(false);
+    }
+  }, [isVaild, memoInputValue]);
+
+  useEffect(() => {
+    if (auctionId) {
+      createId();
+    }
+  }, [createId]);
 
   return (
     <Layout>
@@ -140,11 +158,31 @@ const AuctionShipping = () => {
           )}
           <form
             ref={formRef}
-            className="flex flex-col gap-6"
+            className="flex flex-col"
             onSubmit={handleSubmit(onSubmit)}>
             <FormField
               label="배송메모"
-              name="memo"
+              name="memoSelect"
+              control={control}
+              render={(field) => (
+                <Select value={field.value as string} onValueChange={field.onChange} disabled={isMemoSelectDisabled}>
+                  <SelectTrigger id='배송메모' className='w-full focus:ring-cheeseYellow'>
+                    <SelectValue placeholder='배송메모를 선택하세요.' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup className='focus-visible:ring-cheeseYellow'>
+                      {addressMemo.map((text) => (
+                        <SelectItem key={text} value={text}>
+                          {text}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            <FormField
+              name="memoInput"
               control={control}
               render={(field) => (
                 <Input
