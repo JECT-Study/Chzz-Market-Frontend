@@ -1,5 +1,5 @@
 import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import rocation_on from '@/assets/icons/rocation_on.svg';
@@ -22,6 +22,7 @@ const defaultValues = {
 const AuctionShipping = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
+  const [isVaild, setIsVaild] = useState<boolean>();
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId, isPending } = usePostOrderId();
@@ -43,10 +44,15 @@ const AuctionShipping = () => {
   }
 
   useEffect(() => {
+    if (Object.keys(address).length > 0) {
+      setIsVaild(false);
+    } else {
+      setIsVaild(true);
+    }
     if (auctionId) {
       createId();
     }
-  }, [createId]);
+  }, [createId, isVaild]);
 
   const {
     control,
@@ -159,6 +165,7 @@ const AuctionShipping = () => {
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}
+          disabled={isVaild}
           loading={isPending}
         >
           결제 하기
