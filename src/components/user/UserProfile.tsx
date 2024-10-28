@@ -13,7 +13,11 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
   const userProfileImageUrl = profileImageUrl || null;
 
   if (isLoading) {
-    return <ButtonSpinner />
+    return (
+      <div className='flex justify-center items-center sm:h-[10rem] lg:h-[12.5rem]'>
+        <div className='w-[2rem] h-[2rem] border-2 border-[#F6F8F8] border-opacity-60 rounded-full size-4 border-b-cheeseYellow animate-spin' />
+      </div>
+    )
   }
 
   return (

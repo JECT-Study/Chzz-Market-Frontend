@@ -19,6 +19,9 @@ const UserParticipatedList = () => {
     historyData,
     wonData,
     lostData,
+    historyLoading,
+    wonLoading,
+    lostLoading,
     fetchNextHistoryPage,
     fetchNextWonPage,
     fetchNextLostPage,
@@ -80,6 +83,14 @@ const UserParticipatedList = () => {
       refetchLostData();
     }
   }, [activeTab, refetchHistoryData, refetchWonData, refetchLostData]);
+
+  if (historyLoading || wonLoading || lostLoading) {
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <div className='w-[2rem] h-[2rem] border-2 border-[#F6F8F8] border-opacity-60 rounded-full border-b-cheeseYellow animate-spin' />
+      </div>
+    );
+  }
 
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>

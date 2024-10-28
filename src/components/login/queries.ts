@@ -61,7 +61,6 @@ export const useRefreshTokenOnSuccess = () => {
         dispatch(storeLogin({ token: newAccessToken }));
       }
     },
-    onError: () => {},
   });
 
   useEffect(() => {

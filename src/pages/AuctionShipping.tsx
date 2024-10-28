@@ -1,29 +1,35 @@
 import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import rocation_on from '@/assets/icons/rocation_on.svg';
 import Button from '@/components/common/Button';
 import FormField from '@/components/common/form/FormField';
 import Layout from '@/components/layout/Layout';
-import { Input } from '@/components/ui/input';
 import { AuctionShippingSchema } from '@/constants/schema';
 import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import trophyImage from '@/assets/icons/successful_auction_win.svg';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { addressMemo } from '@/constants/address';
+import { Input } from '@/components/ui/input';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
 
 const defaultValues = {
-  memo: ''
+  memoSelect: addressMemo[0],
+  memoInput: ''
 };
 
 const AuctionShipping = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
+  const [isVaild, setIsVaild] = useState<boolean>();
+  const [isMemoSelectDisabled, setMemoSelectDisabled] = useState(false);
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
-  const { createId, orderId } = usePostOrderId();
+  const { createId, orderId, isPending } = usePostOrderId();
   const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment } = usePostPayment(auctionId || '', orderId);
   let address = {
     id: '',
@@ -41,19 +47,15 @@ const AuctionShipping = () => {
     address = { ...selectedAddress }
   }
 
-  useEffect(() => {
-    if (auctionId) {
-      createId();
-    }
-  }, [createId]);
-
   const {
     control,
+    watch,
     handleSubmit,
   } = useForm<FormFields>({
     defaultValues,
   });
 
+  const memoInputValue = watch('memoInput');
   const formattedAmount = formatCurrencyWithWon(auctionData.winningAmount);
 
   const handleSubmitClick = () => {
@@ -69,12 +71,35 @@ const AuctionShipping = () => {
   }
 
   const onSubmit = (formData: FormFields) => {
-    postPayment(formData, address);
+    const memo = {
+      memo: formData.memoSelect || formData.memoInput || ''
+    }
+    postPayment(memo, address);
   };
+
+
+  useEffect(() => {
+    if (Object.keys(address).length > 0) {
+      setIsVaild(false);
+    } else {
+      setIsVaild(true);
+    }
+    if (memoInputValue) {
+      setMemoSelectDisabled(true);
+    } else {
+      setMemoSelectDisabled(false);
+    }
+  }, [isVaild, memoInputValue]);
+
+  useEffect(() => {
+    if (auctionId) {
+      createId();
+    }
+  }, [createId]);
 
   return (
     <Layout>
-      <Layout.Header title="결제하기" />
+      <Layout.Header title="결제하기" handleBack={() => navigate('/')} />
       <Layout.Main>
         <div className="space-y-6">
           {/* 기본 정보 입력 */}
@@ -89,15 +114,24 @@ const AuctionShipping = () => {
               />
               <div>
                 <p className="font-bold">{auctionData?.productName}</p>
-                <p>결제 금액</p>
-                <p className="font-semibold text-cheeseYellow heading3">{formattedAmount}</p>
+                <div
+                  aria-label="시작가"
+                  className="flex items-center text-xs sm:text-body2 text-gray2"
+                >
+                  <img src={trophyImage} alt="트로피" className="w-[20px] h-[19px]" />
+                  <span className="overflow-hidden whitespace-nowrap pt-[2px]">
+                    <span className="ml-1 text-xs text-black sm:text-body2Bold">
+                      {formattedAmount}
+                    </span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
           {/* 수령지 입력 */}
           <span className='text-heading3'>수령지 입력</span>
           <div className='flex gap-2'>
-            <Button type='button' size='large' color='black'>기본 배송지</Button>
+            <Button type='button' size='large' color={address.isDefault ? 'black' : 'white'} className='cursor-auto'>기본 배송지</Button>
             <Button type='button' size='large' color='white' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
@@ -124,11 +158,31 @@ const AuctionShipping = () => {
           )}
           <form
             ref={formRef}
-            className="flex flex-col gap-6"
+            className="flex flex-col"
             onSubmit={handleSubmit(onSubmit)}>
             <FormField
               label="배송메모"
-              name="memo"
+              name="memoSelect"
+              control={control}
+              render={(field) => (
+                <Select value={field.value as string} onValueChange={field.onChange} disabled={isMemoSelectDisabled}>
+                  <SelectTrigger id='배송메모' className='w-full focus:ring-cheeseYellow'>
+                    <SelectValue placeholder='배송메모를 선택하세요.' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup className='focus-visible:ring-cheeseYellow'>
+                      {addressMemo.map((text) => (
+                        <SelectItem key={text} value={text}>
+                          {text}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            <FormField
+              name="memoInput"
               control={control}
               render={(field) => (
                 <Input
@@ -149,6 +203,8 @@ const AuctionShipping = () => {
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}
+          disabled={isVaild || isPending}
+          loading={isPending}
         >
           결제 하기
         </Button>

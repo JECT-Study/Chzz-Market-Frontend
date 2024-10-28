@@ -7,7 +7,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 const useHistory = (activeTab: string): any => {
   const {
     data: historyData,
-    isLoading: _historyLoading,
+    isLoading: historyLoading,
     error: _historyError,
     fetchNextPage: fetchNextHistoryPage,
     hasNextPage: hasNextHistoryPage,
@@ -27,7 +27,7 @@ const useHistory = (activeTab: string): any => {
 
   const {
     data: wonData,
-    isLoading: _wonLoading,
+    isLoading: wonLoading,
     error: _wonError,
     fetchNextPage: fetchNextWonPage,
     hasNextPage: hasNextWonPage,
@@ -47,7 +47,7 @@ const useHistory = (activeTab: string): any => {
 
   const {
     data: lostData,
-    isLoading: _lostLoading,
+    isLoading: lostLoading,
     error: _lostError,
     fetchNextPage: fetchNextLostPage,
     hasNextPage: hasNextLostPage,
@@ -69,6 +69,9 @@ const useHistory = (activeTab: string): any => {
     historyData,
     wonData,
     lostData,
+    historyLoading,
+    wonLoading,
+    lostLoading,
     fetchNextHistoryPage,
     fetchNextWonPage,
     fetchNextLostPage,

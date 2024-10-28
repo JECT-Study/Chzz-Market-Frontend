@@ -99,6 +99,7 @@ const ProfileEdit = () => {
       dispatch(setIsNicknameChecked(false));
       dispatch(setIsNicknameCheckDisabled(true));
     } else {
+      dispatch(setNicknameError(''));
       dispatch(setIsNicknameCheckDisabled(false));
       if (nickname === originalNickname) {
         dispatch(setIsSubmitEnabled(true));

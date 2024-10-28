@@ -30,16 +30,13 @@ const DeliveryAddressEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [isChecked, setIsChecked] = useState(addressItem.isDefault);
   const toggleCheckbox = () => {
-    if (addressItem.isDefault) {
-      return;
-    }
     setIsChecked((prev: boolean) => !prev);
   }
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
   }
-  const { mutate } = useEditAddress(auctionId);
+  const { mutate, isPending } = useEditAddress(auctionId);
 
   const {
     control,
@@ -241,7 +238,8 @@ const DeliveryAddressEdit = () => {
           className="w-full h-[47px] rounded-lg"
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}
-          disabled={!isVaild}
+          disabled={!isVaild || isPending}
+          loading={isPending}
         >
           저장하기
         </Button>
