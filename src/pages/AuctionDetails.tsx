@@ -1,23 +1,20 @@
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
-import AuctionDetailsFooter from '@/components/details/AuctionDetailsFooter';
-import { CarouselItem } from '@/components/ui/carousel';
-import CustomCarousel from '@/components/common/CustomCarousel';
-import DetailsBasic from '@/components/details/DetailsBasic';
-import Layout from '@/components/layout/Layout';
 import ParticipantAmount from '@/assets/icons/my_participation_amount.svg';
 import Participants from '@/assets/icons/participants.svg';
+import CustomCarousel from '@/components/common/CustomCarousel';
+import AuctionDetailsFooter from '@/components/details/AuctionDetailsFooter';
+import DetailsBasic from '@/components/details/DetailsBasic';
 import ProgressBar from '@/components/details/ProgressBar';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 import { useGetAuctionDetails } from '@/components/details/queries';
-import { useState } from 'react';
+import Layout from '@/components/layout/Layout';
+import { CarouselItem } from '@/components/ui/carousel';
+import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
 
 const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
   const { auctionDetails } = useGetAuctionDetails(auctionId);
-  const { images, productName, status, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
-  const [curStatus, setStatus] = useState(status)
-  const recordStatus = (cur: string) => setStatus(cur)
+  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
 
   return (
     <Layout>
@@ -35,7 +32,6 @@ const AuctionDetails = () => {
             <ProgressBar
               initialTimeRemaining={timeRemaining}
               auctionId={auctionId}
-              recordStatus={recordStatus}
             />
           </div>
           <DetailsBasic profileImg={sellerProfileImageUrl} nickname={sellerNickname} productName={productName} minPrice={minPrice} category={category} />
@@ -63,14 +59,13 @@ const AuctionDetails = () => {
               </p>
             </div>
           </div >
-          <p className='overflow-y-auto text-body2 text-gray1'>
+          <p className='overflow-y-auto whitespace-pre-wrap text-body2 text-gray1'>
             {description}
           </p>
         </div>
       </Layout.Main>
       <AuctionDetailsFooter
         auctionId={auctionId}
-        curStatus={curStatus}
       />
     </Layout>
   );

@@ -1,24 +1,17 @@
 import type { IPreAuctionItem } from '@/@types/AuctionItem';
+import ROUTES from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
 import LikeCount from '../common/atomic/LikeCount';
-import ProductItem from '../common/item/ProductItem';
-import { useDeletePreAuctionHeart } from '../heart/queries';
-import { toast } from 'sonner';
 import Price from '../common/atomic/Price';
+import ProductItem from '../common/item/ProductItem';
+import { useToggleAuctionListHeart } from './queries';
 
 const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
   const navigate = useNavigate();
-  const { mutate: deletePreAuction } = useDeletePreAuctionHeart();
-  const handleProductClick = () => navigate(`/auctions/pre-auction/${product.productId}`)
-  const confirmDelete = () => {
-    deletePreAuction(product.productId)
-    if (product.isLiked) {
-      toast.success('좋아요 취소되었습니다.');
-    } else {
-      toast.success('좋아요 추가되었습니다.');
-    }
-  };
+  const { mutate: toggleAuctionListHeart } = useToggleAuctionListHeart();
+  const handleProductClick = () => navigate(ROUTES.getPreAuctionItemRoute(product.productId))
+  const confirmDelete = () => toggleAuctionListHeart(product.productId)
 
   return (
     <ProductItem product={product} onClick={handleProductClick}>

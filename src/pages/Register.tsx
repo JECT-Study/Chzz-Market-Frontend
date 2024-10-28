@@ -1,6 +1,6 @@
 import { usePatchPreAuction, usePostRegister } from '@/components/register/quries';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
@@ -58,7 +58,7 @@ const Register = () => {
     defaultValues,
     resolver: zodResolver(RegisterSchema),
   });
-  const { isEditing, handleBlur, handleFocus } = useEditableNumberInput({
+  const { isEditing, handleBlur, handleFocus, preventArrowKeys, preventInvalidInput } = useEditableNumberInput({
     name: 'minPrice',
     setValue,
     getValues,
@@ -72,20 +72,6 @@ const Register = () => {
     (caution === '' ? navigate(-1) : setCaution(''));
     toggleCheckBox()
   }
-
-  const preventInvalidInput = (event: ChangeEvent<HTMLInputElement>) => {
-    // 숫자가 아닌 입력값과 한글 입력 필터링
-    if (/[^0-9]/g.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/[^0-9]/g, '');
-    }
-  };
-
-  const preventArrowKeys = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-      event.preventDefault();
-    }
-  };
-
 
   const handleProceed = (proceedType: 'PRE_REGISTER' | 'REGISTER') => {
     handleSubmit(() => setCaution(proceedType))();
@@ -199,9 +185,9 @@ const Register = () => {
                   placeholder='최소 시작가는 1,000원입니다.'
                   className=' focus-visible:ring-cheeseYellow'
                   {...field}
+                  onInput={preventInvalidInput}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
-                  onInput={preventInvalidInput}
                   onKeyDown={preventArrowKeys}
                 />
               )}

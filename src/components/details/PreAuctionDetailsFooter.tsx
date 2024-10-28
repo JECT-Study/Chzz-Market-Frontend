@@ -1,4 +1,4 @@
-import { useConvertAuction, useLikeAuctionItem } from './queries';
+import { useConvertAuction, useToggleAuctionDetailsHeart } from './queries';
 
 import Button from '../common/Button';
 import Confirm from '../common/Confirm';
@@ -12,7 +12,7 @@ interface PreAuctionDetailsFooterProps {
 }
 
 const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuctionDetailsFooterProps) => {
-  const { mutate: likeAuctionItem } = useLikeAuctionItem();
+  const { mutate: toggleAuctionItemHeart } = useToggleAuctionDetailsHeart();
   const { mutate: convertToAuction, isPending } = useConvertAuction();
 
   return (
@@ -38,7 +38,7 @@ const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuction
           type="button"
           className="w-full h-full"
           color={isLiked ? 'grayWhite' : "cheeseYellow"}
-          onClick={() => likeAuctionItem(preAuctionId)}
+          onClick={() => toggleAuctionItemHeart(preAuctionId)}
         >
           {isLiked ? "좋아요 취소" : "좋아요"}
         </Button>}
