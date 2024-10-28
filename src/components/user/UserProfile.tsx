@@ -4,7 +4,6 @@ import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.png';
 import ProfileImage from '@/assets/icons/profile.svg';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
-import ButtonSpinner from '../common/loading/ButtonSpinner';
 
 const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }: IProfileProps) => {
   const navigator = useNavigate();
