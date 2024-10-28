@@ -203,7 +203,7 @@ const AuctionShipping = () => {
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}
-          disabled={isVaild}
+          disabled={isVaild || isPending}
           loading={isPending}
         >
           결제 하기

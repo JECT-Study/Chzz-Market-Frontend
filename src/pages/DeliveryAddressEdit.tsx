@@ -238,7 +238,7 @@ const DeliveryAddressEdit = () => {
           className="w-full h-[47px] rounded-lg"
           color={isVaild ? "cheeseYellow" : "gray3"}
           onClick={handleSubmitClick}
-          disabled={!isVaild}
+          disabled={!isVaild || isPending}
           loading={isPending}
         >
           저장하기
