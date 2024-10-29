@@ -23,7 +23,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
     <div className="pb-10">
       {/* 참여한 정식 경매 내역 */}
       <div>
-        <h2 className="mb-4 text-heading1">참여한 정식 경매 내역</h2>
+        <h2 className="mb-4 text-heading3 web:text-heading1">참여한 정식 경매 내역</h2>
         <div className="flex justify-between gap-3">
           {/* 진행중인 경매 */}
           <div
@@ -78,7 +78,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
 
       {/* 내가 등록한 경매 내역 */}
       <div className="mt-8">
-        <h2 className="mb-4 text-heading1">내가 등록한 경매 내역</h2>
+        <h2 className="mb-4 text-heading3 web:text-heading1">내가 등록한 경매 내역</h2>
         <div className="flex justify-between gap-3">
           {/* 정식 경매 */}
           <div

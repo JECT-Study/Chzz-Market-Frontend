@@ -97,7 +97,7 @@ const Signup = () => {
           className="flex flex-col px-2 py-4 space-y-4"
         >
           <h2 className="pb-4 text-heading3">기본 정보 입력</h2>
-          <div className='flex items-end gap-6'>
+          <div className='flex items-end gap-[0.625rem]'>
             <div className='flex-1'>
               <FormField
                 label="닉네임 *"
@@ -107,7 +107,7 @@ const Signup = () => {
                   <Input
                     id="닉네임 *"
                     type="text"
-                    placeholder="닉네임을 입력해주세요 (공백 제외 15글자 이내)"
+                    placeholder="최대 15글자, 공백 제외"
                     className="focus-visible:ring-cheeseYellow"
                     {...field}
                   />
@@ -115,7 +115,7 @@ const Signup = () => {
               />
             </div>
             <div>
-              <Button type='button' className='h-10' onClick={onNicknameCheck}>중복확인</Button>
+              <Button type='button' className='w-[5.9375rem] h-[3.125rem] border-gray2' onClick={onNicknameCheck}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (

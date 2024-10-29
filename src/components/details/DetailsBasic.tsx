@@ -11,7 +11,7 @@ const DetailsBasic = ({ profileImg, nickname, productName, category, minPrice }:
   const navigate = useNavigate();
 
   const onClickCategory = () => {
-    navigate(`/product/list?category=${category}`, { state: { category: CATEGORIES[category].value }});
+    navigate(`/product/list?category=${CATEGORIES[category].lowerCode}`, { state: { category: CATEGORIES[category].value }});
   };
 
   return (
