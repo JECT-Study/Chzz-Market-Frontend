@@ -2,6 +2,7 @@ import type { IAddressDetail } from "@/@types/Address";
 import { useDeleteAddress, useGetAddresses } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
+import rocation_on from '@/assets/icons/rocation_on.svg';
 import rocation_off from '@/assets/icons/rocation_off.svg';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -54,14 +55,18 @@ const EditAddress = () => {
             <li
               key={item.id}
               onClick={() => setSelectAddress(item)}
-              className="relative flex p-4 rounded-md mb-4 gap-4 border-b border-gray3"
+              className="relative flex pb-2 rounded-md mb-4 gap-4 border-b border-gray3"
             >
               <div className="flex items-center">
-                <img src={rocation_off} className="text-gray2 mr-2" alt="위치 아이콘" />
+                {item?.isDefault ? (
+                  <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
+                ) : (
+                  <img src={rocation_off} className="mr-2 text-gray2" alt="위치 아이콘" />
+                )}
               </div>
               <div className="flex flex-col gap-2 mb-2">
                 {item.isDefault && (
-                  <span className="text-cheeseYellow text-body2 font-semibold">기본배송지</span>
+                  <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm">기본배송지</span>
                 )}
                 <span className="font-bold">{item.recipientName} / {item.phoneNumber}</span>
                 <div className="text-gray2">

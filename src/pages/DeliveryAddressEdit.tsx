@@ -186,18 +186,22 @@ const DeliveryAddressEdit = () => {
                 />
               )}
             />
-            <div className="flex gap-6 item-center">
-              <label className="flex items-center w-[100px] font-bold">우편번호</label>
+            <div className="flex gap-2 item-center">
+              <div className="flex items-center">
+                <label className="flex items-center w-[3.95rem] text-body2 web:text-body1">우편번호</label>
+              </div>
               <Input
-                id="우편번호"
+                id="우편번호 *"
                 type="text"
-                value={zonecode ? zonecode : addressItem.zipcode}
+                value={zonecode}
                 className="focus-visible:ring-cheeseYellow bg-gray3"
                 readOnly
               />
-              <Button type="button" size="small" className="w-[150px] h-[40px]" onClick={handleOpenAddress}>
-                우편번호 찾기
-              </Button>
+              <div>
+                <Button type="button" className="w-[6rem] h-[3.12rem] web:w-[8rem] border-gray3" onClick={handleOpenAddress}>
+                  우편번호 찾기
+                </Button>
+              </div>
             </div>
             <FormField
               label="주소지"

@@ -81,7 +81,7 @@ const DeliveryAddressList = () => {
   return (
     <Layout>
       <Layout.Header title="배송지 목록" />
-      <span className="absolute text-xl cursor-pointer top-3 right-5" onClick={handleEditButtonClick}>편집</span>
+      <span className="absolute text-body1 web:text-heading3 cursor-pointer top-3 right-5" onClick={handleEditButtonClick}>편집</span>
       <Layout.Main>
         <div>
           <div className="flex flex-col gap-5 pt-10">
