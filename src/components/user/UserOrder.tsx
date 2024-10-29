@@ -27,7 +27,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
         <div className="flex justify-between gap-3">
           {/* 진행중인 경매 */}
           <div
-            className="flex flex-col items-center w-[6.69rem] h-[6.69rem] web:w-1/3 web:h-[9.4rem] web:p-4 border rounded-lg cursor-pointer border-gray2"
+            className="flex flex-col items-center w-[6.69rem] h-[6.8rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
               navigate(ROUTERS.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionHistory' },
@@ -46,7 +46,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
 
           {/* 성공한 경매 */}
           <div
-            className="flex flex-col items-center w-[6.69rem] h-[6.69rem] web:w-1/3 web:h-[9.4rem] web:p-4 border rounded-lg cursor-pointer border-gray2"
+            className="flex flex-col items-center w-[6.7rem] h-[6.8rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
               navigate(ROUTERS.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionsWon' },
@@ -61,7 +61,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
 
           {/* 실패한 경매 */}
           <div
-            className="flex flex-col items-center w-[6.69rem] h-[6.69rem] web:w-1/3 web:h-[9.4rem] web:p-4 border rounded-lg cursor-pointer border-gray2"
+            className="flex flex-col items-center w-[6.69rem] h-[6.8rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
               navigate(ROUTERS.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionsLost' },
@@ -102,7 +102,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
             <img
               src={PreAuctionIcon}
               alt="사전 경매"
-              className="w-8 h-8 mb-2"
+              className="w-8 h-[1.87rem] mb-2"
             />
             <span className="text-body2 web:text-heading3">사전 경매</span>
             <span className="mt-1 text-body2 web:text-lg text-orange-500">{$preRegisterCount} 건</span>
