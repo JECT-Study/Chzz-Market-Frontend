@@ -2,9 +2,9 @@ import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from '../ui
 
 import { ReactNode } from 'react';
 
-interface CustomCarouselProps { contentStyle?: string; length: number; children: ReactNode; loop?: boolean }
+interface CustomCarouselProps { contentStyle?: string; length?: number; children: ReactNode; loop?: boolean }
 
-const CustomCarousel = ({ contentStyle, length, children, loop = false }: CustomCarouselProps) => {
+const CustomCarousel = ({ contentStyle, length = 0, children, loop = false }: CustomCarouselProps) => {
   return (
     <Carousel
       opts={{
@@ -13,7 +13,7 @@ const CustomCarousel = ({ contentStyle, length, children, loop = false }: Custom
         watchDrag: false,
         loop
       }}
-      className='w-full overflow-scroll'
+      className='flex-1 w-full overflow-hidden'
     >
       <CarouselContent className={`flex items-center h-full ${contentStyle}`}>{children}</CarouselContent>
       {length > 1 && (
