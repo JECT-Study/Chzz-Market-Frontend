@@ -42,11 +42,11 @@ const ProgressBar = ({ initialTimeRemaining, auctionId }: ProgressBarProps) => {
     hours < 1 ? 'text-timeColor1' : hours <= 16 ? 'text-timeColor2' : 'text-timeColor3';
 
   return (
-    <div className="flex flex-col gap-2 p-2 rounded-lg">
-      <div className={`text-center text-lg font-bold ${textColor}`}>
+    <div className="flex flex-col h-[2.8125rem] w-full">
+      <p className={`flex justify-center items-center ${textColor} h-[2.625rem]`}>
         {timeRemaining !== 0 ? formattedTime : '경매 종료'}
-      </div>
-      <div className="w-full h-2 overflow-hidden bg-gray-200 rounded-lg">
+      </p>
+      <div className="flex-1 bg-gray3">
         <div
           className={`${progressBarColor} h-full transition-width duration-1000`}
           style={{ width: `${progressBarWidth}%` }}
