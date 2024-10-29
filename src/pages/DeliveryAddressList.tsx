@@ -115,7 +115,7 @@ const DeliveryAddressList = () => {
                   </div>
                   <div className="flex flex-col gap-2 mb-2">
                     {item.isDefault && (
-                      <span className="font-semibold text-cheeseYellow text-body2">기본배송지</span>
+                      <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm">기본배송지</span>
                     )}
                     <span className="font-bold">{item.recipientName} / {item.phoneNumber}</span>
                     <div className="text-gray2">
