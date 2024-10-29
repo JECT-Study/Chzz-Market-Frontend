@@ -33,7 +33,7 @@ if (token) {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <ReactQueryProvider showDevTools>
+  <ReactQueryProvider>
     <Provider store={store}>
       <App />
     </Provider>

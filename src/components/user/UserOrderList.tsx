@@ -23,14 +23,14 @@ const UserOrderList = () => {
   };
 
   return (
-    <div className='mt-10'>
+    <div className='web:mt-10'>
       {userList.map((item) => (
         <div
           key={item.id}
           className="flex justify-between w-full py-2 border-b border-b-gray3 cursor-pointer"
           onClick={() => handleItemClick(item.title)}
         >
-          <h2 className="text-xl font-medium">{item.title}</h2>
+          <h2 className="text-heading3 web:text-heading2 font-medium">{item.title}</h2>
           <IoIosArrowForward className="text-2xl" />
         </div>
       ))}
