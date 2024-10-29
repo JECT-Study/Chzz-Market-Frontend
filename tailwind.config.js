@@ -24,9 +24,8 @@ module.exports = {
         error: '#f5f5f5'
       },
       screens: {
-        sm: '350px',
-        lg: '750px',
-        '2xl': '1250px',
+        mobile: '375px', 
+        web: '750px', 
       },
       boxShadow: {
         top: '0 0 8px rgba(0, 0, 0, 0.08)',

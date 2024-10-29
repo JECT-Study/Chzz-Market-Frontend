@@ -13,7 +13,7 @@ interface FormFieldProps<T extends FieldValues> {
 const FormField = <T extends FieldValues>({ name, control, label, render, error }: FormFieldProps<T>) => {
   return (
     <div className='relative flex flex-col gap-2'>
-      <label htmlFor={label} className='cursor-pointer text-heading3'>
+      <label htmlFor={label} className='cursor-pointer text-body2 web:text-heading3'>
         {label}
       </label>
       <Controller name={name} control={control} render={({ field }) => render(field)} />

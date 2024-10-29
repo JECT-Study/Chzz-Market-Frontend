@@ -1,9 +1,9 @@
 import type { IProfileProps } from '@/@types/user';
-import naverIcon from '@/assets/icons/btnG_naverIcon.png';
-import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.png';
 import ProfileImage from '@/assets/icons/profile.svg';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
+import { RiKakaoTalkFill } from 'react-icons/ri';
+import { SiNaver } from 'react-icons/si';
 
 const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }: IProfileProps) => {
   const navigator = useNavigate();
@@ -27,21 +27,40 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
         <img src={ProfileImage} alt='기본 프로필 이미지' className='w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] rounded-full mr-4' />
       )}
       <div className="flex-1">
-        <div className="flex items-center justify-between">
-          <div className="flex">
-            <p className="pr-2 mr-2 font-bold text-heading2 lg:text-2xl">
+        <div className="flex items-start justify-between">
+          <div className="flex-col">
+            <p className="text-heading3 web:text-heading2">
               {userNickname}
             </p>
             {providerType === 'KAKAO' ? (
-              <img src={kakaoImage} alt="카카오이미지" className='w-5 h-5 lg:w-7 lg:h-7' />
+              <div className="flex w-[8rem] web:w-[12rem] mt-[1rem]">
+                <div
+                  className="flex items-center w-full h-[1.6875rem] web:h-[2rem] gap-1 bg-[#FEEA1C] text-black rounded-2xl cursor-pointer hover:bg-[#F4DC00] focus:ring-2 focus:ring-offset-2 focus:ring-[#F4DC00] focus:outline-none"
+                  aria-label="카카오톡과 연결"
+                >
+                  <div className="flex items-center ml-[0.75rem] w-[1rem] h-[0.90625rem] web:w-[1.5rem] web:h-[1.2rem] web:ml-[1.5rem]">
+                    <RiKakaoTalkFill size={24} />
+                  </div>
+                  <span className="flex-grow text-xs web:text-body1">카카오톡과 연결</span>
+                </div>
+              </div>
             ) : (
-              <img src={naverIcon} alt="네이버이미지" className='w-5 h-5 lg:w-7 lg:h-7' />
+              <div className="flex w-[8rem] web:w-[12rem] mt-[1rem]">
+                <div
+                  className="flex items-center w-full h-[1.6875rem] web:h-[2rem] gap-2 bg-[#1ec800] text-white text-lg rounded-2xl cursor-pointer hover:bg-[#17b000] focus:ring-2 focus:ring-offset-2 focus:ring-[#17b000] focus:outline-none"
+                  aria-label="네이버와 연결"
+                >
+                  <div className="flex items-center ml-[0.75rem] w-[1rem] h-[0.90625rem] web:w-[1.5rem] web:h-[1.2rem] web:ml-[1.5rem]">
+                    <SiNaver />
+                  </div>
+                  <span className="flex-grow text-xs web:text-body1">네이버와 연결</span>
+                </div>
+              </div>
             )}
           </div>
           <Button
             type='button'
-            size='medium'
-            className="px-3 py-1 border rounded-md border-gray2"
+            className="flex justify-center items-center w-[3.125rem] h-[2.125rem] web:w-[4rem] border-gray2"
             onClick={() =>
               navigator('profile/edit', { state: { userNickname, userBio, userProfileImageUrl } })
             }
@@ -49,11 +68,11 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
             수정
           </Button>
         </div>
-        <div className="mt-2">
+        <div className="mt-[0.75rem]">
           {userBio && userBio.trim().length > 0 && (
             <>
-              <div className="mb-2 text-body1 sm:font-semibold lg:text-heading3">자기소개</div>
-              <div className='whitespace-pre-wrap sm:text-sm'>{userBio}</div>
+              <div className="mb-2 text-body2Bold web:text-heading3">자기소개</div>
+              <div className='whitespace-pre-wrap text-sm web:text-body1'>{userBio}</div>
             </>
           )}
         </div>
