@@ -22,7 +22,7 @@ const Header = ({
       <div className='relative flex items-center justify-center w-full h-full'>
         {title !== '치즈 마켓' && (
           <button
-            className='absolute left-2'
+            className='absolute left-[-10px] web:left-2'
             aria-label='뒤로 가기'
             onClick={handleBack}
           >
