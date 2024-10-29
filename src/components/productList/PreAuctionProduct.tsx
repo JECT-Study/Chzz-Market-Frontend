@@ -1,7 +1,6 @@
 import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import ROUTES from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
-import Button from '../common/Button';
 import LikeCount from '../common/atomic/LikeCount';
 import Price from '../common/atomic/Price';
 import ProductItem from '../common/item/ProductItem';
@@ -17,12 +16,20 @@ const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
     <ProductItem product={product} onClick={handleProductClick}>
       <Price title='시작가' price={product.minPrice} />
       <LikeCount count={product.likeCount} />
-      <Button onClick={(event) => {
+      <button onClick={(event) => {
         event.stopPropagation();
         confirmDelete();
-      }} color={product.isLiked ? 'black' : 'white'} type='button' size='small'>
-        {product.isLiked ? '좋아요 취소' : '좋아요'}
-      </Button>
+      }} type='button' 
+      className={
+        `w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
+        ${product.isLiked
+          ? 'bg-white border border-gray1'
+          : 'bg-gray3 text-black border-none'
+        }
+      `}
+      >
+        {product.isLiked ? '미리 찜하기' : '찜 목록에서 제외'}
+      </button>
     </ProductItem>
   );
 };
