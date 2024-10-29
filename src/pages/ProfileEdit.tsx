@@ -118,7 +118,7 @@ const ProfileEdit = () => {
           className="flex flex-col px-4 py-6 space-y-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <h2 className="pb-4 text-lg font-bold">프로필 정보</h2>
+          <h2 className="pb-4 text-heading3 web:text-heading2">프로필 정보</h2>
           <ProfileImageUploader 
             file={profileFile}
             setFile={setProfileFile}
@@ -143,7 +143,7 @@ const ProfileEdit = () => {
               />
             </div>
             <div>
-              <Button type='button' className='h-10' onClick={onNicknameCheck} disabled={isNicknameCheckDisabled}>중복확인</Button>
+              <Button type='button' className='w-[5rem] web:w-[5.97rem] h-[3.13rem] border-gray2' onClick={onNicknameCheck} disabled={isNicknameCheckDisabled}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
