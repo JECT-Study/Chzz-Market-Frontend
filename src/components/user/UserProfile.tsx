@@ -1,6 +1,4 @@
 import type { IProfileProps } from '@/@types/user';
-import naverIcon from '@/assets/icons/btnG_naverIcon.png';
-import kakaoImage from '@/assets/icons/kakaotalk_sharing_btn_small.png';
 import ProfileImage from '@/assets/icons/profile.svg';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
