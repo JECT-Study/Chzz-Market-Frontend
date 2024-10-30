@@ -6,7 +6,7 @@ export const ROUTE_INFO: {
     active: 'home',
   },
   '/heart': {
-    title: '좋아요 한 사전 경매 목록',
+    title: '내가 찜 한 사전 경매 목록',
     active: 'heart',
   },
   '/notification': {

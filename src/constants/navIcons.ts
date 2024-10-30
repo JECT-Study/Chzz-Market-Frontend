@@ -24,7 +24,7 @@ export const navIcons: {
   },
   heart: {
     path: '/heart',
-    title: '좋아요 한 사전 경매 목록',
+    title: '내가 찜 한 사전 경매 목록',
     on: HeartOn,
     off: HeartOff,
   },

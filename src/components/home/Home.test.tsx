@@ -153,7 +153,7 @@ describe.only('Home 테스트', () => {
       expect(mockedUseNavigate).toHaveBeenCalledWith('/notification');
     });
 
-    test('좋아요 버튼은 색깔없는 아이콘이어야 하며, 클릭해도 좋아요페이지로 이동한다.', async () => {
+    test('좋아요 버튼은 색깔없는 아이콘이어야 하며, 클릭해도 내가 찜 한 사전 경매 목록페이지로 이동한다.', async () => {
       const { user } = setup();
 
       const heartIcon = screen.getByRole('img', { name: /heart_off_icon/ });

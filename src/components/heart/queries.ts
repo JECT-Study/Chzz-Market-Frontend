@@ -46,7 +46,7 @@ export const useDeletePreAuctionHeart = (): {
       queryClient.invalidateQueries({
         queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
       });
-      toast.success('좋아요 취소되었습니다.');
+      toast.success('찜 목록에서 제외되었습니다.');
     },
     onError: (_err, _var, context) => {
       if (context?.previousData) {

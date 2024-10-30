@@ -18,12 +18,12 @@ const Heart = () => {
       <ul className='grid items-center justify-center grid-cols-2 gap-4'>
         {preAuctionHeartList.map((el: IPreAuctionItem) => (
           <li key={el.productId} onClick={() => navigate(`/auctions/pre-auction/${el.productId}`)} className='cursor-pointer'>
-            <AuctionItem axis='column' label='좋아요 한 사전 경매 상품'>
+            <AuctionItem axis='column' label='내가 찜 한 사전 경매 상품'>
               <AuctionItem.Image src={el.imageUrl} />
               <AuctionItem.Main name={el.productName} count={el.likeCount} price={el.minPrice} kind='pre-register' />
               <AuctionItem.Button>
                 <Button onClick={() => handleDelete(el.productId)} type='button' color='white' className='w-full'>
-                  좋아요 취소
+                  찜 목록에서 제외
                 </Button>
               </AuctionItem.Button>
             </AuctionItem>

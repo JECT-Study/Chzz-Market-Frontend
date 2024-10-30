@@ -28,7 +28,7 @@ const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
         }
       `}
       >
-        {product.isLiked ? '미리 찜하기' : '찜 목록에서 제외'}
+        {product.isLiked ? '찜 목록에서 제외' : '미리 찜하기'}
       </button>
     </ProductItem>
   );
