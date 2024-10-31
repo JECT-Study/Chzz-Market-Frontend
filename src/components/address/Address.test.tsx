@@ -1,4 +1,6 @@
 import AuctionShipping from "@/pages/AuctionShipping";
+import DeliveryAddressList from "@/pages/DeliveryAddressList";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
@@ -156,4 +158,96 @@ describe('AuctionShipping Component', () => {
 
     await user.click(submitButton);
   })
+});
+
+describe('DeliveryAddressList Page', () => {
+  const setup = () => {
+    const user = userEvent.setup();
+    const mockNavigate = vi.fn();
+    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
+
+    const queryClient = new QueryClient();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/auctions/1/address-list']}>
+          <Routes>
+            <Route path="/auctions/:auctionId/address-list" element={<DeliveryAddressList />} />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
+    
+    return { user, mockNavigate };
+  };
+
+  test('왼쪽 < 버튼 클릭 시 navigate(-1) 호출', async () => {
+    const { user } = setup();
+    screen.debug();
+    const backButton = screen.getByAltText('뒤로가기 아이콘');
+    expect(backButton).toBeInTheDocument();
+
+    await user.click(backButton);
+  });
+
+  test('오른쪽 "편집" 버튼 클릭 시 편집 페이지로 이동', async () => {
+    const { user, mockNavigate } = setup();
+    const editButton = screen.getByText('편집');
+
+    await user.click(editButton);
+
+    expect(mockNavigate).toHaveBeenCalledWith(expect.stringContaining('/edit'));
+  });
+
+  test('배송지 추가 input 클릭 시 Daum 주소 검색 창 열리고 배송지 추가 페이지로 이동', async () => {
+    const { user, mockNavigate } = setup();
+    const searchInput = screen.getByPlaceholderText(/지번, 도로명, 건물명으로 검색/);
+
+    const mockOpen = vi.fn();
+    window.daum = {
+      Postcode: vi.fn().mockImplementation(() => ({
+        open: mockOpen,
+      })),
+    };
+
+    await user.click(searchInput);
+
+    expect(window.daum.Postcode).toHaveBeenCalled();
+    expect(mockOpen).toHaveBeenCalled();
+
+    window.daum.Postcode.mock.calls[0][0].onComplete({ address: '서울특별시 종로구', zonecode: '03001' });
+
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith(
+      expect.stringMatching(/\/auctions\/1\/address-add/),
+      {
+        state: {
+          roadAddress: '서울특별시 종로구',
+          zonecode: '03001',
+          jibunAddress: undefined, // 또는 예상되는 값을 설정
+        },
+      }
+    );
+  });
+
+  test('주소가 있을 때 리스트에 렌더링', async () => {
+    setup();
+    
+  });
+
+  test('배송지 선택 완료 버튼 클릭 시 navigate 호출', async () => {
+    const { user, mockNavigate } = setup();
+    const selectButton = screen.getByRole('button', { name: /배송지 선택 완료/ });
+
+    await user.click(selectButton);
+
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith(expect.stringContaining('/auctions/1'), {
+        state: expect.objectContaining({
+          address: expect.any(Object),
+        }),
+        replace: true,
+      });
+    });
+  });
 });
