@@ -5,10 +5,6 @@ import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query"
 import { loadTossPayments } from "@tosspayments/tosspayments-sdk";
 import { useState } from "react";
 
-interface Props extends IAddressDetail {
-  id: string;
-}
-
 const clientKey = `${import.meta.env.VITE_TOSS_CLIENT_KEY}`;
 
 export const usePostPayment = (auctionId: string, orderId: string) => {
@@ -22,7 +18,7 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
     queryFn: () => getAddress()
   });
 
-  const postPayment = (formData: any, address: Props) => {
+  const postPayment = (formData: any, address: IAddressDetail) => {
     const memo = formData.memo;
     const addressId = address.id;
     const phoneNumber = address.phoneNumber.replace(/-/g, '');

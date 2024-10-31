@@ -1,21 +1,17 @@
-import type { IAddressDetail } from "@/@types/Address";
 import { useDeleteAddress, useGetAddresses } from "@/components/address/queries";
 import Button from "@/components/common/Button";
 import Layout from "@/components/layout/Layout";
 import rocation_off from '@/assets/icons/rocation_off.svg';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-interface Props extends IAddressDetail {
-  id: string;
-}
+import type { IAddressDetail } from "@/@types/Address";
 
 const EditAddress = () => {
   const navigate = useNavigate();
   const { addressData: initialAddressData } = useGetAddresses();
   const { auctionId } = useParams<{ auctionId: string}>();
   const [addressData, setAddressData] = useState(initialAddressData);
-  const [selectAddress, setSelectAddress] = useState<Props | null>(null);
+  const [selectAddress, setSelectAddress] = useState<IAddressDetail | null>(null);
   const { deleteData } = useDeleteAddress();
   const addressItems = addressData?.items || [];
 
@@ -31,7 +27,7 @@ const EditAddress = () => {
       onSuccess: () => {
         const updatedAddressData = {
           ...addressData,
-          items: addressData.items.filter((item: Props) => item.id !== id)
+          items: addressData.items.filter((item: IAddressDetail) => item.id !== id)
         };
         setAddressData(updatedAddressData);
         
@@ -41,7 +37,7 @@ const EditAddress = () => {
       },
     });
   };
-  const handleEdit = (item: Props) => {
+  const handleEdit = (item: IAddressDetail) => {
     navigate(`/auctions/${auctionId}/address-edit`, { state: { addressItem: item }});
   }
   return (
@@ -50,7 +46,7 @@ const EditAddress = () => {
       <Layout.Main>
         <div>
           <ul>
-          {addressItems.map((item: Props) => (
+          {addressItems.map((item: IAddressDetail) => (
             <li
               key={item.id}
               onClick={() => setSelectAddress(item)}

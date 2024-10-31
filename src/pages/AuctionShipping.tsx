@@ -14,6 +14,7 @@ import { z } from 'zod';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { addressMemo } from '@/constants/address';
 import { Input } from '@/components/ui/input';
+import type { IAddressDetail } from '@/@types/Address';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
 
@@ -25,13 +26,13 @@ const defaultValues = {
 const AuctionShipping = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
-  const [isVaild, setIsVaild] = useState<boolean>();
+  const [isValid, setIsValid] = useState<boolean>();
   const [isMemoSelectDisabled, setMemoSelectDisabled] = useState(false);
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId, isPending } = usePostOrderId();
   const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment } = usePostPayment(auctionId || '', orderId);
-  let address = {
+  let address: IAddressDetail = {
     id: '',
     recipientName: '',
     phoneNumber: '',
@@ -40,7 +41,7 @@ const AuctionShipping = () => {
     jibun: '',
     detailAddress: '',
     isDefault: false,
-  }
+  };
   if (DefaultAddressData || location.state?.address) {
     const selectedAddress = location.state?.address || DefaultAddressData.items[0];
 
@@ -79,17 +80,18 @@ const AuctionShipping = () => {
 
 
   useEffect(() => {
-    if (Object.keys(address).length > 0) {
-      setIsVaild(false);
+    const isAddressEmpty = !address.recipientName || !address.roadAddress || !address.detailAddress
+    if (!isAddressEmpty) {
+      setIsValid(false);
     } else {
-      setIsVaild(true);
+      setIsValid(true);
     }
     if (memoInputValue) {
       setMemoSelectDisabled(true);
     } else {
       setMemoSelectDisabled(false);
     }
-  }, [isVaild, memoInputValue]);
+  }, [isValid, memoInputValue]);
 
   useEffect(() => {
     if (auctionId) {
@@ -203,10 +205,10 @@ const AuctionShipping = () => {
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}
-          disabled={isVaild || isPending}
+          disabled={isValid || isPending}
           loading={isPending}
         >
-          결제 하기
+          결제하기
         </Button>
       </Layout.Footer>
     </Layout>

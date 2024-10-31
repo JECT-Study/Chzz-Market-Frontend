@@ -1,4 +1,4 @@
-import { IAddressDetail } from "@/@types/Address";
+import type { IAddressDetails } from "@/@types/Address";
 import { httpClient } from "@/api/axios";
 import { API_END_POINT } from "@/constants/api";
 import { queryKeys } from "@/constants/queryKeys";
@@ -31,11 +31,11 @@ export const getAddresses = async () => {
   return response.data;
 };
 
-export const editAddress = async ({addressId, data }: { addressId: string, data: IAddressDetail }) => {
+export const editAddress = async ({addressId, data }: { addressId: string, data: IAddressDetails }) => {
   await httpClient.put(`${API_END_POINT.ADDRESS}/${addressId}`, { ...data });
 }
 
-export const addAddress = async (data: IAddressDetail) => {
+export const addAddress = async (data: IAddressDetails) => {
   await httpClient.post(API_END_POINT.ADDRESS, { ...data });
 };
 
@@ -44,7 +44,7 @@ export const deleteAddress = async (addressId: string) => {
 };
 
 export const usePostAddress = (auctionId: string): {
-  mutate: UseMutateFunction<any, Error, IAddressDetail, unknown>;
+  mutate: UseMutateFunction<any, Error, IAddressDetails, unknown>;
   isPending: boolean;
 } => {
   const navigate = useNavigate();
@@ -59,12 +59,12 @@ export const usePostAddress = (auctionId: string): {
 }
 
 export const useEditAddress = (auctionId: string): {
-  mutate: UseMutateFunction<any, Error, { addressId: string, data: IAddressDetail }, unknown>;
+  mutate: UseMutateFunction<any, Error, { addressId: string, data: IAddressDetails }, unknown>;
   isPending: boolean;
 } => {
   const navigate = useNavigate();
   const { mutate, isPending } = useMutation({
-    mutationFn: ({ addressId, data }: { addressId: string, data: IAddressDetail }) => editAddress({ addressId, data }),
+    mutationFn: ({ addressId, data }: { addressId: string, data: IAddressDetails }) => editAddress({ addressId, data }),
     onSuccess: () => {
       navigate(ROUTES.getDeliveryAddressListRoute(auctionId), { replace: true });
     }
