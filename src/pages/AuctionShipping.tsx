@@ -80,17 +80,15 @@ const AuctionShipping = () => {
 
 
   useEffect(() => {
-    const isAddressEmpty = !address.recipientName || !address.roadAddress || !address.detailAddress
-    if (!isAddressEmpty) {
+    const isAddressValid = address.recipientName && address.roadAddress && address.detailAddress;
+    
+    if (isAddressValid) {
       setIsValid(false);
     } else {
       setIsValid(true);
     }
-    if (memoInputValue) {
-      setMemoSelectDisabled(true);
-    } else {
-      setMemoSelectDisabled(false);
-    }
+
+    setMemoSelectDisabled(!!memoInputValue);
   }, [isValid, memoInputValue]);
 
   useEffect(() => {
