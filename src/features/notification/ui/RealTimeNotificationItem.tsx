@@ -1,10 +1,9 @@
-import { NOTIFICATION_CONTENTS } from '@/features/notification/config/constants';
-import type { IRealTimeNotification } from '@/features/notification/config/type';
 import { Button } from "@/shared";
 import { useNavigate } from 'react-router-dom';
-import { useReadNotification } from './queries';
+import { NOTIFICATION_CONTENTS, type IRealTimeNotification } from '../config';
+import { useReadNotification } from '../model';
 
-const RealTimeNotification = ({
+export const RealTimeNotificationItem = ({
   notification,
   onClose,
 }: {
@@ -50,5 +49,3 @@ const RealTimeNotification = ({
     </div >
   );
 };
-
-export default RealTimeNotification;

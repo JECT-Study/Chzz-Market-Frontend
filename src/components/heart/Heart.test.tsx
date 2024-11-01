@@ -8,8 +8,8 @@ import { preAuctionHeartData } from '@/mocks/data/preAuctionHeartData';
 import { Heart } from '@/pages/heart';
 import { mockedUseNavigate } from '@/shared/test/setupTests';
 import userEvent from '@testing-library/user-event';
-import { useGetNotifications } from '../notification/queries';
 import LayoutWithNav from '../navigation/LayoutWithNav';
+import { useGetNotifications } from '@/features/notification/model';
 
 vi.mock('@/components/heart/queries', () => ({
   useGetPreRegisterHeart: vi.fn(),

@@ -3,8 +3,7 @@ import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
 
 import { isLoggedIn } from '@/features/auth/model/authSlice';
-import { RefreshHandler } from '@/shared/api/axios';
-import { getToken } from '@/shared/utils/token';
+import { RefreshHandler, getToken } from '@/shared';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

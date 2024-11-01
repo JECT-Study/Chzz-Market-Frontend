@@ -1,12 +1,12 @@
-import { BID_CAUTION } from "@/features/bid/config";
 import { Checkbox } from "@/shared";
+import { BID_CAUTION } from "../config";
 
 interface BidCautionProps {
   check: boolean;
   handleCheck: () => void;
 }
 
-const BidCaution = ({ check, handleCheck }: BidCautionProps) => {
+export const BidCaution = ({ check, handleCheck }: BidCautionProps) => {
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-heading3">{BID_CAUTION.HEADING}</h3>
@@ -22,5 +22,3 @@ const BidCaution = ({ check, handleCheck }: BidCautionProps) => {
     </section>
   );
 };
-
-export default BidCaution;

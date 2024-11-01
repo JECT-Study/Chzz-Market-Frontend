@@ -1,19 +1,19 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Layout } from "@/app/layout/index";
+import { MAX_BID_COUNT, getBidSchema } from "@/features/bid/config";
 import { useEditableNumberInput } from "@/features/register/lib/useEditableNumberInput";
 import { Button, FormField, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { z } from "zod";
-import AuctionItem from "../../entities/auction/ui/AuctionItem";
-import { Input } from "../../shared/shadcn/ui/input";
-import { useGetAuctionDetails } from "../details/queries";
-import BidCaution from "./BidCaution";
-import { usePostBid } from "./queries";
-import { MAX_BID_COUNT, getBidSchema } from "@/features/bid/config";
+import { useGetAuctionDetails } from "../../../components/details/queries";
+import AuctionItem from "../../../entities/auction/ui/AuctionItem";
+import { Input } from "../../../shared/shadcn/ui/input";
+import { usePostBid } from "../model/usePostBid";
+import { BidCaution } from "./BidCaution";
 
-const BidMain = ({ auctionId }: { auctionId: number }) => {
+export const BidForm = ({ auctionId }: { auctionId: number }) => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
   const { mutate: postBid, isPending } = usePostBid(auctionId);
   const [check, setCheck] = useState<boolean>(false);
@@ -104,5 +104,3 @@ const BidMain = ({ auctionId }: { auctionId: number }) => {
     </>
   );
 }
-
-export default BidMain;

@@ -1,12 +1,11 @@
-import { NOTIFICATION_CONTENTS } from '@/features/notification/config/constants';
-import type { INotification } from '@/features/notification/config/type';
+import { getTimeAgo } from '@/shared';
 import DefaultImage from '@/shared/assets/icons/default_image.svg';
 import XButtonIcon from '@/shared/assets/icons/x_button.svg';
-import { getTimeAgo } from '@/shared/utils/getTimeAgo';
 import { useNavigate } from 'react-router-dom';
-import { useDeleteNotification, useReadNotification } from './queries';
+import { NOTIFICATION_CONTENTS, type INotification } from '../config';
+import { useDeleteNotification, useReadNotification } from '../model';
 
-const NotificationItem = ({ item }: { item: INotification }) => {
+export const NotificationItem = ({ item }: { item: INotification }) => {
   const navigate = useNavigate();
   const { notificationId, isRead, imageUrl, message, createdAt, type, auctionId } = item;
   const { mutate: deleteNotification } = useDeleteNotification();
@@ -37,5 +36,3 @@ const NotificationItem = ({ item }: { item: INotification }) => {
     </div>
   );
 };
-
-export default NotificationItem;

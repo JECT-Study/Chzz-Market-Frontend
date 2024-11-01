@@ -2,10 +2,10 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
 
+import { Bid } from '@/pages/bid';
 import { mockedUseNavigate } from '@/shared/test/setupTests';
 import userEvent from '@testing-library/user-event';
-import { useGetAuctionDetails } from '../details/queries';
-import { Bid } from '@/pages/bid';
+import { useGetAuctionDetails } from '../../../components/details/queries';
 
 vi.mock('@/components/details/queries');
 vi.mocked(useGetAuctionDetails).mockReturnValue({

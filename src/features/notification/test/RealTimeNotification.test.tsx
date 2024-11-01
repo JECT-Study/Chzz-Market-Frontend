@@ -7,7 +7,7 @@ import { realTimeNotificationData } from '@/mocks/data/realTimeNotificationData'
 import { mockedUseNavigate } from '@/shared/test/setupTests';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { useReadNotification } from '../../../components/notification/queries';
+import { useReadNotification } from '../model';
 
 vi.mock('@/components/notification/queries', () => ({
   useReadNotification: vi.fn(),
