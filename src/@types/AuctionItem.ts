@@ -31,6 +31,7 @@ export interface IPreAuctionItem extends IAuctionItemBase {
   productId: number;
   likeCount: number;
   isLiked: boolean;
+  isSeller: boolean;
 }
 export interface IPreAuctionRegisteredItem extends IPreAuctionItem {
   createdAt: string;

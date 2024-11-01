@@ -21,7 +21,8 @@ const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
         event.stopPropagation();
         confirmDelete();
       }} color={product.isLiked ? 'black' : 'white'} type='button' size='small'>
-        {product.isLiked ? '좋아요 취소' : '좋아요'}
+        {product.isSeller && '내가 등록한 물품'}
+        {!product.isSeller && product.isLiked ? '좋아요 취소' : '좋아요'}
       </Button>
     </ProductItem>
   );
