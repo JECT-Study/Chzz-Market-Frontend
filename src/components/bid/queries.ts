@@ -1,9 +1,9 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import type { IBidPostData } from '@/@types/Bid';
-import { httpClient } from '@/api/axios';
-import { API_END_POINT } from '@/constants/api';
-import ROUTES from '@/constants/routes';
+import type { IBidPostData } from '@/features/bid/config/type';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -23,7 +23,7 @@ export const usePostBid = (
     mutationFn: postBid,
     onSuccess: () => {
       toast.success('입찰 성공!');
-      navigate(ROUTES.getAuctionItemRoute(auctionId), { replace: true });
+      navigate(ROUTES.AUCTION.getItemRoute(auctionId), { replace: true });
     },
   });
 

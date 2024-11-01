@@ -1,8 +1,8 @@
-import type { INotification } from '@/@types/Notification';
-import DefaultImage from '@/assets/icons/default_image.svg';
-import XButtonIcon from '@/assets/icons/x_button.svg';
-import { NOTIFICATION_CONTENTS } from '@/constants/notification';
-import { getTimeAgo } from '@/utils/getTimeAgo';
+import { NOTIFICATION_CONTENTS } from '@/features/notification/config/constants';
+import type { INotification } from '@/features/notification/config/type';
+import DefaultImage from '@/shared/assets/icons/default_image.svg';
+import XButtonIcon from '@/shared/assets/icons/x_button.svg';
+import { getTimeAgo } from '@/shared/utils/getTimeAgo';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteNotification, useReadNotification } from './queries';
 

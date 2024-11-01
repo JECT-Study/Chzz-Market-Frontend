@@ -1,11 +1,11 @@
-import ElectronicsIcon from '@/assets/categories/1_phone.svg';
-import HomeAppliancesIcon from '@/assets/categories/2_laundry.svg';
-import FashionClothingIcon from '@/assets/categories/3_clothes.svg';
-import FurnitureInteriorIcon from '@/assets/categories/4_interior.svg';
-import BooksMediaIcon from '@/assets/categories/5_book.svg';
-import SportsLeisureIcon from '@/assets/categories/6_sports.svg';
-import ToysHobbiesIcon from '@/assets/categories/7_toy.svg';
-import OtherIcon from '@/assets/categories/8_etc.svg';
+import ElectronicsIcon from '@/shared/assets/categories/1_phone.svg';
+import HomeAppliancesIcon from '@/shared/assets/categories/2_laundry.svg';
+import FashionClothingIcon from '@/shared/assets/categories/3_clothes.svg';
+import FurnitureInteriorIcon from '@/shared/assets/categories/4_interior.svg';
+import BooksMediaIcon from '@/shared/assets/categories/5_book.svg';
+import SportsLeisureIcon from '@/shared/assets/categories/6_sports.svg';
+import ToysHobbiesIcon from '@/shared/assets/categories/7_toy.svg';
+import OtherIcon from '@/shared/assets/categories/8_etc.svg';
 
 export const CATEGORIES: { [key: string]: { value: string; code: string; lowerCode: string; icon: string } } = Object.freeze({
   ELECTRONICS: {

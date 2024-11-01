@@ -1,10 +1,10 @@
 import { useProfile } from '@/components/profile/queries';
-import { ProfileEditFormSchema } from '@/constants/schema';
+import { UserProfileEditFormSchema } from '@/shared/constants/schema';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { z } from 'zod';
 
-type FormFields = z.infer<typeof ProfileEditFormSchema>;
+type FormFields = z.infer<typeof UserProfileEditFormSchema>;
 
 export const useEditProfile = () => {
   const location = useLocation();
@@ -20,7 +20,7 @@ export const useEditProfile = () => {
     defaultValues: {
       nickname: originalNickname || '',
       bio: userBio || '',
-    }
+    },
   });
 
   const handleEditProfile = (formData: FormData) => {

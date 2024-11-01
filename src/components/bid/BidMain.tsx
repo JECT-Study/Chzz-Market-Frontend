@@ -1,21 +1,17 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { MAX_BID_COUNT } from "@/constants/bid";
-import { getBidSchema } from "@/constants/schema";
-import { useEditableNumberInput } from "@/hooks/useEditableNumberInput";
-import { convertCurrencyToNumber } from "@/utils/convertCurrencyToNumber";
-import { formatCurrencyWithWon } from "@/utils/formatCurrencyWithWon";
+import { Layout } from "@/app/layout/index";
+import { useEditableNumberInput } from "@/features/register/lib/useEditableNumberInput";
+import { Button, FormField, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { z } from "zod";
-import Button from "../common/Button";
-import FormField from "../common/form/FormField";
-import AuctionItem from "../common/item/AuctionItem";
+import AuctionItem from "../../entities/auction/ui/AuctionItem";
+import { Input } from "../../shared/shadcn/ui/input";
 import { useGetAuctionDetails } from "../details/queries";
-import Layout from "../layout/Layout";
-import { Input } from "../ui/input";
 import BidCaution from "./BidCaution";
 import { usePostBid } from "./queries";
+import { MAX_BID_COUNT, getBidSchema } from "@/features/bid/config";
 
 const BidMain = ({ auctionId }: { auctionId: number }) => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);

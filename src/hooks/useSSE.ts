@@ -2,11 +2,11 @@ import { logout } from '@/components/login/queries';
 import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
 
-import { isLoggedIn } from '@/store/authSlice';
-import { getToken } from '@/utils/tokenUtils';
+import { isLoggedIn } from '@/features/auth/model/authSlice';
+import { RefreshHandler } from '@/shared/api/axios';
+import { getToken } from '@/shared/utils/token';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { RefreshHandler } from '@/api/axios';
 
 export const useSSE = <T>(url: string) => {
   const [state, setState] = useState<T[]>([]);
@@ -34,7 +34,7 @@ export const useSSE = <T>(url: string) => {
             eventSource.current?.close();
             setTimeout(fetchSSE, 1000);
           } else {
-            throw new Error("토큰 갱신 실패");
+            throw new Error('토큰 갱신 실패');
           }
         } catch (error) {
           await logout();

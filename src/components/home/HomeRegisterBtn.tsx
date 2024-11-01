@@ -1,4 +1,4 @@
-import ROUTERS from '@/constants/routes';
+import { ROUTES } from '@/shared/constants';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ const HomeRegisterBtn = ({ isScrolled }: { isScrolled: boolean }) => {
       <button
         className={`relative text-center text-white rounded-full bg-cheeseYellow transition-all text-button  duration-500 h-14 p-4 ${isScrolled ? 'w-full' : 'w-14'
           }`}
-        onClick={() => navigate(ROUTERS.REGISTER)}
+        onClick={() => navigate(ROUTES.REGISTER)}
       >
         <span className={`absolute inset-0  flex justify-center items-center transition-opacity duration-500 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}>
           경매 등록하기

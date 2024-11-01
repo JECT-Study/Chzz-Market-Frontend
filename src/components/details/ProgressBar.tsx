@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useEndAuction } from '@/hooks/useEndAuction';
+import { formatSecondsToTime } from '@/shared/utils/formatSecondsToTime';
 
 const totalTime = 24 * 60 ** 2;
 
@@ -30,11 +31,7 @@ const ProgressBar = ({ initialTimeRemaining, auctionId }: ProgressBarProps) => {
   const progressBarWidth = (timeRemaining / totalTime) * 100;
 
   const hours = Math.floor(timeRemaining / 3600);
-  const minutes = Math.floor((timeRemaining % 3600) / 60);
-  const seconds = timeRemaining % 60;
-  const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes
-    .toString()
-    .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  const formattedTime = formatSecondsToTime(timeRemaining)
 
   const progressBarColor =
     hours < 1 ? 'bg-timeColor1' : hours <= 16 ? 'bg-timeColor2' : 'bg-timeColor3';

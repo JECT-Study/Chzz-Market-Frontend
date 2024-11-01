@@ -1,9 +1,9 @@
 import type { IProfileProps } from '@/@types/user';
-import ProfileImage from '@/assets/icons/profile.svg';
-import { useNavigate } from 'react-router-dom';
-import Button from '../common/Button';
+import { Button } from "@/shared";
+import ProfileImage from '@/shared/assets/icons/profile.svg';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }: IProfileProps) => {
   const navigator = useNavigate();

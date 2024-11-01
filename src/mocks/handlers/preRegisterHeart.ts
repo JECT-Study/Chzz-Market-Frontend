@@ -1,6 +1,6 @@
 import { HttpHandler, HttpResponse, delay, http } from 'msw';
 
-import { API_END_POINT } from '@/constants/api';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { preAuctionHeartData } from '../data/preAuctionHeartData';
 
 let curPreRegisterHeartData = [...preAuctionHeartData];

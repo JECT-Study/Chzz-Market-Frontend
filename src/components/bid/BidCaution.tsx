@@ -1,5 +1,5 @@
-import { BID_CAUTION } from '@/constants/caution';
-import Checkbox from '../common/Checkbox';
+import { BID_CAUTION } from "@/features/bid/config";
+import { Checkbox } from "@/shared";
 
 interface BidCautionProps {
   check: boolean;

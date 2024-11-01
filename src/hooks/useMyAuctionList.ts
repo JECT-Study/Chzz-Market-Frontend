@@ -1,6 +1,6 @@
 import { getAuctionEndRegister, getAuctionOngoingRegister, getAuctionPreAuctionRegister } from '@/components/user/queries';
 
-import { queryKeys } from '@/constants/queryKeys';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +13,7 @@ const useMyAuctionList = (activeTab: string): any => {
     hasNextPage: hasNextOngoingPage,
     refetch: refetchOngoingData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.USER_AUCTION_REGISTERED],
+    queryKey: [QUERY_KEYS.USER_AUCTION_REGISTERED],
     queryFn: () => getAuctionOngoingRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
@@ -33,7 +33,7 @@ const useMyAuctionList = (activeTab: string): any => {
     hasNextPage: hasNextEndPage,
     refetch: refetchEndData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.USER_AUCTION_REGISTERED],
+    queryKey: [QUERY_KEYS.USER_AUCTION_REGISTERED],
     queryFn: () => getAuctionEndRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
@@ -53,7 +53,7 @@ const useMyAuctionList = (activeTab: string): any => {
     hasNextPage: hasNextEnrollPage,
     refetch: refetchEnrollData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.USER_PRE_AUCTION_REGISTERED],
+    queryKey: [QUERY_KEYS.USER_PRE_AUCTION_REGISTERED],
     queryFn: () => getAuctionPreAuctionRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {

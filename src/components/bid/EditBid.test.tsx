@@ -2,8 +2,8 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
 
-import Bid from '@/pages/Bid';
-import { mockedUseNavigate } from '@/setupTests';
+import { Bid } from '@/pages/bid/ui/Bid';
+import { mockedUseNavigate } from '@/shared/test/setupTests';
 import userEvent from '@testing-library/user-event';
 import { useGetAuctionDetails } from '../details/queries';
 

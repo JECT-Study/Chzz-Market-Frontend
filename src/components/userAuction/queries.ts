@@ -1,6 +1,6 @@
-import { httpClient } from '@/api/axios';
-import { API_END_POINT } from '@/constants/api';
 import { IUserAuctionHistoryList, IUserAuctionLostList } from '@/@types/AuctionList';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
 export interface GetProductParams {
   pageNumber: number;
@@ -13,11 +13,11 @@ export const getMyHistoryAuction = async ({ pageNumber, pageSize }: GetProductPa
 };
 
 export const getMyWonAuction = async ({ pageNumber, pageSize }: GetProductParams): Promise<IUserAuctionLostList> => {
-  const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/won?page=${pageNumber}&size=${pageSize}`);
+  const response = await httpClient.get(`${API_END_POINT.AUCTION}/won?page=${pageNumber}&size=${pageSize}`);
   return response.data;
 };
 
 export const getMyLostAuction = async ({ pageNumber, pageSize }: GetProductParams): Promise<IUserAuctionLostList> => {
-  const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/lost?page=${pageNumber}&size=${pageSize}`);
+  const response = await httpClient.get(`${API_END_POINT.AUCTION}/lost?page=${pageNumber}&size=${pageSize}`);
   return response.data;
 };
