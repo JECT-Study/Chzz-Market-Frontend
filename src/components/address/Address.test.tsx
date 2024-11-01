@@ -5,9 +5,11 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
-import { useEditAddress, useGetAddresses, usePostAddress } from "./queries";
+import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "./queries";
 import DeliveryAddressAdd from "@/pages/DeliveryAddressAdd";
 import DeliveryAddressEdit from "@/pages/DeliveryAddressEdit";
+import EditAddress from "@/pages/EditAddress";
+import * as queries from "@/components/address/queries";
 
 // scrollIntoView 메서드가 jsdom에 지원되지 않아서 오류 발생
 Object.defineProperty(Element.prototype, 'hasPointerCapture', {
@@ -52,7 +54,8 @@ vi.mock('@/hooks/usePayment', () => ({
 vi.mock('@/components/address/queries', () => ({
   useGetAddresses: vi.fn(),
   usePostAddress : vi.fn(),
-  useEditAddress: vi.fn()
+  useEditAddress: vi.fn(),
+  useDeleteAddress: vi.fn(),
 }));
 
 vi.mocked(useGetAddresses).mockReturnValue({
@@ -76,6 +79,10 @@ vi.mocked(useGetAddresses).mockReturnValue({
       },
     ],
   },
+});
+
+vi.mocked(useDeleteAddress).mockReturnValue({
+  deleteData: vi.fn()
 });
 
 const postMutateMock = vi.fn();
@@ -514,5 +521,54 @@ describe('주소 수정 페이지 테스트', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /저장하기/ })).toBeEnabled();
     });
+  });
+});
+
+describe('주소 편집 페이지 테스트', () => {
+  const setup = () => {
+    const user = userEvent.setup();
+    render(
+      <QueryClientProvider client={new QueryClient()}>
+        <MemoryRouter initialEntries={['/auctions/1/edit-address']}>
+          <Routes>
+            <Route path="/auctions/:auctionId/edit-address" element={<EditAddress />} />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
+    return { user };
+  };
+
+  test('모든 주소 항목이 올바르게 렌더링 되는지 확인', () => {
+    setup();
+
+    expect(screen.getByText(/홍길동 \/ 010-1234-5678/)).toBeInTheDocument();
+    expect(screen.getByText(/이순신 \/ 010-8765-4321/)).toBeInTheDocument();
+  });
+
+  test('기본 배송지와 수정/삭제 버튼이 올바르게 표시되는지 확인', () => {
+    setup();
+
+    expect(screen.getByText(/기본배송지/)).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /수정/ })).toHaveLength(2);
+    expect(screen.getAllByRole('button', { name: /삭제/ })).toHaveLength(1); // 기본 배송지에는 삭제 버튼이 없음
+  });
+
+  test('삭제 버튼 클릭 시 이벤트가 올바르게 동작하는지 확인', async () => {
+    const { user } = setup();
+    const deleteButton = screen.getAllByRole('button', { name: /삭제/ })[0];
+
+    await user.click(deleteButton);
+
+    waitFor(() => {
+      expect(queries.useDeleteAddress().deleteData).toHaveBeenCalled();
+    });
+  });
+
+  test('수정 버튼 클릭 시 페이지 이동이 올바르게 동작하는지 확인', async () => {
+    const { user } = setup();
+    const editButton = screen.getAllByRole('button', { name: /수정/ })[0];
+
+    await user.click(editButton);
   });
 });
