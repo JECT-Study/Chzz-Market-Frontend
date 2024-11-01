@@ -162,6 +162,7 @@ const DeliveryAddressAdd = () => {
                 <Input
                   id="이름"
                   type="text"
+                  data-testid="recipientName-input"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
                 />
@@ -176,6 +177,7 @@ const DeliveryAddressAdd = () => {
                 <Input
                   id="휴대폰 번호"
                   type="text"
+                  data-testid="phoneNumber-input"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
                 />
@@ -186,6 +188,7 @@ const DeliveryAddressAdd = () => {
               <Input
                 id="우편번호 *"
                 type="text"
+                data-testid="zipcode-input"
                 value={zonecode}
                 className="focus-visible:ring-cheeseYellow bg-gray3"
                 readOnly
@@ -203,6 +206,7 @@ const DeliveryAddressAdd = () => {
                 <Input
                   id="주소지"
                   type="text"
+                  data-testid="roadAddress-input"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
                   readOnly
@@ -218,6 +222,7 @@ const DeliveryAddressAdd = () => {
                 <Input
                   id="상세주소"
                   type="text"
+                  data-testid="detailAddress-input"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
                 />

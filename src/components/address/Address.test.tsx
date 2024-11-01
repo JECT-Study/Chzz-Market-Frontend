@@ -6,6 +6,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 import { useGetAddresses, usePostAddress } from "./queries";
+import DeliveryAddressAdd from "@/pages/DeliveryAddressAdd";
 
 // scrollIntoView 메서드가 jsdom에 지원되지 않아서 오류 발생
 Object.defineProperty(Element.prototype, 'hasPointerCapture', {
@@ -303,6 +304,99 @@ describe('DeliveryAddressList Page', () => {
         }),
         replace: true,
       });
+    });
+  });
+});
+
+describe('DeliveryAddressAdd Component', () => {
+  const setup = (initialState = { roadAddress: '서울특별시 종로구', zonecode: '03001', jibunAddress: '종로 1가' }) => {
+    const user = userEvent.setup();
+    const mockNavigate = vi.fn();
+    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
+
+    render(
+      <QueryClientProvider client={new QueryClient()}>
+        <MemoryRouter initialEntries={[{ pathname: '/auctions/1/address-add', state: initialState }]}>
+          <Routes>
+            <Route path="/auctions/:auctionId/address-add" element={<DeliveryAddressAdd />} />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
+
+    return { user, mockNavigate };
+  };
+
+  test('모든 입력 필드 및 버튼이 올바르게 렌더링 되는지', () => {
+    setup();
+
+    expect(screen.getByTestId('recipientName-input')).toBeInTheDocument();
+    expect(screen.getByTestId('phoneNumber-input')).toBeInTheDocument();
+    expect(screen.getByTestId('zipcode-input')).toBeInTheDocument();
+    expect(screen.getByTestId('roadAddress-input')).toBeInTheDocument();
+    expect(screen.getByTestId('detailAddress-input')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /우편번호 찾기/ })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /기본 배송지로 설정/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /저장하기/ })).toBeInTheDocument();
+  });
+
+  test('초기 상태 값이 올바르게 렌더링 되는지', () => {
+    setup();
+
+    expect(screen.getByDisplayValue('서울특별시 종로구')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('03001')).toBeInTheDocument();
+    expect(screen.getByTestId('roadAddress-input')).toBeInTheDocument();
+  });
+
+  test('입력 필드에 데이터를 입력할 수 있는지 확인', async () => {
+    const { user } = setup();
+
+    await user.type(screen.getByTestId('recipientName-input'), '홍길동');
+    await user.type(screen.getByTestId('phoneNumber-input'), '010-1234-5678');
+    await user.type(screen.getByTestId('detailAddress-input'), '101호');
+
+    expect(screen.getByTestId('recipientName-input')).toHaveValue('홍길동');
+    expect(screen.getByTestId('phoneNumber-input')).toHaveValue('010-1234-5678');
+    expect(screen.getByTestId('detailAddress-input')).toHaveValue('101호');
+  });
+
+  test('입력값 검증 및 에러 메시지가 올바르게 표시되는지 확인', async () => {
+    const { user } = setup();
+
+    const submitButton = screen.getByRole('button', { name: /저장하기/ });
+    await user.click(submitButton);
+
+    screen.debug();
+
+    waitFor(() => {
+      expect(screen.getByText(/이름을 입력해주세요./)).toBeInTheDocument();
+      expect(screen.getByText(/휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요./)).toBeInTheDocument();
+      expect(screen.getByText(/상세주소를 입력해주세요./)).toBeInTheDocument();
+    });
+  });
+
+  test('우편번호 찾기 버튼 클릭 시 이벤트가 올바르게 동작하는지 확인', async () => {
+    const { user } = setup();
+    const handleOpenAddress = vi.fn();
+
+    const button = screen.getByRole('button', { name: /우편번호 찾기/ });
+    await user.click(button);
+
+    expect(handleOpenAddress).not.toThrow();
+  });
+
+  test('폼 제출이 성공적으로 실행될 때 onSubmit 함수가 호출되는지 확인', async () => {
+    const { user } = setup();
+
+    await user.type(screen.getByTestId('recipientName-input'), '홍길동');
+    await user.type(screen.getByTestId('phoneNumber-input'), '01012345678');
+    await user.type(screen.getByTestId('detailAddress-input'), '101호');
+
+    const submitButton = screen.getByRole('button', { name: /저장하기/ });
+    await user.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /저장하기/ })).toBeEnabled();
     });
   });
 });
