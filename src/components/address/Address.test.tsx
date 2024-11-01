@@ -5,6 +5,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
+import { useGetAddresses, usePostAddress } from "./queries";
 
 // scrollIntoView 메서드가 jsdom에 지원되지 않아서 오류 발생
 Object.defineProperty(Element.prototype, 'hasPointerCapture', {
@@ -45,6 +46,41 @@ vi.mock('@/hooks/usePayment', () => ({
     postPayment: vi.fn(),
   }),
 }));
+
+vi.mock('@/components/address/queries', () => ({
+  useGetAddresses: vi.fn(),
+  usePostAddress : vi.fn()
+}));
+
+vi.mocked(useGetAddresses).mockReturnValue({
+  addressData: {
+    items: [
+      {
+        id: '1',
+        recipientName: '홍길동',
+        phoneNumber: '010-1234-5678',
+        roadAddress: '서울특별시 종로구',
+        detailAddress: '101호',
+        isDefault: true,
+      },
+      {
+        id: '2',
+        recipientName: '이순신',
+        phoneNumber: '010-8765-4321',
+        roadAddress: '서울특별시 강남구',
+        detailAddress: '202호',
+        isDefault: false,
+      },
+    ],
+  },
+});
+
+const mutateMock = vi.fn();
+vi.mocked(usePostAddress).mockReturnValue({
+  mutate: mutateMock,
+  isPending: false,
+})
+
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
@@ -232,7 +268,26 @@ describe('DeliveryAddressList Page', () => {
 
   test('주소가 있을 때 리스트에 렌더링', async () => {
     setup();
-    
+
+    const addressListItem1 = await screen.findByText(/홍길동/);
+    const phoneNumber1 = screen.getByText(/010-1234-5678/);
+    const roadAddress1 = screen.getByText(/서울특별시 종로구/);
+    const detailAddress1 = screen.getByText(/101호/);
+
+    const addressListItem2 = screen.getByText(/이순신/);
+    const phoneNumber2 = screen.getByText(/010-8765-4321/);
+    const roadAddress2 = screen.getByText(/서울특별시 강남구/);
+    const detailAddress2 = screen.getByText(/202호/);
+
+    expect(addressListItem1).toBeInTheDocument();
+    expect(phoneNumber1).toBeInTheDocument();
+    expect(roadAddress1).toBeInTheDocument();
+    expect(detailAddress1).toBeInTheDocument();
+
+    expect(addressListItem2).toBeInTheDocument();
+    expect(phoneNumber2).toBeInTheDocument();
+    expect(roadAddress2).toBeInTheDocument();
+    expect(detailAddress2).toBeInTheDocument();
   });
 
   test('배송지 선택 완료 버튼 클릭 시 navigate 호출', async () => {
