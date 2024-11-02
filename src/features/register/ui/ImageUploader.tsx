@@ -1,8 +1,9 @@
+import { useDragAndDrop, useImageUploader } from '../lib/index';
+
 import { CustomCarousel } from "@/shared";
 import DeleteIcon from '@/shared/assets/icons/delete.svg';
 import { CarouselItem } from '../../../shared/shadcn/ui/carousel';
 import { Input } from '../../../shared/shadcn/ui/input';
-import { useDragAndDrop, useImageUploader } from '../lib/index';
 import { AddImageButton } from './index';
 
 interface ImageUploaderProps {
@@ -15,7 +16,7 @@ export const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
   const { fileInputRef, deleteImage, handleImage, handleBoxClick } = useImageUploader(images, setImages);
 
   return (
-    <div className='flex flex-col items-center w-full h-full gap-5 sm:h-32 sm:flex-row'>
+    <div className='flex flex-col items-center w-full h-full gap-5 web:h-32 web:flex-row'>
       <AddImageButton handleBoxClick={handleBoxClick} length={images.length} />
       <CustomCarousel contentStyle='py-3' length={images.length}>
         {images.map((image: string, index: number) => (
@@ -33,7 +34,7 @@ export const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
             >
               <img src={image} alt={`상품 사진 ${index}`} className='object-cover w-full h-full border-2 rounded' />
               {index === 0 && (
-                <p className='absolute text-[8px] sm:text-xs rounded py-1 px-2 text-white bg-[#454545]/90 top-2 left-1/2 transform -translate-x-1/2'>
+                <p className='absolute text-[8px] web:text-xs rounded py-1 px-2 text-white bg-[#454545]/90 top-2 left-1/2 transform -translate-x-1/2'>
                   대표 사진
                 </p>
               )}

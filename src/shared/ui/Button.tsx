@@ -40,7 +40,7 @@ export const Button = ({
   const sizeClasses = classNames({
     'px-2 py-0.5 text-xs': size === 'xsmall',
     'px-2 py-1 text-sm': size === 'small',
-    'sm:px-4 sm:py-2 px-2 py-2 web:text-heading3 text-body2Bold': size === 'medium',
+    'web:px-4 web:py-2 px-2 py-2 web:text-heading3 text-body2Bold': size === 'medium',
     'px-6 py-3 text-lg': size === 'large',
   });
   const hoverColorClasses = classNames({

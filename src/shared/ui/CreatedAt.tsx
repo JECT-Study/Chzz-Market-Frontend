@@ -11,12 +11,12 @@ export const CreatedAt = ({ createAt }: { createAt: string }) => {
   return (
     <div
       aria-label="마감 날짜"
-      className="flex items-center text-xs sm:text-body2 text-gray2"
+      className="flex items-center text-xs web:text-body2 text-gray2"
     >
       <img src={PriceIcon} alt="마감 날짜" />
       <span className='whitespace-nowrap'>
         {`마감 날짜 `}
-        <span className="text-xs text-black sm:text-body2Bold">{formattedDate}</span>
+        <span className="text-xs text-black web:text-body2Bold">{formattedDate}</span>
       </span>
     </div>
   );

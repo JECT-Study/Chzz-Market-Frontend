@@ -1,5 +1,6 @@
-import type { IUserAuctionWonItem } from '@/@types/AuctionItem';
 import { ParticipantCount, ROUTES } from '@/shared';
+
+import type { IUserAuctionWonItem } from '@/@types/AuctionItem';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
@@ -58,7 +59,7 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
             >
               <img src={trophyImage} alt="트로피" className="w-[20px] h-[19px]" />
               <span className="overflow-hidden whitespace-nowrap pt-[2px]">
-                <span className="ml-1 text-xs text-black sm:text-body2Bold">
+                <span className="ml-1 text-xs text-black web:text-body2Bold">
                   {formatted}
                 </span>
               </span>
