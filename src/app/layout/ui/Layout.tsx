@@ -18,15 +18,15 @@ const Header = ({
   if (!handleBack) handleBack = () => navigate(-1);
 
   return (
-    <header className='w-full min-h-[3.375rem] h-[3.375rem] px-8 py-4 shadow-bottom'>
+    <header className='w-full h-[3.375rem] p-4 web:p-8  shadow-bottom'>
       <div className='relative flex items-center justify-center w-full h-full'>
         {title !== '치즈 마켓' && (
           <button
-            className='absolute left-[-10px] web:left-2'
+            className='absolute left-0'
             aria-label='뒤로 가기'
             onClick={handleBack}
           >
-            <img src={BackArrowIcon} alt='뒤로가기 아이콘' className='size-5' />
+            <img src={BackArrowIcon} alt='뒤로가기 아이콘' className='size-6' />
           </button>
         )}
         <h2 className='text-heading2 text-gray1'>{title}</h2>
@@ -42,7 +42,7 @@ const Main = forwardRef<
 >(({ children, style }, ref) => {
   return (
     <main
-      className='relative flex flex-col flex-grow w-full min-h-0 p-5 web:px-8 web:py-6 overflow-y-scroll'
+      className='relative flex flex-col flex-grow w-full min-h-0 px-5 py-3 overflow-y-scroll web:px-8 web:py-6'
       style={style}
       ref={ref}
     >
@@ -58,16 +58,15 @@ const Footer = ({
   type,
 }: {
   children: ReactNode;
-  type: 'single' | 'double' | 'like';
+  type: 'single' | 'double';
 }) => {
   const style = {
     single: 'w-full h-full',
     double: 'flex items-center justify-center h-full gap-3',
-    like: 'flex items-center justify-between h-full',
   };
 
   return (
-    <footer className='w-full min-h-[5rem] h-[5rem] px-[1.25rem] py-[1rem] shadow-top'>
+    <footer className='w-full h-[5rem] px-[.4688rem] py-[10px] shadow-top'>
       <div className={style[type]}>{children}</div>
     </footer>
   );
