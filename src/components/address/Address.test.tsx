@@ -10,6 +10,7 @@ import DeliveryAddressAdd from "@/pages/DeliveryAddressAdd";
 import DeliveryAddressEdit from "@/pages/DeliveryAddressEdit";
 import EditAddress from "@/pages/EditAddress";
 import * as queries from "@/components/address/queries";
+import { mockedUseNavigate } from "@/setupTests";
 
 // scrollIntoView 메서드가 jsdom에 지원되지 않아서 오류 발생
 Object.defineProperty(Element.prototype, 'hasPointerCapture', {
@@ -108,8 +109,7 @@ vi.mock('react-router-dom', async () => {
 describe('결제하기 페이지 테스트', () => {
   const setup = () => {
     const user = userEvent.setup();
-    const mockNavigate = vi.fn();
-    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
+    vi.mocked(useNavigate).mockReturnValue(mockedUseNavigate);
 
     render(
       <MemoryRouter initialEntries={['/auctions/1']}>
@@ -119,7 +119,7 @@ describe('결제하기 페이지 테스트', () => {
       </MemoryRouter>
     );
     
-    return { user, mockNavigate };
+    return { user, mockedUseNavigate };
   };
   test('페이지가 로드되면 기본 상품 정보가 렌더링된다.', async () => {
     setup();
@@ -146,13 +146,13 @@ describe('결제하기 페이지 테스트', () => {
   });
 
   test('배송지 목록 버튼 클릭 시 주소 목록 페이지로 이동한다.', async () => {
-    const { user, mockNavigate } = setup();
+    const { user, mockedUseNavigate } = setup();
 
     const addressListButton = screen.getByRole('button', { name: /배송지 목록/ });
     await user.click(addressListButton);
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith('/auctions/1/address-list');
+      expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/1/address-list');
     });
   });
 
@@ -325,8 +325,7 @@ describe('주소 목록 페이지 테스트', () => {
 describe('주소 추가 페이지 테스트', () => {
   const setup = (initialState = { roadAddress: '서울특별시 종로구', zonecode: '03001', jibunAddress: '종로 1가' }) => {
     const user = userEvent.setup();
-    const mockNavigate = vi.fn();
-    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
+    vi.mocked(useNavigate).mockReturnValue(mockedUseNavigate);
 
     render(
       <QueryClientProvider client={new QueryClient()}>
@@ -338,7 +337,7 @@ describe('주소 추가 페이지 테스트', () => {
       </QueryClientProvider>
     );
 
-    return { user, mockNavigate };
+    return { user, mockedUseNavigate };
   };
 
   test('모든 입력 필드 및 버튼이 올바르게 렌더링 되는지', () => {
@@ -431,8 +430,7 @@ describe('주소 수정 페이지 테스트', () => {
     zonecode: '12345'
   }) => {
     const user = userEvent.setup();
-    const mockNavigate = vi.fn();
-    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
+    vi.mocked(useNavigate).mockReturnValue(mockedUseNavigate);
 
     render(
       <QueryClientProvider client={new QueryClient()}>
@@ -444,7 +442,7 @@ describe('주소 수정 페이지 테스트', () => {
       </QueryClientProvider>
     );
 
-    return { user, mockNavigate };
+    return { user, mockedUseNavigate };
   };
 
   test('모든 입력 필드 및 버튼이 올바르게 렌더링 되는지', () => {
