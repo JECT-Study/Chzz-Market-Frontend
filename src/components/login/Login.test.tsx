@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
 import Login from "@/pages/Login";
 import { render, screen } from "@testing-library/react";
+import { mockedUseNavigate } from "@/setupTests";
 
 vi.mock('@/hooks/useAuth', () => ({
   useAuth: vi.fn(),
@@ -14,15 +15,6 @@ vi.mock('@/hooks/useAuth', () => ({
 vi.mock('@/components/login/queries', () => ({
   useRefreshTokenOnSuccess: vi.fn(),
 }));
-
-const mockNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
-  return {
-    ...actual,
-    useNavigate: () => mockNavigate,
-  };
-});
 
 describe('로그인 페이지 테스트', () => {
   const setup = () => {
@@ -46,7 +38,7 @@ describe('로그인 페이지 테스트', () => {
       </QueryClientProvider>
     )
 
-    return { user, mockNavigate };
+    return { user, mockedUseNavigate };
   };
 
   test("로그인 페이지 렌더링 확인", () => {
@@ -78,6 +70,6 @@ describe('로그인 페이지 테스트', () => {
     });
 
     setup();
-    expect(mockNavigate).toHaveBeenCalledWith('/');
+    expect(mockedUseNavigate).toHaveBeenCalledWith('/');
   });
 });
