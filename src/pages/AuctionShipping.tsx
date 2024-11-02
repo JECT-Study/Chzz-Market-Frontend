@@ -188,6 +188,7 @@ const AuctionShipping = () => {
                 <Input
                   id="배송메모"
                   type="text"
+                  aria-label="배송메모"
                   placeholder="배송 메모를 입력해주세요"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}

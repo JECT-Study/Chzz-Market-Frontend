@@ -159,7 +159,7 @@ describe('결제하기 페이지 테스트', () => {
   test('memoInput에 입력이 있으면 memoSelect가 비활성화된다.', async () => {
     const { user } = setup();
 
-    const memoInput = screen.getByPlaceholderText(/배송 메모를 입력해주세요/);
+    const memoInput = screen.getByRole('textbox', { name: /배송메모/ });
     const memoSelect = screen.getByRole('combobox', { name: /배송메모/ });
 
     await user.type(memoInput, '테스트 메모');
@@ -170,7 +170,7 @@ describe('결제하기 페이지 테스트', () => {
   test('memoInput이 비어 있으면 memoSelect가 활성화된다.', async () => {
     const { user } = setup();
 
-    const memoInput = screen.getByPlaceholderText(/배송 메모를 입력해주세요/);
+    const memoInput = screen.getByRole('textbox', { name: /배송메모/ });
     const memoSelect = screen.getByRole('combobox', { name: /배송메모/ });
 
     await user.clear(memoInput);
@@ -343,11 +343,11 @@ describe('주소 추가 페이지 테스트', () => {
   test('모든 입력 필드 및 버튼이 올바르게 렌더링 되는지', () => {
     setup();
 
-    expect(screen.getByTestId('recipientName-input')).toBeInTheDocument();
-    expect(screen.getByTestId('phoneNumber-input')).toBeInTheDocument();
-    expect(screen.getByTestId('zipcode-input')).toBeInTheDocument();
-    expect(screen.getByTestId('roadAddress-input')).toBeInTheDocument();
-    expect(screen.getByTestId('detailAddress-input')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /이름/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /우편번호/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /주소지/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /상세주소/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /우편번호 찾기/ })).toBeInTheDocument();
     expect(screen.getByRole('checkbox', { name: /기본 배송지로 설정/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /저장하기/ })).toBeInTheDocument();
@@ -356,21 +356,20 @@ describe('주소 추가 페이지 테스트', () => {
   test('초기 상태 값이 올바르게 렌더링 되는지', () => {
     setup();
 
-    expect(screen.getByDisplayValue('서울특별시 종로구')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('03001')).toBeInTheDocument();
-    expect(screen.getByTestId('roadAddress-input')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /주소지/ })).toHaveValue('서울특별시 종로구');
+    expect(screen.getByRole('textbox', { name: /우편번호/ })).toHaveValue('03001');
   });
 
   test('입력 필드에 데이터를 입력할 수 있는지 확인', async () => {
     const { user } = setup();
 
-    await user.type(screen.getByTestId('recipientName-input'), '홍길동');
-    await user.type(screen.getByTestId('phoneNumber-input'), '010-1234-5678');
-    await user.type(screen.getByTestId('detailAddress-input'), '101호');
+    await user.type(screen.getByRole('textbox', { name: /이름/ }), '홍길동');
+    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '010-1234-5678');
+    await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '101호');
 
-    expect(screen.getByTestId('recipientName-input')).toHaveValue('홍길동');
-    expect(screen.getByTestId('phoneNumber-input')).toHaveValue('010-1234-5678');
-    expect(screen.getByTestId('detailAddress-input')).toHaveValue('101호');
+    expect(screen.getByRole('textbox', { name: /이름/ })).toHaveValue('홍길동');
+    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue('010-1234-5678');
+    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue('101호');
   });
 
   test('입력값 검증 및 에러 메시지가 올바르게 표시되는지 확인', async () => {
@@ -401,9 +400,9 @@ describe('주소 추가 페이지 테스트', () => {
   test('폼 제출이 성공적으로 실행될 때 onSubmit 함수가 호출되는지 확인', async () => {
     const { user } = setup();
 
-    await user.type(screen.getByTestId('recipientName-input'), '홍길동');
-    await user.type(screen.getByTestId('phoneNumber-input'), '01012345678');
-    await user.type(screen.getByTestId('detailAddress-input'), '101호');
+    await user.type(screen.getByRole('textbox', { name: /이름/ }), '홍길동');
+    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '01012345678');
+    await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '101호');
 
     const submitButton = screen.getByRole('button', { name: /저장하기/ });
     await user.click(submitButton);
@@ -448,11 +447,11 @@ describe('주소 수정 페이지 테스트', () => {
   test('모든 입력 필드 및 버튼이 올바르게 렌더링 되는지', () => {
     setup();
 
-    expect(screen.getByTestId('recipientName-input')).toBeInTheDocument();
-    expect(screen.getByTestId('phoneNumber-input')).toBeInTheDocument();
-    expect(screen.getByTestId('zipcode-input')).toBeInTheDocument();
-    expect(screen.getByTestId('roadAddress-input')).toBeInTheDocument();
-    expect(screen.getByTestId('detailAddress-input')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /이름/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /우편번호/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /주소지/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /상세주소/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /우편번호 찾기/ })).toBeInTheDocument();
     expect(screen.getByRole('checkbox', { name: /기본 배송지로 설정/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /저장하기/ })).toBeInTheDocument();
@@ -461,26 +460,26 @@ describe('주소 수정 페이지 테스트', () => {
   test('초기 상태 값이 올바르게 렌더링 되는지', () => {
     setup();
 
-    expect(screen.getByDisplayValue('이순신')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('010-9876-5432')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('12345')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('서울특별시 중구')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('202호')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /이름/ })).toHaveValue('이순신');
+    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue('010-9876-5432');
+    expect(screen.getByRole('textbox', { name: /우편번호/ })).toHaveValue('12345');
+    expect(screen.getByRole('textbox', { name: /주소지/ })).toHaveValue('서울특별시 중구');
+    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue('202호');
   });
 
   test('입력 필드에 데이터를 입력할 수 있는지 확인', async () => {
     const { user } = setup();
 
-    await user.clear(screen.getByTestId('recipientName-input'));
-    await user.type(screen.getByTestId('recipientName-input'), '김유신');
-    await user.clear(screen.getByTestId('phoneNumber-input'));
-    await user.type(screen.getByTestId('phoneNumber-input'), '010-1111-2222');
-    await user.clear(screen.getByTestId('detailAddress-input'));
-    await user.type(screen.getByTestId('detailAddress-input'), '303호');
+    await user.clear(screen.getByRole('textbox', { name: /이름/ }));
+    await user.type(screen.getByRole('textbox', { name: /이름/ }), '김유신');
+    await user.clear(screen.getByRole('textbox', { name: /휴대폰 번호/ }));
+    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '010-1111-2222');
+    await user.clear(screen.getByRole('textbox', { name: /상세주소/ }));
+    await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '303호');
 
-    expect(screen.getByTestId('recipientName-input')).toHaveValue('김유신');
-    expect(screen.getByTestId('phoneNumber-input')).toHaveValue('010-1111-2222');
-    expect(screen.getByTestId('detailAddress-input')).toHaveValue('303호');
+    expect(screen.getByRole('textbox', { name: /이름/ })).toHaveValue('김유신');
+    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue('010-1111-2222');
+    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue('303호');
   });
 
   test('입력값 검증 및 에러 메시지가 올바르게 표시되는지 확인', async () => {
@@ -509,9 +508,9 @@ describe('주소 수정 페이지 테스트', () => {
   test('폼 제출이 성공적으로 실행될 때 onSubmit 함수가 호출되는지 확인', async () => {
     const { user } = setup();
 
-    await user.type(screen.getByTestId('recipientName-input'), '석장원');
-    await user.type(screen.getByTestId('phoneNumber-input'), '010-1234-5678');
-    await user.type(screen.getByTestId('detailAddress-input'), '303호');
+    await user.type(screen.getByRole('textbox', { name: /이름/ }), '석장원');
+    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '010-1234-5678');
+    await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '303호');
 
     const submitButton = screen.getByRole('button', { name: /저장하기/ });
     await user.click(submitButton);
