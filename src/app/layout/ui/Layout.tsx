@@ -22,7 +22,7 @@ const Header = ({
       <div className='relative flex items-center justify-center w-full h-full'>
         {title !== '치즈 마켓' && (
           <button
-            className='absolute left-2'
+            className='absolute left-[-10px] web:left-2'
             aria-label='뒤로 가기'
             onClick={handleBack}
           >
@@ -42,7 +42,7 @@ const Main = forwardRef<
 >(({ children, style }, ref) => {
   return (
     <main
-      className='relative flex flex-col flex-grow w-full min-h-0 p-5 overflow-y-scroll'
+      className='relative flex flex-col flex-grow w-full min-h-0 p-5 web:px-8 web:py-6 overflow-y-scroll'
       style={style}
       ref={ref}
     >

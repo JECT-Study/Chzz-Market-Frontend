@@ -2,6 +2,7 @@ import type { IAddressDetail } from "@/@types/Address";
 import { Layout } from "@/app/layout/index";
 import { useDeleteAddress, useGetAddresses } from "@/components/address/queries";
 import { Button } from "@/shared";
+import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import rocation_off from '@/shared/assets/icons/rocation_off.svg';
 import { ROUTES } from "@/shared/constants/routes";
 import { useEffect, useState } from "react";
@@ -51,37 +52,41 @@ export const PaymentAddressEditList = () => {
       <Layout.Main>
         <div>
           <ul>
-            {addressItems.map((item: Props) => (
-              <li
-                key={item.id}
-                onClick={() => setSelectAddress(item)}
-                className="relative flex gap-4 p-4 mb-4 border-b rounded-md border-gray3"
-              >
-                <div className="flex items-center">
+          {addressItems.map((item: Props) => (
+            <li
+              key={item.id}
+              onClick={() => setSelectAddress(item)}
+              className="relative flex pb-2 rounded-md mb-4 gap-4 border-b border-gray3"
+            >
+              <div className="flex items-center">
+                {item?.isDefault ? (
+                  <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
+                ) : (
                   <img src={rocation_off} className="mr-2 text-gray2" alt="위치 아이콘" />
+                )}
+              </div>
+              <div className="flex flex-col gap-2 mb-2">
+                {item.isDefault && (
+                  <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm">기본배송지</span>
+                )}
+                <span className="font-bold">{item.recipientName} / {item.phoneNumber}</span>
+                <div className="text-gray2">
+                  <p>{item.roadAddress}</p>
+                  <p>{item.detailAddress}</p>
                 </div>
-                <div className="flex flex-col gap-2 mb-2">
-                  {item.isDefault && (
-                    <span className="font-semibold text-cheeseYellow text-body2">기본배송지</span>
-                  )}
-                  <span className="font-bold">{item.recipientName} / {item.phoneNumber}</span>
-                  <div className="text-gray2">
-                    <p>{item.roadAddress}</p>
-                    <p>{item.detailAddress}</p>
+                {item.isDefault ? (
+                  <div>
+                    <Button type="button" size="small" className="rounded-xl border-gray3" onClick={() => handleEdit(item)}>수정</Button>
                   </div>
-                  {item.isDefault ? (
-                    <div>
-                      <Button type="button" size="small" className="rounded-xl border-gray3" onClick={() => handleEdit(item)}>수정</Button>
-                    </div>
-                  ) : (
-                    <div className="flex gap-3">
-                      <Button type="button" size="small" className="rounded-xl border-gray3" onClick={() => handleEdit(item)}>수정</Button>
-                      <Button type="button" size="small" className="rounded-xl border-gray3" onClick={() => handleDelete(item.id)}>삭제</Button>
-                    </div>
-                  )}
-                </div>
-              </li>
-            ))}
+                ): (
+                  <div className="flex gap-3">
+                    <Button type="button" size="small" className="rounded-xl border-gray3" onClick={() => handleEdit(item)}>수정</Button>
+                    <Button type="button" size="small" className="rounded-xl border-gray3" onClick={() => handleDelete(item.id)}>삭제</Button>
+                  </div>
+                )}
+              </div>
+            </li>
+          ))}
           </ul>
         </div>
       </Layout.Main>

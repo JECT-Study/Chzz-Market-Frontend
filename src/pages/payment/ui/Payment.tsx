@@ -102,50 +102,51 @@ export const Payment = () => {
         <div className="space-y-6">
           {/* 기본 정보 입력 */}
           <div className="py-4 space-y-2 rounded-lg">
-            <h2 className="text-lg font-semibold">기본 정보 입력</h2>
+            <h2 className="text-heading3 web:text-heading2">기본 정보 입력</h2>
             {/* 상품 정보 */}
             <div className="flex p-2 space-x-4">
               <img
                 src={auctionData?.imageUrl}
                 alt="product"
-                className="object-cover rounded-md w-28 h-28 xs:w-24 xs:h-24"
+                className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]"
               />
               <div>
-                <p className="font-bold">{auctionData?.productName}</p>
+                <p className="text-heading3 web:text-heading2">{auctionData?.productName}</p>
                 <div
-                  aria-label="시작가"
-                  className="flex items-center text-xs sm:text-body2 text-gray2"
+                  aria-label="결제 금액"
+                  className="flex items-center text-body2 web:text-heading3"
                 >
-                  <img src={trophyImage} alt="트로피" className="w-[20px] h-[19px]" />
+                  <img src={trophyImage} alt="트로피" className="w-[1.25rem] h-[1.2rem] web:w-[2rem] web:h-[2rem]" />
                   <span className="overflow-hidden whitespace-nowrap pt-[2px]">
-                    <span className="ml-1 text-xs text-black sm:text-body2Bold">
-                      {formattedAmount}
-                    </span>
+                    결제 금액
                   </span>
                 </div>
+                <span className="ml-1 text-body2Bold web:text-heading3 text-cheeseYellow">
+                  {formattedAmount}
+                </span>
               </div>
             </div>
           </div>
           {/* 수령지 입력 */}
           <span className='text-heading3'>수령지 입력</span>
           <div className='flex gap-2'>
-            <Button type='button' size='large' color={address.isDefault ? 'black' : 'white'} className='cursor-auto'>기본 배송지</Button>
-            <Button type='button' size='large' color='white' onClick={handleClickAddressList}>배송지 목록</Button>
+            <Button type='button' color={address.isDefault ? 'black' : 'white'} className='w-[10.15rem] h-[3.125rem]'>기본 배송지</Button>
+            <Button type='button' color='white' className='w-[10.15rem] h-[3.125rem]' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
           {Object.keys(address).length > 0 ? (
             <div
-              className='flex p-4 mb-4 rounded-md'
+              className='flex mb-4 rounded-md'
             >
               <div className="flex items-center">
                 <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
               </div>
-              <div className="flex flex-col gap-2 mb-2">
+              <div className="flex flex-col">
                 {address.isDefault && (
-                  <span className="font-semibold text-cheeseYellow text-body2">기본배송지</span>
+                  <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm mb-[10px]">기본배송지</span>
                 )}
-                <span className="font-bold">{address.recipientName} / {address.phoneNumber}</span>
-                <div className="text-gray2">
+                <span className="text-body1Bold web:text-heading3">{address.recipientName} / {address.phoneNumber}</span>
+                <div className='text-body1'>
                   <p>{address.roadAddress}</p>
                   <p>{address.detailAddress}</p>
                 </div>

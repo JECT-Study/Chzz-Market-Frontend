@@ -63,8 +63,8 @@ export const useToggleAuctionDetailsHeart = (): {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST],
       });
-      if (data.isLiked) toast.success('좋아요 추가되었습니다.');
-      else toast.success('좋아요 취소되었습니다.');
+      if (data.isLiked) toast.success('찜 목록에 추가되었습니다.');
+      else toast.success('찜 목록에 제외되었습니다.');
     },
     onError: (_err, preAuctionId, context) => {
       if (context?.previousData) {

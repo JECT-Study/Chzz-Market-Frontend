@@ -95,7 +95,7 @@ export const Signup = () => {
           className="flex flex-col px-2 py-4 space-y-4"
         >
           <h2 className="pb-4 text-heading3">기본 정보 입력</h2>
-          <div className='flex items-end gap-[0.625rem]'>
+          <div className='flex items-end gap-[10px]'>
             <div className='flex-1'>
               <FormField
                 label="닉네임 *"
@@ -113,7 +113,7 @@ export const Signup = () => {
               />
             </div>
             <div>
-              <Button type='button' className='w-[5.9375rem] h-[3.125rem] border-gray2' onClick={onNicknameCheck}>중복확인</Button>
+              <Button type='button' className='w-[5rem] web:w-[5.97rem] h-[3.13rem] border-gray2' onClick={onNicknameCheck}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
@@ -144,7 +144,7 @@ export const Signup = () => {
       <Layout.Footer type="single">
         <Button
           type="button"
-          className="w-full h-[47px] rounded-lg"
+          className="w-full h-[2.94rem] rounded-lg"
           color="cheeseYellow"
           onClick={() => formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
           disabled={!isSubmitEnabled || isPending}

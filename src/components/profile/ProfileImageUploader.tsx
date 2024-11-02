@@ -39,19 +39,19 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
   return (
     <div className="flex flex-col items-center gap-4">
       {image ? (
-        <div className="relative w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] cursor-pointer" onClick={onClickImage}>
+        <div className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer" onClick={onClickImage}>
           <img src={image} alt="프로필 사진" className="object-cover w-full h-full rounded-full" />
-          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='absolute bottom-0 right-0 w-14 h-14' />
-          {onMenu &&
+          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
+          {onMenu && 
             <div ref={menuRef}>
               <MenuAccordion fileInputRef={fileInputRef} deleteImage={deleteImage} setOnMenu={setOnMenu} />
             </div>
           }
         </div>
       ) : (
-        <div className="relative w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] cursor-pointer" onClick={handleBoxClick}>
+        <div className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer" onClick={handleBoxClick}>
           <img src={Profile} alt="프로필 사진" className="relative object-cover w-full h-full rounded-full" />
-          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='absolute bottom-0 right-0 w-14 h-14' />
+          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
         </div>
       )}
       <Input

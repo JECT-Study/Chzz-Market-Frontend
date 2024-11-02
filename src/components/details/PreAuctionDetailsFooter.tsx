@@ -38,7 +38,7 @@ const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuction
           color={isLiked ? 'grayWhite' : "cheeseYellow"}
           onClick={() => toggleAuctionItemHeart(preAuctionId)}
         >
-          {isLiked ? "좋아요 취소" : "좋아요"}
+          {isLiked ? "찜 목록에서 제외" : "찜 목록에 추가"}
         </Button>}
     </Layout.Footer>
   );
