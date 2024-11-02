@@ -18,9 +18,9 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
   };
 
   return (
-    <div className={`p-5 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} `} aria-label={`알림 배경_${notificationId}`}>
-      <figure onClick={handleClick} className={`flex w-full ${auctionId ? 'cursor-pointer' : (isRead) ? '' : 'cursor-pointer'}`} aria-label={`알림_${notificationId}`}>
-        <figcaption className='flex flex-col flex-1 justify-between min-h-[6rem] p-3'>
+    <div className={`p-10 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} `} aria-label={`알림 배경_${notificationId}`}>
+      <figure onClick={handleClick} className={`flex justify-between w-full gap-3 ${auctionId ? 'cursor-pointer' : (isRead) ? '' : 'cursor-pointer'}`} aria-label={`알림_${notificationId}`}>
+        <figcaption className='flex flex-col flex-1 justify-between min-h-[6rem]'>
           <h4 className='text-body1' aria-label={`알림 제목${notificationId}`}>
             {message}
           </h4>
@@ -28,11 +28,13 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
             {time}
           </div>
         </figcaption>
-        <img className='object-cover rounded size-24' src={imageUrl ?? DefaultImage} alt={`알림 이미지_${item.notificationId}`} />
+        <div className='flex items-start gap-3'>
+          <img className='object-cover rounded size-24' src={imageUrl ?? DefaultImage} alt={`알림 이미지_${item.notificationId}`} />
+          <button aria-label={`알림 삭제 버튼_${item.notificationId}`} onClick={() => deleteNotification(notificationId)}>
+            <img className='rounded size-4' src={XButtonIcon} alt='알림 삭제 아이콘' />
+          </button>
+        </div>
       </figure>
-      <button aria-label={`알림 삭제 버튼_${item.notificationId}`} onClick={() => deleteNotification(notificationId)}>
-        <img className='p-2 rounded size-8 hover:bg-black/30 active:bg-black/60' src={XButtonIcon} alt='알림 삭제 아이콘' />
-      </button>
     </div>
   );
 };
