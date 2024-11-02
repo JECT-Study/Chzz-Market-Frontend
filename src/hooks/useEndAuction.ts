@@ -1,14 +1,14 @@
 import { IAuctionDetails } from '@/@types/AuctionDetails';
-import { queryKeys } from '@/constants/queryKeys';
-import { useCallback } from 'react';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
 
 export const useEndAuction = () => {
   const queryClient = useQueryClient();
 
   const endAuction = useCallback(
     async (auctionId: number) => {
-      queryClient.setQueryData([queryKeys.AUCTION_DETAILS, auctionId], (oldData: IAuctionDetails) => {
+      queryClient.setQueryData([QUERY_KEYS.AUCTION_DETAILS, auctionId], (oldData: IAuctionDetails) => {
         return {
           ...oldData,
           status: 'ENDED',

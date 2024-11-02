@@ -1,11 +1,11 @@
-import { httpClient } from "@/api/axios";
-import Button from "@/components/common/Button";
-import Layout from "@/components/layout/Layout";
-import { Input } from "@/components/ui/input";
+import { Layout } from "@/app/layout/index";
+import { httpClient } from "@/shared/api/axios";
+import { Input } from "@/shared/shadcn/ui/input";
+import { Button } from "@/shared";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Test = () => {
+export const Test = () => {
   const [state, setState] = useState(0)
   const navigate = useNavigate()
 
@@ -28,5 +28,3 @@ const Test = () => {
     </Layout>
   );
 }
-
-export default Test;

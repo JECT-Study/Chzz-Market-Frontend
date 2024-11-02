@@ -1,15 +1,14 @@
 import type { IPreAuctionItem } from '@/@types/AuctionItem';
-import ROUTES from '@/constants/routes';
+import { LikeCount, Price } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
-import LikeCount from '../common/atomic/LikeCount';
-import Price from '../common/atomic/Price';
-import ProductItem from '../common/item/ProductItem';
+import ProductItem from '../../entities/product/ui/ProductItem';
 import { useToggleAuctionListHeart } from './queries';
 
 const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
   const navigate = useNavigate();
   const { mutate: toggleAuctionListHeart } = useToggleAuctionListHeart();
-  const handleProductClick = () => navigate(ROUTES.getPreAuctionItemRoute(product.productId))
+  const handleProductClick = () => navigate(ROUTES.PRE_AUCTION.getItemRoute(product.productId))
   const confirmDelete = () => toggleAuctionListHeart(product.productId)
 
   return (

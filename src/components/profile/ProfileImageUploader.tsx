@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { Input } from '../ui/input';
 import { useProfileImageUploader } from '@/hooks/useProfileImageUploader';
-import ProfileEdit from '@/assets/icons/profile_edit.svg';
-import Profile from '@/assets/icons/profile.svg';
-import MenuAccordion from '../common/MenuAccordion';
+import { MenuAccordion } from '@/shared';
+import Profile from '@/shared/assets/icons/profile.svg';
+import ProfileEdit from '@/shared/assets/icons/profile_edit.svg';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Input } from '../../shared/shadcn/ui/input';
 
 interface ImageUploaderProps {
   image: string | null;
@@ -30,7 +30,7 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };

@@ -1,10 +1,10 @@
 import type { IAuctionDetails, IPreAuctionDetails } from '@/@types/AuctionDetails';
 import { UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
-import { httpClient } from '@/api/axios';
-import { API_END_POINT } from '@/constants/api';
-import { queryKeys } from '@/constants/queryKeys';
-import ROUTES from '@/constants/routes';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
+import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -15,7 +15,7 @@ export const useConvertAuction = (): {
   const navigate = useNavigate();
 
   const convertAuction = async (preAuctionId: number) => {
-    const response = await httpClient.post(`${API_END_POINT.AUCTIONS}/start`, preAuctionId);
+    const response = await httpClient.post(`${API_END_POINT.AUCTION}/start`, preAuctionId);
 
     return response.data;
   };
@@ -23,7 +23,7 @@ export const useConvertAuction = (): {
   const { mutate, isPending } = useMutation({
     mutationFn: convertAuction,
     onSuccess: (data) => {
-      navigate(ROUTES.getAuctionItemRoute(data.auctionId), { replace: true });
+      navigate(ROUTES.AUCTION.getItemRoute(data.auctionId), { replace: true });
       toast.success('경매로 전환되었습니다.');
     },
   });
@@ -44,11 +44,11 @@ export const useToggleAuctionDetailsHeart = (): {
   const { mutate } = useMutation({
     mutationFn: heartAuctionItem,
     onMutate: async (preAuctionId: number) => {
-      await queryClient.cancelQueries({ queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId] });
+      await queryClient.cancelQueries({ queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId] });
 
-      const previousData = queryClient.getQueryData([queryKeys.PRE_AUCTION_DETAILS, preAuctionId]);
+      const previousData = queryClient.getQueryData([QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId]);
 
-      queryClient.setQueryData([queryKeys.PRE_AUCTION_DETAILS, preAuctionId], (oldData: IPreAuctionDetails) => {
+      queryClient.setQueryData([QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId], (oldData: IPreAuctionDetails) => {
         if (!oldData) return oldData;
         return {
           ...oldData,
@@ -61,19 +61,19 @@ export const useToggleAuctionDetailsHeart = (): {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_HEART_LIST],
+        queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST],
       });
       if (data.isLiked) toast.success('찜 목록에 추가되었습니다.');
       else toast.success('찜 목록에 제외되었습니다.');
     },
     onError: (_err, preAuctionId, context) => {
       if (context?.previousData) {
-        queryClient.setQueryData([queryKeys.PRE_AUCTION_DETAILS, preAuctionId], context.previousData);
+        queryClient.setQueryData([QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId], context.previousData);
       }
     },
     onSettled: (_res, _err, preAuctionId: number) => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
+        queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId],
       });
     },
   });
@@ -96,7 +96,7 @@ export const useCancelBid = (): {
     mutationFn: cancelBid,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.AUCTION_DETAILS],
+        queryKey: [QUERY_KEYS.AUCTION_DETAILS],
       });
       toast.success('경매 참여를 취소했습니다.');
     },
@@ -107,13 +107,13 @@ export const useCancelBid = (): {
 
 export const useGetAuctionDetails = (auctionId: number): { auctionDetails: IAuctionDetails } => {
   const getAuctionDetails = async (): Promise<IAuctionDetails> => {
-    const response = await httpClient.get(`${API_END_POINT.AUCTIONS}/${auctionId}`);
+    const response = await httpClient.get(`${API_END_POINT.AUCTION}/${auctionId}`);
 
     return response.data;
   };
 
   const { data: auctionDetails } = useSuspenseQuery({
-    queryKey: [queryKeys.AUCTION_DETAILS, auctionId],
+    queryKey: [QUERY_KEYS.AUCTION_DETAILS, auctionId],
     queryFn: getAuctionDetails,
   });
 
@@ -130,7 +130,7 @@ export const useGetPreAuctionDetails = (preAuctionId: number | undefined) => {
   };
 
   const { data: preAuctionDetails } = useQuery({
-    queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
+    queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId],
     queryFn: getPreAuctionDetails,
     enabled: preAuctionId === undefined ? false : true,
   });
@@ -148,7 +148,7 @@ export const useGetPreAuctionDetailsWithSuspense = (preAuctionId: number) => {
   };
 
   const { data: preAuctionDetails } = useSuspenseQuery({
-    queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
+    queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId],
     queryFn: getPreAuctionDetails,
   });
 

@@ -1,8 +1,8 @@
 import { IAuctionList, IPreAuctionList } from '@/@types/AuctionList';
 
-import { httpClient } from '@/api/axios';
-import { API_END_POINT } from '@/constants/api';
-import { queryKeys } from '@/constants/queryKeys';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -14,7 +14,7 @@ export interface GetProductParams {
 }
 
 export const getOngoingProductList = async ({ pageNumber, pageSize, sortType = 'newest', category = 'all' }: GetProductParams): Promise<IAuctionList> => {
-  const response = await httpClient.get(`${API_END_POINT.AUCTIONS}?category=${category}&sort=${sortType}&page=${pageNumber}&size=${pageSize}`);
+  const response = await httpClient.get(`${API_END_POINT.AUCTION}?category=${category}&sort=${sortType}&page=${pageNumber}&size=${pageSize}`);
   return response.data;
 };
 
@@ -37,13 +37,13 @@ export const useToggleAuctionListHeart = (): {
     mutationFn: heartAuctionItem,
     onSuccess: (data, preAuctionId) => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_HEART_LIST],
+        queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST],
       });
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
+        queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId],
       });
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_LIST],
+        queryKey: [QUERY_KEYS.PRE_AUCTION_LIST],
       });
       if (data.isLiked) toast.success('찜 목록에 추가되었습니다.');
       else toast.success('찜 목록에서 제외되었습니다.');

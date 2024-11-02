@@ -1,9 +1,9 @@
 import { UseMutateFunction, useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
 import { IPreAuctionItem } from '@/@types/AuctionItem';
-import { httpClient } from '@/api/axios';
-import { API_END_POINT } from '@/constants/api';
-import { queryKeys } from '@/constants/queryKeys';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { toast } from 'sonner';
 
 export const useGetPreAuctionHeartList = () => {
@@ -14,7 +14,7 @@ export const useGetPreAuctionHeartList = () => {
   };
 
   const { data: preAuctionHeartList } = useSuspenseQuery({
-    queryKey: [queryKeys.PRE_AUCTION_HEART_LIST],
+    queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST],
     queryFn: getPreAuctionHeartList,
   });
 
@@ -32,9 +32,9 @@ export const useDeletePreAuctionHeart = (): {
   const { mutate } = useMutation({
     mutationFn: deletePreAuctionHeart,
     onMutate: async (preAuctionId: number) => {
-      await queryClient.cancelQueries({ queryKey: [queryKeys.PRE_AUCTION_HEART_LIST] });
-      const previousData = queryClient.getQueryData([queryKeys.PRE_AUCTION_HEART_LIST]);
-      queryClient.setQueryData([queryKeys.PRE_AUCTION_HEART_LIST], (oldData: IPreAuctionItem[]) => {
+      await queryClient.cancelQueries({ queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST] });
+      const previousData = queryClient.getQueryData([QUERY_KEYS.PRE_AUCTION_HEART_LIST]);
+      queryClient.setQueryData([QUERY_KEYS.PRE_AUCTION_HEART_LIST], (oldData: IPreAuctionItem[]) => {
         if (!oldData) return oldData;
 
         return oldData.filter((el: IPreAuctionItem) => el.productId !== preAuctionId);
@@ -44,18 +44,18 @@ export const useDeletePreAuctionHeart = (): {
     },
     onSuccess: (_, preAuctionId: number) => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_DETAILS, preAuctionId],
+        queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId],
       });
       toast.success('찜 목록에서 제외되었습니다.');
     },
     onError: (_err, _var, context) => {
       if (context?.previousData) {
-        queryClient.setQueryData([queryKeys.PRE_AUCTION_HEART_LIST], context.previousData);
+        queryClient.setQueryData([QUERY_KEYS.PRE_AUCTION_HEART_LIST], context.previousData);
       }
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.PRE_AUCTION_HEART_LIST],
+        queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST],
       });
     },
   });

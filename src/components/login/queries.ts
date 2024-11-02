@@ -1,10 +1,10 @@
-import { removeToken, setToken } from '@/utils/tokenUtils';
+import { removeToken, setToken } from '@/shared/utils/token';
 
-import { API_END_POINT } from '@/constants/api';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 // eslint-disable-next-line import/no-cycle
 import type { IUser } from '@/@types/user';
-import { httpClient } from '@/api/axios';
-import { storeLogin } from '@/store/authSlice';
+import { storeLogin } from '@/features/auth/model/authSlice';
+import { httpClient } from '@/shared/api/axios';
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -86,4 +86,4 @@ export const usePostSignup = (): {
   });
 
   return { signupMutation, isPending };
-}
+};

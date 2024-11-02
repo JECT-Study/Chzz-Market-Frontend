@@ -1,20 +1,19 @@
 import type { IUserAuctionWonItem } from '@/@types/AuctionItem';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import { ParticipantCount, ROUTES } from '@/shared';
+import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
+import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
-import trophyImage from '@/assets/icons/successful_auction_win.svg';
-import ParticipantCount from '../common/atomic/ParticipantCount';
-import ROUTES from '@/constants/routes';
 
 const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const navigate = useNavigate();
   const formatted = formatCurrencyWithWon(product.winningAmount);
 
-  const handleProductClick = () => navigate(ROUTES.getAuctionItemRoute(product.auctionId));
+  const handleProductClick = () => navigate(ROUTES.AUCTION.getItemRoute(product.auctionId));
 
   const handleButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!product.isOrdered) {
-      navigate(ROUTES.getAuctionShippingRoute(product.auctionId));
+      navigate(ROUTES.PAYMENT.getRoute(product.auctionId));
     } else {
       navigate(`/payment/success?auctionId=${product.auctionId}`);
     }
@@ -33,14 +32,14 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
             {product.isOrdered ? (
               <div
                 aria-label="시간"
-                className="absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 text-timeColor3 border-b-2 text-body1"
+                className="absolute bottom-0 w-full pt-1 text-center bg-white border-b-2 opacity-80 text-timeColor3 text-body1"
               >
                 <p className="text-timeColor3">결제 완료</p>
               </div>
             ) : (
               <div
                 aria-label="시간"
-                className="absolute bottom-0 w-full pt-1 text-center bg-white opacity-80 text-timeColor1 border-b-2 text-body1"
+                className="absolute bottom-0 w-full pt-1 text-center bg-white border-b-2 opacity-80 text-timeColor1 text-body1"
               >
                 <p className="text-redNotice">결제 전</p>
               </div>
