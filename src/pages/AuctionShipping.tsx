@@ -14,7 +14,7 @@ import { z } from 'zod';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { addressMemo } from '@/constants/address';
 import { Input } from '@/components/ui/input';
-import type { IAddressDetail } from '@/@types/Address';
+import type { IAddressWithId } from '@/@types/Address';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
 
@@ -32,7 +32,7 @@ const AuctionShipping = () => {
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId, isPending } = usePostOrderId();
   const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment } = usePostPayment(auctionId || '', orderId);
-  let address: IAddressDetail = {
+  let address: IAddressWithId = {
     id: '',
     recipientName: '',
     phoneNumber: '',

@@ -1,4 +1,4 @@
-import type { IAddressDetail } from "@/@types/Address";
+import type { IAddressWithId } from "@/@types/Address";
 import { createOrderId, getAddress, getCustomerKey, useGetAddressDetail } from "@/components/address/queries";
 import { queryKeys } from "@/constants/queryKeys";
 import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
@@ -18,7 +18,7 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
     queryFn: () => getAddress()
   });
 
-  const postPayment = (formData: any, address: IAddressDetail) => {
+  const postPayment = (formData: any, address: IAddressWithId) => {
     const memo = formData.memo;
     const addressId = address.id;
     const phoneNumber = address.phoneNumber.replace(/-/g, '');

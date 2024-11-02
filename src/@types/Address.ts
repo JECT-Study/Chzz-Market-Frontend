@@ -1,6 +1,6 @@
 import { PaginationData } from './AuctionList';
 
-export interface IAddressDetails {
+export interface IAddressBase {
   recipientName: string;
   phoneNumber: string;
   zipcode: string;
@@ -10,8 +10,8 @@ export interface IAddressDetails {
   isDefault: boolean;
 }
 
-export interface IAddressDetail extends IAddressDetails {
+export interface IAddressWithId extends IAddressBase {
   id: string;
 }
 
-export interface IAddressData extends PaginationData<IAddressDetails> {}
+export interface IAddressData extends PaginationData<IAddressBase> {}
