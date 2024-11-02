@@ -17,7 +17,7 @@
     "paths": {
       "@/*": ["/*"],
       "@/components/*": ["components/*"],
-      "@/assets/*": ["assets/*"],
+      "@/shared/assets/*": ["shared/assets/*"],
       "@/constants/*": ["constants/*"],
       "@/mocks/*": ["mocks/*"],
       "@/pages/*": ["pages/*"],

@@ -1,8 +1,8 @@
 import { HttpHandler, HttpResponse, delay, http } from 'msw';
 
-import { API_END_POINT } from '@/constants/api';
-import { serverAPI } from '@/main';
-import type { INotification } from '@/@types/Notification';
+import { serverAPI } from '@/app/main';
+import type { INotification } from '@/features/notification/config/type';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { notificationData } from '../data/notificationData';
 
 let notifications = [...notificationData];

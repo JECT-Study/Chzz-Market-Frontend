@@ -1,12 +1,10 @@
 import { useCancelBid, useGetAuctionDetails } from "@/components/details/queries";
 
-import Button from "@/components/common/Button";
-import { MAX_BID_COUNT } from "@/constants/bid";
-import ROUTES from "@/constants/routes";
+import { Layout } from "@/app/layout/index";
+import { MAX_BID_COUNT } from "@/features/bid/config";
+import { Button, Confirm, Modal } from "@/shared";
+import { ROUTES } from "@/shared/constants/routes";
 import { useNavigate } from "react-router-dom";
-import Confirm from "../common/Confirm";
-import Modal from "../common/Modal";
-import Layout from "../layout/Layout";
 
 const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
@@ -30,7 +28,7 @@ const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
           (isWon
             ?
             // 낙찰
-            <Button type='button' onClick={() => navigate(ROUTES.getFinalBidderListRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
+            <Button type='button' onClick={() => navigate(ROUTES.getSettlementRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
               참여자 내역 보기
             </Button>
             :
@@ -50,7 +48,7 @@ const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
               </Button>
               :
               // 결제 이전
-              <Button type='button' onClick={() => navigate(ROUTES.getAuctionShippingRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
+              <Button type='button' onClick={() => navigate(ROUTES.PAYMENT.getRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
                 결제하기
               </Button>)
             :

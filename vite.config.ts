@@ -1,8 +1,8 @@
 /// <reference types="vitest" />
 
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react()],
@@ -10,7 +10,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src'),
       '@/components': resolve(__dirname, 'src/components'),
-      '@/assets': resolve(__dirname, 'src/assets'),
+      '@/shared/assets': resolve(__dirname, 'src/shared/assets'),
       '@/constants': resolve(__dirname, 'src/constants'),
       '@/mocks': resolve(__dirname, 'src/mocks'),
       '@/pages': resolve(__dirname, 'src/pages'),

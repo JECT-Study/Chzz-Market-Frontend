@@ -1,6 +1,6 @@
 import { getMyHistoryAuction, getMyLostAuction, getMyWonAuction } from '@/components/userAuction/queries';
 
-import { queryKeys } from '@/constants/queryKeys';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +13,7 @@ const useHistory = (activeTab: string): any => {
     hasNextPage: hasNextHistoryPage,
     refetch: refetchHistoryData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.AUCTION_HISTORY],
+    queryKey: [QUERY_KEYS.AUCTION_HISTORY],
     queryFn: () => getMyHistoryAuction({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
@@ -33,7 +33,7 @@ const useHistory = (activeTab: string): any => {
     hasNextPage: hasNextWonPage,
     refetch: refetchWonData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.AUCTION_WON],
+    queryKey: [QUERY_KEYS.AUCTION_WON],
     queryFn: () => getMyWonAuction({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
@@ -53,7 +53,7 @@ const useHistory = (activeTab: string): any => {
     hasNextPage: hasNextLostPage,
     refetch: refetchLostData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.AUCTION_LOST],
+    queryKey: [QUERY_KEYS.AUCTION_LOST],
     queryFn: () => getMyLostAuction({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {

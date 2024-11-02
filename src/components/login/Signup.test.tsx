@@ -1,8 +1,8 @@
-import { describe, expect, test, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, test, vi } from 'vitest';
 
+import { Signup } from '@/pages/sign-up/ui/Signup';
 import { BrowserRouter } from 'react-router-dom';
-import Signup from '@/pages/Signup';
 
 describe.skip('Signup', () => {
   const setup = (placeholder: string, value: string) => {

@@ -1,8 +1,8 @@
-import { API_END_POINT } from '@/constants/api';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { http, HttpHandler, HttpResponse } from 'msw';
 import ongoingProducts from '../data/ongoingData';
 
-export const getOngoingProductList: HttpHandler = http.get(`${API_END_POINT.AUCTIONS}`, ({ request }) => {
+export const getOngoingProductList: HttpHandler = http.get(`${API_END_POINT.AUCTION}`, ({ request }) => {
   const url = new URL(request.url);
   const page = url.searchParams.get('page') || '0';
   const limit = url.searchParams.get('limit') || '10';

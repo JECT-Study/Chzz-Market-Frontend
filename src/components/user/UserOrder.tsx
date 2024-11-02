@@ -1,10 +1,10 @@
 import { IParticipantCountItems } from '@/@types/user';
-import AuctionIcon from '@/assets/icons/auction.svg';
-import FailedIcon from '@/assets/icons/failed_auction.svg';
-import OnGoingIcon from '@/assets/icons/ongoing_auction.svg';
-import PreAuctionIcon from '@/assets/icons/pre_auction.svg';
-import SuccessIcon from '@/assets/icons/successful_auction.svg';
-import ROUTERS from '@/constants/routes';
+import AuctionIcon from '@/shared/assets/icons/auction.svg';
+import FailedIcon from '@/shared/assets/icons/failed_auction.svg';
+import OnGoingIcon from '@/shared/assets/icons/ongoing_auction.svg';
+import PreAuctionIcon from '@/shared/assets/icons/pre_auction.svg';
+import SuccessIcon from '@/shared/assets/icons/successful_auction.svg';
+import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
@@ -29,7 +29,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
           <div
             className="flex flex-col items-center w-1/3 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate(ROUTERS.PARTICIPATED_LIST, {
+              navigate(ROUTES.USER.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionHistory' },
               })
             }
@@ -39,8 +39,8 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
               alt="참여중인 경매"
               className="w-8 h-8 mb-2"
             />
-            <span className="text-body2 text-center block lg:hidden">참여중인 <br /> 경매</span>
-            <span className="text-heading3 hidden lg:block">참여중인 경매</span>
+            <span className="block text-center text-body2 lg:hidden">참여중인 <br /> 경매</span>
+            <span className="hidden text-heading3 lg:block">참여중인 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$participantCount.ongoingAuctionCount} 건</span>
           </div>
 
@@ -48,14 +48,14 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
           <div
             className="flex flex-col items-center w-1/3 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate(ROUTERS.PARTICIPATED_LIST, {
+              navigate(ROUTES.USER.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionsWon' },
               })
             }
           >
             <img src={SuccessIcon} alt="성공한 경매" className="w-8 h-8 mb-2" />
-            <span className="text-body2 text-center block lg:hidden">성공한 <br /> 경매</span>
-            <span className="text-heading3 hidden lg:block">성공한 경매</span>
+            <span className="block text-center text-body2 lg:hidden">성공한 <br /> 경매</span>
+            <span className="hidden text-heading3 lg:block">성공한 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$participantCount.successfulAuctionCount} 건</span>
           </div>
 
@@ -63,14 +63,14 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
           <div
             className="flex flex-col items-center w-1/3 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate(ROUTERS.PARTICIPATED_LIST, {
+              navigate(ROUTES.USER.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionsLost' },
               })
             }
           >
             <img src={FailedIcon} alt="실패한 경매" className="w-8 h-8 mb-2" />
-            <span className="text-body2 text-center block lg:hidden">실패한 <br /> 경매</span>
-            <span className="text-heading3 hidden lg:block">실패한 경매</span>
+            <span className="block text-center text-body2 lg:hidden">실패한 <br /> 경매</span>
+            <span className="hidden text-heading3 lg:block">실패한 경매</span>
             <span className="mt-1 text-lg text-orange-500">{$participantCount.failedAuctionCount} 건</span>
           </div>
         </div>
@@ -84,7 +84,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
           <div
             className="flex flex-col items-center w-1/2 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate(ROUTERS.REGISTERED_LIST, { state: { sortType: 'ongoing' } })
+              navigate(ROUTES.USER.REGISTERED_LIST, { state: { sortType: 'ongoing' } })
             }
           >
             <img src={AuctionIcon} alt="정식 경매" className="w-8 h-8 mb-2" />
@@ -96,7 +96,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
           <div
             className="flex flex-col items-center w-1/2 p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
-              navigate(ROUTERS.PRE_REGISTERED_LIST, { state: { sortType: 'preAuction' } })
+              navigate(ROUTES.USER.PRE_REGISTERED_LIST, { state: { sortType: 'preAuction' } })
             }
           >
             <img

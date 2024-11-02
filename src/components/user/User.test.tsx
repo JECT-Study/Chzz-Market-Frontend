@@ -1,14 +1,14 @@
-import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
+import { User } from '@/pages/user';
 import { BrowserRouter } from 'react-router-dom';
-import USER from '@/pages/User';
 
 describe('USER', () => {
   it.skip('렌더 테스트 마이페이지', () => {
     render(
       <BrowserRouter>
-        <USER />
+        <User />
       </BrowserRouter>,
     );
 

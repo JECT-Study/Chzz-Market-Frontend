@@ -1,6 +1,6 @@
 import { CATEGORIES } from '@/constants/categories';
+import { Price } from "@/shared";
 import { useNavigate } from 'react-router-dom';
-import Price from '../common/atomic/Price';
 
 interface DetailsBasicProps {
   productName: string, category: string, minPrice: number
@@ -10,7 +10,7 @@ const DetailsBasic = ({ productName, category, minPrice }: DetailsBasicProps) =>
   const navigate = useNavigate();
 
   const onClickCategory = () => {
-    navigate(`/product/list?category=${CATEGORIES[category].lowerCode}`, { state: { category: CATEGORIES[category].value }});
+    navigate(`/product/list?category=${CATEGORIES[category].lowerCode}`, { state: { category: CATEGORIES[category].value } });
   };
 
   return (

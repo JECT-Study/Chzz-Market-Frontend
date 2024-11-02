@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import Button from '@/components/common/Button';
+import { Button } from '@/shared';
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 
 interface ProductButtonsProps {
   setOngoingSortType: (sortType: string) => void;
@@ -21,7 +21,7 @@ const ProductButtons = ({ setOngoingSortType, setPreAuctionSortType }: ProductBu
   const buttonSize = windowSize >= 500 ? 'small' : 'xsmall';
 
   return (
-    <div className="flex h-22px space-x-3 p-4">
+    <div className="flex p-4 space-x-3 h-22px">
       <Button
         size={buttonSize}
         color={classNames(activeFilter === 'newest' ? 'black' : 'white')}

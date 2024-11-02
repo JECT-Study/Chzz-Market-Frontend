@@ -1,6 +1,6 @@
 import { getEnrollProductList, getOngoingProductList } from '@/components/productList/queries';
 
-import { queryKeys } from '@/constants/queryKeys';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +13,7 @@ const useProductList = (activeTab: string, ongoingSortType: string, preAuctionSo
     hasNextPage: hasNextOngoingPage,
     refetch: refetchOngoingData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.AUCTION_LIST, ongoingSortType, category],
+    queryKey: [QUERY_KEYS.AUCTION_LIST, ongoingSortType, category],
     queryFn: () =>
       getOngoingProductList({
         pageNumber: 0,
@@ -39,7 +39,7 @@ const useProductList = (activeTab: string, ongoingSortType: string, preAuctionSo
     hasNextPage: hasNextEnrollPage,
     refetch: refetchEnrollData,
   } = useInfiniteQuery({
-    queryKey: [queryKeys.PRE_AUCTION_LIST, preAuctionSortType, category],
+    queryKey: [QUERY_KEYS.PRE_AUCTION_LIST, preAuctionSortType, category],
     queryFn: () => getEnrollProductList({ pageNumber: 0, pageSize: 10, sortType: preAuctionSortType, category }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {

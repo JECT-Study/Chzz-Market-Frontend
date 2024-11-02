@@ -1,12 +1,9 @@
 import type { IAuctionEndRegisteredItem } from '@/@types/AuctionItem';
-import PriceIcon from '@/assets/icons/price.svg';
-import ROUTES from '@/constants/routes';
-import { formatCurrencyWithWon } from '@/utils/formatCurrencyWithWon';
+import PriceIcon from '@/shared/assets/icons/price.svg';
+import { ROUTES, CreatedAt, ParticipantCount, Price } from '@/shared';
+import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
-import CreatedAt from '../common/atomic/CreatedAt';
-import ParticipantCount from '../common/atomic/ParticipantCount';
-import ProductItem from '../common/item/ProductItem';
-import Price from '../common/atomic/Price';
+import ProductItem from '../../entities/product/ui/ProductItem';
 
 const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
   const navigate = useNavigate();
@@ -14,7 +11,7 @@ const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
   const formattedWinningBid = formatCurrencyWithWon(winningBidAmount);
 
   return (
-    <ProductItem product={product} onClick={() => navigate(ROUTES.getAuctionItemRoute(product.auctionId))}>
+    <ProductItem product={product} onClick={() => navigate(ROUTES.AUCTION.getItemRoute(product.auctionId))}>
       <Price title='시작가' price={product.minPrice} />
       <ParticipantCount count={product.participantCount} />
       <div

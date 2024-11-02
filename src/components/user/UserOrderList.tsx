@@ -1,5 +1,5 @@
-import ROUTERS from '@/constants/routes';
 import { useAuth } from '@/hooks/useAuth';
+import { ROUTES } from '@/shared/constants/routes';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const UserOrderList = () => {
 
   const handleItemClick = (title: string) => {
     if (title === '내가 등록한 경매 내역') {
-      navigate(ROUTERS.REGISTERED_LIST);
+      navigate(ROUTES.USER.REGISTERED_LIST);
     } else if (title === '로그아웃') {
       handleLogout();
     }
@@ -27,7 +27,7 @@ const UserOrderList = () => {
       {userList.map((item) => (
         <div
           key={item.id}
-          className="flex justify-between w-full py-2 border-b border-b-gray3 cursor-pointer"
+          className="flex justify-between w-full py-2 border-b cursor-pointer border-b-gray3"
           onClick={() => handleItemClick(item.title)}
         >
           <h2 className="text-xl font-medium">{item.title}</h2>

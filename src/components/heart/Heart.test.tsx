@@ -1,15 +1,15 @@
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from './queries';
 
-import Heart from '@/pages/Heart';
-import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
 import { preAuctionHeartData } from '@/mocks/data/preAuctionHeartData';
+import { Heart } from '@/pages/heart';
+import { mockedUseNavigate } from '@/shared/test/setupTests';
 import userEvent from '@testing-library/user-event';
-import { useGetNotifications } from '../notification/queries';
-import LayoutWithNav from '../layout/LayoutWithNav';
-import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from './queries';
+import LayoutWithNav from '../navigation/LayoutWithNav';
+import { useGetNotifications } from '@/features/notification/model';
 
 vi.mock('@/components/heart/queries', () => ({
   useGetPreRegisterHeart: vi.fn(),

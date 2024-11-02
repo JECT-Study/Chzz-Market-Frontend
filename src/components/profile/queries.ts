@@ -1,10 +1,10 @@
-import { httpClient } from '@/api/axios';
-import { API_END_POINT } from '@/constants/api';
-import { queryKeys } from '@/constants/queryKeys';
-import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
-import { nicknameCheck } from '../login/queries';
-import { useNavigate } from 'react-router-dom';
 import { IProfileData } from '@/@types/user';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
+import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { nicknameCheck } from '../login/queries';
 
 export const getProfile = async () => {
   const response = await httpClient.get(`${API_END_POINT.SIGNUP}`);
@@ -17,7 +17,7 @@ export const postEditProfile = async (formData: FormData) => {
       'Content-Type': 'multipart/form-data',
     },
   });
-  
+
   return response.data;
 };
 
@@ -30,11 +30,11 @@ export const useProfile = (): {
   const navigate = useNavigate();
 
   const { data: profileData, isLoading } = useQuery({
-    queryKey: [queryKeys.PROFILE],
+    queryKey: [QUERY_KEYS.PROFILE],
     queryFn: () => getProfile(),
   });
 
-  const { mutate: profileMutation, isPending} = useMutation({
+  const { mutate: profileMutation, isPending } = useMutation({
     mutationFn: (formData: FormData) => postEditProfile(formData),
     onSuccess: () => {
       navigate('/user');
@@ -44,11 +44,15 @@ export const useProfile = (): {
   return { profileData, profileMutation, isPending, isLoading };
 };
 
-export const useCheckNickname = ({ nickname }: { nickname: string }): {
+export const useCheckNickname = ({
+  nickname,
+}: {
+  nickname: string;
+}): {
   checkNickname: (options?: RefetchOptions) => Promise<QueryObserverResult<any, Error>>;
 } => {
   const { refetch: checkNickname } = useQuery({
-    queryKey: [queryKeys.NICKNAME, nickname],
+    queryKey: [QUERY_KEYS.NICKNAME, nickname],
     queryFn: () => nicknameCheck(nickname),
     enabled: false,
   });

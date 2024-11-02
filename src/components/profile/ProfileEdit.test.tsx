@@ -1,14 +1,14 @@
-import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
+import { UserProfileEdit } from '@/pages/user';
 import { BrowserRouter } from 'react-router-dom';
-import ProfileEdit from '@/pages/ProfileEdit';
 
 describe.skip('ProfileEdit', () => {
   it('프로필 수정 페이지 input test', () => {
     render(
       <BrowserRouter>
-        <ProfileEdit />
+        <UserProfileEdit />
       </BrowserRouter>,
     );
 
