@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { Input } from '../ui/input';
 import { useProfileImageUploader } from '@/hooks/useProfileImageUploader';
-import ProfileEdit from '@/assets/icons/profile_edit.svg';
-import Profile from '@/assets/icons/profile.svg';
-import MenuAccordion from '../common/MenuAccordion';
+import { MenuAccordion } from '@/shared';
+import Profile from '@/shared/assets/icons/profile.svg';
+import ProfileEdit from '@/shared/assets/icons/profile_edit.svg';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Input } from '../../shared/shadcn/ui/input';
 
 interface ImageUploaderProps {
   image: string | null;
@@ -30,7 +30,7 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -39,9 +39,9 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
   return (
     <div className="flex flex-col items-center gap-4">
       {image ? (
-        <div className="relative w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] cursor-pointer" onClick={onClickImage}>
+        <div className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer" onClick={onClickImage}>
           <img src={image} alt="프로필 사진" className="object-cover w-full h-full rounded-full" />
-          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-14 h-14 absolute bottom-0 right-0' />
+          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
           {onMenu && 
             <div ref={menuRef}>
               <MenuAccordion fileInputRef={fileInputRef} deleteImage={deleteImage} setOnMenu={setOnMenu} />
@@ -49,9 +49,9 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
           }
         </div>
       ) : (
-        <div className="relative w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] cursor-pointer" onClick={handleBoxClick}>
+        <div className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer" onClick={handleBoxClick}>
           <img src={Profile} alt="프로필 사진" className="relative object-cover w-full h-full rounded-full" />
-          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-14 h-14 absolute bottom-0 right-0' />
+          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
         </div>
       )}
       <Input

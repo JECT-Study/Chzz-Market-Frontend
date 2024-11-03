@@ -1,14 +1,14 @@
-import Adidas from '@/assets/images/adidas_superstar.jpeg';
-import type { INotification } from '@/@types/Notification';
-import JordanBlue from '@/assets/images/jordan_blue.jpeg';
-import JordanRed from '@/assets/images/jordan_red.jpeg';
-import NewBalance from '@/assets/images/newbalance_993.jpeg';
+import type { INotification } from '@/features/notification/config/type';
+import Adidas from '@/shared/assets/images/adidas_superstar.jpeg';
+import JordanBlue from '@/shared/assets/images/jordan_blue.jpeg';
+import JordanRed from '@/shared/assets/images/jordan_red.jpeg';
+import NewBalance from '@/shared/assets/images/newbalance_993.jpeg';
 
 export const notificationData: INotification[] = [
   {
     notificationId: 0,
     type: 'AUCTION_START',
-    message: '좋아요를 누른 사전 등록 제품의 경매가 시작되었습니다!',
+    message: '미리 찜하기를 누른 사전 등록 제품의 경매가 시작되었습니다!',
     createdAt: '2024-09-09T08:57:30.944646',
     isRead: false,
     imageUrl: JordanBlue,
@@ -51,7 +51,7 @@ export const notificationData: INotification[] = [
   {
     notificationId: 5,
     type: 'PRE_AUCTION_CANCELED',
-    message: '좋아요를 누른 사전 등록 제품이 판매자에 의해 취소되었습니다.',
+    message: '미리 찜하기를 누른 사전 등록 제품이 판매자에 의해 취소되었습니다.',
     createdAt: '2024-08-24T16:57:30.944646',
     isRead: true,
     imageUrl: NewBalance,

@@ -1,10 +1,10 @@
 import { IAuctionItem, IPreAuctionItem } from '@/@types/AuctionItem';
 
-import adidasImage from '@/assets/images/adidas_superstar.jpeg';
-import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
-import jordanBlueImage from '@/assets/images/jordan_blue.jpeg';
-import jordanRedImage from '@/assets/images/jordan_red.jpeg';
-import newBalanceImage from '@/assets/images/newbalance_993.jpeg';
+import adidasImage from '@/shared/assets/images/adidas_superstar.jpeg';
+import jordanBlackImage from '@/shared/assets/images/jordan_black.jpeg';
+import jordanBlueImage from '@/shared/assets/images/jordan_blue.jpeg';
+import jordanRedImage from '@/shared/assets/images/jordan_red.jpeg';
+import newBalanceImage from '@/shared/assets/images/newbalance_993.jpeg';
 
 export const bestAuctionsData: IAuctionItem[] = [
   {
@@ -110,6 +110,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
     minPrice: 230_000,
     likeCount: 45,
     isLiked: true,
+    isSeller: true,
   },
   {
     productId: 1,
@@ -118,6 +119,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
     minPrice: 100_000,
     likeCount: 30,
     isLiked: true,
+    isSeller: true,
   },
   {
     productId: 2,
@@ -126,6 +128,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
     minPrice: 180_000,
     likeCount: 18,
     isLiked: true,
+    isSeller: true,
   },
   {
     productId: 3,
@@ -134,6 +137,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
     minPrice: 120_000,
     likeCount: 12,
     isLiked: true,
+    isSeller: true,
   },
 
   {
@@ -143,5 +147,6 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
     minPrice: 70_000,
     likeCount: 1,
     isLiked: true,
+    isSeller: true,
   },
 ];

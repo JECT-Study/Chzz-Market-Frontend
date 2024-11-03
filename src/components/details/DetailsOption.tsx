@@ -1,8 +1,7 @@
-import Button from "../common/Button";
-import Confirm from "../common/Confirm";
-import DeleteIcon from '@/assets/icons/modal_cancel.svg';
-import EditIcon from '@/assets/icons/modal_edit.svg';
-import Modal from "../common/Modal";
+import { Button, Confirm, Modal } from "@/shared";
+
+import DeleteIcon from '@/shared/assets/icons/modal_cancel.svg';
+import EditIcon from '@/shared/assets/icons/modal_edit.svg';
 
 interface DetailsOptionProps {
   clickEdit: () => void
@@ -13,7 +12,7 @@ interface DetailsOptionProps {
 
 const DetailsOption = ({ clickEdit, confirmDelete, isPending }: DetailsOptionProps) => {
   return (
-    <div onClick={(e) => e.stopPropagation()} className='absolute flex flex-col z-50 bg-white rounded-lg w-[10rem] top-12 right-8 sm:text-body1 text-body2'>
+    <div onClick={(e) => e.stopPropagation()} className='absolute flex flex-col z-50 bg-white rounded-lg w-[10rem] top-12 right-8 web:text-body1 text-body2'>
       <button onClick={clickEdit} className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10'>
         <span>수정하기</span>
         <img src={EditIcon} alt="수정 아이콘" className='size-5 mb-[2px]' />

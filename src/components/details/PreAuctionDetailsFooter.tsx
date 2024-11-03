@@ -1,9 +1,7 @@
-import { useConvertAuction, useLikeAuctionItem } from './queries';
+import { Button, Confirm, Modal } from "@/shared";
+import { useConvertAuction, useToggleAuctionDetailsHeart } from './queries';
 
-import Button from '../common/Button';
-import Confirm from '../common/Confirm';
-import Modal from '../common/Modal';
-import Layout from '../layout/Layout';
+import { Layout } from "@/app/layout/index";
 
 interface PreAuctionDetailsFooterProps {
   isLiked: boolean
@@ -12,7 +10,7 @@ interface PreAuctionDetailsFooterProps {
 }
 
 const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuctionDetailsFooterProps) => {
-  const { mutate: likeAuctionItem } = useLikeAuctionItem();
+  const { mutate: toggleAuctionItemHeart } = useToggleAuctionDetailsHeart();
   const { mutate: convertToAuction, isPending } = useConvertAuction();
 
   return (
@@ -38,9 +36,9 @@ const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuction
           type="button"
           className="w-full h-full"
           color={isLiked ? 'grayWhite' : "cheeseYellow"}
-          onClick={() => likeAuctionItem(preAuctionId)}
+          onClick={() => toggleAuctionItemHeart(preAuctionId)}
         >
-          {isLiked ? "좋아요 취소" : "좋아요"}
+          {isLiked ? "찜 목록에서 제외" : "찜 목록에 추가"}
         </Button>}
     </Layout.Footer>
   );

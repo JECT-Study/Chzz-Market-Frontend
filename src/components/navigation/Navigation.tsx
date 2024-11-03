@@ -1,6 +1,6 @@
 import { navIcons } from '@/constants/navIcons';
+import { useGetNotifications } from '@/features/notification';
 import { useNavigate } from 'react-router-dom';
-import { useGetNotifications } from '../notification/queries';
 
 interface NavigationItemProps {
   name: string;
@@ -20,7 +20,7 @@ const NavigationItem = ({
   const notificationCondition = name === 'notification' && unreadNotificationsCount > 0;
 
   return (
-    <li className='flex justify-center transition-all items-center w-[11.25rem] h-[3.75rem] relative'>
+    <li className='flex justify-center transition-all items-center w-[11.25rem] min-w-[5.625rem] h-[3.75rem] relative'>
       <img onClick={() => navigate(path)} src={iconSrc} alt={`${name}_${active ? 'on' : 'off'}_icon`} className='cursor-pointer size-6' />
       {notificationCondition && (
         <div aria-label='읽지 않은 알림을 표시하는 빨간 점' className='absolute top-[25%] right-[42%] rounded-full size-1 bg-cheeseYellow' />
@@ -37,7 +37,7 @@ const Navigation = ({ active }: { active: string }) => {
   ) : 0
 
   return (
-    <nav className='flex items-center h-full'>
+    <nav className='flex items-center h-full -mx-[22.5px]'>
       {Object.entries(navIcons).map(([name, value]) => (
         <NavigationItem
           key={name}

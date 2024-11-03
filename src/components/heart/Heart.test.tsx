@@ -1,15 +1,15 @@
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from './queries';
 
-import Heart from '@/pages/Heart';
-import { mockedUseNavigate } from '@/setupTests';
 import { notificationData } from '@/mocks/data/notificationData';
 import { preAuctionHeartData } from '@/mocks/data/preAuctionHeartData';
+import { Heart } from '@/pages/heart';
+import { mockedUseNavigate } from '@/shared/test/setupTests';
 import userEvent from '@testing-library/user-event';
-import { useGetNotifications } from '../notification/queries';
-import LayoutWithNav from '../layout/LayoutWithNav';
-import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from './queries';
+import LayoutWithNav from '../navigation/LayoutWithNav';
+import { useGetNotifications } from '@/features/notification/model';
 
 vi.mock('@/components/heart/queries', () => ({
   useGetPreRegisterHeart: vi.fn(),
@@ -33,7 +33,7 @@ vi.mocked(useDeletePreAuctionHeart).mockReturnValue({
   mutate: mutateMock,
 });
 
-describe('좋아요 페이지 테스트', () => {
+describe('내가 찜 한 페이지 테스트', () => {
   const setup = () => {
     const utils = render(
       <MemoryRouter initialEntries={['/notification']}>
@@ -63,10 +63,10 @@ describe('좋아요 페이지 테스트', () => {
     });
   });
 
-  test('좋아요 한 사전 경매 상품 목록이 화면에 렌더링된다.', async () => {
+  test('내가 찜 한 사전 경매 상품 목록이 화면에 렌더링된다.', async () => {
     const { user: _user } = setup();
     const heartProducts = await screen.findAllByRole('figure', {
-      name: /좋아요 한 사전 경매 상품/,
+      name: /내가 찜 한 사전 경매 상품/,
     });
     expect(heartProducts).toHaveLength(3);
   });
@@ -74,7 +74,7 @@ describe('좋아요 페이지 테스트', () => {
   test('항목을 클릭하면 상세 페이지로 이동한다.', async () => {
     const { user } = setup();
     const heartProducts = await screen.findAllByRole('figure', {
-      name: /좋아요 한 사전 경매 상품/,
+      name: /내가 찜 한 사전 경매 상품/,
     });
     expect(heartProducts).toHaveLength(3);
 
@@ -84,9 +84,9 @@ describe('좋아요 페이지 테스트', () => {
     expect(mockedUseNavigate).toHaveBeenCalledWith('/product/0');
   });
 
-  test('좋아요 버튼을 클릭하면 항목이 삭제된다.', async () => {
+  test('찜 목록에서 제외 버튼을 클릭하면 항목이 삭제된다.', async () => {
     const { user } = setup();
-    const buttons = await screen.findAllByRole('button', { name: /좋아요/ });
+    const buttons = await screen.findAllByRole('button', { name: /찜 목록에서 제외/ });
 
     const firstButton = buttons[0];
     await user.click(firstButton);

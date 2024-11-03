@@ -1,7 +1,6 @@
 import type { IUserAuctionLostItem } from '@/@types/AuctionItem';
-import ParticipantCount from '../common/atomic/ParticipantCount';
-import ProductItem from '../common/item/ProductItem';
-import Price from '../common/atomic/Price';
+import { ParticipantCount, Price } from '@/shared';
+import ProductItem from '../../entities/product/ui/ProductItem';
 
 const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
 

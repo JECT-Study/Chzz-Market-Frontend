@@ -1,5 +1,5 @@
-import CustomCarousel from "../common/CustomCarousel";
-import EmptyBoundary from "../common/boundary/EmptyBoundary";
+import { EmptyBoundary } from "@/shared";
+import { CustomCarousel } from "@/shared";
 import HomeItem from "./HomeItem";
 import { useGetImminentAuctions } from "./queries";
 

@@ -1,24 +1,17 @@
 import { useCancelBid, useGetAuctionDetails } from "@/components/details/queries";
 
-import Button from "@/components/common/Button";
-import { MAX_BID_COUNT } from "@/constants/bid";
-import ROUTES from "@/constants/routes";
+import { Layout } from "@/app/layout/index";
+import { MAX_BID_COUNT } from "@/features/bid/config";
+import { Button, Confirm, Modal } from "@/shared";
+import { ROUTES } from "@/shared/constants/routes";
 import { useNavigate } from "react-router-dom";
-import Confirm from "../common/Confirm";
-import Modal from "../common/Modal";
-import Layout from "../layout/Layout";
 
-interface AuctionDetailsFooterProps {
-  auctionId: number
-  curStatus: string
-}
-
-const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProps) => {
+const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
-  const { mutate: cancelBid } = useCancelBid()
+  const { mutate: cancelBid, isPending } = useCancelBid()
   const { auctionDetails } = useGetAuctionDetails(auctionId);
 
-  const { isOrdered, isWinner, isSeller, bidId, isCancelled, remainingBidCount, isWon } = auctionDetails
+  const { isOrdered, isWinner, status, isSeller, bidId, isCancelled, remainingBidCount, isWon } = auctionDetails
   const remainFlag = remainingBidCount === MAX_BID_COUNT
   const disabledFlag = remainingBidCount === 0
 
@@ -26,7 +19,7 @@ const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProp
   const clickCancel = () => cancelBid(bidId || 0)
 
   // 경매 종료
-  if (curStatus === 'ENDED') {
+  if (status === 'ENDED') {
     return (
       <Layout.Footer type="single">
         {isSeller
@@ -35,7 +28,7 @@ const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProp
           (isWon
             ?
             // 낙찰
-            <Button type='button' onClick={() => navigate(ROUTES.getFinalBidderListRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
+            <Button type='button' onClick={() => navigate(ROUTES.getSettlementRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
               참여자 내역 보기
             </Button>
             :
@@ -55,7 +48,7 @@ const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProp
               </Button>
               :
               // 결제 이전
-              <Button type='button' onClick={() => navigate(ROUTES.getAuctionShippingRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
+              <Button type='button' onClick={() => navigate(ROUTES.PAYMENT.getRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
                 결제하기
               </Button>)
             :
@@ -117,7 +110,7 @@ const AuctionDetailsFooter = ({ auctionId, curStatus }: AuctionDetailsFooterProp
               </Modal.Open>
               <Modal.Window name="cancelBid">
                 <Confirm type="cancelBid" >
-                  <Button type='button' color='cheeseYellow' className='w-full' onClick={clickCancel}>
+                  <Button type='button' disabled={isPending} loading={isPending} color='cheeseYellow' className='w-full' onClick={clickCancel}>
                     참여 취소
                   </Button>
                 </Confirm>

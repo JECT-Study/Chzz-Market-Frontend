@@ -1,6 +1,6 @@
 import type { IAuctionDetails } from '@/@types/AuctionDetails';
-import jordanBlackImage from '@/assets/images/jordan_black.jpeg';
-import jordanRedImage from '@/assets/images/jordan_red.jpeg';
+import jordanBlackImage from '@/shared/assets/images/jordan_black.jpeg';
+import jordanRedImage from '@/shared/assets/images/jordan_red.jpeg';
 
 export const auctionDetailsData: IAuctionDetails[] = [
   {

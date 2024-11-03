@@ -1,8 +1,8 @@
 import type { IAuctionItem, IPreAuctionItem } from '@/@types/AuctionItem';
 
-import { API_END_POINT } from '@/constants/api';
-import { httpClient } from '@/api/axios';
-import { queryKeys } from '@/constants/queryKeys';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useGetBestAuctions = () => {
@@ -11,7 +11,7 @@ export const useGetBestAuctions = () => {
     return response.data;
   };
 
-  const { data: bestAuctions } = useSuspenseQuery({ queryKey: [queryKeys.BEST_AUCTIONS], queryFn: getBestAuctions });
+  const { data: bestAuctions } = useSuspenseQuery({ queryKey: [QUERY_KEYS.BEST_AUCTIONS], queryFn: getBestAuctions });
 
   return { bestAuctions };
 };
@@ -22,7 +22,7 @@ export const useGetImminentAuctions = () => {
   };
 
   const { data: imminentAuctions } = useSuspenseQuery({
-    queryKey: [queryKeys.IMMINENT_AUCTIONS],
+    queryKey: [QUERY_KEYS.IMMINENT_AUCTIONS],
     queryFn: getImminentAuctions,
   });
 
@@ -39,7 +39,7 @@ export const useGetPreAuctions = () => {
   };
 
   const { data: preAuctions } = useSuspenseQuery({
-    queryKey: [queryKeys.PRE_AUCTIONS],
+    queryKey: [QUERY_KEYS.PRE_AUCTIONS],
     queryFn: getPreAuctions,
   });
 

@@ -1,7 +1,7 @@
 import { IPreAuctionItem } from '@/@types/AuctionItem';
-import JordanBlack from '@/assets/images/jordan_black.jpeg';
-import JordanBlue from '@/assets/images/jordan_blue.jpeg';
-import JordanRed from '@/assets/images/jordan_red.jpeg';
+import JordanBlack from '@/shared/assets/images/jordan_black.jpeg';
+import JordanBlue from '@/shared/assets/images/jordan_blue.jpeg';
+import JordanRed from '@/shared/assets/images/jordan_red.jpeg';
 
 export const preAuctionHeartData: IPreAuctionItem[] = [
   {
@@ -11,6 +11,7 @@ export const preAuctionHeartData: IPreAuctionItem[] = [
     minPrice: 200_000,
     likeCount: 30,
     isLiked: true,
+    isSeller: true,
   },
   {
     productId: 1,
@@ -19,6 +20,7 @@ export const preAuctionHeartData: IPreAuctionItem[] = [
     minPrice: 350_000,
     likeCount: 12,
     isLiked: true,
+    isSeller: true,
   },
   {
     productId: 2,
@@ -27,5 +29,6 @@ export const preAuctionHeartData: IPreAuctionItem[] = [
     minPrice: 270_000,
     likeCount: 20,
     isLiked: true,
+    isSeller: true,
   },
 ];
