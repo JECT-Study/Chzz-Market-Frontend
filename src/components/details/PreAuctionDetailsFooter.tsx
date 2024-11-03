@@ -1,9 +1,7 @@
 import { useConvertAuction, useToggleAuctionDetailsHeart } from './queries';
 
-import Button from '../common/Button';
-import Confirm from '../common/Confirm';
-import Modal from '../common/Modal';
-import Layout from '../layout/Layout';
+import { Layout } from "@/app/layout/index";
+import { Button, Confirm, Modal } from "@/shared";
 
 interface PreAuctionDetailsFooterProps {
   isLiked: boolean
@@ -40,7 +38,7 @@ const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuction
           color={isLiked ? 'grayWhite' : "cheeseYellow"}
           onClick={() => toggleAuctionItemHeart(preAuctionId)}
         >
-          {isLiked ? "좋아요 취소" : "좋아요"}
+          {isLiked ? "찜 목록에서 제외" : "찜 목록에 추가"}
         </Button>}
     </Layout.Footer>
   );

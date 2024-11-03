@@ -1,7 +1,7 @@
 import { IPreAuctionItem } from '@/@types/AuctionItem';
-import JordanBlack from '@/assets/images/jordan_black.jpeg';
-import JordanBlue from '@/assets/images/jordan_blue.jpeg';
-import JordanRed from '@/assets/images/jordan_red.jpeg';
+import JordanBlack from '@/shared/assets/images/jordan_black.jpeg';
+import JordanBlue from '@/shared/assets/images/jordan_blue.jpeg';
+import JordanRed from '@/shared/assets/images/jordan_red.jpeg';
 
 export const preAuctionHeartData: IPreAuctionItem[] = [
   {

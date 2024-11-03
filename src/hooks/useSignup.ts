@@ -1,5 +1,5 @@
-import { SignupFormSchema } from '@/constants/schema';
 import { usePostSignup } from '@/components/login/queries';
+import { SignupFormSchema } from '@/shared/constants/schema';
 import { Control, UseFormHandleSubmit, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -14,20 +14,14 @@ interface IUseSignupReturn {
   isPending: boolean;
 }
 
-
 const defaultValues = {
   nickname: '',
-  bio: ''
+  bio: '',
 };
 
 export const useSignup = (): IUseSignupReturn => {
   const { signupMutation, isPending } = usePostSignup();
-  const {
-    control,
-    setValue,
-    handleSubmit,
-    watch,
-  } = useForm<FormFields>({
+  const { control, setValue, handleSubmit, watch } = useForm<FormFields>({
     defaultValues,
   });
 
@@ -37,6 +31,6 @@ export const useSignup = (): IUseSignupReturn => {
     watch,
     setValue,
     signupMutation,
-    isPending
+    isPending,
   };
 };

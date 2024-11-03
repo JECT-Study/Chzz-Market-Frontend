@@ -1,0 +1,38 @@
+import { getTimeAgo } from '@/shared';
+import DefaultImage from '@/shared/assets/icons/default_image.svg';
+import XButtonIcon from '@/shared/assets/icons/x_button.svg';
+import { useNavigate } from 'react-router-dom';
+import { NOTIFICATION_CONTENTS, type INotification } from '../config';
+import { useDeleteNotification, useReadNotification } from '../model';
+
+export const NotificationItem = ({ item }: { item: INotification }) => {
+  const navigate = useNavigate();
+  const { notificationId, isRead, imageUrl, message, createdAt, type, auctionId } = item;
+  const { mutate: deleteNotification } = useDeleteNotification();
+  const { mutate: readNotification } = useReadNotification();
+  const time = getTimeAgo(createdAt);
+
+  const handleClick = () => {
+    if (!isRead) readNotification(notificationId)
+    if (NOTIFICATION_CONTENTS[type]?.link && auctionId) navigate(NOTIFICATION_CONTENTS[type].link!(auctionId))
+  };
+
+  return (
+    <div className={`p-5 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} `} aria-label={`알림 배경_${notificationId}`}>
+      <figure onClick={handleClick} className={`flex w-full ${auctionId ? 'cursor-pointer' : (isRead) ? '' : 'cursor-pointer'}`} aria-label={`알림_${notificationId}`}>
+        <figcaption className='flex flex-col flex-1 justify-between min-h-[6rem] p-3'>
+          <h4 className='text-body1' aria-label={`알림 제목${notificationId}`}>
+            {message}
+          </h4>
+          <div aria-label={`알림 시간_${notificationId}`} className='text-gray2 text-body2'>
+            {time}
+          </div>
+        </figcaption>
+        <img className='object-cover rounded size-24' src={imageUrl ?? DefaultImage} alt={`알림 이미지_${item.notificationId}`} />
+      </figure>
+      <button aria-label={`알림 삭제 버튼_${item.notificationId}`} onClick={() => deleteNotification(notificationId)}>
+        <img className='p-2 rounded size-8 hover:bg-black/30 active:bg-black/60' src={XButtonIcon} alt='알림 삭제 아이콘' />
+      </button>
+    </div>
+  );
+};
