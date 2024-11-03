@@ -1,16 +1,20 @@
-import PriceIcon from '@/shared/assets/icons/price.svg';
+import LikeIcon from '@/shared/assets/icons/heart_off.svg';
 
 export const LikeCount = ({ count }: { count: number }) => {
   return (
     <div
       aria-label="좋아요"
-      className="flex items-center text-xs web:text-body2 text-gray2"
+      className="flex items-center text-caption web:text-body2"
     >
-      <img src={PriceIcon} alt="좋아요" />
-      <span className='overflow-hidden whitespace-nowrap pt-[2px]'>
-        좋아요
-        <span className="ml-1 text-xs text-black web:text-body2Bold">{count} 명</span>
-      </span>
+      <div className='size-5'>
+        <img src={LikeIcon} alt="좋아요" className='w-full h-full p-1 pt-[.125rem]' />
+      </div>
+      <div className='flex items-center gap-1'>
+        <span className=' text-gray2 whitespace-nowrap'>
+          좋아요
+        </span>
+        <span className="font-bold">{count} 명</span>
+      </div>
     </div>
   );
 };
