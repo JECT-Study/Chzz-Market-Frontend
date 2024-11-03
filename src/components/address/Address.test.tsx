@@ -96,13 +96,13 @@ const editMutateMock = vi.fn();
 vi.mocked(useEditAddress).mockReturnValue({
   mutate: editMutateMock,
   isPending: false,
-})
+});
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
     ...actual,
-    useNavigate: vi.fn(() => vi.fn()),
+    useNavigate: vi.fn(() => mockedUseNavigate),
   };
 });
 
