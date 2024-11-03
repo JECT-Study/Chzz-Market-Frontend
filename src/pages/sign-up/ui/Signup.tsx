@@ -114,7 +114,7 @@ export const Signup = () => {
               />
             </div>
             <div>
-              <Button type='button' className='w-[5rem] web:w-[5.97rem] h-[3.13rem] border-gray2' onClick={onNicknameCheck}>중복확인</Button>
+              <Button type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={onNicknameCheck}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
