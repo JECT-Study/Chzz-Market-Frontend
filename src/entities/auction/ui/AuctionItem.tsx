@@ -12,7 +12,7 @@ const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
   const axisStyle = axis === 'column' && 'flex-col';
 
   return (
-    <figure aria-label={label} className={`flex min-h-[15rem] h-[15rem] web:h-[20rem] w-full ${axisStyle}`}>
+    <figure aria-label={label} className={`flex min-h-[16rem] h-[16rem] w-full ${axisStyle}`}>
       {children}
     </figure>
   );
@@ -20,7 +20,7 @@ const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
 
 const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
   return (
-    <div className='relative border rounded min-w-[10rem] w-full min-h-[7.5rem] h-full'>
+    <div className='relative border rounded w-full min-h-[7.5rem] max-h-[9rem] h-full'>
       <img src={src} alt='이미지' className='object-cover w-full h-full rounded' />
       {time !== undefined && <TimeLabel time={time} />}
     </div>
@@ -28,7 +28,7 @@ const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
 };
 
 interface MainProps {
-  kind: 'register' | 'pre-register';
+  kind: string;
   name: string;
   price: number;
   count: number;
@@ -36,7 +36,7 @@ interface MainProps {
 
 const Main = ({ kind, name, price, count }: MainProps) => {
   return (
-    <figcaption className='flex flex-col p-2'>
+    <figcaption className='flex flex-col gap-[.125rem] py-2'>
       <h3 aria-label='이름' className='text-body2 text-gray1'>
         {name}
       </h3>
