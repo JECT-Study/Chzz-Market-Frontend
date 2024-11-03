@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-import type { IAddressDetail } from "@/@types/Address";
 import { Layout } from "@/app/layout/index";
 import { useGetAddresses } from "@/components/address/queries";
 import { ADDRESS_SCRIPT_URL } from "@/constants/address";
@@ -11,17 +9,14 @@ import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import { ROUTES } from "@/shared/constants/routes";
 import { FaCheck } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
-
-interface Props extends IAddressDetail {
-  id: string;
-}
+import type { IAddressWithId } from "@/@types/Address";
 
 export const PaymentAddressList = () => {
   const navigate = useNavigate();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { addressData: initialAddressData } = useGetAddresses();
   const [addressData, setAddressData] = useState(initialAddressData);
-  const [selectAddress, setSelectAddress] = useState<Props | null>(null);
+  const [selectAddress, setSelectAddress] = useState<IAddressWithId | null>(null);
   const addressItems = addressData?.items || [];
 
   useEffect(() => {
@@ -99,7 +94,7 @@ export const PaymentAddressList = () => {
           <div>
             <div className="border-b-8 border-gray-100 ml-[-32px] mr-[-32px] my-5" />
             <ul>
-              {addressItems.map((item: Props) => (
+              {addressItems.map((item: IAddressWithId) => (
                 <li
                   key={item.id}
                   onClick={() => setSelectAddress(item)}

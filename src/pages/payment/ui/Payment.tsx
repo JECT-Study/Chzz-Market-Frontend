@@ -14,6 +14,7 @@ import { Input } from '@/shared/shadcn/ui/input';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import type { IAddressWithId } from '@/@types/Address';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
 
@@ -25,13 +26,13 @@ const defaultValues = {
 export const Payment = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
-  const [isVaild, setIsVaild] = useState<boolean>();
+  const [isValid, setIsValid] = useState<boolean>();
   const [isMemoSelectDisabled, setMemoSelectDisabled] = useState(false);
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId, isPending } = usePostOrderId();
   const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment } = usePostPayment(auctionId || '', orderId);
-  let address = {
+  let address: IAddressWithId = {
     id: '',
     recipientName: '',
     phoneNumber: '',
@@ -40,7 +41,7 @@ export const Payment = () => {
     jibun: '',
     detailAddress: '',
     isDefault: false,
-  }
+  };
   if (DefaultAddressData || location.state?.address) {
     const selectedAddress = location.state?.address || DefaultAddressData.items[0];
 
@@ -77,17 +78,16 @@ export const Payment = () => {
 
 
   useEffect(() => {
-    if (Object.keys(address).length > 0) {
-      setIsVaild(false);
+    const isAddressValid = address.recipientName && address.roadAddress && address.detailAddress;
+    
+    if (isAddressValid) {
+      setIsValid(false);
     } else {
-      setIsVaild(true);
+      setIsValid(true);
     }
-    if (memoInputValue) {
-      setMemoSelectDisabled(true);
-    } else {
-      setMemoSelectDisabled(false);
-    }
-  }, [isVaild, memoInputValue]);
+
+    setMemoSelectDisabled(!!memoInputValue);
+  }, [isValid, memoInputValue]);
 
   useEffect(() => {
     if (auctionId) {
@@ -187,6 +187,7 @@ export const Payment = () => {
                 <Input
                   id="배송메모"
                   type="text"
+                  aria-label="배송메모"
                   placeholder="배송 메모를 입력해주세요"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
@@ -202,10 +203,10 @@ export const Payment = () => {
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
           onClick={handleSubmitClick}
-          disabled={isVaild || isPending}
+          disabled={isValid || isPending}
           loading={isPending}
         >
-          결제 하기
+          결제하기
         </Button>
       </Layout.Footer>
     </Layout>

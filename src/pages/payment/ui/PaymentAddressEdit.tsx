@@ -166,6 +166,7 @@ export const PaymentAddressEdit = () => {
                 <Input
                   id="이름"
                   type="text"
+                  aria-label="이름"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
                 />
@@ -180,6 +181,7 @@ export const PaymentAddressEdit = () => {
                 <Input
                   id="휴대폰 번호"
                   type="text"
+                  aria-label="휴대폰 번호"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
                 />
@@ -192,7 +194,8 @@ export const PaymentAddressEdit = () => {
               <Input
                 id="우편번호 *"
                 type="text"
-                value={zonecode}
+                aria-label="우편번호"
+                value={zonecode ? zonecode : addressItem.zipcode}
                 className="focus-visible:ring-cheeseYellow bg-gray3"
                 readOnly
               />
@@ -211,6 +214,7 @@ export const PaymentAddressEdit = () => {
                 <Input
                   id="주소지"
                   type="text"
+                  aria-label="주소지"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
                   readOnly
@@ -226,6 +230,7 @@ export const PaymentAddressEdit = () => {
                 <Input
                   id="상세주소"
                   type="text"
+                  aria-label="상세주소"
                   className="focus-visible:ring-cheeseYellow"
                   {...field}
                 />

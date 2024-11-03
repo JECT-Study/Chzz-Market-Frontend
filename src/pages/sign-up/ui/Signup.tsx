@@ -105,6 +105,7 @@ export const Signup = () => {
                   <Input
                     id="닉네임 *"
                     type="text"
+                    data-testid="nickname-input"
                     placeholder="최대 15글자, 공백 제외"
                     className="focus-visible:ring-cheeseYellow"
                     {...field}
@@ -134,6 +135,7 @@ export const Signup = () => {
               <Textarea
                 id="자기소개"
                 placeholder="자기소개를 입력해주세요"
+                data-testid="bio-input"
                 className="focus-visible:ring-cheeseYellow"
                 {...field}
               />

@@ -1,4 +1,3 @@
-import type { IAddressDetail } from "@/@types/Address";
 import { Layout } from "@/app/layout/index";
 import { useDeleteAddress, useGetAddresses } from "@/components/address/queries";
 import { Button } from "@/shared";
@@ -7,17 +6,14 @@ import rocation_off from '@/shared/assets/icons/rocation_off.svg';
 import { ROUTES } from "@/shared/constants/routes";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-interface Props extends IAddressDetail {
-  id: string;
-}
+import type { IAddressWithId } from "@/@types/Address";
 
 export const PaymentAddressEditList = () => {
   const navigate = useNavigate();
   const { addressData: initialAddressData } = useGetAddresses();
   const { auctionId } = useParams<{ auctionId: string }>();
   const [addressData, setAddressData] = useState(initialAddressData);
-  const [selectAddress, setSelectAddress] = useState<Props | null>(null);
+  const [selectAddress, setSelectAddress] = useState<IAddressWithId | null>(null);
   const { deleteData } = useDeleteAddress();
   const addressItems = addressData?.items || [];
 
@@ -33,7 +29,7 @@ export const PaymentAddressEditList = () => {
       onSuccess: () => {
         const updatedAddressData = {
           ...addressData,
-          items: addressData.items.filter((item: Props) => item.id !== id)
+          items: addressData.items.filter((item: IAddressWithId) => item.id !== id)
         };
         setAddressData(updatedAddressData);
 
@@ -43,7 +39,8 @@ export const PaymentAddressEditList = () => {
       },
     });
   };
-  const handleEdit = (item: Props) => {
+
+  const handleEdit = (item: IAddressWithId) => {
     navigate(ROUTES.PAYMENT.ADDRESS.getEditRoute(auctionId!), { state: { addressItem: item } });
   }
   return (
@@ -52,7 +49,7 @@ export const PaymentAddressEditList = () => {
       <Layout.Main>
         <div>
           <ul>
-          {addressItems.map((item: Props) => (
+          {addressItems.map((item: IAddressWithId) => (
             <li
               key={item.id}
               onClick={() => setSelectAddress(item)}

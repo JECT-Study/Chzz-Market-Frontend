@@ -1,4 +1,4 @@
-import { IAddressDetail } from '@/@types/Address';
+import type { IAddressBase } from "@/@types/Address";
 import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
@@ -31,11 +31,11 @@ export const getAddresses = async () => {
   return response.data;
 };
 
-export const editAddress = async ({ addressId, data }: { addressId: string; data: IAddressDetail }) => {
+export const editAddress = async ({addressId, data }: { addressId: string, data: IAddressBase }) => {
   await httpClient.put(`${API_END_POINT.ADDRESS}/${addressId}`, { ...data });
 };
 
-export const addAddress = async (data: IAddressDetail) => {
+export const addAddress = async (data: IAddressBase) => {
   await httpClient.post(API_END_POINT.ADDRESS, { ...data });
 };
 
@@ -43,10 +43,8 @@ export const deleteAddress = async (addressId: string) => {
   await httpClient.delete(`${API_END_POINT.ADDRESS}/${addressId}`);
 };
 
-export const usePostAddress = (
-  auctionId: string
-): {
-  mutate: UseMutateFunction<any, Error, IAddressDetail, unknown>;
+export const usePostAddress = (auctionId: string): {
+  mutate: UseMutateFunction<any, Error, IAddressBase, unknown>;
   isPending: boolean;
 } => {
   const navigate = useNavigate();
@@ -60,15 +58,13 @@ export const usePostAddress = (
   return { mutate, isPending };
 };
 
-export const useEditAddress = (
-  auctionId: string
-): {
-  mutate: UseMutateFunction<any, Error, { addressId: string; data: IAddressDetail }, unknown>;
+export const useEditAddress = (auctionId: string): {
+  mutate: UseMutateFunction<any, Error, { addressId: string, data: IAddressBase }, unknown>;
   isPending: boolean;
 } => {
   const navigate = useNavigate();
   const { mutate, isPending } = useMutation({
-    mutationFn: ({ addressId, data }: { addressId: string; data: IAddressDetail }) => editAddress({ addressId, data }),
+    mutationFn: ({ addressId, data }: { addressId: string, data: IAddressBase }) => editAddress({ addressId, data }),
     onSuccess: () => {
       navigate(ROUTES.PAYMENT.ADDRESS.getListRoute(auctionId), { replace: true });
     },
