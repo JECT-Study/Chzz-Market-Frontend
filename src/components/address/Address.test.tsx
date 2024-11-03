@@ -1,16 +1,12 @@
-import AuctionShipping from "@/pages/AuctionShipping";
-import DeliveryAddressList from "@/pages/DeliveryAddressList";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "./queries";
-import DeliveryAddressAdd from "@/pages/DeliveryAddressAdd";
-import DeliveryAddressEdit from "@/pages/DeliveryAddressEdit";
-import EditAddress from "@/pages/EditAddress";
 import * as queries from "@/components/address/queries";
-import { mockedUseNavigate } from "@/setupTests";
+import { mockedUseNavigate } from "@/shared/test/setupTests";
+import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages";
 
 // scrollIntoView 메서드가 jsdom에 지원되지 않아서 오류 발생
 Object.defineProperty(Element.prototype, 'hasPointerCapture', {
@@ -114,7 +110,7 @@ describe('결제하기 페이지 테스트', () => {
     render(
       <MemoryRouter initialEntries={['/auctions/1']}>
         <Routes>
-          <Route path="/auctions/:auctionId" element={<AuctionShipping />} />
+          <Route path="/auctions/:auctionId" element={<Payment />} />
         </Routes>
       </MemoryRouter>
     );
@@ -223,7 +219,7 @@ describe('주소 목록 페이지 테스트', () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={['/auctions/1/address-list']}>
           <Routes>
-            <Route path="/auctions/:auctionId/address-list" element={<DeliveryAddressList />} />
+            <Route path="/auctions/:auctionId/address-list" element={<PaymentAddressList />} />
           </Routes>
         </MemoryRouter>
       </QueryClientProvider>
@@ -331,7 +327,7 @@ describe('주소 추가 페이지 테스트', () => {
       <QueryClientProvider client={new QueryClient()}>
         <MemoryRouter initialEntries={[{ pathname: '/auctions/1/address-add', state: initialState }]}>
           <Routes>
-            <Route path="/auctions/:auctionId/address-add" element={<DeliveryAddressAdd />} />
+            <Route path="/auctions/:auctionId/address-add" element={<PaymentAddressAdd />} />
           </Routes>
         </MemoryRouter>
       </QueryClientProvider>
@@ -435,7 +431,7 @@ describe('주소 수정 페이지 테스트', () => {
       <QueryClientProvider client={new QueryClient()}>
         <MemoryRouter initialEntries={[{ pathname: '/auctions/1/address-edit', state: initialState }]}>
           <Routes>
-            <Route path="/auctions/:auctionId/address-edit" element={<DeliveryAddressEdit />} />
+            <Route path="/auctions/:auctionId/address-edit" element={<PaymentAddressEdit />} />
           </Routes>
         </MemoryRouter>
       </QueryClientProvider>
@@ -528,7 +524,7 @@ describe('주소 편집 페이지 테스트', () => {
       <QueryClientProvider client={new QueryClient()}>
         <MemoryRouter initialEntries={['/auctions/1/edit-address']}>
           <Routes>
-            <Route path="/auctions/:auctionId/edit-address" element={<EditAddress />} />
+            <Route path="/auctions/:auctionId/edit-address" element={<PaymentAddressEditList />} />
           </Routes>
         </MemoryRouter>
       </QueryClientProvider>

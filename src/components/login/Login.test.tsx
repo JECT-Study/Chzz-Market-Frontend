@@ -4,9 +4,9 @@ import { describe, expect, test, vi } from "vitest";
 import { useRefreshTokenOnSuccess } from "./queries";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
-import Login from "@/pages/Login";
 import { render, screen } from "@testing-library/react";
-import { mockedUseNavigate } from "@/setupTests";
+import { mockedUseNavigate } from "@/shared/test/setupTests";
+import { Login } from "@/pages";
 
 vi.mock('@/hooks/useAuth', () => ({
   useAuth: vi.fn(),
