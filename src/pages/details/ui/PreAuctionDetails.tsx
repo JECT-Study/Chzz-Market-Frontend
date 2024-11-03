@@ -2,13 +2,13 @@ import {
   useDeletePreAuction,
   useGetPreAuctionDetailsWithSuspense
 } from '@/components/details/queries';
+import { CustomCarousel, Modal } from "@/shared";
 import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
 
 import { Layout } from '@/app/layout/index';
 import DetailsBasic from '@/components/details/DetailsBasic';
 import DetailsOption from '@/components/details/DetailsOption';
 import PreAuctionDetailsFooter from '@/components/details/PreAuctionDetailsFooter';
-import { CustomCarousel, Modal } from "@/shared";
 import BoxEditIcon from '@/shared/assets/icons/in_box_edit_time.svg';
 import BoxLikeIcon from '@/shared/assets/icons/in_box_like.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
@@ -82,7 +82,7 @@ export const PreAuctionDetails = () => {
                   className="flex flex-col items-center w-full gap-1 py-4">
                   <div className='flex items-center gap-1 text-body2 text-gray2'>
                     <img src={BoxLikeIcon} alt='좋아요' className='size-4' />
-                    <span className='pt-[2px]'>좋아요</span>
+                    <span className='pt-[2px]'>찜한 사람</span>
                   </div>
                   <p className='text-body1Bold text-gray1'>
                     {`${likeCount} 명`}

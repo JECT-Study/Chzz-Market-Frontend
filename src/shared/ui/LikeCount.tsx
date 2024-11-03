@@ -1,4 +1,4 @@
-import LikeIcon from '@/shared/assets/icons/heart_off.svg';
+import LikeIcon from '@/shared/assets/icons/in_box_like.svg';
 
 export const LikeCount = ({ count }: { count: number }) => {
   return (
@@ -11,7 +11,7 @@ export const LikeCount = ({ count }: { count: number }) => {
       </div>
       <div className='flex items-center gap-1'>
         <span className=' text-gray2 whitespace-nowrap'>
-          좋아요
+          찜한 사람
         </span>
         <span className="font-bold">{count} 명</span>
       </div>
