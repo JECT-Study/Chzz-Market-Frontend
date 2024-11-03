@@ -1,8 +1,8 @@
+import { Button, EmptyBoundary, ROUTES } from '@/shared';
 import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from '@/components/heart/queries';
 
-import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import AuctionItem from '@/entities/auction/ui/AuctionItem';
-import { Button, EmptyBoundary } from '@/shared';
+import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import { useNavigate } from 'react-router-dom';
 
 export const Heart = () => {
@@ -14,14 +14,14 @@ export const Heart = () => {
 
   return (
     <EmptyBoundary length={preAuctionHeartList.length} name='heart'>
-      <ul className='grid items-center justify-center grid-cols-2 gap-4'>
+      <ul className='grid items-center justify-between grid-cols-2 gap-4'>
         {preAuctionHeartList.map((el: IPreAuctionItem) => (
-          <li key={el.productId} onClick={() => navigate(`/auctions/pre-auction/${el.productId}`)} className='cursor-pointer'>
+          <li key={el.productId} onClick={() => navigate(ROUTES.PRE_AUCTION.getItemRoute(el.productId))} className='cursor-pointer'>
             <AuctionItem axis='column' label='내가 찜 한 사전 경매 상품'>
               <AuctionItem.Image src={el.imageUrl} />
               <AuctionItem.Main name={el.productName} count={el.likeCount} price={el.minPrice} kind='pre-register' />
               <AuctionItem.Button>
-                <Button onClick={() => handleDelete(el.productId)} type='button' color='white' className='w-full'>
+                <Button onClick={() => handleDelete(el.productId)} type='button' className='w-full'>
                   찜 목록에서 제외
                 </Button>
               </AuctionItem.Button>

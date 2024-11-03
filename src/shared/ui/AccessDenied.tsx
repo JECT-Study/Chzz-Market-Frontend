@@ -14,7 +14,7 @@ export const AccessDenied = () => {
           <Layout.Header title='치즈 마켓' />
           <Layout.Main>
             <div className='flex flex-col items-center justify-center h-full gap-5'>
-              <img src={ErrorIcon} alt='에러 아이콘' className='sm:size-14 size-10' />
+              <img src={ErrorIcon} alt='에러 아이콘' className='web:size-14 size-10' />
               <div className='flex flex-col items-center justify-center gap-1'>
                 <h2 className='text-heading2 text-gray1'>접근이 제한된 페이지입니다</h2>
                 <p className='text-body2Bold text-gray2'>이 페이지에 접근할 권한이 없습니다.</p>

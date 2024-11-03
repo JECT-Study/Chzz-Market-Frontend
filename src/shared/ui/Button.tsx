@@ -1,6 +1,6 @@
-import classNames from 'classnames';
-import { ReactNode } from 'react';
 import { ButtonSpinner } from './spinner';
+import { ReactNode } from 'react';
+import classNames from 'classnames';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -40,7 +40,7 @@ export const Button = ({
   const sizeClasses = classNames({
     'px-2 py-0.5 text-xs': size === 'xsmall',
     'px-2 py-1 text-sm': size === 'small',
-    'sm:px-4 sm:py-2 px-2 py-2 sm:text-button text-sm': size === 'medium',
+    'web:px-4 py-2 px-2 web:text-heading3 text-body2Bold': size === 'medium',
     'px-6 py-3 text-lg': size === 'large',
   });
   const hoverColorClasses = classNames({
@@ -53,7 +53,7 @@ export const Button = ({
 
   return (
     <button className={combinedClasses} disabled={disabled} onClick={onClick} type={type} aria-label={ariaLabel}>
-      <div className='flex items-center justify-center w-full gap-3'>
+      <div className='flex items-center justify-center w-full gap-2'>
         <span className='pt-[.125rem]'>{children}</span>
         {loading && <ButtonSpinner />}
       </div>

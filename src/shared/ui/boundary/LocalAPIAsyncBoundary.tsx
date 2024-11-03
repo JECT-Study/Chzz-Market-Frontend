@@ -16,12 +16,12 @@ const FallbackComponent = ({ error, resetErrorBoundary, height }: FallbackCompon
 
   return (
     <div className={`flex flex-col items-center justify-center w-full h-[${height}px] gap-3 p-5 border rounded bg-error`}>
-      <img src={ErrorIcon} alt='에러 아이콘' className='sm:size-8 size-6' />
+      <img src={ErrorIcon} alt='에러 아이콘' className='web:size-8 size-6' />
       <div className='space-y-2 text-center'>
-        <h2 className='sm:text-body2 text-caption text-gray2'>데이터를 불러오는 도중
+        <h2 className='web:text-body2 text-caption text-gray2'>데이터를 불러오는 도중
           문제가 발생했습니다.</h2>
       </div>
-      <Button type='button' color='cheeseYellow' className='text-xs sm:text-smallBtn' onClick={resetErrorBoundary}>
+      <Button type='button' color='cheeseYellow' className='text-xs web:text-smallBtn' onClick={resetErrorBoundary}>
         다시 불러오기
       </Button>
     </div>
