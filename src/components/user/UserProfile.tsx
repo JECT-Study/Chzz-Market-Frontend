@@ -60,7 +60,7 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
           </div>
           <Button
             type='button'
-            className="flex justify-center items-center w-[3.125rem] h-[2.125rem] web:w-[4rem] border-gray2"
+            className="flex justify-center items-center w-[3.125rem] h-[2.125rem] web:w-[5rem] web:h-[2.5rem] border-gray2"
             onClick={() =>
               navigator('profile/edit', { state: { userNickname, userBio, userProfileImageUrl } })
             }
