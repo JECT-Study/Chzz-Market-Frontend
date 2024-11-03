@@ -33,24 +33,24 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
               {userNickname}
             </p>
             {providerType === 'KAKAO' ? (
-              <div className="flex w-[8rem] web:w-[12rem] mt-[1rem]">
+              <div className="flex w-[8rem] web:w-[11rem] mt-[0.3rem] web:mt-[0.6rem]">
                 <div
                   className="flex items-center w-full h-[1.69rem] web:h-[2rem] gap-1 bg-[#FEEA1C] text-black rounded-2xl cursor-pointer hover:bg-[#F4DC00] focus:ring-2 focus:ring-offset-2 focus:ring-[#F4DC00] focus:outline-none"
                   aria-label="카카오톡과 연결"
                 >
-                  <div className="flex items-center ml-[0.75rem] w-[1rem] h-[0.91rem] web:w-[1.5rem] web:h-[1.2rem] web:ml-[1.5rem]">
+                  <div className="flex items-center ml-[0.75rem] w-[1rem] h-[0.91rem] web:w-[1.5rem] web:h-[1.2rem] web:ml-[1rem]">
                     <RiKakaoTalkFill size={24} />
                   </div>
                   <span className="flex-grow text-xs web:text-body1">카카오톡과 연결</span>
                 </div>
               </div>
             ) : (
-              <div className="flex w-[8rem] web:w-[12rem] mt-[1rem]">
+              <div className="flex w-[8rem] web:w-[11rem] mt-[0.3rem] web:mt-[0.6rem]">
                 <div
                   className="flex items-center w-full h-[1.69rem] web:h-[2rem] gap-2 bg-[#1ec800] text-white text-lg rounded-2xl cursor-pointer hover:bg-[#17b000] focus:ring-2 focus:ring-offset-2 focus:ring-[#17b000] focus:outline-none"
                   aria-label="네이버와 연결"
                 >
-                  <div className="flex items-center ml-[0.75rem] w-[1rem] h-[0.91rem] web:w-[1.5rem] web:h-[1.2rem] web:ml-[1.5rem]">
+                  <div className="flex items-center ml-[0.75rem] w-[1rem] h-[0.91rem] web:w-[1.5rem] web:h-[1.2rem] web:ml-[1.3rem]">
                     <SiNaver />
                   </div>
                   <span className="flex-grow text-xs web:text-body1">네이버와 연결</span>
