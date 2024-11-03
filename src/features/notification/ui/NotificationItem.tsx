@@ -21,7 +21,7 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
     <div className={`p-10 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} `} aria-label={`알림 배경_${notificationId}`}>
       <figure onClick={handleClick} className={`flex justify-between w-full gap-3 ${auctionId ? 'cursor-pointer' : (isRead) ? '' : 'cursor-pointer'}`} aria-label={`알림_${notificationId}`}>
         <figcaption className='flex flex-col flex-1 justify-between min-h-[6rem]'>
-          <h4 className='text-body1' aria-label={`알림 제목${notificationId}`}>
+          <h4 className='web:text-body1 text-body2' aria-label={`알림 제목${notificationId}`}>
             {message}
           </h4>
           <div aria-label={`알림 시간_${notificationId}`} className='text-gray2 text-body2'>
