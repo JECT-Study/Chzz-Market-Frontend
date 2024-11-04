@@ -28,6 +28,7 @@ export const Payment = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [isValid, setIsValid] = useState<boolean>();
   const [isMemoSelectDisabled, setMemoSelectDisabled] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState<IAddressWithId | null>(null);
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId, isPending } = usePostOrderId();
@@ -69,6 +70,12 @@ export const Payment = () => {
 
   const handleClickAddressList = () => navigate(ROUTES.PAYMENT.ADDRESS.getListRoute(auctionId!))
 
+  const handleClickDefaultAddress = () => {
+    if (DefaultAddressData.items[0].isDefault) {
+      setSelectedAddress(DefaultAddressData.items[0]);
+    }
+  }
+
   const onSubmit = (formData: FormFields) => {
     const memo = {
       memo: formData.memoSelect || formData.memoInput || ''
@@ -79,13 +86,7 @@ export const Payment = () => {
 
   useEffect(() => {
     const isAddressValid = address.recipientName && address.roadAddress && address.detailAddress;
-    
-    if (isAddressValid) {
-      setIsValid(false);
-    } else {
-      setIsValid(true);
-    }
-
+    setIsValid(!isAddressValid);
     setMemoSelectDisabled(!!memoInputValue);
   }, [isValid, memoInputValue]);
 
@@ -130,30 +131,50 @@ export const Payment = () => {
           {/* 수령지 입력 */}
           <span className='text-heading3'>수령지 입력</span>
           <div className='flex gap-2'>
-            <Button type='button' color={address.isDefault ? 'black' : 'white'} className='w-[10.15rem] h-[3.125rem]'>기본 배송지</Button>
+            <Button type='button'
+              color={selectedAddress?.isDefault ? 'black' : address.isDefault ? 'black' : 'white'}
+              className='w-[10.15rem] h-[3.125rem]' 
+              onClick={handleClickDefaultAddress}
+            >기본 배송지</Button>
             <Button type='button' color='white' className='w-[10.15rem] h-[3.125rem]' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
-          {Object.keys(address).length > 0 ? (
-            <div
-              className='flex mb-4 rounded-md'
-            >
+          {selectedAddress ? (
+            <div className='flex mb-4 rounded-md'>
               <div className="flex items-center">
                 <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
               </div>
               <div className="flex flex-col">
-                {address.isDefault && (
+                {selectedAddress.isDefault && (
                   <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm mb-[10px]">기본배송지</span>
                 )}
-                <span className="text-body1Bold web:text-heading3">{address.recipientName} / {address.phoneNumber}</span>
+                <span className="text-body1Bold web:text-heading3">{selectedAddress.recipientName} / {selectedAddress.phoneNumber}</span>
                 <div className='text-body1'>
-                  <p>{address.roadAddress}</p>
-                  <p>{address.detailAddress}</p>
+                  <p>{selectedAddress.roadAddress}</p>
+                  <p>{selectedAddress.detailAddress}</p>
                 </div>
               </div>
             </div>
           ) : (
-            <div>기본 배송지가 없습니다. 배송지 목록에서 배송지를 추가해주세요.</div>
+            Object.keys(address).length > 0 ? (
+              <div className='flex mb-4 rounded-md'>
+                <div className="flex items-center">
+                  <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
+                </div>
+                <div className="flex flex-col">
+                  {address.isDefault && (
+                    <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm mb-[10px]">기본배송지</span>
+                  )}
+                  <span className="text-body1Bold web:text-heading3">{address.recipientName} / {address.phoneNumber}</span>
+                  <div className='text-body1'>
+                    <p>{address.roadAddress}</p>
+                    <p>{address.detailAddress}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div>기본 배송지가 없습니다. 배송지 목록에서 배송지를 추가해주세요.</div>
+            )
           )}
           <form
             ref={formRef}

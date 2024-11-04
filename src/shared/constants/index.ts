@@ -4,3 +4,4 @@ export { EMPTY_MESSAGE } from './emptyMessage';
 export { ERROR_CODE } from './errorCode';
 export { QUERY_KEYS } from './queryKeys';
 export { ROUTES } from './routes';
+export { CATEGORIES } from './categories';

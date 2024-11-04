@@ -1,5 +1,6 @@
+import { CATEGORIES } from '@/shared';
 import { useNavigate } from 'react-router-dom';
-import { CATEGORIES } from '../../constants/categories';
+
 
 const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: string }) => {
   const navigate = useNavigate();

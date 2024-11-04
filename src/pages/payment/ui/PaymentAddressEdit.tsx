@@ -200,7 +200,7 @@ export const PaymentAddressEdit = () => {
                 readOnly
               />
               <div>
-                <Button type="button" className="w-[6rem] h-[3.12rem] web:w-[8rem] border-gray3" onClick={handleOpenAddress}>
+                <Button type="button" className="w-[6rem] h-[3.12rem] web:w-[9rem] border-gray3" onClick={handleOpenAddress}>
                   우편번호 찾기
                 </Button>
               </div>

@@ -25,9 +25,9 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
       <div>
         <h2 className="mb-4 text-heading3 web:text-heading1">참여한 정식 경매 내역</h2>
         <div className="flex justify-between gap-3">
-          {/* 진행중인 경매 */}
+          {/* 참여중인 경매 */}
           <div
-            className="flex flex-col items-center w-[6.69rem] h-[6.8rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
+            className="flex flex-col justify-center items-center w-[6.69rem] h-[7rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
               navigate(ROUTES.USER.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionHistory' },
@@ -46,7 +46,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
 
           {/* 성공한 경매 */}
           <div
-            className="flex flex-col items-center w-[6.7rem] h-[6.8rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
+            className="flex flex-col justify-center items-center w-[6.7rem] h-[7rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
               navigate(ROUTES.USER.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionsWon' },
@@ -61,7 +61,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
 
           {/* 실패한 경매 */}
           <div
-            className="flex flex-col items-center w-[6.69rem] h-[6.8rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
+            className="flex flex-col justify-center items-center w-[6.69rem] h-[7rem] web:w-1/3 web:h-[9.4rem] p-1 web:p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
               navigate(ROUTES.USER.PARTICIPATED_LIST, {
                 state: { sortType: 'AuctionsLost' },
@@ -82,7 +82,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
         <div className="flex justify-between gap-3">
           {/* 정식 경매 */}
           <div
-            className="flex flex-col items-center w-[10.25rem] h-[6.25rem] web:w-1/2 web:h-[9.4rem] p-2 web:p-4 border rounded-lg cursor-pointer border-gray2"
+            className="flex flex-col justify-center items-center w-[10.25rem] h-[7rem] web:w-1/2 web:h-[9.4rem] p-2 web:p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
               navigate(ROUTES.USER.REGISTERED_LIST, { state: { sortType: 'ongoing' } })
             }
@@ -94,7 +94,7 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
 
           {/* 사전 경매 */}
           <div
-            className="flex flex-col items-center w-[10.25rem] h-[6.25rem] web:w-1/2 web:h-[9.4rem] p-2 web:p-4 border rounded-lg cursor-pointer border-gray2"
+            className="flex flex-col justify-center items-center w-[10.25rem] h-[7rem] web:w-1/2 web:h-[9.4rem] p-2 web:p-4 border rounded-lg cursor-pointer border-gray2"
             onClick={() =>
               navigate(ROUTES.USER.PRE_REGISTERED_LIST, { state: { sortType: 'preAuction' } })
             }

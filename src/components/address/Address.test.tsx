@@ -76,6 +76,15 @@ vi.mocked(useGetAddresses).mockReturnValue({
       },
     ],
   },
+  refetchAddresses: vi.fn().mockResolvedValue({
+    data: {
+      items: [],
+    },
+    error: null,
+    isLoading: false,
+    isError: false,
+    isSuccess: true,
+  }),
 });
 
 vi.mocked(useDeleteAddress).mockReturnValue({

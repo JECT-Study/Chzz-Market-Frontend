@@ -3,7 +3,7 @@ import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { ROUTES } from '@/shared/constants/routes';
-import { UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
+import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 export const useGetAddressDetail = async (auctionId: string) => {
@@ -73,13 +73,16 @@ export const useEditAddress = (auctionId: string): {
   return { mutate, isPending };
 };
 
-export const useGetAddresses = () => {
-  const { data: addressData } = useQuery({
+export const useGetAddresses = () : {
+  addressData: any;
+  refetchAddresses: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<any, Error>>;
+} => {
+  const { data: addressData, refetch: refetchAddresses } = useQuery({
     queryKey: [QUERY_KEYS.ADDRESSES],
     queryFn: () => getAddresses(),
   });
 
-  return { addressData };
+  return { addressData, refetchAddresses };
 };
 
 export const useDeleteAddress = () => {

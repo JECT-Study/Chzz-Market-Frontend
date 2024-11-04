@@ -8,7 +8,6 @@ import PreAuctionProduct from '@/components/productList/PreAuctionProduct';
 import ProductButtons from '@/components/productList/ProductButtons';
 import ProductListTabs from '@/components/productList/ProductListTabs';
 import useProductList from '@/hooks/useProductList';
-import { EmptyBoundary } from '@/shared';
 
 export const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
@@ -79,17 +78,15 @@ export const ProductList = () => {
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <ProductButtons setOngoingSortType={setOngoingSortType} setPreAuctionSortType={setPreAuctionSortType} />
         {activeTab === 'ongoing'
-          ? <EmptyBoundary length={ongoingItems.length} name='category'>
-            <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
-              {ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.auctionId} product={product} />)}
-            </div>
-          </EmptyBoundary>
+          ?
+          <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
+            {ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.auctionId} product={product} />)}
+          </div>
           :
-          <EmptyBoundary length={enrollItems.length} name='category'>
-            <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
-              {enrollItems?.map((product: IPreAuctionItem) => <PreAuctionProduct key={product.productId} product={product} />)}
-            </div>
-          </EmptyBoundary>
+
+          <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
+            {enrollItems?.map((product: IPreAuctionItem) => <PreAuctionProduct key={product.productId} product={product} />)}
+          </div>
         }
         <div ref={loader} />
       </Layout.Main>

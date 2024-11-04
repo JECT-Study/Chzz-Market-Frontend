@@ -1,5 +1,4 @@
-import { CATEGORIES } from '@/constants/categories';
-import { Price } from "@/shared";
+import { CATEGORIES, Price } from "@/shared";
 import { useNavigate } from 'react-router-dom';
 
 interface DetailsBasicProps {
