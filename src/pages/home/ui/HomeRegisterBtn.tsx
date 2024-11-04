@@ -2,7 +2,7 @@ import { ROUTES } from '@/shared/constants';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
-const HomeRegisterBtn = ({ isScrolled }: { isScrolled: boolean }) => {
+export const HomeRegisterBtn = ({ isScrolled }: { isScrolled: boolean }) => {
   const navigate = useNavigate();
 
   return (
@@ -22,5 +22,3 @@ const HomeRegisterBtn = ({ isScrolled }: { isScrolled: boolean }) => {
     </div>
   );
 };
-
-export default HomeRegisterBtn;
