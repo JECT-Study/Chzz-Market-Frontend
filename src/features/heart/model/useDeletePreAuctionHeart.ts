@@ -1,33 +1,13 @@
-import { UseMutateFunction, useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-
-import { IPreAuctionItem } from '@/@types/AuctionItem';
-import { httpClient } from '@/shared/api/axios';
-import { API_END_POINT } from '@/shared/constants/apiEndPoint';
-import { QUERY_KEYS } from '@/shared/constants/queryKeys';
+import type { IPreAuctionItem } from '@/@types/AuctionItem';
+import { QUERY_KEYS } from '@/shared';
+import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-
-export const useGetPreAuctionHeartList = () => {
-  const getPreAuctionHeartList = async (): Promise<IPreAuctionItem[]> => {
-    const response = await httpClient.get(`${API_END_POINT.PRE_AUCTION}/history`);
-
-    return response.data.items;
-  };
-
-  const { data: preAuctionHeartList } = useSuspenseQuery({
-    queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST],
-    queryFn: getPreAuctionHeartList,
-  });
-
-  return { preAuctionHeartList };
-};
+import { deletePreAuctionHeart } from '../api';
 
 export const useDeletePreAuctionHeart = (): {
   mutate: UseMutateFunction<void, Error, number, unknown>;
 } => {
   const queryClient = useQueryClient();
-  const deletePreAuctionHeart = async (preAuctionId: number) => {
-    await httpClient.post(`${API_END_POINT.PRE_AUCTION}/${preAuctionId}/likes`);
-  };
 
   const { mutate } = useMutation({
     mutationFn: deletePreAuctionHeart,
