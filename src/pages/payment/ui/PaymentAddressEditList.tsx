@@ -36,6 +36,10 @@ export const PaymentAddressEditList = () => {
         if (selectAddress?.id === id) {
           setSelectAddress(updatedAddressData.items[0] || null);
         }
+
+        if (updatedAddressData.items.length === 0 && auctionId) {
+          navigate(ROUTES.PAYMENT.ADDRESS.getListRoute(auctionId), { state: { refetch: true } });
+        }
       },
     });
   };

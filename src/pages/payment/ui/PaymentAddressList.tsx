@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "@/app/layout/index";
 import { useGetAddresses } from "@/components/address/queries";
 import { ADDRESS_SCRIPT_URL } from "@/constants/address";
@@ -14,7 +14,8 @@ import type { IAddressWithId } from "@/@types/Address";
 export const PaymentAddressList = () => {
   const navigate = useNavigate();
   const { auctionId } = useParams<{ auctionId: string }>();
-  const { addressData: initialAddressData } = useGetAddresses();
+  const location = useLocation();
+  const { addressData: initialAddressData, refetchAddresses } = useGetAddresses();
   const [addressData, setAddressData] = useState(initialAddressData);
   const [selectAddress, setSelectAddress] = useState<IAddressWithId | null>(null);
   const addressItems = addressData?.items || [];
@@ -23,8 +24,21 @@ export const PaymentAddressList = () => {
     if (initialAddressData?.items && initialAddressData.items.length > 0) {
       setAddressData(initialAddressData);
       setSelectAddress(initialAddressData.items[0]);
-    }
+    };
   }, [initialAddressData]);
+
+  useEffect(() => {
+    const fetchUpdatedAddresses = async () => {
+      const { data } = await refetchAddresses();
+      if (data?.items) {
+        setAddressData(data);
+      }
+    };
+
+    if (location.state?.refetch) {
+      fetchUpdatedAddresses();
+    }
+  }, [location.state, refetchAddresses]);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -75,7 +89,7 @@ export const PaymentAddressList = () => {
 
   return (
     <Layout>
-      <Layout.Header title="배송지 목록" />
+      <Layout.Header title="배송지 목록" handleBack={() => auctionId && navigate(ROUTES.PAYMENT.getRoute(auctionId))} />
       <span className="absolute text-body1 web:text-heading3 cursor-pointer top-3 right-5" onClick={handleEditButtonClick}>편집</span>
       <Layout.Main>
         <div>
