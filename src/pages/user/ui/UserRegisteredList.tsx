@@ -5,7 +5,6 @@ import EndMyRegister from '@/components/user/EndMyRegister';
 import OngoingMyRegister from '@/components/user/OngoingMyRegister';
 import UserOrderTab from '@/components/user/UserOrderTab';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
-import { EmptyBoundary } from '@/shared';
 import { useLocation } from 'react-router-dom';
 
 export const UserRegisteredList = () => {
@@ -68,22 +67,18 @@ export const UserRegisteredList = () => {
     <div className='mx-[-32px] my-[-4px] h-full'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'ongoing' &&
-        <EmptyBoundary length={ongoingItems.length} name='userAuction'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
-              <OngoingMyRegister product={product} key={product.auctionId} />
-            ))}
-          </div>
-        </EmptyBoundary>
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+          {ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
+            <OngoingMyRegister product={product} key={product.auctionId} />
+          ))}
+        </div>
       }
       {activeTab === 'end' &&
-        <EmptyBoundary length={ongoingItems.length} name='userAuction'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {endItems.map((product: IAuctionEndRegisteredItem) => (
-              <EndMyRegister product={product} key={product.auctionId} />
-            ))}
-          </div>
-        </EmptyBoundary>
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+          {endItems.map((product: IAuctionEndRegisteredItem) => (
+            <EndMyRegister product={product} key={product.auctionId} />
+          ))}
+        </div>
       }
     </div>
   );

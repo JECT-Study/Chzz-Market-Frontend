@@ -6,7 +6,6 @@ import OrderListTab from '@/components/order/OrderListTab';
 import OrderLostProduct from '@/components/order/OrderLostProduct';
 import OrderWonProduct from '@/components/order/OrderWonProduct';
 import useHistory from '@/hooks/useHistory';
-import { EmptyBoundary } from '@/shared';
 import { useLocation } from 'react-router-dom';
 
 export const UserParticipatedList = () => {
@@ -96,25 +95,20 @@ export const UserParticipatedList = () => {
     <div className='mx-[-32px] my-[-4px] h-full'>
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'AuctionHistory' &&
-        <EmptyBoundary length={historyItems.length} name='participated'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)}
-          </div>
-        </EmptyBoundary>
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+          {historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)}
+        </div>
       }
       {activeTab === 'AuctionsWon' &&
-        <EmptyBoundary length={wonItems.length} name='won'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {wonItems.map((product: IUserAuctionWonItem) => <OrderWonProduct key={product.auctionId} product={product} />)}
-          </div>
-        </EmptyBoundary>
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+          {wonItems.map((product: IUserAuctionWonItem) => <OrderWonProduct key={product.auctionId} product={product} />)}
+        </div>
       }
       {activeTab === 'AuctionsLost' &&
-        <EmptyBoundary length={lostItems.length} name='lost'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {lostItems.map((product: IUserAuctionLostItem) => <OrderLostProduct key={product.auctionId} product={product} />)}
-          </div>
-        </EmptyBoundary>}
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+          {lostItems.map((product: IUserAuctionLostItem) => <OrderLostProduct key={product.auctionId} product={product} />)}
+        </div>
+      }
     </div>
   );
 };
