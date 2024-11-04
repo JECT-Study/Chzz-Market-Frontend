@@ -1,7 +1,6 @@
 import { IAuctionEndRegisteredList, IAuctionOngoingRegisteredList, IPreAuctionRegisteredList } from '@/@types/AuctionList';
 
-import { httpClient } from '@/shared/api/axios';
-import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { API_END_POINT, httpClient } from '@/shared';
 
 export interface GetAuctionProps {
   pageNumber: number;
@@ -11,6 +10,7 @@ export interface GetAuctionProps {
 
 export const getAuctionOngoingRegister = async ({ pageNumber, pageSize, sortType = 'newest' }: GetAuctionProps): Promise<IAuctionOngoingRegisteredList> => {
   const response = await httpClient.get(`${API_END_POINT.USER_ONGOING_AUCTION_REGISTERED}?sort=${sortType}&page=${pageNumber}&size=${pageSize}`);
+
   return response.data;
 };
 

@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { IPreAuctionRegisteredItem } from '@/@types/AuctionItem';
 import PreAuctionMyRegister from '@/components/user/PreAuctionMyRegister';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
-import { EmptyBoundary } from '@/shared';
 import { useLocation } from 'react-router-dom';
 
 export const UserPreRegisteredList = () => {
@@ -59,13 +58,11 @@ export const UserPreRegisteredList = () => {
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>
       {activeTab === 'preAuction' &&
-        <EmptyBoundary length={enrollItems.length} name='userPreAuction'>
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {enrollItems.map((product: IPreAuctionRegisteredItem) => (
-              <PreAuctionMyRegister product={product} key={product.productId} />
-            ))}
-          </div>
-        </EmptyBoundary>
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+          {enrollItems.map((product: IPreAuctionRegisteredItem) => (
+            <PreAuctionMyRegister product={product} key={product.productId} />
+          ))}
+        </div>
       }
     </div>
   );
