@@ -5,8 +5,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Textarea } from "@/shared/shadcn/ui/textarea";
 
 import { Layout } from "@/app/layout/index";
-import { CATEGORIES } from "@/constants/categories";
 import NoticeIcon from '@/shared/assets/icons/notice.svg';
+import { CATEGORIES } from "@/shared/constants/categories";
 import { convertCurrencyToNumber } from "@/shared/utils/convertCurrencyToNumber";
 import { formatCurrencyWithWon } from "@/shared/utils/formatCurrencyWithWon";
 import { zodResolver } from "@hookform/resolvers/zod";
