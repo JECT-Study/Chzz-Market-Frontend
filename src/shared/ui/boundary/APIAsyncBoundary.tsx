@@ -2,14 +2,20 @@ import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 import ErrorIcon from '@/shared/assets/icons/error.svg';
+import { EmptyError } from '@/shared/lib';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useLocation } from 'react-router-dom';
+import { EmptyFallback } from '..';
 import { getErrorByCode } from '../../utils/getErrorByCode';
 import { Button } from '../Button';
 import { GlobalSpinner } from '../spinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
+  if (error instanceof EmptyError) {
+    return <EmptyFallback emptyName={error.message} />
+  }
+
   const { title, description } = getErrorByCode(error)
   if (!isAxiosError(error)) throw error
 
