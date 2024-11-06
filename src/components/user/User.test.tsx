@@ -1,24 +1,53 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, test, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import UserProfile from "./UserProfile";
+import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { mockedUseNavigate } from "@/shared/test/setupTests";
 
-import { User } from '@/pages/user';
-import { BrowserRouter } from 'react-router-dom';
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: mockedUseNavigate,
+  };
+});
 
-describe('USER', () => {
-  it.skip('렌더 테스트 마이페이지', () => {
+describe('유저 페이지 테스트', () => {
+  const setup = (props = {}) => {
+    const user = userEvent.setup();
     render(
-      <BrowserRouter>
-        <User />
-      </BrowserRouter>,
+      <QueryClientProvider client={new QueryClient()}>
+        <MemoryRouter>
+          <UserProfile {...props} />
+        </MemoryRouter>
+      </QueryClientProvider>
     );
+    return { user };
+  };
+  
+  test('로딩될 때 스피너 도는지 테스트', () => {
+    setup({ isLoading: true });
+    expect(screen.getByRole('status')).toBeInTheDocument();
+  })
 
-    // Header
-    expect(screen.getByText('마이페이지')).toBeInTheDocument();
+  test("수정 버튼 클릭 시 edit 페이지로 이동", async () => {
+    const { user } = setup({
+      nickname: "테스트 사용자",
+      bio: "테스트 소개",
+      profileImageUrl: "/test.jpg",
+    });
 
-    // Main
-    expect(screen.getByText('모든 참여 내역')).toBeInTheDocument();
-    expect(screen.getByText('내가 등록한 경매')).toBeInTheDocument();
-    expect(screen.getByText('설정')).toBeInTheDocument();
-    expect(screen.getByText('로그아웃')).toBeInTheDocument();
+    const editButton = screen.getByRole("button", { name: "수정" });
+    await user.click(editButton);
+
+    expect(mockedUseNavigate).toHaveBeenCalledWith("profile/edit", {
+      state: {
+        userNickname: "테스트 사용자",
+        userBio: "테스트 소개",
+        userProfileImageUrl: "/test.jpg",
+      },
+    });
   });
 });
