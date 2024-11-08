@@ -9,7 +9,7 @@ interface Props {
   error?: FieldError;
 }
 
-const ProfileInput = ({
+export const ProfileInput = ({
   title,
   placeholder = '',
   registerProps,
@@ -36,5 +36,3 @@ const ProfileInput = ({
     </div>
   );
 };
-
-export default ProfileInput;

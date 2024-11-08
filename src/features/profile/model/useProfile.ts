@@ -1,25 +1,10 @@
-import { IProfileData } from '@/@types/user';
-import { httpClient } from '@/shared/api/axios';
-import { API_END_POINT } from '@/shared/constants/apiEndPoint';
-import { QUERY_KEYS } from '@/shared/constants/queryKeys';
-import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
-import { nicknameCheck } from '../login/queries';
-
-export const getProfile = async () => {
-  const response = await httpClient.get(`${API_END_POINT.SIGNUP}`);
-  return response.data;
-};
-
-export const postEditProfile = async (formData: FormData) => {
-  const response = await httpClient.post(`${API_END_POINT.PROFILE}`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-
-  return response.data;
-};
+import { IProfileData } from "@/@types/user";
+import { QUERY_KEYS } from "@/shared";
+import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { getProfile } from "../api/getProfile";
+import { postEditProfile } from "../api/postEditProfile";
+import { nicknameCheck } from "@/components/login/queries";
 
 export const useProfile = (): {
   profileData: IProfileData;

@@ -1,7 +1,7 @@
-import { useProfile } from '@/components/profile/queries';
 import UserOrder from '@/components/user/UserOrder';
 import UserOrderList from '@/components/user/UserOrderList';
 import UserProfile from '@/components/user/UserProfile';
+import { useProfile } from '@/features/profile/model/useProfile';
 
 export const User = () => {
   const { profileData, isLoading } = useProfile();

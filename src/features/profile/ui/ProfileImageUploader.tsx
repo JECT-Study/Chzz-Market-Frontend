@@ -3,7 +3,7 @@ import { MenuAccordion } from '@/shared';
 import Profile from '@/shared/assets/icons/profile.svg';
 import ProfileEdit from '@/shared/assets/icons/profile_edit.svg';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { Input } from '../../shared/shadcn/ui/input';
+import { Input } from '../../../shared/shadcn/ui/input';
 
 interface ImageUploaderProps {
   image: string | null;
@@ -12,7 +12,7 @@ interface ImageUploaderProps {
   setFile: Dispatch<SetStateAction<File | null>>;
 }
 
-const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderProps) => {
+export const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderProps) => {
   const [onMenu, setOnMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { fileInputRef, deleteImage, handleImage, handleBoxClick } = useProfileImageUploader(image, setImage, file, setFile, setOnMenu);
@@ -67,5 +67,3 @@ const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderP
     </div>
   );
 };
-
-export default ProfileImageUploader;
