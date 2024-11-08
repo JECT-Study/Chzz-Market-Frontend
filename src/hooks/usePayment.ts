@@ -1,5 +1,5 @@
 import type { IAddressWithId } from "@/@types/Address";
-import { createOrderId, getAddress, getCustomerKey, useGetAddressDetail } from '@/components/address/queries';
+import { getAddress, getAddressDetail, getCustomerKey, postOrderId } from "@/features/address/api";
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
 import { loadTossPayments } from '@tosspayments/tosspayments-sdk';
@@ -10,7 +10,7 @@ const clientKey = `${import.meta.env.VITE_TOSS_CLIENT_KEY}`;
 export const usePostPayment = (auctionId: string, orderId: string) => {
   const { data: auctionData } = useQuery({
     queryKey: [QUERY_KEYS.AUCTION_ADDRESS_DETAIL],
-    queryFn: () => useGetAddressDetail(auctionId),
+    queryFn: () => getAddressDetail(auctionId),
   });
 
   const { data: DefaultAddressData } = useQuery({
@@ -63,7 +63,7 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
 export const usePostOrderId = (): { createId: UseMutateFunction; orderId: string; isPending: boolean } => {
   const [orderId, setOrderId] = useState<string>('');
   const { mutate: createId, isPending } = useMutation({
-    mutationFn: createOrderId,
+    mutationFn: postOrderId,
     onSuccess: (data) => {
       setOrderId(data.orderId);
     },

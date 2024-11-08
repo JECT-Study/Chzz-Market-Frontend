@@ -3,8 +3,8 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
-import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "./queries";
-import * as queries from "@/components/address/queries";
+import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "@/features/address/model/index";
+import * as queries from "@/features/address/api/index";
 import { mockedUseNavigate } from "@/shared/test/setupTests";
 import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages";
 
@@ -563,7 +563,7 @@ describe('주소 편집 페이지 테스트', () => {
     await user.click(deleteButton);
 
     waitFor(() => {
-      expect(queries.useDeleteAddress().deleteData).toHaveBeenCalled();
+      expect(queries.deleteAddress('1')).toHaveBeenCalled();
     });
   });
 
