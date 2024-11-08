@@ -1,4 +1,4 @@
-import { useProfile } from '@/components/profile/queries';
+import { useProfile } from '@/features/profile/model/useProfile';
 import { UserProfileEditFormSchema } from '@/shared/constants/schema';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';

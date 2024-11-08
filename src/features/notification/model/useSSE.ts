@@ -1,4 +1,3 @@
-import { logout } from '@/components/login/queries';
 import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
 
@@ -6,6 +5,7 @@ import { isLoggedIn } from '@/features/auth/model/authSlice';
 import { RefreshHandler, getToken } from '@/shared';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '@/features/auth/api';
 
 export const useSSE = <T>(url: string) => {
   const [state, setState] = useState<T[]>([]);

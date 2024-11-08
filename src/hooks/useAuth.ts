@@ -1,4 +1,4 @@
-import { logout } from '@/components/login/queries';
+import { logout } from '@/features/auth/api';
 import { removeToken } from '@/shared/utils/token';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';

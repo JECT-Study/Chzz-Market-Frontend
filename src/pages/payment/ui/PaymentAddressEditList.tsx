@@ -1,5 +1,4 @@
 import { Layout } from "@/app/layout/index";
-import { useDeleteAddress, useGetAddresses } from "@/components/address/queries";
 import { Button } from "@/shared";
 import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import rocation_off from '@/shared/assets/icons/rocation_off.svg';
@@ -7,6 +6,7 @@ import { ROUTES } from "@/shared/constants/routes";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type { IAddressWithId } from "@/@types/Address";
+import { useDeleteAddress, useGetAddresses } from "@/features/address/model";
 
 export const PaymentAddressEditList = () => {
   const navigate = useNavigate();

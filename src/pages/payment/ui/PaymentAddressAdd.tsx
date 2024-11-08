@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Layout } from "@/app/layout/index";
-import { usePostAddress } from "@/components/address/queries";
 import { ADDRESS_SCRIPT_URL } from "@/constants/address";
 import { Button, Checkbox, FormField } from "@/shared";
 import { Input } from "@/shared/shadcn/ui/input";
 import { formatPhoneNumber } from "@/shared/utils/formatPhoneNumber";
 import { useForm } from "react-hook-form";
+import { usePostAddress } from "@/features/address/model";
 
 interface AddressProps {
   recipientName: string,

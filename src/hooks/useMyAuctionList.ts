@@ -1,5 +1,5 @@
-import { getAuctionEndRegister, getAuctionOngoingRegister, getAuctionPreAuctionRegister } from '@/components/user/queries';
 
+import { getAuctionEndRegister, getAuctionOngoingRegister, getAuctionPreAuctionRegister } from '@/features/user/api';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 

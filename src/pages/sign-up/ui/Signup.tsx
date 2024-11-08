@@ -1,7 +1,7 @@
 import { IUser } from '@/@types/user';
 import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
-import { useCheckNickname } from '@/components/profile/queries';
+import { useCheckNickname } from '@/features/profile/model/useProfile';
 import { setIsNameValid, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '@/features/sign-up/model/signupSlice';
 import { useSignup } from '@/hooks/useSignup';
 import { Button, FormField } from '@/shared';

@@ -1,4 +1,4 @@
-import { usePostSignup } from '@/components/login/queries';
+import { usePostSignup } from '@/features/auth/model';
 import { SignupFormSchema } from '@/shared/constants/schema';
 import { Control, UseFormHandleSubmit, useForm } from 'react-hook-form';
 import { z } from 'zod';
