@@ -37,7 +37,7 @@ export const useProfile = (): {
   const { mutate: profileMutation, isPending } = useMutation({
     mutationFn: (formData: FormData) => postEditProfile(formData),
     onSuccess: () => {
-      navigate('/user');
+      navigate('/user', { replace: true });
     },
   });
 

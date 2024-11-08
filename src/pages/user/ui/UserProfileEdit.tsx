@@ -13,11 +13,9 @@ import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { Input } from '@/shared/shadcn/ui/input';
 import { Textarea } from '@/shared/shadcn/ui/textarea';
-import { useNavigate } from 'react-router-dom';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
-  const navigate = useNavigate();
   const { control, watch, handleSubmit, handleEditProfile, originalNickname, userProfileImageUrl, isPending } = useEditProfile();
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [profileFile, setProfileFile] = useState<File | null>(userProfileImageUrl);
@@ -111,7 +109,7 @@ export const UserProfileEdit = () => {
 
   return (
     <Layout>
-      <Layout.Header title="프로필 수정" handleBack={() => navigate('/user')} />
+      <Layout.Header title="프로필 수정" />
       <Layout.Main>
         <form
           ref={formRef}
