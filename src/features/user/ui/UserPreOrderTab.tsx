@@ -5,7 +5,7 @@ interface UserOrderTabProps {
   setActiveTab: (activeTab: string) => void;
 }
 
-const UserPreOrderTab = ({ activeTab, setActiveTab }: UserOrderTabProps) => {
+export const UserPreOrderTab = ({ activeTab, setActiveTab }: UserOrderTabProps) => {
   return (
     <div className='flex justify-center w-full'>
       <div
@@ -22,5 +22,3 @@ const UserPreOrderTab = ({ activeTab, setActiveTab }: UserOrderTabProps) => {
     </div>
   );
 };
-
-export default UserPreOrderTab;

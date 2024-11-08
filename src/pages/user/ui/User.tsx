@@ -1,7 +1,5 @@
-import UserOrder from '@/components/user/UserOrder';
-import UserOrderList from '@/components/user/UserOrderList';
-import UserProfile from '@/components/user/UserProfile';
 import { useProfile } from '@/features/profile/model/useProfile';
+import { UserOrder, UserOrderList, UserProfile } from '@/features/user/ui';
 
 export const User = () => {
   const { profileData, isLoading } = useProfile();

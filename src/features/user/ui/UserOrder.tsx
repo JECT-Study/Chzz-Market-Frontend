@@ -13,7 +13,7 @@ interface Props {
   registeredAuctionCount?: number;
 }
 
-const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount }: Props) => {
+export const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount }: Props) => {
   const navigate = useNavigate();
   const $participantCount = participantCount || { failedAuctionCount: 0, ongoingAuctionCount: 0, successfulAuctionCount: 0 };
   const $preRegisterCount = preRegisterCount || 0;
@@ -112,5 +112,3 @@ const UserOrder = ({ participantCount, preRegisterCount, registeredAuctionCount 
     </div>
   );
 };
-
-export default UserOrder;

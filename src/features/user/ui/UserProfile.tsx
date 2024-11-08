@@ -5,7 +5,7 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 
-const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }: IProfileProps) => {
+export const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }: IProfileProps) => {
   const navigator = useNavigate();
   const userNickname = nickname || null;
   const userBio = bio || null;
@@ -80,5 +80,3 @@ const UserProfile = ({ nickname, bio, profileImageUrl, providerType, isLoading }
     </div>
   );
 };
-
-export default UserProfile;

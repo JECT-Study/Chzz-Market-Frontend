@@ -1,5 +1,5 @@
 import { Layout } from '@/app/layout/index';
-import { useRefreshTokenOnSuccess } from '@/components/login/queries';
+import { useRefreshTokenOnSuccess } from '@/features/auth/model';
 import { useAuth } from '@/hooks/useAuth';
 import ChizzImage from '@/shared/assets/icons/main_cheese_icon.svg';
 import { RiKakaoTalkFill } from "react-icons/ri";

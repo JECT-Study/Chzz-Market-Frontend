@@ -1,9 +1,9 @@
 import type { IAuctionOngoingRegisteredItem } from '@/@types/AuctionItem';
 import { CreatedAt, ParticipantCount, Price, ROUTES } from '@/shared';
 import { useNavigate } from 'react-router-dom';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../../../entities/product/ui/ProductItem';
 
-const OngoingMyRegister = ({ product }: { product: IAuctionOngoingRegisteredItem }) => {
+export const OngoingMyRegister = ({ product }: { product: IAuctionOngoingRegisteredItem }) => {
   const navigate = useNavigate();
 
   return (
@@ -14,5 +14,3 @@ const OngoingMyRegister = ({ product }: { product: IAuctionOngoingRegisteredItem
     </ProductItem>
   );
 };
-
-export default OngoingMyRegister;

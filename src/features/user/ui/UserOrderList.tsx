@@ -10,7 +10,7 @@ const userList = [
   },
 ];
 
-const UserOrderList = () => {
+export const UserOrderList = () => {
   const { handleLogout } = useAuth();
   const navigate = useNavigate();
 
@@ -37,5 +37,3 @@ const UserOrderList = () => {
     </div>
   );
 };
-
-export default UserOrderList;

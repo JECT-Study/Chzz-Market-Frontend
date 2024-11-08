@@ -31,3 +31,9 @@ export interface IProfileData {
   profileImageUrl: string;
   providerType: string;
 }
+
+export interface GetAuctionProps {
+  pageNumber: number;
+  pageSize: number;
+  sortType?: string;
+}

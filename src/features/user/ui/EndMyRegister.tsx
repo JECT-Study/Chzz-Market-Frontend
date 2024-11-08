@@ -4,9 +4,9 @@ import type { IAuctionEndRegisteredItem } from '@/@types/AuctionItem';
 import PriceIcon from '@/shared/assets/icons/price.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../../../entities/product/ui/ProductItem';
 
-const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
+export const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
   const navigate = useNavigate();
   const winningBidAmount = product.winningBidAmount ?? 0;
   const formattedWinningBid = formatCurrencyWithWon(winningBidAmount);
@@ -46,5 +46,3 @@ const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
     </ProductItem>
   );
 };
-
-export default EndMyRegister;

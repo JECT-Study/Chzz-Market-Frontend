@@ -1,5 +1,4 @@
-import { getMyHistoryAuction, getMyLostAuction, getMyWonAuction } from '@/components/userAuction/queries';
-
+import { getMyHistoryAuction, getMyLostAuction, getMyWonAuction } from '@/features/user/api';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 

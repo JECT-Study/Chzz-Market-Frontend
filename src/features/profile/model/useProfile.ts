@@ -4,7 +4,7 @@ import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, us
 import { useNavigate } from "react-router-dom";
 import { getProfile } from "../api/getProfile";
 import { postEditProfile } from "../api/postEditProfile";
-import { nicknameCheck } from "@/components/login/queries";
+import { nicknameCheck } from "@/features/auth/api";
 
 export const useProfile = (): {
   profileData: IProfileData;

@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import UserProfile from "./UserProfile";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { mockedUseNavigate } from "@/shared/test/setupTests";
+import { UserProfile } from "@/features/user/ui";
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');

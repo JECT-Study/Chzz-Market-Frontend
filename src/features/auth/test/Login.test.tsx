@@ -1,12 +1,12 @@
 import { useAuth } from "@/hooks/useAuth";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-import { useRefreshTokenOnSuccess } from "./queries";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import { mockedUseNavigate } from "@/shared/test/setupTests";
 import { Login } from "@/pages";
+import { useRefreshTokenOnSuccess } from "../model";
 
 vi.mock('@/hooks/useAuth', () => ({
   useAuth: vi.fn(),
