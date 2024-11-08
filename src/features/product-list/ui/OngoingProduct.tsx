@@ -1,9 +1,9 @@
 import type { IAuctionItem } from '@/@types/AuctionItem';
 import { ParticipantCount, Price, ROUTES } from '@/shared';
 import { useNavigate } from 'react-router-dom';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../../../entities/product/ui/ProductItem';
 
-const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
+export const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
   const navigate = useNavigate();
   const handleProductClick = () => navigate(ROUTES.AUCTION.getItemRoute(product.auctionId));
 
@@ -14,5 +14,3 @@ const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
     </ProductItem>
   );
 };
-
-export default OngoingProduct;

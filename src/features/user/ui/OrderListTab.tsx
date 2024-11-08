@@ -6,7 +6,7 @@ interface OrderListTabProps {
   setActiveTab: (tab: string) => void;
 }
 
-const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
+export const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
   const tabClass = 'flex-1 text-center cursor-pointer';
   const [isWidthScreen, setIsWidthScreen] = useState(window.innerWidth >= 750);
 
@@ -85,5 +85,3 @@ const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
     </div>
   );
 };
-
-export default OrderListTab;

@@ -1,8 +1,8 @@
 import type { IUserAuctionLostItem } from '@/@types/AuctionItem';
 import { ParticipantCount, Price } from '@/shared';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../../../entities/product/ui/ProductItem';
 
-const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
+export const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
 
   return (
     <ProductItem product={product}>
@@ -11,5 +11,3 @@ const OrderLostProduct = ({ product }: { product: IUserAuctionLostItem }) => {
     </ProductItem>
   );
 };
-
-export default OrderLostProduct;

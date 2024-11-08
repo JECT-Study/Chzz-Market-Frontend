@@ -5,7 +5,7 @@ import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
 
-const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
+export const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
   const navigate = useNavigate();
   const formatted = formatCurrencyWithWon(product.winningAmount);
 
@@ -86,5 +86,3 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
     </div>
   );
 };
-
-export default OrderWonProduct;

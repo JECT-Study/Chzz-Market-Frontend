@@ -1,5 +1,4 @@
-import { getEnrollProductList, getOngoingProductList } from '@/components/productList/queries';
-
+import { getEnrollProductList, getOngoingProductList } from '@/features/product-list/api';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 

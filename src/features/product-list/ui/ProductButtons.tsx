@@ -7,7 +7,7 @@ interface ProductButtonsProps {
   setPreAuctionSortType: (sortType: string) => void;
 }
 
-const ProductButtons = ({ setOngoingSortType, setPreAuctionSortType }: ProductButtonsProps) => {
+export const ProductButtons = ({ setOngoingSortType, setPreAuctionSortType }: ProductButtonsProps) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [activeFilter, setActiveFilter] = useState('newest');
 
@@ -81,5 +81,3 @@ const ProductButtons = ({ setOngoingSortType, setPreAuctionSortType }: ProductBu
     </div>
   );
 };
-
-export default ProductButtons;

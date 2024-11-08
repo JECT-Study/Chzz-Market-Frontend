@@ -55,3 +55,10 @@ export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipa
   auctionId: number;
   bidAmount: number;
 }
+
+export interface ProductParams {
+  pageNumber: number;
+  pageSize: number;
+  sortType?: string;
+  category?: string;
+}
