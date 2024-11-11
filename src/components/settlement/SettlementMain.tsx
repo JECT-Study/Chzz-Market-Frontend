@@ -1,10 +1,11 @@
+import { Button, formatCurrencyWithWon } from "@/shared";
+
 import { Layout } from "@/app/layout/index";
 import { BIDDER_LIST_PRICE_FILTER } from "@/constants/filter";
 import type { IBidder } from "@/features/bid/config/type";
-import { Button, formatCurrencyWithWon } from "@/shared";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuctionItem from "../../entities/auction/ui/AuctionItem";
+import AuctionItem from "../auction/ui/AuctionItem";
 import { useGetAuctionDetails } from "../details/queries";
 import { useGetBidderList } from "./queries";
 

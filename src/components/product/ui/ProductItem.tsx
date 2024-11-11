@@ -1,5 +1,5 @@
-import { TimeLabel } from '@/shared/ui';
 import { ReactNode } from 'react';
+import { TimeLabel } from '@/shared/ui';
 
 export interface ProductProps {
   id?: number;
