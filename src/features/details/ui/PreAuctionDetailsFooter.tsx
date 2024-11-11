@@ -1,7 +1,7 @@
 import { Button, Confirm, Modal } from "@/shared";
-import { useConvertAuction, useToggleAuctionDetailsHeart } from './queries';
 
-import { Layout } from "@/app/layout/index";
+import { Layout } from "@/app/layout";
+import { useConvertAuction, useToggleAuctionDetailsHeart } from "../model";
 
 interface PreAuctionDetailsFooterProps {
   isLiked: boolean
@@ -9,7 +9,7 @@ interface PreAuctionDetailsFooterProps {
   isSeller: boolean
 }
 
-const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuctionDetailsFooterProps) => {
+export const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuctionDetailsFooterProps) => {
   const { mutate: toggleAuctionItemHeart } = useToggleAuctionDetailsHeart();
   const { mutate: convertToAuction, isPending } = useConvertAuction();
 
@@ -43,5 +43,3 @@ const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuction
     </Layout.Footer>
   );
 }
-
-export default PreAuctionDetailsFooter;

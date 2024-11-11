@@ -5,7 +5,7 @@ interface DetailsBasicProps {
   productName: string, category: string, minPrice: number
 }
 
-const DetailsBasic = ({ productName, category, minPrice }: DetailsBasicProps) => {
+export const DetailsBasic = ({ productName, category, minPrice }: DetailsBasicProps) => {
   const navigate = useNavigate();
 
   const onClickCategory = () => {
@@ -26,5 +26,3 @@ const DetailsBasic = ({ productName, category, minPrice }: DetailsBasicProps) =>
     </>
   );
 }
-
-export default DetailsBasic;

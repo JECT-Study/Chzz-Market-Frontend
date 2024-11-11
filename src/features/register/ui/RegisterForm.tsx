@@ -1,10 +1,10 @@
-import { useGetPreAuctionDetails } from "@/components/details/queries";
 import { AccessDenied, Button, FormField } from "@/shared";
 import { Input } from "@/shared/shadcn/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/shared/shadcn/ui/select";
 import { Textarea } from "@/shared/shadcn/ui/textarea";
 
 import { Layout } from "@/app/layout/index";
+import { useGetPreAuctionDetails } from "@/features/details/model";
 import NoticeIcon from '@/shared/assets/icons/notice.svg';
 import { CATEGORIES } from "@/shared/constants/categories";
 import { convertCurrencyToNumber } from "@/shared/utils/convertCurrencyToNumber";

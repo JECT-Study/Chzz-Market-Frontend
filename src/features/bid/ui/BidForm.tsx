@@ -1,14 +1,14 @@
-import { MAX_BID_COUNT, getBidSchema } from "@/features/bid/config";
-import { Button, FormField, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
+import { getBidSchema } from "@/features/bid/config";
+import { Button, FormField, MAX_BID_COUNT, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Layout } from "@/app/layout/index";
+import { useGetAuctionDetails } from "@/features/details";
 import { useEditableNumberInput } from "@/features/register/lib/useEditableNumberInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { z } from "zod";
 import AuctionItem from "../../../components/auction/ui/AuctionItem";
-import { useGetAuctionDetails } from "../../../components/details/queries";
 import { Input } from "../../../shared/shadcn/ui/input";
 import { usePostBid } from "../model/usePostBid";
 import { BidCaution } from "./BidCaution";

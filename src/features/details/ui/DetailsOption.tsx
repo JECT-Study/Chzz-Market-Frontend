@@ -10,7 +10,7 @@ interface DetailsOptionProps {
   isPending: boolean
 }
 
-const DetailsOption = ({ clickEdit, confirmDelete, isPending }: DetailsOptionProps) => {
+export const DetailsOption = ({ clickEdit, confirmDelete, isPending }: DetailsOptionProps) => {
   return (
     <div onClick={(e) => e.stopPropagation()} className='absolute flex flex-col z-50 bg-white rounded-lg w-[10rem] top-12 right-8 web:text-body1 text-body2'>
       <button onClick={clickEdit} className='flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10'>
@@ -35,5 +35,3 @@ const DetailsOption = ({ clickEdit, confirmDelete, isPending }: DetailsOptionPro
     </div>
   );
 }
-
-export default DetailsOption;

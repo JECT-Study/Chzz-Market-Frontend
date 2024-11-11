@@ -1,12 +1,11 @@
-import { useCancelBid, useGetAuctionDetails } from "@/components/details/queries";
 
-import { Layout } from "@/app/layout/index";
-import { MAX_BID_COUNT } from "@/features/bid/config";
-import { Button, Confirm, Modal } from "@/shared";
-import { ROUTES } from "@/shared/constants/routes";
+import { Layout } from "@/app/layout";
+import { useCancelBid } from "@/features/bid";
+import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from "@/shared";
 import { useNavigate } from "react-router-dom";
+import { useGetAuctionDetails } from "../model";
 
-const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
+export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
   const { mutate: cancelBid, isPending } = useCancelBid()
   const { auctionDetails } = useGetAuctionDetails(auctionId);
@@ -132,5 +131,3 @@ const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
     </>
   );
 }
-
-export default AuctionDetailsFooter;
