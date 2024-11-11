@@ -1,4 +1,4 @@
-import type { IAuctionDetails, IPreAuctionDetails } from '@/@types/AuctionDetails';
+import type { IAuctionDetails, IPreAuctionDetails } from '@/entities';
 import { UseMutateFunction, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
 import { httpClient } from '@/shared/api/axios';

@@ -1,4 +1,4 @@
-import { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from '@/@types/AuctionItem';
+import type { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from '@/entities';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EndMyRegister from '@/components/user/EndMyRegister';

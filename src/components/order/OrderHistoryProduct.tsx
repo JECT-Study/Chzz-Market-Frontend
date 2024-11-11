@@ -1,8 +1,9 @@
-import type { IUserAuctionHistoryItem } from '@/@types/AuctionItem';
 import { ParticipantCount, Price } from "@/shared";
+
+import type { IUserAuctionHistoryItem } from '@/entities';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../product/ui/ProductItem';
 
 const OrderHistoryProduct = ({ product }: { product: IUserAuctionHistoryItem }) => {
   const navigate = useNavigate();

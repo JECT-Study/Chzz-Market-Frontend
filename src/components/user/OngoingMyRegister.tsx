@@ -1,7 +1,8 @@
-import type { IAuctionOngoingRegisteredItem } from '@/@types/AuctionItem';
 import { CreatedAt, ParticipantCount, Price, ROUTES } from '@/shared';
+
+import type { IAuctionOngoingRegisteredItem } from '@/entities';
 import { useNavigate } from 'react-router-dom';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../product/ui/ProductItem';
 
 const OngoingMyRegister = ({ product }: { product: IAuctionOngoingRegisteredItem }) => {
   const navigate = useNavigate();

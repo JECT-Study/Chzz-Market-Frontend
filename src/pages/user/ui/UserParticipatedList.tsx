@@ -1,4 +1,4 @@
-import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from '@/@types/AuctionItem';
+import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from '@/entities';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import OrderHistoryProduct from '@/components/order/OrderHistoryProduct';

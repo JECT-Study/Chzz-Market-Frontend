@@ -1,8 +1,9 @@
-import type { IPreAuctionItem } from '@/@types/AuctionItem';
 import { LikeCount, Price } from '@/shared';
+
+import type { IPreAuctionItem } from '@/entities';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../product/ui/ProductItem';
 import { useToggleAuctionListHeart } from './queries';
 
 const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
@@ -18,14 +19,14 @@ const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
       <button onClick={(event) => {
         event.stopPropagation();
         confirmDelete();
-      }} 
-      type='button' 
-      className={
-        `w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
+      }}
+        type='button'
+        className={
+          `w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
         ${product.isLiked
-          ? 'bg-white border border-gray1'
-          : 'bg-gray3 text-black border-none'
-        }
+            ? 'bg-white border border-gray1'
+            : 'bg-gray3 text-black border-none'
+          }
       `}
       >
         {product.isSeller && '내가 등록한 물품'}

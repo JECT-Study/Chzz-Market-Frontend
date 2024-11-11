@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import type { IPreAuctionRegisteredItem } from '@/@types/AuctionItem';
 import PreAuctionMyRegister from '@/components/user/PreAuctionMyRegister';
+import type { IPreAuctionRegisteredItem } from '@/entities';
 import useMyAuctionList from '@/hooks/useMyAuctionList';
 import { useLocation } from 'react-router-dom';
 

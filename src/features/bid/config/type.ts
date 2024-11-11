@@ -1,4 +1,4 @@
-import { PaginationData } from '../../../@types/AuctionList';
+import type { PaginationData } from '@/entities';
 
 export interface IBidPostData {
   auctionId: number;

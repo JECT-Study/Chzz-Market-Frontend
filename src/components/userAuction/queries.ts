@@ -1,4 +1,5 @@
-import { IUserAuctionHistoryList, IUserAuctionLostList } from '@/@types/AuctionList';
+import type { IUserAuctionHistoryList, IUserAuctionLostList } from '@/entities';
+
 import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 

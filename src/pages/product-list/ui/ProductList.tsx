@@ -1,4 +1,4 @@
-import type { IAuctionItem, IPreAuctionItem } from '@/@types/AuctionItem';
+import type { IAuctionItem, IPreAuctionItem } from '@/entities';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 

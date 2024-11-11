@@ -1,10 +1,10 @@
 import { CreatedAt, ParticipantCount, Price, ROUTES } from '@/shared';
 
-import type { IAuctionEndRegisteredItem } from '@/@types/AuctionItem';
+import type { IAuctionEndRegisteredItem } from '@/entities';
 import PriceIcon from '@/shared/assets/icons/price.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../product/ui/ProductItem';
 
 const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
   const navigate = useNavigate();

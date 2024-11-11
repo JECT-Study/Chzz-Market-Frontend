@@ -1,7 +1,8 @@
-import type { IPreAuctionRegisteredItem } from '@/@types/AuctionItem';
 import { LikeCount, Price, ROUTES } from '@/shared';
+
+import type { IPreAuctionRegisteredItem } from '@/entities';
 import { useNavigate } from 'react-router-dom';
-import ProductItem from '../../entities/product/ui/ProductItem';
+import ProductItem from '../product/ui/ProductItem';
 
 const PreAuctionMyRegister = ({ product }: { product: IPreAuctionRegisteredItem }) => {
   const navigate = useNavigate()

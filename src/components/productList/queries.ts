@@ -1,9 +1,9 @@
-import { IAuctionList, IPreAuctionList } from '@/@types/AuctionList';
+import type { IAuctionList, IPreAuctionList } from '@/entities';
+import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 export interface GetProductParams {

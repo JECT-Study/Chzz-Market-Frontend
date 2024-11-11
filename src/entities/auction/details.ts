@@ -1,17 +1,4 @@
-interface IAuctionDetailsBase {
-  productId: number;
-  sellerNickname: string;
-  productName: string;
-  description: string;
-  minPrice: number;
-  isSeller: boolean;
-  category: string;
-  sellerProfileImageUrl: string;
-  images: {
-    imageId: number;
-    imageUrl: string;
-  }[];
-}
+import { IAuctionDetailsBase } from './base';
 
 export interface IAuctionDetails extends IAuctionDetailsBase {
   timeRemaining: number;

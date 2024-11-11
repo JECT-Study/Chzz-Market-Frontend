@@ -1,5 +1,4 @@
-import { IAuctionEndRegisteredList, IAuctionOngoingRegisteredList, IPreAuctionRegisteredList } from '@/@types/AuctionList';
-
+import type { IAuctionEndRegisteredList, IAuctionOngoingRegisteredList, IPreAuctionRegisteredList } from '@/entities';
 import { API_END_POINT, httpClient } from '@/shared';
 
 export interface GetAuctionProps {

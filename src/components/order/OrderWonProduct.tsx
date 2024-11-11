@@ -1,6 +1,6 @@
 import { ParticipantCount, ROUTES } from '@/shared';
 
-import type { IUserAuctionWonItem } from '@/@types/AuctionItem';
+import type { IUserAuctionWonItem } from '@/entities';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
@@ -65,7 +65,7 @@ const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
               </span>
             </div>
             <ParticipantCount count={product.participantCount} />
-            <div className='flex justify-center items-center pt-1'>
+            <div className='flex items-center justify-center pt-1'>
               <button
                 type="button"
                 onClick={handleButtonClick}

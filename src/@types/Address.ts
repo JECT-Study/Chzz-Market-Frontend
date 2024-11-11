@@ -1,4 +1,4 @@
-import { PaginationData } from './AuctionList';
+import type { PaginationData } from '@/entities';
 
 export interface IAddressBase {
   recipientName: string;
