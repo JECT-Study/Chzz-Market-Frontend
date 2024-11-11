@@ -1,4 +1,4 @@
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/features/auth/hooks';
 import { ROUTES } from '@/shared/constants/routes';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
