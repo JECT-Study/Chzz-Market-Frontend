@@ -3,7 +3,7 @@ import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useHistory = (activeTab: string): any => {
+export const useHistory = (activeTab: string): any => {
   const {
     data: historyData,
     isLoading: historyLoading,
@@ -82,5 +82,3 @@ const useHistory = (activeTab: string): any => {
     refetchLostData,
   };
 };
-
-export default useHistory;

@@ -3,7 +3,7 @@ import { LikeCount, Price } from '@/shared';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
 import ProductItem from '../../../entities/product/ui/ProductItem';
-import { useToggleAuctionListHeart } from '../model/useToggleAuctionListHeart';
+import { useToggleAuctionListHeart } from '../model';
 
 export const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
   const navigate = useNavigate();

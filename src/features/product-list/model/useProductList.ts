@@ -3,7 +3,7 @@ import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useProductList = (activeTab: string, ongoingSortType: string, preAuctionSortType: string, category: string): any => {
+export const useProductList = (activeTab: string, ongoingSortType: string, preAuctionSortType: string, category: string): any => {
   const {
     data: ongoingData,
     isLoading: _ongoingLoading,
@@ -61,5 +61,3 @@ const useProductList = (activeTab: string, ongoingSortType: string, preAuctionSo
     refetchEnrollData,
   };
 };
-
-export default useProductList;

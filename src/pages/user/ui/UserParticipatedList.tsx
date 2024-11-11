@@ -1,9 +1,9 @@
 import type { IUserAuctionHistoryItem, IUserAuctionLostItem, IUserAuctionWonItem } from '@/@types/AuctionItem';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import useHistory from '@/hooks/useHistory';
 import { useLocation } from 'react-router-dom';
 import { OrderHistoryProduct, OrderListTab, OrderLostProduct, OrderWonProduct } from '@/features/user/ui';
+import { useHistory } from '@/features/user/model';
 
 export const UserParticipatedList = () => {
   const location = useLocation();

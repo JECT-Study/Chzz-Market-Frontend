@@ -1,9 +1,9 @@
-import { useProfileImageUploader } from '@/hooks/useProfileImageUploader';
 import { MenuAccordion } from '@/shared';
 import Profile from '@/shared/assets/icons/profile.svg';
 import ProfileEdit from '@/shared/assets/icons/profile_edit.svg';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { Input } from '../../../shared/shadcn/ui/input';
+import { useProfileImageUploader } from '../lib';
 
 interface ImageUploaderProps {
   image: string | null;

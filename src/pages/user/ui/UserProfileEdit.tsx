@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IUserProfile } from '@/@types/user';
 import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
-import { useEditProfile } from '@/hooks/useProfile';
 import { Button, FormField } from '@/shared';
 import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
@@ -13,6 +12,7 @@ import { Input } from '@/shared/shadcn/ui/input';
 import { Textarea } from '@/shared/shadcn/ui/textarea';
 import { ProfileImageUploader } from '@/features/profile/ui';
 import { useCheckNickname } from '@/features/profile/model/useProfile';
+import { useEditProfile } from '@/features/profile/hooks';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
