@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { formatSecondsToTime } from '@/shared/utils/formatSecondsToTime';
-import { useEndAuction } from '@/features/user/model';
+import { useEndAuction } from '../lib/useEndAuction';
 
 const totalTime = 24 * 60 ** 2;
 

@@ -3,7 +3,7 @@ import { LoaderFunction, useLoaderData } from 'react-router-dom';
 import { Layout } from '@/app/layout/index';
 import AuctionDetailsFooter from '@/components/details/AuctionDetailsFooter';
 import DetailsBasic from '@/components/details/DetailsBasic';
-import ProgressBar from '@/components/details/ProgressBar';
+import ProgressBar from '@/features/details/ui/ProgressBar';
 import { useGetAuctionDetails } from '@/components/details/queries';
 import { CustomCarousel } from "@/shared";
 import ParticipantAmount from '@/shared/assets/icons/my_participation_amount.svg';
