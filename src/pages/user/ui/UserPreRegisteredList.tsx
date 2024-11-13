@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import type { IPreAuctionRegisteredItem } from '@/@types/AuctionItem';
-import PreAuctionMyRegister from '@/components/user/PreAuctionMyRegister';
-import useMyAuctionList from '@/hooks/useMyAuctionList';
 import { useLocation } from 'react-router-dom';
+import { PreAuctionMyRegister } from '@/features/user/ui';
+import { useMyAuctionList } from '@/features/user/model';
 
 export const UserPreRegisteredList = () => {
   const location = useLocation();
