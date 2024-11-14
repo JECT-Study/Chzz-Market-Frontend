@@ -9,33 +9,50 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      # 1. 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v4
 
+       # 2. Node.js 설치 및 글로벌 npm 캐시 활성화
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
-
+          node-version: 20
+          cache: 'npm' # ~/.npm 캐싱
+          
+      # 3. node_modules 캐싱
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+  
+      # 4. 의존성 설치
       - name: Install dependencies
-        run: |
-          npm install
-          npm run build
+        run: npm ci
 
+      # 5. 빌드 실행
+      - name: Build project
+        run: npm run build
+
+      # 6. AWS 크레덴셜 설정
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      # 7. S3로 배포
       - name: Deploy to S3
         run: |
           aws s3 sync ./dist s3://${{ secrets.S3_BUCKET_NAME }} --delete
-
+          echo "Deployment to S3 and CloudFront completed successfully!"
+          
+      # 8. CloudFront 캐시 무효화
       - name: Invalidate CloudFront Cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
-
-      - name: Post-deployment success message
-        run: echo "Deployment to S3 and CloudFront completed successfully!"
+          echo "CloudFront Cache Invalidated!"
