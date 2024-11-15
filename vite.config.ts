@@ -1,11 +1,20 @@
 /// <reference types="vitest" />
 
+import path, { resolve } from 'path';
+
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import { rimraf } from 'rimraf';
 import { defineConfig } from 'vite';
 
+const removeMSW = () => ({
+  name: 'remove-msw',
+  closeBundle: async () => {
+    await rimraf(path.join(__dirname, 'dist', 'mockServiceWorker.js'));
+  },
+});
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), removeMSW()],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),

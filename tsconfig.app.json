@@ -30,5 +30,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", ".husky/_/mockServiceWorker.js"]
+  "include": ["src/**/*", ".husky/_/mockServiceWorker.js", "public/mockServiceWorker.js"]
 }
