@@ -1,13 +1,9 @@
 import type { IAuctionItem, IPreAuctionItem } from '@/entities';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-
 import { Layout } from '@/app/layout/index';
-import OngoingProduct from '@/components/productList/OngoingProduct';
-import PreAuctionProduct from '@/components/productList/PreAuctionProduct';
-import ProductButtons from '@/components/productList/ProductButtons';
-import ProductListTabs from '@/components/productList/ProductListTabs';
-import useProductList from '@/hooks/useProductList';
+import { OngoingProduct, PreAuctionProduct, ProductButtons, ProductListTabs } from '@/features/product-list/ui';
+import { useProductList } from '@/features/product-list/model';
 
 export const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');

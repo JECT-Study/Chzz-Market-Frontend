@@ -1,4 +1,3 @@
-import { usePostOrderId, usePostPayment } from '@/hooks/usePayment';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/shared/shadcn/ui/select';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -15,6 +14,8 @@ import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import type { IAddressWithId } from '@/@types/Address';
+import { usePostPayment } from '@/features/address/model';
+import { usePostOrderId } from '@/features/address/model/usePostPayment';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
 

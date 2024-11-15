@@ -1,8 +1,8 @@
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
-import { Layout } from '@/app/layout';
-import { AuctionDetailsMain } from '@/features/details';
 import { APIAsyncBoundary } from '@/shared';
+import { AuctionDetailsMain } from '@/features/details';
+import { Layout } from '@/app/layout';
 
 export const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
