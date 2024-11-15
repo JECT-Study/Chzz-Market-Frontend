@@ -1,11 +1,9 @@
-import { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from '@/@types/AuctionItem';
+import type { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from '@/entities';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import EndMyRegister from '@/components/user/EndMyRegister';
-import OngoingMyRegister from '@/components/user/OngoingMyRegister';
-import UserOrderTab from '@/components/user/UserOrderTab';
-import useMyAuctionList from '@/hooks/useMyAuctionList';
 import { useLocation } from 'react-router-dom';
+import { EndMyRegister, OngoingMyRegister, UserOrderTab } from '@/features/user/ui';
+import { useMyAuctionList } from '@/features/user/model';
 
 export const UserRegisteredList = () => {
   const location = useLocation();

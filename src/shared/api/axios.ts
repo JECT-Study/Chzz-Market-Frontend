@@ -1,7 +1,7 @@
+import { refreshToken } from '@/features/auth/api';
 import { getToken, removeToken, setToken } from '@/shared/utils/token';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
-import { refreshToken } from '@/components/login/queries';
 import { toast } from 'sonner';
 
 interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {

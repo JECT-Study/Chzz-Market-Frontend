@@ -1,4 +1,4 @@
-import type { IAuctionDetails } from '@/@types/AuctionDetails';
+import type { IAuctionDetails } from '@/entities';
 import jordanBlackImage from '@/shared/assets/images/jordan_black.jpeg';
 import jordanRedImage from '@/shared/assets/images/jordan_red.jpeg';
 

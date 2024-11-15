@@ -1,4 +1,4 @@
-import { IPreAuctionItem } from '@/@types/AuctionItem';
+import type { IPreAuctionItem } from '@/entities';
 import JordanBlack from '@/shared/assets/images/jordan_black.jpeg';
 import JordanBlue from '@/shared/assets/images/jordan_blue.jpeg';
 import JordanRed from '@/shared/assets/images/jordan_red.jpeg';
