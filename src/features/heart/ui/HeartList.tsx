@@ -1,9 +1,9 @@
 import { Button, ROUTES } from '@/shared';
-
-import type { IPreAuctionItem } from '@/@types/AuctionItem';
-import AuctionItem from '@/entities/auction/ui/AuctionItem';
-import { useNavigate } from 'react-router-dom';
 import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from '../model';
+
+import AuctionItem from '@/components/auction/ui/AuctionItem';
+import type { IPreAuctionItem } from '@/entities';
+import { useNavigate } from 'react-router-dom';
 
 export const HeartList = () => {
   const navigate = useNavigate();

@@ -1,6 +1,7 @@
-import { IPreAuctionRegisteredList } from "@/@types/AuctionList";
-import { GetAuctionProps } from "@/@types/user";
-import { API_END_POINT, httpClient } from "@/shared";
+import { API_END_POINT, httpClient } from '@/shared';
+
+import { GetAuctionProps } from '@/@types/user';
+import type { IPreAuctionRegisteredList } from '@/entities';
 
 export const getAuctionPreAuctionRegister = async ({
   pageNumber,

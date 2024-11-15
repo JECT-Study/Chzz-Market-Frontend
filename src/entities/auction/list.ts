@@ -1,4 +1,4 @@
-import type {
+import {
   IAuctionEndRegisteredItem,
   IAuctionItem,
   IAuctionOngoingRegisteredItem,
@@ -7,7 +7,7 @@ import type {
   IUserAuctionHistoryItem,
   IUserAuctionLostItem,
   IUserAuctionWonItem,
-} from './AuctionItem';
+} from '.';
 
 export interface PaginationData<T> {
   hasNext: boolean;

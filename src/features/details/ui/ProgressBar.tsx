@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { formatSecondsToTime } from '@/shared/utils/formatSecondsToTime';
-import { useEndAuction } from '../lib/useEndAuction';
+import { formatSecondsToTime } from '@/shared';
+import { useEndAuction } from '../lib';
 
 const totalTime = 24 * 60 ** 2;
 
 interface ProgressBarProps { initialTimeRemaining: number; auctionId: number }
 
-const ProgressBar = ({ initialTimeRemaining, auctionId }: ProgressBarProps) => {
+export const ProgressBar = ({ initialTimeRemaining, auctionId }: ProgressBarProps) => {
   const [timeRemaining, setTimeRemaining] = useState<number>(initialTimeRemaining);
   const { endAuction } = useEndAuction()
 
@@ -52,5 +52,3 @@ const ProgressBar = ({ initialTimeRemaining, auctionId }: ProgressBarProps) => {
     </div>
   );
 };
-
-export default ProgressBar;

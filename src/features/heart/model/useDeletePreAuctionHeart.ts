@@ -1,6 +1,7 @@
-import type { IPreAuctionItem } from '@/@types/AuctionItem';
-import { QUERY_KEYS } from '@/shared';
 import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+
+import type { IPreAuctionItem } from '@/entities';
+import { QUERY_KEYS } from '@/shared';
 import { toast } from 'sonner';
 import { deletePreAuctionHeart } from '../api';
 
