@@ -1,10 +1,10 @@
 import { LikeCount, Price } from '@/shared';
 
-import type { IPreAuctionItem } from '@/entities';
 import ProductItem from '@/components/product/ui/ProductItem';
+import type { IPreAuctionItem } from '@/entities';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
-import { useToggleAuctionListHeart } from './queries';
+import { useToggleAuctionListHeart } from '../model';
 
 export const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
   const navigate = useNavigate();
