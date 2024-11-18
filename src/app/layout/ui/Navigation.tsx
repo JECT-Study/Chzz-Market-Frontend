@@ -1,6 +1,6 @@
-import { navIcons } from '@/constants/navIcons';
 import { useGetNotifications } from '@/features/notification';
 import { useNavigate } from 'react-router-dom';
+import { NAV_ICONS } from '../config';
 
 interface NavigationItemProps {
   name: string;
@@ -16,7 +16,7 @@ const NavigationItem = ({
   unreadNotificationsCount = 0,
 }: NavigationItemProps) => {
   const navigate = useNavigate();
-  const iconSrc = navIcons[name][active ? 'on' : 'off'];
+  const iconSrc = NAV_ICONS[name][active ? 'on' : 'off'];
   const notificationCondition = name === 'notification' && unreadNotificationsCount > 0;
 
   return (
@@ -38,7 +38,7 @@ export const Navigation = ({ active }: { active: string }) => {
 
   return (
     <nav className='flex items-center h-full -mx-[22.5px]'>
-      {Object.entries(navIcons).map(([name, value]) => (
+      {Object.entries(NAV_ICONS).map(([name, value]) => (
         <NavigationItem
           key={name}
           name={name}

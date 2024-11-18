@@ -1,8 +1,8 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Layout } from '@/app/layout/index';
-import { ROUTE_INFO } from '@/constants/routeInfo';
 import { Navigation } from '.';
+import { ROUTE_INFO } from '../config';
 
 export const LayoutWithNav = () => {
   const navigate = useNavigate();
