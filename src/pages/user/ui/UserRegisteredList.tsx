@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { EndMyRegister, OngoingMyRegister, UserOrderTab } from '@/features/user/ui';
 import { useMyAuctionList } from '@/features/user/model';
+import { EmptyFallback } from '@/shared';
 
 export const UserRegisteredList = () => {
   const location = useLocation();
@@ -64,20 +65,29 @@ export const UserRegisteredList = () => {
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'ongoing' &&
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
-            <OngoingMyRegister product={product} key={product.auctionId} />
-          ))}
-        </div>
-      }
-      {activeTab === 'end' &&
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {endItems.map((product: IAuctionEndRegisteredItem) => (
-            <EndMyRegister product={product} key={product.auctionId} />
-          ))}
-        </div>
-      }
+      {activeTab === 'ongoing' && (
+        ongoingItems.length > 0 ? (
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+            {ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
+              <OngoingMyRegister product={product} key={product.auctionId} />
+            ))}
+          </div>
+        ) : (
+          <EmptyFallback emptyName="userAuction" />
+        )
+      )}
+
+      {activeTab === 'end' && (
+        endItems.length > 0 ? (
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+            {endItems.map((product: IAuctionEndRegisteredItem) => (
+              <EndMyRegister product={product} key={product.auctionId} />
+            ))}
+          </div>
+        ) : (
+          <EmptyFallback emptyName="userAuction" />
+        )
+      )}
     </div>
   );
 };

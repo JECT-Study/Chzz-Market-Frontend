@@ -135,7 +135,9 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.PRODUCT_LIST,
         element: (
-          <ProductList />
+          <APIAsyncBoundary>
+            <ProductList />
+          </APIAsyncBoundary>
         ),
       },
       {

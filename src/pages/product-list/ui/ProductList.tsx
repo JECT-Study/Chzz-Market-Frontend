@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Layout } from '@/app/layout/index';
 import { OngoingProduct, PreAuctionProduct, ProductButtons, ProductListTabs } from '@/features/product-list/ui';
 import { useProductList } from '@/features/product-list/model';
+import { EmptyFallback } from '@/shared';
 
 export const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
@@ -73,17 +74,27 @@ export const ProductList = () => {
       <Layout.Main style={{ paddingLeft: 0, paddingRight: 0 }} ref={mainContainerRef}>
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <ProductButtons setOngoingSortType={setOngoingSortType} setPreAuctionSortType={setPreAuctionSortType} />
-        {activeTab === 'ongoing'
-          ?
-          <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
-            {ongoingItems?.map((product: IAuctionItem) => <OngoingProduct key={product.auctionId} product={product} />)}
-          </div>
-          :
-
-          <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
-            {enrollItems?.map((product: IPreAuctionItem) => <PreAuctionProduct key={product.productId} product={product} />)}
-          </div>
-        }
+        {activeTab === 'ongoing' ? (
+          ongoingItems?.length > 0 ? (
+            <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
+              {ongoingItems?.map((product: IAuctionItem) => (
+                <OngoingProduct key={product.auctionId} product={product} />
+              ))}
+            </div>
+          ) : (
+            <EmptyFallback emptyName="category" />
+          )
+        ) : (
+          enrollItems?.length > 0 ? (
+            <div className='grid grid-cols-2 gap-6 p-4 overflow-y-auto'>
+              {enrollItems?.map((product: IPreAuctionItem) => (
+                <PreAuctionProduct key={product.productId} product={product} />
+              ))}
+            </div>
+          ) : (
+            <EmptyFallback emptyName="category" />
+          )
+        )}
         <div ref={loader} />
       </Layout.Main>
     </Layout>
