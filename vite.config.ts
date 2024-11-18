@@ -14,6 +14,12 @@ const removeMSW = () => ({
 });
 
 export default defineConfig({
+  // 테스트 이미지 제외
+  build: {
+    rollupOptions: {
+      external: (id) => id.includes('src/shared/assets/test'),
+    },
+  },
   plugins: [react(), removeMSW()],
   resolve: {
     alias: {
