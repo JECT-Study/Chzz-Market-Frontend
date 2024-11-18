@@ -1,5 +1,5 @@
 import { getBidSchema } from "@/features/bid/config";
-import { Button, FormField, MAX_BID_COUNT, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
+import { AuctionItem, Button, FormField, MAX_BID_COUNT, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Layout } from "@/app/layout/index";
@@ -8,7 +8,6 @@ import { useEditableNumberInput } from "@/features/register/lib/useEditableNumbe
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { z } from "zod";
-import AuctionItem from "../../../components/auction/ui/AuctionItem";
 import { Input } from "../../../shared/shadcn/ui/input";
 import { usePostBid } from "../model/usePostBid";
 import { BidCaution } from "./BidCaution";
