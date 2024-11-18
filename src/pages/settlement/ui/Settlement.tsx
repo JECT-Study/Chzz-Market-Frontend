@@ -1,7 +1,7 @@
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import { Layout } from '@/app/layout/index';
-import SettlementMain from '@/components/settlement/SettlementMain';
+import SettlementMain from '@/pages/settlement/ui/SettlementMain';
 import { APIAsyncBoundary } from '@/shared';
 
 export const Settlement = () => {

@@ -2,12 +2,12 @@ import { Button, formatCurrencyWithWon } from "@/shared";
 
 import { Layout } from "@/app/layout/index";
 import { BIDDER_LIST_PRICE_FILTER } from "@/constants/filter";
-import type { IBidder } from "@/features/bid/config/type";
 import { useGetAuctionDetails } from "@/features/details";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuctionItem from "../auction/ui/AuctionItem";
-import { useGetBidderList } from "./queries";
+import AuctionItem from "../../../components/auction/ui/AuctionItem";
+import type { IBidder } from "../config";
+import { useGetBidderList } from "../model/useGetBidderList";
 
 const SettlementMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
@@ -53,7 +53,7 @@ const SettlementMain = ({ auctionId }: { auctionId: number }) => {
         </div>
       </Layout.Main>
       <Layout.Footer type='single'>
-        <Button type='button' onClick={() => navigate(-1)} color='cheeseYellow' className='w-full h-full' aria-label='최종 판매 버튼'>
+        <Button type='button' onClick={() => navigate(-1)} color='cheeseYellow' className='w-full h-full' aria-label='확인 버튼'>
           확인 완료
         </Button>
       </Layout.Footer></>
