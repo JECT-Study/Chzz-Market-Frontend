@@ -29,7 +29,7 @@ const NavigationItem = ({
   );
 };
 
-const Navigation = ({ active }: { active: string }) => {
+export const Navigation = ({ active }: { active: string }) => {
   const { notifications } = useGetNotifications();
   const unreadNotificationsCount = notifications ? notifications.reduce(
     (acc, cur) => (!cur.isRead ? acc + 1 : acc),
@@ -50,5 +50,3 @@ const Navigation = ({ active }: { active: string }) => {
     </nav>
   );
 };
-
-export default Navigation;

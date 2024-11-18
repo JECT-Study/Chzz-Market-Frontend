@@ -2,15 +2,15 @@ import { bestAuctionsData, imminentAuctionsData, preRegisterAuctionsData } from 
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
+import { useGetBestAuctions, useGetImminentAuctions, useGetPreAuctions } from '../model';
 
+import { LayoutWithNav } from '@/app/layout';
 import { useGetNotifications } from '@/features/notification/model';
 import { notificationData } from '@/mocks/data/notificationData';
 import { Home } from '@/pages/home';
 import { mockedUseNavigate } from '@/shared/test/setupTests';
 import { getTimeColor } from '@/shared/utils/getTimeColor';
 import userEvent from '@testing-library/user-event';
-import LayoutWithNav from '../../../components/navigation/LayoutWithNav';
-import { useGetBestAuctions, useGetImminentAuctions, useGetPreAuctions } from '../model';
 
 // vi.mock을 사용해 특정 모듈을 모킹할 수 있다.
 // 실제로 useGetBestAuctions 함수를 실행하는 대신, 원하는 반환값을 제공하는 모의 함수를 제공한다는 뜻

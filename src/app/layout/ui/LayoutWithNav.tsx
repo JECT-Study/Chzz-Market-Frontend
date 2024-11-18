@@ -1,9 +1,10 @@
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+
 import { Layout } from '@/app/layout/index';
 import { ROUTE_INFO } from '@/constants/routeInfo';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import Navigation from './Navigation';
+import { Navigation } from '.';
 
-const LayoutWithNav = () => {
+export const LayoutWithNav = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { title, active } = ROUTE_INFO[pathname];
@@ -20,5 +21,3 @@ const LayoutWithNav = () => {
     </Layout>
   );
 };
-
-export default LayoutWithNav;
