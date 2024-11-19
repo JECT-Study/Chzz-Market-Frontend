@@ -1,4 +1,4 @@
-import { IUser } from "@/@types/user";
+import { IUser } from "@/entities/user/user";
 import { API_END_POINT, httpClient, setToken } from "@/shared";
 
 export const postSignup = async (data: IUser) => {

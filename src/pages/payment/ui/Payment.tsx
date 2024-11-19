@@ -13,7 +13,7 @@ import { Input } from '@/shared/shadcn/ui/input';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import type { IAddressWithId } from '@/@types/Address';
+import type { IAddressWithId } from '@/entities/address/address';
 import { usePostPayment } from '@/features/address/model';
 import { usePostOrderId } from '@/features/address/model/usePostPayment';
 

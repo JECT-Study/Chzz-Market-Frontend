@@ -1,4 +1,4 @@
-import { IProfileData } from "@/@types/user";
+import { IProfileData } from "@/entities/user/user";
 import { QUERY_KEYS } from "@/shared";
 import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";

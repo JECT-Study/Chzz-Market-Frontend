@@ -1,4 +1,4 @@
-import { IAddressBase } from "@/@types/Address";
+import { IAddressBase } from "@/entities/address/address";
 import { ROUTES } from "@/shared";
 import { UseMutateFunction, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";

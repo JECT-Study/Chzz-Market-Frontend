@@ -1,4 +1,4 @@
-import { IUser } from "@/@types/user";
+import { IUser } from "@/entities/user/user";
 import { UseMutateFunction, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { postSignup } from "../api";

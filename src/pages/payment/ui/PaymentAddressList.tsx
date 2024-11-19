@@ -8,7 +8,7 @@ import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import { ROUTES } from "@/shared/constants/routes";
 import { FaCheck } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
-import type { IAddressWithId } from "@/@types/Address";
+import type { IAddressWithId } from "@/entities/address/address";
 import { useGetAddresses } from "@/features/address/model";
 
 export const PaymentAddressList = () => {

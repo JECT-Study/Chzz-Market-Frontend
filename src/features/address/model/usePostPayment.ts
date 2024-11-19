@@ -1,4 +1,4 @@
-import type { IAddressWithId } from "@/@types/Address";
+import type { IAddressWithId } from "@/entities/address/address";
 import { getAddress, getAddressDetail, getCustomerKey, postOrderId } from "@/features/address/api";
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
