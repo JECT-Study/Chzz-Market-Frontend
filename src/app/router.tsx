@@ -1,8 +1,8 @@
-import { GlobalLayout } from "@/app/layout/index";
-import LayoutWithNav from '@/components/navigation/LayoutWithNav';
+import { GlobalLayout, LayoutWithNav } from "@/app/layout";
 import { APIAsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorBoundary } from '@/shared';
-import { createBrowserRouter } from 'react-router-dom';
 import { AuctionDetails, Bid, Heart, Home, Login, Notification, Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess, PreAuctionDetails, ProductList, Register, Settlement, Signup, Test, User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList, auctionDetailsLoader, bidLoader, preAuctionDetailsLoader, registerLoader, settlementLoader } from '../pages';
+
+import { createBrowserRouter } from 'react-router-dom';
 
 const layoutWithNavRouteList = [
   {

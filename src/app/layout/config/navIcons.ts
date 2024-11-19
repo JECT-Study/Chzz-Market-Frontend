@@ -7,7 +7,7 @@ import MyOn from '@/shared/assets/icons/my_on.svg';
 import NotificationOff from '@/shared/assets/icons/notification_off.svg';
 import NotificationOn from '@/shared/assets/icons/notification_on.svg';
 
-export const navIcons: {
+export const NAV_ICONS: {
   [key in string]: { path: string; title: string; on: string; off: string };
 } = Object.freeze({
   home: {

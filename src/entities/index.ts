@@ -1,1 +1,1 @@
-export * from './auction/index';
+export * from './auction/model/types/index';

@@ -1,7 +1,6 @@
-import { Button, ROUTES } from '@/shared';
+import { AuctionItem, Button, ROUTES } from '@/shared';
 import { useDeletePreAuctionHeart, useGetPreAuctionHeartList } from '../model';
 
-import AuctionItem from '@/components/auction/ui/AuctionItem';
 import type { IPreAuctionItem } from '@/entities';
 import { useNavigate } from 'react-router-dom';
 
