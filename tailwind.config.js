@@ -20,6 +20,12 @@ module.exports = {
       },
     },
     extend: {
+      width: {
+        web: '46.875rem',
+      },
+      minWidth: {
+        mobile: '21.875rem'
+      },
       backgroundColor: {
         error: '#f5f5f5'
       },
