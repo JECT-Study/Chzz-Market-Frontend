@@ -1,12 +1,11 @@
-
-import { RealTimeNotification } from '@/features/notification';
 import { Outlet } from 'react-router-dom';
+import { RealTimeNotification } from '@/features/notification';
 
 export const GlobalLayout = () => {
 
   return (
     <div className='flex justify-center w-full h-screen'>
-      <div className='relative w-[46.875rem] min-w-[23.4375rem] h-full'>
+      <div className='relative h-full w-web min-w-mobile'>
         <Outlet />
         <RealTimeNotification />
       </div>
