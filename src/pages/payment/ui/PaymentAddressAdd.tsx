@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Layout } from "@/app/layout/index";
-import { ADDRESS_SCRIPT_URL } from "@/constants/address";
+import { ADDRESS_SCRIPT_URL } from "@/features/address/config/address";
 import { Button, Checkbox, FormField } from "@/shared";
 import { Input } from "@/shared/shadcn/ui/input";
 import { formatPhoneNumber } from "@/shared/utils/formatPhoneNumber";

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { Layout } from '@/app/layout/index';
-import { addressMemo } from '@/constants/address';
+import { addressMemo } from '@/features/address/config/address';
 import { Button, FormField } from "@/shared";
 import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';

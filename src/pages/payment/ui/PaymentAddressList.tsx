@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "@/app/layout/index";
-import { ADDRESS_SCRIPT_URL } from "@/constants/address";
+import { ADDRESS_SCRIPT_URL } from "@/features/address/config/address";
 import { Button } from "@/shared";
 import rocation_off from '@/shared/assets/icons/rocation_off.svg';
 import rocation_on from '@/shared/assets/icons/rocation_on.svg';
