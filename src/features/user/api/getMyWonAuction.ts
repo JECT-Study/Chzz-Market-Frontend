@@ -1,6 +1,6 @@
 import { API_END_POINT, httpClient } from '@/shared';
 
-import { GetAuctionProps } from '@/@types/user';
+import type { GetAuctionProps } from '@/entities/user/user';
 import type { IUserAuctionLostList } from '@/entities';
 
 export const getMyWonAuction = async ({ pageNumber, pageSize }: GetAuctionProps): Promise<IUserAuctionLostList> => {

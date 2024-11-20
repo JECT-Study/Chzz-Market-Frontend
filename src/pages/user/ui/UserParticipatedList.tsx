@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { OrderHistoryProduct, OrderListTab, OrderLostProduct, OrderWonProduct } from '@/features/user/ui';
 import { useHistory } from '@/features/user/model';
+import { EmptyFallback } from '@/shared';
 
 export const UserParticipatedList = () => {
   const location = useLocation();
@@ -91,21 +92,41 @@ export const UserParticipatedList = () => {
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'AuctionHistory' &&
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {historyItems.map((product: IUserAuctionHistoryItem) => <OrderHistoryProduct key={product.auctionId} product={product} />)}
-        </div>
-      }
-      {activeTab === 'AuctionsWon' &&
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {wonItems.map((product: IUserAuctionWonItem) => <OrderWonProduct key={product.auctionId} product={product} />)}
-        </div>
-      }
-      {activeTab === 'AuctionsLost' &&
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {lostItems.map((product: IUserAuctionLostItem) => <OrderLostProduct key={product.auctionId} product={product} />)}
-        </div>
-      }
+      {activeTab === 'AuctionHistory' && (
+        historyItems.length > 0 ? (
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+            {historyItems.map((product: IUserAuctionHistoryItem) => (
+              <OrderHistoryProduct key={product.auctionId} product={product} />
+            ))}
+          </div>
+        ) : (
+          <EmptyFallback emptyName="participated" />
+        )
+      )}
+
+      {activeTab === 'AuctionsWon' && (
+        wonItems.length > 0 ? (
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+            {wonItems.map((product: IUserAuctionWonItem) => (
+              <OrderWonProduct key={product.auctionId} product={product} />
+            ))}
+          </div>
+        ) : (
+          <EmptyFallback emptyName="won" />
+        )
+      )}
+
+      {activeTab === 'AuctionsLost' && (
+        lostItems.length > 0 ? (
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+            {lostItems.map((product: IUserAuctionLostItem) => (
+              <OrderLostProduct key={product.auctionId} product={product} />
+            ))}
+          </div>
+        ) : (
+          <EmptyFallback emptyName="lost" />
+        )
+      )}
     </div>
   );
 };

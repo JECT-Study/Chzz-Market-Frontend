@@ -1,4 +1,4 @@
-import { IUser } from '@/@types/user';
+import type { IUser } from '@/entities/user/user';
 import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
 import { useCheckNickname } from '@/features/profile/model/useProfile';

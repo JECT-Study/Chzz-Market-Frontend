@@ -1,4 +1,4 @@
-import { IParticipantCountItems } from '@/@types/user';
+import type { IParticipantCountItems } from '@/entities/user/user';
 import AuctionIcon from '@/shared/assets/icons/auction.svg';
 import FailedIcon from '@/shared/assets/icons/failed_auction.svg';
 import OnGoingIcon from '@/shared/assets/icons/ongoing_auction.svg';

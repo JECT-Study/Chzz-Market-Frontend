@@ -5,7 +5,7 @@ import rocation_off from '@/shared/assets/icons/rocation_off.svg';
 import { ROUTES } from "@/shared/constants/routes";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import type { IAddressWithId } from "@/@types/Address";
+import type { IAddressWithId } from "@/entities/address/address";
 import { useDeleteAddress, useGetAddresses } from "@/features/address/model";
 
 export const PaymentAddressEditList = () => {

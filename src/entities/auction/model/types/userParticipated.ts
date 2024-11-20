@@ -1,5 +1,5 @@
-import { IAuctionItemBase } from './base';
-import { IAuctionItem } from './item';
+import type { IAuctionItemBase } from './base';
+import type { IAuctionItem } from './item';
 
 // 참여한 정식 경매 내역
 

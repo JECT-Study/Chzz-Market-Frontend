@@ -2,7 +2,7 @@ import { setIsNicknameCheckDisabled, setIsNicknameChecked, setIsSubmitEnabled, s
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IUserProfile } from '@/@types/user';
+import type { IUserProfile } from '@/entities/user/user';
 import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
 import { Button, FormField } from '@/shared';

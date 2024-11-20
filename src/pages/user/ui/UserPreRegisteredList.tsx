@@ -4,6 +4,7 @@ import type { IPreAuctionRegisteredItem } from '@/entities';
 import { useMyAuctionList } from '@/features/user/model';
 import { PreAuctionMyRegister } from '@/features/user/ui';
 import { useLocation } from 'react-router-dom';
+import { EmptyFallback } from '@/shared';
 
 export const UserPreRegisteredList = () => {
   const location = useLocation();
@@ -57,13 +58,17 @@ export const UserPreRegisteredList = () => {
 
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>
-      {activeTab === 'preAuction' &&
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {enrollItems.map((product: IPreAuctionRegisteredItem) => (
-            <PreAuctionMyRegister product={product} key={product.productId} />
-          ))}
-        </div>
-      }
+      {activeTab === 'preAuction' && (
+        enrollItems.length > 0 ? (
+          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+            {enrollItems.map((product: IPreAuctionRegisteredItem) => (
+              <PreAuctionMyRegister product={product} key={product.productId} />
+            ))}
+          </div>
+        ) : (
+          <EmptyFallback emptyName="userPreAuction" />
+        )
+      )}
     </div>
   );
 };

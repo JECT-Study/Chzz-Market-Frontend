@@ -1,6 +1,6 @@
 import { API_END_POINT, httpClient } from '@/shared';
 
-import { GetAuctionProps } from '@/@types/user';
+import type { GetAuctionProps } from '@/entities/user/user';
 import type { IPreAuctionRegisteredList } from '@/entities';
 
 export const getAuctionPreAuctionRegister = async ({

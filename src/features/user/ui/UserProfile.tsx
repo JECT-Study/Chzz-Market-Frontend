@@ -1,4 +1,4 @@
-import type { IProfileProps } from '@/@types/user';
+import type { IProfileProps } from '@/entities/user/user';
 import { Button } from "@/shared";
 import ProfileImage from '@/shared/assets/icons/profile.svg';
 import { RiKakaoTalkFill } from 'react-icons/ri';

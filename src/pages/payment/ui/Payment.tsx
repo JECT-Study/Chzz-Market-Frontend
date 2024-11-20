@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { Layout } from '@/app/layout/index';
-import { addressMemo } from '@/constants/address';
+import { addressMemo } from '@/features/address/config/address';
 import { Button, FormField } from "@/shared";
 import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
@@ -13,7 +13,7 @@ import { Input } from '@/shared/shadcn/ui/input';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import type { IAddressWithId } from '@/@types/Address';
+import type { IAddressWithId } from '@/entities/address/address';
 import { usePostPayment } from '@/features/address/model';
 import { usePostOrderId } from '@/features/address/model/usePostPayment';
 
