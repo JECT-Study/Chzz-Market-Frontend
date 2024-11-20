@@ -1,1 +1,1 @@
-export { GlobalLayout, Layout } from './ui/index';
+export { GlobalLayout, Layout, LayoutWithNav } from './ui/index';

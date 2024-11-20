@@ -1,4 +1,5 @@
 export { AccessDenied } from './AccessDenied';
+export { AuctionItem } from './AuctionItem';
 export { Button } from './Button';
 export { Checkbox } from './Checkbox';
 export { Confirm } from './Confirm';

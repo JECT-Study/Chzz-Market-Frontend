@@ -1,8 +1,8 @@
 import type { INotification } from '@/features/notification/config/type';
-import Adidas from '@/shared/assets/images/adidas_superstar.jpeg';
-import JordanBlue from '@/shared/assets/images/jordan_blue.jpeg';
-import JordanRed from '@/shared/assets/images/jordan_red.jpeg';
-import NewBalance from '@/shared/assets/images/newbalance_993.jpeg';
+import Adidas from '@/shared/assets/test/adidas_superstar.jpeg';
+import JordanBlue from '@/shared/assets/test/jordan_blue.jpeg';
+import JordanRed from '@/shared/assets/test/jordan_red.jpeg';
+import NewBalance from '@/shared/assets/test/newbalance_993.jpeg';
 
 export const notificationData: INotification[] = [
   {

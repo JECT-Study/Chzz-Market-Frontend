@@ -1,6 +1,5 @@
-import { CustomCarousel, ROUTES } from "@/shared";
+import { AuctionItem, CustomCarousel, ROUTES } from "@/shared";
 
-import AuctionItem from "@/components/auction/ui/AuctionItem";
 import { CarouselItem } from "@/shared/shadcn/ui/carousel";
 import { useNavigate } from "react-router-dom";
 import { useGetPreAuctions } from "../model";

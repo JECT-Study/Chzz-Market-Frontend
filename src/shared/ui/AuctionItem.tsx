@@ -8,7 +8,7 @@ interface AuctionItemProps {
   children: ReactNode;
 }
 
-const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
+export const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
   const axisStyle = axis === 'column' && 'flex-col';
 
   return (
@@ -53,5 +53,3 @@ const Button = ({ children }: { children: ReactNode }) => {
 AuctionItem.Image = Image;
 AuctionItem.Main = Main;
 AuctionItem.Button = Button;
-
-export default AuctionItem;
