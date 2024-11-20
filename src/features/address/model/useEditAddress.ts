@@ -1,4 +1,4 @@
-import { IAddressBase } from "@/entities/address/address";
+import type { IAddressBase } from "@/entities/address/address";
 import { UseMutateFunction, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { editAddress } from "../api";

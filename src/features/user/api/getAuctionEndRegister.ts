@@ -1,6 +1,6 @@
 import { API_END_POINT, httpClient } from '@/shared';
 
-import { GetAuctionProps } from '@/entities/user/user';
+import type { GetAuctionProps } from '@/entities/user/user';
 import type { IAuctionEndRegisteredList } from '@/entities';
 
 export const getAuctionEndRegister = async ({ pageNumber, pageSize, sortType = 'newest' }: GetAuctionProps): Promise<IAuctionEndRegisteredList> => {
