@@ -1,12 +1,12 @@
 import './index.css';
 
-import App from './App';
-import { Provider } from 'react-redux';
-import ReactDOM from 'react-dom/client';
-import { ReactQueryProvider } from './provider/index';
-import { Toaster } from 'sonner';
-import { store } from './store';
 import { storeLogin } from '@/features/auth/model/authSlice';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { Toaster } from 'sonner';
+import App from './App';
+import { ReactQueryProvider } from './provider/index';
+import { store } from './store';
 
 export const serverAPI = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
 
@@ -37,7 +37,7 @@ enableMocking().then(() => {
       <Provider store={store}>
         <App />
       </Provider>
-      <Toaster richColors position='top-right' />
+      <Toaster richColors />
     </ReactQueryProvider>
   );
 });
