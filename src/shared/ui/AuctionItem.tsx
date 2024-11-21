@@ -10,9 +10,10 @@ interface AuctionItemProps {
 
 export const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
   const axisStyle = axis === 'column' && 'flex-col';
+  const height = axis === 'column' && 'min-h-[16rem] h-[16rem]'
 
   return (
-    <figure aria-label={label} className={`flex min-h-[16rem] h-[16rem] w-full ${axisStyle}`}>
+    <figure aria-label={label} className={`flex ${height} gap-3 w-full ${axisStyle}`}>
       {children}
     </figure>
   );
@@ -36,8 +37,8 @@ interface MainProps {
 
 const Main = ({ kind, name, price, count }: MainProps) => {
   return (
-    <figcaption className='flex flex-col gap-[.125rem] py-2'>
-      <h3 aria-label='이름' className='text-body2 text-gray1'>
+    <figcaption className='flex flex-col w-full gap-[.125rem] py-2'>
+      <h3 aria-label='이름' className='text-body1Bold text-gray1'>
         {name}
       </h3>
       <Price title='시작가' price={price} />

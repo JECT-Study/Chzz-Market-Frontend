@@ -66,7 +66,7 @@ const Footer = ({
   };
 
   return (
-    <footer className='w-full h-[5rem] px-[30px] py-[16px] shadow-top'>
+    <footer className='w-full h-[5rem] min-h-[5rem] px-[30px] py-[16px] shadow-top'>
       <div className={style[type]}>{children}</div>
     </footer>
   );
