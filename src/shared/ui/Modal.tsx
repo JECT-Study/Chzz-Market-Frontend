@@ -1,25 +1,17 @@
-import { Dispatch, ReactElement, ReactNode, SetStateAction, cloneElement, createContext, useContext, useState } from 'react';
+import { ReactElement, ReactNode, cloneElement, createContext, useContext, useState } from 'react';
 
 import { createPortal } from 'react-dom';
 
-interface ModalContextValues {
-  openName: string;
-  open: Dispatch<SetStateAction<string>>
-  close: () => void
-}
-
-const defaultValues = {
+const ModalContext = createContext({
   openName: '',
-  open: () => { },
+  open: (_name: string) => { },
   close: () => { }
-}
-
-const ModalContext = createContext<ModalContextValues>(defaultValues)
+});
 
 export const Modal = ({ children }: { children: ReactNode }) => {
   const [openName, setOpenName] = useState('')
   const close = () => setOpenName('')
-  const open = setOpenName;
+  const open = (name: string) => setOpenName(name);
 
   return <ModalContext.Provider value={{ openName, open, close }}>
     {children}
