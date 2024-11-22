@@ -25,6 +25,7 @@
       "@/utils/*": ["utils/*"],
       "@/models/*": ["models/*"],
       "@/store/*": ["store/*"],
+      "@/stories/*": ["stories/*"],
     }
   }
 }

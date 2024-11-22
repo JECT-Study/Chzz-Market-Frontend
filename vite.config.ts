@@ -33,6 +33,7 @@ export default defineConfig({
       '@/utils': resolve(__dirname, 'src/utils'),
       '@/models': resolve(__dirname, 'src/models'),
       '@/store': resolve(__dirname, 'src/store'),
+      '@/stories': resolve(__dirname, 'src/stories'),
     },
   },
   test: {
