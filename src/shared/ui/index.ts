@@ -5,7 +5,6 @@ export { Checkbox } from './Checkbox';
 export { Confirm } from './Confirm';
 export { CreatedAt } from './CreatedAt';
 export { CustomCarousel } from './CustomCarousel';
-export { EmptyFallback } from './EmptyFallback';
 export { ErrorMessage } from './ErrorMessage';
 export { FormField } from './FormField';
 export { LikeCount } from './LikeCount';

@@ -1,10 +1,10 @@
 import type { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from '@/entities';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useLocation } from 'react-router-dom';
-import { EndMyRegister, OngoingMyRegister, UserOrderTab } from '@/features/user/ui';
 import { useMyAuctionList } from '@/features/user/model';
-import { EmptyFallback } from '@/shared';
+import { EndMyRegister, OngoingMyRegister, UserOrderTab } from '@/features/user/ui';
+import { EmptyBoundary } from '@/shared';
+import { useLocation } from 'react-router-dom';
 
 export const UserRegisteredList = () => {
   const location = useLocation();
@@ -65,29 +65,15 @@ export const UserRegisteredList = () => {
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'ongoing' && (
-        ongoingItems.length > 0 ? (
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
-              <OngoingMyRegister product={product} key={product.auctionId} />
-            ))}
-          </div>
-        ) : (
-          <EmptyFallback emptyName="userAuction" />
-        )
-      )}
-
-      {activeTab === 'end' && (
-        endItems.length > 0 ? (
-          <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-            {endItems.map((product: IAuctionEndRegisteredItem) => (
-              <EndMyRegister product={product} key={product.auctionId} />
-            ))}
-          </div>
-        ) : (
-          <EmptyFallback emptyName="userAuction" />
-        )
-      )}
+      <EmptyBoundary type='userAuction' length={activeTab === 'ongoing' ? ongoingItems.length : endItems.length}>
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+          {activeTab === 'ongoing' ? ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
+            <OngoingMyRegister product={product} key={product.auctionId} />
+          )) : endItems.map((product: IAuctionEndRegisteredItem) => (
+            <EndMyRegister product={product} key={product.auctionId} />
+          ))}
+        </div>
+      </EmptyBoundary>
     </div>
   );
 };

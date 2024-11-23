@@ -1,16 +1,13 @@
-import { API_END_POINT, QUERY_KEYS, httpClient } from '@/shared';
+import { QUERY_KEYS } from '@/shared';
 import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { deleteNotification } from '../api';
 import type { INotification } from '../config';
 
 export const useDeleteNotification = (): {
   mutate: UseMutateFunction<unknown, Error, number, unknown>;
 } => {
   const queryClient = useQueryClient();
-
-  const deleteNotification = async (id: number) => {
-    await httpClient.delete(`${API_END_POINT.NOTIFICATIONS}/${id}`);
-    return;
-  };
 
   const { mutate } = useMutation({
     mutationFn: deleteNotification,
