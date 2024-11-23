@@ -19,7 +19,7 @@ export const Confirm = ({ type, children, onCloseModal }: ConfirmProps) => {
       </div>
       <div className="flex justify-between w-full gap-3">
         <Button type='button' onClick={onCloseModal} className='w-full'>
-          취소
+          닫기
         </Button>
         {children}
       </div>
