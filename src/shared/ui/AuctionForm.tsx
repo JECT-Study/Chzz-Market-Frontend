@@ -14,6 +14,14 @@ import { z } from "zod";
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
+const defaultValues = {
+  productName: '',
+  category: '',
+  minPrice: '',
+  description: '',
+  images: []
+}
+
 export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails }) => {
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
@@ -35,7 +43,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
       minPrice: formatCurrencyWithWon(preAuction.minPrice),
       description: preAuction.description,
       images: preAuction.images.map(el => el.imageUrl)
-    } : undefined,
+    } : defaultValues,
     resolver: zodResolver(RegisterSchema),
   });
   const { isEditing, handleBlur, handleFocus, preventArrowKeys, preventInvalidInput } = useEditableNumberInput({
