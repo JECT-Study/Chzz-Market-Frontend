@@ -1,4 +1,4 @@
-import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from '../shadcn/ui/carousel';
+import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from './carousel';
 
 import { ReactNode } from 'react';
 

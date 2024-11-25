@@ -1,10 +1,10 @@
+import { CarouselItem, CustomCarousel, formatCurrencyWithWon } from "@/shared";
+import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
+
 import { Layout } from "@/app/layout";
-import { CustomCarousel, formatCurrencyWithWon } from "@/shared";
 import ParticipantAmount from '@/shared/assets/icons/my_participation_amount.svg';
 import Participants from '@/shared/assets/icons/participants.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
-import { CarouselItem } from "@/shared/shadcn/ui/carousel";
-import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
 import { useGetAuctionDetails } from "..";
 
 export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {

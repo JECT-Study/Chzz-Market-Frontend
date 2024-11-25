@@ -1,18 +1,18 @@
 import { setIsNicknameCheckDisabled, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '@/entities/user/model/profileEditSlice';
+import { Button, FormField } from '@/shared';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import type { IUserProfile } from '@/entities/user/user';
 import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
-import { Button, FormField } from '@/shared';
+import type { IUserProfile } from '@/entities/user/user';
+import { useEditProfile } from '@/features/profile/hooks';
+import { useCheckNickname } from '@/features/profile/model/useProfile';
+import { ProfileImageUploader } from '@/features/profile/ui';
 import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
-import { Input } from '@/shared/shadcn/ui/input';
-import { Textarea } from '@/shared/shadcn/ui/textarea';
-import { ProfileImageUploader } from '@/features/profile/ui';
-import { useCheckNickname } from '@/features/profile/model/useProfile';
-import { useEditProfile } from '@/features/profile/hooks';
+import { Input } from '@/shared/ui/input';
+import { Textarea } from '@/shared/ui/textarea';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);

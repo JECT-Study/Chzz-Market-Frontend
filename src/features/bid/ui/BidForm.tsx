@@ -1,14 +1,13 @@
-import { AuctionItem, Button, FormField, MAX_BID_COUNT, convertCurrencyToNumber, formatCurrencyWithWon, useToggleState } from "@/shared";
+import { AuctionItem, Button, FormField, Input, MAX_BID_COUNT, convertCurrencyToNumber, formatCurrencyWithWon, useToggleState } from "@/shared";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { Layout } from "@/app/layout/index";
-import { getBidSchema } from "@/features/bid/config";
+import { Layout } from "@/app/layout";
 import { useGetAuctionDetails } from "@/features/details";
-import { useEditableNumberInput } from "@/features/register/lib/useEditableNumberInput";
+import { useEditableNumberInput } from "@/features/register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Input } from "../../../shared/shadcn/ui/input";
-import { usePostBid } from "../model/usePostBid";
+import { getBidSchema } from "../config";
+import { usePostBid } from "../model";
 import { BidCaution } from "./BidCaution";
 
 export const BidForm = ({ auctionId }: { auctionId: number }) => {

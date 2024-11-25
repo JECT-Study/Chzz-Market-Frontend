@@ -1,21 +1,21 @@
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/shared/shadcn/ui/select';
+import { Button, FormField } from "@/shared";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { Layout } from '@/app/layout/index';
+import type { IAddressWithId } from '@/entities/address/address';
 import { addressMemo } from '@/features/address/config/address';
-import { Button, FormField } from "@/shared";
+import { usePostPayment } from '@/features/address/model';
+import { usePostOrderId } from '@/features/address/model/usePostPayment';
 import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { ROUTES } from '@/shared/constants/routes';
 import { AuctionShippingSchema } from '@/shared/constants/schema';
-import { Input } from '@/shared/shadcn/ui/input';
+import { Input } from '@/shared/ui/input';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import type { IAddressWithId } from '@/entities/address/address';
-import { usePostPayment } from '@/features/address/model';
-import { usePostOrderId } from '@/features/address/model/usePostPayment';
 
 type FormFields = z.infer<typeof AuctionShippingSchema>;
 
@@ -134,7 +134,7 @@ export const Payment = () => {
           <div className='flex gap-2'>
             <Button type='button'
               color={selectedAddress?.isDefault ? 'black' : address.isDefault ? 'black' : 'white'}
-              className='w-[10.15rem] h-[3.125rem]' 
+              className='w-[10.15rem] h-[3.125rem]'
               onClick={handleClickDefaultAddress}
             >기본 배송지</Button>
             <Button type='button' color='white' className='w-[10.15rem] h-[3.125rem]' onClick={handleClickAddressList}>배송지 목록</Button>

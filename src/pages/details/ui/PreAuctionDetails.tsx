@@ -1,6 +1,6 @@
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout';
 import { PreAuctionDetailsMain } from "@/features/details";
 import { APIAsyncBoundary } from '@/shared';
 

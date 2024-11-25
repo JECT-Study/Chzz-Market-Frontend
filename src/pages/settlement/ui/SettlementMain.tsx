@@ -5,7 +5,7 @@ import { useGetAuctionDetails } from "@/features/details";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BIDDER_LIST_PRICE_FILTER, type IBidder } from "../config";
-import { useGetBidderList } from "../model/useGetBidderList";
+import { useGetBidderList } from "../model";
 
 const SettlementMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);

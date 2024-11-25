@@ -1,14 +1,13 @@
+import { CustomCarousel, Modal, getTimeAgo, CarouselItem } from '@/shared';
+import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
+import { useDeletePreAuction, useGetPreAuctionDetails } from '..';
+
 import { Layout } from '@/app/layout';
-import { CustomCarousel, Modal, getTimeAgo } from '@/shared';
 import BoxEditIcon from '@/shared/assets/icons/in_box_edit_time.svg';
 import BoxLikeIcon from '@/shared/assets/icons/in_box_like.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
 import ThreeDotsIcon from '@/shared/assets/icons/three_dots.svg';
-
-import { CarouselItem } from '@/shared/shadcn/ui/carousel';
 import { useNavigate } from 'react-router-dom';
-import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
-import { useDeletePreAuction, useGetPreAuctionDetails } from '..';
 
 export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }) => {
   const navigate = useNavigate();
