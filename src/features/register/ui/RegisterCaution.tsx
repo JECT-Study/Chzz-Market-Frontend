@@ -4,10 +4,10 @@ import { PRE_REGISTER_CAUTION, REGISTER_CAUTION } from '../config';
 interface CautionProps {
   kind: string;
   check: boolean;
-  handleCheck: () => void;
+  toggle: () => void;
 }
 
-export const RegisterCaution = ({ kind, check, handleCheck }: CautionProps) => {
+export const RegisterCaution = ({ kind, check, toggle }: CautionProps) => {
   return (
     <section className='flex flex-col pt-5 gap-[3rem]'>
       <h3 className='text-heading2'>{kind === 'REGISTER' ? REGISTER_CAUTION.HEADING : PRE_REGISTER_CAUTION.HEADING}</h3>
@@ -32,7 +32,7 @@ export const RegisterCaution = ({ kind, check, handleCheck }: CautionProps) => {
             ))}
           </div>
         )}
-        <Checkbox check={check} handleCheck={handleCheck} />
+        <Checkbox check={check} toggle={toggle} />
       </div>
     </section>
   );

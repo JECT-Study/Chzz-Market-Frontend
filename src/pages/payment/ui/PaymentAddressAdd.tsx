@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Layout } from "@/app/layout/index";
 import { ADDRESS_SCRIPT_URL } from "@/features/address/config/address";
-import { Button, Checkbox, FormField } from "@/shared";
+import { Button, Checkbox, FormField, useToggleState } from "@/shared";
 import { Input } from "@/shared/shadcn/ui/input";
 import { formatPhoneNumber } from "@/shared/utils/formatPhoneNumber";
 import { useForm } from "react-hook-form";
@@ -24,8 +24,7 @@ export const PaymentAddressAdd = () => {
   const location = useLocation();
   const { roadAddress, zonecode, jibunAddress } = location.state;
   const formRef = useRef<HTMLFormElement>(null);
-  const [isChecked, setIsChecked] = useState(false);
-  const toggleCheckbox = () => setIsChecked((prev) => !prev)
+  const [isChecked, toggleCheck] = useToggleState(false);
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
@@ -231,7 +230,7 @@ export const PaymentAddressAdd = () => {
               )}
             />
             {/* 기본 배송지 체크박스는 직접 처리 */}
-            <Checkbox title="기본 배송지로 설정" check={isChecked} handleCheck={toggleCheckbox} />
+            <Checkbox title="기본 배송지로 설정" check={isChecked} toggle={toggleCheck} />
           </form>
         </div>
       </Layout.Main>

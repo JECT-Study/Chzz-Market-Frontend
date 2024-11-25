@@ -1,4 +1,4 @@
-import { Button, CATEGORIES, FormField, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
+import { Button, CATEGORIES, FormField, convertCurrencyToNumber, formatCurrencyWithWon, useToggleState } from "@/shared";
 import { Input, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, Textarea } from "@/shared/shadcn";
 
 import { Layout } from "@/app/layout";
@@ -24,7 +24,7 @@ const defaultValues = {
 
 export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails }) => {
   const [caution, setCaution] = useState<string>('');
-  const [check, setCheck] = useState<boolean>(false);
+  const [check, toggle] = useToggleState(false)
   const navigate = useNavigate();
 
   const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction();
@@ -53,10 +53,9 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
   });
 
   const title = caution ? '주의사항' : preAuction ? '사전 경매 수정하기' : '경매 등록하기';
-  const toggleCheckBox = () => setCheck((state) => !state);
   const clickBack = () => {
     (caution === '' ? navigate(-1) : setCaution(''));
-    toggleCheckBox()
+    toggle()
   }
   const handleProceed = (proceedType: 'PRE_REGISTER' | 'REGISTER') => {
     handleSubmit(() => setCaution(proceedType))();
@@ -196,7 +195,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
             </div>
           </form>
         ) : (
-          <RegisterCaution kind={caution} check={check} handleCheck={toggleCheckBox} />
+          <RegisterCaution kind={caution} check={check} toggle={toggle} />
         )}
       </Layout.Main>
       <Layout.Footer type={caution === '' ? 'double' : 'single'}>
