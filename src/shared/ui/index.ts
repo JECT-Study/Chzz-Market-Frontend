@@ -1,4 +1,5 @@
 export { AccessDenied } from './AccessDenied';
+export { AuctionForm } from './AuctionForm';
 export { AuctionItem } from './AuctionItem';
 export { Button } from './Button';
 export { Checkbox } from './Checkbox';
@@ -13,6 +14,6 @@ export { Modal } from './Modal';
 export { ParticipantCount } from './ParticipantCount';
 export { Price } from './Price';
 export { TimeLabel } from './TimeLabel';
-export * from './boundary/index';
-export { PrivateRoute, PublicRoute } from './route/index';
-export { ButtonSpinner, GlobalSpinner, LocalSpinner } from './spinner/index';
+export * from './boundary';
+export { PrivateRoute, PublicRoute } from './route';
+export { ButtonSpinner, GlobalSpinner, LocalSpinner } from './spinner';

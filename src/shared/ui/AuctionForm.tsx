@@ -1,45 +1,25 @@
-import { AccessDenied, Button, FormField } from "@/shared";
-import { Input } from "@/shared/shadcn/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/shared/shadcn/ui/select";
-import { Textarea } from "@/shared/shadcn/ui/textarea";
+import { Button, CATEGORIES, FormField, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
+import { Input, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, Textarea } from "@/shared/shadcn";
 
-import { Layout } from "@/app/layout/index";
-import { useGetPreAuctionDetails } from "@/features/details/model";
+import { Layout } from "@/app/layout";
+import type { IPreAuctionDetails } from "@/entities";
+import { usePatchPreAuction } from "@/features/edit-auction";
+import { ImageUploader, RegisterCaution, RegisterSchema, dataURLtoFile, useEditableNumberInput, usePostAuction, type IRegister } from "@/features/register";
 import NoticeIcon from '@/shared/assets/icons/notice.svg';
-import { CATEGORIES } from "@/shared/constants/categories";
-import { convertCurrencyToNumber } from "@/shared/utils/convertCurrencyToNumber";
-import { formatCurrencyWithWon } from "@/shared/utils/formatCurrencyWithWon";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { IRegister, RegisterSchema } from "../config/index";
-import { dataURLtoFile, useEditableNumberInput } from "../lib/index";
-import { usePatchPreAuction, usePostAuction } from "../model/index";
-import { ImageUploader, RegisterCaution } from "./index";
 
 type FormFields = z.infer<typeof RegisterSchema>;
 
-const defaultValues: FormFields = {
-  productName: '',
-  images: [],
-  category: '',
-  description: '',
-  minPrice: '',
-};
-
-export const RegisterForm = ({ preAuctionId }: { preAuctionId: number }) => {
-  const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
-  if (preAuctionId && !preAuctionDetails?.isSeller) {
-    return <AccessDenied />
-  }
-
+export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails }) => {
   const [caution, setCaution] = useState<string>('');
   const [check, setCheck] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction(preAuctionId);
+  const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction();
   const { mutate: register, isPending: postPending } = usePostAuction();
   const [existingImages, setExistingImages] = useState<{ imageId: number; imageUrl: string; firstIdx: number }[]>([])
   const {
@@ -49,7 +29,13 @@ export const RegisterForm = ({ preAuctionId }: { preAuctionId: number }) => {
     setValue,
     getValues,
   } = useForm<FormFields>({
-    defaultValues,
+    defaultValues: preAuction ? {
+      productName: preAuction.productName,
+      category: CATEGORIES[preAuction.category].code,
+      minPrice: formatCurrencyWithWon(preAuction.minPrice),
+      description: preAuction.description,
+      images: preAuction.images.map(el => el.imageUrl)
+    } : undefined,
     resolver: zodResolver(RegisterSchema),
   });
   const { isEditing, handleBlur, handleFocus, preventArrowKeys, preventInvalidInput } = useEditableNumberInput({
@@ -58,7 +44,7 @@ export const RegisterForm = ({ preAuctionId }: { preAuctionId: number }) => {
     getValues,
   });
 
-  const title = caution ? '주의사항' : preAuctionId ? '사전 경매 수정하기' : '경매 등록하기';
+  const title = caution ? '주의사항' : preAuction ? '사전 경매 수정하기' : '경매 등록하기';
   const toggleCheckBox = () => setCheck((state) => !state);
   const clickBack = () => {
     (caution === '' ? navigate(-1) : setCaution(''));
@@ -79,20 +65,22 @@ export const RegisterForm = ({ preAuctionId }: { preAuctionId: number }) => {
 
     // 기존의 이미지가 현재 어느 위치에 있는지 계산
     let imageSequence = new Map<number, number>()
-    if (preAuctionId) existingImages.map((el) => {
-      for (const sequence of previewImageSequence) {
-        if (el.imageUrl === sequence.image) {
-          imageSequence.set(el.imageId, sequence.id)
+    if (preAuction) {
+      existingImages.map((el) => {
+        for (const sequence of previewImageSequence) {
+          if (el.imageUrl === sequence.image) {
+            imageSequence.set(el.imageId, sequence.id)
+          }
         }
-      }
-    }).filter(image => image)
+      }).filter(image => image)
+    }
 
     const submitData: IRegister = {
       productName,
       category,
       description,
       minPrice: convertCurrencyToNumber(minPrice),
-      ...(preAuctionId ? { imageSequence: Object.fromEntries(imageSequence) } : { auctionRegisterType: caution }),
+      ...(preAuction ? { imageSequence: Object.fromEntries(imageSequence) } : { auctionRegisterType: caution }),
     };
 
     formData.append(
@@ -102,25 +90,20 @@ export const RegisterForm = ({ preAuctionId }: { preAuctionId: number }) => {
       })
     );
 
-    if (preAuctionId) newFiles.forEach((newFile) => formData.append(String(newFile.id), newFile.file))
+    if (preAuction) newFiles.forEach((newFile) => formData.append(String(newFile.id), newFile.file))
     else newFiles.forEach((newFile) => formData.append('images', newFile.file))
 
-    preAuctionId ? patchPreAuction({ preAuctionId, formData }) : register(formData);
+    preAuction ? patchPreAuction({ preAuctionId: preAuction.productId, formData }) : register(formData);
   };
 
   useEffect(() => {
-    if (preAuctionDetails) {
-      const { productName, images, category, description, minPrice } = preAuctionDetails;
-      setValue('productName', productName);
-      setValue('images', images.map(el => el.imageUrl));
-      setExistingImages(images.map((image, idx) => ({ ...image, firstIdx: idx + 1 })))
-      setValue('description', description);
-      setValue('minPrice', formatCurrencyWithWon(minPrice));
-      setValue('category', CATEGORIES[category].code); // 카테고리 기본 값 설정
+    if (preAuction) {
+      setExistingImages(preAuction.images.map((image, idx) => ({ ...image, firstIdx: idx + 1 })))
     }
-  }, [preAuctionDetails, setValue]);
+  }, [preAuction, setExistingImages])
+
   return (
-    <>
+    <Layout>
       <Layout.Header title={title} handleBack={clickBack} />
       <Layout.Main>
         {caution === '' ? (
@@ -131,7 +114,7 @@ export const RegisterForm = ({ preAuctionId }: { preAuctionId: number }) => {
               control={control}
               error={errors.images?.message}
               render={(field) => (
-                <ImageUploader images={field.value as string[]} setImages={(images: string[]) => field.onChange(images)} />
+                <ImageUploader images={field.value as string[] || []} setImages={(images: string[]) => field.onChange(images)} />
               )}
             />
             <FormField
@@ -209,7 +192,7 @@ export const RegisterForm = ({ preAuctionId }: { preAuctionId: number }) => {
         )}
       </Layout.Main>
       <Layout.Footer type={caution === '' ? 'double' : 'single'}>
-        {preAuctionId ? (
+        {preAuction ? (
           <Button disabled={patchPending} loading={patchPending} onClick={handleSubmit(onSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
             수정 완료
           </Button>
@@ -236,6 +219,6 @@ export const RegisterForm = ({ preAuctionId }: { preAuctionId: number }) => {
           </Button>
         )}
       </Layout.Footer>
-    </>
+    </Layout>
   );
 }

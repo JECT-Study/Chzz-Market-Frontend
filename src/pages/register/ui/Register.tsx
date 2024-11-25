@@ -1,20 +1,6 @@
-import { LoaderFunction, useLoaderData } from 'react-router-dom';
-
-import { Layout } from '@/app/layout/index';
-import { RegisterForm } from '@/features/register';
+import { AuctionForm } from '@/shared';
 
 export const Register = () => {
-  const preAuctionId = useLoaderData() as number;
+  return <AuctionForm />
 
-  return (
-    <Layout>
-      <RegisterForm preAuctionId={preAuctionId} />
-    </Layout>
-  );
-};
-
-export const loader: LoaderFunction<number> = async ({ params }) => {
-  const { preAuctionId } = params;
-
-  return preAuctionId;
 };

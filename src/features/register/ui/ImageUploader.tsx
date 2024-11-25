@@ -1,10 +1,9 @@
-import { useDragAndDrop, useImageUploader } from '../lib/index';
+import { useDragAndDrop, useImageUploader } from '../lib';
 
 import { CustomCarousel } from "@/shared";
 import DeleteIcon from '@/shared/assets/icons/delete.svg';
-import { CarouselItem } from '../../../shared/shadcn/ui/carousel';
-import { Input } from '../../../shared/shadcn/ui/input';
-import { AddImageButton } from './index';
+import { CarouselItem, Input } from '@/shared/shadcn';
+import { AddImageButton } from '.';
 
 interface ImageUploaderProps {
   images: string[];

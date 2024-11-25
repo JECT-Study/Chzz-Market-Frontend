@@ -1,6 +1,6 @@
 import { GlobalLayout, LayoutWithNav } from "@/app/layout";
 import { APIAsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorBoundary } from '@/shared';
-import { AuctionDetails, Bid, Heart, Home, Login, Notification, Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess, PreAuctionDetails, ProductList, Register, Settlement, Signup, Test, User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList, auctionDetailsLoader, bidLoader, preAuctionDetailsLoader, registerLoader, settlementLoader } from '../pages';
+import { AuctionDetails, Bid, EditAuction, Heart, Home, Login, Notification, Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess, PreAuctionDetails, ProductList, Register, Settlement, Signup, Test, User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList, auctionDetailsLoader, bidLoader, editAuctionLoader, preAuctionDetailsLoader, settlementLoader } from '../pages';
 
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -56,8 +56,12 @@ const privateRouteList = [
   },
   {
     path: ROUTES.PRE_AUCTION.EDIT,
-    element: <Register />,
-    loader: registerLoader,
+    element: (
+      <APIAsyncBoundary>
+        <EditAuction />
+      </APIAsyncBoundary>
+    ),
+    loader: editAuctionLoader,
   },
   {
     path: ROUTES.PAYMENT.HOME,

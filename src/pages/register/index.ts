@@ -1,1 +1,1 @@
-export { Register, registerLoader } from './ui/index';
+export { Register } from './ui';

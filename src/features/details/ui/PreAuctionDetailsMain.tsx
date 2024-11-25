@@ -8,12 +8,12 @@ import ThreeDotsIcon from '@/shared/assets/icons/three_dots.svg';
 import { CarouselItem } from '@/shared/shadcn/ui/carousel';
 import { useNavigate } from 'react-router-dom';
 import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
-import { useDeletePreAuction, useGetPreAuctionDetailsWithSuspense } from '..';
+import { useDeletePreAuction, useGetPreAuctionDetails } from '..';
 
 export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }) => {
   const navigate = useNavigate();
 
-  const { preAuctionDetails } = useGetPreAuctionDetailsWithSuspense(preAuctionId);
+  const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
   const { mutate: deletePreAuction, isPending } = useDeletePreAuction();
 
   const { images, productName, productId, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
