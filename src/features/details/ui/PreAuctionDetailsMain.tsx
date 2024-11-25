@@ -1,4 +1,4 @@
-import { CustomCarousel, Modal, getTimeAgo, CarouselItem } from '@/shared';
+import { CarouselItem, CustomCarousel, Modal, getTimeAgo } from '@/shared';
 import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
 import { useDeletePreAuction, useGetPreAuctionDetails } from '..';
 
@@ -42,13 +42,15 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
       />
       <Layout.Main>
         <figure>
-          <CustomCarousel contentStyle='-mx-[20px] -mt-[20px] h-[21.25rem]' length={images.length} loop>
-            {images.map((img) => (
-              <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
-              </CarouselItem>
-            ))}
-          </CustomCarousel>
+          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem]'>
+            <CustomCarousel contentStyle='h-[21.25rem]' length={images.length} loop>
+              {images.map((img) => (
+                <CarouselItem className='flex items-center justify-center' key={img.imageId}>
+                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
+                </CarouselItem>
+              ))}
+            </CustomCarousel>
+          </div>
           <figcaption>
             {/* 판매자 정보 */}
             <div className='flex items-center gap-[13px] h-[3.75rem]'>

@@ -16,7 +16,7 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
       <Layout.Main>
         <figure>
           {/* 상품 이미지 */}
-          <div className='-mx-[20px] -mt-[20px] h-[21.25rem] flex flex-col'>
+          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem] h-[21.25rem] flex flex-col'>
             <CustomCarousel contentStyle="h-[21.25rem]" length={images.length} loop>
               {images.map((img) => (
                 <CarouselItem className='w-full h-full' key={img.imageId}>
