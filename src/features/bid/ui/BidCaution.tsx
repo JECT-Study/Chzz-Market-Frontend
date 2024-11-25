@@ -3,10 +3,10 @@ import { BID_CAUTION } from "../config";
 
 interface BidCautionProps {
   check: boolean;
-  handleCheck: () => void;
+  toggle: () => void;
 }
 
-export const BidCaution = ({ check, handleCheck }: BidCautionProps) => {
+export const BidCaution = ({ check, toggle }: BidCautionProps) => {
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-heading3">{BID_CAUTION.HEADING}</h3>
@@ -18,7 +18,7 @@ export const BidCaution = ({ check, handleCheck }: BidCautionProps) => {
           </div>
         ))}
       </div>
-      <Checkbox title='주의사항을 모두 확인하였으며 위 내용에 동의합니다.' check={check} handleCheck={handleCheck} />
+      <Checkbox title='주의사항을 모두 확인하였으며 위 내용에 동의합니다.' check={check} toggle={toggle} />
     </section>
   );
 };

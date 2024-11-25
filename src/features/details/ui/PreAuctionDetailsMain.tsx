@@ -1,14 +1,13 @@
+import { CarouselItem, CustomCarousel, Modal, getTimeAgo } from '@/shared';
+import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
+import { useDeletePreAuction, useGetPreAuctionDetails } from '..';
+
 import { Layout } from '@/app/layout';
-import { CustomCarousel, Modal, getTimeAgo } from '@/shared';
 import BoxEditIcon from '@/shared/assets/icons/in_box_edit_time.svg';
 import BoxLikeIcon from '@/shared/assets/icons/in_box_like.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
 import ThreeDotsIcon from '@/shared/assets/icons/three_dots.svg';
-
-import { CarouselItem } from '@/shared/shadcn/ui/carousel';
 import { useNavigate } from 'react-router-dom';
-import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
-import { useDeletePreAuction, useGetPreAuctionDetails } from '..';
 
 export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }) => {
   const navigate = useNavigate();
@@ -43,13 +42,15 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
       />
       <Layout.Main>
         <figure>
-          <CustomCarousel contentStyle='-mx-[20px] -mt-[20px] h-[21.25rem]' length={images.length} loop>
-            {images.map((img) => (
-              <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
-              </CarouselItem>
-            ))}
-          </CustomCarousel>
+          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem]'>
+            <CustomCarousel contentStyle='h-[21.25rem]' length={images.length} loop>
+              {images.map((img) => (
+                <CarouselItem className='flex items-center justify-center' key={img.imageId}>
+                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
+                </CarouselItem>
+              ))}
+            </CustomCarousel>
+          </div>
           <figcaption>
             {/* 판매자 정보 */}
             <div className='flex items-center gap-[13px] h-[3.75rem]'>

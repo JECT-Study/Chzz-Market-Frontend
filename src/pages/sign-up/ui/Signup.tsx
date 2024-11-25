@@ -1,16 +1,17 @@
-import type { IUser } from '@/entities/user/user';
-import { Layout } from '@/app/layout/index';
-import { RootState } from '@/app/store';
-import { useCheckNickname } from '@/features/profile/model/useProfile';
-import { useSignup } from '@/features/sign-up/hooks';
 import { setIsNameValid, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '@/features/sign-up/model/signupSlice';
 import { Button, FormField } from '@/shared';
-import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
-import NoticeRed from '@/shared/assets/icons/notice_red.svg';
-import { Input } from '@/shared/shadcn/ui/input';
-import { Textarea } from '@/shared/shadcn/ui/textarea';
 import { KeyboardEvent, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { Layout } from '@/app/layout/index';
+import { RootState } from '@/app/store';
+import type { IUser } from '@/entities/user/user';
+import { useCheckNickname } from '@/features/profile/model/useProfile';
+import { useSignup } from '@/features/sign-up/hooks';
+import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
+import NoticeRed from '@/shared/assets/icons/notice_red.svg';
+import { Input } from '@/shared/ui/input';
+import { Textarea } from '@/shared/ui/textarea';
 import { useNavigate } from 'react-router-dom';
 
 export const Signup = () => {
