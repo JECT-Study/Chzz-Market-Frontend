@@ -5,5 +5,5 @@ import { getBestAuctions } from '../api';
 export const useGetBestAuctions = () => {
   const { data: bestAuctions } = useSuspenseQuery({ queryKey: [QUERY_KEYS.BEST_AUCTIONS], queryFn: getBestAuctions });
 
-  return { bestAuctions };
+  return { bestAuctions: bestAuctions.items };
 };

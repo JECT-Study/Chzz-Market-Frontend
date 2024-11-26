@@ -21,7 +21,7 @@ vi.mocked(useGetAuctionDetails).mockReturnValue({
     minPrice: 23000,
     productName: 'qwer 미니 2집',
     participantCount: 4,
-    productId: 14,
+    auctionId: 14,
     remainingBidCount: 0,
     sellerNickname: 'aaron93',
     status: 'PROCEEDING',
@@ -29,7 +29,8 @@ vi.mocked(useGetAuctionDetails).mockReturnValue({
     category: 'ELECTRONICS',
     sellerProfileImageUrl: '',
     isWinner: false,
-    isWon: false
+    isWon: false,
+    isOrdered: false
   },
 });
 const router = createMemoryRouter(

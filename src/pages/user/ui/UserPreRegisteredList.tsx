@@ -61,7 +61,7 @@ export const UserPreRegisteredList = () => {
       <EmptyBoundary type='userPreAuction' length={enrollItems.length}>
         <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
           {enrollItems.map((product: IPreAuctionRegisteredItem) => (
-            <PreAuctionMyRegister product={product} key={product.productId} />
+            <PreAuctionMyRegister product={product} key={product.auctionId} />
           ))}
         </div>
       </EmptyBoundary>

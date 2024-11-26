@@ -12,7 +12,7 @@ const PreAuctionItemList = () => {
     <EmptyBoundary type="preAuction" length={preAuctions.length}>
       <CustomCarousel length={preAuctions.length}>
         {preAuctions.map((el) => (
-          <CarouselItem key={el.productId} onClick={() => handleClick(el.productId)} className='cursor-pointer web:basis-1/3 basis-1/2'>
+          <CarouselItem key={el.auctionId} onClick={() => handleClick(el.auctionId)} className='cursor-pointer web:basis-1/3 basis-1/2'>
             <AuctionItem label='imminent' axis='column'>
               <AuctionItem.Image src={el.imageUrl} />
               <AuctionItem.Main kind='imminent' name={el.productName} price={el.minPrice} count={el.likeCount} />

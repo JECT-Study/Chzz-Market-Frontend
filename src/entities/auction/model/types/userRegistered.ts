@@ -9,12 +9,10 @@ export interface IAuctionOngoingRegisteredItem extends IAuctionItemBase {
   createdAt: string;
   participantCount: number;
   timeRemaining: number;
-  auctionId: number;
 }
 
 // 종료된 경매
 export interface IAuctionEndRegisteredItem extends IAuctionItemBase {
-  auctionId: number;
   participantCount: number;
   winningBidAmount: number;
   isWon: boolean;

@@ -1,34 +1,35 @@
+const PRE_FIX = '/api/v1';
+
 export const API_END_POINT = {
   // AUTH
   LOGIN: {
     KAKAO: '/auth/kakao',
     NAVER: '/auth/naver',
   },
-  LOGOUT: '/api/v1/users/logout',
-  NICKNAME_CHECK: 'api/v1/users/check/nickname',
-  REFRESH_TOKEN: '/api/v1/users/tokens/reissue',
-  SIGNUP: '/api/v1/users',
-  PROFILE: '/api/v1/users/profile',
-  CUSTOMER_KEY: '/api/v1/users/customer-key',
+  LOGOUT: `${PRE_FIX}/users/logout`,
+  NICKNAME_CHECK: `${PRE_FIX}/users/check/nickname`,
+  REFRESH_TOKEN: `${PRE_FIX}/users/tokens/reissue`,
+  SIGNUP: `${PRE_FIX}/users`,
+  PROFILE: `${PRE_FIX}/users/profile`,
+  CUSTOMER_KEY: `${PRE_FIX}/users/customer-key`,
   ORDER_LIST: '/order/list',
-  MY_ACUTION_PRE_REGISTER: '/product/list/api/v1/users/me/auctions',
+  MY_AUCTION_PRE_REGISTER: `/product/list/api/v1/users/me/auctions`,
 
-  BEST: '/api/v1/auctions/best',
-  IMMINENT: '/api/v1/auctions/imminent',
-  PRE_AUCTION: '/api/v1/products',
-  AUCTION: '/api/v1/auctions',
-  NOTIFICATIONS: '/api/v1/notifications',
-  ADDRESS: '/api/v1/addresses',
-  REALTIME_NOTIFICATIONS: '/api/v1/notifications/subscribe',
+  BEST: `${PRE_FIX}/auctions?status=proceeding&size=5&sort=popularity,newest`,
+  IMMINENT: `${PRE_FIX}/auctions?status=proceeding&minutes=60&size=5&sort=immediately,popularity`,
+  PRE_AUCTION: `${PRE_FIX}/auctions?status=pre&size=5&sort=likes,newest`,
+  AUCTION: `${PRE_FIX}/auctions`,
 
-  USER_ONGOING_AUCTION_REGISTERED: '/api/v1/auctions/users/proceeding',
-  USER_END_AUCTION_REGISTERED: '/api/v1/auctions/users/ended',
-  USER_PRE_AUCTION_REGISTERED: '/api/v1/products/users',
+  HEARTS: `${PRE_FIX}/auctions/users/likes`,
+  NOTIFICATIONS: `${PRE_FIX}/notifications`,
+  ADDRESS: `${PRE_FIX}/addresses`,
+  REALTIME_NOTIFICATIONS: `${PRE_FIX}/notifications/subscribe`,
 
-  AUCTION_ITEM: '/api/v1/auctions/auction/:auctionId',
-  PRE_AUCTION_ITEM: '/api/v1/pre-auction/:auctionId',
+  USER_ONGOING_AUCTION_REGISTERED: `${PRE_FIX}/auctions/auctions/users/proceeding`,
+  USER_END_AUCTION_REGISTERED: `${PRE_FIX}/auctions/auctions/users/ended`,
+  USER_PRE_AUCTION_REGISTERED: `${PRE_FIX}/auctions/products/users`,
 
-  BID: '/api/v1/bids',
-  PAYMENT: '/api/v1/payments/approval',
-  CREATE_ORDERID: '/api/v1/payments/order-id',
+  BID: `${PRE_FIX}/bids`,
+  PAYMENT: `${PRE_FIX}/payments/approval`,
+  CREATE_ORDERID: `${PRE_FIX}/payments/order-id`,
 };

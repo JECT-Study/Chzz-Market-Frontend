@@ -15,6 +15,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 100_000,
     participantCount: 11,
     isParticipated: true,
+    isSeller: false,
   },
   {
     auctionId: 1,
@@ -24,6 +25,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 120_000,
     participantCount: 8,
     isParticipated: true,
+    isSeller: false,
   },
   {
     auctionId: 2,
@@ -33,6 +35,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 180_000,
     participantCount: 29,
     isParticipated: true,
+    isSeller: false,
   },
   {
     auctionId: 3,
@@ -42,6 +45,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 230_000,
     participantCount: 32,
     isParticipated: true,
+    isSeller: false,
   },
   {
     auctionId: 4,
@@ -51,6 +55,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 70_000,
     participantCount: 6,
     isParticipated: true,
+    isSeller: false,
   },
 ];
 
@@ -63,6 +68,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     minPrice: 120_000,
     participantCount: 8,
     isParticipated: true,
+    isSeller: false,
   },
   {
     auctionId: 1,
@@ -72,6 +78,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     minPrice: 70_000,
     participantCount: 6,
     isParticipated: true,
+    isSeller: false,
   },
   {
     auctionId: 2,
@@ -81,6 +88,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     minPrice: 180_000,
     participantCount: 29,
     isParticipated: true,
+    isSeller: false,
   },
   {
     auctionId: 3,
@@ -90,6 +98,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
     minPrice: 230_000,
     participantCount: 32,
     isParticipated: true,
+    isSeller: false,
   },
   {
     auctionId: 4,
@@ -99,12 +108,13 @@ export const imminentAuctionsData: IAuctionItem[] = [
     minPrice: 100_000,
     participantCount: 11,
     isParticipated: true,
+    isSeller: false,
   },
 ];
 
 export const preRegisterAuctionsData: IPreAuctionItem[] = [
   {
-    productId: 0,
+    auctionId: 0,
     productName: '[뉴발란스] 993',
     imageUrl: newBalanceImage,
     minPrice: 230_000,
@@ -113,7 +123,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
     isSeller: true,
   },
   {
-    productId: 1,
+    auctionId: 1,
     productName: '[나이키] 에어 조던 로우',
     imageUrl: jordanRedImage,
     minPrice: 100_000,
@@ -122,7 +132,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
     isSeller: true,
   },
   {
-    productId: 2,
+    auctionId: 2,
     productName: '[나이키] 조던 블루',
     imageUrl: jordanBlueImage,
     minPrice: 180_000,
@@ -131,7 +141,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
     isSeller: true,
   },
   {
-    productId: 3,
+    auctionId: 3,
     productName: '[나이키] 조던 블랙',
     imageUrl: jordanBlackImage,
     minPrice: 120_000,
@@ -141,7 +151,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   },
 
   {
-    productId: 4,
+    auctionId: 4,
     productName: '[아디다스] 슈퍼스타',
     imageUrl: adidasImage,
     minPrice: 70_000,

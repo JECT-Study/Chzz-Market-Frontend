@@ -8,5 +8,5 @@ export const useGetPreAuctions = () => {
     queryFn: getPreAuctions,
   });
 
-  return { preAuctions };
+  return { preAuctions: preAuctions.items };
 };

@@ -13,11 +13,12 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
 
   return (
     <>
+      <Layout.Header title="제품 상세" />
       <Layout.Main>
         <figure>
           {/* 상품 이미지 */}
-          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem] h-[21.25rem] flex flex-col'>
-            <CustomCarousel contentStyle="h-[21.25rem]" length={images.length} loop>
+          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem] h-[23rem] flex flex-col'>
+            <CustomCarousel contentStyle="h-[23rem]" length={images.length} loop>
               {images.map((img) => (
                 <CarouselItem className='w-full h-full' key={img.imageId}>
                   <img src={img.imageUrl} className='object-cover w-full h-full' alt={`${productName}${img.imageId}`} />

@@ -14,7 +14,7 @@ export const preRegisterHeartDeleteHandler: HttpHandler = http.delete(`${API_END
   const id = params.id as string;
   const heartId = parseInt(id, 10);
 
-  curPreRegisterHeartData = curPreRegisterHeartData.filter((el) => el.productId !== heartId);
+  curPreRegisterHeartData = curPreRegisterHeartData.filter((el) => el.auctionId !== heartId);
 
   return HttpResponse.json({ data: curPreRegisterHeartData, status: 204 });
 });

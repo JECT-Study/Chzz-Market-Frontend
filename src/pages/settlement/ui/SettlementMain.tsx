@@ -54,7 +54,8 @@ const SettlementMain = ({ auctionId }: { auctionId: number }) => {
         <Button type='button' onClick={() => navigate(-1)} color='cheeseYellow' className='w-full h-full' aria-label='확인 버튼'>
           확인 완료
         </Button>
-      </Layout.Footer></>
+      </Layout.Footer>
+    </>
   );
 }
 

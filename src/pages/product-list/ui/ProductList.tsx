@@ -79,7 +79,7 @@ export const ProductList = () => {
             {ongoingFlag ? ongoingItems?.map((product: IAuctionItem) => (
               <OngoingProduct key={product.auctionId} product={product} />
             )) : enrollItems?.map((product: IPreAuctionItem) => (
-              <PreAuctionProduct key={product.productId} product={product} />
+              <PreAuctionProduct key={product.auctionId} product={product} />
             ))}
           </div>
         </EmptyBoundary>

@@ -1,24 +1,24 @@
 import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { IPreAuctionItem } from '@/entities';
+import type { IPreAuctionItem, IPreAuctionList } from '@/entities';
+import { heartAuction } from '@/features/details/api';
 import { QUERY_KEYS } from '@/shared';
 import { toast } from 'sonner';
-import { deletePreAuctionHeart } from '../api';
 
 export const useDeletePreAuctionHeart = (): {
-  mutate: UseMutateFunction<void, Error, number, unknown>;
+  mutate: UseMutateFunction<{ isLiked: boolean; likeCount: number }, Error, number, unknown>;
 } => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: deletePreAuctionHeart,
+    mutationFn: heartAuction,
     onMutate: async (preAuctionId: number) => {
       await queryClient.cancelQueries({ queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST] });
       const previousData = queryClient.getQueryData([QUERY_KEYS.PRE_AUCTION_HEART_LIST]);
-      queryClient.setQueryData([QUERY_KEYS.PRE_AUCTION_HEART_LIST], (oldData: IPreAuctionItem[]) => {
+      queryClient.setQueryData([QUERY_KEYS.PRE_AUCTION_HEART_LIST], (oldData: IPreAuctionList) => {
         if (!oldData) return oldData;
 
-        return oldData.filter((el: IPreAuctionItem) => el.productId !== preAuctionId);
+        return { ...oldData, items: oldData.items.filter((el: IPreAuctionItem) => el.auctionId !== preAuctionId) };
       });
 
       return { previousData };
