@@ -99,7 +99,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
     if (preAuction) newFiles.forEach((newFile) => formData.append(String(newFile.id), newFile.file))
     else newFiles.forEach((newFile) => formData.append('images', newFile.file))
 
-    preAuction ? patchPreAuction({ preAuctionId: preAuction.productId, formData }) : register(formData);
+    preAuction ? patchPreAuction({ preAuctionId: preAuction.auctionId, formData }) : register(formData);
   };
 
   useEffect(() => {
