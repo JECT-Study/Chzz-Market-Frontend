@@ -1,8 +1,8 @@
 import { API_END_POINT, httpClient } from '@/shared';
-import { IBidder } from '../config';
+import type { IBidderList } from '../config';
 
-export const getBidderList = async (auctionId: number): Promise<IBidder[]> => {
-  const response = await httpClient.get(`${API_END_POINT.AUCTION}/${auctionId}/bids?sort=bid-amount,desc`);
+export const getBidderList = async (auctionId: number): Promise<IBidderList> => {
+  const response = await httpClient.get(`${API_END_POINT.AUCTION}/${auctionId}/bids`);
 
-  return response.data.items;
+  return response.data;
 };

@@ -8,5 +8,5 @@ export const useGetBidderList = (auctionId: number) => {
     queryFn: () => getBidderList(auctionId),
   });
 
-  return { bidderList };
+  return { bidderList: bidderList.items };
 };
