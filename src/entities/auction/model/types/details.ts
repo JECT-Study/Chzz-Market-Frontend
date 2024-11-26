@@ -2,7 +2,6 @@ import { IAuctionDetailsBase } from './base';
 
 export interface IAuctionDetails extends IAuctionDetailsBase {
   timeRemaining: number;
-  status: string;
   participantCount: number;
   isParticipated: boolean;
   bidId: number | null;
@@ -11,7 +10,7 @@ export interface IAuctionDetails extends IAuctionDetailsBase {
   isCancelled: boolean;
   isWinner: boolean;
   isWon: boolean;
-  isOrdered?: boolean;
+  isOrdered: boolean;
 }
 
 export interface IPreAuctionDetails extends IAuctionDetailsBase {
