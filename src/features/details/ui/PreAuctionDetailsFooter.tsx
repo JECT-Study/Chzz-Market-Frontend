@@ -11,7 +11,7 @@ interface PreAuctionDetailsFooterProps {
 
 export const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: PreAuctionDetailsFooterProps) => {
   const { mutate: toggleAuctionItemHeart } = useToggleAuctionDetailsHeart();
-  const { mutate: convertToAuction, isPending } = useConvertAuction();
+  const { mutate: convertToAuction, isPending } = useConvertAuction(preAuctionId);
 
   return (
     <Layout.Footer type="single">
@@ -25,7 +25,7 @@ export const PreAuctionDetailsFooter = ({ isLiked, preAuctionId, isSeller }: Pre
           </Modal.Open>
           <Modal.Window name='convert'>
             <Confirm type='convert'>
-              <Button type='button' disabled={isPending} loading={isPending} onClick={() => convertToAuction(preAuctionId)} className="w-full h-full" color="cheeseYellow">
+              <Button type='button' disabled={isPending} loading={isPending} onClick={() => convertToAuction()} className="w-full h-full" color="cheeseYellow">
                 전환하기
               </Button>
             </Confirm>
