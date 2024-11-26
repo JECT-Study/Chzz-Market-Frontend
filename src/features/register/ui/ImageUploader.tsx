@@ -20,7 +20,7 @@ export const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
         {images.map((image: string, index: number) => (
           <CarouselItem className='basis-1/2 md:basis-1/3' key={image}>
             <div
-              className={`relative h-32 transition-transform duration-400 mx-3 ${index === hoveredIndex ? 'transform scale-105' : ''}`}
+              className={`relative h-40 web:h-32 transition-transform duration-400 mx-3 ${index === hoveredIndex ? 'transform scale-105' : ''}`}
               draggable
               onDragStart={() => handleDragStart(index)}
               onDragOver={(e) => {
