@@ -1,4 +1,3 @@
-export { AccessDenied } from './AccessDenied';
 export { AuctionForm } from './AuctionForm';
 export { AuctionItem } from './AuctionItem';
 export { Button } from './Button';
