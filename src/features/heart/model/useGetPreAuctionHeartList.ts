@@ -8,5 +8,5 @@ export const useGetPreAuctionHeartList = () => {
     queryFn: getPreAuctionHeartList,
   });
 
-  return { preAuctionHeartList };
+  return { preAuctionHeartList: preAuctionHeartList.items };
 };
