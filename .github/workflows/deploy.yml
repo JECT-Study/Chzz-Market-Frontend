@@ -9,38 +9,51 @@ on:
     
 jobs:
   deploy:
+    permissions:
+      deployments: write
+
     runs-on: ubuntu-latest
+
     steps:
       # 1. 코드 체크아웃
       - name: Checkout code
         uses: actions/checkout@v4
 
-       # 2. Node.js 설치 및 글로벌 npm 캐시 활성화
+      # 2. 배포 생성 (GitHub deployment 생성)
+      - name: Create GitHub deployment
+        id: deployment
+        uses: chrnorm/deployment-action@v2
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'  # GITHUB_TOKEN 사용
+          environment-url: https://chzzmarket.store  # 배포 URL
+          environment: production
+
+       # 3. Node.js 설치 및 글로벌 npm 캐시 활성화
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm' # ~/.npm 캐싱
   
-      # 3. 의존성 설치
+      # 4. 의존성 설치
       - name: Install dependencies
         run: npm ci
 
-      # 4. 기존 빌드 파일 삭제
+      # 5. 기존 빌드 파일 삭제
       - name: Clean build directory
         run: |
           rm -rf dist
 
-      # 5. .env.production 파일 생성
+      # 6. .env.production 파일 생성
       - name: Create .env.production
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env.production
 
-      # 6. 빌드 실행
+      # 7. 빌드 실행
       - name: Build project
         run: npm run build
 
-      # 7. AWS 크레덴셜 설정
+      # 8. AWS 크레덴셜 설정
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -48,14 +61,34 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      # 8. S3로 배포
+      # 9. S3로 배포
       - name: Deploy to S3
         run: |
           aws s3 sync ./dist s3://${{ secrets.S3_BUCKET_NAME }} --delete --exact-timestamps
           echo "Deployment to S3 and CloudFront completed successfully!"
 
-      # 9. CloudFront 캐시 무효화
+      # 10. CloudFront 캐시 무효화
       - name: Invalidate CloudFront Cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
           echo "CloudFront Cache Invalidated!"
+
+      # 11. 배포 상태 업데이트 (성공)
+      - name: Update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          environment-url: https://chzzmarket.store
+          state: 'success'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+
+      # 12. 배포 상태 업데이트 (실패)
+      - name: Update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          environment-url: https://chzzmarket.store
+          state: 'failure'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
