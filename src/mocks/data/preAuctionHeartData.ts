@@ -5,7 +5,7 @@ import JordanRed from '@/shared/assets/test/jordan_red.jpeg';
 
 export const preAuctionHeartData: IPreAuctionItem[] = [
   {
-    productId: 0,
+    auctionId: 0,
     productName: '조던 블루',
     imageUrl: JordanBlue,
     minPrice: 200_000,
@@ -14,7 +14,7 @@ export const preAuctionHeartData: IPreAuctionItem[] = [
     isSeller: true,
   },
   {
-    productId: 1,
+    auctionId: 1,
     productName: '조던 레드',
     imageUrl: JordanRed,
     minPrice: 350_000,
@@ -23,7 +23,7 @@ export const preAuctionHeartData: IPreAuctionItem[] = [
     isSeller: true,
   },
   {
-    productId: 2,
+    auctionId: 2,
     productName: '조던 블랙',
     imageUrl: JordanBlack,
     minPrice: 270_000,
