@@ -15,7 +15,7 @@ export const usePatchPreAuction = (): {
     mutationFn: patchPreAuction,
     onSuccess: (data) => {
       toast.success('사전 경매가 수정되었습니다.');
-      navigate(ROUTES.PRE_AUCTION.getItemRoute(data.productId));
+      navigate(ROUTES.PRE_AUCTION.getItemRoute(data.auctionId));
     },
   });
 
