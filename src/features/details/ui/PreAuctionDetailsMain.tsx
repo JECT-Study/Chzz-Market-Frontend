@@ -15,10 +15,10 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
   const { mutate: deletePreAuction, isPending } = useDeletePreAuction();
 
-  const { images, productName, productId, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
+  const { images, productName, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
   const updatedTime = getTimeAgo(updatedAt)
 
-  const clickEdit = () => navigate(`/auctions/pre-auction/edit/${productId}`);
+  const clickEdit = () => navigate(`/auctions/pre-auction/edit/${preAuctionId}`);
   const confirmDelete = () => deletePreAuction(preAuctionId);
 
   return (
@@ -42,11 +42,11 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
       />
       <Layout.Main>
         <figure>
-          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem]'>
-            <CustomCarousel contentStyle='h-[21.25rem]' length={images.length} loop>
+          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem] h-[23rem]'>
+            <CustomCarousel contentStyle='h-[23rem]' length={images.length} loop>
               {images.map((img) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} />
+                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} className='h-full' />
                 </CarouselItem>
               ))}
             </CustomCarousel>

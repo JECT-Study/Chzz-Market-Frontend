@@ -15,7 +15,7 @@ export const auctionDetailsData: IAuctionDetails[] = [
     minPrice: 23000,
     productName: '조던 레드',
     participantCount: 4,
-    productId: 14,
+    auctionId: 14,
     remainingBidCount: 0,
     sellerNickname: 'aaron93',
     status: 'PROCEEDING',
@@ -24,6 +24,7 @@ export const auctionDetailsData: IAuctionDetails[] = [
     sellerProfileImageUrl: '',
     isWinner: false,
     isWon: false,
+    isOrdered: false,
   },
   {
     bidAmount: 0,
@@ -37,7 +38,7 @@ export const auctionDetailsData: IAuctionDetails[] = [
     minPrice: 23000,
     productName: '조던 블랙',
     participantCount: 4,
-    productId: 14,
+    auctionId: 14,
     remainingBidCount: 0,
     sellerNickname: 'aaron93',
     status: 'PROCEEDING',
@@ -46,5 +47,6 @@ export const auctionDetailsData: IAuctionDetails[] = [
     sellerProfileImageUrl: '',
     isWinner: false,
     isWon: false,
+    isOrdered: false,
   },
 ];

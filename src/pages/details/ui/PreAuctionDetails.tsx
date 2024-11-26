@@ -9,7 +9,7 @@ export const PreAuctionDetails = () => {
 
   return (
     <Layout>
-      <APIAsyncBoundary>
+      <APIAsyncBoundary header='제품 상세'>
         <PreAuctionDetailsMain preAuctionId={preAuctionId} />
       </APIAsyncBoundary>
     </Layout >)
