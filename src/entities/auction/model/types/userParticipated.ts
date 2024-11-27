@@ -2,8 +2,6 @@ import type { IAuctionItemBase } from './base';
 import type { IAuctionItem } from './item';
 
 // 참여한 정식 경매 내역
-
-// 진행중인 경매
 export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {
   bidAmount: number;
 }
