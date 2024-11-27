@@ -1,6 +1,5 @@
-import { LikeCount, Price } from '@/shared';
+import { LikeCount, Price, ProductItem } from '@/shared';
 
-import ProductItem from '@/components/product/ui/ProductItem';
 import type { IPreAuctionItem } from '@/entities';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +20,7 @@ export const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => 
         confirmDelete();
       }}
         type='button'
+        disabled={!product.isSeller}
         className={
           `w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
         ${product.isLiked
@@ -29,8 +29,7 @@ export const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => 
           }
       `}
       >
-        {product.isSeller && '내가 등록한 물품'}
-        {!product.isSeller && product.isLiked ? '찜 목록에서 제외' : '찜하기'}
+        {product.isSeller ? "내가 등록한 물품" : (product.isLiked ? "찜 목록에서 제외" : "찜하기")}
       </button>
     </ProductItem>
   );

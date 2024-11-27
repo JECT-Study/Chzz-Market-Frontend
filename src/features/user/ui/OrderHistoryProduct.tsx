@@ -1,7 +1,6 @@
-import { ParticipantCount, Price } from "@/shared";
+import { ParticipantCount, Price, ProductItem } from "@/shared";
 
 import type { IUserAuctionHistoryItem } from '@/entities';
-import ProductItem from "@/components/product/ui/ProductItem";
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
 

@@ -33,11 +33,12 @@ export default defineConfig({
       '@/utils': resolve(__dirname, 'src/utils'),
       '@/models': resolve(__dirname, 'src/models'),
       '@/store': resolve(__dirname, 'src/store'),
+      '@/stories': resolve(__dirname, 'src/stories'),
     },
   },
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/setupTests.ts',
+    setupFiles: './src/shared/test/setupTests.ts',
   },
 });

@@ -17,7 +17,7 @@ export interface ProductProps {
   imageUrl?: string;
 }
 
-const ProductItem = ({
+export const ProductItem = ({
   product,
   children,
   onClick,
@@ -53,5 +53,3 @@ const ProductItem = ({
     </div>
   );
 };
-
-export default ProductItem;

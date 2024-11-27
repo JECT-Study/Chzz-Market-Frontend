@@ -20,6 +20,11 @@
       "@/entities/*": ["entities/*"],
       "@/features/*": ["features/*"],
       "@/pages/*": ["pages/*"],
+      "@/api/*": ["api/*"],
+      "@/utils/*": ["utils/*"],
+      "@/models/*": ["models/*"],
+      "@/store/*": ["store/*"],
+      "@/stories/*": ["stories/*"],
       "@/shared/*": ["shared/*"],
     }
   }

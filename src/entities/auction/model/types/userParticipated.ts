@@ -19,6 +19,7 @@ export interface IUserAuctionWonItem extends IAuctionItemBase {
 
 // 실패한 경매
 export interface IUserAuctionLostItem extends IAuctionItemBase {
+  auctionId: number;
   endDateTime: string;
   bidAmount: number;
   participantCount: number;

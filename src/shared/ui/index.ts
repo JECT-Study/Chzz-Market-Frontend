@@ -13,6 +13,7 @@ export { Modal } from './Modal';
 export { ParticipantCount } from './ParticipantCount';
 export { Price } from './Price';
 export { TimeLabel } from './TimeLabel';
+export { ProductItem } from './ProductItem';
 export * from './boundary';
 export { ButtonCN } from './buttonCN';
 export * from './carousel';

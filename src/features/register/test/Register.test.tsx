@@ -8,7 +8,7 @@ import {
 import { describe, expect, test } from 'vitest';
 
 import { Register } from '@/pages/register';
-import { mockedUseNavigate } from '@/shared/test/setupTests';
+import { mockWindowProperties, mockedUseNavigate } from '@/shared/test/setupTests';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -20,16 +20,7 @@ import { BrowserRouter } from 'react-router-dom';
 
   Object.defineProperty를 사용하면 객체의 프로퍼티를 정의하거나 수정할 수 있다. 이를 통해 Element.prototype에 새로운 메서드를 추가하거나 기존 메서드를 오버라이드할 수 있다. */
 
-Object.defineProperty(Element.prototype, 'hasPointerCapture', {
-  value: () => false,
-  // 프로퍼티가 변경 가능한 지 여부
-});
-Object.defineProperty(Element.prototype, 'setPointerCapture', {
-  value: () => { },
-});
-Object.defineProperty(Element.prototype, 'scrollIntoView', {
-  value: () => { },
-});
+mockWindowProperties();
 
 const fillFormWithValidData = async (
   user: ReturnType<typeof userEvent.setup>,
