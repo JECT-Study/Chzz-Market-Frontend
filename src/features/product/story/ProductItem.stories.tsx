@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import ProductItem from './ProductItem';
-import { Price, LikeCount } from '@/shared/ui';
+import { Price, LikeCount, ProductItem } from '@/shared/ui';
 
 const meta: Meta<typeof ProductItem> = {
   title: 'Components/ProductItem',

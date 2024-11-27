@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
-import ProductItem from "../ui/ProductItem";
 import { mockWindowProperties } from "@/shared/test/setupTests";
+import { ProductItem } from "@/shared";
 
 mockWindowProperties();
 

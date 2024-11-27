@@ -17,3 +17,4 @@ export { TimeLabel } from './TimeLabel';
 export * from './boundary/index';
 export { PrivateRoute, PublicRoute } from './route/index';
 export { ButtonSpinner, GlobalSpinner, LocalSpinner } from './spinner/index';
+export { ProductItem } from './ProductItem';

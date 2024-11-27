@@ -1,6 +1,5 @@
-import { LikeCount, Price } from '@/shared';
+import { LikeCount, Price, ProductItem } from '@/shared';
 
-import ProductItem from '@/components/product/ui/ProductItem';
 import type { IPreAuctionItem } from '@/entities';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
