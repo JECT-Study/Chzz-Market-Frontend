@@ -5,21 +5,10 @@ import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "@/features/address/model/index";
 import * as queries from "@/features/address/api/index";
-import { mockedUseNavigate } from "@/shared/test/setupTests";
+import { mockWindowProperties, mockedUseNavigate } from "@/shared/test/setupTests";
 import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages";
 
-// scrollIntoView 메서드가 jsdom에 지원되지 않아서 오류 발생
-Object.defineProperty(Element.prototype, 'hasPointerCapture', {
-  value: () => false,
-});
-
-Object.defineProperty(Element.prototype, 'setPointerCapture', {
-  value: () => {},
-});
-
-Object.defineProperty(Element.prototype, 'scrollIntoView', {
-  value: () => {},
-})
+mockWindowProperties();
 
 // mock으로 사용할 훅, API 호출 정의
 vi.mock('@/hooks/usePayment', () => ({
@@ -48,11 +37,11 @@ vi.mock('@/hooks/usePayment', () => ({
   }),
 }));
 
-vi.mock('@/components/address/queries', () => ({
+vi.mock('@/features/address/model/index', () => ({
   useGetAddresses: vi.fn(),
-  usePostAddress : vi.fn(),
-  useEditAddress: vi.fn(),
   useDeleteAddress: vi.fn(),
+  usePostAddress: vi.fn(),
+  useEditAddress: vi.fn(),
 }));
 
 vi.mocked(useGetAddresses).mockReturnValue({

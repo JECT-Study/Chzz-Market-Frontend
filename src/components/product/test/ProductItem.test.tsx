@@ -3,20 +3,9 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 import ProductItem from "../ui/ProductItem";
+import { mockWindowProperties } from "@/shared/test/setupTests";
 
-// scrollIntoView 메서드가 jsdom에 지원되지 않아서 오류 발생
-Object.defineProperty(Element.prototype, 'hasPointerCapture', {
-  value: () => false,
-});
-
-Object.defineProperty(Element.prototype, 'setPointerCapture', {
-  value: () => {},
-});
-
-Object.defineProperty(Element.prototype, 'scrollIntoView', {
-  value: () => {},
-})
-
+mockWindowProperties();
 
 const mockProduct = {
   id: 1,

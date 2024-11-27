@@ -57,3 +57,34 @@ mockWindowProperty('IntersectionObserver', () => ({
   unobserve: vi.fn(),
   disconnect: vi.fn(),
 }));
+
+// scrollIntoView 메서드가 jsdom에 지원되지 않아서 오류 발생 코드 대체
+export const mockWindowProperties = () => {
+  const mockWindowProperty = (property: string, implementation: any) => {
+    Object.defineProperty(window, property, {
+      writable: true,
+      value: vi.fn().mockImplementation(implementation),
+    });
+  };
+
+  // ResizeObserver 모킹
+  mockWindowProperty("ResizeObserver", () => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+  }));
+
+  // matchMedia 모킹
+  mockWindowProperty("matchMedia", () => ({
+    matches: false,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  }));
+
+  // IntersectionObserver 모킹
+  mockWindowProperty("IntersectionObserver", () => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+  }));
+};
