@@ -25,8 +25,8 @@ export const API_END_POINT = {
   ADDRESS: `${PRE_FIX}/addresses`,
   REALTIME_NOTIFICATIONS: `${PRE_FIX}/notifications/subscribe`,
 
-  USER_ONGOING_AUCTION_REGISTERED: `${PRE_FIX}/auctions/auctions/users/proceeding`,
-  USER_END_AUCTION_REGISTERED: `${PRE_FIX}/auctions/auctions/users/ended`,
+  USER_ONGOING_AUCTION_REGISTERED: `${PRE_FIX}/auctions/users/proceeding`,
+  USER_END_AUCTION_REGISTERED: `${PRE_FIX}/auctions/users/ended`,
   USER_PRE_AUCTION_REGISTERED: `${PRE_FIX}/auctions/products/users`,
 
   BID: `${PRE_FIX}/bids`,

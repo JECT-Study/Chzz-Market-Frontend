@@ -2,9 +2,7 @@ import type { IAuctionItemBase } from './base';
 import type { IAuctionItem } from './item';
 
 // 참여한 정식 경매 내역
-
-// 진행중인 경매
-export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {
+export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {  
   bidAmount: number;
 }
 
@@ -19,7 +17,6 @@ export interface IUserAuctionWonItem extends IAuctionItemBase {
 
 // 실패한 경매
 export interface IUserAuctionLostItem extends IAuctionItemBase {
-  auctionId: number;
   endDateTime: string;
   bidAmount: number;
   participantCount: number;

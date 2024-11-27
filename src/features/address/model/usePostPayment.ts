@@ -8,7 +8,7 @@ import { useState } from 'react';
 const clientKey = `${import.meta.env.VITE_TOSS_CLIENT_KEY}`;
 
 export const usePostPayment = (auctionId: string, orderId: string) => {
-  const { data: auctionData } = useQuery({
+  const { data: auctionData, isLoading: auctionDataIsLoading } = useQuery({
     queryKey: [QUERY_KEYS.AUCTION_ADDRESS_DETAIL],
     queryFn: () => getAddressDetail(auctionId),
   });
@@ -57,7 +57,7 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
     fetchPayment();
   };
 
-  return { auctionData, postPayment, DefaultAddressData };
+  return { auctionData, postPayment, DefaultAddressData, auctionDataIsLoading };
 };
 
 export const usePostOrderId = (): { createId: UseMutateFunction; orderId: string; isPending: boolean } => {

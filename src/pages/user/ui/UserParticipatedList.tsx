@@ -94,13 +94,20 @@ export const UserParticipatedList = () => {
       <OrderListTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <EmptyBoundary type={activeTab === 'AuctionHistory' ? 'participated' : activeTab === 'AuctionsWon' ? 'won' : 'lost'} length={activeTab === 'AuctionHistory' ? historyItems.length : activeTab === 'AuctionsWon' ? wonItems.length : lostItems.length}>
         <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {activeTab === historyItems.map((product: IUserAuctionHistoryItem) => (
+        {activeTab === "AuctionHistory" &&
+          historyItems.map((product: IUserAuctionHistoryItem) => (
             <OrderHistoryProduct key={product.auctionId} product={product} />
-          )) ? 'participated' : activeTab === 'AuctionsWon' ? wonItems.map((product: IUserAuctionWonItem) => (
+        ))}
+
+        {activeTab === "AuctionsWon" &&
+          wonItems.map((product: IUserAuctionWonItem) => (
             <OrderWonProduct key={product.auctionId} product={product} />
-          )) : lostItems.map((product: IUserAuctionLostItem) => (
+        ))}
+
+        {activeTab === "AuctionsLost" &&
+          lostItems.map((product: IUserAuctionLostItem) => (
             <OrderLostProduct key={product.auctionId} product={product} />
-          ))}
+        ))}
         </div>
       </EmptyBoundary>
     </div>

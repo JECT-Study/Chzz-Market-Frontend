@@ -33,7 +33,7 @@ export const Payment = () => {
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId, isPending } = usePostOrderId();
-  const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, postPayment } = usePostPayment(auctionId || '', orderId);
+  const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, auctionDataIsLoading, postPayment } = usePostPayment(auctionId || '', orderId);
   let address: IAddressWithId = {
     id: '',
     recipientName: '',
@@ -140,7 +140,16 @@ export const Payment = () => {
             <Button type='button' color='white' className='w-[10.15rem] h-[3.125rem]' onClick={handleClickAddressList}>배송지 목록</Button>
           </div>
           {/* 배송지 */}
-          {selectedAddress ? (
+          {auctionDataIsLoading ? (
+            <div className='flex mb-4 rounded-md animate-pulse'>
+              <div className="flex items-center w-6 h-6 bg-gray-200 rounded-full mr-2"></div>
+              <div className="flex flex-col space-y-2">
+                <div className="w-32 h-4 bg-gray-200 rounded"></div>
+                <div className="w-48 h-4 bg-gray-200 rounded"></div>
+                <div className="w-40 h-4 bg-gray-200 rounded"></div>
+              </div>
+            </div>
+          ) : selectedAddress ? (
             <div className='flex mb-4 rounded-md'>
               <div className="flex items-center">
                 <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
@@ -156,26 +165,24 @@ export const Payment = () => {
                 </div>
               </div>
             </div>
-          ) : (
-            Object.keys(address).length > 0 ? (
-              <div className='flex mb-4 rounded-md'>
-                <div className="flex items-center">
-                  <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
-                </div>
-                <div className="flex flex-col">
-                  {address.isDefault && (
-                    <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm mb-[10px]">기본배송지</span>
-                  )}
-                  <span className="text-body1Bold web:text-heading3">{address.recipientName} / {address.phoneNumber}</span>
-                  <div className='text-body1'>
-                    <p>{address.roadAddress}</p>
-                    <p>{address.detailAddress}</p>
-                  </div>
+          ) : Object.keys(address).length > 0 ? (
+            <div className='flex mb-4 rounded-md'>
+              <div className="flex items-center">
+                <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
+              </div>
+              <div className="flex flex-col">
+                {address.isDefault && (
+                  <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm mb-[10px]">기본배송지</span>
+                )}
+                <span className="text-body1Bold web:text-heading3">{address.recipientName} / {address.phoneNumber}</span>
+                <div className='text-body1'>
+                  <p>{address.roadAddress}</p>
+                  <p>{address.detailAddress}</p>
                 </div>
               </div>
-            ) : (
-              <div>기본 배송지가 없습니다. 배송지 목록에서 배송지를 추가해주세요.</div>
-            )
+            </div>
+          ) : (
+            <div>기본 배송지가 없습니다. 배송지 목록에서 배송지를 추가해주세요.</div>
           )}
           <form
             ref={formRef}
