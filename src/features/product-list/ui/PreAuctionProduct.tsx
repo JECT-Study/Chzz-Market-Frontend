@@ -8,8 +8,8 @@ import { useToggleAuctionListHeart } from '../model';
 export const PreAuctionProduct = ({ product }: { product: IPreAuctionItem }) => {
   const navigate = useNavigate();
   const { mutate: toggleAuctionListHeart } = useToggleAuctionListHeart();
-  const handleProductClick = () => navigate(ROUTES.PRE_AUCTION.getItemRoute(product.productId))
-  const confirmDelete = () => toggleAuctionListHeart(product.productId)
+  const handleProductClick = () => navigate(ROUTES.PRE_AUCTION.getItemRoute(product.auctionId))
+  const confirmDelete = () => toggleAuctionListHeart(product.auctionId)
 
   return (
     <ProductItem product={product} onClick={handleProductClick}>

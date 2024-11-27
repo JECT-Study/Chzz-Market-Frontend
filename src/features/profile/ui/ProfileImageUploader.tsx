@@ -1,8 +1,9 @@
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+
 import { MenuAccordion } from '@/shared';
 import Profile from '@/shared/assets/icons/profile.svg';
 import ProfileEdit from '@/shared/assets/icons/profile_edit.svg';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { Input } from '../../../shared/shadcn/ui/input';
+import { Input } from '../../../shared/ui/input';
 import { useProfileImageUploader } from '../lib';
 
 interface ImageUploaderProps {
@@ -42,7 +43,7 @@ export const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUp
         <div className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer" onClick={onClickImage}>
           <img src={image} alt="프로필 사진" className="object-cover w-full h-full rounded-full" />
           <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
-          {onMenu && 
+          {onMenu &&
             <div ref={menuRef}>
               <MenuAccordion fileInputRef={fileInputRef} deleteImage={deleteImage} setOnMenu={setOnMenu} />
             </div>

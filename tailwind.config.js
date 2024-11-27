@@ -2,9 +2,6 @@
 module.exports = {
   darkMode: ['class'],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
   prefix: '',
@@ -20,6 +17,12 @@ module.exports = {
       },
     },
     extend: {
+      width: {
+        web: '46.875rem',
+      },
+      minWidth: {
+        mobile: '21.875rem'
+      },
       backgroundColor: {
         error: '#f5f5f5'
       },

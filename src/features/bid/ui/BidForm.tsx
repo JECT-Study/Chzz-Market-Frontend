@@ -1,22 +1,19 @@
-import { getBidSchema } from "@/features/bid/config";
-import { AuctionItem, Button, FormField, MAX_BID_COUNT, convertCurrencyToNumber, formatCurrencyWithWon } from "@/shared";
+import { AuctionItem, Button, FormField, Input, MAX_BID_COUNT, convertCurrencyToNumber, formatCurrencyWithWon, useToggleState } from "@/shared";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { Layout } from "@/app/layout/index";
+import { Layout } from "@/app/layout";
 import { useGetAuctionDetails } from "@/features/details";
-import { useEditableNumberInput } from "@/features/register/lib/useEditableNumberInput";
+import { useEditableNumberInput } from "@/features/register";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import { z } from "zod";
-import { Input } from "../../../shared/shadcn/ui/input";
-import { usePostBid } from "../model/usePostBid";
+import { getBidSchema } from "../config";
+import { usePostBid } from "../model";
 import { BidCaution } from "./BidCaution";
 
 export const BidForm = ({ auctionId }: { auctionId: number }) => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
   const { mutate: postBid, isPending } = usePostBid(auctionId);
-  const [check, setCheck] = useState<boolean>(false);
-  const toggleCheckBox = () => setCheck((state) => !state);
+  const [check, toggle] = useToggleState(false)
 
   const { images, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = auctionDetails;
   const BidSchema = getBidSchema(minPrice, bidAmount);
@@ -84,7 +81,7 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
               />
             )}
           />
-          <BidCaution check={check} handleCheck={toggleCheckBox} />
+          <BidCaution check={check} toggle={toggle} />
         </div>
       </Layout.Main>
       <Layout.Footer type={isParticipated ? 'double' : 'single'}>

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 
-import { cn } from '@/shared/shadcn/lib/utils';
+import { cn } from '@/shared/lib/utils';
 
 const Select = SelectPrimitive.Root;
 

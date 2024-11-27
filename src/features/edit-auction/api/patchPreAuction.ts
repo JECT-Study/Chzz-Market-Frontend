@@ -1,10 +1,11 @@
-import { httpClient } from '@/shared/api/axios';
-import { API_END_POINT } from '@/shared/constants/index';
+import { API_END_POINT, httpClient } from '@/shared';
 
 export const patchPreAuction = async ({ preAuctionId, formData }: { preAuctionId: number; formData: FormData }) => {
-  await httpClient.patch(`${API_END_POINT.PRE_AUCTION}/${preAuctionId}`, formData, {
+  const response = await httpClient.patch(`${API_END_POINT.AUCTION}/${preAuctionId}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
+
+  return response.data;
 };

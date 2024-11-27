@@ -1,19 +1,21 @@
 import './index.css';
 
-import App from './App';
-import { Provider } from 'react-redux';
-import ReactDOM from 'react-dom/client';
-import { ReactQueryProvider } from './provider/index';
-import { Toaster } from 'sonner';
-import { store } from './store';
 import { storeLogin } from '@/features/auth/model/authSlice';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { Toaster } from 'sonner';
+import App from './App';
+import { ReactQueryProvider } from './provider/index';
+import { store } from './store';
 
 export const serverAPI = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
 
-async function enableMocking(): Promise<void> {
+async function setupMocks(): Promise<void> {
   if (import.meta.env.MODE !== 'development') {
     return;
   }
+
+  if (import.meta.env.VITE_USE_MOCK !== 'true') return;
 
   const { worker } = await import('../shared/test/browser');
   await worker.start({
@@ -26,18 +28,19 @@ async function enableMocking(): Promise<void> {
   });
 }
 
-enableMocking().then(() => {
+
+(async () => {
   const token = localStorage.getItem('accessToken');
-  if (token) {
-    store.dispatch(storeLogin({ token }));
-  }
+  if (token) store.dispatch(storeLogin({ token }))
+
+  await setupMocks()
 
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <ReactQueryProvider>
       <Provider store={store}>
         <App />
       </Provider>
-      <Toaster richColors position='top-right' />
+      <Toaster richColors />
     </ReactQueryProvider>
   );
-});
+})()

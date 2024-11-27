@@ -8,5 +8,5 @@ export const useGetImminentAuctions = () => {
     queryFn: getImminentAuctions,
   });
 
-  return { imminentAuctions };
+  return { imminentAuctions: imminentAuctions.items };
 };

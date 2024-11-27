@@ -2,10 +2,8 @@ import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 import ErrorIcon from '@/shared/assets/icons/error.svg';
-import { EmptyError } from '@/shared/lib';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
-import { EmptyFallback } from '..';
 import { Button } from '../Button';
 import { LocalSpinner } from '../spinner';
 
@@ -14,10 +12,6 @@ interface FallbackComponentProps extends FallbackProps {
 }
 
 const FallbackComponent = ({ error, resetErrorBoundary, height }: FallbackComponentProps) => {
-  if (error instanceof EmptyError) {
-    return <EmptyFallback emptyName={error.message} />
-  }
-
   if (!isAxiosError(error)) throw error
 
   return (

@@ -25,7 +25,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src'),
       '@/components': resolve(__dirname, 'src/components'),
-      '@/shared/assets': resolve(__dirname, 'src/shared/assets'),
+      '@/shared': resolve(__dirname, 'src/shared'),
       '@/constants': resolve(__dirname, 'src/constants'),
       '@/mocks': resolve(__dirname, 'src/mocks'),
       '@/pages': resolve(__dirname, 'src/pages'),

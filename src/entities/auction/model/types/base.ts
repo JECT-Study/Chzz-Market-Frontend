@@ -1,18 +1,17 @@
 export interface IAuctionItemBase {
+  auctionId: number;
   productName: string;
   minPrice: number;
   imageUrl: string;
+  isSeller: boolean;
 }
 
-export interface IAuctionDetailsBase {
-  productId: number;
+export interface IAuctionDetailsBase extends Omit<IAuctionItemBase, 'imageUrl'> {
   sellerNickname: string;
-  productName: string;
-  description: string;
-  minPrice: number;
-  isSeller: boolean;
-  category: string;
   sellerProfileImageUrl: string;
+  description: string;
+  status: string;
+  category: string;
   images: {
     imageId: number;
     imageUrl: string;

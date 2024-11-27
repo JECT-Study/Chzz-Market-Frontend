@@ -16,16 +16,16 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["/*"],
-      "@/components/*": ["components/*"],
-      "@/shared/assets/*": ["shared/assets/*"],
-      "@/constants/*": ["constants/*"],
-      "@/mocks/*": ["mocks/*"],
+      "@/app/*": ["app/*"],
+      "@/entities/*": ["entities/*"],
+      "@/features/*": ["features/*"],
       "@/pages/*": ["pages/*"],
       "@/api/*": ["api/*"],
       "@/utils/*": ["utils/*"],
       "@/models/*": ["models/*"],
       "@/store/*": ["store/*"],
       "@/stories/*": ["stories/*"],
+      "@/shared/*": ["shared/*"],
     }
   }
 }

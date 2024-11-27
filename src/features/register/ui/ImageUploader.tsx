@@ -1,10 +1,8 @@
-import { useDragAndDrop, useImageUploader } from '../lib/index';
+import { useDragAndDrop, useImageUploader } from '../lib';
 
-import { CustomCarousel } from "@/shared";
+import { CarouselItem, CustomCarousel, Input } from "@/shared";
 import DeleteIcon from '@/shared/assets/icons/delete.svg';
-import { CarouselItem } from '../../../shared/shadcn/ui/carousel';
-import { Input } from '../../../shared/shadcn/ui/input';
-import { AddImageButton } from './index';
+import { AddImageButton } from '.';
 
 interface ImageUploaderProps {
   images: string[];
@@ -20,9 +18,9 @@ export const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
       <AddImageButton handleBoxClick={handleBoxClick} length={images.length} />
       <CustomCarousel contentStyle='py-3' length={images.length}>
         {images.map((image: string, index: number) => (
-          <CarouselItem className='basis-1/2 md:basis-1/3' key={image}>
+          <CarouselItem className='pr-2 basis-1/2 md:basis-1/3' key={image}>
             <div
-              className={`relative h-32 transition-transform duration-400 mx-3 ${index === hoveredIndex ? 'transform scale-105' : ''}`}
+              className={`relative h-40 web:h-32 transition-transform duration-400 mx-3 ${index === hoveredIndex ? 'transform scale-105' : ''}`}
               draggable
               onDragStart={() => handleDragStart(index)}
               onDragOver={(e) => {
@@ -34,7 +32,7 @@ export const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
             >
               <img src={image} alt={`상품 사진 ${index}`} className='object-cover w-full h-full border-2 rounded' />
               {index === 0 && (
-                <p className='absolute text-[8px] web:text-xs rounded py-1 px-2 text-white bg-[#454545]/90 top-2 left-1/2 transform -translate-x-1/2'>
+                <p className='absolute text-[10px] web:text-xs rounded py-1 px-2 text-white bg-[#454545]/90 top-2 left-1/2 transform -translate-x-1/2'>
                   대표 사진
                 </p>
               )}

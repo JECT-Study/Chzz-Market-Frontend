@@ -1,7 +1,5 @@
-import { Layout } from "@/app/layout/index";
-import { httpClient } from "@/shared/api/axios";
-import { Input } from "@/shared/shadcn/ui/input";
-import { Button } from "@/shared";
+import { Layout } from "@/app/layout";
+import { Button, httpClient, Input } from "@/shared";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

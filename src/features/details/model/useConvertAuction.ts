@@ -5,16 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { convertAuction } from '../api';
 
-export const useConvertAuction = (): {
-  mutate: UseMutateFunction<any, Error, number, unknown>;
+export const useConvertAuction = (
+  preAuctionId: number
+): {
+  mutate: UseMutateFunction<any, Error, void, unknown>;
   isPending: boolean;
 } => {
   const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: convertAuction,
-    onSuccess: (data) => {
-      navigate(ROUTES.AUCTION.getItemRoute(data.auctionId), { replace: true });
+    mutationFn: () => convertAuction(preAuctionId),
+    onSuccess: () => {
+      navigate(ROUTES.AUCTION.getItemRoute(preAuctionId), { replace: true });
       toast.success('경매로 전환되었습니다.');
     },
   });

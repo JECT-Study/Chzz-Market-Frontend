@@ -1,8 +1,8 @@
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
-import { Layout } from '@/app/layout/index';
-import SettlementMain from '@/pages/settlement/ui/SettlementMain';
+import { Layout } from '@/app/layout';
 import { APIAsyncBoundary } from '@/shared';
+import SettlementMain from './SettlementMain';
 
 export const Settlement = () => {
   const auctionId = useLoaderData() as number;

@@ -1,6 +1,7 @@
 export { Test } from './Test';
 export * from './bid';
 export * from './details';
+export * from './edit-auction';
 export * from './heart';
 export * from './home';
 export * from './login';

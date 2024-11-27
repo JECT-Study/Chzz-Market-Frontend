@@ -5,13 +5,11 @@ import type { IAuctionItem } from './item';
 
 // 진행중인 경매
 export interface IUserAuctionHistoryItem extends Omit<IAuctionItem, 'isParticipated'> {
-  auctionId: number;
   bidAmount: number;
 }
 
 // 성공한 경매
 export interface IUserAuctionWonItem extends IAuctionItemBase {
-  auctionId: number;
   endDateTime: string;
   winningAmount: number;
   isOrdered: boolean;

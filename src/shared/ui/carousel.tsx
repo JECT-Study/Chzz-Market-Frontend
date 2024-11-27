@@ -2,8 +2,8 @@ import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-reac
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import * as React from 'react';
 
-import { cn } from '@/shared/shadcn/lib/utils';
-import { Button } from '@/shared/shadcn/ui/button';
+import { cn } from '@/shared/lib/utils';
+import { ButtonCN } from '@/shared/ui/buttonCN';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -150,12 +150,12 @@ const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 });
 CarouselItem.displayName = 'CarouselItem';
 
-const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
+const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof ButtonCN>>(
   ({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
     return (
-      <Button
+      <ButtonCN
         ref={ref}
         variant={variant}
         size={size}
@@ -170,18 +170,18 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
       >
         <ArrowLeft className='w-4 h-4' />
         <span className='sr-only'>Previous slide</span>
-      </Button>
+      </ButtonCN>
     );
   }
 );
 CarouselPrevious.displayName = 'CarouselPrevious';
 
-const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
+const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof ButtonCN>>(
   ({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
     const { orientation, scrollNext, canScrollNext } = useCarousel();
 
     return (
-      <Button
+      <ButtonCN
         ref={ref}
         variant={variant}
         size={size}
@@ -196,7 +196,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
       >
         <ArrowRight className='w-4 h-4' />
         <span className='sr-only'>Next slide</span>
-      </Button>
+      </ButtonCN>
     );
   }
 );

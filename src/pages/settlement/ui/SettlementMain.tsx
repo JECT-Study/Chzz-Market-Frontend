@@ -5,7 +5,7 @@ import { useGetAuctionDetails } from "@/features/details";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BIDDER_LIST_PRICE_FILTER, type IBidder } from "../config";
-import { useGetBidderList } from "../model/useGetBidderList";
+import { useGetBidderList } from "../model";
 
 const SettlementMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
@@ -54,7 +54,8 @@ const SettlementMain = ({ auctionId }: { auctionId: number }) => {
         <Button type='button' onClick={() => navigate(-1)} color='cheeseYellow' className='w-full h-full' aria-label='확인 버튼'>
           확인 완료
         </Button>
-      </Layout.Footer></>
+      </Layout.Footer>
+    </>
   );
 }
 

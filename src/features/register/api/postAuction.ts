@@ -1,5 +1,4 @@
-import { httpClient } from '@/shared/api/axios';
-import { API_END_POINT } from '@/shared/constants/index';
+import { API_END_POINT, httpClient } from '@/shared';
 
 export const postAuction = async (formData: FormData) => {
   await httpClient.post(`${API_END_POINT.AUCTION}`, formData, {

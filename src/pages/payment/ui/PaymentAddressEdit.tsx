@@ -1,14 +1,14 @@
+import { Button, Checkbox, FormField, useToggleState } from "@/shared";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Layout } from "@/app/layout/index";
 import { ADDRESS_SCRIPT_URL } from "@/features/address/config/address";
-import { Button, Checkbox, FormField } from "@/shared";
+import { useEditAddress } from "@/features/address/model";
 import { ROUTES } from "@/shared/constants/routes";
-import { Input } from "@/shared/shadcn/ui/input";
+import { Input } from "@/shared/ui/input";
 import { formatPhoneNumber } from "@/shared/utils/formatPhoneNumber";
 import { useForm } from "react-hook-form";
-import { useEditAddress } from "@/features/address/model";
 
 interface AddressProps {
   recipientName: string,
@@ -27,10 +27,7 @@ export const PaymentAddressEdit = () => {
   const roadAddress = location.state?.roadAddress;
   const zonecode = location.state?.zonecode;
   const formRef = useRef<HTMLFormElement>(null);
-  const [isChecked, setIsChecked] = useState(addressItem.isDefault);
-  const toggleCheckbox = () => {
-    setIsChecked((prev: boolean) => !prev);
-  }
+  const [isChecked, toggleCheck] = useToggleState(addressItem.isDefault)
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
@@ -236,7 +233,7 @@ export const PaymentAddressEdit = () => {
                 />
               )}
             />
-            <Checkbox title="기본 배송지로 설정" check={isChecked} handleCheck={toggleCheckbox} />
+            <Checkbox title="기본 배송지로 설정" check={isChecked} toggle={toggleCheck} />
           </form>
         </div>
       </Layout.Main>

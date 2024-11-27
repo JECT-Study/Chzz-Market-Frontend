@@ -1,25 +1,17 @@
-import { Dispatch, ReactElement, ReactNode, SetStateAction, cloneElement, createContext, useContext, useState } from 'react';
+import { ReactElement, ReactNode, cloneElement, createContext, useContext, useState } from 'react';
 
 import { createPortal } from 'react-dom';
 
-interface ModalContextValues {
-  openName: string;
-  open: Dispatch<SetStateAction<string>>
-  close: () => void
-}
-
-const defaultValues = {
+const ModalContext = createContext({
   openName: '',
-  open: () => { },
+  open: (_name: string) => { },
   close: () => { }
-}
-
-const ModalContext = createContext<ModalContextValues>(defaultValues)
+});
 
 export const Modal = ({ children }: { children: ReactNode }) => {
   const [openName, setOpenName] = useState('')
   const close = () => setOpenName('')
-  const open = setOpenName;
+  const open = (name: string) => setOpenName(name);
 
   return <ModalContext.Provider value={{ openName, open, close }}>
     {children}
@@ -44,7 +36,7 @@ const Window = ({ children, name = '', closeModal }: { children: ReactElement, n
   return createPortal(
     <div className="absolute inset-0 z-50 flex items-center justify-center" onClick={handleClose}>
       <div
-        className="w-[46rem] relative min-w-[23rem] h-full z-50 flex items-center justify-center bg-black/50"
+        className="relative z-50 flex items-center justify-center h-full w-web min-w-mobile bg-black/50"
         aria-label="모달 배경"
       >
         {cloneElement(children, { onCloseModal: close })}

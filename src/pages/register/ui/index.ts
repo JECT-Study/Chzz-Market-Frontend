@@ -1,1 +1,1 @@
-export { Register, loader as registerLoader } from './Register';
+export { Register } from './Register';

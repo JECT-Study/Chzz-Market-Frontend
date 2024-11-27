@@ -1,10 +1,10 @@
+import { CarouselItem, CustomCarousel, formatCurrencyWithWon } from "@/shared";
+import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
+
 import { Layout } from "@/app/layout";
-import { CustomCarousel, formatCurrencyWithWon } from "@/shared";
 import ParticipantAmount from '@/shared/assets/icons/my_participation_amount.svg';
 import Participants from '@/shared/assets/icons/participants.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
-import { CarouselItem } from "@/shared/shadcn/ui/carousel";
-import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
 import { useGetAuctionDetails } from "..";
 
 export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
@@ -13,11 +13,12 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
 
   return (
     <>
+      <Layout.Header title="제품 상세" />
       <Layout.Main>
         <figure>
           {/* 상품 이미지 */}
-          <div className='-mx-[20px] -mt-[20px] h-[21.25rem] flex flex-col'>
-            <CustomCarousel contentStyle="h-[21.25rem]" length={images.length} loop>
+          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem] h-[23rem] flex flex-col'>
+            <CustomCarousel contentStyle="h-[23rem]" length={images.length} loop>
               {images.map((img) => (
                 <CarouselItem className='w-full h-full' key={img.imageId}>
                   <img src={img.imageUrl} className='object-cover w-full h-full' alt={`${productName}${img.imageId}`} />
