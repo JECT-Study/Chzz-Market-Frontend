@@ -25,9 +25,6 @@ export const UserParticipatedList = () => {
     hasNextHistoryPage,
     hasNextWonPage,
     hasNextLostPage,
-    refetchHistoryData,
-    refetchWonData,
-    refetchLostData,
   } = useHistory(activeTab);
   const historyItems = historyData?.pages[0]?.items || [];
   const wonItems = wonData?.pages[0]?.items || [];
@@ -70,16 +67,6 @@ export const UserParticipatedList = () => {
       }
     };
   }, [hasNextHistoryPage, hasNextWonPage, hasNextLostPage, handleObserver]);
-
-  useEffect(() => {
-    if (activeTab === 'AuctionHistory') {
-      refetchHistoryData();
-    } else if (activeTab === 'AuctionsWon') {
-      refetchWonData();
-    } else if (activeTab === 'AuctionsLost') {
-      refetchLostData();
-    }
-  }, [activeTab, refetchHistoryData, refetchWonData, refetchLostData]);
 
   if (historyLoading || wonLoading || lostLoading) {
     return (

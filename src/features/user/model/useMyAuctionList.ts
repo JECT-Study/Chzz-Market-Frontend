@@ -11,7 +11,6 @@ export const useMyAuctionList = (activeTab: string): any => {
     error: _ongoingError,
     fetchNextPage: fetchNextOngoingPage,
     hasNextPage: hasNextOngoingPage,
-    refetch: refetchOngoingData,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.USER_AUCTION_REGISTERED],
     queryFn: () => getAuctionOngoingRegister({ pageNumber: 0, pageSize: 10 }),
@@ -31,7 +30,6 @@ export const useMyAuctionList = (activeTab: string): any => {
     error: _endError,
     fetchNextPage: fetchNextEndPage,
     hasNextPage: hasNextEndPage,
-    refetch: refetchEndData,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.USER_AUCTION_REGISTERED],
     queryFn: () => getAuctionEndRegister({ pageNumber: 0, pageSize: 10 }),
@@ -51,7 +49,6 @@ export const useMyAuctionList = (activeTab: string): any => {
     error: _enrollError,
     fetchNextPage: fetchNextEnrollPage,
     hasNextPage: hasNextEnrollPage,
-    refetch: refetchEnrollData,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.USER_PRE_AUCTION_REGISTERED],
     queryFn: () => getAuctionPreAuctionRegister({ pageNumber: 0, pageSize: 10 }),
@@ -75,8 +72,5 @@ export const useMyAuctionList = (activeTab: string): any => {
     hasNextOngoingPage,
     hasNextEndPage,
     hasNextEnrollPage,
-    refetchOngoingData,
-    refetchEndData,
-    refetchEnrollData,
   };
 };

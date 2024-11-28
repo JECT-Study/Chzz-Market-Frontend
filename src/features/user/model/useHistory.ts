@@ -10,7 +10,6 @@ export const useHistory = (activeTab: string): any => {
     error: _historyError,
     fetchNextPage: fetchNextHistoryPage,
     hasNextPage: hasNextHistoryPage,
-    refetch: refetchHistoryData,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.AUCTION_HISTORY],
     queryFn: () => getMyHistoryAuction({ pageNumber: 0, pageSize: 10 }),
@@ -30,7 +29,6 @@ export const useHistory = (activeTab: string): any => {
     error: _wonError,
     fetchNextPage: fetchNextWonPage,
     hasNextPage: hasNextWonPage,
-    refetch: refetchWonData,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.AUCTION_WON],
     queryFn: () => getMyWonAuction({ pageNumber: 0, pageSize: 10 }),
@@ -50,7 +48,6 @@ export const useHistory = (activeTab: string): any => {
     error: _lostError,
     fetchNextPage: fetchNextLostPage,
     hasNextPage: hasNextLostPage,
-    refetch: refetchLostData,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.AUCTION_LOST],
     queryFn: () => getMyLostAuction({ pageNumber: 0, pageSize: 10 }),
@@ -77,8 +74,5 @@ export const useHistory = (activeTab: string): any => {
     hasNextHistoryPage,
     hasNextWonPage,
     hasNextLostPage,
-    refetchHistoryData,
-    refetchWonData,
-    refetchLostData,
   };
 };
