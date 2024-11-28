@@ -10,7 +10,6 @@ export const useProductList = (activeTab: string, ongoingSortType: string, preAu
     error: _ongoingError,
     fetchNextPage: fetchNextOngoingPage,
     hasNextPage: hasNextOngoingPage,
-    refetch: refetchOngoingData,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.AUCTION_LIST, ongoingSortType, category],
     queryFn: () =>
@@ -36,7 +35,6 @@ export const useProductList = (activeTab: string, ongoingSortType: string, preAu
     error: _enrollError,
     fetchNextPage: fetchNextEnrollPage,
     hasNextPage: hasNextEnrollPage,
-    refetch: refetchEnrollData,
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.PRE_AUCTION_LIST, preAuctionSortType, category],
     queryFn: () => getEnrollProductList({ pageNumber: 0, pageSize: 10, sortType: preAuctionSortType, category }),
@@ -57,7 +55,5 @@ export const useProductList = (activeTab: string, ongoingSortType: string, preAu
     fetchNextEnrollPage,
     hasNextOngoingPage,
     hasNextEnrollPage,
-    refetchOngoingData,
-    refetchEnrollData,
   };
 };

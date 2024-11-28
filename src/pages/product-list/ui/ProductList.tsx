@@ -18,7 +18,7 @@ export const ProductList = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || 'all';
 
-  const { ongoingData, enrollData, fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage, refetchOngoingData, refetchEnrollData } =
+  const { ongoingData, enrollData, fetchNextOngoingPage, fetchNextEnrollPage, hasNextOngoingPage, hasNextEnrollPage } =
     useProductList(activeTab, ongoingSortType, preAuctionSortType, category);
 
   const ongoingItems = ongoingData?.pages[0]?.items || [];
@@ -59,14 +59,6 @@ export const ProductList = () => {
       }
     };
   }, [fetchNextOngoingPage, hasNextOngoingPage, handleObserver]);
-
-  useEffect(() => {
-    if (activeTab === 'ongoing') {
-      refetchOngoingData();
-    } else {
-      refetchEnrollData();
-    }
-  }, [activeTab, refetchOngoingData, refetchEnrollData]);
 
   return (
     <Layout>
