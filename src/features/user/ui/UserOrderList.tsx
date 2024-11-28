@@ -37,7 +37,6 @@ export const UserOrderList = () => {
         <Modal.Window name="deleteUser">
           <Confirm 
             type="deleteUser"
-            onCloseModal={() => {}}
           >
             <Button
               type="button"
