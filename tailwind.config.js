@@ -29,6 +29,7 @@ module.exports = {
       screens: {
         mobile: '375px', 
         web: '750px', 
+        image:'530px'
       },
       boxShadow: {
         top: '0 0 8px rgba(0, 0, 0, 0.08)',

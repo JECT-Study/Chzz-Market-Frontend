@@ -42,11 +42,11 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
       />
       <Layout.Main>
         <figure>
-          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem] h-[23rem]'>
-            <CustomCarousel contentStyle='h-[23rem]' length={images.length} loop>
+          <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem]'>
+            <CustomCarousel length={images.length} loop>
               {images.map((img) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} className='h-full' />
+                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} className='h-[26.36rem]' />
                 </CarouselItem>
               ))}
             </CustomCarousel>

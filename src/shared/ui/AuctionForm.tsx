@@ -12,6 +12,11 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 type FormFields = z.infer<typeof RegisterSchema>;
+interface ExistingImage {
+  imageId: number;
+  imageUrl: string;
+  firstIdx: number
+}
 
 const defaultValues = {
   productName: '',
@@ -28,7 +33,8 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
 
   const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction();
   const { mutate: register, isPending: postPending } = usePostAuction();
-  const [existingImages, setExistingImages] = useState<{ imageId: number; imageUrl: string; firstIdx: number }[]>([])
+  const [existingImages, setExistingImages] = useState<ExistingImage[]>([])
+
   const {
     control,
     handleSubmit,
@@ -45,6 +51,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
     } : defaultValues,
     resolver: zodResolver(RegisterSchema),
   });
+
   const { isEditing, handleBlur, handleFocus, preventArrowKeys, preventInvalidInput } = useEditableNumberInput({
     name: 'minPrice',
     setValue,

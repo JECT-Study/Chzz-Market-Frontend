@@ -1,8 +1,8 @@
+import { CarouselItem, CustomCarousel, Input } from "@/shared";
 import { useDragAndDrop, useImageUploader } from '../lib';
 
-import { CarouselItem, CustomCarousel, Input } from "@/shared";
-import DeleteIcon from '@/shared/assets/icons/delete.svg';
 import { AddImageButton } from '.';
+import DeleteIcon from '@/shared/assets/icons/delete.svg';
 
 interface ImageUploaderProps {
   images: string[];
@@ -14,13 +14,13 @@ export const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
   const { fileInputRef, deleteImage, handleImage, handleBoxClick } = useImageUploader(images, setImages);
 
   return (
-    <div className='flex flex-col items-center w-full h-full gap-5 web:h-32 web:flex-row'>
+    <div className='flex flex-col items-center gap-5 web:flex-row'>
       <AddImageButton handleBoxClick={handleBoxClick} length={images.length} />
       <CustomCarousel contentStyle='py-3' length={images.length}>
         {images.map((image: string, index: number) => (
-          <CarouselItem className='pr-2 basis-1/2 md:basis-1/3' key={image}>
+          <CarouselItem className='pr-2 basis-1/2 image:basis-1/3' key={image}>
             <div
-              className={`relative h-40 web:h-32 transition-transform duration-400 mx-3 ${index === hoveredIndex ? 'transform scale-105' : ''}`}
+              className={`relative transition-transform flex h-32 justify-center items-center duration-400 mx-3 ${index === hoveredIndex ? 'transform scale-105' : ''}`}
               draggable
               onDragStart={() => handleDragStart(index)}
               onDragOver={(e) => {
@@ -30,9 +30,9 @@ export const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
               onDragLeave={handleDragLeave}
               onDrop={() => handleDrop(index)}
             >
-              <img src={image} alt={`상품 사진 ${index}`} className='object-cover w-full h-full border-2 rounded' />
+              <img src={image} alt={`상품 사진 ${index}`} className='relative w-full h-32' />
               {index === 0 && (
-                <p className='absolute text-[10px] web:text-xs rounded py-1 px-2 text-white bg-[#454545]/90 top-2 left-1/2 transform -translate-x-1/2'>
+                <p className='absolute text-[8px] web:text-xs rounded py-1 px-2 text-white bg-[#454545]/90 top-2 left-1/2 transform -translate-x-1/2'>
                   대표 사진
                 </p>
               )}
