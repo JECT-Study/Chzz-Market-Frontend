@@ -1,29 +1,16 @@
 import { ChangeEvent, useRef } from 'react';
+import { compressAndConvertToWebP, convertFileToDataURL } from '../utils';
+
 import { toast } from 'sonner';
 
 export const useImageUploader = (state: string[], setState: (images: string[]) => void) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const convertFileToDataURL = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        if (reader.result && typeof reader.result === 'string') resolve(reader.result);
-        else reject(new Error('File reading failed!'));
-      };
-      reader.onerror = () => reject(new Error('File reading failed!'));
-    });
-  };
-
   const addImages = async (newFiles: File[]) => {
-    try {
-      const newImages = await Promise.all(newFiles.map(async (newFile) => convertFileToDataURL(newFile)));
-      const imgArr = Array.from(new Set([...state, ...newImages]));
-      setState(imgArr);
-    } catch (error) {
-      throw new Error('Error reading file!');
-    }
+    const compressedFiles = await Promise.all(newFiles.map((file) => compressAndConvertToWebP(file)));
+    const compressedImages = await Promise.all(compressedFiles.map((file) => convertFileToDataURL(file)));
+
+    setState(Array.from(new Set([...state, ...compressedImages])));
   };
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +20,7 @@ export const useImageUploader = (state: string[], setState: (images: string[]) =
     const maxSize = 10 * 1024 * 1024;
     for (let file of curFiles) {
       if (file.size > maxSize) {
-        toast.error('파일 크기는 10MB를 초과할 수 없습니다.');
+        toast.error('10MB 이하의 이미지만 가능합니다.');
         return;
       }
     }
