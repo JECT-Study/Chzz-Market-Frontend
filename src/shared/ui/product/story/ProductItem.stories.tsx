@@ -4,8 +4,23 @@ import { Price, LikeCount, ProductItem } from '@/shared/ui';
 const meta: Meta<typeof ProductItem> = {
   title: 'Components/ProductItem',
   component: ProductItem,
+  tags: ["autodocs"], // 자동으로 Docs 파일 생성 Docs파일 커스터마이징 원할 시 아래의 argTypes에 각 Prop에 대한 설명 추가 및 Default Value를 테이블 속성에 정의 가능
   argTypes: {
     onClick: { action: 'clicked' },
+    product: {
+      description: '상품 정보를 포함하는 객체입니다.',
+      table: {
+        type: { summary: 'object' },
+        defaultValue: { summary: '{}' },
+      },
+    },
+  },
+  parameters: { // parameters.docs.description.component
+    docs: {
+      description: {
+        component: 'ProductItem은 상품 정보를 렌더링하는 컴포넌트입니다.' // 전체 컴포넌트에 대한 설명 추가
+      },
+    },
   },
 };
 
