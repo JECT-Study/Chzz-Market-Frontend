@@ -3,6 +3,8 @@ module.exports = {
   darkMode: ['class'],
   content: [
     './src/**/*.{ts,tsx}',
+    './src/**/*.stories.@(ts|tsx)',
+    './src/**/*.mdx',
   ],
   prefix: '',
   theme: {
