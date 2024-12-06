@@ -15,6 +15,10 @@ export const UserOrderList = () => {
         removeToken();
         navigate('/');
       },
+      // onError: (error) => {
+      //   console.log(error);
+      //   close()
+      // }
     });
   };
 
