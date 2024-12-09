@@ -7,12 +7,12 @@ import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
 import type { IUserProfile } from '@/entities/user/user';
 import { useEditProfile } from '@/features/profile/hooks';
-import { useCheckNickname } from '@/features/profile/model/useProfile';
 import { ProfileImageUploader } from '@/features/profile/ui';
 import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
+import { uploadProfileImage, useCheckNickname, useEditProfileImage } from '@/features/profile/model';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -26,6 +26,7 @@ export const UserProfileEdit = () => {
 
   const nickname = watch('nickname')?.trim();
   const { checkNickname } = useCheckNickname({ nickname });
+  const { profileImageMutate } = useEditProfileImage();
 
   const handleNicknameValidation = (nickname: string, isAvailable: boolean) => {
     if (!nickname || nickname === '') {
@@ -57,31 +58,39 @@ export const UserProfileEdit = () => {
 
   const onSubmit = (data: IUserProfile) => {
     const { nickname, bio } = data;
-    if (isNicknameChecked || nickname === originalNickname) {
-      const formData = new FormData();
-      const submitData = {
-        nickname,
-        bio,
-        useDefaultImage: !profileFile,
-      };
-
-      if (profileFile) {
-        formData.append('file', profileFile);
-        setUseDefaultImage(false);
-      } else {
-        setUseDefaultImage(true);
+    
+    profileImageMutate(profileFile?.name, {
+      onSuccess: async ({ objectKey, uploadUrl }) => {
+        
+        uploadProfileImage(uploadUrl, profileFile);
+        if (isNicknameChecked || nickname === originalNickname) {
+          const formData = new FormData();
+          const submitData = {
+            nickname,
+            bio,
+            objectKey,
+            useDefaultImage: !profileFile,
+          };
+    
+          if (profileFile) {
+            formData.append('file', profileFile);
+            setUseDefaultImage(false);
+          } else {
+            setUseDefaultImage(true);
+          }
+          formData.append('request',
+            new Blob([JSON.stringify(submitData)], {
+              type: 'application/json',
+            })
+          );
+          handleEditProfile(formData);
+        } else {
+          dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
+          dispatch(setIsNicknameChecked(false));
+          dispatch(setIsSubmitEnabled(false));
+        }
       }
-      formData.append('request',
-        new Blob([JSON.stringify(submitData)], {
-          type: 'application/json',
-        })
-      );
-      handleEditProfile(formData);
-    } else {
-      dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
-      dispatch(setIsNicknameChecked(false));
-      dispatch(setIsSubmitEnabled(false));
-    }
+    });
   };
 
   useEffect(() => {
