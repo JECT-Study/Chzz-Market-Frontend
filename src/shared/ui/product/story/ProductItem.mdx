@@ -1,0 +1,21 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { ProductItem } from '@/shared/ui';
+import * as ProductStories from './ProductItem.stories';
+
+<Meta
+  title="Components/ProductItem"
+  component={ProductItem}
+  of={ProductStories}
+/>
+
+# ProductItem
+
+`ProductItem`은 상품 정보를 렌더링하는 컴포넌트입니다. 아래는 다양한 상태를 보여줍니다.
+
+## 기본 사용법
+
+<Story name="Default">{ProductStories.Default.args}</Story>
+
+## Liked 상태
+
+<Story name="Liked">{ProductStories.Liked.args}</Story>

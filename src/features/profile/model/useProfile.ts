@@ -1,10 +1,9 @@
 import type { IProfileData } from "@/entities/user/user";
 import { QUERY_KEYS } from "@/shared";
-import { QueryObserverResult, RefetchOptions, UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
+import { UseMutateFunction, useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getProfile } from "../api/getProfile";
 import { postEditProfile } from "../api/postEditProfile";
-import { nicknameCheck } from "@/features/auth/api";
 
 export const useProfile = (): {
   profileData: IProfileData;
@@ -28,19 +27,4 @@ export const useProfile = (): {
 
   return { profileData, profileMutation, isPending, isLoading };
 };
-
-export const useCheckNickname = ({
-  nickname,
-}: {
-  nickname: string;
-}): {
-  checkNickname: (options?: RefetchOptions) => Promise<QueryObserverResult<any, Error>>;
-} => {
-  const { refetch: checkNickname } = useQuery({
-    queryKey: [QUERY_KEYS.NICKNAME, nickname],
-    queryFn: () => nicknameCheck(nickname),
-    enabled: false,
-  });
-
-  return { checkNickname };
-};
+  
