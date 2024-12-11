@@ -12,7 +12,8 @@ import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
-import { uploadProfileImage, useCheckNickname, useEditProfileImage } from '@/features/profile/model';
+import { uploadProfileImageToS3, useCheckNickname } from '@/features/profile/model';
+import { getProfileImageURL } from '@/features/profile/api';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -26,7 +27,6 @@ export const UserProfileEdit = () => {
 
   const nickname = watch('nickname')?.trim();
   const { checkNickname } = useCheckNickname({ nickname });
-  const { profileImageMutate } = useEditProfileImage();
 
   const handleNicknameValidation = (nickname: string, isAvailable: boolean) => {
     if (!nickname || nickname === '') {
@@ -56,41 +56,39 @@ export const UserProfileEdit = () => {
     handleNicknameValidation(nickname, data.isAvailable);
   };
 
-  const onSubmit = (data: IUserProfile) => {
+  const onSubmit = async (data: IUserProfile) => {
     const { nickname, bio } = data;
     
-    profileImageMutate(profileFile?.name, {
-      onSuccess: async ({ objectKey, uploadUrl }) => {
-        
-        uploadProfileImage(uploadUrl, profileFile);
-        if (isNicknameChecked || nickname === originalNickname) {
-          const formData = new FormData();
-          const submitData = {
-            nickname,
-            bio,
-            objectKey,
-            useDefaultImage: !profileFile,
-          };
-    
-          if (profileFile) {
-            formData.append('file', profileFile);
-            setUseDefaultImage(false);
-          } else {
-            setUseDefaultImage(true);
-          }
-          formData.append('request',
-            new Blob([JSON.stringify(submitData)], {
-              type: 'application/json',
-            })
-          );
-          handleEditProfile(formData);
-        } else {
-          dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
-          dispatch(setIsNicknameChecked(false));
-          dispatch(setIsSubmitEnabled(false));
-        }
+    const urlData = await getProfileImageURL(profileFile?.name || "");
+    const { objectKey, uploadUrl } = urlData;
+
+    uploadProfileImageToS3(uploadUrl, profileFile);
+    if (isNicknameChecked || nickname === originalNickname) {
+      const formData = new FormData();
+      const submitData = {
+        nickname,
+        bio,
+        objectKey,
+        useDefaultImage: !profileFile,
+      };
+
+      if (profileFile) {
+        formData.append('file', profileFile);
+        setUseDefaultImage(false);
+      } else {
+        setUseDefaultImage(true);
       }
-    });
+      formData.append('request',
+        new Blob([JSON.stringify(submitData)], {
+          type: 'application/json',
+        })
+      );
+      handleEditProfile(formData);
+    } else {
+      dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsSubmitEnabled(false));
+    }
   };
 
   useEffect(() => {
