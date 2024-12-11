@@ -1,5 +1,5 @@
-import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
 import { CarouselItem, CustomCarousel, formatCurrencyWithWon } from "@/shared";
+import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
 
 import { Layout } from "@/app/layout";
 import ParticipantAmount from '@/shared/assets/icons/my_participation_amount.svg';
@@ -9,7 +9,7 @@ import { useGetAuctionDetails } from "..";
 
 export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
-  const { images, productName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
+  const { images, auctionName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
 
   return (
     <>
@@ -21,7 +21,7 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
             <CustomCarousel length={images.length} loop>
               {images.map((img) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={img.imageUrl} className='h-[26.36rem]' alt={`${productName}${img.imageId}`} />
+                  <img src={img.imageUrl} className='h-[26.36rem]' alt={`${auctionName}${img.imageId}`} />
                 </CarouselItem>
               ))}
             </CustomCarousel>
@@ -41,7 +41,7 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
 
             {/* 상품 정보 */}
             <div className='flex flex-col gap-4'>
-              <DetailsBasic productName={productName} minPrice={minPrice} category={category} />
+              <DetailsBasic auctionName={auctionName} minPrice={minPrice} category={category} />
               <div className='flex items-center justify-between border rounded-lg border-gray3'>
                 <div aria-label="참여 금액" className='flex flex-col items-center w-full gap-1 py-4'>
                   <div className='flex items-center gap-1 text-body2 text-gray2'>

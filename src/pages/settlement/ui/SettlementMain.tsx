@@ -19,7 +19,7 @@ const SettlementMain = ({ auctionId }: { auctionId: number }) => {
   const { bidderList } = useGetBidderList(auctionId);
 
   const filteredBidderList = filterState.sort === 'desc' ? bidderList : bidderList.sort((a, b) => a.bidAmount - b.bidAmount)
-  const { images, productName, minPrice, participantCount } = auctionDetails;
+  const { images, auctionName, minPrice, participantCount } = auctionDetails;
 
   return (
     <>
@@ -27,7 +27,7 @@ const SettlementMain = ({ auctionId }: { auctionId: number }) => {
         <div className='flex flex-col gap-8 pt-4'>
           <AuctionItem axis='row' label='입찰자 목록 상품'>
             <AuctionItem.Image src={images[0].imageUrl} />
-            <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
+            <AuctionItem.Main kind='register' name={auctionName} count={participantCount} price={minPrice} />
           </AuctionItem>
           <div className='flex items-center justify-between'>
             <h2 className='text-heading2'>참여 가격</h2>

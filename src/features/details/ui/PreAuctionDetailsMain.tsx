@@ -15,7 +15,7 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
   const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
   const { mutate: deletePreAuction, isPending } = useDeletePreAuction();
 
-  const { images, productName, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
+  const { images, auctionName, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
   const updatedTime = getTimeAgo(updatedAt)
 
   const clickEdit = () => navigate(`/auctions/pre-auction/edit/${preAuctionId}`);
@@ -46,7 +46,7 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
             <CustomCarousel length={images.length} loop>
               {images.map((img) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={img.imageUrl} alt={`${productName}${img.imageId}`} className='h-[26.36rem]' />
+                  <img src={img.imageUrl} alt={`${auctionName}${img.imageId}`} className='h-[26.36rem]' />
                 </CarouselItem>
               ))}
             </CustomCarousel>
@@ -62,7 +62,7 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
 
             {/* 상품 정보 */}
             <div className='flex flex-col gap-4'>
-              <DetailsBasic productName={productName} minPrice={minPrice} category={category} />
+              <DetailsBasic auctionName={auctionName} minPrice={minPrice} category={category} />
               <div className='flex items-center justify-between border rounded-lg border-gray3'>
                 <div aria-label="수정 시간" className='flex flex-col items-center w-full gap-1 py-4'>
                   <div className='flex items-center gap-1 text-body2 text-gray2'>

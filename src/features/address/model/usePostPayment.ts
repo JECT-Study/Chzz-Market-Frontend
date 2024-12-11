@@ -1,5 +1,5 @@
-import type { IAddressWithId } from "@/entities/address/address";
-import { getAddress, getAddressDetail, getCustomerKey, postOrderId } from "@/features/address/api";
+import type { IAddressWithId } from '@/entities/address/address';
+import { getAddress, getAddressDetail, getCustomerKey, postOrderId } from '@/features/address/api';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
 import { loadTossPayments } from '@tosspayments/tosspayments-sdk';
@@ -37,7 +37,7 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
             value: auctionData.winningAmount,
           },
           orderId,
-          orderName: auctionData.productName,
+          orderName: auctionData.auctionName,
           successUrl:
             window.location.origin + `/payment/success?auctionId=${auctionId}&memo=${encodeURIComponent(JSON.stringify(memo))}&addressId=${addressId}`,
           failUrl: window.location.origin + '/fail',

@@ -1,5 +1,5 @@
+import { LikeCount, Price, ProductItem } from '@/shared/ui';
 import { Meta, StoryObj } from '@storybook/react';
-import { Price, LikeCount, ProductItem } from '@/shared/ui';
 
 const meta: Meta<typeof ProductItem> = {
   title: 'Components/ProductItem',
@@ -17,7 +17,7 @@ export const Default: Story = {
   args: {
     product: {
       id: 1,
-      productName: '테스트 상품',
+      auctionName: '테스트 상품',
       minPrice: 50000,
       timeRemaining: 3600,
       participantCount: 10,
@@ -40,7 +40,7 @@ export const Liked: Story = {
   args: {
     product: {
       id: 2,
-      productName: '좋아요 상품',
+      auctionName: '좋아요 상품',
       minPrice: 100000,
       timeRemaining: 3600,
       participantCount: 15,
