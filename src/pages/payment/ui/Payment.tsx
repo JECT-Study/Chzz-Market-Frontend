@@ -33,7 +33,7 @@ export const Payment = () => {
   const location = useLocation();
   const { auctionId } = useParams<{ auctionId: string }>();
   const { createId, orderId, isPending } = usePostOrderId();
-  const { auctionData = { productName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, auctionDataIsLoading, postPayment } = usePostPayment(auctionId || '', orderId);
+  const { auctionData = { auctionName: '', imageUrl: '', winningAmount: 0 }, DefaultAddressData, auctionDataIsLoading, postPayment } = usePostPayment(auctionId || '', orderId);
   let address: IAddressWithId = {
     id: '',
     recipientName: '',
@@ -113,7 +113,7 @@ export const Payment = () => {
                 className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]"
               />
               <div>
-                <p className="text-heading3 web:text-heading2">{auctionData?.productName}</p>
+                <p className="text-heading3 web:text-heading2">{auctionData?.auctionName}</p>
                 <div
                   aria-label="결제 금액"
                   className="flex items-center text-body2 web:text-heading3"

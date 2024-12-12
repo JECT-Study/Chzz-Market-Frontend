@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
 import { TimeLabel } from '@/shared/ui';
+import { ReactNode } from 'react';
 
 export interface ProductProps {
   id?: number;
   auctionId?: number;
   name?: string;
-  productName?: string;
+  auctionName?: string;
   minPrice: number;
   timeRemaining?: number;
   participantCount?: number;
@@ -26,7 +26,7 @@ export const ProductItem = ({
   children: ReactNode;
   onClick?: () => void;
 }) => {
-  const displayName = product.productName || product.name;
+  const displayName = product.auctionName || product.name;
   const productId = product.auctionId || product.id;
 
   return (

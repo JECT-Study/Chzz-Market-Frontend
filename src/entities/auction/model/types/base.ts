@@ -1,6 +1,6 @@
 export interface IAuctionItemBase {
   auctionId: number;
-  productName: string;
+  auctionName: string;
   minPrice: number;
   imageUrl: string;
   isSeller: boolean;

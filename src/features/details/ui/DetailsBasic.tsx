@@ -2,10 +2,10 @@ import { CATEGORIES, Price } from "@/shared";
 import { useNavigate } from 'react-router-dom';
 
 interface DetailsBasicProps {
-  productName: string, category: string, minPrice: number
+  auctionName: string, category: string, minPrice: number
 }
 
-export const DetailsBasic = ({ productName, category, minPrice }: DetailsBasicProps) => {
+export const DetailsBasic = ({ auctionName, category, minPrice }: DetailsBasicProps) => {
   const navigate = useNavigate();
 
   const onClickCategory = () => {
@@ -16,7 +16,7 @@ export const DetailsBasic = ({ productName, category, minPrice }: DetailsBasicPr
     <>
       <div className='flex flex-col gap-[6px] h-[5.25rem]'>
         <p className='text-heading2'>
-          {productName}
+          {auctionName}
         </p>
         <span className='inline-flex'>
           <button onClick={onClickCategory} className='underline cursor-pointer text-gray2 text-body2'>{CATEGORIES[category].value}</button>

@@ -28,7 +28,7 @@ export const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) =
             <img
               className="object-cover w-[10rem] h-[7.5rem] web:w-full web:h-[15rem] rounded-t"
               src={product.imageUrl}
-              alt={product.productName || "제품 사진"}
+              alt={product.auctionName || "제품 사진"}
             />
             {product.isOrdered ? (
               <div
@@ -50,7 +50,7 @@ export const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) =
 
         <div className="flex flex-col gap-[2px] web:gap-[4px]">
           <div>
-            <p className="text-body2 web:text-heading3">{product.productName}</p>
+            <p className="text-body2 web:text-heading3">{product.auctionName}</p>
           </div>
           <div className="flex flex-col">
             <div

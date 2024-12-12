@@ -15,7 +15,7 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
   const { mutate: postBid, isPending } = usePostBid(auctionId);
   const [check, toggle] = useToggleState(false)
 
-  const { images, productName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = auctionDetails;
+  const { images, auctionName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = auctionDetails;
   const BidSchema = getBidSchema(minPrice, bidAmount);
   type FormFields = z.infer<typeof BidSchema>;
   const maxFlag = remainingBidCount === MAX_BID_COUNT
@@ -52,7 +52,7 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
         <div className='flex flex-col gap-8'>
           <AuctionItem axis='row' label='입찰 상품'>
             <AuctionItem.Image src={images[0].imageUrl} time={timeRemaining} />
-            <AuctionItem.Main kind='register' name={productName} count={participantCount} price={minPrice} />
+            <AuctionItem.Main kind='register' name={auctionName} count={participantCount} price={minPrice} />
           </AuctionItem>
           {isParticipated && (
             <div className='flex flex-col gap-2'>

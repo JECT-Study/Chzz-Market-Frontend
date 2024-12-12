@@ -1,8 +1,22 @@
-export interface IRegister {
-  productName: string;
+interface IRegisterBase {
+  auctionName: string;
   description: string;
   minPrice: number;
-  auctionRegisterType?: string;
   category: string;
-  imageSequence?: { [k: string]: number };
+}
+
+export interface IRegisterPost extends IRegisterBase {
+  auctionRegisterType: string;
+  objectKeys: string[];
+}
+
+export interface IRegisterPatch extends IRegisterBase {
+  imageSequence: { [k: string]: number };
+  objectKeyBuffer: { [k: string]: string };
+}
+
+export interface IAuctionImageUploadURLs {
+  objectKey: string;
+  uploadUrl: string;
+  expiration: string;
 }

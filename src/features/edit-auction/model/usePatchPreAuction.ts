@@ -4,9 +4,10 @@ import { ROUTES } from '@/shared';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { patchPreAuction } from '..';
+import type { IRegisterPatch } from '@/features/register';
 
 export const usePatchPreAuction = (): {
-  mutate: UseMutateFunction<void, Error, { preAuctionId: number; formData: FormData }, unknown>;
+  mutate: UseMutateFunction<void, Error, { preAuctionId: number; submitData: IRegisterPatch }, unknown>;
   isPending: boolean;
 } => {
   const navigate = useNavigate();
