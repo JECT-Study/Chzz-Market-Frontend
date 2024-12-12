@@ -11,6 +11,7 @@ export const API_END_POINT = {
   REFRESH_TOKEN: `${PRE_FIX}/users/tokens/reissue`,
   SIGNUP: `${PRE_FIX}/users`,
   PROFILE: `${PRE_FIX}/users/profile`,
+  PROFILE_IMAGE_UPLOAD_URL: `${PRE_FIX}/image/profile`,
   CUSTOMER_KEY: `${PRE_FIX}/users/customer-key`,
   ORDER_LIST: '/order/list',
   MY_AUCTION_PRE_REGISTER: `/product/list/api/v1/users/me/auctions`,

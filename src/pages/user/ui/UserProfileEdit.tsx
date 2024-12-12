@@ -7,12 +7,13 @@ import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
 import type { IUserProfile } from '@/entities/user/user';
 import { useEditProfile } from '@/features/profile/hooks';
-import { useCheckNickname } from '@/features/profile/model/useProfile';
 import { ProfileImageUploader } from '@/features/profile/ui';
 import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
+import { uploadProfileImageToS3, useCheckNickname } from '@/features/profile/model';
+import { getProfileImageURL } from '@/features/profile/api';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -55,13 +56,19 @@ export const UserProfileEdit = () => {
     handleNicknameValidation(nickname, data.isAvailable);
   };
 
-  const onSubmit = (data: IUserProfile) => {
+  const onSubmit = async (data: IUserProfile) => {
     const { nickname, bio } = data;
+    
+    const urlData = await getProfileImageURL(profileFile?.name || "");
+    const { objectKey, uploadUrl } = urlData;
+
+    uploadProfileImageToS3(uploadUrl, profileFile);
     if (isNicknameChecked || nickname === originalNickname) {
       const formData = new FormData();
       const submitData = {
         nickname,
         bio,
+        objectKey,
         useDefaultImage: !profileFile,
       };
 
