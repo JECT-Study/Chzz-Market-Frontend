@@ -21,8 +21,8 @@ export const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
 
 const Image = ({ src, time = undefined }: { src: string; time?: number }) => {
   return (
-    <div className='relative border rounded w-full min-h-[7.5rem] max-h-[9rem] h-full'>
-      <img src={src} alt='이미지' className='object-cover w-full h-full rounded' />
+    <div className='relative w-full min-h-[7.5rem] max-h-[9rem] h-full'>
+      <img src={src} alt='이미지' className='object-contain w-full h-full rounded' />
       {time !== undefined && <TimeLabel time={time} />}
     </div>
   );

@@ -13,7 +13,7 @@ export const UserRegisteredList = () => {
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
-  const { ongoingData, endData, fetchNextOngoingPage, fetchNextEndPage, hasNextOngoingPage, hasNextEndPage, refetchOngoingData, refetchEndData } =
+  const { ongoingData, endData, fetchNextOngoingPage, fetchNextEndPage, hasNextOngoingPage, hasNextEndPage } =
     useMyAuctionList(activeTab);
 
   const ongoingItems = ongoingData?.pages[0]?.items || [];
@@ -53,14 +53,6 @@ export const UserRegisteredList = () => {
       }
     };
   }, [fetchNextOngoingPage, fetchNextEndPage, hasNextOngoingPage, hasNextEndPage, handleObserver]);
-
-  useEffect(() => {
-    if (activeTab === 'ongoing') {
-      refetchOngoingData();
-    } else if (activeTab === 'end') {
-      refetchEndData();
-    }
-  }, [activeTab, refetchOngoingData, refetchEndData]);
 
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>

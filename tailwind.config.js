@@ -3,6 +3,8 @@ module.exports = {
   darkMode: ['class'],
   content: [
     './src/**/*.{ts,tsx}',
+    './src/**/*.stories.@(ts|tsx)',
+    './src/**/*.mdx',
   ],
   prefix: '',
   theme: {
@@ -29,6 +31,7 @@ module.exports = {
       screens: {
         mobile: '375px', 
         web: '750px', 
+        image:'530px'
       },
       boxShadow: {
         top: '0 0 8px rgba(0, 0, 0, 0.08)',

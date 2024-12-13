@@ -1,15 +1,15 @@
+import { ProductItem } from "@/shared";
+import { mockWindowProperties } from "@/shared/test/setupTests";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
-import { mockWindowProperties } from "@/shared/test/setupTests";
-import { ProductItem } from "@/shared";
 
 mockWindowProperties();
 
 const mockProduct = {
   id: 1,
-  productName: "테스트 상품",
+  auctionName: "테스트 상품",
   minPrice: 30000,
   timeRemaining: 3600,
   likeCount: 10,
@@ -42,8 +42,8 @@ describe("ProductItem 컴포넌트 테스트", () => {
     expect(productImage).toBeInTheDocument();
     expect(productImage).toHaveAttribute("src", "https://via.placeholder.com/150");
 
-    const productName = screen.getByText("테스트 상품");
-    expect(productName).toBeInTheDocument();
+    const auctionName = screen.getByText("테스트 상품");
+    expect(auctionName).toBeInTheDocument();
 
     // 금액 확인 테스트코드 추가해야 함
 
@@ -74,7 +74,7 @@ describe("ProductItem 컴포넌트 테스트", () => {
   });
 
   test("이미지 대체 텍스트가 없는 경우 기본값 표시", () => {
-    setup({ productName: undefined });
+    setup({ auctionName: undefined });
 
     const productImage = screen.getByAltText("제품 사진");
     expect(productImage).toBeInTheDocument();

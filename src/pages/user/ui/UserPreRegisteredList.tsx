@@ -13,7 +13,7 @@ export const UserPreRegisteredList = () => {
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
-  const { enrollData, fetchNextEnrollPage, hasNextEnrollPage, refetchEnrollData } =
+  const { enrollData, fetchNextEnrollPage, hasNextEnrollPage } =
     useMyAuctionList(activeTab);
 
   const enrollItems = enrollData?.pages[0]?.items || [];
@@ -49,12 +49,6 @@ export const UserPreRegisteredList = () => {
       }
     };
   }, [fetchNextEnrollPage, hasNextEnrollPage, handleObserver]);
-
-  useEffect(() => {
-    if (activeTab === 'end') {
-      refetchEnrollData();
-    }
-  }, [activeTab, refetchEnrollData]);
 
   return (
     <div className='mx-[-32px] my-[-4px] h-full'>

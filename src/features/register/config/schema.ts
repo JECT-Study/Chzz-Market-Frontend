@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const RegisterSchema = z.object({
-  productName: z.string().superRefine((value, ctx) => {
+  auctionName: z.string().superRefine((value, ctx) => {
     const name = value.replaceAll(' ', '');
     if (name.length === 0 || name.length < 2) {
       ctx.addIssue({
