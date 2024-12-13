@@ -3,18 +3,25 @@ import { Button, CATEGORIES, FormField, Input, Select, SelectContent, SelectGrou
 import { Layout } from "@/app/layout";
 import type { IPreAuctionDetails } from "@/entities";
 import { usePatchPreAuction } from "@/features/edit-auction";
-import { ImageUploader, RegisterCaution, RegisterSchema, dataURLtoFile, useEditableNumberInput, usePostAuction, type IRegister } from "@/features/register";
+import { ImageUploader, RegisterCaution, RegisterSchema, dataURLtoFile, getAuctionUploadURLs, useEditableNumberInput, usePostAuction, type IRegisterPatch, type IRegisterPost } from "@/features/register";
+import { uploadImagesToS3 } from "@/features/register/api/uploadImagesToS3";
 import NoticeIcon from '@/shared/assets/icons/notice.svg';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { z } from "zod";
 
 type FormFields = z.infer<typeof RegisterSchema>;
+interface ExistingImage {
+  imageId: number;
+  imageUrl: string;
+  firstIdx: number
+}
 
 const defaultValues = {
-  productName: '',
+  auctionName: '',
   category: '',
   minPrice: '',
   description: '',
@@ -26,9 +33,10 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
   const [check, toggle] = useToggleState(false)
   const navigate = useNavigate();
 
+  const [existingImages, setExistingImages] = useState<ExistingImage[]>([])
   const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction();
   const { mutate: register, isPending: postPending } = usePostAuction();
-  const [existingImages, setExistingImages] = useState<{ imageId: number; imageUrl: string; firstIdx: number }[]>([])
+
   const {
     control,
     handleSubmit,
@@ -37,7 +45,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
     getValues,
   } = useForm<FormFields>({
     defaultValues: preAuction ? {
-      productName: preAuction.productName,
+      auctionName: preAuction.auctionName,
       category: CATEGORIES[preAuction.category].code,
       minPrice: formatCurrencyWithWon(preAuction.minPrice),
       description: preAuction.description,
@@ -45,6 +53,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
     } : defaultValues,
     resolver: zodResolver(RegisterSchema),
   });
+
   const { isEditing, handleBlur, handleFocus, preventArrowKeys, preventInvalidInput } = useEditableNumberInput({
     name: 'minPrice',
     setValue,
@@ -60,46 +69,83 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
     handleSubmit(() => setCaution(proceedType))();
   };
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const { productName, images, category, description, minPrice } = data;
-    const formData = new FormData();
+  const onPatchSubmit: SubmitHandler<FormFields> = async (data) => {
+    if (!preAuction) {
+      toast.error('잘못된 접근입니다.')
+      return;
+    }
+    const { auctionName, images, category, description, minPrice } = data;
 
     // 유저가 정한 최종 이미지 순서
     const previewImageSequence = images.map((image, idx) => ({ id: idx + 1, image }))
     // 새로 삽입한 이미지만 뽑기
-    const newFiles = previewImageSequence.filter((el) => el.image.split(':')[0] === 'data').map((el) => ({ id: el.id, file: dataURLtoFile(el.image) }))
+    const newImages = previewImageSequence.filter((el) => el.image.split(':')[0] === 'data').map((el) => ({ id: el.id, file: dataURLtoFile(el.image) }))
 
     // 기존의 이미지가 현재 어느 위치에 있는지 계산
     let imageSequence = new Map<number, number>()
-    if (preAuction) {
-      existingImages.map((el) => {
-        for (const sequence of previewImageSequence) {
-          if (el.imageUrl === sequence.image) {
-            imageSequence.set(el.imageId, sequence.id)
-          }
+    existingImages.map((el) => {
+      for (const sequence of previewImageSequence) {
+        if (el.imageUrl === sequence.image) {
+          imageSequence.set(el.imageId, sequence.id)
         }
-      }).filter(image => image)
+      }
+    }).filter(Boolean)
+
+    const newImageNames = newImages.map((el) => el.file.name)
+    const newImageIds = newImages.map((el) => el.id)
+    const urlsData = await getAuctionUploadURLs(newImageNames)
+
+    const objectKeys = urlsData.map((el) => el.objectKey)
+    const objectKeyBuffer = new Map()
+    newImageIds.forEach((id, idx) => {
+      objectKeyBuffer.set(id, objectKeys[idx])
+    })
+
+    const urls = urlsData.map((el) => el.uploadUrl)
+    const results = await uploadImagesToS3(urls, newImages.map((el) => el.file))
+    const resultsStatus = results.every(Boolean)
+    if (resultsStatus) {
+      const submitData: IRegisterPatch = {
+        auctionName,
+        category,
+        description,
+        minPrice: convertCurrencyToNumber(minPrice),
+        imageSequence: Object.fromEntries(imageSequence),
+        objectKeyBuffer: Object.fromEntries(objectKeyBuffer)
+      };
+      patchPreAuction({ preAuctionId: preAuction.auctionId, submitData })
+    } else {
+      toast.error('이미지 전송에 실패했습니다. 다시 시도해 주세요.')
+      return;
     }
+  };
 
-    const submitData: IRegister = {
-      productName,
-      category,
-      description,
-      minPrice: convertCurrencyToNumber(minPrice),
-      ...(preAuction ? { imageSequence: Object.fromEntries(imageSequence) } : { auctionRegisterType: caution }),
-    };
+  const onPostSubmit: SubmitHandler<FormFields> = async (data) => {
+    const { auctionName, images, category, description, minPrice } = data;
 
-    formData.append(
-      'request',
-      new Blob([JSON.stringify(submitData)], {
-        type: 'application/json',
-      })
-    );
+    const imageFiles = images.map(dataURLtoFile)
+    const imageNames = imageFiles.map((el) => el.name)
 
-    if (preAuction) newFiles.forEach((newFile) => formData.append(String(newFile.id), newFile.file))
-    else newFiles.forEach((newFile) => formData.append('images', newFile.file))
+    const urlsData = await getAuctionUploadURLs(imageNames)
+    const urls = urlsData.map((el) => el.uploadUrl)
+    const objectKeys = urlsData.map((el) => el.objectKey)
 
-    preAuction ? patchPreAuction({ preAuctionId: preAuction.auctionId, formData }) : register(formData);
+    const results = await uploadImagesToS3(urls, imageFiles)
+    const resultsStatus = results.every(Boolean)
+    if (resultsStatus) {
+      const submitData: IRegisterPost = {
+        auctionName,
+        category,
+        description,
+        minPrice: convertCurrencyToNumber(minPrice),
+        auctionRegisterType: caution,
+        objectKeys
+      };
+      register(submitData)
+    } else {
+      toast.error('이미지 전송에 실패했습니다. 다시 시도해 주세요.')
+      return;
+    }
   };
 
   useEffect(() => {
@@ -113,7 +159,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
       <Layout.Header title={title} handleBack={clickBack} />
       <Layout.Main>
         {caution === '' ? (
-          <form className='flex flex-col pt-5 gap-7' onSubmit={handleSubmit(onSubmit)}>
+          <form className='flex flex-col pt-5 gap-7'>
             <FormField
               label='사진*'
               name='images'
@@ -125,9 +171,9 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
             />
             <FormField
               label='제목*'
-              name='productName'
+              name='auctionName'
               control={control}
-              error={errors.productName?.message}
+              error={errors.auctionName?.message}
               render={(field) => <Input id='제목*' type='text' placeholder='제목을 입력해주세요.' className='focus-visible:ring-cheeseYellow' {...field} />}
             />
             <FormField
@@ -199,7 +245,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
       </Layout.Main>
       <Layout.Footer type={caution === '' ? 'double' : 'single'}>
         {preAuction ? (
-          <Button disabled={patchPending} loading={patchPending} onClick={handleSubmit(onSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
+          <Button disabled={patchPending} loading={patchPending} onClick={handleSubmit(onPatchSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
             수정 완료
           </Button>
         ) : caution === '' ? (
@@ -217,7 +263,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
             color='cheeseYellow'
             className='w-full h-full'
             disabled={!check || postPending}
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onPostSubmit)}
             aria-label='최종 등록 버튼'
             loading={postPending}
           >

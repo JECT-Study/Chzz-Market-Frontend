@@ -33,4 +33,6 @@ export const API_END_POINT = {
   BID: `${PRE_FIX}/bids`,
   PAYMENT: `${PRE_FIX}/payments/approval`,
   CREATE_ORDERID: `${PRE_FIX}/payments/order-id`,
+
+  AUCTION_IMAGE_UPLOAD_URL: `${PRE_FIX}/image/auction`,
 };

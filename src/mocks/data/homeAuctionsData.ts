@@ -9,7 +9,7 @@ import newBalanceImage from '@/shared/assets/test/newbalance_993.jpeg';
 export const bestAuctionsData: IAuctionItem[] = [
   {
     auctionId: 0,
-    productName: '[나이키] 에어 조던 로우',
+    auctionName: '[나이키] 에어 조던 로우',
     imageUrl: jordanRedImage,
     timeRemaining: 50_400,
     minPrice: 100_000,
@@ -19,7 +19,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   },
   {
     auctionId: 1,
-    productName: '[나이키] 조던 블랙',
+    auctionName: '[나이키] 조던 블랙',
     imageUrl: jordanBlackImage,
     timeRemaining: 25_200,
     minPrice: 120_000,
@@ -29,7 +29,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   },
   {
     auctionId: 2,
-    productName: '[나이키] 조던 블루',
+    auctionName: '[나이키] 조던 블루',
     imageUrl: jordanBlueImage,
     timeRemaining: 82_800,
     minPrice: 180_000,
@@ -39,7 +39,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   },
   {
     auctionId: 3,
-    productName: '[뉴발란스] 993',
+    auctionName: '[뉴발란스] 993',
     imageUrl: newBalanceImage,
     timeRemaining: 360,
     minPrice: 230_000,
@@ -49,7 +49,7 @@ export const bestAuctionsData: IAuctionItem[] = [
   },
   {
     auctionId: 4,
-    productName: '[아디다스] 슈퍼스타',
+    auctionName: '[아디다스] 슈퍼스타',
     imageUrl: adidasImage,
     timeRemaining: 43_200,
     minPrice: 70_000,
@@ -62,7 +62,7 @@ export const bestAuctionsData: IAuctionItem[] = [
 export const imminentAuctionsData: IAuctionItem[] = [
   {
     auctionId: 0,
-    productName: '[나이키] 조던 블랙',
+    auctionName: '[나이키] 조던 블랙',
     imageUrl: jordanBlackImage,
     timeRemaining: 25_200,
     minPrice: 120_000,
@@ -72,7 +72,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   },
   {
     auctionId: 1,
-    productName: '[아디다스] 슈퍼스타',
+    auctionName: '[아디다스] 슈퍼스타',
     imageUrl: adidasImage,
     timeRemaining: 43_200,
     minPrice: 70_000,
@@ -82,7 +82,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   },
   {
     auctionId: 2,
-    productName: '[나이키] 조던 블루',
+    auctionName: '[나이키] 조던 블루',
     imageUrl: jordanBlueImage,
     timeRemaining: 82_800,
     minPrice: 180_000,
@@ -92,7 +92,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   },
   {
     auctionId: 3,
-    productName: '[뉴발란스] 993',
+    auctionName: '[뉴발란스] 993',
     imageUrl: newBalanceImage,
     timeRemaining: 360,
     minPrice: 230_000,
@@ -102,7 +102,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
   },
   {
     auctionId: 4,
-    productName: '[나이키] 에어 조던 로우',
+    auctionName: '[나이키] 에어 조던 로우',
     imageUrl: jordanRedImage,
     timeRemaining: 50_400,
     minPrice: 100_000,
@@ -115,7 +115,7 @@ export const imminentAuctionsData: IAuctionItem[] = [
 export const preRegisterAuctionsData: IPreAuctionItem[] = [
   {
     auctionId: 0,
-    productName: '[뉴발란스] 993',
+    auctionName: '[뉴발란스] 993',
     imageUrl: newBalanceImage,
     minPrice: 230_000,
     likeCount: 45,
@@ -124,7 +124,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   },
   {
     auctionId: 1,
-    productName: '[나이키] 에어 조던 로우',
+    auctionName: '[나이키] 에어 조던 로우',
     imageUrl: jordanRedImage,
     minPrice: 100_000,
     likeCount: 30,
@@ -133,7 +133,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   },
   {
     auctionId: 2,
-    productName: '[나이키] 조던 블루',
+    auctionName: '[나이키] 조던 블루',
     imageUrl: jordanBlueImage,
     minPrice: 180_000,
     likeCount: 18,
@@ -142,7 +142,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
   },
   {
     auctionId: 3,
-    productName: '[나이키] 조던 블랙',
+    auctionName: '[나이키] 조던 블랙',
     imageUrl: jordanBlackImage,
     minPrice: 120_000,
     likeCount: 12,
@@ -152,7 +152,7 @@ export const preRegisterAuctionsData: IPreAuctionItem[] = [
 
   {
     auctionId: 4,
-    productName: '[아디다스] 슈퍼스타',
+    auctionName: '[아디다스] 슈퍼스타',
     imageUrl: adidasImage,
     minPrice: 70_000,
     likeCount: 1,

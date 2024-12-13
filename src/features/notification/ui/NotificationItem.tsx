@@ -36,7 +36,7 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
           </div>
         </figcaption>
         <div className='flex items-start gap-3'>
-          <img className='object-cover rounded size-24' src={imageUrl ?? DefaultImage} alt={`알림 이미지_${item.notificationId}`} />
+          <img className='object-contain rounded size-24' src={imageUrl ?? DefaultImage} alt={`알림 이미지_${item.notificationId}`} />
           <button aria-label={`알림 삭제 버튼_${item.notificationId}`} onClick={handleDelete}>
             <img className='inline rounded size-4' src={XButtonIcon} alt='알림 삭제 아이콘' />
           </button>

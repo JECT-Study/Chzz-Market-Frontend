@@ -1,12 +1,12 @@
+import * as queries from "@/features/address/api/index";
+import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "@/features/address/model/index";
+import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages";
+import { mockWindowProperties, mockedUseNavigate } from "@/shared/test/setupTests";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
-import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "@/features/address/model/index";
-import * as queries from "@/features/address/api/index";
-import { mockWindowProperties, mockedUseNavigate } from "@/shared/test/setupTests";
-import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages";
 
 mockWindowProperties();
 
@@ -18,7 +18,7 @@ vi.mock('@/hooks/usePayment', () => ({
     isPending: false,
   }),
   usePostPayment: () => ({
-    auctionData: { productName: '테스트 상품', imageUrl: 'test.jpg', winningAmount: 30000 },
+    auctionData: { auctionName: '테스트 상품', imageUrl: 'test.jpg', winningAmount: 30000 },
     DefaultAddressData: {
       items: [
         {
@@ -112,17 +112,17 @@ describe('결제하기 페이지 테스트', () => {
         </Routes>
       </MemoryRouter>
     );
-    
+
     return { user, mockedUseNavigate };
   };
   test('페이지가 로드되면 기본 상품 정보가 렌더링된다.', async () => {
     setup();
 
-    const productName = screen.getByText(/테스트 상품/);
+    const auctionName = screen.getByText(/테스트 상품/);
     const productPrice = screen.getByText(/30,000\s*원/)
     const recipientName = screen.getByText(/홍길동/);
 
-    expect(productName).toBeInTheDocument();
+    expect(auctionName).toBeInTheDocument();
     expect(productPrice).toBeInTheDocument();
     expect(recipientName).toBeInTheDocument();
   });
@@ -222,7 +222,7 @@ describe('주소 목록 페이지 테스트', () => {
         </MemoryRouter>
       </QueryClientProvider>
     );
-    
+
     return { user, mockNavigate };
   };
 
