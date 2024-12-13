@@ -30,7 +30,7 @@ export const ImageUploader = ({ images, setImages }: ImageUploaderProps) => {
               onDragLeave={handleDragLeave}
               onDrop={() => handleDrop(index)}
             >
-              <img src={image} alt={`상품 사진 ${index}`} className='relative w-full h-full' />
+              <img src={image} alt={`상품 사진 ${index}`} className='relative object-cover w-full h-full' />
               {index === 0 && (
                 <p className='absolute text-[8px] web:text-xs rounded py-1 px-2 text-white bg-[#454545]/90 top-2 left-1/2 transform -translate-x-1/2'>
                   대표 사진

@@ -21,7 +21,7 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
             <CustomCarousel length={images.length} loop>
               {images.map((img) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={img.imageUrl} className='h-[26.36rem]' alt={`${auctionName}${img.imageId}`} />
+                  <img src={img.imageUrl} className='h-[26.36rem] object-contain w-full' alt={`${auctionName}${img.imageId}`} />
                 </CarouselItem>
               ))}
             </CustomCarousel>
