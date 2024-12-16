@@ -14,7 +14,7 @@ import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
 import { uploadProfileImageToS3 } from '@/features/profile/model';
 import { getProfileImageURL } from '@/features/profile/api';
-import { useNicknameValidate } from '@/features/user/hooks/useNicknameValidate';
+import { useProfileNicknameValidate } from '@/features/profile/hooks/useProfileNicknameValidate';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -27,7 +27,7 @@ export const UserProfileEdit = () => {
   const { nicknameError, isNicknameChecked, isSubmitEnabled, isNicknameCheckDisabled } = useSelector((state: RootState) => state.profileEdit);
 
   const nickname = watch('nickname')?.trim();
-  const { checkNicknameAvailability } = useNicknameValidate({ nickname, originalNickname });
+  const { checkNicknameAvailability } = useProfileNicknameValidate({ nickname, originalNickname });
 
   const onSubmit = async (data: IUserProfile) => {
     const { nickname, bio } = data;

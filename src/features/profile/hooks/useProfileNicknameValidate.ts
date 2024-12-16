@@ -13,7 +13,7 @@ interface UseNicknameProps {
   originalNickname: string;
 }
 
-export const useNicknameValidate = ({ nickname, originalNickname }: UseNicknameProps) => {
+export const useProfileNicknameValidate = ({ nickname, originalNickname }: UseNicknameProps) => {
   const dispatch = useDispatch();
   const { checkNickname } = useCheckNickname({ nickname });
 
