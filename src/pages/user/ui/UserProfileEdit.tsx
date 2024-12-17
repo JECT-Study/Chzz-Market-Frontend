@@ -1,4 +1,4 @@
-import { setIsNicknameCheckDisabled, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '@/entities/user/model/profileEditSlice';
+import { setNicknameError } from '@/entities/user/model/profileEditSlice';
 import { Button, FormField } from '@/shared';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,8 +12,9 @@ import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
-import { uploadProfileImageToS3, useCheckNickname } from '@/features/profile/model';
+import { uploadProfileImageToS3 } from '@/features/profile/model';
 import { getProfileImageURL } from '@/features/profile/api';
+import { useProfileNicknameValidate } from '@/features/profile/hooks/useProfileNicknameValidate';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -26,35 +27,7 @@ export const UserProfileEdit = () => {
   const { nicknameError, isNicknameChecked, isSubmitEnabled, isNicknameCheckDisabled } = useSelector((state: RootState) => state.profileEdit);
 
   const nickname = watch('nickname')?.trim();
-  const { checkNickname } = useCheckNickname({ nickname });
-
-  const handleNicknameValidation = (nickname: string, isAvailable: boolean) => {
-    if (!nickname || nickname === '') {
-      dispatch(setNicknameError('닉네임을 입력해주세요.'));
-      dispatch(setIsNicknameChecked(false));
-      dispatch(setIsSubmitEnabled(false));
-    } else if (isAvailable) {
-      dispatch(setNicknameError('사용 가능한 닉네임입니다.'));
-      dispatch(setIsNicknameChecked(true));
-      dispatch(setIsSubmitEnabled(true));
-    } else {
-      dispatch(setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.'));
-      dispatch(setIsNicknameChecked(false));
-      dispatch(setIsSubmitEnabled(false));
-    }
-  };
-
-  const onNicknameCheck = async () => {
-    if (nickname === originalNickname) {
-      dispatch(setNicknameError('기존 닉네임입니다. 사용가능합니다.'));
-      dispatch(setIsNicknameChecked(true));
-      dispatch(setIsSubmitEnabled(true));
-      return;
-    }
-
-    const { data } = await checkNickname();
-    handleNicknameValidation(nickname, data.isAvailable);
-  };
+  const { checkNicknameAvailability } = useProfileNicknameValidate({ nickname, originalNickname });
 
   const onSubmit = async (data: IUserProfile) => {
     const { nickname, bio } = data;
@@ -86,8 +59,6 @@ export const UserProfileEdit = () => {
       handleEditProfile(formData);
     } else {
       dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
-      dispatch(setIsNicknameChecked(false));
-      dispatch(setIsSubmitEnabled(false));
     }
   };
 
@@ -96,23 +67,6 @@ export const UserProfileEdit = () => {
       setProfileImage(userProfileImageUrl);
     }
   }, [userProfileImageUrl]);
-
-  useEffect(() => {
-    if (nickname.length > 15) {
-      dispatch(setNicknameError('닉네임 15자 미만으로 입력해주세요.'));
-      dispatch(setIsSubmitEnabled(false));
-      dispatch(setIsNicknameChecked(false));
-      dispatch(setIsNicknameCheckDisabled(true));
-    } else {
-      dispatch(setNicknameError(''));
-      dispatch(setIsNicknameCheckDisabled(false));
-      if (nickname === originalNickname) {
-        dispatch(setIsSubmitEnabled(true));
-      } else {
-        dispatch(setIsSubmitEnabled(false));
-      }
-    }
-  }, [nickname]);
 
   return (
     <Layout>
@@ -148,7 +102,7 @@ export const UserProfileEdit = () => {
               />
             </div>
             <div>
-              <Button type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={onNicknameCheck} disabled={isNicknameCheckDisabled}>중복확인</Button>
+              <Button type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={checkNicknameAvailability} disabled={isNicknameCheckDisabled}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
