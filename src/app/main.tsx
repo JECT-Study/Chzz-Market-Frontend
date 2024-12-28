@@ -1,7 +1,7 @@
 import './index.css';
 
 import { storeLogin } from '@/features/auth/model/authSlice';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Toaster } from 'sonner';
 import App from './App';
@@ -35,7 +35,8 @@ async function setupMocks(): Promise<void> {
 
   await setupMocks()
 
-  ReactDOM.createRoot(document.getElementById('root')!).render(
+  const root = createRoot(document.getElementById('root')!)
+  root.render(
     <ReactQueryProvider>
       <Provider store={store}>
         <App />
