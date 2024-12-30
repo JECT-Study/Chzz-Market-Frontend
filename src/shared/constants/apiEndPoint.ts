@@ -20,6 +20,7 @@ export const API_END_POINT = {
   IMMINENT: `${PRE_FIX}/auctions?status=proceeding&minutes=60&size=5&sort=immediately,popularity`,
   PRE_AUCTION: `${PRE_FIX}/auctions?status=pre&size=5&sort=likes,newest`,
   AUCTION: `${PRE_FIX}/auctions`,
+  SEARCH: `${PRE_FIX}/auctions/search`,
 
   HEARTS: `${PRE_FIX}/auctions/users/likes`,
   NOTIFICATIONS: `${PRE_FIX}/notifications`,
