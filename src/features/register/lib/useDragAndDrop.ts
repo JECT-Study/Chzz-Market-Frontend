@@ -1,43 +1,38 @@
-import { DragEvent, useState } from 'react';
+import { DragEndEvent, DragStartEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 
-export const useDragAndDrop = (
-  state: string[],
-  setState: (images: string[]) => void,
-) => {
-  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+import { arrayMove } from '@dnd-kit/sortable';
+import { useState } from 'react';
 
-  const handleDragStart = (index: number) => {
-    setDraggedIndex(index);
+export const useDragAndDrop = (state: string[], setState: (state: string[]) => void) => {
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  // 센서 정의, PointerSensor는 마우스, 터치, 펜 이벤트를 모두 커버
+  const sensors = useSensors(useSensor(PointerSensor));
+
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string);
   };
 
-  const handleDragOver = (e: DragEvent<HTMLDivElement>, index: number) => {
-    e.preventDefault();
-    setHoveredIndex(index);
+  const handleDragCancel = () => {
+    setActiveId(null);
   };
 
-  const handleDragLeave = () => {
-    setHoveredIndex(null);
-  };
-
-  const handleDrop = (index: number) => {
-    if (draggedIndex !== null && draggedIndex !== index) {
-      const newImages = [...state];
-      [newImages[index], newImages[draggedIndex]] = [
-        newImages[draggedIndex],
-        newImages[index],
-      ];
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = state.indexOf(active.id as string);
+      const newIndex = state.indexOf(over.id as string);
+      const newImages = arrayMove(state, oldIndex, newIndex);
       setState(newImages);
     }
-    setDraggedIndex(null);
-    setHoveredIndex(null);
-  };
 
+    setActiveId(null);
+  };
   return {
+    activeId,
+    sensors,
     handleDragStart,
-    handleDragLeave,
-    handleDragOver,
-    handleDrop,
-    hoveredIndex,
+    handleDragCancel,
+    handleDragEnd,
   };
 };

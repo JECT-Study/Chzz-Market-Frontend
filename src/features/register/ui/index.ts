@@ -1,3 +1,3 @@
 export { AddImageButton } from './AddImageButton';
-export { ImageUploader } from './ImageUploader';
+export { ImageUploaderInput } from './ImageUploaderInput';
 export { RegisterCaution } from './RegisterCaution';
