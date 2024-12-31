@@ -3,8 +3,7 @@ import { Button, CATEGORIES, FormField, Input, Select, SelectContent, SelectGrou
 import { Layout } from "@/app/layout";
 import type { IPreAuctionDetails } from "@/entities";
 import { usePatchPreAuction } from "@/features/edit-auction";
-import { ImageUploader, RegisterCaution, RegisterSchema, dataURLtoFile, getAuctionUploadURLs, useEditableNumberInput, usePostAuction, type IRegisterPatch, type IRegisterPost } from "@/features/register";
-import { uploadImagesToS3 } from "@/features/register/api/uploadImagesToS3";
+import { ImageUploaderInput, RegisterCaution, RegisterSchema, convertDataURLtoFile, getAuctionUploadURLs, uploadImagesToS3, useEditableNumberInput, usePostAuction, type IRegisterPatch, type IRegisterPost } from "@/features/register";
 import NoticeIcon from '@/shared/assets/icons/notice.svg';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
@@ -79,7 +78,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
     // 유저가 정한 최종 이미지 순서
     const previewImageSequence = images.map((image, idx) => ({ id: idx + 1, image }))
     // 새로 삽입한 이미지만 뽑기
-    const newImages = previewImageSequence.filter((el) => el.image.split(':')[0] === 'data').map((el) => ({ id: el.id, file: dataURLtoFile(el.image) }))
+    const newImages = previewImageSequence.filter((el) => el.image.split(':')[0] === 'data').map((el) => ({ id: el.id, file: convertDataURLtoFile(el.image) }))
 
     // 기존의 이미지가 현재 어느 위치에 있는지 계산
     let imageSequence = new Map<number, number>()
@@ -123,7 +122,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
   const onPostSubmit: SubmitHandler<FormFields> = async (data) => {
     const { auctionName, images, category, description, minPrice } = data;
 
-    const imageFiles = images.map(dataURLtoFile)
+    const imageFiles = images.map(convertDataURLtoFile)
     const imageNames = imageFiles.map((el) => el.name)
 
     const urlsData = await getAuctionUploadURLs(imageNames)
@@ -166,7 +165,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
               control={control}
               error={errors.images?.message}
               render={(field) => (
-                <ImageUploader images={field.value as string[] || []} setImages={(images: string[]) => field.onChange(images)} />
+                <ImageUploaderInput images={field.value as string[] || []} setImages={(images: string[]) => field.onChange(images)} />
               )}
             />
             <FormField

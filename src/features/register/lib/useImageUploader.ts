@@ -1,16 +1,37 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { compressAndConvertToWebP, convertFileToDataURL } from '../utils';
 
 import { toast } from 'sonner';
 
 export const useImageUploader = (state: string[], setState: (images: string[]) => void) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [isReading, setIsReading] = useState(false);
+  const [_completedCount, setCompletedCount] = useState(0);
 
   const addImages = async (newFiles: File[]) => {
-    const compressedFiles = await Promise.all(newFiles.map((file) => compressAndConvertToWebP(file)));
-    const compressedImages = await Promise.all(compressedFiles.map((file) => convertFileToDataURL(file)));
+    setProgress(0);
+    setIsReading(true);
+    setCompletedCount(0);
+    const totalFiles = newFiles.length;
 
-    setState(Array.from(new Set([...state, ...compressedImages])));
+    const compressedAllFiles = await Promise.all(
+      newFiles.map(async (file) => {
+        const compressed = await compressAndConvertToWebP(file);
+        const dataUrl = await convertFileToDataURL(compressed);
+
+        setCompletedCount((prev) => {
+          const newCompletedCount = prev + 1;
+          setProgress(Math.round((newCompletedCount / totalFiles) * 100));
+          return newCompletedCount;
+        });
+
+        return dataUrl;
+      })
+    );
+    setState(Array.from(new Set([...state, ...compressedAllFiles])));
+    setProgress(100);
+    setIsReading(false);
   };
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,5 +62,7 @@ export const useImageUploader = (state: string[], setState: (images: string[]) =
     deleteImage,
     handleImage,
     handleBoxClick,
+    progress,
+    isReading,
   };
 };
