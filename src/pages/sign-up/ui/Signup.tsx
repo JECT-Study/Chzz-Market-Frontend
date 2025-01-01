@@ -1,6 +1,6 @@
-import { setIsNameValid, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '@/features/sign-up/model/signupSlice';
+import { setNicknameError } from '@/features/sign-up/model/signupSlice';
 import { Button, FormField } from '@/shared';
-import { KeyboardEvent, useEffect, useRef } from 'react';
+import { KeyboardEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Layout } from '@/app/layout/index';
@@ -12,17 +12,14 @@ import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
 import { useNavigate } from 'react-router-dom';
-import { useCheckNickname } from '@/features/profile/model';
+import { useSignupNicknameValidate } from '@/features/sign-up/hooks/useSignupNicknameValidate';
 
 export const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
 
-  const nicknameError = useSelector((state: RootState) => state.signup.nicknameError);
-  const isNameValid = useSelector((state: RootState) => state.signup.isNameValid);
-  const isNicknameChecked = useSelector((state: RootState) => state.signup.isNicknameChecked);
-  const isSubmitEnabled = useSelector((state: RootState) => state.signup.isSubmitEnabled);
+  const { nicknameError, isNameValid, isNicknameChecked, isSubmitEnabled, isNicknameCheckDisabled } = useSelector((state: RootState) => state.signup);
 
   const {
     control,
@@ -33,41 +30,9 @@ export const Signup = () => {
   } = useSignup();
   const formValues = watch();
   const nickname = formValues.nickname?.trim() || '';
-  const { checkNickname } = useCheckNickname({ nickname });
-
-  const validateNickname = () => {
-    if (nickname.length > 15) {
-      dispatch(setNicknameError('닉네임 15자 미만으로 입력해주세요.'));
-      dispatch(setIsNameValid(false));
-      dispatch(setIsSubmitEnabled(false));
-      return false;
-    }
-    dispatch(setNicknameError(null));
-    dispatch(setIsNameValid(false));
-    dispatch(setIsSubmitEnabled(false));
-    return true;
-  };
-
-  useEffect(() => {
-    validateNickname();
-  }, [nickname]);
-
-  const onNicknameCheck = async () => {
-    if (!validateNickname()) return;
-
-    if (!nickname) {
-      dispatch(setNicknameError('닉네임을 입력해주세요.'));
-      return;
-    }
-
-    const { data } = await checkNickname();
-    const { isAvailable } = data;
-
-    dispatch(setNicknameError(isAvailable ? '사용 가능한 닉네임입니다.' : '이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.'));
-    dispatch(setIsNameValid(isAvailable));
-    dispatch(setIsSubmitEnabled(isAvailable));
-    dispatch(setIsNicknameChecked(isAvailable));
-  };
+  const { checkNicknameAvailability } = useSignupNicknameValidate({
+    nickname,
+  });
 
   const onSubmit = (data: IUser) => {
     if (!isNicknameChecked) {
@@ -83,7 +48,6 @@ export const Signup = () => {
       dispatch(setNicknameError('닉네임 중복 확인을 해주세요.'));
     }
   };
-
 
   return (
     <Layout>
@@ -115,7 +79,7 @@ export const Signup = () => {
               />
             </div>
             <div>
-              <Button type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={onNicknameCheck}>중복확인</Button>
+              <Button type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={checkNicknameAvailability} disabled={isNicknameCheckDisabled}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
