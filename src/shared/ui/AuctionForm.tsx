@@ -28,11 +28,11 @@ const defaultValues = {
 }
 
 export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails }) => {
+  const navigate = useNavigate();
   const [caution, setCaution] = useState<string>('');
   const [check, toggle] = useToggleState(false)
-  const navigate = useNavigate();
-
   const [existingImages, setExistingImages] = useState<ExistingImage[]>([])
+
   const { mutate: patchPreAuction, isPending: patchPending } = usePatchPreAuction();
   const { mutate: register, isPending: postPending } = usePostAuction();
 
@@ -125,6 +125,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
     const imageFiles = images.map(convertDataURLtoFile)
     const imageNames = imageFiles.map((el) => el.name)
 
+    // 이미지 이름 기반으로 presigned URL 요청
     const urlsData = await getAuctionUploadURLs(imageNames)
     const urls = urlsData.map((el) => el.uploadUrl)
     const objectKeys = urlsData.map((el) => el.objectKey)
