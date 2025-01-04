@@ -1,8 +1,9 @@
 import { IAuctionSearchItem } from "@/entities";
 import { getAuctionSearch } from "@/features/auction-search/api";
-import { Command, CommandEmpty, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/shared/ui/Command"
+import { Command, CommandInput, CommandList } from "@/shared/ui/Command"
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom";
+import { AuctionSearchItem } from "./AuctionSearchItem";
 
 export const AuctionSearch = () => {
   const [searchParams] = useSearchParams();
@@ -36,21 +37,11 @@ export const AuctionSearch = () => {
         onValueChange={handleKeywordChange}
       />
       <CommandList>
-        {Array.isArray(items) && items.length > 0 ? (
-          items.map((item: IAuctionSearchItem) => (
-            <CommandItem key={item.auctionId}>
-              <img
-                src={item.imageUrl}
-                alt={item.auctionName}
-                className="mr-2 h-6 w-6 rounded-md"
-              />
-              <span>{item.auctionName}</span>
-            </CommandItem>
-          ))
-        ) : (
-          <CommandEmpty>검색 결과가 존재하지 않습니다.</CommandEmpty>
-        )}
-        <CommandSeparator />
+        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+          {items.map((el: IAuctionSearchItem) => (
+            <AuctionSearchItem key={el.auctionId} product={el} />
+          ))}
+        </div>
       </CommandList>
     </Command>
   )
