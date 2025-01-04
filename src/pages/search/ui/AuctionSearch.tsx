@@ -1,29 +1,44 @@
-import { IAuctionSearchItem } from "@/entities";
+import { IAuctionSearchItem, IPreAuctionItem } from "@/entities";
 import { getAuctionSearch } from "@/features/auction-search/api";
 import { Command, CommandInput, CommandList } from "@/shared/ui/Command"
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom";
 import { AuctionSearchItem } from "./AuctionSearchItem";
+import { EmptyBoundary } from "@/shared";
+import { getPreAuctionSearch } from "@/features/auction-search/api/getPreAuctionSearch";
+import { ProductListTabs } from "@/features/product-list";
+import { PreAuctionSearchItem } from "./PreAuctionSearchItem";
 
 export const AuctionSearch = () => {
   const [searchParams] = useSearchParams();
   const originalInputValue = searchParams.get("keyword") || "";
+  const [activeTab, setActiveTab] = useState('ongoing');
   const [keyword, setKeyword] = useState(originalInputValue);
   const [items, setItems] = useState([]);
+  const [preItems, setPreItems] = useState([]);
+  const ongoingFlag = activeTab === 'ongoing';
+
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (keyword.trim()) {
-        getAuctionSearch(keyword).then((data) => {
-          setItems(data.items || []);
-        });
+        if (activeTab === 'ongoing') {
+          getAuctionSearch(keyword).then((data) => {
+            setItems(data.items || []);
+          });
+        } else {
+          getPreAuctionSearch(keyword).then((data) => {
+            setPreItems(data.items || []);
+          });
+        }
       } else {
         setItems([]);
       }
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [keyword]);
+  }, [keyword, activeTab]);
 
   const handleKeywordChange = (value: string) => {
     setKeyword(value);
@@ -36,12 +51,17 @@ export const AuctionSearch = () => {
         value={keyword}
         onValueChange={handleKeywordChange}
       />
+      <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <CommandList>
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {items.map((el: IAuctionSearchItem) => (
-            <AuctionSearchItem key={el.auctionId} product={el} />
-          ))}
-        </div>
+        <EmptyBoundary type='category' length={ongoingFlag ? items.length : preItems.length}>
+          <div className='grid grid-cols-2 gap-6 p-2 web:p-4 overflow-y-auto'>
+            {ongoingFlag ? items?.map((product: IAuctionSearchItem) => (
+              <AuctionSearchItem key={product.auctionId} product={product} />
+            )) : preItems?.map((product: IPreAuctionItem) => (
+              <PreAuctionSearchItem key={product.auctionId} product={product} />
+            ))}
+          </div>
+        </EmptyBoundary>
       </CommandList>
     </Command>
   )
