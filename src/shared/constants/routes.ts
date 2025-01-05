@@ -14,6 +14,7 @@ export const ROUTES = Object.freeze({
   LOGIN: '/login',
   PRODUCT_LIST: '/product/list',
   REGISTER: '/auctions/register',
+  AUCTION_SEARCH: '/auctions/search',
 
   AUCTION: {
     ITEM: '/auctions/auction/:auctionId',
