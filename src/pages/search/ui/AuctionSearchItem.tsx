@@ -1,7 +1,6 @@
-import { ParticipantCount, Price, ProductItem, TimeRemaining } from "@/shared";
+import { ParticipantCount, Price, ProductItem, ROUTES, TimeRemaining } from "@/shared";
 
 import type { IAuctionSearchItem } from '@/entities';
-import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router-dom';
 
 export const AuctionSearchItem = ({ product }: { product: IAuctionSearchItem }) => {

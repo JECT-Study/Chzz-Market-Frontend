@@ -18,8 +18,6 @@ export const AuctionSearch = () => {
   const [preItems, setPreItems] = useState([]);
   const ongoingFlag = activeTab === 'ongoing';
 
-  
-
   useEffect(() => {
     const timer = setTimeout(() => {
       if (keyword.trim()) {
