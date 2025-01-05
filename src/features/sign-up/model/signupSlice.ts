@@ -5,6 +5,7 @@ export interface SignupState {
   isNameValid: boolean;
   isNicknameChecked: boolean;
   isSubmitEnabled: boolean;
+  isNicknameCheckDisabled: boolean;
 }
 
 const initialState: SignupState = {
@@ -12,6 +13,7 @@ const initialState: SignupState = {
   isNameValid: false,
   isNicknameChecked: false,
   isSubmitEnabled: false,
+  isNicknameCheckDisabled: false,
 };
 
 export const signupSlice = createSlice({
@@ -30,8 +32,11 @@ export const signupSlice = createSlice({
     setIsSubmitEnabled: (state, action: PayloadAction<boolean>) => {
       state.isSubmitEnabled = action.payload;
     },
+    setIsNicknameCheckDisabled: (state, action: PayloadAction<boolean>) => {
+      state.isNicknameCheckDisabled = action.payload;
+    }
   },
 });
 
-export const { setNicknameError, setIsNameValid, setIsNicknameChecked, setIsSubmitEnabled } = signupSlice.actions;
+export const { setNicknameError, setIsNameValid, setIsNicknameChecked, setIsSubmitEnabled, setIsNicknameCheckDisabled } = signupSlice.actions;
 export default signupSlice.reducer;

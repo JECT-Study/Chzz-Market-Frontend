@@ -3,6 +3,7 @@ import { APIAsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTE
 import { AuctionDetails, Bid, EditAuction, Heart, Home, Login, Notification, Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess, PreAuctionDetails, ProductList, Register, Settlement, Signup, Test, User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList, auctionDetailsLoader, bidLoader, editAuctionLoader, preAuctionDetailsLoader, settlementLoader } from '../pages';
 
 import { createBrowserRouter } from 'react-router-dom';
+import { AuctionSearch } from "@/pages/search";
 
 const layoutWithNavRouteList = [
   {
@@ -32,7 +33,7 @@ const layoutWithNavRouteList = [
   {
     path: ROUTES.USER.PARTICIPATED_LIST,
     element: <UserParticipatedList />,
-  },
+  }
 ];
 
 const privateRouteList = [
@@ -86,6 +87,10 @@ const privateRouteList = [
   {
     path: ROUTES.PAYMENT.ADDRESS.EDIT_LIST,
     element: <PaymentAddressEditList />
+  },
+  {
+    path: ROUTES.AUCTION_SEARCH,
+    element: <AuctionSearch />, 
   }
 ];
 

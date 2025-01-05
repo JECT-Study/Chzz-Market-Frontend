@@ -10,3 +10,9 @@ export interface IPreAuctionItem extends IAuctionItemBase {
   likeCount: number;
   isLiked: boolean;
 }
+
+export interface IAuctionSearchItem extends IAuctionItemBase {
+  isParticipated: boolean;
+  participantCount: number;
+  timeRemaining: number;
+}
