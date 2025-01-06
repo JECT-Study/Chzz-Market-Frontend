@@ -1,5 +1,6 @@
-import { ROUTES } from "@/shared";
 import { Command, CommandInput, CommandList, CommandSeparator } from "@/shared/ui/Command";
+
+import { ROUTES } from "@/shared";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -23,16 +24,16 @@ export const HomeSearchBar = () => {
   }
 
   return (
-    <Command className="rounded-lg border shadow-xs">
+    <Command>
       <form onSubmit={handleSubmit}>
-        <CommandInput 
-          placeholder="검색어를 입력하세요" 
+        <CommandInput
+          placeholder="검색어를 입력하세요"
           value={inputValue}
           onValueChange={handleValueChange}
           onKeyDown={handleKeyDown}
           onIconClick={handleSubmit}
         />
-        <CommandList>
+        <CommandList className="hidden">
           <CommandSeparator />
         </CommandList>
       </form>

@@ -2,8 +2,8 @@ import { GlobalLayout, LayoutWithNav } from "@/app/layout";
 import { APIAsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorBoundary } from '@/shared';
 import { AuctionDetails, Bid, EditAuction, Heart, Home, Login, Notification, Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess, PreAuctionDetails, ProductList, Register, Settlement, Signup, Test, User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList, auctionDetailsLoader, bidLoader, editAuctionLoader, preAuctionDetailsLoader, settlementLoader } from '../pages';
 
-import { createBrowserRouter } from 'react-router-dom';
 import { AuctionSearch } from "@/pages/search";
+import { createBrowserRouter } from 'react-router-dom';
 
 const layoutWithNavRouteList = [
   {
@@ -88,10 +88,7 @@ const privateRouteList = [
     path: ROUTES.PAYMENT.ADDRESS.EDIT_LIST,
     element: <PaymentAddressEditList />
   },
-  {
-    path: ROUTES.AUCTION_SEARCH,
-    element: <AuctionSearch />, 
-  }
+
 ];
 
 const publicRouteList = [
@@ -103,6 +100,7 @@ const publicRouteList = [
     path: ROUTES.LOGIN,
     element: <Login />,
   },
+
 ];
 
 export const router = createBrowserRouter([
@@ -167,6 +165,10 @@ export const router = createBrowserRouter([
         path: `/test`,
         element: <Test />
       },
+      {
+        path: ROUTES.AUCTION_SEARCH,
+        element: <AuctionSearch />,
+      }
     ],
   },
 ]);
