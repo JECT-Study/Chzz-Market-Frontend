@@ -39,12 +39,12 @@ const CommandInput = React.forwardRef<
     onIconClick?: () => void;
   }
 >(({ className, onIconClick, ...props }, ref) => (
-  <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-    <Search className="mr-4 h-6 w-6 web:h-8 web:w-8 shrink-0 opacity-50" onClick={onIconClick} />
+  <div className="flex items-center px-3" cmdk-input-wrapper="">
+    <Search className="mr-4 h-6 w-6 web:h-7 web:w-7 shrink-0 opacity-50" onClick={onIconClick} />
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
-        "flex h-10 web:h-14 w-full rounded-md bg-transparent py-6 web:py-10 text-md web:text-2xl outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-10 web:h-12 w-full rounded-md bg-transparent py-6 web:py-7 text-md web:text-lg outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
@@ -73,7 +73,7 @@ const CommandEmpty = React.forwardRef<
 >((props, ref) => (
   <CommandPrimitive.Empty
     ref={ref}
-    className="py-6 text-center text-sm"
+    className="md:text-body1 text-caption text-gray2"
     {...props}
   />
 ))
