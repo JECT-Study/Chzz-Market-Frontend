@@ -1,14 +1,15 @@
 import { IAuctionSearchItem, IPreAuctionItem } from "@/entities";
 import { getAuctionSearch } from "@/features/auction-search/api";
-import { Command, CommandInput, CommandList } from "@/shared/ui/Command"
+import { Command, CommandEmpty, CommandInput, CommandList } from "@/shared/ui/Command"
 import { useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AuctionSearchItem } from "./AuctionSearchItem";
-import { EmptyBoundary, GlobalSpinner } from "@/shared";
+import { GlobalSpinner } from "@/shared";
 import { getPreAuctionSearch } from "@/features/auction-search/api/getPreAuctionSearch";
 import { ProductListTabs } from "@/features/product-list";
 import BackArrowIcon from '@/shared/assets/icons/back_arrow.svg';
 import { PreAuctionSearchItem } from "./PreAuctionSearchItem";
+import EmptyIcon from '@/shared/assets/icons/empty.svg';
 
 export const AuctionSearch = () => {
   const [searchParams] = useSearchParams();
@@ -54,10 +55,10 @@ export const AuctionSearch = () => {
       setIsLoading(false);
     }
   };
-
+  
   return (
-    <Command className="shadow-md md:min-w-[450px]">
-      <header className='w-full h-[3.375rem] p-4 web:p-8  shadow-bottom'>
+    <Command>
+      <header className='w-full h-[3.375rem] p-4 web:p-8 shadow-bottom'>
         <div className='relative flex items-center justify-center w-full h-full'>
           <button
             className='absolute left-0'
@@ -77,16 +78,21 @@ export const AuctionSearch = () => {
       <CommandList>
         {isLoading ? (
           <GlobalSpinner />
-        ): (
-          <EmptyBoundary type='category' length={ongoingFlag ? items.length : preItems.length}>
-            <div className='grid grid-cols-2 gap-6 p-2 web:p-4 overflow-y-auto'>
-              {ongoingFlag ? items?.map((product: IAuctionSearchItem) => (
-                <AuctionSearchItem key={product.auctionId} product={product} />
-              )) : preItems?.map((product: IPreAuctionItem) => (
-                <PreAuctionSearchItem key={product.auctionId} product={product} />
-              ))}
-            </div>
-          </EmptyBoundary>
+        ) : items.length === 0 && preItems.length === 0 ? (
+          <div className='flex flex-col items-center justify-center w-full h-screen gap-2 rounded min-h-28'>
+            <img src={EmptyIcon} alt='emptyIcon' className='size-7' />
+            <CommandEmpty>검색 결과가 없습니다.</CommandEmpty>
+          </div>
+        ) : (
+          <div className='grid grid-cols-2 gap-6 p-2 web:p-4 overflow-y-auto'>
+            {ongoingFlag
+              ? items?.map((product: IAuctionSearchItem) => (
+                  <AuctionSearchItem key={product.auctionId} product={product} />
+                ))
+              : preItems?.map((product: IPreAuctionItem) => (
+                  <PreAuctionSearchItem key={product.auctionId} product={product} />
+                ))}
+          </div>
         )}
       </CommandList>
     </Command>
