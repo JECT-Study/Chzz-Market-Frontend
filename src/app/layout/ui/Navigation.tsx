@@ -37,16 +37,18 @@ export const Navigation = ({ active }: { active: string }) => {
   ) : 0
 
   return (
-    <nav className='flex items-center h-full -mx-[22.5px]'>
-      {Object.entries(NAV_ICONS).map(([name, value]) => (
-        <NavigationItem
-          key={name}
-          name={name}
-          active={active === name}
-          path={value.path}
-          unreadNotificationsCount={unreadNotificationsCount}
-        />
-      ))}
+    <nav className="flex items-center h-full -mx-[22.5px]" aria-label="main navigation">
+      <ul className='flex w-full' role='menu'>
+        {Object.entries(NAV_ICONS).map(([name, value]) => (
+          <NavigationItem
+            key={name}
+            name={name}
+            active={active === name}
+            path={value.path}
+            unreadNotificationsCount={unreadNotificationsCount}
+          />
+        ))}
+      </ul>
     </nav>
   );
 };

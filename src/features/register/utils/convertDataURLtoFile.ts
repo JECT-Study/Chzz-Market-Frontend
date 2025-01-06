@@ -1,6 +1,6 @@
 import { toast } from 'sonner';
 
-export const dataURLtoFile = (dataURL: string): File => {
+export const convertDataURLtoFile = (dataURL: string): File => {
   // DataURL에서 Base64와 MIME 타입 추출
   const arr = dataURL.split(',');
   const mimeMatch = arr[0].match(/data:(.*?);base64/);
