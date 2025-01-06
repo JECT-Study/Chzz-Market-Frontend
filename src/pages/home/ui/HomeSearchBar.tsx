@@ -23,21 +23,19 @@ export const HomeSearchBar = () => {
   }
 
   return (
-    <div className='flex'>
-      <Command className="rounded-lg border shadow-xs">
-        <form onSubmit={handleSubmit}>
-          <CommandInput 
-            placeholder="검색어를 입력하세요" 
-            value={inputValue}
-            onValueChange={handleValueChange}
-            onKeyDown={handleKeyDown}
-            onIconClick={handleSubmit}
-          />
-          <CommandList>
-            <CommandSeparator />
-          </CommandList>
-        </form>
-      </Command>
-    </div>
+    <Command className="rounded-lg border shadow-xs">
+      <form onSubmit={handleSubmit}>
+        <CommandInput 
+          placeholder="검색어를 입력하세요" 
+          value={inputValue}
+          onValueChange={handleValueChange}
+          onKeyDown={handleKeyDown}
+          onIconClick={handleSubmit}
+        />
+        <CommandList>
+          <CommandSeparator />
+        </CommandList>
+      </form>
+    </Command>
   );
 };
