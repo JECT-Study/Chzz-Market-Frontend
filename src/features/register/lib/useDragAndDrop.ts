@@ -1,4 +1,4 @@
-import { DragEndEvent, DragStartEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DragEndEvent, DragStartEvent, MouseSensor, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 
 import { arrayMove } from '@dnd-kit/sortable';
 import { useState } from 'react';
@@ -6,8 +6,24 @@ import { useState } from 'react';
 export const useDragAndDrop = (state: string[], setState: (state: string[]) => void) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 5,
+    },
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      distance: 5,
+    },
+  });
+  const pointerSensor = useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 5,
+    },
+  });
+
   // 센서 정의, PointerSensor는 마우스, 터치, 펜 이벤트를 모두 커버
-  const sensors = useSensors(useSensor(PointerSensor));
+  const sensors = useSensors(mouseSensor, touchSensor, pointerSensor);
 
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string);

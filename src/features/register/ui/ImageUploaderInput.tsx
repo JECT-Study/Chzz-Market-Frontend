@@ -18,7 +18,7 @@ export const ImageUploaderInput = ({ images, setImages }: ImageUploaderProps) =>
 
 
   return (
-    <div className='flex flex-col items-center gap-5 web:flex-row web:h-32'>
+    <div className='flex flex-col items-center gap-5 web:flex-row web:h-32 touch-none'>
       {/* 이미지 추가 버튼 */}
       <AddImageButton handleBoxClick={handleBoxClick} length={images.length} progress={progress} isReading={isReading} />
 
