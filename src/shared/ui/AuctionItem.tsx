@@ -49,7 +49,7 @@ const Main = ({ kind, name, price, count }: MainProps) => {
         {name}
       </h3>
       <Price title='시작가' price={price} />
-      {kind === 'register' ? <ParticipantCount count={count} /> : <LikeCount count={count} />}
+      {kind !== 'preAuction' ? <ParticipantCount count={count} /> : <LikeCount count={count} />}
     </figcaption>
   );
 };
