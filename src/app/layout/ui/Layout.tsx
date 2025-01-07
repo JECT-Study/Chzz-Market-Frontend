@@ -4,15 +4,17 @@ import BackArrowIcon from '@/shared/assets/icons/back_arrow.svg';
 import { useNavigate } from 'react-router';
 
 interface HeaderProps {
-  title: string;
+  title?: string;
   handleBack?: () => void;
   option?: ReactNode
+  children?: ReactNode
 }
 
 const Header = ({
   title,
   handleBack,
-  option
+  option,
+  children
 }: HeaderProps) => {
   const navigate = useNavigate();
   if (!handleBack) handleBack = () => navigate(-1);
@@ -29,8 +31,13 @@ const Header = ({
             <img src={BackArrowIcon} alt='뒤로가기 아이콘' className='size-6' />
           </button>
         )}
-        <h2 className='text-heading2 text-gray1'>{title}</h2>
-        {option}
+        {
+          children ? children : <>
+            <h2 className='text-heading2 text-gray1'>{title}</h2>
+            {option}
+          </>
+        }
+
       </div>
     </header>
   );

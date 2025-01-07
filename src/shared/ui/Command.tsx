@@ -1,8 +1,7 @@
-import * as React from "react"
+import { cn } from "@/shared/lib/utils"
 import { type DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"
-import { Search } from "lucide-react"
-import { cn } from "@/shared/lib/utils"
+import * as React from "react"
 import { Dialog, DialogContent } from "./Dialog"
 
 
@@ -24,7 +23,7 @@ Command.displayName = CommandPrimitive.displayName
 const CommandDialog = ({ children, ...props }: DialogProps) => {
   return (
     <Dialog {...props}>
-      <DialogContent className="overflow-hidden p-0 shadow-lg">
+      <DialogContent className="p-0 overflow-hidden shadow-lg">
         <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
           {children}
         </Command>
@@ -39,12 +38,11 @@ const CommandInput = React.forwardRef<
     onIconClick?: () => void;
   }
 >(({ className, onIconClick, ...props }, ref) => (
-  <div className="flex items-center px-3" cmdk-input-wrapper="">
-    <Search className="mr-4 h-6 w-6 web:h-7 web:w-7 shrink-0 opacity-50" onClick={onIconClick} />
+  <div className="flex items-center justify-center w-full px-10" cmdk-input-wrapper="">
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
-        "flex h-10 web:h-12 w-full rounded-md bg-transparent py-6 web:py-7 text-md web:text-lg outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+        "flex w-full items-center justify-center pl-4 bg-transparent py-2 rounded bg-slate-100 text-md outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
@@ -142,12 +140,7 @@ CommandShortcut.displayName = "CommandShortcut"
 
 export {
   Command,
-  CommandDialog,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandShortcut,
-  CommandSeparator,
+  CommandDialog, CommandEmpty,
+  CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut
 }
+
