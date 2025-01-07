@@ -9,7 +9,7 @@ export const HomeSearchBar = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    navigate(`${ROUTES.AUCTION_SEARCH}?keyword=${inputValue}`)
+    navigate(`${ROUTES.AUCTION_SEARCH}`)
   }
 
   const handleValueChange = (value: string) => {
