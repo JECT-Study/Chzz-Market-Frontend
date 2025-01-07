@@ -44,9 +44,9 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
         <figure>
           <div className='-mx-[1.25rem] -mt-[1.25rem] web:-mt-[2rem] web:-mx-[2rem]'>
             <CustomCarousel length={images.length} loop>
-              {images.map((img) => (
+              {images.map((img, idx) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={img.imageUrl} alt={`${auctionName}${img.imageId}`} className='h-[26.36rem] object-contain w-full' />
+                  <img src={`${img.imageUrl}?h=840`} alt={`${auctionName}${img.imageId}`} className='object-contain h-[420px]' {...{ fetchpriority: idx === 0 ? 'high' : 'low' }} loading={idx === 0 ? 'eager' : 'lazy'} />
                 </CarouselItem>
               ))}
             </CustomCarousel>
