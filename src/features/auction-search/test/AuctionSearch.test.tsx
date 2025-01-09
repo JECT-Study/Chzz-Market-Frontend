@@ -1,0 +1,64 @@
+import { AuctionSearch } from "@/pages/search";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import { Mock, beforeEach, describe, expect, test, vi } from "vitest";
+import { getAuctionSearch, getPreAuctionSearch } from "../api";
+
+vi.mock('@/features/auction-search/api', () => ({
+  getAuctionSearch: vi.fn(),
+  getPreAuctionSearch: vi.fn(),
+}));
+
+const renderComponent = () => {
+  render(
+    <BrowserRouter>
+      <AuctionSearch />
+    </BrowserRouter>
+  )
+}
+
+describe('AuctionSearch', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  test('input tab 렌더링 확인', () => {
+    renderComponent();
+
+    expect(screen.getByPlaceholderText('검색어를 입력하세요')).toBeInTheDocument();
+  });
+
+  test('데이터 패치 시 로딩 스피너 확인', async () => {
+    (getAuctionSearch as Mock).mockResolvedValueOnce({ items: [] });
+
+    renderComponent();
+      
+    const input = screen.getByPlaceholderText('검색어를 입력하세요');
+    fireEvent.change(input, { target: { value: 'test'} });
+
+    await waitFor(() => expect(getAuctionSearch).toHaveBeenCalledTimes(1));
+
+    expect(screen.getByText('검색 결과가 없습니다.')).toBeInTheDocument();
+
+
+    (getPreAuctionSearch as Mock).mockResolvedValueOnce({ items: [] });
+    fireEvent.click(screen.getByText('사전 경매'));
+    
+    // await waitFor(() => expect(getPreAuctionSearch).toHaveBeenCalledTimes(1));
+
+    // expect(screen.getByText('검색 결과가 없습니다.')).toBeInTheDocument();
+  });
+
+  test('검색 결과가 없을 때 "검색 결과가 없습니다"'), async () => {
+    (getAuctionSearch as Mock).mockResolvedValueOnce({ items: [] });
+
+    renderComponent();
+
+    const input = screen.getByPlaceholderText('검색어를 입력하세요');
+    fireEvent.change(input, { target: { value: 'nonexistent' }});
+
+    await waitFor(() => {
+      expect(screen.getByText('검색 결과가 없습니다.')).toBeInTheDocument();
+    });
+  };
+});

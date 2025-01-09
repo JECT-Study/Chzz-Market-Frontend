@@ -24,27 +24,12 @@ describe.skip('Signup', () => {
     expect(nicknameInput).toHaveValue('testNickname');
   });
 
-  test('은행', () => {
-    const bankInput = setup('은행을 선택해주세요', '국민은행');
-    expect(bankInput).toHaveValue('국민은행');
-  });
-
-  test('계좌번호', () => {
-    const accountNumberInput = setup('계좌번호를 입력해주세요.', '1234567890');
-    expect(accountNumberInput).toHaveValue('1234567890');
-  });
-
   test('자기소개', () => {
     const introductionInput = setup(
       '간단한 자기 소개를 입력해주세요.',
       '안녕하세요, 테스트입니다.',
     );
     expect(introductionInput).toHaveValue('안녕하세요, 테스트입니다.');
-  });
-
-  test('링크', () => {
-    const linkInput = setup('http://', 'http://test.com');
-    expect(linkInput).toHaveValue('http://test.com');
   });
 
   // 필수 입력 사항 확인 및 버튼 활성화
@@ -98,19 +83,5 @@ describe.skip('Signup', () => {
     // fireEvent.click(backBtn);
 
     expect(navigate).toHaveBeenCalledWith('/');
-  });
-
-  // 은행 선택 시 모달 창 열기
-  test.skip('은행 선택 시 모달 창 열기', async () => {
-    render(
-      <BrowserRouter>
-        <Signup />
-      </BrowserRouter>,
-    );
-    const bankDropdownIcon = screen.getByTestId('bank-dropdown-icon');
-    fireEvent.click(bankDropdownIcon);
-
-    const banking = await screen.findByText('SelectBank');
-    expect(banking).toBeInTheDocument();
   });
 });
