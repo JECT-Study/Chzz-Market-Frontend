@@ -1,5 +1,4 @@
 import { LocalAPIAsyncBoundary } from "@/shared";
-
 import { ReactNode } from "react";
 
 const HomeItemField = ({ children, name }: { children: ReactNode, name: string }) => {
@@ -7,7 +6,7 @@ const HomeItemField = ({ children, name }: { children: ReactNode, name: string }
     <section className='flex flex-col w-full gap-4'>
       <label className='text-heading3'>{name}</label>
       <div className='flex gap-4'>
-        <LocalAPIAsyncBoundary height={250}>
+        <LocalAPIAsyncBoundary >
           {children}
         </LocalAPIAsyncBoundary>
       </div>

@@ -7,15 +7,12 @@ import { isAxiosError } from 'axios';
 import { Button } from '../Button';
 import { LocalSpinner } from '../spinner';
 
-interface FallbackComponentProps extends FallbackProps {
-  height: number
-}
 
-const FallbackComponent = ({ error, resetErrorBoundary, height }: FallbackComponentProps) => {
+const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
   if (!isAxiosError(error)) throw error
 
   return (
-    <div className={`flex flex-col items-center justify-center w-full h-[${height}px] gap-3 p-5 border rounded bg-error`}>
+    <div className={`flex flex-col items-center justify-center w-full min-h-28 gap-3 p-5 border rounded bg-error`}>
       <img src={ErrorIcon} alt='에러 아이콘' className='web:size-8 size-6' />
       <div className='space-y-2 text-center'>
         <h2 className='web:text-body2 text-caption text-gray2'>데이터를 불러오는 도중
@@ -28,11 +25,11 @@ const FallbackComponent = ({ error, resetErrorBoundary, height }: FallbackCompon
   );
 };
 
-export const LocalAPIAsyncBoundary = ({ children, height }: { children: ReactNode, height: number }) => {
+export const LocalAPIAsyncBoundary = ({ children }: { children: ReactNode }) => {
   return (
     <QueryErrorResetBoundary>
-      {({ reset }) => (<ErrorBoundary onReset={reset} FallbackComponent={(props) => <FallbackComponent height={height} {...props} />}>
-        <Suspense fallback={<LocalSpinner height={height} />}>
+      {({ reset }) => (<ErrorBoundary onReset={reset} FallbackComponent={(props) => <FallbackComponent  {...props} />}>
+        <Suspense fallback={<LocalSpinner />}>
           {children}
         </Suspense>
       </ErrorBoundary>)}
