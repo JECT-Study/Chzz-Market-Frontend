@@ -1,5 +1,4 @@
 import { IAuctionSearchItem, IPreAuctionItem } from "@/entities";
-import { Command, CommandEmpty, CommandInput, CommandList } from "@/shared/ui/Command";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -7,7 +6,7 @@ import { Layout } from "@/app/layout";
 import { getAuctionSearch } from "@/features/auction-search/api";
 import { getPreAuctionSearch } from "@/features/auction-search/api/getPreAuctionSearch";
 import { ProductListTabs } from "@/features/product-list";
-import { GlobalSpinner } from "@/shared";
+import { Command, CommandEmpty, CommandInput, CommandList, GlobalSpinner } from "@/shared";
 import EmptyIcon from '@/shared/assets/icons/empty.svg';
 import { AuctionSearchItem } from "./AuctionSearchItem";
 import { PreAuctionSearchItem } from "./PreAuctionSearchItem";
