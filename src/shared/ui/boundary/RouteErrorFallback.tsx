@@ -3,7 +3,7 @@ import NotFoundIcon from '@/shared/assets/icons/404_sign.svg';
 import { useNavigate } from 'react-router';
 import { Button } from '../Button';
 
-export const RouteErrorBoundary = () => {
+export const RouteErrorFallback = () => {
   const navigate = useNavigate();
   const handleBack = () => navigate('/', { replace: true });
 
