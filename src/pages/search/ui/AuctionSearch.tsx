@@ -62,15 +62,14 @@ export const AuctionSearch = () => {
             placeholder="검색어를 입력하세요"
             value={keyword}
             onValueChange={handleKeywordChange}
-            className=""
           />
         </Layout.Header>
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        <CommandList className="flex items-center justify-center h-full">
+        <CommandList>
           {isLoading ? (
             <GlobalSpinner />
           ) : items.length === 0 && preItems.length === 0 ? (
-            <div className='flex flex-col items-center justify-center w-full gap-2 rounded min-h-[16rem] h-[16rem]'>
+            <div style={{ height: 'calc(var(--vh, 1vh) * 100)' }} className='flex flex-col items-center justify-center w-full h-full gap-2 rounded'>
               <img src={EmptyIcon} alt='emptyIcon' className='size-10' />
               <CommandEmpty className='md:text-heading3 text-body1 text-gray2'>검색 결과가 없습니다.</CommandEmpty>
             </div>
