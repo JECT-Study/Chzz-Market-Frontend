@@ -21,11 +21,13 @@ const FallbackComponent = ({ error, resetErrorBoundary, header }: FallbackCompon
   return (
     <>
       {header && <Layout.Header title={header} />}
-      <div className='flex flex-col items-center min-w-[10rem] justify-center h-full gap-5'>
+      <div className='flex flex-col items-center justify-center w-full h-full gap-3 px-10'>
         <img src={ErrorIcon} alt='에러 아이콘' />
         <div className='space-y-2 text-center'>
-          <h2 className='web:text-heading2 text-heading3 text-gray1'>{title}</h2>
-          <p className='text-gray2 text-body1'>{description}</p>
+          <h2 className='web:text-heading2 text-heading3 text-gray1'>
+            {title}
+          </h2>
+          <p className=' text-gray2 web:text-body1 text-body2'>{description}</p>
         </div>
       </div>
       <Layout.Footer type='single'>
@@ -39,7 +41,7 @@ const FallbackComponent = ({ error, resetErrorBoundary, header }: FallbackCompon
 
 export const AsyncBoundary = ({ children, header }: { children: ReactNode; header?: string }) => {
   const { pathname, key } = useLocation();
-  const fallback = (
+  const spinner = (
     header &&
     <Layout>
       <Layout.Header title={header} />
@@ -49,11 +51,12 @@ export const AsyncBoundary = ({ children, header }: { children: ReactNode; heade
 
   return (
     <QueryErrorResetBoundary>
-      {({ reset }) => (<ErrorBoundary onReset={reset} FallbackComponent={(props) => <FallbackComponent {...props} header={header} />} resetKeys={[pathname, key]}>
-        <Suspense fallback={fallback}>
-          {children}
-        </Suspense>
-      </ErrorBoundary>)}
+      {({ reset }) => (
+        <ErrorBoundary onReset={reset} FallbackComponent={(props) => <FallbackComponent {...props} header={header} />} resetKeys={[pathname, key]}>
+          <Suspense fallback={spinner}>
+            {children}
+          </Suspense>
+        </ErrorBoundary>)}
     </QueryErrorResetBoundary>
   );
 };
