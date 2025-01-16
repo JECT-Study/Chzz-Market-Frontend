@@ -56,7 +56,7 @@ export const AuctionSearch = () => {
 
   return (
     <Layout>
-      <Command className="h-screen">
+      <Command style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
         <Layout.Header >
           <CommandInput
             placeholder="검색어를 입력하세요"
