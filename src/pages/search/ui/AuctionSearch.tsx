@@ -56,7 +56,7 @@ export const AuctionSearch = () => {
 
   return (
     <Layout>
-      <Command>
+      <Command className="h-screen">
         <Layout.Header >
           <CommandInput
             placeholder="검색어를 입력하세요"
@@ -66,13 +66,13 @@ export const AuctionSearch = () => {
           />
         </Layout.Header>
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        <CommandList>
+        <CommandList className="flex items-center justify-center h-full">
           {isLoading ? (
             <GlobalSpinner />
           ) : items.length === 0 && preItems.length === 0 ? (
-            <div className='flex flex-col items-center justify-center w-full h-screen gap-2 rounded min-h-28'>
-              <img src={EmptyIcon} alt='emptyIcon' className='size-7' />
-              <CommandEmpty>검색 결과가 없습니다.</CommandEmpty>
+            <div className='flex flex-col items-center justify-center w-full gap-2 rounded min-h-[16rem] h-[16rem]'>
+              <img src={EmptyIcon} alt='emptyIcon' className='size-10' />
+              <CommandEmpty className='md:text-heading3 text-body1 text-gray2'>검색 결과가 없습니다.</CommandEmpty>
             </div>
           ) : (
             <div className='grid grid-cols-2 gap-6 p-2 overflow-y-auto web:p-4'>

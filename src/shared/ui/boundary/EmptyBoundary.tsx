@@ -4,9 +4,9 @@ import { ReactNode } from "react";
 
 const EmptyFallback = ({ type }: { type: string }) => {
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full gap-2 rounded min-h-28'>
-      <img src={EmptyIcon} alt='emptyIcon' className='size-7' />
-      <p className='md:text-body1 text-caption text-gray2'>{EMPTY_MESSAGE[type]}</p>
+    <div className='flex flex-col items-center justify-center w-full gap-2 rounded min-h-[16rem] h-[16rem]'>
+      <img src={EmptyIcon} alt='emptyIcon' className='size-10' />
+      <p className='md:text-heading3 text-body1 text-gray2'>{EMPTY_MESSAGE[type]}</p>
     </div>
   )
 };
