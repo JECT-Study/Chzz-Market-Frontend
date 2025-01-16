@@ -103,14 +103,13 @@ const publicRouteList = [
 
 export const router = createBrowserRouter([
   {
-    // Global Boundary
-    element: <GlobalAsyncBoundary>
-      <GlobalLayout />
-    </GlobalAsyncBoundary>,
+    element:
+      <GlobalAsyncBoundary>
+        <GlobalLayout />
+      </GlobalAsyncBoundary>,
     errorElement: <RouteErrorFallback />,
     children: [
       {
-        // LayoutWithNav Boundary
         element: (
           <LayoutWithNav />
         ),
