@@ -37,7 +37,7 @@ const FallbackComponent = ({ error, resetErrorBoundary, header }: FallbackCompon
   );
 };
 
-export const APIAsyncBoundary = ({ children, header }: { children: ReactNode; header?: string }) => {
+export const AsyncBoundary = ({ children, header }: { children: ReactNode; header?: string }) => {
   const { pathname, key } = useLocation();
   const fallback = (
     header &&

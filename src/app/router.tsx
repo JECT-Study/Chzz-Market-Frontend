@@ -1,5 +1,5 @@
 import { GlobalLayout, LayoutWithNav } from "@/app/layout";
-import { APIAsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorFallback } from '@/shared';
+import { AsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorFallback } from '@/shared';
 import { AuctionDetails, Bid, EditAuction, Heart, Home, Login, Notification, Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess, PreAuctionDetails, ProductList, Register, Settlement, Signup, Test, User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList, auctionDetailsLoader, bidLoader, editAuctionLoader, preAuctionDetailsLoader, settlementLoader } from '../pages';
 
 import { AuctionSearch } from "@/pages/search";
@@ -58,9 +58,9 @@ const privateRouteList = [
   {
     path: ROUTES.PRE_AUCTION.EDIT,
     element: (
-      <APIAsyncBoundary>
+      <AsyncBoundary>
         <EditAuction />
-      </APIAsyncBoundary>
+      </AsyncBoundary>
     ),
     loader: editAuctionLoader,
   },
@@ -117,9 +117,9 @@ export const router = createBrowserRouter([
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
           element: (
-            <APIAsyncBoundary>
+            <AsyncBoundary>
               {path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}
-            </APIAsyncBoundary>
+            </AsyncBoundary>
           ),
         })),
       },
@@ -140,9 +140,9 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.PRODUCT_LIST,
         element: (
-          <APIAsyncBoundary>
+          <AsyncBoundary>
             <ProductList />
-          </APIAsyncBoundary>
+          </AsyncBoundary>
         ),
       },
       {

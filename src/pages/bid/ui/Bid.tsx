@@ -2,7 +2,7 @@ import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import { Layout } from '@/app/layout';
 import { BidForm } from '@/features/bid';
-import { APIAsyncBoundary } from "@/shared";
+import { AsyncBoundary } from "@/shared";
 
 export const Bid = () => {
   const auctionId = useLoaderData() as number;
@@ -10,9 +10,9 @@ export const Bid = () => {
   return (
     <Layout>
       <Layout.Header title='경매 참여하기' />
-      <APIAsyncBoundary>
+      <AsyncBoundary>
         <BidForm auctionId={auctionId} />
-      </APIAsyncBoundary>
+      </AsyncBoundary>
     </Layout>
   );
 };
