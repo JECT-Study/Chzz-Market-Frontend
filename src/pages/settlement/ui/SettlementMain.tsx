@@ -10,19 +10,18 @@ import { useGetBidderList } from "../model";
 const SettlementMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
   const navigate = useNavigate()
+  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { bidderList } = useGetBidderList(auctionId);
 
   const handleFilterState = () =>
     setFilterState((prev) => (prev.name === BIDDER_LIST_PRICE_FILTER.HIGH.name ? BIDDER_LIST_PRICE_FILTER.LOW : BIDDER_LIST_PRICE_FILTER.HIGH));
-
-
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
-  const { bidderList } = useGetBidderList(auctionId);
 
   const filteredBidderList = filterState.sort === 'desc' ? bidderList : bidderList.sort((a, b) => a.bidAmount - b.bidAmount)
   const { images, auctionName, minPrice, participantCount } = auctionDetails;
 
   return (
-    <>
+    <Layout>
+      <Layout.Header title='경매 참여자 목록' />
       <Layout.Main>
         <div className='flex flex-col gap-8 pt-4'>
           <AuctionItem axis='row' label='입찰자 목록 상품'>
@@ -55,7 +54,7 @@ const SettlementMain = ({ auctionId }: { auctionId: number }) => {
           확인 완료
         </Button>
       </Layout.Footer>
-    </>
+    </Layout>
   );
 }
 

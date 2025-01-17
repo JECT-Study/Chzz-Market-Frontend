@@ -47,7 +47,8 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
     postBid(bidData);
   };
   return (
-    <>
+    <Layout>
+      <Layout.Header title='경매 참여하기' />
       <Layout.Main>
         <div className='flex flex-col gap-8'>
           <AuctionItem axis='row' label='입찰 상품'>
@@ -97,6 +98,6 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
           {maxFlag ? '제안하기' : `금액 수정 ${zeroFlag ? '(소진)' : `(${remainingBidCount}회 가능)`}`}
         </Button>
       </Layout.Footer>
-    </>
+    </Layout>
   );
 }
