@@ -10,7 +10,7 @@ vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
     ...actual,
-    useNavigate: mockedUseNavigate,
+    useNavigate: () => mockedUseNavigate,
   };
 });
 
@@ -27,7 +27,7 @@ describe('유저 페이지 테스트', () => {
     return { user };
   };
   
-  test('로딩될 때 스피너 도는지 테스트', () => {
+  test('로딩될 때 스피너 테스트', () => {
     setup({ isLoading: true });
     expect(screen.getByRole('status')).toBeInTheDocument();
   })
