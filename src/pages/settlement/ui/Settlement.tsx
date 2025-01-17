@@ -1,7 +1,7 @@
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import { Layout } from '@/app/layout';
-import { APIAsyncBoundary } from '@/shared';
+import { AsyncBoundary } from '@/shared';
 import SettlementMain from './SettlementMain';
 
 export const Settlement = () => {
@@ -10,9 +10,9 @@ export const Settlement = () => {
   return (
     <Layout>
       <Layout.Header title='경매 참여자 목록' />
-      <APIAsyncBoundary>
+      <AsyncBoundary>
         <SettlementMain auctionId={auctionId} />
-      </APIAsyncBoundary>
+      </AsyncBoundary>
     </Layout>
   );
 };

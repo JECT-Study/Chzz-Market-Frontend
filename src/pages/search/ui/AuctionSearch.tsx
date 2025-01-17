@@ -1,5 +1,4 @@
 import { IAuctionSearchItem, IPreAuctionItem } from "@/entities";
-import { Command, CommandEmpty, CommandInput, CommandList } from "@/shared/ui/Command";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -7,7 +6,7 @@ import { Layout } from "@/app/layout";
 import { getAuctionSearch } from "@/features/auction-search/api";
 import { getPreAuctionSearch } from "@/features/auction-search/api/getPreAuctionSearch";
 import { ProductListTabs } from "@/features/product-list";
-import { GlobalSpinner } from "@/shared";
+import { Command, CommandEmpty, CommandInput, CommandList, GlobalSpinner } from "@/shared";
 import EmptyIcon from '@/shared/assets/icons/empty.svg';
 import { AuctionSearchItem } from "./AuctionSearchItem";
 import { PreAuctionSearchItem } from "./PreAuctionSearchItem";
@@ -57,13 +56,12 @@ export const AuctionSearch = () => {
 
   return (
     <Layout>
-      <Command>
+      <Command style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
         <Layout.Header >
           <CommandInput
             placeholder="검색어를 입력하세요"
             value={keyword}
             onValueChange={handleKeywordChange}
-            className=""
           />
         </Layout.Header>
         <ProductListTabs activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -71,9 +69,9 @@ export const AuctionSearch = () => {
           {isLoading ? (
             <GlobalSpinner />
           ) : items.length === 0 && preItems.length === 0 ? (
-            <div className='flex flex-col items-center justify-center w-full h-screen gap-2 rounded min-h-28'>
-              <img src={EmptyIcon} alt='emptyIcon' className='size-7' />
-              <CommandEmpty>검색 결과가 없습니다.</CommandEmpty>
+            <div style={{ height: 'calc(var(--vh, 1vh) * 100)' }} className='flex flex-col items-center justify-center w-full h-full gap-2 rounded'>
+              <img src={EmptyIcon} alt='emptyIcon' className='size-10' />
+              <CommandEmpty className='md:text-heading3 text-body1 text-gray2'>검색 결과가 없습니다.</CommandEmpty>
             </div>
           ) : (
             <div className='grid grid-cols-2 gap-6 p-2 overflow-y-auto web:p-4'>

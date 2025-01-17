@@ -12,9 +12,10 @@ const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
   const { title, description } = getErrorByCode(error)
 
   return (
-    <div className='flex justify-center w-full h-screen'>
-      <div className='relative w-[46rem] min-w-[23rem] h-full'>
+    <div className='flex justify-center w-full' style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
+      <div className='relative h-full w-web min-w-mobile'>
         <Layout>
+          <Layout.Header title='치즈 마켓' />
           <Layout.Main>
             <div className='flex flex-col items-center min-w-[10rem] justify-center h-full gap-5'>
               <img src={ErrorIcon} alt='에러 아이콘' />

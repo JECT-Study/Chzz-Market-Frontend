@@ -2,16 +2,16 @@ import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import { Layout } from '@/app/layout';
 import { PreAuctionDetailsMain } from "@/features/details";
-import { APIAsyncBoundary } from '@/shared';
+import { AsyncBoundary } from '@/shared';
 
 export const PreAuctionDetails = () => {
   const preAuctionId = useLoaderData() as number;
 
   return (
     <Layout>
-      <APIAsyncBoundary header='제품 상세'>
+      <AsyncBoundary header='제품 상세'>
         <PreAuctionDetailsMain preAuctionId={preAuctionId} />
-      </APIAsyncBoundary>
+      </AsyncBoundary>
     </Layout >)
 }
 

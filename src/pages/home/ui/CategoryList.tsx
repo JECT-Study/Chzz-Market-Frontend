@@ -18,7 +18,7 @@ const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: 
 
 const CategoryList = () => {
   return (
-    <section className='flex flex-col w-full gap-4'>
+    <section className='flex flex-col w-full gap-6'>
       <label className='text-heading3'>카테고리</label>
       <ul className='grid items-center justify-center grid-cols-5 gap-2'>
         {Object.values(CATEGORIES).map((el) => (
