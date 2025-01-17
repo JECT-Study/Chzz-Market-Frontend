@@ -12,7 +12,7 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
   const { images, auctionName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
 
   return (
-    <>
+    <Layout>
       <Layout.Header title="제품 상세" />
       <Layout.Main>
         <figure>
@@ -75,6 +75,6 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
       <AuctionDetailsFooter
         auctionId={auctionId}
       />
-    </>
+    </Layout>
   );
 }

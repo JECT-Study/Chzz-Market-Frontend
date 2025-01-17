@@ -22,7 +22,7 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
   const confirmDelete = () => deletePreAuction(preAuctionId);
 
   return (
-    <>
+    <Layout>
       <Layout.Header
         title='제품 상세'
         option={isSeller && (
@@ -92,6 +92,6 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
         </figure>
       </Layout.Main>
       <PreAuctionDetailsFooter isLiked={isLiked} preAuctionId={preAuctionId} isSeller={isSeller} />
-    </>
+    </Layout>
   );
 }
