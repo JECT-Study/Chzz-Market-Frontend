@@ -1,6 +1,4 @@
-import { Command, CommandInput, CommandList, CommandSeparator } from "@/shared/ui/Command";
-
-import { ROUTES } from "@/shared";
+import { Command, CommandInput, CommandList, CommandSeparator, ROUTES } from "@/shared";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

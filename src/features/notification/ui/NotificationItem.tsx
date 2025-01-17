@@ -7,11 +7,12 @@ import { NOTIFICATION_CONTENTS, type INotification } from '../config';
 import { useDeleteNotification, useReadNotification } from '../model';
 
 export const NotificationItem = ({ item }: { item: INotification }) => {
-  const navigate = useNavigate();
   const { notificationId, isRead, imageUrl, message, createdAt, type, auctionId } = item;
+
+  const navigate = useNavigate();
+  const time = getTimeAgo(createdAt);
   const { mutate: deleteNotification } = useDeleteNotification();
   const { mutate: readNotification } = useReadNotification();
-  const time = getTimeAgo(createdAt);
 
   const handleClick = () => {
     if (!isRead) readNotification(notificationId)
@@ -25,7 +26,7 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
   }
 
   return (
-    <li onClick={handleClick} className={`p-10 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor cursor-pointer'} `} aria-label={`알림 배경_${notificationId}`}>
+    <li onClick={handleClick} className={`p-10 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} ${auctionId && 'cursor-pointer'}`} aria-label={`알림 배경_${notificationId}`}>
       <figure className='flex justify-between w-full gap-3' aria-label={`알림_${notificationId}`}>
         <figcaption className='flex flex-col flex-1 justify-between min-h-[6rem]'>
           <h4 className='web:text-body1 text-body2' aria-label={`알림 제목${notificationId}`}>

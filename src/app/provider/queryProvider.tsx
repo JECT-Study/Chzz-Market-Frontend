@@ -20,6 +20,7 @@ export const ReactQueryProvider = ({ showDevTools = false, children }: ReactQuer
           retryOnMount: true,
           refetchOnReconnect: false,
           retry: false,
+          throwOnError: true,
         },
         mutations: {
           throwOnError: false,

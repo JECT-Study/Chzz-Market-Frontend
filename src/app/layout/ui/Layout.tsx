@@ -20,7 +20,7 @@ const Header = ({
   if (!handleBack) handleBack = () => navigate(-1);
 
   return (
-    <header className='w-full h-[3.375rem] p-4 web:p-8  shadow-bottom'>
+    <header className='w-full h-[3.375rem] p-4 web:p-8 shadow-bottom'>
       <div className='relative flex items-center justify-center w-full h-full'>
         {title !== '치즈 마켓' && (
           <button
@@ -32,10 +32,11 @@ const Header = ({
           </button>
         )}
         {
-          children ? children : <>
-            <h2 className='text-heading2 text-gray1'>{title}</h2>
-            {option}
-          </>
+          children ? children :
+            <>
+              <h2 className='text-heading2 text-gray1'>{title}</h2>
+              {option}
+            </>
         }
 
       </div>
