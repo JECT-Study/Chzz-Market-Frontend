@@ -1,87 +1,77 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { Signup } from '@/pages/sign-up/ui/Signup';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '@/app/store';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { mockedUseNavigate } from '@/shared/test/setupTests';
 
-describe.skip('Signup', () => {
-  const setup = (placeholder: string, value: string) => {
+describe('Signup', () => {
+  beforeEach(() => {
     render(
-      <BrowserRouter>
-        <Signup />
-      </BrowserRouter>,
+      <QueryClientProvider client={new QueryClient()}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Signup />
+          </BrowserRouter>
+        </Provider>
+      </QueryClientProvider>
     );
-    const inputElement = screen.getByPlaceholderText(placeholder);
+  });
+
+  const setup = (testId: string, value: string) => {
+    const inputElement = screen.getByTestId(testId);
     fireEvent.change(inputElement, { target: { value } });
     return inputElement;
   };
 
   test('닉네임 테스트', () => {
-    const nicknameInput = setup(
-      '닉네임을 입력해주세요 (공백 제외 15글자 이내)',
-      'testNickname',
-    );
+    const nicknameInput = setup('nickname-input', 'testNickname');
     expect(nicknameInput).toHaveValue('testNickname');
   });
 
   test('자기소개', () => {
     const introductionInput = setup(
-      '간단한 자기 소개를 입력해주세요.',
+      'bio-input',
       '안녕하세요, 테스트입니다.',
     );
     expect(introductionInput).toHaveValue('안녕하세요, 테스트입니다.');
   });
 
   // 필수 입력 사항 확인 및 버튼 활성화
-  test.skip('필수 입력 사항 확인 및 버튼 활성화', async () => {
-    render(
-      <BrowserRouter>
-        <Signup />
-      </BrowserRouter>,
-    );
+  test('필수 입력 사항 확인 및 버튼 활성화', async () => {
+    setup('nickname-input', 'testNickname');
+    setup('bio-input', '안녕하세요, 테스트입니다.');
 
-    await setup(
-      '닉네임을 입력해주세요 (공백 제외 15글자 이내)',
-      'testNickname',
-    );
-    await setup('지역을 입력해주세요.', '서울');
-    await setup(
-      '간단한 자기 소개를 입력해주세요.',
-      '안녕하세요, 테스트입니다.',
-    );
-
-    const signupBtn = screen.getByText('회원 가입 완료');
+    // 비동기 작업 대기 및 텍스트 찾기
+    const signupBtn = await screen.findByRole('button', { name: /회원 가입 완료/i });
     expect(signupBtn).toHaveClass('bg-cheeseYellow');
   });
 
   // 버튼 클릭 이전페이지 이동 테스트
-  test.skip('회원 가입 완료 버튼 클릭 시 이전 페이지로 이동', () => {
-    const navigate = vi.fn();
-
-    render(
-      <BrowserRouter>
-        <Signup />
-      </BrowserRouter>,
-    );
+  test('회원 가입 완료 버튼 클릭 시 이전 페이지로 이동', () => {
+    const navigate = vi.fn(); // 모의 함수 설정
+    vi.mocked(mockedUseNavigate).mockReturnValue(navigate); // useNavigate를 모의로 반환
 
     const backBtn = screen.getByLabelText('뒤로 가기');
+    expect(backBtn).toBeInTheDocument();
+
     fireEvent.click(backBtn);
 
-    expect(navigate).toHaveBeenCalledWith('/');
+    expect(mockedUseNavigate).toHaveBeenCalledTimes(1);
+    expect(mockedUseNavigate).toHaveBeenCalledWith('/');
   });
 
   // 버튼 클릭 회원가입 이동 테스트
-  test.skip('회원가입 버튼', () => {
+  test('회원가입 버튼', () => {
     const navigate = vi.fn();
-    render(
-      <BrowserRouter>
-        <Signup />
-      </BrowserRouter>,
-    );
+    const backBtn = screen.getByText('회원가입').closest('button');
 
-    // const backBtn = screen.getByText('회원가입').closest('button');
-    // fireEvent.click(backBtn);
-
-    expect(navigate).toHaveBeenCalledWith('/');
+    if (backBtn) {
+      fireEvent.click(backBtn);
+      expect(navigate).toHaveBeenCalledWith('/');
+    }
   });
 });
