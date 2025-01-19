@@ -64,6 +64,13 @@ describe('Signup', () => {
     expect(mockedUseNavigate).toHaveBeenCalledWith('/');
   });
 
+  test('닉네임 중복 확인 버튼 클릭 테스트', () => {
+    const nicknameCheckButton = screen.getByText('중복확인');
+    expect(nicknameCheckButton).toBeInTheDocument();
+
+    fireEvent.click(nicknameCheckButton);
+  });
+
   // 버튼 클릭 회원가입 이동 테스트
   test('회원가입 버튼', () => {
     const navigate = vi.fn();
