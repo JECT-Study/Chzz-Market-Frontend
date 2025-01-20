@@ -9,22 +9,18 @@ vi.mock('@/features/auction-search/api', () => ({
   getPreAuctionSearch: vi.fn(),
 }));
 
-const renderComponent = () => {
-  render(
-    <BrowserRouter>
-      <AuctionSearch />
-    </BrowserRouter>
-  )
-}
-
 describe('AuctionSearch', () => {
   // 모킹된 함수 호출 기록 초기화, 상호 간섭 방지
   beforeEach(() => {
+    render(
+      <BrowserRouter>
+        <AuctionSearch />
+      </BrowserRouter>
+    )
     vi.clearAllMocks();
   });
 
   test('입력창 및 탭이 렌더링 확인', () => {
-    renderComponent();
     // 검색 입력창 렌더링 확인
     expect(screen.getByPlaceholderText('검색어를 입력하세요')).toBeInTheDocument();
   });
@@ -32,8 +28,6 @@ describe('AuctionSearch', () => {
   test('데이터 패치 시 로딩 스피너 확인', async () => {
     (getAuctionSearch as Mock).mockResolvedValueOnce({ items: [] });
     (getPreAuctionSearch as Mock).mockResolvedValueOnce({ items: [] });
-
-    renderComponent();
       
     // 검색 입력 시 getAuctionSearch API 호출 확인
     const input = screen.getByPlaceholderText('검색어를 입력하세요');
@@ -53,8 +47,6 @@ describe('AuctionSearch', () => {
 
   test('검색 결과가 없을 때 "검색 결과가 없습니다"'), async () => {
     (getAuctionSearch as Mock).mockResolvedValueOnce({ items: [] });
-
-    renderComponent();
 
     const input = screen.getByPlaceholderText('검색어를 입력하세요');
     fireEvent.change(input, { target: { value: 'nonexistent' }});
