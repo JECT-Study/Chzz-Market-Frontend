@@ -1,8 +1,5 @@
-import type { INotification } from '@/features/notification/config/type';
-import Adidas from '@/shared/assets/test/adidas_superstar.jpeg';
-import JordanBlue from '@/shared/assets/test/jordan_blue.jpeg';
-import JordanRed from '@/shared/assets/test/jordan_red.jpeg';
-import NewBalance from '@/shared/assets/test/newbalance_993.jpeg';
+import { adidasImage, jordanBlueImage, jordanRedImage, newBalanceImage } from '@/shared';
+import type { INotification } from '../config';
 
 export const notificationData: INotification[] = [
   {
@@ -11,7 +8,7 @@ export const notificationData: INotification[] = [
     message: '미리 찜하기를 누른 사전 등록 제품의 경매가 시작되었습니다!',
     createdAt: '2024-09-09T08:57:30.944646',
     isRead: false,
-    imageUrl: JordanBlue,
+    imageUrl: jordanBlueImage,
     auctionId: 59,
   },
   {
@@ -20,7 +17,7 @@ export const notificationData: INotification[] = [
     message: '경매에 올린 제품이 낙찰되었습니다!',
     createdAt: '2024-09-08T22:57:30.944646',
     isRead: true,
-    imageUrl: NewBalance,
+    imageUrl: newBalanceImage,
     auctionId: 59,
   },
   {
@@ -29,7 +26,7 @@ export const notificationData: INotification[] = [
     message: '경매에 올린 제품이 유찰되었습니다.',
     createdAt: '2024-09-08T14:57:30.944646',
     isRead: true,
-    imageUrl: JordanRed,
+    imageUrl: jordanRedImage,
   },
   {
     notificationId: 3,
@@ -37,7 +34,7 @@ export const notificationData: INotification[] = [
     message: '축하합니다! 입찰에 참여한 경매의 낙찰자로 선정되었습니다!',
     createdAt: '2024-09-08T07:57:30.944646',
     isRead: true,
-    imageUrl: Adidas,
+    imageUrl: adidasImage,
     auctionId: 59,
   },
   {
@@ -46,7 +43,7 @@ export const notificationData: INotification[] = [
     message: '안타깝지만 입찰에 참여한 경매에 낙찰되지 못했습니다.',
     createdAt: '2024-09-01T22:57:30.944646',
     isRead: true,
-    imageUrl: JordanBlue,
+    imageUrl: jordanBlueImage,
   },
   {
     notificationId: 5,
@@ -54,6 +51,12 @@ export const notificationData: INotification[] = [
     message: '미리 찜하기를 누른 사전 등록 제품이 판매자에 의해 취소되었습니다.',
     createdAt: '2024-08-24T16:57:30.944646',
     isRead: true,
-    imageUrl: NewBalance,
+    imageUrl: newBalanceImage,
   },
+];
+
+export const realTimeNotificationData = [
+  'id:1_1722845403085\nevent:notification\ndata:{ "notificationId": 1, "message": "경매에 올린 test가 낙찰되었습니다.", "type": "AUCTION_SUCCESS", "auctionId": 59}\n\n',
+  'id:1_1722845403090\nevent:notification\ndata:{ "notificationId": 2, "message": "경매에 올린 test가 미낙찰되었습니다.", "type": "AUCTION_FAILURE"}\n\n',
+  'id:1_1722845403175\nevent:notification\ndata:{ "notificationId": 3, "message": "축하합니다! 입찰에 참여한 경매 test의 낙찰자로 선정되었습니다.", "type": "AUCTION_WINNER", "auctionId": 62}\n\n',
 ];
