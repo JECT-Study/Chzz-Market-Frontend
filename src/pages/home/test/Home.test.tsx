@@ -70,14 +70,6 @@ describe('Home 테스트', () => {
       expect(emptyMessage).toBeInTheDocument();
     })
 
-    test('경매 상품이 없으면 경매 없음 문구를 보여준다.', async () => {
-      setup();
-
-      const emptyMessage = await screen.findByLabelText(/empty/);
-      expect(emptyMessage).toBeInTheDocument();
-    });
-
-
     test('사전 경매 상품을 클릭하면 사전 경매 상세 페이지로 이동한다.', async () => {
       const { user } = setup();
 
