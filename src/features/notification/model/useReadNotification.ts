@@ -10,9 +10,8 @@ export const useReadNotification = (): {
 
   const { mutate } = useMutation({
     mutationFn: readNotification,
-    onSuccess: (data) => {
-      queryClient.setQueryData([QUERY_KEYS.NOTIFICATIONS], data);
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.NOTIFICATIONS] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.NOTIFICATION_LIST] });
     },
   });
 
