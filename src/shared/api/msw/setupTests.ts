@@ -1,5 +1,3 @@
-// src/shared/test/setupTests.ts
-
 import '@testing-library/jest-dom';
 
 import { beforeAll, vi } from 'vitest';
@@ -86,7 +84,6 @@ export const mockWindowProperties = () => {
     value: vi.fn(() => 'mocked-url'),
   });
 };
-export const serverAPI = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
 
 // Apply the mocks before all tests
 beforeAll(() => {
