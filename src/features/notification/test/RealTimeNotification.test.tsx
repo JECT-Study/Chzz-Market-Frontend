@@ -1,5 +1,5 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { useReadNotification, useSSE } from '../model';
 
 import { GlobalLayout } from "@/app/layout";
@@ -33,10 +33,6 @@ describe('Layout 알림 테스트', () => {
       }).filter(notification => notification !== null),
       setState: mockSetState,
     });
-  });
-
-  afterEach(() => {
-    vi.clearAllMocks();
   });
 
   const setup = () => {
