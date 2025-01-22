@@ -1,12 +1,12 @@
+import { heartData, useDeleteHeart, useGetHeartList } from '@/features/heart';
 import { notificationData, useGetNotificationList } from '@/features/notification';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
 
 import { LayoutWithNav } from '@/app/layout';
-import { heartData, useDeleteHeart, useGetHeartList } from '@/features/heart';
 import { Heart } from '@/pages/heart';
-import { mockedUseNavigate } from '@/shared/test/setupTests';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 
 vi.mock('@/features/heart/model', () => ({

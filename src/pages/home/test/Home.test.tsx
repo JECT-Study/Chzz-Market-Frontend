@@ -7,7 +7,7 @@ import { bestAuctionsData, imminentAuctionsData, preAuctionsData } from './data'
 
 import { LayoutWithNav } from '@/app/layout';
 import { getTimeColor } from '@/shared';
-import { mockedUseNavigate } from '@/shared/test/setupTests';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { Home } from '../ui';
 

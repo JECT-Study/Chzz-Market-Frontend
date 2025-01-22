@@ -1,10 +1,11 @@
-import { describe, expect, test, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { mockedUseNavigate } from "@/shared/test/setupTests";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, test, vi } from "vitest";
+
 import { UserProfile } from "@/features/user/ui";
+import { mockedUseNavigate } from "@/shared/api/msw/setupTests";
+import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router-dom";
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
@@ -26,7 +27,7 @@ describe('유저 페이지 테스트', () => {
     );
     return { user };
   };
-  
+
   test('로딩될 때 스피너 도는지 테스트', () => {
     setup({ isLoading: true });
     expect(screen.getByRole('status')).toBeInTheDocument();

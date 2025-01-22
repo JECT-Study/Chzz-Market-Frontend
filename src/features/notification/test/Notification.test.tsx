@@ -5,7 +5,7 @@ import { notificationData, useDeleteNotification, useGetNotificationList, useGet
 
 import { LayoutWithNav } from '@/app/layout';
 import { Notification } from '@/pages/notification';
-import { mockedUseNavigate } from '@/shared/test/setupTests';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { NOTIFICATION_CONTENTS } from '../config';
 

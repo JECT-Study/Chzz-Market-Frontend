@@ -4,7 +4,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { useGetAuctionDetails } from '@/features/details';
 import { Bid } from '@/pages/bid/ui/Bid';
-import { mockedUseNavigate } from '@/shared/test/setupTests';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 
 vi.mock('@/components/details/queries');

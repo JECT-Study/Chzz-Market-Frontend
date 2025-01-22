@@ -1,13 +1,13 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { useReadNotification, useSSE } from '../model';
 
 import { GlobalLayout } from "@/app/layout";
 import { store } from '@/app/store';
-import { mockedUseNavigate } from '@/shared/test/setupTests';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { realTimeNotificationData } from '.';
-import { useReadNotification, useSSE } from '../model';
 
 vi.mock('@/features/notification/model', () => ({
   useReadNotification: vi.fn(),
