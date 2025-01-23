@@ -22,11 +22,11 @@ export const ROUTES = Object.freeze({
   },
 
   PRE_AUCTION: {
-    ITEM: '/auctions/pre-auction/:preAuctionId',
-    getItemRoute: (preAuctionId: number) => `/auctions/pre-auction/${preAuctionId}`,
+    ITEM: '/auctions/pre-auction/:auctionId',
+    getItemRoute: (auctionId: number) => `/auctions/pre-auction/${auctionId}`,
 
-    EDIT: '/auctions/pre-auction/edit/:preAuctionId',
-    getEditRoute: (preAuctionId: number) => `/auctions/pre-auction/edit/${preAuctionId}`,
+    EDIT: '/auctions/pre-auction/edit/:auctionId',
+    getEditRoute: (auctionId: number) => `/auctions/pre-auction/edit/${auctionId}`,
   },
 
   BID: '/auctions/bid/:auctionId',

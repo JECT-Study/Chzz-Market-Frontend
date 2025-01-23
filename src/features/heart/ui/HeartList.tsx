@@ -13,7 +13,7 @@ export const HeartList = () => {
 
   return (
     <EmptyBoundary type='heart' length={heartList.length}>
-      <ul className='grid items-center justify-between grid-cols-2 gap-4'>
+      <ul className='grid items-center justify-between grid-cols-2 gap-8'>
         {heartList.map((el: IPreAuctionItem) => (
           <li key={el.auctionId} onClick={() => navigate(ROUTES.PRE_AUCTION.getItemRoute(el.auctionId))} className='cursor-pointer'>
             <AuctionItem axis='column' label='내가 찜 한 사전 경매 상품'>

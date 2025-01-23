@@ -5,17 +5,21 @@ import { heartData } from './data';
 
 let curHeartData = [...heartData];
 
-export const heartHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}${API_END_POINT.PRE_AUCTION}/history`, async () => {
+export const heartHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}${API_END_POINT.HEART_LIST}`, async () => {
   await delay(1000);
 
-  return HttpResponse.json(curHeartData);
+  return HttpResponse.json({
+    items: curHeartData,
+  });
 });
 
-export const heartDeleteHandler: HttpHandler = http.delete(`${import.meta.env.VITE_API_URL}${API_END_POINT.PRE_AUCTION}/:id`, ({ params }) => {
-  const id = params.id as string;
-  const heartId = parseInt(id, 10);
+export const heartDeleteHandler: HttpHandler = http.post(`${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}/:preAuctionId/likes`, ({ params }) => {
+  const { preAuctionId } = params;
+  const heartId = parseInt(preAuctionId as string, 10);
 
   curHeartData = curHeartData.filter((el) => el.auctionId !== heartId);
 
-  return HttpResponse.json({ data: curHeartData, status: 204 });
+  return HttpResponse.json({
+    item: curHeartData,
+  });
 });

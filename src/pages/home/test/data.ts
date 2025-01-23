@@ -58,7 +58,7 @@ export const imminentAuctionsData: IAuctionItem[] = [];
 
 export const preAuctionsData: IPreAuctionItem[] = [
   {
-    auctionId: 0,
+    auctionId: 10,
     auctionName: '[뉴발란스] 993',
     imageUrl: newBalanceImage,
     minPrice: 230_000,
@@ -67,7 +67,7 @@ export const preAuctionsData: IPreAuctionItem[] = [
     isSeller: true,
   },
   {
-    auctionId: 1,
+    auctionId: 11,
     auctionName: '[나이키] 조던 블루',
     imageUrl: jordanBlueImage,
     minPrice: 180_000,
