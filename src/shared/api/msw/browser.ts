@@ -1,7 +1,7 @@
 import { heartDeleteHandler, heartHandler } from '@/features/heart';
 import { notificationDeleteHandler, notificationListHandler, notificationReadHandler, realTimeNotificationsHandler } from '@/features/notification';
 
-import { auctionDetailsHandler, preAuctionDetailsHandler } from '@/features/details';
+import { auctionDetailsHandler } from '@/features/details';
 import postSignup from '@/mocks/handlers/Login';
 import { getOngoingProductList } from '@/mocks/handlers/ProductList';
 import { bidderListHandler } from '@/mocks/handlers/bidderList';
@@ -24,7 +24,6 @@ const handlers: HttpHandler[] = [
   heartDeleteHandler,
   bidderListHandler,
   auctionDetailsHandler,
-  preAuctionDetailsHandler,
 ];
 
 export const worker = setupWorker(...handlers);
