@@ -1,9 +1,9 @@
+import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from "@/shared";
 
 import { Layout } from "@/app/layout";
 import { useCancelBid } from "@/features/bid";
-import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from "@/shared";
-import { useNavigate } from "react-router-dom";
 import { useGetAuctionDetails } from "../model";
+import { useNavigate } from "react-router-dom";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
@@ -24,35 +24,20 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
         {isSeller
           ?
           // 판매자
-          (isWon
-            ?
-            // 낙찰
-            <Button type='button' onClick={() => navigate(ROUTES.getSettlementRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
-              참여자 내역 보기
-            </Button>
-            :
-            // 유찰
-            <Button type='button' disabled color="disabled" className='w-full h-full'>
-              참여자 내역 보기
-            </Button>)
+          <Button aria-label="참여자 내역 보기" type='button' disabled={!isWon} color={!isWon ? 'disabled' : 'cheeseYellow'} onClick={isWon ? () => navigate(ROUTES.getSettlementRoute(auctionId)) : undefined} className='w-full h-full'>
+            참여자 내역 보기
+          </Button>
           :
           // 낙찰 성공
           (isWinner
             ?
-            (isOrdered
-              ?
-              // 결제 완료
-              <Button type='button' color="cheeseYellow" className='w-full h-full'>
-                결제 내역 보기
-              </Button>
-              :
-              // 결제 이전
-              <Button type='button' onClick={() => navigate(ROUTES.PAYMENT.getRoute(auctionId))} color="cheeseYellow" className='w-full h-full'>
-                결제하기
-              </Button>)
+            // 결제 완료
+            <Button type='button' aria-label={isOrdered ? '결제 내역 보기' : '결제하기'} color="cheeseYellow" onClick={!isOrdered ? () => navigate(ROUTES.PAYMENT.getRoute(auctionId)) : undefined} className='w-full h-full'>
+              {isOrdered ? '결제 내역 보기' : '결제하기'}
+            </Button>
             :
             // 낙찰 실패
-            <Button type='button' disabled color="disabled" className='w-full h-full'>
+            <Button aria-label="종료된 경매" type='button' disabled color="disabled" className='w-full h-full'>
               종료된 경매
             </Button>)
         }
@@ -64,8 +49,8 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   if (isCancelled) {
     return (
       <Layout.Footer type="single">
-        <Button type='button' disabled color="disabled" className='w-full h-full'>
-          참여 취소 한 경매
+        <Button type='button' disabled color="disabled" className='w-full h-full' aria-label="참여 취소한 경매">
+          참여 취소한 경매
         </Button>
       </Layout.Footer>
     );
@@ -103,13 +88,14 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
                 <Button
                   type="button"
                   className="flex-1 h-full transition-colors rounded text-button active:bg-black"
+                  ariaLabel="참여 취소"
                 >
                   참여 취소
                 </Button>
               </Modal.Open>
               <Modal.Window name="cancelBid">
                 <Confirm type="cancelBid" >
-                  <Button type='button' disabled={isPending} loading={isPending} color='cheeseYellow' className='w-full' onClick={clickCancel}>
+                  <Button type='button' disabled={isPending} loading={isPending} color='cheeseYellow' className='w-full' onClick={clickCancel} ariaLabel="확인 모달 참여 취소">
                     참여 취소
                   </Button>
                 </Confirm>
@@ -117,10 +103,12 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
             </Modal>
             <Button
               type="button"
-              className="flex-[2] h-full"
+              className="flex-[2] h-full text-button"
               disabled={disabledFlag}
               color='cheeseYellow'
+              size="medium"
               onClick={clickBid}
+              ariaLabel="금액 수정"
             >
               금액 수정 {remainingBidCount > 0 ? `(${remainingBidCount}회 가능)` : '(소진)'}
             </Button>

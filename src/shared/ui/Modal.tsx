@@ -34,7 +34,7 @@ const Window = ({ children, name = '', closeModal }: { children: ReactElement, n
   }
 
   return createPortal(
-    <div className="absolute inset-0 z-50 flex items-center justify-center" onClick={handleClose} aria-label="모달 배경">
+    <div className="absolute inset-0 z-50 flex items-center justify-center" onClick={handleClose} aria-label="모달">
       <div
         className="relative z-50 flex items-center justify-center h-full w-web min-w-mobile bg-black/50"
       >

@@ -1,4 +1,5 @@
 import { CATEGORIES, Price } from "@/shared";
+
 import { useNavigate } from 'react-router-dom';
 
 interface DetailsBasicProps {
@@ -15,11 +16,11 @@ export const DetailsBasic = ({ auctionName, category, minPrice }: DetailsBasicPr
   return (
     <>
       <div className='flex flex-col gap-[6px] h-[5.25rem]'>
-        <p className='text-heading2'>
+        <h2 className='text-heading2' aria-label="상품 이름">
           {auctionName}
-        </p>
+        </h2>
         <span className='inline-flex'>
-          <button onClick={onClickCategory} className='underline cursor-pointer text-gray2 text-body2'>{CATEGORIES[category].value}</button>
+          <button aria-label="카테고리" onClick={onClickCategory} className='underline cursor-pointer text-gray2 text-body2'>{CATEGORIES[category].value}</button>
         </span>
         <Price title='시작가' price={minPrice} />
       </div>

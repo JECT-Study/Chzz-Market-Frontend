@@ -39,7 +39,7 @@ export const ProgressBar = ({ initialTimeRemaining, auctionId }: ProgressBarProp
     hours < 1 ? 'text-timeColor1' : hours <= 16 ? 'text-timeColor2' : 'text-timeColor3';
 
   return (
-    <div className="flex flex-col h-[2.8125rem] w-full">
+    <div className="flex flex-col h-[2.8125rem] w-full" aria-label='남은 시간'>
       <p className={`flex justify-center items-center ${textColor} h-[2.625rem]`}>
         {timeRemaining !== 0 ? formattedTime : '경매 종료'}
       </p>
@@ -47,6 +47,7 @@ export const ProgressBar = ({ initialTimeRemaining, auctionId }: ProgressBarProp
         <div
           className={`${progressBarColor} h-full transition-width duration-1000`}
           style={{ width: `${progressBarWidth}%` }}
+          aria-label='남은 시간 막대'
         />
       </div>
     </div>

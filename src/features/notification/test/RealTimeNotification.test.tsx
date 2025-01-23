@@ -69,7 +69,7 @@ describe('Layout 알림 테스트', () => {
 
     const popup = await screen.findByLabelText(/알림 박스/);
 
-    const popupBackground = screen.getByLabelText('모달 배경');
+    const popupBackground = screen.getByLabelText('모달');
     await user.click(popupBackground);
 
     await waitFor(() => {
@@ -84,7 +84,7 @@ describe('Layout 알림 테스트', () => {
 
         const firstPopup = await screen.findByLabelText(/알림 박스/);
 
-        const popupBackground = screen.getByLabelText('모달 배경');
+        const popupBackground = screen.getByLabelText('모달');
         await user.click(popupBackground);
 
         await waitFor(() => {
