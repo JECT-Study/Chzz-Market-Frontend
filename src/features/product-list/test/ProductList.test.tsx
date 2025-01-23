@@ -1,9 +1,10 @@
 import { beforeEach, describe, test, vi } from "vitest";
 import { useProductList } from "@/features/product-list";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import { ProductList } from "@/pages";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import userEvent from "@testing-library/user-event";
 
 vi.mock('@/features/product-list', async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, any>;
@@ -112,19 +113,19 @@ describe('ProductList', () => {
     expect(screen.getByText('낮은 가격순')).toBeInTheDocument();
   });
 
-  test('정식 경매 탭 클릭 시 호출 확인', () => {
+  test('정식 경매 탭 클릭 시 호출 확인', async () => {
     const ongoingTab = screen.getByText(/정식 경매/);
     expect(ongoingTab).toBeInTheDocument();
 
-    fireEvent.click(ongoingTab);
+    await userEvent.click(ongoingTab);
     expect(mockUseProductList).toHaveBeenCalled();
   });
 
-  test('사전 경매 탭 클릭 시 호출 확인', () => {
+  test('사전 경매 탭 클릭 시 호출 확인', async () => {
     const preAuctionTab = screen.getByText(/사전 경매/);
     expect(preAuctionTab).toBeInTheDocument();
 
-    fireEvent.click(preAuctionTab);
+    await userEvent.click(preAuctionTab);
     expect(mockUseProductList).toHaveBeenCalled();
   });
 });

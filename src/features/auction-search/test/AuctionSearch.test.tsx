@@ -1,8 +1,9 @@
 import { AuctionSearch } from "@/pages/search";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Mock, beforeEach, describe, expect, test, vi } from "vitest";
 import { getAuctionSearch, getPreAuctionSearch } from "../api";
+import userEvent from "@testing-library/user-event";
 
 vi.mock('@/features/auction-search/api', () => ({
   getAuctionSearch: vi.fn(),
@@ -32,7 +33,7 @@ describe('AuctionSearch', () => {
     const input = screen.getByPlaceholderText('검색어를 입력하세요');
     expect(input).toBeInTheDocument();
 
-    fireEvent.change(input, { target: { value: 'test'} });
+    await userEvent.type(input, 'test');
     await waitFor(() => expect(getAuctionSearch).toHaveBeenCalledTimes(1));
     expect(screen.getByText('검색 결과가 없습니다.')).toBeInTheDocument();
   });
@@ -41,7 +42,7 @@ describe('AuctionSearch', () => {
     (getAuctionSearch as Mock).mockResolvedValueOnce({ items: [] });
 
     const input = screen.getByPlaceholderText('검색어를 입력하세요');
-    fireEvent.change(input, { target: { value: 'nonexistent' }});
+    await userEvent.type(input, 'nonexistent');
 
     await waitFor(() => {
       expect(screen.getByText('검색 결과가 없습니다.')).toBeInTheDocument();

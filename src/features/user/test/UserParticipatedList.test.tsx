@@ -1,9 +1,10 @@
 import { beforeEach, describe, test, vi } from "vitest";
 import { useHistory } from "../model";
 import { MemoryRouter, useLocation } from "react-router-dom";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UserParticipatedList } from "@/pages";
+import userEvent from "@testing-library/user-event";
 
 vi.mock('@/features/user/model', async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, any>;
@@ -123,7 +124,7 @@ describe('참여한 경매 내역 페이지', () => {
   // 경매인원 수만 파악하여 데이터 렌더링 되는지 확인
   test('참여중인 경매 데이터 렌더링 확인', async () => {
     const ongoingTab = screen.getByText(/참여중인 경매/);
-    fireEvent.click(ongoingTab);
+    await userEvent.click(ongoingTab);
 
     await waitFor(() => {
       const participantElement = screen.getByRole('img', { name: /참여자/ });
@@ -134,7 +135,7 @@ describe('참여한 경매 내역 페이지', () => {
 
   test('성공한 경매 데이터 렌더링 확인', async () => {
     const wonTab = screen.getByText(/성공한 경매/);
-    fireEvent.click(wonTab);
+    await userEvent.click(wonTab);
 
     await waitFor(() => {
       const participantElement = screen.getByRole('img', { name: /참여자/ });
@@ -145,7 +146,7 @@ describe('참여한 경매 내역 페이지', () => {
 
   test('실패한 경매 데이터 렌더링 확인', async () => {
     const lostTab = screen.getByText(/실패한 경매/);
-    fireEvent.click(lostTab);
+    await userEvent.click(lostTab);
 
     await waitFor(() => {
       const participantElement = screen.getByRole('img', { name: /참여자/ });

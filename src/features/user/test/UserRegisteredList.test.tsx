@@ -1,9 +1,10 @@
 import { beforeEach, describe, vi } from "vitest";
 import { useMyAuctionList } from "../model";
 import { MemoryRouter, useLocation } from "react-router-dom";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UserRegisteredList } from "@/pages";
+import userEvent from "@testing-library/user-event";
 
 vi.mock('@/features/user/model', async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, any>;
@@ -94,7 +95,7 @@ describe('내가 등록한 경매 내역 페이지', () => {
 
   test('진행중 경매 데이터 렌더링 확인', async () => {
     const ongoingTab = screen.getByText(/진행중인 경매/);
-    fireEvent.click(ongoingTab);
+    await userEvent.click(ongoingTab);
 
     await waitFor(() => {
       const participantElement = screen.getByRole('img', { name: /참여자/ });
