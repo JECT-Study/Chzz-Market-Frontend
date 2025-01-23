@@ -1,2 +1,2 @@
-export { bestAuctionsHandler, imminentAuctionsHandler, preAuctionsHandler } from './test';
+export { homeAuctionsHandler } from './test';
 export { Home } from './ui';

@@ -12,7 +12,6 @@ import userEvent from '@testing-library/user-event';
 import { Home } from '../ui';
 
 // vi.mock을 사용해 특정 모듈을 모킹할 수 있다.
-// 실제로 useGetBestAuctions 함수를 실행하는 대신, 원하는 반환값을 제공하는 모의 함수를 제공한다.
 vi.mock('@/pages/home/model');
 vi.mock('@/features/notification/model');
 

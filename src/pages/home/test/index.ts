@@ -1,1 +1,1 @@
-export { bestAuctionsHandler, imminentAuctionsHandler, preAuctionsHandler } from './handler';
+export { homeAuctionsHandler } from './handler';

@@ -1,26 +1,28 @@
 // src/mocks/handlers.ts
-import { HttpHandler, HttpResponse, delay, http } from 'msw';
+import { HttpHandler, HttpResponse, http } from 'msw';
 import { bestAuctionsData, imminentAuctionsData, preAuctionsData } from './data';
 
 import { API_END_POINT } from '@/shared';
 
-export const bestAuctionsHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}${API_END_POINT.BEST}`, async () => {
-  await delay(1000);
-  return HttpResponse.json({
-    items: bestAuctionsData,
-  });
-});
+export const homeAuctionsHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}`, async ({ request }) => {
+  const url = new URL(request.url);
 
-export const imminentAuctionsHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}${API_END_POINT.IMMINENT}`, async () => {
-  await delay(1000);
-  return HttpResponse.json({
-    items: imminentAuctionsData,
-  });
-});
+  const status = url.searchParams.get('status');
+  const minutes = url.searchParams.get('minutes');
 
-export const preAuctionsHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}${API_END_POINT.PRE_AUCTION}`, async () => {
-  await delay(1000);
-  return HttpResponse.json({
-    items: preAuctionsData,
-  });
+  if (status === 'proceeding') {
+    if (minutes === '60') {
+      return HttpResponse.json({
+        items: imminentAuctionsData,
+      });
+    } else {
+      return HttpResponse.json({
+        items: bestAuctionsData,
+      });
+    }
+  } else if (status === 'pre') {
+    return HttpResponse.json({
+      items: preAuctionsData,
+    });
+  }
 });
