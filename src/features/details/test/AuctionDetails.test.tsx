@@ -197,7 +197,7 @@ describe('경매 상세 조회 테스트', () => {
       const btn = screen.getByRole('button', { name: /참여자 내역 보기/ });
       await user.click(btn);
 
-      expect(mockedUseNavigate).toHaveBeenCalledWith(`/auctions/${auctionDetailsData[6].auctionId}/settlement`);
+      expect(mockedUseNavigate).toHaveBeenCalledWith(`/auctions/${auctionDetailsData[6].auctionId}/bidder-list`);
     })
 
     test('구매자인 경우, 참여하지 않은 경매 또는 낙찰받지 못한 경매라면 종료된 경매 버튼이 있고 클릭할 수 없다.', () => {

@@ -10,7 +10,7 @@ export const NOTIFICATION_CONTENTS: Record<string, NotificationContent> = Object
   AUCTION_SUCCESS: {
     title: '최종 낙찰 알림',
     buttonName: '경매 참여자 목록 보러가기',
-    link: (auctionId: number) => ROUTES.getSettlementRoute(auctionId),
+    link: (auctionId: number) => ROUTES.getBidderListRoute(auctionId),
   },
   AUCTION_FAILURE: {
     title: '최종 유찰 알림',

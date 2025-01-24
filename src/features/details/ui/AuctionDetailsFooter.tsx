@@ -2,8 +2,8 @@ import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from "@/shared";
 
 import { Layout } from "@/app/layout";
 import { useCancelBid } from "@/features/bid";
-import { useGetAuctionDetails } from "../model";
 import { useNavigate } from "react-router-dom";
+import { useGetAuctionDetails } from "../model";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
         {isSeller
           ?
           // 판매자
-          <Button aria-label="참여자 내역 보기" type='button' disabled={!isWon} color={!isWon ? 'disabled' : 'cheeseYellow'} onClick={isWon ? () => navigate(ROUTES.getSettlementRoute(auctionId)) : undefined} className='w-full h-full'>
+          <Button aria-label="참여자 내역 보기" type='button' disabled={!isWon} color={!isWon ? 'disabled' : 'cheeseYellow'} onClick={isWon ? () => navigate(ROUTES.getBidderListRoute(auctionId)) : undefined} className='w-full h-full'>
             참여자 내역 보기
           </Button>
           :

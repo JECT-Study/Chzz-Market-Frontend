@@ -1,14 +1,14 @@
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import { AsyncBoundary } from '@/shared';
-import SettlementMain from './SettlementMain';
+import { BidderListMain } from './BidderListMain';
 
-export const Settlement = () => {
+export const BidderList = () => {
   const auctionId = useLoaderData() as number;
 
   return (
-    <AsyncBoundary>
-      <SettlementMain auctionId={auctionId} />
+    <AsyncBoundary header='경매 참여자 목록'>
+      <BidderListMain auctionId={auctionId} />
     </AsyncBoundary>
   );
 };

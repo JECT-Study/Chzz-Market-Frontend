@@ -32,8 +32,8 @@ export const ROUTES = Object.freeze({
   BID: '/auctions/bid/:auctionId',
   getBidRoute: (auctionId: number) => `/auctions/bid/${auctionId}`,
 
-  SETTLEMENT: '/auctions/:auctionId/settlement',
-  getSettlementRoute: (auctionId: number) => `/auctions/${auctionId}/settlement`,
+  BIDDER_LIST: '/auctions/:auctionId/bidder-list',
+  getBidderListRoute: (auctionId: number) => `/auctions/${auctionId}/bidder-list`,
 
   PAYMENT: {
     HOME: '/auctions/:auctionId/payment',
