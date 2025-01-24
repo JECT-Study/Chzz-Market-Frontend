@@ -1,3 +1,3 @@
 export { useDeletePreAuction, useGetAuctionDetails, useGetPreAuctionDetails } from './model';
-export { auctionDetailsHandler } from './test';
+export { auctionDetailsData, auctionDetailsHandler } from './test';
 export { AuctionDetailsMain, PreAuctionDetailsMain } from './ui';

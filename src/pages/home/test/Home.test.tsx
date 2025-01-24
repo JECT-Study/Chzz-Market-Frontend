@@ -11,13 +11,9 @@ import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { Home } from '../ui';
 
-// vi.mock을 사용해 특정 모듈을 모킹할 수 있다.
 vi.mock('@/pages/home/model');
 vi.mock('@/features/notification/model');
 
-// 모듈을 모킹한 후, 우리는 각 함수가 어떤 값을 반환할지 정의
-// 모킹을 통해 설정한 반환값은 실제로 테스트를 진행할 때, 컴포넌트가 이 훅에서 데이터를 가져오는 것처럼 작동하게 한다. 
-// 이 과정에서 API 요청이 발생하지 않으며, 데이터가 항상 일관되게 제공된다.
 vi.mocked(useGetBestAuctions).mockReturnValue({
   bestAuctions: bestAuctionsData,
 });
@@ -77,7 +73,7 @@ describe('Home 테스트', () => {
       });
       await user.click(mockData[0]);
 
-      expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/pre-auction/0');
+      expect(mockedUseNavigate).toHaveBeenCalledWith(`/auctions/pre-auction/${preAuctionsData[0].auctionId}`);
     });
 
     describe('경매 시간은 남은 시간에 따라 다른 색으로 표시한다.', () => {
