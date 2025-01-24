@@ -19,7 +19,7 @@ const FallbackComponent = ({ error, resetErrorBoundary, header }: FallbackCompon
   if (!isAxiosError(error)) throw error
 
   return (
-    <>
+    <Layout>
       {header && <Layout.Header title={header} />}
       <div className='flex flex-col items-center justify-center w-full h-full gap-3 px-10'>
         <img src={ErrorIcon} alt='에러 아이콘' />
@@ -35,7 +35,7 @@ const FallbackComponent = ({ error, resetErrorBoundary, header }: FallbackCompon
           다시 불러오기
         </Button>
       </Layout.Footer>
-    </>
+    </Layout>
   );
 };
 
