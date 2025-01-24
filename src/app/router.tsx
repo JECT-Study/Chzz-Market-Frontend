@@ -1,9 +1,9 @@
 import { GlobalLayout, LayoutWithNav } from "@/app/layout";
 import { Bid, bidLoader } from "@/pages/bid";
+import { BidderList, bidderListLoader } from "@/pages/bidder-list";
 import { AuctionDetails, PreAuctionDetails, auctionDetailsLoader, preAuctionDetailsLoader } from "@/pages/details";
 import { EditAuction, editAuctionLoader } from "@/pages/edit-auction";
 import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess } from "@/pages/payment";
-import { Settlement, settlementLoader } from "@/pages/settlement";
 import { User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList } from "@/pages/user";
 import { AsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorFallback } from '@/shared';
 
@@ -60,9 +60,9 @@ const privateRouteList = [
     loader: bidLoader,
   },
   {
-    path: ROUTES.SETTLEMENT,
-    element: <Settlement />,
-    loader: settlementLoader,
+    path: ROUTES.BIDDER_LIST,
+    element: <BidderList />,
+    loader: bidderListLoader,
   },
   {
     path: ROUTES.USER.PROFILE_EDIT,

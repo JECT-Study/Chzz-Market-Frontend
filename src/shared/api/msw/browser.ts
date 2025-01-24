@@ -4,11 +4,11 @@ import { notificationDeleteHandler, notificationListHandler, notificationReadHan
 import { auctionDetailsHandler } from '@/features/details';
 import postSignup from '@/mocks/handlers/Login';
 import { getOngoingProductList } from '@/mocks/handlers/ProductList';
-import { bidderListHandler } from '@/mocks/handlers/bidderList';
 import getMyAuctionPreRegister from '@/mocks/handlers/myAuctuon';
 import { homeAuctionsHandler } from '@/pages/home';
 import { HttpHandler } from 'msw';
 import { setupWorker } from 'msw/browser';
+import { bidderListHandler } from '@/pages/bidder-list';
 
 /* eslint-disable import/no-named-as-default */
 const handlers: HttpHandler[] = [
@@ -22,8 +22,8 @@ const handlers: HttpHandler[] = [
   notificationDeleteHandler,
   heartHandler,
   heartDeleteHandler,
-  bidderListHandler,
   auctionDetailsHandler,
+  bidderListHandler,
 ];
 
 export const worker = setupWorker(...handlers);
