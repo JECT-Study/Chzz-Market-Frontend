@@ -9,17 +9,17 @@ import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
 import ThreeDotsIcon from '@/shared/assets/icons/three_dots.svg';
 import { useNavigate } from 'react-router-dom';
 
-export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }) => {
+export const PreAuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
 
-  const { preAuctionDetails } = useGetPreAuctionDetails(preAuctionId);
+  const { preAuctionDetails } = useGetPreAuctionDetails(auctionId);
   const { mutate: deletePreAuction, isPending } = useDeletePreAuction();
 
   const { images, auctionName, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
   const updatedTime = getTimeAgo(updatedAt)
 
-  const clickEdit = () => navigate(`/auctions/pre-auction/edit/${preAuctionId}`);
-  const confirmDelete = () => deletePreAuction(preAuctionId);
+  const clickEdit = () => navigate(`/auctions/pre-auction/edit/${auctionId}`);
+  const confirmDelete = () => deletePreAuction(auctionId);
 
   return (
     <Layout>
@@ -46,7 +46,7 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
             <CustomCarousel length={images.length} loop>
               {images.map((img, idx) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={`${img.imageUrl}?h=840`} alt={`${auctionName}${img.imageId}`} className='object-contain h-[420px]' {...{ fetchpriority: idx === 0 ? 'high' : 'low' }} loading={idx === 0 ? 'eager' : 'lazy'} />
+                  <img src={`${img.imageUrl}?h=840`} alt={`상품 사진_${img.imageId}`} className='object-contain h-[420px]' {...{ fetchpriority: idx === 0 ? 'high' : 'low' }} loading={idx === 0 ? 'eager' : 'lazy'} />
                 </CarouselItem>
               ))}
             </CustomCarousel>
@@ -54,8 +54,8 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
           <figcaption>
             {/* 판매자 정보 */}
             <div className='flex items-center gap-[13px] h-[3.75rem]'>
-              <img src={sellerProfileImageUrl ?? ProfileDefaultImage} alt="판매자 프로필" className='border rounded-full size-[1.875rem]' />
-              <p className='text-body2'>
+              <img src={sellerProfileImageUrl ?? ProfileDefaultImage} alt="판매자 프로필 사진" className='border rounded-full size-[1.875rem]' />
+              <p className='text-body2' aria-label='판매자 이름'>
                 {sellerNickname}
               </p>
             </div>
@@ -91,7 +91,7 @@ export const PreAuctionDetailsMain = ({ preAuctionId }: { preAuctionId: number }
           </figcaption>
         </figure>
       </Layout.Main>
-      <PreAuctionDetailsFooter isLiked={isLiked} preAuctionId={preAuctionId} isSeller={isSeller} />
+      <PreAuctionDetailsFooter isLiked={isLiked} auctionId={auctionId} isSeller={isSeller} />
     </Layout>
   );
 }

@@ -29,7 +29,7 @@ export const useToggleAuctionDetailsHeart = (): {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST],
+        queryKey: [QUERY_KEYS.HEART_LIST],
       });
     },
     onError: (_err, preAuctionId, context) => {

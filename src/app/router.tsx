@@ -1,8 +1,21 @@
 import { GlobalLayout, LayoutWithNav } from "@/app/layout";
+import { Bid, bidLoader } from "@/pages/bid";
+import { BidderList, bidderListLoader } from "@/pages/bidder-list";
+import { AuctionDetails, PreAuctionDetails, auctionDetailsLoader, preAuctionDetailsLoader } from "@/pages/details";
+import { EditAuction, editAuctionLoader } from "@/pages/edit-auction";
+import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess } from "@/pages/payment";
+import { User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList } from "@/pages/user";
 import { AsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorFallback } from '@/shared';
-import { AuctionDetails, Bid, EditAuction, Heart, Home, Login, Notification, Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess, PreAuctionDetails, ProductList, Register, Settlement, Signup, Test, User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList, auctionDetailsLoader, bidLoader, editAuctionLoader, preAuctionDetailsLoader, settlementLoader } from '../pages';
 
+import { Test } from "@/pages/Test";
+import { Heart } from "@/pages/heart";
+import { Home } from "@/pages/home";
+import { Login } from "@/pages/login";
+import { Notification } from "@/pages/notification";
+import { ProductList } from "@/pages/product-list";
+import { Register } from "@/pages/register";
 import { AuctionSearch } from "@/pages/search";
+import { Signup } from "@/pages/sign-up";
 import { createBrowserRouter } from 'react-router-dom';
 
 const layoutWithNavRouteList = [
@@ -38,23 +51,24 @@ const layoutWithNavRouteList = [
 
 const privateRouteList = [
   {
+    path: ROUTES.REGISTER,
+    element: <Register />,
+  },
+  {
     path: ROUTES.BID,
     element: <Bid />,
     loader: bidLoader,
   },
   {
-    path: ROUTES.SETTLEMENT,
-    element: <Settlement />,
-    loader: settlementLoader,
+    path: ROUTES.BIDDER_LIST,
+    element: <BidderList />,
+    loader: bidderListLoader,
   },
   {
     path: ROUTES.USER.PROFILE_EDIT,
     element: <UserProfileEdit />,
   },
-  {
-    path: ROUTES.REGISTER,
-    element: <Register />,
-  },
+
   {
     path: ROUTES.PRE_AUCTION.EDIT,
     element: (

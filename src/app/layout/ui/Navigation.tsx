@@ -1,4 +1,4 @@
-import { useGetNotifications } from '@/features/notification';
+import { useGetNotificationList } from '@/features/notification';
 import { useNavigate } from 'react-router-dom';
 import { NAV_ICONS } from '../config';
 
@@ -20,18 +20,18 @@ const NavigationItem = ({
   const notificationCondition = name === 'notification' && unreadNotificationsCount > 0;
 
   return (
-    <li className='flex justify-center transition-all items-center w-[11.25rem] min-w-[5.625rem] h-[3.75rem] relative'>
+    <li aria-label={`${name}_icon`} className='flex justify-center transition-all items-center w-[11.25rem] min-w-[5.625rem] h-[3.75rem] relative'>
       <img onClick={() => navigate(path)} src={iconSrc} alt={`${name}_${active ? 'on' : 'off'}_icon`} className='cursor-pointer size-6' />
-      {notificationCondition && (
-        <div aria-label='읽지 않은 알림을 표시하는 빨간 점' className='absolute top-[25%] right-[42%] rounded-full size-1 bg-cheeseYellow' />
-      )}
+      {notificationCondition ? (
+        <div aria-label='읽지 않음 표시' className='absolute top-[25%] right-[42%] rounded-full size-1 bg-cheeseYellow' />
+      ) : null}
     </li>
   );
 };
 
 export const Navigation = ({ active }: { active: string }) => {
-  const { notifications } = useGetNotifications();
-  const unreadNotificationsCount = notifications ? notifications.reduce(
+  const { notificationList } = useGetNotificationList();
+  const unreadNotificationsCount = notificationList ? notificationList.reduce(
     (acc, cur) => (!cur.isRead ? acc + 1 : acc),
     0,
   ) : 0

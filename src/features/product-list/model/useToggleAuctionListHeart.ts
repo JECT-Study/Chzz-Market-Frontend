@@ -11,7 +11,7 @@ export const useToggleAuctionListHeart = (): {
     mutationFn: heartAuction,
     onSuccess: (_, preAuctionId) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.PRE_AUCTION_HEART_LIST],
+        queryKey: [QUERY_KEYS.HEART_LIST],
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId],

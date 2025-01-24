@@ -1,5 +1,5 @@
-import { CarouselItem, CustomCarousel, formatCurrencyWithWon } from "@/shared";
 import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
+import { CarouselItem, CustomCarousel, formatCurrencyWithWon } from "@/shared";
 
 import { Layout } from "@/app/layout";
 import ParticipantAmount from '@/shared/assets/icons/my_participation_amount.svg';
@@ -9,7 +9,7 @@ import { useGetAuctionDetails } from "..";
 
 export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
   const { auctionDetails } = useGetAuctionDetails(auctionId);
-  const { images, auctionName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled } = auctionDetails
+  const { images, auctionName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled, isSeller } = auctionDetails
 
   return (
     <Layout>
@@ -21,7 +21,7 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
             <CustomCarousel length={images.length} loop>
               {images.map((img, idx) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={`${img.imageUrl}?h=840`} alt={`${auctionName}${img.imageId}`} className='object-contain h-[420px]' {...{ fetchpriority: idx === 0 ? 'high' : 'low' }} loading={idx === 0 ? 'eager' : 'lazy'} />
+                  <img src={`${img.imageUrl}?h=840`} alt={`상품 사진_${idx}`} className='object-contain h-[420px]' {...{ fetchpriority: idx === 0 ? 'high' : 'low' }} loading={idx === 0 ? 'eager' : 'lazy'} />
                 </CarouselItem>
               ))}
             </CustomCarousel>
@@ -33,8 +33,8 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
           <figcaption>
             {/* 판매자 정보 */}
             <div className='flex items-center gap-[13px] h-[3.75rem]'>
-              <img src={sellerProfileImageUrl ?? ProfileDefaultImage} alt="판매자 프로필" className='border rounded-full size-[1.875rem]' />
-              <p className='text-body2'>
+              <img src={sellerProfileImageUrl ?? ProfileDefaultImage} alt="판매자 프로필 사진" className='border rounded-full size-[1.875rem]' />
+              <p className='text-body2' aria-label="판매자 이름">
                 {sellerNickname}
               </p>
             </div>
@@ -49,7 +49,7 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
                     <span className='pt-[2px]'>나의 참여 금액</span>
                   </div>
                   <p className='text-body1Bold text-gray1'>
-                    {isParticipated
+                    {isSeller ? '내가 등록한 경매' : isParticipated
                       ? `${formatCurrencyWithWon(bidAmount)}`
                       : (isCancelled ? '참여 취소' : '참여 전')}
                   </p>

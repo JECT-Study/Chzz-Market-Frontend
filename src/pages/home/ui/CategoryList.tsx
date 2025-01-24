@@ -1,7 +1,6 @@
 import { CATEGORIES } from '@/shared';
 import { useNavigate } from 'react-router-dom';
 
-
 const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: string }) => {
   const navigate = useNavigate();
   const onClickCategory = () => {
@@ -9,7 +8,7 @@ const CategoryItem = ({ code, name, icon }: { code: string; name: string; icon: 
   };
 
   return (
-    <li className='flex flex-col items-center h-full gap-2 cursor-pointer' onClick={onClickCategory}>
+    <li aria-label={code} className='flex flex-col items-center h-full gap-2 cursor-pointer' onClick={onClickCategory}>
       <img src={icon} alt={`${name} 카테고리`} className='p-3 rounded-full size-14 text-caption bg-categoryColor' />
       <div className='text-caption text-gray1'>{name.split(' ')[0]}</div>
     </li>

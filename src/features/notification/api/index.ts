@@ -1,3 +1,3 @@
 export { deleteNotification } from './deleteNotification';
-export { getNotifications } from './getNotification';
+export { getNotificationList } from './getNotificationList';
 export { readNotification } from './readNotification';

@@ -42,13 +42,12 @@ export const ImageUploaderInput = ({ images, setImages }: ImageUploaderProps) =>
       <Input
         ref={fileInputRef}
         type='file'
-        id='사진'
+        id='사진*'
         className='hidden'
         accept='image/jpeg, image/png, image/webp'
         multiple
         onChange={handleImage}
         aria-label='사진 업로드 인풋'
-        role='button'
       />
     </div>
   );

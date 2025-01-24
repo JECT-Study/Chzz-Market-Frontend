@@ -1,12 +1,14 @@
 import * as queries from "@/features/address/api/index";
+
 import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "@/features/address/model/index";
-import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages";
-import { mockWindowProperties, mockedUseNavigate } from "@/shared/test/setupTests";
+import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages/payment";
+import { mockWindowProperties, mockedUseNavigate } from "@/shared/api/msw/setupTests";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
+
+import userEvent from "@testing-library/user-event";
 
 mockWindowProperties();
 

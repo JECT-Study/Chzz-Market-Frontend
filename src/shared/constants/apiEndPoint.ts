@@ -22,8 +22,8 @@ export const API_END_POINT = {
   AUCTION: `${PRE_FIX}/auctions`,
   SEARCH: `${PRE_FIX}/auctions/search`,
 
-  HEARTS: `${PRE_FIX}/auctions/users/likes`,
-  NOTIFICATIONS: `${PRE_FIX}/notifications`,
+  HEART_LIST: `${PRE_FIX}/auctions/users/likes`,
+  NOTIFICATION_LIST: `${PRE_FIX}/notifications`,
   ADDRESS: `${PRE_FIX}/addresses`,
   REALTIME_NOTIFICATIONS: `${PRE_FIX}/notifications/subscribe`,
 

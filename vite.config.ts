@@ -24,6 +24,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      '@/app': resolve(__dirname, 'src/app'),
       '@/components': resolve(__dirname, 'src/components'),
       '@/shared': resolve(__dirname, 'src/shared'),
       '@/constants': resolve(__dirname, 'src/constants'),
@@ -39,6 +40,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/shared/test/setupTests.ts',
+    setupFiles: './src/shared/api/msw/setupTests.ts',
   },
 });

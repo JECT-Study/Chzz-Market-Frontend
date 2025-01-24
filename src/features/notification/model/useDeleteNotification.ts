@@ -12,9 +12,9 @@ export const useDeleteNotification = (): {
   const { mutate } = useMutation({
     mutationFn: deleteNotification,
     onMutate: async (id: number) => {
-      await queryClient.cancelQueries({ queryKey: [QUERY_KEYS.NOTIFICATIONS] });
-      const previousData = queryClient.getQueryData([QUERY_KEYS.NOTIFICATIONS]);
-      queryClient.setQueryData([QUERY_KEYS.NOTIFICATIONS], (oldData: INotification[]) => {
+      await queryClient.cancelQueries({ queryKey: [QUERY_KEYS.NOTIFICATION_LIST] });
+      const previousData = queryClient.getQueryData([QUERY_KEYS.NOTIFICATION_LIST]);
+      queryClient.setQueryData([QUERY_KEYS.NOTIFICATION_LIST], (oldData: INotification[]) => {
         if (!oldData) return oldData;
 
         return oldData.filter((el: INotification) => el.notificationId !== id);
@@ -23,15 +23,15 @@ export const useDeleteNotification = (): {
       return { previousData };
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.NOTIFICATIONS] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.NOTIFICATION_LIST] });
     },
     onError: (_err, _var, context) => {
       if (context?.previousData) {
-        queryClient.setQueryData([QUERY_KEYS.NOTIFICATIONS], context.previousData);
+        queryClient.setQueryData([QUERY_KEYS.NOTIFICATION_LIST], context.previousData);
       }
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.NOTIFICATIONS] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.NOTIFICATION_LIST] });
     },
   });
 
