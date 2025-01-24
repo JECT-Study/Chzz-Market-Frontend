@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { Signup } from '@/pages/sign-up/ui/Signup';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { store } from '@/app/store';
+import { Signup } from '@/pages/sign-up/ui/Signup';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { mockedUseNavigate } from '@/shared/test/setupTests';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Signup', () => {
   beforeEach(() => {

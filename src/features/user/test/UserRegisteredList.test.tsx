@@ -1,10 +1,10 @@
-import { beforeEach, describe, vi } from "vitest";
-import { useMyAuctionList } from "../model";
-import { MemoryRouter, useLocation } from "react-router-dom";
-import { render, screen, waitFor } from "@testing-library/react";
+import { UserRegisteredList } from "@/pages/user";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { UserRegisteredList } from "@/pages";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter, useLocation } from "react-router-dom";
+import { beforeEach, describe, expect, test, vi } from "vitest";
+import { useMyAuctionList } from "../model";
 
 vi.mock('@/features/user/model', async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, any>;
