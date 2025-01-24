@@ -7,14 +7,6 @@ import { mockedUseNavigate } from "@/shared/api/msw/setupTests";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
-  return {
-    ...actual,
-    useNavigate: mockedUseNavigate,
-  };
-});
-
 describe('유저 페이지 테스트', () => {
   const setup = (props = {}) => {
     const user = userEvent.setup();
@@ -27,8 +19,7 @@ describe('유저 페이지 테스트', () => {
     );
     return { user };
   };
-
-  test('로딩될 때 스피너 도는지 테스트', () => {
+  test('로딩될 때 스피너 테스트', () => {
     setup({ isLoading: true });
     expect(screen.getByRole('status')).toBeInTheDocument();
   })

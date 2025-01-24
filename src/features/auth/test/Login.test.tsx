@@ -9,11 +9,11 @@ import { useAuth } from "../hooks";
 import { useRefreshTokenOnSuccess } from "../model";
 import { Login } from "@/pages/login";
 
-vi.mock('@/hooks/useAuth', () => ({
+vi.mock('../hooks', () => ({
   useAuth: vi.fn(),
 }));
 
-vi.mock('@/components/login/queries', () => ({
+vi.mock('../model', () => ({
   useRefreshTokenOnSuccess: vi.fn(),
 }));
 
