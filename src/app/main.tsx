@@ -1,14 +1,12 @@
 import './index.css';
 
-import { storeLogin } from '@/features/auth/model/authSlice';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { Toaster } from 'sonner';
 import App from './App';
+import { Provider } from 'react-redux';
 import { ReactQueryProvider } from './provider/index';
+import { Toaster } from 'sonner';
+import { createRoot } from 'react-dom/client';
 import { store } from './store';
-
-export const serverAPI = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
+import { storeLogin } from '@/features/auth/model/authSlice';
 
 async function setupMocks(): Promise<void> {
   if (import.meta.env.MODE !== 'development') {
@@ -17,7 +15,7 @@ async function setupMocks(): Promise<void> {
 
   if (import.meta.env.VITE_USE_MOCK !== 'true') return;
 
-  const { worker } = await import('../shared/test/browser');
+  const { worker } = await import('../shared/api/msw/browser');
   await worker.start({
     onUnhandledRequest: (req) => {
       const url = new URL(req.url);

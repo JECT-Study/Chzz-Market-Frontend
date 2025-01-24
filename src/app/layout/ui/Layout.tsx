@@ -1,7 +1,7 @@
 import { ReactNode, forwardRef } from 'react';
 
 import BackArrowIcon from '@/shared/assets/icons/back_arrow.svg';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   title?: string;
@@ -17,7 +17,6 @@ const Header = ({
   children
 }: HeaderProps) => {
   const navigate = useNavigate();
-  if (!handleBack) handleBack = () => navigate(-1);
 
   return (
     <header className='w-full h-[3.375rem] p-4 web:p-8 shadow-bottom'>
@@ -26,7 +25,7 @@ const Header = ({
           <button
             className='absolute left-0'
             aria-label='뒤로 가기'
-            onClick={handleBack}
+            onClick={handleBack ?? (() => navigate(-1))}
           >
             <img src={BackArrowIcon} alt='뒤로가기 아이콘' className='size-6' />
           </button>

@@ -30,10 +30,10 @@ export const RealTimeNotificationItem = ({
       onClick={(e) => e.stopPropagation()}
     >
       <div className="flex flex-col w-full gap-3">
-        <h2 aria-label="알림 제목" className="web:text-heading3 text-body2Bold">
+        <h2 aria-label="제목" className="web:text-heading3 text-body2Bold">
           {title}
         </h2>
-        <p aria-label="알림 메시지" className="web:text-body2 text-caption">
+        <p aria-label="메시지" className="web:text-body2 text-caption">
           {message}
         </p>
       </div>

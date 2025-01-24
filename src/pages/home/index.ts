@@ -1,1 +1,2 @@
-export { Home } from './ui/index';
+export { homeAuctionsHandler } from './test';
+export { Home } from './ui';

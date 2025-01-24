@@ -1,17 +1,19 @@
 import * as queries from "@/features/address/api/index";
+
 import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "@/features/address/model/index";
-import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages";
-import { mockWindowProperties, mockedUseNavigate } from "@/shared/test/setupTests";
+import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages/payment";
+import { mockWindowProperties, mockedUseNavigate } from "@/shared/api/msw/setupTests";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
+
+import userEvent from "@testing-library/user-event";
 
 mockWindowProperties();
 
 // mock으로 사용할 훅, API 호출 정의
-vi.mock('@/hooks/usePayment', () => ({
+vi.mock('@/features/address/model/index', () => ({
   usePostOrderId: () => ({
     createId: vi.fn(),
     orderId: '123',
@@ -22,7 +24,7 @@ vi.mock('@/hooks/usePayment', () => ({
     DefaultAddressData: {
       items: [
         {
-          id: '1',
+          id: '0',
           recipientName: '홍길동',
           phoneNumber: '010-1234-5678',
           zipcode: '12345',
@@ -35,9 +37,6 @@ vi.mock('@/hooks/usePayment', () => ({
     },
     postPayment: vi.fn(),
   }),
-}));
-
-vi.mock('@/features/address/model/index', () => ({
   useGetAddresses: vi.fn(),
   useDeleteAddress: vi.fn(),
   usePostAddress: vi.fn(),
@@ -106,11 +105,13 @@ describe('결제하기 페이지 테스트', () => {
     vi.mocked(useNavigate).mockReturnValue(mockedUseNavigate);
 
     render(
-      <MemoryRouter initialEntries={['/auctions/1']}>
-        <Routes>
-          <Route path="/auctions/:auctionId" element={<Payment />} />
-        </Routes>
-      </MemoryRouter>
+      <QueryClientProvider client={new QueryClient()}>
+        <MemoryRouter initialEntries={['/auctions/1']}>
+          <Routes>
+            <Route path="/auctions/:auctionId" element={<Payment />} />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
     );
 
     return { user, mockedUseNavigate };
@@ -146,7 +147,7 @@ describe('결제하기 페이지 테스트', () => {
     await user.click(addressListButton);
 
     await waitFor(() => {
-      expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/1/address-list');
+      expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/1/payment/address-list');
     });
   });
 
@@ -241,7 +242,7 @@ describe('주소 목록 페이지 테스트', () => {
 
     await user.click(editButton);
 
-    expect(mockNavigate).toHaveBeenCalledWith(expect.stringContaining('/edit'));
+    expect(mockNavigate).toHaveBeenCalledWith(expect.stringContaining('/payment/address-edit-list'));
   });
 
   test('배송지 추가 input 클릭 시 Daum 주소 검색 창 열리고 배송지 추가 페이지로 이동', async () => {
@@ -264,7 +265,7 @@ describe('주소 목록 페이지 테스트', () => {
 
     expect(mockNavigate).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledWith(
-      expect.stringMatching(/\/auctions\/1\/address-add/),
+      expect.stringMatching(/\/auctions\/1\/payment\/address-add/),
       {
         state: {
           roadAddress: '서울특별시 종로구',
@@ -552,7 +553,7 @@ describe('주소 편집 페이지 테스트', () => {
     await user.click(deleteButton);
 
     waitFor(() => {
-      expect(queries.deleteAddress('1')).toHaveBeenCalled();
+      expect(queries.deleteAddress).toHaveBeenCalledWith('1');
     });
   });
 

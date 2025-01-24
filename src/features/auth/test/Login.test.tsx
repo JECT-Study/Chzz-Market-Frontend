@@ -1,18 +1,19 @@
-import userEvent from "@testing-library/user-event";
-import { describe, expect, test, vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import { mockedUseNavigate } from "@/shared/test/setupTests";
-import { Login } from "@/pages";
-import { useRefreshTokenOnSuccess } from "../model";
-import { useAuth } from "../hooks";
+import { describe, expect, test, vi } from "vitest";
 
-vi.mock('@/hooks/useAuth', () => ({
+import { mockedUseNavigate } from "@/shared/api/msw/setupTests";
+import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router-dom";
+import { useAuth } from "../hooks";
+import { useRefreshTokenOnSuccess } from "../model";
+import { Login } from "@/pages/login";
+
+vi.mock('../hooks', () => ({
   useAuth: vi.fn(),
 }));
 
-vi.mock('@/components/login/queries', () => ({
+vi.mock('../model', () => ({
   useRefreshTokenOnSuccess: vi.fn(),
 }));
 

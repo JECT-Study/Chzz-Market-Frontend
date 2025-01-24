@@ -1,4 +1,4 @@
-import { AuctionItem } from '@/mocks/data/auctionDetailPageData';
+import type { IAuctionItem } from '.';
 
 // 페이지 정보에 대한 인터페이스
 export interface Pageable {
@@ -19,7 +19,7 @@ export interface Sort {
 
 // 메인 데이터 구조에 대한 인터페이스
 export interface MyAuctionData {
-  content: AuctionItem[];
+  content: IAuctionItem[];
   pageable: Pageable;
   last: boolean;
   totalPages: number;

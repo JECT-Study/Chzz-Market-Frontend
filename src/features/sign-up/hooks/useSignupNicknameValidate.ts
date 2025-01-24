@@ -32,7 +32,9 @@ export const useSignupNicknameValidate = ({ nickname }: UseNicknameProps) => {
 
   const checkNicknameAvailability = async () => {
     const { data } = await checkNickname();
-    handleNicknameValidation(data.isAvailable);
+    if (data) {
+      handleNicknameValidation(data.isAvailable);
+    } 
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
 export { useDeleteNotification } from './useDeleteNotification';
-export { useGetNotifications, useGetNotificationsWithSuspense } from './useGetNotifications';
+export { useGetNotificationList, useGetNotificationListWithSuspense } from './useGetNotificationList';
 export { useReadNotification } from './useReadNotification';
 export { useSSE } from './useSSE';

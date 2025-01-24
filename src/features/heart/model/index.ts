@@ -1,2 +1,2 @@
-export { useDeletePreAuctionHeart } from './useDeletePreAuctionHeart';
-export { useGetPreAuctionHeartList } from './useGetPreAuctionHeartList';
+export { useDeleteHeart } from './useDeleteHeart';
+export { useGetHeartList } from './useGetHeartList';
