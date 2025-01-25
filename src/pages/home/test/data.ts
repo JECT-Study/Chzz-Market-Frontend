@@ -1,10 +1,10 @@
 import type { IAuctionItem, IPreAuctionItem } from '@/entities';
 
-import adidasImage from '@/shared/assets/test/adidas.png';
-import jordanBlackImage from '@/shared/assets/test/jordanBlack.png';
-import jordanBlueImage from '@/shared/assets/test/jordanBlue.png';
-import jordanRedImage from '@/shared/assets/test/jordanRed.png';
-import newBalanceImage from '@/shared/assets/test/newBalance.png';
+import adidasImage from '@/shared/assets/test/adidas_superstar.jpeg';
+import jordanBlackImage from '@/shared/assets/test/jordan_black.jpeg';
+import jordanBlueImage from '@/shared/assets/test/jordan_blue.jpeg';
+import jordanRedImage from '@/shared/assets/test/jordan_red.jpeg';
+import newBalanceImage from '@/shared/assets/test/newbalance_993.jpeg';
 
 export const bestAuctionsData: IAuctionItem[] = [
   {
