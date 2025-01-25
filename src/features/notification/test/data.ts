@@ -1,4 +1,7 @@
-import { adidasImage, jordanBlueImage, jordanRedImage, newBalanceImage } from '@/shared';
+import adidasImage from '@/shared/assets/test/adidas_superstar.jpeg';
+import jordanBlueImage from '@/shared/assets/test/jordan_blue.jpeg';
+import jordanRedImage from '@/shared/assets/test/jordan_red.jpeg';
+import newBalanceImage from '@/shared/assets/test/newbalance_993.jpeg';
 import type { INotification } from '../config';
 
 export const notificationData: INotification[] = [
