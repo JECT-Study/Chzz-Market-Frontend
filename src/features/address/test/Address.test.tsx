@@ -9,6 +9,7 @@ import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 
 import userEvent from "@testing-library/user-event";
+import { mockAddresses, mockDefaultAddressData } from "./data/mockData";
 
 mockWindowProperties();
 
@@ -16,54 +17,31 @@ mockWindowProperties();
 vi.mock('@/features/address/model/index', () => ({
   usePostOrderId: () => ({
     createId: vi.fn(),
-    orderId: '123',
+    orderId: "123",
     isPending: false,
   }),
   usePostPayment: () => ({
-    auctionData: { auctionName: '테스트 상품', imageUrl: 'test.jpg', winningAmount: 30000 },
-    DefaultAddressData: {
-      items: [
-        {
-          id: '0',
-          recipientName: '홍길동',
-          phoneNumber: '010-1234-5678',
-          zipcode: '12345',
-          roadAddress: '서울특별시 종로구',
-          jibun: '종로 1가',
-          detailAddress: '101호',
-          isDefault: true,
-        },
-      ],
-    },
+    auctionData: { auctionName: "테스트 상품", imageUrl: "test.jpg", winningAmount: 30000 },
+    DefaultAddressData: mockDefaultAddressData,
     postPayment: vi.fn(),
   }),
-  useGetAddresses: vi.fn(),
-  useDeleteAddress: vi.fn(),
-  usePostAddress: vi.fn(),
-  useEditAddress: vi.fn(),
+  useGetAddresses: vi.fn(() => ({
+    addressData: mockAddresses.addressData,
+    refetchAddresses: vi.fn().mockResolvedValue({
+      data: { items: [] },
+      error: null,
+      isLoading: false,
+      isError: false,
+      isSuccess: true,
+    }),
+  })),
+  useDeleteAddress: vi.fn(() => ({ deleteData: vi.fn() })),
+  usePostAddress: vi.fn(() => ({ mutate: vi.fn(), isPending: false })),
+  useEditAddress: vi.fn(() => ({ mutate: vi.fn(), isPending: false })),
 }));
 
 vi.mocked(useGetAddresses).mockReturnValue({
-  addressData: {
-    items: [
-      {
-        id: '1',
-        recipientName: '홍길동',
-        phoneNumber: '010-1234-5678',
-        roadAddress: '서울특별시 종로구',
-        detailAddress: '101호',
-        isDefault: true,
-      },
-      {
-        id: '2',
-        recipientName: '이순신',
-        phoneNumber: '010-8765-4321',
-        roadAddress: '서울특별시 강남구',
-        detailAddress: '202호',
-        isDefault: false,
-      },
-    ],
-  },
+  addressData: mockAddresses.addressData,
   refetchAddresses: vi.fn().mockResolvedValue({
     data: {
       items: [],
