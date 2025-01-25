@@ -1,4 +1,8 @@
-import { adidasImage, jordanBlackImage, jordanBlueImage, jordanRedImage, newBalanceImage } from '@/shared';
+import adidasImage from '@/shared/assets/test/adidas.png';
+import jordanBlackImage from '@/shared/assets/test/jordanBlack.png';
+import jordanBlueImage from '@/shared/assets/test/jordanBlue.png';
+import jordanRedImage from '@/shared/assets/test/jordanRed.png';
+import newBalanceImage from '@/shared/assets/test/newBalance.png';
 
 import type { IAuctionDetails, IPreAuctionDetails } from '@/entities';
 

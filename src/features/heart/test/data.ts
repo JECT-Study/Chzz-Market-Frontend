@@ -1,5 +1,6 @@
-import { jordanBlackImage, jordanBlueImage, jordanRedImage } from '@/shared';
-
+import jordanBlackImage from '@/shared/assets/test/jordanBlack.png';
+import jordanBlueImage from '@/shared/assets/test/jordanBlue.png';
+import jordanRedImage from '@/shared/assets/test/jordanRed.png';
 import type { IPreAuctionItem } from '@/entities';
 
 export const heartData: IPreAuctionItem[] = [

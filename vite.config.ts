@@ -1,10 +1,22 @@
 /// <reference types="vitest" />
 
 import path, { resolve } from 'path';
+import { PluginOption, defineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react';
 import { rimraf } from 'rimraf';
-import { defineConfig } from 'vite';
+
+function excludeTestImages(): PluginOption {
+  return {
+    name: 'exclude-test-images',
+    enforce: 'pre',
+    load(id: string) {
+      if (id.includes('src/shared/assets/test')) {
+        return 'export default ""';
+      }
+    },
+  };
+}
 
 const removeMSW = () => ({
   name: 'remove-msw',
@@ -14,13 +26,7 @@ const removeMSW = () => ({
 });
 
 export default defineConfig({
-  // 테스트 이미지 제외
-  build: {
-    rollupOptions: {
-      external: (id) => id.includes('src/shared/assets/test'),
-    },
-  },
-  plugins: [react(), removeMSW()],
+  plugins: [react(), removeMSW(), excludeTestImages()],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
