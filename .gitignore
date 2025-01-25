@@ -31,3 +31,4 @@ dist/
 build/
 *.log
 .prettierignore
+.eslintrc.cjs

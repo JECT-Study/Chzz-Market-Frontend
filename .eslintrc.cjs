@@ -72,6 +72,7 @@ module.exports = {
 
     'testing-library/no-node-access': 'warn',
     '@typescript-eslint/no-explicit-any': 'off',
+    "import/export": "off",
 
     // 의존성 문제 해결
     'no-param-reassign': 'off',
@@ -97,6 +98,14 @@ module.exports = {
         forbidDefaultForRequired: true,
         ignoreFunctionalComponents: true,
       },
+    ],
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": true, // 싱글 쿼테이션 강제
+        "semi": true,
+        "trailingComma": "none"
+      }
     ],
   },
   parserOptions: {
