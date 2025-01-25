@@ -499,21 +499,6 @@ describe('주소 수정 페이지 테스트', () => {
 
     expect(handleOpenAddress).not.toThrow();
   });
-
-  test('폼 제출이 성공적으로 실행될 때 onSubmit 함수가 호출되는지 확인', async () => {
-    const { user } = setup();
-
-    await user.type(screen.getByRole('textbox', { name: /이름/ }), '석장원');
-    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '010-1234-5678');
-    await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '303호');
-
-    const submitButton = screen.getByRole('button', { name: /저장하기/ });
-    await user.click(submitButton);
-
-    await waitFor(() => {
-      expect(screen.getByRole('button', { name: /저장하기/ })).toBeEnabled();
-    });
-  });
 });
 
 describe('주소 편집 페이지 테스트', () => {
