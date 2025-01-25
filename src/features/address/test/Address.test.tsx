@@ -9,7 +9,7 @@ import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 
 import userEvent from "@testing-library/user-event";
-import { mockAddresses, mockDefaultAddressData } from "./data/mockData";
+import { mockAddresses, mockDefaultAddressData } from "./mockData";
 
 mockWindowProperties();
 
