@@ -11,7 +11,7 @@ function excludeTestImages(): PluginOption {
     name: 'exclude-test-images',
     enforce: 'pre',
     load(id: string) {
-      if (id.includes('src/shared/assets/test')) {
+      if (process.env.NODE_ENV === 'production' && id.includes('src/shared/assets/test')) {
         return 'export default ""';
       }
     },
