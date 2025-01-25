@@ -1,7 +1,7 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
-import myAuctionData from '../data/auctionData';
+import myAuctionData from './auctionData';
 
 export const getMyAuctionPreRegister: HttpHandler = http.get(`${API_END_POINT.MY_AUCTION_PRE_REGISTER}`, ({ request }) => {
   const url = new URL(request.url);

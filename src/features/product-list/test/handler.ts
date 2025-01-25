@@ -1,6 +1,6 @@
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { http, HttpHandler, HttpResponse } from 'msw';
-import ongoingProducts from '../data/ongoingData';
+import ongoingProducts from './ongoingData';
 
 export const getOngoingProductList: HttpHandler = http.get(`${API_END_POINT.AUCTION}`, ({ request }) => {
   const url = new URL(request.url);
