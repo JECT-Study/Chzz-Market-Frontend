@@ -1,7 +1,7 @@
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { http, HttpHandler, HttpResponse } from 'msw';
 
-const postSignup: HttpHandler = http.post(`${API_END_POINT.SIGNUP}`, async () => {
+const postSignupHandler: HttpHandler = http.post(`${API_END_POINT.SIGNUP}`, async () => {
   return new HttpResponse(
     JSON.stringify({
       status: 'created',
@@ -16,4 +16,4 @@ const postSignup: HttpHandler = http.post(`${API_END_POINT.SIGNUP}`, async () =>
   );
 });
 
-export default postSignup;
+export default postSignupHandler;
