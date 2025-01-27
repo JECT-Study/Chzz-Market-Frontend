@@ -13,7 +13,11 @@ import { setupWorker } from 'msw/browser';
 import { bidderListHandler } from '@/pages/bidder-list';
 import { getOngoingProductListHandler } from '@/features/product-list/test';
 import { getMyAuctionPreRegisterHandler } from '@/features/user/test';
-import postSignupHandler from '@/features/auth/test/handler';
+import {
+  kakaoLoginHandler,
+  naverLoginHandler,
+  postSignupHandler
+} from '@/features/auth/test';
 
 /* eslint-disable import/no-named-as-default */
 const handlers: HttpHandler[] = [
@@ -21,6 +25,8 @@ const handlers: HttpHandler[] = [
   getOngoingProductListHandler,
   getMyAuctionPreRegisterHandler,
   postSignupHandler,
+  kakaoLoginHandler,
+  naverLoginHandler,
   realTimeNotificationsHandler,
   notificationListHandler,
   notificationReadHandler,
