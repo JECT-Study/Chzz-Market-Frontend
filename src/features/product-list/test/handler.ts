@@ -2,7 +2,7 @@ import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { http, HttpHandler, HttpResponse } from 'msw';
 import ongoingProducts from './ongoingData';
 
-export const getOngoingProductList: HttpHandler = http.get(`${API_END_POINT.AUCTION}`, ({ request }) => {
+export const getOngoingProductListHandler: HttpHandler = http.get(`${API_END_POINT.AUCTION}`, ({ request }) => {
   const url = new URL(request.url);
   const page = url.searchParams.get('page') || '0';
   const limit = url.searchParams.get('limit') || '10';
@@ -70,4 +70,4 @@ export const getOngoingProductList: HttpHandler = http.get(`${API_END_POINT.AUCT
   );
 });
 
-export default { getOngoingProductList };
+export default { getOngoingProductListHandler };
