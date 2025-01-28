@@ -4,13 +4,14 @@ import { Layout } from "@/app/layout";
 import { useCancelBid } from "@/features/bid";
 import { useNavigate } from "react-router-dom";
 import { useGetAuctionDetails } from "../model";
+import type { IAuctionDetails } from "@/entities";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
   const { mutate: cancelBid, isPending } = useCancelBid()
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { details } = useGetAuctionDetails<IAuctionDetails>(auctionId);
 
-  const { isOrdered, isWinner, status, isSeller, bidId, isCancelled, remainingBidCount, isWon } = auctionDetails
+  const { isOrdered, isWinner, status, isSeller, bidId, isCancelled, remainingBidCount, isWon } = details
   const remainFlag = remainingBidCount === MAX_BID_COUNT
   const disabledFlag = remainingBidCount === 0
 

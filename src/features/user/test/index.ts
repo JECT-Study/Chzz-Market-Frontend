@@ -1,1 +1,1 @@
-export * from './handler';
+export { getMyAuctionPreRegisterHandler } from './handler';

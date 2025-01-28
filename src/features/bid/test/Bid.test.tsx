@@ -1,13 +1,13 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
+import { BidForm } from '..';
 import type { IAuctionDetails } from '@/entities';
-import { useGetAuctionDetails } from '@/features/details';
 import { auctionDetailsData } from '@/features/details/test/data';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import userEvent from '@testing-library/user-event';
-import { BidForm } from '..';
+import { useGetAuctionDetails } from '@/features/details';
 import { usePostBid } from '../model';
+import userEvent from '@testing-library/user-event';
 
 vi.mock('@/features/details/model', () => ({
   useGetAuctionDetails: vi.fn(),
@@ -27,7 +27,7 @@ describe('입찰 및 입찰 수정 테스트', () => {
   const setup = (auctionId: number) => {
     const auctionData = auctionDetailsData.find((data) => data.auctionId === auctionId) as IAuctionDetails;
     vi.mocked(useGetAuctionDetails).mockReturnValue({
-      auctionDetails: auctionData
+      details: auctionData
     });
 
     const utils = render(<BidForm auctionId={auctionId} />);

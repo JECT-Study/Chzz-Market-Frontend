@@ -1,5 +1,6 @@
-import { API_END_POINT } from '@/shared/constants/apiEndPoint';
-import { http, HttpHandler, HttpResponse } from 'msw';
+import { HttpHandler, HttpResponse, http } from 'msw';
+
+import { API_END_POINT } from '@/shared';
 
 export const kakaoLoginHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`, async () => {
   const mockResponse = {

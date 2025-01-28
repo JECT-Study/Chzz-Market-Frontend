@@ -6,9 +6,12 @@ import {
   realTimeNotificationsHandler
 } from '@/features/notification';
 
-import { auctionDetailsHandler } from '@/features/details';
-import { homeAuctionsHandler } from '@/pages/home';
 import { HttpHandler } from 'msw';
+import { auctionDetailsHandler } from '@/features/details';
+import { bidderListHandler } from '@/pages/bidder-list';
+import { getMyAuctionPreRegisterHandler } from '@/features/user';
+import { getOngoingProductListHandler } from '@/features/product-list';
+import { homeAuctionsHandler } from '@/pages/home';
 import { setupWorker } from 'msw/browser';
 import { bidderListHandler } from '@/pages/bidder-list';
 import { getOngoingProductListHandler } from '@/features/product-list/test';

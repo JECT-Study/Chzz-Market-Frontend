@@ -1,21 +1,22 @@
 import { AuctionItem, Button, FormField, Input, MAX_BID_COUNT, convertCurrencyToNumber, formatCurrencyWithWon, useToggleState } from "@/shared";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { Layout } from "@/app/layout";
-import { useGetAuctionDetails } from "@/features/details";
-import { useEditableNumberInput } from "@/features/register";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { getBidSchema } from "../config";
-import { usePostBid } from "../model";
 import { BidCaution } from "./BidCaution";
+import type { IAuctionDetails } from "@/entities";
+import { Layout } from "@/app/layout";
+import { getBidSchema } from "../config";
+import { useEditableNumberInput } from "@/features/register";
+import { useGetAuctionDetails } from "@/features/details";
+import { usePostBid } from "../model";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const BidForm = ({ auctionId }: { auctionId: number }) => {
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { details } = useGetAuctionDetails<IAuctionDetails>(auctionId);
   const { mutate: postBid, isPending } = usePostBid(auctionId);
   const [check, toggle] = useToggleState(false)
 
-  const { images, auctionName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = auctionDetails;
+  const { images, auctionName, minPrice, participantCount, remainingBidCount, bidAmount, timeRemaining, isParticipated } = details;
   const BidSchema = getBidSchema(minPrice, bidAmount);
   type FormFields = z.infer<typeof BidSchema>;
   const maxFlag = remainingBidCount === MAX_BID_COUNT

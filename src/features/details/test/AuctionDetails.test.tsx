@@ -1,15 +1,15 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, test, vi } from 'vitest';
 import { AuctionDetailsMain, useGetAuctionDetails } from '..';
+import { describe, expect, test, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 
-import type { IAuctionDetails } from '@/entities';
-import { useCancelBid } from '@/features/bid';
-import { CATEGORIES } from '@/shared';
-import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import { useEndAuction } from '../lib';
+import { CATEGORIES } from '@/shared';
+import type { IAuctionDetails } from '@/entities';
 import { auctionDetailsData } from './data';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { useCancelBid } from '@/features/bid';
+import { useEndAuction } from '../lib';
+import userEvent from '@testing-library/user-event';
 
 vi.mock('@/features/details/model', () => ({
   useGetAuctionDetails: vi.fn(),
@@ -36,7 +36,7 @@ describe('경매 상세 조회 테스트', () => {
   const setup = (auctionId: number) => {
     const auctionData = auctionDetailsData.find((data) => data.auctionId === auctionId) as IAuctionDetails;
     mockUseGetAuctionDetails.mockReturnValue({
-      auctionDetails: auctionData as IAuctionDetails,
+      details: auctionData as IAuctionDetails,
     })
 
     const utils = render(<AuctionDetailsMain auctionId={auctionId} />, { wrapper: BrowserRouter });
