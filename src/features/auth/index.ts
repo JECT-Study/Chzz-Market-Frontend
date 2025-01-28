@@ -1,1 +1,5 @@
-export { kakaoLoginHandler, postSignupHandler } from './test';
+export {
+  kakaoLoginHandler,
+  postSignupHandler,
+  naverLoginHandler
+} from './test';
