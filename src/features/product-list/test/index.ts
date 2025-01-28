@@ -1,1 +1,1 @@
-export * from './handler';
+export { getOngoingProductListHandler } from './handler';

@@ -1,1 +1,1 @@
-export * from './handler';
+export { kakaoLoginHandler, postSignupHandler } from './handler';

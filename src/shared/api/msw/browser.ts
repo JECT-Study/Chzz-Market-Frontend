@@ -1,21 +1,27 @@
 import { heartDeleteHandler, heartHandler } from '@/features/heart';
-import { notificationDeleteHandler, notificationListHandler, notificationReadHandler, realTimeNotificationsHandler } from '@/features/notification';
+import { kakaoLoginHandler, postSignupHandler } from '@/features/auth';
+import {
+  notificationDeleteHandler,
+  notificationListHandler,
+  notificationReadHandler,
+  realTimeNotificationsHandler
+} from '@/features/notification';
 
-import { auctionDetailsHandler } from '@/features/details';
-import { homeAuctionsHandler } from '@/pages/home';
 import { HttpHandler } from 'msw';
-import { setupWorker } from 'msw/browser';
+import { auctionDetailsHandler } from '@/features/details';
 import { bidderListHandler } from '@/pages/bidder-list';
-import { getOngoingProductList } from '@/features/product-list/test';
-import { getMyAuctionPreRegister } from '@/features/user/test';
-import postSignup from '@/features/auth/test/handler';
+import { getMyAuctionPreRegisterHandler } from '@/features/user';
+import { getOngoingProductListHandler } from '@/features/product-list';
+import { homeAuctionsHandler } from '@/pages/home';
+import { setupWorker } from 'msw/browser';
 
 /* eslint-disable import/no-named-as-default */
 const handlers: HttpHandler[] = [
   homeAuctionsHandler,
-  getOngoingProductList,
-  getMyAuctionPreRegister,
-  postSignup,
+  getOngoingProductListHandler,
+  getMyAuctionPreRegisterHandler,
+  postSignupHandler,
+  kakaoLoginHandler,
   realTimeNotificationsHandler,
   notificationListHandler,
   notificationReadHandler,
@@ -23,7 +29,7 @@ const handlers: HttpHandler[] = [
   heartHandler,
   heartDeleteHandler,
   auctionDetailsHandler,
-  bidderListHandler,
+  bidderListHandler
 ];
 
 export const worker = setupWorker(...handlers);
