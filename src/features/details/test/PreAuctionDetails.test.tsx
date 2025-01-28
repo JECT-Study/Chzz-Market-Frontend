@@ -1,19 +1,19 @@
 import { describe, expect, test, vi } from "vitest";
-
-import type { IPreAuctionDetails } from "@/entities";
-import { CATEGORIES } from "@/shared";
-import { mockedUseNavigate } from "@/shared/api/msw/setupTests";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { useConvertAuction, useDeletePreAuction, useGetAuctionDetails, useToggleAuctionDetailsHeart } from "../model";
+
 import { BrowserRouter } from "react-router-dom";
-import { PreAuctionDetailsMain, useGetPreAuctionDetails } from "..";
-import { useConvertAuction, useDeletePreAuction, useToggleAuctionDetailsHeart } from "../model";
+import { CATEGORIES } from "@/shared";
+import type { IPreAuctionDetails } from "@/entities";
+import { PreAuctionDetailsMain } from "..";
 import { auctionDetailsData } from "./data";
+import { mockedUseNavigate } from "@/shared/api/msw/setupTests";
+import userEvent from "@testing-library/user-event";
 
 vi.mock('@/features/details/model', () => ({
   useConvertAuction: vi.fn(),
   useDeletePreAuction: vi.fn(),
-  useGetPreAuctionDetails: vi.fn(),
+  useGetAuctionDetails: vi.fn(),
   useToggleAuctionDetailsHeart: vi.fn(),
 }));
 
@@ -34,13 +34,13 @@ vi.mocked(useToggleAuctionDetailsHeart).mockReturnValue({
   mutate: mockedToggleAuctionDetailsHeart,
 })
 
-const mockUseGetPreAuctionDetails = vi.mocked(useGetPreAuctionDetails);
+const mockUseGetPreAuctionDetails = vi.mocked(useGetAuctionDetails);
 
 describe('사전 경매 상세 조회 테스트', () => {
   const setup = (auctionId: number) => {
     const preAuctionData = auctionDetailsData.find((data) => data.auctionId === auctionId) as IPreAuctionDetails;
     mockUseGetPreAuctionDetails.mockReturnValue({
-      preAuctionDetails: preAuctionData as IPreAuctionDetails,
+      details: preAuctionData as IPreAuctionDetails,
     });
 
     const utils = render(<PreAuctionDetailsMain auctionId={auctionId} />, { wrapper: BrowserRouter });

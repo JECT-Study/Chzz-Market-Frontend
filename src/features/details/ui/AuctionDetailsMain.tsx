@@ -1,6 +1,7 @@
 import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
 import { CarouselItem, CustomCarousel, formatCurrencyWithWon } from "@/shared";
 
+import type { IAuctionDetails } from "@/entities";
 import { Layout } from "@/app/layout";
 import ParticipantAmount from '@/shared/assets/icons/my_participation_amount.svg';
 import Participants from '@/shared/assets/icons/participants.svg';
@@ -8,8 +9,8 @@ import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
 import { useGetAuctionDetails } from "..";
 
 export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
-  const { images, auctionName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled, isSeller } = auctionDetails
+  const { details } = useGetAuctionDetails<IAuctionDetails>(auctionId);
+  const { images, auctionName, timeRemaining, sellerNickname, minPrice, bidAmount, isParticipated, description, participantCount, category, sellerProfileImageUrl, isCancelled, isSeller } = details
 
   return (
     <Layout>

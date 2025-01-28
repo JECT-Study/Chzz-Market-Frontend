@@ -18,7 +18,7 @@ vi.mock('@/pages/bidder-list/model', () => ({
 }));
 
 vi.mocked(useGetAuctionDetails).mockReturnValue({
-  auctionDetails: auctionDetailsData[1] as IAuctionDetails,
+  details: auctionDetailsData[1] as IAuctionDetails,
 })
 vi.mocked(useGetBidderList).mockReturnValue({
   bidderList: bidderListData

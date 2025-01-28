@@ -1,15 +1,12 @@
-import type { IAuctionDetails } from '@/entities';
 import { QUERY_KEYS } from '@/shared';
-import { useSuspenseQuery } from '@tanstack/react-query';
 import { getAuctionDetails } from '../api';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-export const useGetAuctionDetails = (auctionId: number): { auctionDetails: IAuctionDetails } => {
-  const { data: auctionDetails } = useSuspenseQuery({
+export const useGetAuctionDetails = <U>(auctionId: number): { details: U } => {
+  const { data: details } = useSuspenseQuery({
     queryKey: [QUERY_KEYS.AUCTION_DETAILS, auctionId],
-    queryFn: () => getAuctionDetails(auctionId),
+    queryFn: () => getAuctionDetails<U>(auctionId)
   });
 
-  return {
-    auctionDetails,
-  };
+  return { details };
 };

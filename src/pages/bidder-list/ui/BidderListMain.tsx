@@ -1,6 +1,7 @@
 import { AuctionItem, Button, formatCurrencyWithWon } from "@/shared";
 
 import { Layout } from "@/app/layout";
+import type { IAuctionDetails } from "@/entities";
 import { useGetAuctionDetails } from "@/features/details";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +11,15 @@ import { useGetBidderList } from "../model";
 export const BidderListMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
   const navigate = useNavigate()
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { details } = useGetAuctionDetails<IAuctionDetails>(auctionId);
   const { bidderList } = useGetBidderList(auctionId);
+
+  const { images, auctionName, minPrice, participantCount } = details;
 
   const handleFilterState = () =>
     setFilterState((prev) => (prev.name === BIDDER_LIST_PRICE_FILTER.HIGH.name ? BIDDER_LIST_PRICE_FILTER.LOW : BIDDER_LIST_PRICE_FILTER.HIGH));
 
   const filteredBidderList = filterState.sort === 'desc' ? Array.from(bidderList).sort((a, b) => b.bidAmount - a.bidAmount) : Array.from(bidderList).sort((a, b) => a.bidAmount - b.bidAmount)
-
-  const { images, auctionName, minPrice, participantCount } = auctionDetails;
 
   return (
     <Layout>

@@ -1,12 +1,21 @@
 import type { IPreAuctionItem, IPreAuctionList } from '@/entities';
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  UseMutateFunction,
+  useMutation,
+  useQueryClient
+} from '@tanstack/react-query';
 
-import { heartAuction } from '@/features/details/api';
 import { QUERY_KEYS } from '@/shared';
+import { heartAuction } from '@/features/details/api';
 import { toast } from 'sonner';
 
 export const useDeleteHeart = (): {
-  mutate: UseMutateFunction<{ isLiked: boolean; likeCount: number }, Error, number, unknown>;
+  mutate: UseMutateFunction<
+    { isLiked: boolean; likeCount: number },
+    Error,
+    number,
+    unknown
+  >;
 } => {
   const queryClient = useQueryClient();
 
@@ -15,17 +24,25 @@ export const useDeleteHeart = (): {
     onMutate: async (preAuctionId: number) => {
       await queryClient.cancelQueries({ queryKey: [QUERY_KEYS.HEART_LIST] });
       const previousData = queryClient.getQueryData([QUERY_KEYS.HEART_LIST]);
-      queryClient.setQueryData([QUERY_KEYS.HEART_LIST], (oldData: IPreAuctionList) => {
-        if (!oldData) return oldData;
+      queryClient.setQueryData(
+        [QUERY_KEYS.HEART_LIST],
+        (oldData: IPreAuctionList) => {
+          if (!oldData) return oldData;
 
-        return { ...oldData, items: oldData.items.filter((el: IPreAuctionItem) => el.auctionId !== preAuctionId) };
-      });
+          return {
+            ...oldData,
+            items: oldData.items.filter(
+              (el: IPreAuctionItem) => el.auctionId !== preAuctionId
+            )
+          };
+        }
+      );
 
       return { previousData };
     },
     onSuccess: (_, preAuctionId: number) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId],
+        queryKey: [QUERY_KEYS.AUCTION_DETAILS, preAuctionId]
       });
     },
     onError: (_err, _var, context) => {
@@ -36,9 +53,9 @@ export const useDeleteHeart = (): {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.HEART_LIST],
+        queryKey: [QUERY_KEYS.HEART_LIST]
       });
-    },
+    }
   });
 
   return { mutate };
