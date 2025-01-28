@@ -1,5 +1,4 @@
 import { heartDeleteHandler, heartHandler } from '@/features/heart';
-import { kakaoLoginHandler, postSignupHandler } from '@/features/auth';
 import {
   notificationDeleteHandler,
   notificationListHandler,
@@ -14,6 +13,14 @@ import { getMyAuctionPreRegisterHandler } from '@/features/user';
 import { getOngoingProductListHandler } from '@/features/product-list';
 import { homeAuctionsHandler } from '@/pages/home';
 import { setupWorker } from 'msw/browser';
+import { bidderListHandler } from '@/pages/bidder-list';
+import { getOngoingProductListHandler } from '@/features/product-list/test';
+import { getMyAuctionPreRegisterHandler } from '@/features/user/test';
+import {
+  kakaoLoginHandler,
+  naverLoginHandler,
+  postSignupHandler
+} from '@/features/auth/test';
 
 /* eslint-disable import/no-named-as-default */
 const handlers: HttpHandler[] = [
@@ -22,6 +29,7 @@ const handlers: HttpHandler[] = [
   getMyAuctionPreRegisterHandler,
   postSignupHandler,
   kakaoLoginHandler,
+  naverLoginHandler,
   realTimeNotificationsHandler,
   notificationListHandler,
   notificationReadHandler,

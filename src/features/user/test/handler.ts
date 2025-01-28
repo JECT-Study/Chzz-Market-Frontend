@@ -1,15 +1,12 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { API_END_POINT } from '@/shared';
 import myAuctionData from './auctionData';
 
-export const getMyAuctionPreRegisterHandler: HttpHandler = http.get(
-  `${import.meta.env.VITE_API_URL}${API_END_POINT.MY_AUCTION_PRE_REGISTER}`,
-  ({ request }) => {
-    const url = new URL(request.url);
-    const page = url.searchParams.get('page') || '0';
-    const size = url.searchParams.get('size') || '5';
-
+export const getMyAuctionPreRegisterHandler: HttpHandler = http.get(`${API_END_POINT.MY_AUCTION_PRE_REGISTER}`, ({ request }) => {
+  const url = new URL(request.url);
+  const page = url.searchParams.get('page') || '0';
+  const size = url.searchParams.get('size') || '5';
     const startIndex = Number(page) * Number(size);
     const endIndex = startIndex + Number(size);
     const paginatedContent = myAuctionData.content.slice(startIndex, endIndex);
@@ -21,14 +18,14 @@ export const getMyAuctionPreRegisterHandler: HttpHandler = http.get(
         pageable: {
           ...myAuctionData.pageable,
           pageNumber: Number(page),
-          pageSize: Number(size)
+          pageSize: Number(size),
         },
         last: page === (myAuctionData.totalPages - 1).toString(),
-        numberOfElements: paginatedContent.length
+        numberOfElements: paginatedContent.length,
       }),
       {
         status: 200,
-        statusText: 'OK'
+        statusText: 'OK',
       }
     );
   }
