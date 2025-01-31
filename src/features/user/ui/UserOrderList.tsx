@@ -1,8 +1,8 @@
 import { useAuth } from '@/features/auth/hooks';
 import { IoIosArrowForward } from 'react-icons/io';
-import { useDeleteUsers } from '../model/useDeleteUsers';
 import { useNavigate } from 'react-router-dom';
 import { Button, Confirm, Modal, removeToken } from '@/shared';
+import { useDeleteUsers } from '../model/useDeleteUsers';
 
 export const UserOrderList = () => {
   const { handleLogout } = useAuth();

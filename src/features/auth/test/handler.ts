@@ -1,6 +1,6 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
+import { API_END_POINT, setToken } from '@/shared';
 
 export const kakaoLoginHandler: HttpHandler = http.get(`${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`, async () => {
   const mockResponse = {
@@ -15,7 +15,7 @@ export const kakaoLoginHandler: HttpHandler = http.get(`${import.meta.env.VITE_A
 
   document.cookie = `REFRESH=${mockResponse.data.refreshToken}; Path=/;`;
 
-  localStorage.setItem('accessToken', mockResponse.data.accessToken);
+  setToken(mockResponse.data.accessToken);
 
   return new HttpResponse(JSON.stringify(mockResponse), {
     status: 200,
@@ -39,6 +39,8 @@ export const naverLoginHandler: HttpHandler = http.get(`${import.meta.env.VITE_A
   document.cookie = `REFRESH=${mockResponse.data.refreshToken}; Path=/;`;
 
   localStorage.setItem('accessToken', mockResponse.data.accessToken);
+
+  setToken(mockResponse.data.accessToken);
 
   return new HttpResponse(JSON.stringify(mockResponse), {
     status: 200,
