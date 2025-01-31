@@ -18,7 +18,7 @@ export const useConvertAuction = (
     onSuccess: () => {
       navigate(ROUTES.AUCTION.getItemRoute(preAuctionId), { replace: true });
       toast.success('경매로 전환되었습니다.');
-    },
+    }
   });
 
   return { mutate, isPending };

@@ -5,7 +5,7 @@ import { getPreAuctions } from '../api';
 export const useGetPreAuctions = () => {
   const { data: preAuctions } = useSuspenseQuery({
     queryKey: [QUERY_KEYS.PRE_AUCTIONS],
-    queryFn: getPreAuctions,
+    queryFn: getPreAuctions
   });
 
   return { preAuctions: preAuctions.items };

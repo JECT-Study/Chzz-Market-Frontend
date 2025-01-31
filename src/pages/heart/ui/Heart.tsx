@@ -1,5 +1,5 @@
-import { HeartList } from "@/features/heart";
+import { HeartList } from '@/features/heart';
 
 export const Heart = () => {
-  return <HeartList />
+  return <HeartList />;
 };

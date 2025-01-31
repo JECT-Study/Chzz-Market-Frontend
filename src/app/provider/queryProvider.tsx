@@ -11,7 +11,10 @@ interface ReactQueryProviderProps {
   showDevTools?: boolean;
 }
 
-export const ReactQueryProvider = ({ showDevTools = false, children }: ReactQueryProviderProps) => {
+export const ReactQueryProvider = ({
+  showDevTools = false,
+  children
+}: ReactQueryProviderProps) => {
   const [client] = useState(
     new QueryClient({
       defaultOptions: {
@@ -20,23 +23,23 @@ export const ReactQueryProvider = ({ showDevTools = false, children }: ReactQuer
           retryOnMount: true,
           refetchOnReconnect: false,
           retry: false,
-          throwOnError: true,
+          throwOnError: true
         },
         mutations: {
           throwOnError: false,
           onError: (error) => {
             if (error instanceof AxiosError) {
-              const { description } = getErrorByCode(error)
+              const { description } = getErrorByCode(error);
               toast.error(description);
             }
-          },
-        },
-      },
+          }
+        }
+      }
     })
   );
   return (
     <QueryClientProvider client={client}>
-      {showDevTools && <ReactQueryDevtools buttonPosition='bottom-left' />}
+      {showDevTools && <ReactQueryDevtools buttonPosition="bottom-left" />}
       {children}
     </QueryClientProvider>
   );

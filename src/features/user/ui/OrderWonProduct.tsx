@@ -5,11 +5,16 @@ import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router-dom';
 
-export const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) => {
+export const OrderWonProduct = ({
+  product
+}: {
+  product: IUserAuctionWonItem;
+}) => {
   const navigate = useNavigate();
   const formatted = formatCurrencyWithWon(product.winningAmount);
 
-  const handleProductClick = () => navigate(ROUTES.AUCTION.getItemRoute(product.auctionId));
+  const handleProductClick = () =>
+    navigate(ROUTES.AUCTION.getItemRoute(product.auctionId));
 
   const handleButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -18,17 +23,21 @@ export const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) =
     } else {
       navigate(`/payment/success?auctionId=${product.auctionId}`);
     }
-  }
+  };
 
   return (
-    <div key={product.auctionId} className="p-1 mb-4 cursor-pointer" onClick={handleProductClick}>
+    <div
+      key={product.auctionId}
+      className="p-1 mb-4 cursor-pointer"
+      onClick={handleProductClick}
+    >
       <div className="flex flex-col">
         <div className="w-full h-auto mb-4">
           <div className="relative">
             <img
               className="object-cover w-[10rem] h-[7.5rem] web:w-full web:h-[15rem] rounded-t"
               src={product.imageUrl}
-              alt={product.auctionName || "제품 사진"}
+              alt={product.auctionName || '제품 사진'}
             />
             {product.isOrdered ? (
               <div
@@ -50,14 +59,20 @@ export const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) =
 
         <div className="flex flex-col gap-[2px] web:gap-[4px]">
           <div>
-            <p className="text-body2 web:text-heading3">{product.auctionName}</p>
+            <p className="text-body2 web:text-heading3">
+              {product.auctionName}
+            </p>
           </div>
           <div className="flex flex-col">
             <div
               aria-label="시작가"
               className="flex items-center text-body2 web:text-body1 text-gray2"
             >
-              <img src={trophyImage} alt="트로피" className="w-[20px] h-[19px]" />
+              <img
+                src={trophyImage}
+                alt="트로피"
+                className="w-[20px] h-[19px]"
+              />
               <span className="overflow-hidden whitespace-nowrap pt-[2px]">
                 <span className="ml-1 text-xs text-black web:text-body2Bold">
                   {formatted}
@@ -65,15 +80,15 @@ export const OrderWonProduct = ({ product }: { product: IUserAuctionWonItem }) =
               </span>
             </div>
             <ParticipantCount count={product.participantCount} />
-            <div className='flex items-center justify-center pt-1'>
+            <div className="flex items-center justify-center pt-1">
               <button
                 type="button"
                 onClick={handleButtonClick}
-                className={
-                  `w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
-                  ${product.isOrdered
-                    ? 'bg-gray3 border-none'
-                    : 'bg-gray1 text-white border-none'
+                className={`w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
+                  ${
+                    product.isOrdered
+                      ? 'bg-gray3 border-none'
+                      : 'bg-gray1 text-white border-none'
                   }
                 `}
               >

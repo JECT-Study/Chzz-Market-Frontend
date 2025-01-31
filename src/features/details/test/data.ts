@@ -14,16 +14,16 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanRedImage,
+        imageUrl: jordanRedImage
       },
       {
         imageId: 1,
-        imageUrl: newBalanceImage,
+        imageUrl: newBalanceImage
       },
       {
         imageId: 2,
-        imageUrl: jordanBlackImage,
-      },
+        imageUrl: jordanBlackImage
+      }
     ],
     minPrice: 100_000,
     timeRemaining: 50_400,
@@ -41,7 +41,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'FASHION_AND_CLOTHING',
     isWinner: false,
     isWon: false,
-    isOrdered: false,
+    isOrdered: false
   },
   // 판매자 및 경매 종료 예시
   {
@@ -50,8 +50,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlackImage,
-      },
+        imageUrl: jordanBlackImage
+      }
     ],
     minPrice: 120_000,
     timeRemaining: 3,
@@ -69,7 +69,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'ELECTRONICS',
     isWinner: false,
     isWon: true,
-    isOrdered: false,
+    isOrdered: false
   },
   // 경매 취소 예시
   {
@@ -78,12 +78,12 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlueImage,
+        imageUrl: jordanBlueImage
       },
       {
         imageId: 1,
-        imageUrl: newBalanceImage,
-      },
+        imageUrl: newBalanceImage
+      }
     ],
     minPrice: 180_000,
     timeRemaining: 82_800,
@@ -101,7 +101,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'BOOKS_AND_MEDIA',
     isWinner: false,
     isWon: false,
-    isOrdered: false,
+    isOrdered: false
   },
   // 경매 참여자, 소진 예시
   {
@@ -110,8 +110,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: newBalanceImage,
-      },
+        imageUrl: newBalanceImage
+      }
     ],
     minPrice: 230_000,
     timeRemaining: 3600,
@@ -129,7 +129,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'ELECTRONICS',
     isWinner: false,
     isWon: false,
-    isOrdered: false,
+    isOrdered: false
   },
   // 경매 참여자, 종료 예시
   {
@@ -138,12 +138,12 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: adidasImage,
+        imageUrl: adidasImage
       },
       {
         imageId: 1,
-        imageUrl: newBalanceImage,
-      },
+        imageUrl: newBalanceImage
+      }
     ],
     minPrice: 70_000,
     timeRemaining: 2,
@@ -161,7 +161,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'ELECTRONICS',
     isWinner: false,
     isWon: false,
-    isOrdered: false,
+    isOrdered: false
   },
   // 판매자, 종료된 경매, 참여자 없음 예시
   {
@@ -170,8 +170,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlackImage,
-      },
+        imageUrl: jordanBlackImage
+      }
     ],
     minPrice: 120_000,
     timeRemaining: 0,
@@ -189,7 +189,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'ELECTRONICS',
     isWinner: false,
     isWon: false,
-    isOrdered: false,
+    isOrdered: false
   },
   // 판매자, 종료된 경매, 참여자 있음 예시
   {
@@ -198,8 +198,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlackImage,
-      },
+        imageUrl: jordanBlackImage
+      }
     ],
     minPrice: 120_000,
     timeRemaining: 0,
@@ -217,7 +217,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'ELECTRONICS',
     isWinner: false,
     isWon: true,
-    isOrdered: false,
+    isOrdered: false
   },
   // 구매자, 종료된 경매, 참여자 하지 않은 예시
   {
@@ -226,8 +226,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlackImage,
-      },
+        imageUrl: jordanBlackImage
+      }
     ],
     minPrice: 120_000,
     timeRemaining: 0,
@@ -245,7 +245,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'ELECTRONICS',
     isWinner: false,
     isWon: false,
-    isOrdered: false,
+    isOrdered: false
   },
   // 구매자, 종료된 경매, 낙찰받은 예시
   {
@@ -254,8 +254,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlackImage,
-      },
+        imageUrl: jordanBlackImage
+      }
     ],
     minPrice: 120_000,
     timeRemaining: 0,
@@ -273,7 +273,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'ELECTRONICS',
     isWinner: true,
     isWon: false,
-    isOrdered: false,
+    isOrdered: false
   },
   // 구매자, 종료된 경매, 결제한 예시
   {
@@ -282,8 +282,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlackImage,
-      },
+        imageUrl: jordanBlackImage
+      }
     ],
     minPrice: 120_000,
     timeRemaining: 0,
@@ -301,7 +301,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     category: 'ELECTRONICS',
     isWinner: true,
     isWon: false,
-    isOrdered: true,
+    isOrdered: true
   },
 
   // 사전 경매
@@ -315,16 +315,16 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: newBalanceImage,
+        imageUrl: newBalanceImage
       },
       {
         imageId: 1,
-        imageUrl: adidasImage,
+        imageUrl: adidasImage
       },
       {
         imageId: 2,
-        imageUrl: jordanBlackImage,
-      },
+        imageUrl: jordanBlackImage
+      }
     ],
     minPrice: 230_000,
     description: '뉴발란스 993입니다.',
@@ -332,7 +332,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     sellerNickname: 'seller',
     sellerProfileImageUrl: jordanBlueImage,
     status: 'PROCEEDING',
-    category: 'FASHION_AND_CLOTHING',
+    category: 'FASHION_AND_CLOTHING'
   },
   // 구매자, 좋아요
   {
@@ -344,8 +344,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlueImage,
-      },
+        imageUrl: jordanBlueImage
+      }
     ],
     minPrice: 180_000,
     description: '에어 조던 블루입니다.',
@@ -353,7 +353,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     sellerNickname: 'seller',
     sellerProfileImageUrl: newBalanceImage,
     status: 'PROCEEDING',
-    category: 'ELECTRONICS',
+    category: 'ELECTRONICS'
   },
   // 구매자, 좋아요 안 함
   {
@@ -365,8 +365,8 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlueImage,
-      },
+        imageUrl: jordanBlueImage
+      }
     ],
     minPrice: 180_000,
     description: '에어 조던 블루입니다.',
@@ -374,6 +374,6 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     sellerNickname: 'seller',
     sellerProfileImageUrl: newBalanceImage,
     status: 'PROCEEDING',
-    category: 'ELECTRONICS',
-  },
+    category: 'ELECTRONICS'
+  }
 ];

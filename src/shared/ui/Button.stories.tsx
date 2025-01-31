@@ -10,54 +10,57 @@ const meta: Meta<typeof Button> = {
       description: '버튼의 크기를 설정합니다.',
       table: {
         type: { summary: `'xsmall' | 'small' | 'medium' | 'large'` },
-        defaultValue: { summary: 'medium' },
+        defaultValue: { summary: 'medium' }
       },
       control: 'select',
-      options: ['xsmall', 'small', 'medium', 'large'],
+      options: ['xsmall', 'small', 'medium', 'large']
     },
     color: {
       description: '버튼의 배경 색상을 설정합니다.',
       table: {
-        type: { summary: `'white' | 'black' | 'gray' | 'cheeseYellow' | 'disabled'` },
-        defaultValue: { summary: 'white' },
+        type: {
+          summary: `'white' | 'black' | 'gray' | 'cheeseYellow' | 'disabled'`
+        },
+        defaultValue: { summary: 'white' }
       },
       control: 'select',
-      options: ['white', 'black', 'gray', 'cheeseYellow', 'disabled'],
+      options: ['white', 'black', 'gray', 'cheeseYellow', 'disabled']
     },
     hoverColor: {
       description: '호버 상태에서의 색상을 설정합니다.',
       table: {
         type: { summary: `'black' | 'white'` },
-        defaultValue: { summary: '' },
+        defaultValue: { summary: '' }
       },
       control: 'select',
-      options: ['black', 'white', ''],
+      options: ['black', 'white', '']
     },
     loading: {
       description: '로딩 스피너를 표시할지 여부를 설정합니다.',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
+        defaultValue: { summary: 'false' }
       },
-      control: 'boolean',
+      control: 'boolean'
     },
     disabled: {
       description: '버튼 활성화 여부를 설정합니다.',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
+        defaultValue: { summary: 'false' }
       },
-      control: 'boolean',
+      control: 'boolean'
     },
-    onClick: { action: 'clicked' }, // 클릭 이벤트
+    onClick: { action: 'clicked' } // 클릭 이벤트
   },
   parameters: {
     docs: {
       description: {
-        component: 'Button은 다양한 크기, 색상, 상태를 지원하는 UI 컴포넌트입니다.', // 컴포넌트 설명
-      },
-    },
-  },
+        component:
+          'Button은 다양한 크기, 색상, 상태를 지원하는 UI 컴포넌트입니다.' // 컴포넌트 설명
+      }
+    }
+  }
 };
 
 export default meta;
@@ -72,8 +75,8 @@ export const Default: Story = {
     hoverColor: '',
     disabled: false,
     loading: false,
-    type: 'button',
-  },
+    type: 'button'
+  }
 };
 
 export const Disabled: Story = {
@@ -84,8 +87,8 @@ export const Disabled: Story = {
     hoverColor: '',
     disabled: true,
     loading: false,
-    type: 'button',
-  },
+    type: 'button'
+  }
 };
 
 export const Loading: Story = {
@@ -96,8 +99,8 @@ export const Loading: Story = {
     hoverColor: '',
     disabled: false,
     loading: true,
-    type: 'button',
-  },
+    type: 'button'
+  }
 };
 
 export const LargeButton: Story = {
@@ -108,6 +111,6 @@ export const LargeButton: Story = {
     hoverColor: 'black',
     disabled: false,
     loading: false,
-    type: 'button',
-  },
+    type: 'button'
+  }
 };

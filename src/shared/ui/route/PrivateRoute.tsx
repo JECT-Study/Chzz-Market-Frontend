@@ -7,7 +7,7 @@ export const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const isLogin = useSelector(isLoggedIn);
 
   if (!isLogin) {
-    return <Navigate to='/login' replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;

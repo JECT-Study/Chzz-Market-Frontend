@@ -15,7 +15,7 @@ export const usePostAuction = (): {
     onSuccess: () => {
       toast.success('경매가 등록되었습니다.');
       navigate('/');
-    },
+    }
   });
 
   return { mutate, isPending };

@@ -1,18 +1,24 @@
-import { nicknameCheck } from "@/features/auth/api";
-import { QUERY_KEYS } from "@/shared";
-import { QueryObserverResult, RefetchOptions, useQuery } from "@tanstack/react-query";
+import { nicknameCheck } from '@/features/auth/api';
+import { QUERY_KEYS } from '@/shared';
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  useQuery
+} from '@tanstack/react-query';
 
 export const useCheckNickname = ({
-  nickname,
+  nickname
 }: {
   nickname: string;
 }): {
-  checkNickname: (options?: RefetchOptions) => Promise<QueryObserverResult<any, Error>>;
+  checkNickname: (
+    options?: RefetchOptions
+  ) => Promise<QueryObserverResult<any, Error>>;
 } => {
   const { refetch: checkNickname } = useQuery({
     queryKey: [QUERY_KEYS.NICKNAME, nickname],
     queryFn: () => nicknameCheck(nickname),
-    enabled: false,
+    enabled: false
   });
 
   return { checkNickname };

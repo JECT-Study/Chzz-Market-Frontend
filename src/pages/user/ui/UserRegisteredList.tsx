@@ -1,8 +1,15 @@
-import type { IAuctionEndRegisteredItem, IAuctionOngoingRegisteredItem } from '@/entities';
+import type {
+  IAuctionEndRegisteredItem,
+  IAuctionOngoingRegisteredItem
+} from '@/entities';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useMyAuctionList } from '@/features/user/model';
-import { EndMyRegister, OngoingMyRegister, UserOrderTab } from '@/features/user/ui';
+import {
+  EndMyRegister,
+  OngoingMyRegister,
+  UserOrderTab
+} from '@/features/user/ui';
 import { EmptyBoundary } from '@/shared';
 import { useLocation } from 'react-router-dom';
 
@@ -13,8 +20,14 @@ export const UserRegisteredList = () => {
   const loader = useRef(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
-  const { ongoingData, endData, fetchNextOngoingPage, fetchNextEndPage, hasNextOngoingPage, hasNextEndPage } =
-    useMyAuctionList(activeTab);
+  const {
+    ongoingData,
+    endData,
+    fetchNextOngoingPage,
+    fetchNextEndPage,
+    hasNextOngoingPage,
+    hasNextEndPage
+  } = useMyAuctionList(activeTab);
 
   const ongoingItems = ongoingData?.pages[0]?.items || [];
   const endItems = endData?.pages[0]?.items || [];
@@ -38,7 +51,7 @@ export const UserRegisteredList = () => {
     const options = {
       root: mainContainerRef.current,
       rootMargin: '0px',
-      threshold: 1.0,
+      threshold: 1.0
     };
     const observer = new IntersectionObserver(handleObserver, options);
 
@@ -52,18 +65,29 @@ export const UserRegisteredList = () => {
         observer.unobserve(currentLoader);
       }
     };
-  }, [fetchNextOngoingPage, fetchNextEndPage, hasNextOngoingPage, hasNextEndPage, handleObserver]);
+  }, [
+    fetchNextOngoingPage,
+    fetchNextEndPage,
+    hasNextOngoingPage,
+    hasNextEndPage,
+    handleObserver
+  ]);
 
   return (
-    <div className='mx-[-32px] my-[-4px] h-full'>
+    <div className="mx-[-32px] my-[-4px] h-full">
       <UserOrderTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <EmptyBoundary type='userAuction' length={activeTab === 'ongoing' ? ongoingItems.length : endItems.length}>
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
-          {activeTab === 'ongoing' ? ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
-            <OngoingMyRegister product={product} key={product.auctionId} />
-          )) : endItems.map((product: IAuctionEndRegisteredItem) => (
-            <EndMyRegister product={product} key={product.auctionId} />
-          ))}
+      <EmptyBoundary
+        type="userAuction"
+        length={activeTab === 'ongoing' ? ongoingItems.length : endItems.length}
+      >
+        <div className="grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto">
+          {activeTab === 'ongoing'
+            ? ongoingItems.map((product: IAuctionOngoingRegisteredItem) => (
+                <OngoingMyRegister product={product} key={product.auctionId} />
+              ))
+            : endItems.map((product: IAuctionEndRegisteredItem) => (
+                <EndMyRegister product={product} key={product.auctionId} />
+              ))}
         </div>
       </EmptyBoundary>
     </div>

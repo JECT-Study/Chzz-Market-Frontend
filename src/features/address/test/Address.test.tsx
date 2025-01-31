@@ -1,15 +1,29 @@
-import * as queries from "@/features/address/api/index";
+import * as queries from '@/features/address/api/index';
 
-import { useDeleteAddress, useEditAddress, useGetAddresses, usePostAddress } from "@/features/address/model/index";
-import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList } from "@/pages/payment";
-import { mockWindowProperties, mockedUseNavigate } from "@/shared/api/msw/setupTests";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen, waitFor } from "@testing-library/react";
-import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
-import { describe, expect, test, vi } from "vitest";
+import {
+  useDeleteAddress,
+  useEditAddress,
+  useGetAddresses,
+  usePostAddress
+} from '@/features/address/model/index';
+import {
+  Payment,
+  PaymentAddressAdd,
+  PaymentAddressEdit,
+  PaymentAddressEditList,
+  PaymentAddressList
+} from '@/pages/payment';
+import {
+  mockWindowProperties,
+  mockedUseNavigate
+} from '@/shared/api/msw/setupTests';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { describe, expect, test, vi } from 'vitest';
 
-import userEvent from "@testing-library/user-event";
-import { mockAddresses, mockDefaultAddressData } from "./mockData";
+import userEvent from '@testing-library/user-event';
+import { mockAddresses, mockDefaultAddressData } from './mockData';
 
 mockWindowProperties();
 
@@ -17,13 +31,17 @@ mockWindowProperties();
 vi.mock('@/features/address/model/index', () => ({
   usePostOrderId: () => ({
     createId: vi.fn(),
-    orderId: "123",
-    isPending: false,
+    orderId: '123',
+    isPending: false
   }),
   usePostPayment: () => ({
-    auctionData: { auctionName: "테스트 상품", imageUrl: "test.jpg", winningAmount: 30000 },
+    auctionData: {
+      auctionName: '테스트 상품',
+      imageUrl: 'test.jpg',
+      winningAmount: 30000
+    },
     DefaultAddressData: mockDefaultAddressData,
-    postPayment: vi.fn(),
+    postPayment: vi.fn()
   }),
   useGetAddresses: vi.fn(() => ({
     addressData: mockAddresses.addressData,
@@ -32,25 +50,25 @@ vi.mock('@/features/address/model/index', () => ({
       error: null,
       isLoading: false,
       isError: false,
-      isSuccess: true,
-    }),
+      isSuccess: true
+    })
   })),
   useDeleteAddress: vi.fn(() => ({ deleteData: vi.fn() })),
   usePostAddress: vi.fn(() => ({ mutate: vi.fn(), isPending: false })),
-  useEditAddress: vi.fn(() => ({ mutate: vi.fn(), isPending: false })),
+  useEditAddress: vi.fn(() => ({ mutate: vi.fn(), isPending: false }))
 }));
 
 vi.mocked(useGetAddresses).mockReturnValue({
   addressData: mockAddresses.addressData,
   refetchAddresses: vi.fn().mockResolvedValue({
     data: {
-      items: [],
+      items: []
     },
     error: null,
     isLoading: false,
     isError: false,
-    isSuccess: true,
-  }),
+    isSuccess: true
+  })
 });
 
 vi.mocked(useDeleteAddress).mockReturnValue({
@@ -60,20 +78,20 @@ vi.mocked(useDeleteAddress).mockReturnValue({
 const postMutateMock = vi.fn();
 vi.mocked(usePostAddress).mockReturnValue({
   mutate: postMutateMock,
-  isPending: false,
+  isPending: false
 });
 
 const editMutateMock = vi.fn();
 vi.mocked(useEditAddress).mockReturnValue({
   mutate: editMutateMock,
-  isPending: false,
+  isPending: false
 });
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
     ...actual,
-    useNavigate: vi.fn(() => mockedUseNavigate),
+    useNavigate: vi.fn(() => mockedUseNavigate)
   };
 });
 
@@ -98,7 +116,7 @@ describe('결제하기 페이지 테스트', () => {
     setup();
 
     const auctionName = screen.getByText(/테스트 상품/);
-    const productPrice = screen.getByText(/30,000\s*원/)
+    const productPrice = screen.getByText(/30,000\s*원/);
     const recipientName = screen.getByText(/홍길동/);
 
     expect(auctionName).toBeInTheDocument();
@@ -121,11 +139,15 @@ describe('결제하기 페이지 테스트', () => {
   test('배송지 목록 버튼 클릭 시 주소 목록 페이지로 이동한다.', async () => {
     const { user, mockedUseNavigate } = setup();
 
-    const addressListButton = screen.getByRole('button', { name: /배송지 목록/ });
+    const addressListButton = screen.getByRole('button', {
+      name: /배송지 목록/
+    });
     await user.click(addressListButton);
 
     await waitFor(() => {
-      expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/1/payment/address-list');
+      expect(mockedUseNavigate).toHaveBeenCalledWith(
+        '/auctions/1/payment/address-list'
+      );
     });
   });
 
@@ -148,7 +170,7 @@ describe('결제하기 페이지 테스트', () => {
 
     await user.clear(memoInput);
 
-    expect(memoSelect).not.toBeDisabled();
+    expect(memoSelect).toBeEnabled();
   });
 
   test('isPending 값이 false이고 address 값이 유효하면 결제 버튼이 활성화된다.', async () => {
@@ -157,8 +179,8 @@ describe('결제하기 페이지 테스트', () => {
     const submitButton = screen.getByRole('button', { name: /결제하기/ });
 
     await waitFor(() => {
-      expect(submitButton).not.toBeDisabled();
-    })
+      expect(submitButton).toBeEnabled();
+    });
     screen.debug();
   });
 
@@ -181,7 +203,7 @@ describe('결제하기 페이지 테스트', () => {
     });
 
     await user.click(submitButton);
-  })
+  });
 });
 
 describe('주소 목록 페이지 테스트', () => {
@@ -196,7 +218,10 @@ describe('주소 목록 페이지 테스트', () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={['/auctions/1/address-list']}>
           <Routes>
-            <Route path="/auctions/:auctionId/address-list" element={<PaymentAddressList />} />
+            <Route
+              path="/auctions/:auctionId/address-list"
+              element={<PaymentAddressList />}
+            />
           </Routes>
         </MemoryRouter>
       </QueryClientProvider>
@@ -220,18 +245,21 @@ describe('주소 목록 페이지 테스트', () => {
 
     await user.click(editButton);
 
-    expect(mockNavigate).toHaveBeenCalledWith(expect.stringContaining('/payment/address-edit-list'));
+    expect(mockNavigate).toHaveBeenCalledWith(
+      expect.stringContaining('/payment/address-edit-list')
+    );
   });
 
   test('배송지 추가 input 클릭 시 Daum 주소 검색 창 열리고 배송지 추가 페이지로 이동', async () => {
     const { user, mockNavigate } = setup();
-    const searchInput = screen.getByPlaceholderText(/지번, 도로명, 건물명으로 검색/);
+    const searchInput =
+      screen.getByPlaceholderText(/지번, 도로명, 건물명으로 검색/);
 
     const mockOpen = vi.fn();
     window.daum = {
       Postcode: vi.fn().mockImplementation(() => ({
-        open: mockOpen,
-      })),
+        open: mockOpen
+      }))
     };
 
     await user.click(searchInput);
@@ -239,7 +267,10 @@ describe('주소 목록 페이지 테스트', () => {
     expect(window.daum.Postcode).toHaveBeenCalled();
     expect(mockOpen).toHaveBeenCalled();
 
-    window.daum.Postcode.mock.calls[0][0].onComplete({ address: '서울특별시 종로구', zonecode: '03001' });
+    window.daum.Postcode.mock.calls[0][0].onComplete({
+      address: '서울특별시 종로구',
+      zonecode: '03001'
+    });
 
     expect(mockNavigate).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledWith(
@@ -248,8 +279,8 @@ describe('주소 목록 페이지 테스트', () => {
         state: {
           roadAddress: '서울특별시 종로구',
           zonecode: '03001',
-          jibunAddress: undefined, // 또는 예상되는 값을 설정
-        },
+          jibunAddress: undefined // 또는 예상되는 값을 설정
+        }
       }
     );
   });
@@ -280,31 +311,49 @@ describe('주소 목록 페이지 테스트', () => {
 
   test('배송지 선택 완료 버튼 클릭 시 navigate 호출', async () => {
     const { user, mockNavigate } = setup();
-    const selectButton = screen.getByRole('button', { name: /배송지 선택 완료/ });
+    const selectButton = screen.getByRole('button', {
+      name: /배송지 선택 완료/
+    });
 
     await user.click(selectButton);
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(expect.stringContaining('/auctions/1'), {
-        state: expect.objectContaining({
-          address: expect.any(Object),
-        }),
-        replace: true,
-      });
+      expect(mockNavigate).toHaveBeenCalledWith(
+        expect.stringContaining('/auctions/1'),
+        {
+          state: expect.objectContaining({
+            address: expect.any(Object)
+          }),
+          replace: true
+        }
+      );
     });
   });
 });
 
 describe('주소 추가 페이지 테스트', () => {
-  const setup = (initialState = { roadAddress: '서울특별시 종로구', zonecode: '03001', jibunAddress: '종로 1가' }) => {
+  const setup = (
+    initialState = {
+      roadAddress: '서울특별시 종로구',
+      zonecode: '03001',
+      jibunAddress: '종로 1가'
+    }
+  ) => {
     const user = userEvent.setup();
     vi.mocked(useNavigate).mockReturnValue(mockedUseNavigate);
 
     render(
       <QueryClientProvider client={new QueryClient()}>
-        <MemoryRouter initialEntries={[{ pathname: '/auctions/1/address-add', state: initialState }]}>
+        <MemoryRouter
+          initialEntries={[
+            { pathname: '/auctions/1/address-add', state: initialState }
+          ]}
+        >
           <Routes>
-            <Route path="/auctions/:auctionId/address-add" element={<PaymentAddressAdd />} />
+            <Route
+              path="/auctions/:auctionId/address-add"
+              element={<PaymentAddressAdd />}
+            />
           </Routes>
         </MemoryRouter>
       </QueryClientProvider>
@@ -317,32 +366,55 @@ describe('주소 추가 페이지 테스트', () => {
     setup();
 
     expect(screen.getByRole('textbox', { name: /이름/ })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /우편번호/ })).toBeInTheDocument();
+    expect(
+      screen.getByRole('textbox', { name: /휴대폰 번호/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('textbox', { name: /우편번호/ })
+    ).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /주소지/ })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /상세주소/ })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /우편번호 찾기/ })).toBeInTheDocument();
-    expect(screen.getByRole('checkbox', { name: /기본 배송지로 설정/ })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /저장하기/ })).toBeInTheDocument();
+    expect(
+      screen.getByRole('textbox', { name: /상세주소/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /우편번호 찾기/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('checkbox', { name: /기본 배송지로 설정/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /저장하기/ })
+    ).toBeInTheDocument();
   });
 
   test('초기 상태 값이 올바르게 렌더링 되는지', () => {
     setup();
 
-    expect(screen.getByRole('textbox', { name: /주소지/ })).toHaveValue('서울특별시 종로구');
-    expect(screen.getByRole('textbox', { name: /우편번호/ })).toHaveValue('03001');
+    expect(screen.getByRole('textbox', { name: /주소지/ })).toHaveValue(
+      '서울특별시 종로구'
+    );
+    expect(screen.getByRole('textbox', { name: /우편번호/ })).toHaveValue(
+      '03001'
+    );
   });
 
   test('입력 필드에 데이터를 입력할 수 있는지 확인', async () => {
     const { user } = setup();
 
     await user.type(screen.getByRole('textbox', { name: /이름/ }), '홍길동');
-    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '010-1234-5678');
+    await user.type(
+      screen.getByRole('textbox', { name: /휴대폰 번호/ }),
+      '010-1234-5678'
+    );
     await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '101호');
 
     expect(screen.getByRole('textbox', { name: /이름/ })).toHaveValue('홍길동');
-    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue('010-1234-5678');
-    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue('101호');
+    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue(
+      '010-1234-5678'
+    );
+    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue(
+      '101호'
+    );
   });
 
   test('입력값 검증 및 에러 메시지가 올바르게 표시되는지 확인', async () => {
@@ -355,7 +427,11 @@ describe('주소 추가 페이지 테스트', () => {
 
     waitFor(() => {
       expect(screen.getByText(/이름을 입력해주세요./)).toBeInTheDocument();
-      expect(screen.getByText(/휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요./)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요./
+        )
+      ).toBeInTheDocument();
       expect(screen.getByText(/상세주소를 입력해주세요./)).toBeInTheDocument();
     });
   });
@@ -374,7 +450,10 @@ describe('주소 추가 페이지 테스트', () => {
     const { user } = setup();
 
     await user.type(screen.getByRole('textbox', { name: /이름/ }), '홍길동');
-    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '01012345678');
+    await user.type(
+      screen.getByRole('textbox', { name: /휴대폰 번호/ }),
+      '01012345678'
+    );
     await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '101호');
 
     const submitButton = screen.getByRole('button', { name: /저장하기/ });
@@ -387,28 +466,37 @@ describe('주소 추가 페이지 테스트', () => {
 });
 
 describe('주소 수정 페이지 테스트', () => {
-  const setup = (initialState = {
-    addressItem: {
-      id: '1',
-      recipientName: '이순신',
-      phoneNumber: '010-9876-5432',
-      zipcode: '12345',
+  const setup = (
+    initialState = {
+      addressItem: {
+        id: '1',
+        recipientName: '이순신',
+        phoneNumber: '010-9876-5432',
+        zipcode: '12345',
+        roadAddress: '서울특별시 중구',
+        detailAddress: '202호',
+        jibun: '중구 1가',
+        isDefault: true
+      },
       roadAddress: '서울특별시 중구',
-      detailAddress: '202호',
-      jibun: '중구 1가',
-      isDefault: true,
-    },
-    roadAddress: '서울특별시 중구',
-    zonecode: '12345'
-  }) => {
+      zonecode: '12345'
+    }
+  ) => {
     const user = userEvent.setup();
     vi.mocked(useNavigate).mockReturnValue(mockedUseNavigate);
 
     render(
       <QueryClientProvider client={new QueryClient()}>
-        <MemoryRouter initialEntries={[{ pathname: '/auctions/1/address-edit', state: initialState }]}>
+        <MemoryRouter
+          initialEntries={[
+            { pathname: '/auctions/1/address-edit', state: initialState }
+          ]}
+        >
           <Routes>
-            <Route path="/auctions/:auctionId/address-edit" element={<PaymentAddressEdit />} />
+            <Route
+              path="/auctions/:auctionId/address-edit"
+              element={<PaymentAddressEdit />}
+            />
           </Routes>
         </MemoryRouter>
       </QueryClientProvider>
@@ -421,23 +509,43 @@ describe('주소 수정 페이지 테스트', () => {
     setup();
 
     expect(screen.getByRole('textbox', { name: /이름/ })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /우편번호/ })).toBeInTheDocument();
+    expect(
+      screen.getByRole('textbox', { name: /휴대폰 번호/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('textbox', { name: /우편번호/ })
+    ).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /주소지/ })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /상세주소/ })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /우편번호 찾기/ })).toBeInTheDocument();
-    expect(screen.getByRole('checkbox', { name: /기본 배송지로 설정/ })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /저장하기/ })).toBeInTheDocument();
+    expect(
+      screen.getByRole('textbox', { name: /상세주소/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /우편번호 찾기/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('checkbox', { name: /기본 배송지로 설정/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /저장하기/ })
+    ).toBeInTheDocument();
   });
 
   test('초기 상태 값이 올바르게 렌더링 되는지', () => {
     setup();
 
     expect(screen.getByRole('textbox', { name: /이름/ })).toHaveValue('이순신');
-    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue('010-9876-5432');
-    expect(screen.getByRole('textbox', { name: /우편번호/ })).toHaveValue('12345');
-    expect(screen.getByRole('textbox', { name: /주소지/ })).toHaveValue('서울특별시 중구');
-    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue('202호');
+    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue(
+      '010-9876-5432'
+    );
+    expect(screen.getByRole('textbox', { name: /우편번호/ })).toHaveValue(
+      '12345'
+    );
+    expect(screen.getByRole('textbox', { name: /주소지/ })).toHaveValue(
+      '서울특별시 중구'
+    );
+    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue(
+      '202호'
+    );
   });
 
   test('입력 필드에 데이터를 입력할 수 있는지 확인', async () => {
@@ -446,13 +554,20 @@ describe('주소 수정 페이지 테스트', () => {
     await user.clear(screen.getByRole('textbox', { name: /이름/ }));
     await user.type(screen.getByRole('textbox', { name: /이름/ }), '김유신');
     await user.clear(screen.getByRole('textbox', { name: /휴대폰 번호/ }));
-    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '010-1111-2222');
+    await user.type(
+      screen.getByRole('textbox', { name: /휴대폰 번호/ }),
+      '010-1111-2222'
+    );
     await user.clear(screen.getByRole('textbox', { name: /상세주소/ }));
     await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '303호');
 
     expect(screen.getByRole('textbox', { name: /이름/ })).toHaveValue('김유신');
-    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue('010-1111-2222');
-    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue('303호');
+    expect(screen.getByRole('textbox', { name: /휴대폰 번호/ })).toHaveValue(
+      '010-1111-2222'
+    );
+    expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue(
+      '303호'
+    );
   });
 
   test('입력값 검증 및 에러 메시지가 올바르게 표시되는지 확인', async () => {
@@ -463,7 +578,11 @@ describe('주소 수정 페이지 테스트', () => {
 
     waitFor(() => {
       expect(screen.getByText(/이름을 입력해주세요./)).toBeInTheDocument();
-      expect(screen.getByText(/휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요./)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요./
+        )
+      ).toBeInTheDocument();
       expect(screen.getByText(/상세주소를 입력해주세요./)).toBeInTheDocument();
     });
   });
@@ -482,7 +601,10 @@ describe('주소 수정 페이지 테스트', () => {
     const { user } = setup();
 
     await user.type(screen.getByRole('textbox', { name: /이름/ }), '석장원');
-    await user.type(screen.getByRole('textbox', { name: /휴대폰 번호/ }), '010-1234-5678');
+    await user.type(
+      screen.getByRole('textbox', { name: /휴대폰 번호/ }),
+      '010-1234-5678'
+    );
     await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '303호');
 
     const submitButton = screen.getByRole('button', { name: /저장하기/ });
@@ -501,7 +623,10 @@ describe('주소 편집 페이지 테스트', () => {
       <QueryClientProvider client={new QueryClient()}>
         <MemoryRouter initialEntries={['/auctions/1/edit-address']}>
           <Routes>
-            <Route path="/auctions/:auctionId/edit-address" element={<PaymentAddressEditList />} />
+            <Route
+              path="/auctions/:auctionId/edit-address"
+              element={<PaymentAddressEditList />}
+            />
           </Routes>
         </MemoryRouter>
       </QueryClientProvider>
@@ -542,4 +667,3 @@ describe('주소 편집 페이지 테스트', () => {
     await user.click(editButton);
   });
 });
-

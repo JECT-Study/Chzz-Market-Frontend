@@ -7,7 +7,15 @@ import { NOTIFICATION_CONTENTS, type INotification } from '../config';
 import { useDeleteNotification, useReadNotification } from '../model';
 
 export const NotificationItem = ({ item }: { item: INotification }) => {
-  const { notificationId, isRead, imageUrl, message, createdAt, type, auctionId } = item;
+  const {
+    notificationId,
+    isRead,
+    imageUrl,
+    message,
+    createdAt,
+    type,
+    auctionId
+  } = item;
 
   const navigate = useNavigate();
   const time = getTimeAgo(createdAt);
@@ -15,31 +23,49 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
   const { mutate: readNotification } = useReadNotification();
 
   const handleClick = () => {
-    if (!isRead) readNotification(notificationId)
-    if (NOTIFICATION_CONTENTS[type]?.link && auctionId) navigate(NOTIFICATION_CONTENTS[type].link!(auctionId))
+    if (!isRead) readNotification(notificationId);
+    if (NOTIFICATION_CONTENTS[type]?.link && auctionId)
+      navigate(NOTIFICATION_CONTENTS[type].link!(auctionId));
   };
 
   const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    deleteNotification(notificationId)
-
-  }
+    deleteNotification(notificationId);
+  };
 
   return (
-    <li onClick={handleClick} className={`p-10 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} ${auctionId && 'cursor-pointer'}`} aria-label={`알림_${notificationId}`}>
-      <figure className='flex justify-between w-full gap-3'>
-        <figcaption className='flex flex-col flex-1 justify-between min-h-[6rem]'>
-          <h4 className='web:text-body1 text-body2' aria-label={`제목_${notificationId}`}>
+    <li
+      onClick={handleClick}
+      className={`p-10 flex justify-between items-start gap-3 ${!isRead && 'bg-notificationBgColor'} ${auctionId && 'cursor-pointer'}`}
+      aria-label={`알림_${notificationId}`}
+    >
+      <figure className="flex justify-between w-full gap-3">
+        <figcaption className="flex flex-col flex-1 justify-between min-h-[6rem]">
+          <h4
+            className="web:text-body1 text-body2"
+            aria-label={`제목_${notificationId}`}
+          >
             {message}
           </h4>
-          <div aria-label={`시간_${notificationId}`} className='text-gray2 text-body2'>
+          <div
+            aria-label={`시간_${notificationId}`}
+            className="text-gray2 text-body2"
+          >
             {time}
           </div>
         </figcaption>
-        <div className='flex items-start gap-3'>
-          <img className='object-contain rounded size-24' src={imageUrl ?? DefaultImage} alt={`이미지_${notificationId}`} />
+        <div className="flex items-start gap-3">
+          <img
+            className="object-contain rounded size-24"
+            src={imageUrl ?? DefaultImage}
+            alt={`이미지_${notificationId}`}
+          />
           <button aria-label={`버튼_${notificationId}`} onClick={handleDelete}>
-            <img className='inline rounded size-4' src={XButtonIcon} alt='알림 삭제 아이콘' />
+            <img
+              className="inline rounded size-4"
+              src={XButtonIcon}
+              alt="알림 삭제 아이콘"
+            />
           </button>
         </div>
       </figure>

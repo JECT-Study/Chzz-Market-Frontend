@@ -13,7 +13,7 @@ const initialState: SignupState = {
   isNameValid: false,
   isNicknameChecked: false,
   isSubmitEnabled: false,
-  isNicknameCheckDisabled: false,
+  isNicknameCheckDisabled: false
 };
 
 export const signupSlice = createSlice({
@@ -35,8 +35,14 @@ export const signupSlice = createSlice({
     setIsNicknameCheckDisabled: (state, action: PayloadAction<boolean>) => {
       state.isNicknameCheckDisabled = action.payload;
     }
-  },
+  }
 });
 
-export const { setNicknameError, setIsNameValid, setIsNicknameChecked, setIsSubmitEnabled, setIsNicknameCheckDisabled } = signupSlice.actions;
+export const {
+  setNicknameError,
+  setIsNameValid,
+  setIsNicknameChecked,
+  setIsSubmitEnabled,
+  setIsNicknameCheckDisabled
+} = signupSlice.actions;
 export default signupSlice.reducer;

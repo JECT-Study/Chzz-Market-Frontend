@@ -5,7 +5,7 @@ import { getHeartList } from '..';
 export const useGetHeartList = () => {
   const { data: heartList } = useSuspenseQuery({
     queryKey: [QUERY_KEYS.HEART_LIST],
-    queryFn: getHeartList,
+    queryFn: getHeartList
   });
 
   return { heartList: heartList.items };

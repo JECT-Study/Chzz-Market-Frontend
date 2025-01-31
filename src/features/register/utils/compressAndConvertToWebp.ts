@@ -4,7 +4,10 @@ export const compressAndConvertToWebP = async (file: File): Promise<File> => {
   try {
     const fileArrayBuffer = await file.arrayBuffer();
 
-    const worker = new Worker(new URL('../lib/imageCompressionWorker.ts', import.meta.url), { type: 'module' });
+    const worker = new Worker(
+      new URL('../lib/imageCompressionWorker.ts', import.meta.url),
+      { type: 'module' }
+    );
 
     return new Promise<File>((resolve, reject) => {
       worker.onmessage = (e: MessageEvent) => {
@@ -22,7 +25,9 @@ export const compressAndConvertToWebP = async (file: File): Promise<File> => {
         worker.terminate();
       };
 
-      worker.postMessage({ fileData: fileArrayBuffer, fileName: file.name }, [fileArrayBuffer]);
+      worker.postMessage({ fileData: fileArrayBuffer, fileName: file.name }, [
+        fileArrayBuffer
+      ]);
     });
   } catch {
     toast.error('이미지를 읽지 못했습니다.');

@@ -9,24 +9,34 @@ import { Button } from '../Button';
 import { GlobalSpinner } from '../spinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
-  const { title, description } = getErrorByCode(error)
+  const { title, description } = getErrorByCode(error);
 
   return (
-    <div className='flex justify-center w-full' style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
-      <div className='relative h-full w-web min-w-mobile'>
+    <div
+      className="flex justify-center w-full"
+      style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+    >
+      <div className="relative h-full w-web min-w-mobile">
         <Layout>
-          <Layout.Header title='치즈 마켓' />
+          <Layout.Header title="치즈 마켓" />
           <Layout.Main>
-            <div className='flex flex-col items-center min-w-[10rem] justify-center h-full gap-5'>
-              <img src={ErrorIcon} alt='에러 아이콘' />
-              <div className='space-y-2 text-center'>
-                <h2 className='web:text-heading2 text-heading3 text-gray1'>{title}</h2>
-                <p className='text-gray2 text-body2'>{description}</p>
+            <div className="flex flex-col items-center min-w-[10rem] justify-center h-full gap-5">
+              <img src={ErrorIcon} alt="에러 아이콘" />
+              <div className="space-y-2 text-center">
+                <h2 className="web:text-heading2 text-heading3 text-gray1">
+                  {title}
+                </h2>
+                <p className="text-gray2 text-body2">{description}</p>
               </div>
             </div>
           </Layout.Main>
-          <Layout.Footer type='single'>
-            <Button type='button' color='cheeseYellow' className='w-full h-full' onClick={resetErrorBoundary}>
+          <Layout.Footer type="single">
+            <Button
+              type="button"
+              color="cheeseYellow"
+              className="w-full h-full"
+              onClick={resetErrorBoundary}
+            >
               다시 시도하기
             </Button>
           </Layout.Footer>
@@ -37,7 +47,7 @@ const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
 };
 
 export const GlobalAsyncBoundary = ({ children }: { children: ReactNode }) => {
-  const { reset } = useQueryErrorResetBoundary()
+  const { reset } = useQueryErrorResetBoundary();
 
   return (
     <ErrorBoundary onReset={reset} FallbackComponent={FallbackComponent}>

@@ -1,4 +1,8 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  UseMutateFunction,
+  useMutation,
+  useQueryClient
+} from '@tanstack/react-query';
 
 import { QUERY_KEYS } from '@/shared';
 import { toast } from 'sonner';
@@ -14,10 +18,10 @@ export const useCancelBid = (): {
     mutationFn: cancelBid,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.AUCTION_DETAILS],
+        queryKey: [QUERY_KEYS.AUCTION_DETAILS]
       });
       toast.success('경매 참여를 취소했습니다.');
-    },
+    }
   });
 
   return { mutate, isPending };

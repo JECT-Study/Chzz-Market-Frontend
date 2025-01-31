@@ -31,6 +31,5 @@ export const ProgressCircle = ({ progress }: { progress: number }) => {
         {progress}%
       </div>
     </div>
-
   );
-}
+};

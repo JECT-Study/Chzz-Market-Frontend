@@ -1,4 +1,8 @@
-import { getMyHistoryAuction, getMyLostAuction, getMyWonAuction } from '@/features/user/api';
+import {
+  getMyHistoryAuction,
+  getMyLostAuction,
+  getMyWonAuction
+} from '@/features/user/api';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -9,7 +13,7 @@ export const useHistory = (activeTab: string): any => {
     isLoading: historyLoading,
     error: _historyError,
     fetchNextPage: fetchNextHistoryPage,
-    hasNextPage: hasNextHistoryPage,
+    hasNextPage: hasNextHistoryPage
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.AUCTION_HISTORY],
     queryFn: () => getMyHistoryAuction({ pageNumber: 0, pageSize: 10 }),
@@ -20,7 +24,7 @@ export const useHistory = (activeTab: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'AuctionHistory',
+    enabled: activeTab === 'AuctionHistory'
   });
 
   const {
@@ -28,7 +32,7 @@ export const useHistory = (activeTab: string): any => {
     isLoading: wonLoading,
     error: _wonError,
     fetchNextPage: fetchNextWonPage,
-    hasNextPage: hasNextWonPage,
+    hasNextPage: hasNextWonPage
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.AUCTION_WON],
     queryFn: () => getMyWonAuction({ pageNumber: 0, pageSize: 10 }),
@@ -39,7 +43,7 @@ export const useHistory = (activeTab: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'AuctionsWon',
+    enabled: activeTab === 'AuctionsWon'
   });
 
   const {
@@ -47,7 +51,7 @@ export const useHistory = (activeTab: string): any => {
     isLoading: lostLoading,
     error: _lostError,
     fetchNextPage: fetchNextLostPage,
-    hasNextPage: hasNextLostPage,
+    hasNextPage: hasNextLostPage
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.AUCTION_LOST],
     queryFn: () => getMyLostAuction({ pageNumber: 0, pageSize: 10 }),
@@ -58,7 +62,7 @@ export const useHistory = (activeTab: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'AuctionsLost',
+    enabled: activeTab === 'AuctionsLost'
   });
 
   return {
@@ -73,6 +77,6 @@ export const useHistory = (activeTab: string): any => {
     fetchNextLostPage,
     hasNextHistoryPage,
     hasNextWonPage,
-    hasNextLostPage,
+    hasNextLostPage
   };
 };

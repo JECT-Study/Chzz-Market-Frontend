@@ -1,5 +1,8 @@
 import { heartData, useDeleteHeart, useGetHeartList } from '@/features/heart';
-import { notificationData, useGetNotificationList } from '@/features/notification';
+import {
+  notificationData,
+  useGetNotificationList
+} from '@/features/notification';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
@@ -11,24 +14,24 @@ import userEvent from '@testing-library/user-event';
 
 vi.mock('@/features/heart/model', () => ({
   useGetHeartList: vi.fn(),
-  useDeleteHeart: vi.fn(),
+  useDeleteHeart: vi.fn()
 }));
 
 vi.mock('@/features/notification/model', () => ({
-  useGetNotificationList: vi.fn(),
+  useGetNotificationList: vi.fn()
 }));
 
 vi.mocked(useGetNotificationList).mockReturnValue({
-  notificationList: notificationData,
+  notificationList: notificationData
 });
 
 vi.mocked(useGetHeartList).mockReturnValue({
-  heartList: heartData,
+  heartList: heartData
 });
 
 const mutateMock = vi.fn();
 vi.mocked(useDeleteHeart).mockReturnValue({
-  mutate: mutateMock,
+  mutate: mutateMock
 });
 
 describe('찜 목록 테스트', () => {
@@ -37,7 +40,7 @@ describe('찜 목록 테스트', () => {
       <MemoryRouter initialEntries={['/notification']}>
         <Routes>
           <Route element={<LayoutWithNav />}>
-            <Route path='/notification' element={<Heart />} />
+            <Route path="/notification" element={<Heart />} />
           </Route>
         </Routes>
       </MemoryRouter>
@@ -46,7 +49,7 @@ describe('찜 목록 테스트', () => {
 
     return {
       ...utils,
-      user,
+      user
     };
   };
 
@@ -54,7 +57,7 @@ describe('찜 목록 테스트', () => {
     const { user } = setup();
 
     const backBtnElement = screen.getByRole('button', {
-      name: /뒤로 가기/,
+      name: /뒤로 가기/
     });
     await user.click(backBtnElement);
 
@@ -65,7 +68,7 @@ describe('찜 목록 테스트', () => {
     setup();
 
     const heartProducts = await screen.findAllByRole('figure', {
-      name: /내가 찜 한 사전 경매 상품/,
+      name: /내가 찜 한 사전 경매 상품/
     });
     expect(heartProducts).toHaveLength(3);
   });
@@ -74,7 +77,7 @@ describe('찜 목록 테스트', () => {
     const { user } = setup();
 
     const heartProducts = await screen.findAllByRole('figure', {
-      name: /내가 찜 한 사전 경매 상품/,
+      name: /내가 찜 한 사전 경매 상품/
     });
     await user.click(heartProducts[0]);
 
@@ -83,7 +86,9 @@ describe('찜 목록 테스트', () => {
 
   test('찜 목록에서 제외 버튼을 클릭하면 항목이 삭제된다.', async () => {
     const { user } = setup();
-    const buttons = await screen.findAllByRole('button', { name: /찜 목록에서 제외/ });
+    const buttons = await screen.findAllByRole('button', {
+      name: /찜 목록에서 제외/
+    });
 
     const firstButton = buttons[0];
     await user.click(firstButton);

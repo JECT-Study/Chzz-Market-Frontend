@@ -1,9 +1,9 @@
 export const formatPhoneNumber = (value: string) => {
   if (!value) return value;
 
-  const phoneNumber = value.replace(/[^\d]/g, "");
+  const phoneNumber = value.replace(/[^\d]/g, '');
 
-  if (!phoneNumber.startsWith("010")) return phoneNumber;
+  if (!phoneNumber.startsWith('010')) return phoneNumber;
 
   if (phoneNumber.length < 4) return phoneNumber;
   if (phoneNumber.length < 8) {

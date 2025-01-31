@@ -14,7 +14,7 @@ export const ProfileInput = ({
   placeholder = '',
   registerProps,
   value,
-  error,
+  error
 }: Props) => {
   return (
     <div className="w-full">

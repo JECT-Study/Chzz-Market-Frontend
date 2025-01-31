@@ -15,11 +15,14 @@ export const mockedUseNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
   // importActual은 실제 모듈의 원래 구현을 가져오는 기능을 한다.
   // 일부 기능은 실제 동작을 그대로 유지하면서 useNavigate만 모킹하려는 경우에 유용하다.
-  const mod = await vi.importActual<typeof import('react-router-dom')>('react-router-dom');
+  const mod =
+    await vi.importActual<typeof import('react-router-dom')>(
+      'react-router-dom'
+    );
   return {
     ...mod,
     // useNavigate 훅이 호출될 때마다 mockedUseNavigate 라는 모의 함수가 호출된다.
-    useNavigate: () => mockedUseNavigate,
+    useNavigate: () => mockedUseNavigate
   };
 });
 
@@ -38,7 +41,7 @@ export const mockWindowProperties = () => {
   const mockWindowProperty = (property: string, implementation: any) => {
     Object.defineProperty(window, property, {
       writable: true,
-      value: vi.fn().mockImplementation(implementation),
+      value: vi.fn().mockImplementation(implementation)
     });
   };
 
@@ -46,42 +49,42 @@ export const mockWindowProperties = () => {
   mockWindowProperty('ResizeObserver', () => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
-    disconnect: vi.fn(),
+    disconnect: vi.fn()
   }));
 
   // matchMedia 모킹
   mockWindowProperty('matchMedia', (query: string) => ({
     matches: matchingMediaQueries.includes(query),
     addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
+    removeEventListener: vi.fn()
   }));
 
   // IntersectionObserver 모킹
   mockWindowProperty('IntersectionObserver', () => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
-    disconnect: vi.fn(),
+    disconnect: vi.fn()
   }));
 
   // jsdom이 지원하지 않는 Element.prototype 메서드 모킹
   Object.defineProperty(Element.prototype, 'hasPointerCapture', {
     writable: true,
-    value: vi.fn(() => false),
+    value: vi.fn(() => false)
   });
 
   Object.defineProperty(Element.prototype, 'setPointerCapture', {
     writable: true,
-    value: vi.fn(),
+    value: vi.fn()
   });
 
   Object.defineProperty(Element.prototype, 'scrollIntoView', {
     writable: true,
-    value: vi.fn(),
+    value: vi.fn()
   });
 
   Object.defineProperty(URL, 'createObjectURL', {
     writable: true,
-    value: vi.fn(() => 'mocked-url'),
+    value: vi.fn(() => 'mocked-url')
   });
 };
 

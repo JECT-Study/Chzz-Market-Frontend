@@ -6,8 +6,8 @@ export const mockUserProfile = {
   participantCount: {
     failedAuctionCount: 2,
     ongoingAuctionCount: 3,
-    successfulAuctionCount: 5,
+    successfulAuctionCount: 5
   },
   preRegisterCount: 4,
-  registeredAuctionCount: 7,
+  registeredAuctionCount: 7
 };

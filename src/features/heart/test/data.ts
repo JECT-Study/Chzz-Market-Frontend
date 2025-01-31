@@ -11,7 +11,7 @@ export const heartData: IPreAuctionItem[] = [
     minPrice: 200_000,
     likeCount: 30,
     isLiked: true,
-    isSeller: false,
+    isSeller: false
   },
   {
     auctionId: 1,
@@ -20,7 +20,7 @@ export const heartData: IPreAuctionItem[] = [
     minPrice: 350_000,
     likeCount: 12,
     isLiked: true,
-    isSeller: false,
+    isSeller: false
   },
   {
     auctionId: 2,
@@ -29,6 +29,6 @@ export const heartData: IPreAuctionItem[] = [
     minPrice: 270_000,
     likeCount: 20,
     isLiked: true,
-    isSeller: false,
-  },
+    isSeller: false
+  }
 ];

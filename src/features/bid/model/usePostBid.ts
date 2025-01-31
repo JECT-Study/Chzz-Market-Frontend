@@ -18,7 +18,7 @@ export const usePostBid = (
     onSuccess: () => {
       toast.success('입찰 성공!');
       navigate(ROUTES.AUCTION.getItemRoute(auctionId), { replace: true });
-    },
+    }
   });
 
   return { mutate, isPending };

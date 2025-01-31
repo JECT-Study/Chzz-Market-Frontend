@@ -11,7 +11,7 @@ const initialState: ProfileEditState = {
   nicknameError: null,
   isNicknameChecked: false,
   isSubmitEnabled: false,
-  isNicknameCheckDisabled: false,
+  isNicknameCheckDisabled: false
 };
 
 export const profileEditSlice = createSlice({
@@ -29,15 +29,15 @@ export const profileEditSlice = createSlice({
     },
     setIsNicknameCheckDisabled: (state, action: PayloadAction<boolean>) => {
       state.isNicknameCheckDisabled = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const {
   setNicknameError,
   setIsNicknameChecked,
   setIsSubmitEnabled,
-  setIsNicknameCheckDisabled,
+  setIsNicknameCheckDisabled
 } = profileEditSlice.actions;
 
 export default profileEditSlice.reducer;

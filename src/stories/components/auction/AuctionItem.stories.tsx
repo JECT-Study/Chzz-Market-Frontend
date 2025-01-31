@@ -10,9 +10,9 @@ const meta: Meta<typeof AuctionItem> = {
     axis: {
       control: { type: 'radio' },
       options: ['row', 'column'],
-      description: 'Layout direction (row or column)',
-    },
-  },
+      description: 'Layout direction (row or column)'
+    }
+  }
 };
 
 export default meta;
@@ -24,10 +24,7 @@ export const Default: Story = {
     axis: 'row',
     children: (
       <>
-        <AuctionItem.Image
-          src="https://via.placeholder.com/150"
-          time={3600}
-        />
+        <AuctionItem.Image src="https://via.placeholder.com/150" time={3600} />
         <AuctionItem.Main
           kind="register"
           name="Awesome Item"
@@ -35,13 +32,16 @@ export const Default: Story = {
           count={10}
         />
         <AuctionItem.Button>
-          <Button type='button' className="bg-blue-500 text-white px-2 py-1 rounded">
+          <Button
+            type="button"
+            className="bg-blue-500 text-white px-2 py-1 rounded"
+          >
             참여하기
           </Button>
         </AuctionItem.Button>
       </>
-    ),
-  },
+    )
+  }
 };
 
 export const ColumnLayout: Story = {
@@ -50,10 +50,7 @@ export const ColumnLayout: Story = {
     axis: 'column',
     children: (
       <>
-        <AuctionItem.Image
-          src="https://via.placeholder.com/150"
-          time={7200}
-        />
+        <AuctionItem.Image src="https://via.placeholder.com/150" time={7200} />
         <AuctionItem.Main
           kind="like"
           name="Another Item"
@@ -61,13 +58,16 @@ export const ColumnLayout: Story = {
           count={30}
         />
         <AuctionItem.Button>
-          <Button type='button' className="bg-green-500 text-white px-2 py-1 rounded">
+          <Button
+            type="button"
+            className="bg-green-500 text-white px-2 py-1 rounded"
+          >
             좋아요
           </Button>
         </AuctionItem.Button>
       </>
-    ),
-  },
+    )
+  }
 };
 
 export const NoTimeImage: Story = {
@@ -84,11 +84,14 @@ export const NoTimeImage: Story = {
           count={5}
         />
         <AuctionItem.Button>
-          <Button type='button' className="bg-gray-300 text-black px-2 py-1 rounded">
+          <Button
+            type="button"
+            className="bg-gray-300 text-black px-2 py-1 rounded"
+          >
             자세히 보기
           </Button>
         </AuctionItem.Button>
       </>
-    ),
-  },
+    )
+  }
 };

@@ -18,7 +18,12 @@ import { getMyAuctionPreRegisterHandler } from '@/features/user';
 import { getOngoingProductListHandler } from '@/features/product-list';
 import { homeAuctionsHandler } from '@/pages/home';
 import { setupWorker } from 'msw/browser';
-import { deleteUserHandler, getUserProfileHandler, logoutHandler, refreshTokenHandler } from '@/features/user/test/handler';
+import {
+  deleteUserHandler,
+  getUserProfileHandler,
+  logoutHandler,
+  refreshTokenHandler
+} from '@/features/user/test/handler';
 
 /* eslint-disable import/no-named-as-default */
 const handlers: HttpHandler[] = [

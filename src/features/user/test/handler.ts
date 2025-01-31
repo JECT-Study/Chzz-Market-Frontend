@@ -4,10 +4,12 @@ import { API_END_POINT } from '@/shared';
 import myAuctionData from './auctionData';
 import { mockUserProfile } from './userProfileData';
 
-export const getMyAuctionPreRegisterHandler: HttpHandler = http.get(`${API_END_POINT.MY_AUCTION_PRE_REGISTER}`, ({ request }) => {
-  const url = new URL(request.url);
-  const page = url.searchParams.get('page') || '0';
-  const size = url.searchParams.get('size') || '5';
+export const getMyAuctionPreRegisterHandler: HttpHandler = http.get(
+  `${API_END_POINT.MY_AUCTION_PRE_REGISTER}`,
+  ({ request }) => {
+    const url = new URL(request.url);
+    const page = url.searchParams.get('page') || '0';
+    const size = url.searchParams.get('size') || '5';
     const startIndex = Number(page) * Number(size);
     const endIndex = startIndex + Number(size);
     const paginatedContent = myAuctionData.content.slice(startIndex, endIndex);
@@ -19,14 +21,14 @@ export const getMyAuctionPreRegisterHandler: HttpHandler = http.get(`${API_END_P
         pageable: {
           ...myAuctionData.pageable,
           pageNumber: Number(page),
-          pageSize: Number(size),
+          pageSize: Number(size)
         },
         last: page === (myAuctionData.totalPages - 1).toString(),
-        numberOfElements: paginatedContent.length,
+        numberOfElements: paginatedContent.length
       }),
       {
         status: 200,
-        statusText: 'OK',
+        statusText: 'OK'
       }
     );
   }
@@ -39,9 +41,8 @@ export const getUserProfileHandler: HttpHandler = http.get(
       status: 200,
       headers: {
         'Content-Type': 'application/json'
-        },
       }
-    );
+    });
   }
 );
 
@@ -51,16 +52,16 @@ export const refreshTokenHandler: HttpHandler = http.post(
     const mockResponse = {
       status: 'success',
       data: {
-        accessToken: 'mockKakaoAccessToken',
-      },
+        accessToken: 'mockKakaoAccessToken'
+      }
     };
 
     return new HttpResponse(JSON.stringify(mockResponse), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer mockAccessToken`,
-      },
+        Authorization: `Bearer mockAccessToken`
+      }
     });
   }
 );
@@ -70,7 +71,7 @@ export const logoutHandler: HttpHandler = http.post(
   () => {
     return new HttpResponse(null, {
       status: 200,
-      statusText: 'OK',
+      statusText: 'OK'
     });
   }
 );
@@ -80,7 +81,7 @@ export const deleteUserHandler: HttpHandler = http.delete(
   () => {
     return new HttpResponse(null, {
       status: 200,
-      statusText: 'OK',
+      statusText: 'OK'
     });
   }
 );
@@ -91,4 +92,4 @@ export const mockUserHandlers = [
   logoutHandler,
   deleteUserHandler,
   refreshTokenHandler
-]
+];

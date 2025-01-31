@@ -3,12 +3,14 @@ import { HttpHandler, HttpResponse, http } from 'msw';
 import { API_END_POINT } from '@/shared';
 import ongoingProducts from './ongoingData';
 
-export const getOngoingProductListHandler: HttpHandler = http.get(`${API_END_POINT.AUCTION}`, ({ request }) => {
-  const url = new URL(request.url);
-  const page = url.searchParams.get('page') || '0';
-  const limit = url.searchParams.get('limit') || '10';
-  const category = url.searchParams.get('category') || 'fashion';
-  const sortType = url.searchParams.get('type') || 'newest';
+export const getOngoingProductListHandler: HttpHandler = http.get(
+  `${API_END_POINT.AUCTION}`,
+  ({ request }) => {
+    const url = new URL(request.url);
+    const page = url.searchParams.get('page') || '0';
+    const limit = url.searchParams.get('limit') || '10';
+    const category = url.searchParams.get('category') || 'fashion';
+    const sortType = url.searchParams.get('type') || 'newest';
     const pageNumber = Number(page);
     const pageSize = Number(limit);
 
@@ -65,20 +67,21 @@ export const getOngoingProductListHandler: HttpHandler = http.get(`${API_END_POI
         }
       );
     }
-  
-  return new HttpResponse(
-    JSON.stringify({
-      items: paginatedOngoingProducts,
-      pageNumber,
-      pageSize,
-      totalPages,
-      totalElements: filteredProducts.length,
-      last,
-      message: 'success',
-    }),
-    {
-      status: 200,
-      statusText: 'OK',
-    }
-  );
-});
+
+    return new HttpResponse(
+      JSON.stringify({
+        items: paginatedOngoingProducts,
+        pageNumber,
+        pageSize,
+        totalPages,
+        totalElements: filteredProducts.length,
+        last,
+        message: 'success'
+      }),
+      {
+        status: 200,
+        statusText: 'OK'
+      }
+    );
+  }
+);

@@ -1,10 +1,12 @@
-import type { IAddressBase } from "@/entities/address/address";
-import { ROUTES } from "@/shared";
-import { UseMutateFunction, useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { addAddress } from "../api";
+import type { IAddressBase } from '@/entities/address/address';
+import { ROUTES } from '@/shared';
+import { UseMutateFunction, useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { addAddress } from '../api';
 
-export const usePostAddress = (auctionId: string): {
+export const usePostAddress = (
+  auctionId: string
+): {
   mutate: UseMutateFunction<any, Error, IAddressBase, unknown>;
   isPending: boolean;
 } => {
@@ -12,8 +14,10 @@ export const usePostAddress = (auctionId: string): {
   const { mutate, isPending } = useMutation({
     mutationFn: addAddress,
     onSuccess: () => {
-      navigate(ROUTES.PAYMENT.ADDRESS.getListRoute(auctionId), { replace: true });
-    },
+      navigate(ROUTES.PAYMENT.ADDRESS.getListRoute(auctionId), {
+        replace: true
+      });
+    }
   });
 
   return { mutate, isPending };

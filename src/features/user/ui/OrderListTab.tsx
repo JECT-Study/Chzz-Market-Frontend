@@ -6,7 +6,10 @@ interface OrderListTabProps {
   setActiveTab: (tab: string) => void;
 }
 
-export const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => {
+export const OrderListTab = ({
+  activeTab,
+  setActiveTab
+}: OrderListTabProps) => {
   const tabClass = 'flex-1 text-center cursor-pointer';
   const [isWidthScreen, setIsWidthScreen] = useState(window.innerWidth >= 750);
 
@@ -30,7 +33,7 @@ export const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => 
           activeTab === 'AuctionHistory'
             ? 'border-b-2 border-cheeseYellow cursor-pointer text-body2 web:text-heading3'
             : 'text-body2 web:text-heading3 text-gray2 border-b-2 border-gray-300',
-          isWidthScreen && 'p-2',
+          isWidthScreen && 'p-2'
         )}
         onClick={() => setActiveTab('AuctionHistory')}
       >
@@ -50,7 +53,7 @@ export const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => 
           activeTab === 'AuctionsWon'
             ? 'border-b-2 border-cheeseYellow cursor-pointer text-body2 web:text-heading3'
             : 'text-body2 web:text-heading3 text-gray2 border-b-2 border-gray-300',
-          isWidthScreen && 'p-2',
+          isWidthScreen && 'p-2'
         )}
         onClick={() => setActiveTab('AuctionsWon')}
       >
@@ -69,7 +72,7 @@ export const OrderListTab = ({ activeTab, setActiveTab }: OrderListTabProps) => 
           activeTab === 'AuctionsLost'
             ? 'border-b-2 border-cheeseYellow text-body2 web:text-heading3'
             : 'text-body2 web:text-heading3 text-gray2 border-b-2 border-gray-300',
-          isWidthScreen && 'p-2',
+          isWidthScreen && 'p-2'
         )}
         onClick={() => setActiveTab('AuctionsLost')}
       >

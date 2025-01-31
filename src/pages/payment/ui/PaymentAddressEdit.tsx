@@ -1,22 +1,22 @@
-import { Button, Checkbox, FormField, useToggleState } from "@/shared";
-import { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Button, Checkbox, FormField, useToggleState } from '@/shared';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { Layout } from "@/app/layout/index";
-import { ADDRESS_SCRIPT_URL } from "@/features/address/config/address";
-import { useEditAddress } from "@/features/address/model";
-import { ROUTES } from "@/shared/constants/routes";
-import { Input } from "@/shared/ui/input";
-import { formatPhoneNumber } from "@/shared/utils/formatPhoneNumber";
-import { useForm } from "react-hook-form";
+import { Layout } from '@/app/layout/index';
+import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
+import { useEditAddress } from '@/features/address/model';
+import { ROUTES } from '@/shared/constants/routes';
+import { Input } from '@/shared/ui/input';
+import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
+import { useForm } from 'react-hook-form';
 
 interface AddressProps {
-  recipientName: string,
-  phoneNumber: string,
-  zipcode: string,
-  roadAddress: string,
-  jibun: string,
-  detailAddress: string,
+  recipientName: string;
+  phoneNumber: string;
+  zipcode: string;
+  roadAddress: string;
+  jibun: string;
+  detailAddress: string;
 }
 
 export const PaymentAddressEdit = () => {
@@ -27,7 +27,7 @@ export const PaymentAddressEdit = () => {
   const roadAddress = location.state?.roadAddress;
   const zonecode = location.state?.zonecode;
   const formRef = useRef<HTMLFormElement>(null);
-  const [isChecked, toggleCheck] = useToggleState(addressItem.isDefault)
+  const [isChecked, toggleCheck] = useToggleState(addressItem.isDefault);
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
     return;
@@ -40,15 +40,15 @@ export const PaymentAddressEdit = () => {
     formState: { errors },
     setValue,
     handleSubmit,
-    setError,
+    setError
   } = useForm<AddressProps>({
     defaultValues: {
       recipientName: addressItem?.recipientName || '',
       phoneNumber: addressItem?.phoneNumber || '',
-      zipcode: zonecode ? zonecode : addressItem?.zipcode,
-      roadAddress: roadAddress ? roadAddress : addressItem?.roadAddress,
+      zipcode: zonecode || addressItem?.zipcode,
+      roadAddress: roadAddress || addressItem?.roadAddress,
       detailAddress: addressItem?.detailAddress || '',
-      jibun: addressItem?.jibun || '',
+      jibun: addressItem?.jibun || ''
     }
   });
 
@@ -59,45 +59,45 @@ export const PaymentAddressEdit = () => {
   const handleSubmitClick = () => {
     if (formRef.current) {
       formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true }),
+        new Event('submit', { cancelable: true, bubbles: true })
       );
     }
   };
 
   const onSubmit = handleSubmit((data: AddressProps) => {
     let hasError = false;
-    if (!data.phoneNumber.startsWith("010") || data.phoneNumber.length > 13) {
-      setError("phoneNumber", {
-        message: "휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.",
+    if (!data.phoneNumber.startsWith('010') || data.phoneNumber.length > 13) {
+      setError('phoneNumber', {
+        message: '휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.'
       });
     }
     if (!data.recipientName.trim()) {
-      setError("recipientName", {
-        type: "manual",
-        message: "이름을 입력해주세요.",
+      setError('recipientName', {
+        type: 'manual',
+        message: '이름을 입력해주세요.'
       });
       hasError = true;
     }
 
     if (!data.roadAddress.trim()) {
-      setError("roadAddress", {
-        type: "manual",
-        message: "주소지를 입력해주세요.",
+      setError('roadAddress', {
+        type: 'manual',
+        message: '주소지를 입력해주세요.'
       });
       hasError = true;
     }
 
     if (!data.detailAddress.trim()) {
-      setError("detailAddress", {
-        type: "manual",
-        message: "상세주소를 입력해주세요.",
+      setError('detailAddress', {
+        type: 'manual',
+        message: '상세주소를 입력해주세요.'
       });
       hasError = true;
     }
     if (!hasError) {
       const finalData = {
         ...data,
-        isDefault: isChecked,
+        isDefault: isChecked
       };
       mutate({ addressId: addressItem.id, data: finalData });
     }
@@ -121,11 +121,13 @@ export const PaymentAddressEdit = () => {
         setValue('zipcode', zonecode);
         setValue('roadAddress', roadAddress);
 
-        navigate(ROUTES.PAYMENT.ADDRESS.getEditRoute(auctionId), { state: { addressItem: addressItem, roadAddress, zonecode } });
-      },
+        navigate(ROUTES.PAYMENT.ADDRESS.getEditRoute(auctionId), {
+          state: { addressItem, roadAddress, zonecode }
+        });
+      }
     }).open({
       left,
-      top,
+      top
     });
   };
 
@@ -153,7 +155,11 @@ export const PaymentAddressEdit = () => {
       <Layout.Header title="배송지 수정" />
       <Layout.Main>
         <div className="flex flex-col">
-          <form ref={formRef} className="flex flex-col gap-6" onSubmit={onSubmit}>
+          <form
+            ref={formRef}
+            className="flex flex-col gap-6"
+            onSubmit={onSubmit}
+          >
             <FormField
               label="이름"
               name="recipientName"
@@ -186,18 +192,24 @@ export const PaymentAddressEdit = () => {
             />
             <div className="flex gap-2 item-center">
               <div className="flex items-center">
-                <label className="flex items-center w-[3.95rem] text-body2 web:text-body1">우편번호</label>
+                <label className="flex items-center w-[3.95rem] text-body2 web:text-body1">
+                  우편번호
+                </label>
               </div>
               <Input
                 id="우편번호 *"
                 type="text"
                 aria-label="우편번호"
-                value={zonecode ? zonecode : addressItem.zipcode}
+                value={zonecode || addressItem.zipcode}
                 className="focus-visible:ring-cheeseYellow bg-gray3"
                 readOnly
               />
               <div>
-                <Button type="button" className="w-[6rem] h-[3.12rem] web:w-[9rem] border-gray3" onClick={handleOpenAddress}>
+                <Button
+                  type="button"
+                  className="w-[6rem] h-[3.12rem] web:w-[9rem] border-gray3"
+                  onClick={handleOpenAddress}
+                >
                   우편번호 찾기
                 </Button>
               </div>
@@ -233,7 +245,11 @@ export const PaymentAddressEdit = () => {
                 />
               )}
             />
-            <Checkbox title="기본 배송지로 설정" check={isChecked} toggle={toggleCheck} />
+            <Checkbox
+              title="기본 배송지로 설정"
+              check={isChecked}
+              toggle={toggleCheck}
+            />
           </form>
         </div>
       </Layout.Main>
@@ -241,7 +257,7 @@ export const PaymentAddressEdit = () => {
         <Button
           type="button"
           className="w-full h-[47px] rounded-lg"
-          color={isVaild ? "cheeseYellow" : "gray3"}
+          color={isVaild ? 'cheeseYellow' : 'gray3'}
           onClick={handleSubmitClick}
           disabled={!isVaild || isPending}
           loading={isPending}

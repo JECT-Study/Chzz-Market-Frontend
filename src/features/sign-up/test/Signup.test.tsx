@@ -36,7 +36,7 @@ describe('Signup', () => {
   test('자기소개', async () => {
     const introductionInput = await setup(
       'bio-input',
-      '안녕하세요, 테스트입니다.',
+      '안녕하세요, 테스트입니다.'
     );
     expect(introductionInput).toHaveValue('안녕하세요, 테스트입니다.');
   });
@@ -47,7 +47,9 @@ describe('Signup', () => {
     setup('bio-input', '안녕하세요, 테스트입니다.');
 
     // 비동기 작업 대기 및 텍스트 찾기
-    const signupBtn = await screen.findByRole('button', { name: /회원 가입 완료/i });
+    const signupBtn = await screen.findByRole('button', {
+      name: /회원 가입 완료/i
+    });
     expect(signupBtn).toHaveClass('bg-cheeseYellow');
   });
 
@@ -65,20 +67,20 @@ describe('Signup', () => {
     expect(mockedUseNavigate).toHaveBeenCalledWith('/');
   });
 
-  test('닉네임 중복 확인 버튼 클릭 테스트', () => {
+  test('닉네임 중복 확인 버튼 클릭 테스트', async () => {
     const nicknameCheckButton = screen.getByText('중복확인');
     expect(nicknameCheckButton).toBeInTheDocument();
 
-    userEvent.click(nicknameCheckButton);
+    await userEvent.click(nicknameCheckButton);
   });
 
   // 버튼 클릭 회원가입 이동 테스트
-  test('회원가입 버튼', () => {
+  test('회원가입 버튼', async () => {
     const navigate = vi.fn();
     const backBtn = screen.getByText('회원가입').closest('button');
 
     if (backBtn) {
-      userEvent.click(backBtn);
+      await userEvent.click(backBtn);
       expect(navigate).toHaveBeenCalledWith('/');
     }
   });

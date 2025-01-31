@@ -33,7 +33,7 @@ self.onmessage = async (e: MessageEvent<WorkerMessage>) => {
     const quality = 0.9;
     const webpBlob = await offscreen.convertToBlob({
       type: 'image/webp',
-      quality,
+      quality
     });
 
     // 변환된 Blob을 메인 스레드로 전송

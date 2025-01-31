@@ -1,21 +1,21 @@
-import { Button, Checkbox, FormField, useToggleState } from "@/shared";
-import { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Button, Checkbox, FormField, useToggleState } from '@/shared';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { Layout } from "@/app/layout/index";
-import { ADDRESS_SCRIPT_URL } from "@/features/address/config/address";
-import { usePostAddress } from "@/features/address/model";
-import { Input } from "@/shared/ui/input";
-import { formatPhoneNumber } from "@/shared/utils/formatPhoneNumber";
-import { useForm } from "react-hook-form";
+import { Layout } from '@/app/layout/index';
+import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
+import { usePostAddress } from '@/features/address/model';
+import { Input } from '@/shared/ui/input';
+import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
+import { useForm } from 'react-hook-form';
 
 interface AddressProps {
-  recipientName: string,
-  phoneNumber: string,
-  zipcode: string,
-  roadAddress: string,
-  jibun: string,
-  detailAddress: string,
+  recipientName: string;
+  phoneNumber: string;
+  zipcode: string;
+  roadAddress: string;
+  jibun: string;
+  detailAddress: string;
 }
 
 export const PaymentAddressAdd = () => {
@@ -37,15 +37,15 @@ export const PaymentAddressAdd = () => {
     formState: { errors },
     setValue,
     handleSubmit,
-    setError,
+    setError
   } = useForm<AddressProps>({
     defaultValues: {
       recipientName: '',
       phoneNumber: '',
       zipcode: zonecode,
-      roadAddress: roadAddress,
+      roadAddress,
       detailAddress: '',
-      jibun: jibunAddress,
+      jibun: jibunAddress
     }
   });
   const recipientName = watch('recipientName');
@@ -55,45 +55,45 @@ export const PaymentAddressAdd = () => {
   const handleSubmitClick = () => {
     if (formRef.current) {
       formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true }),
+        new Event('submit', { cancelable: true, bubbles: true })
       );
     }
   };
 
   const onSubmit = handleSubmit((data: AddressProps) => {
     let hasError = false;
-    if (!data.phoneNumber.startsWith("010") || data.phoneNumber.length > 13) {
-      setError("phoneNumber", {
-        message: "휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.",
+    if (!data.phoneNumber.startsWith('010') || data.phoneNumber.length > 13) {
+      setError('phoneNumber', {
+        message: '휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.'
       });
     }
     if (!data.recipientName.trim()) {
-      setError("recipientName", {
-        type: "manual",
-        message: "이름을 입력해주세요.",
+      setError('recipientName', {
+        type: 'manual',
+        message: '이름을 입력해주세요.'
       });
       hasError = true;
     }
 
     if (!data.roadAddress.trim()) {
-      setError("roadAddress", {
-        type: "manual",
-        message: "주소지를 입력해주세요.",
+      setError('roadAddress', {
+        type: 'manual',
+        message: '주소지를 입력해주세요.'
       });
       hasError = true;
     }
 
     if (!data.detailAddress.trim()) {
-      setError("detailAddress", {
-        type: "manual",
-        message: "상세주소를 입력해주세요.",
+      setError('detailAddress', {
+        type: 'manual',
+        message: '상세주소를 입력해주세요.'
       });
       hasError = true;
     }
     if (!hasError) {
       const finalData = {
         ...data,
-        isDefault: isChecked,
+        isDefault: isChecked
       };
       mutate(finalData);
     }
@@ -117,17 +117,19 @@ export const PaymentAddressAdd = () => {
         setValue('zipcode', zonecode);
         setValue('roadAddress', roadAddress);
 
-        navigate(`/auctions/${auctionId}/address-add`, { state: { roadAddress, zonecode, jibunAddress } });
-      },
+        navigate(`/auctions/${auctionId}/address-add`, {
+          state: { roadAddress, zonecode, jibunAddress }
+        });
+      }
     }).open({
       left,
-      top,
+      top
     });
   };
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = ADDRESS_SCRIPT_URL
+    script.src = ADDRESS_SCRIPT_URL;
     script.async = true;
     document.head.appendChild(script);
 
@@ -149,7 +151,11 @@ export const PaymentAddressAdd = () => {
       <Layout.Header title="배송지 추가" />
       <Layout.Main>
         <div className="flex flex-col">
-          <form ref={formRef} className="flex flex-col gap-6" onSubmit={onSubmit}>
+          <form
+            ref={formRef}
+            className="flex flex-col gap-6"
+            onSubmit={onSubmit}
+          >
             <FormField
               label="이름 *"
               name="recipientName"
@@ -182,7 +188,9 @@ export const PaymentAddressAdd = () => {
             />
             <div className="flex gap-2 item-center">
               <div className="flex items-center">
-                <label className="flex items-center w-[3.95rem] text-body2 web:text-body1">우편번호</label>
+                <label className="flex items-center w-[3.95rem] text-body2 web:text-body1">
+                  우편번호
+                </label>
               </div>
               <Input
                 id="우편번호 *"
@@ -193,7 +201,11 @@ export const PaymentAddressAdd = () => {
                 readOnly
               />
               <div>
-                <Button type="button" className="w-[6rem] h-[3.12rem] web:w-[9rem] border-gray3" onClick={handleOpenAddress}>
+                <Button
+                  type="button"
+                  className="w-[6rem] h-[3.12rem] web:w-[9rem] border-gray3"
+                  onClick={handleOpenAddress}
+                >
                   우편번호 찾기
                 </Button>
               </div>
@@ -230,7 +242,11 @@ export const PaymentAddressAdd = () => {
               )}
             />
             {/* 기본 배송지 체크박스는 직접 처리 */}
-            <Checkbox title="기본 배송지로 설정" check={isChecked} toggle={toggleCheck} />
+            <Checkbox
+              title="기본 배송지로 설정"
+              check={isChecked}
+              toggle={toggleCheck}
+            />
           </form>
         </div>
       </Layout.Main>
@@ -238,7 +254,7 @@ export const PaymentAddressAdd = () => {
         <Button
           type="button"
           className="w-full h-[47px] rounded-lg"
-          color={isVaild ? "cheeseYellow" : "gray3"}
+          color={isVaild ? 'cheeseYellow' : 'gray3'}
           onClick={handleSubmitClick}
           disabled={!isVaild || isPending}
           loading={isPending}
