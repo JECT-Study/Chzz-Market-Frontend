@@ -10,10 +10,13 @@ interface AuctionItemProps {
 
 export const AuctionItem = ({ label, axis, children }: AuctionItemProps) => {
   const axisStyle = axis === 'column' && 'flex-col';
-  const height = axis === 'column' && 'min-h-[16rem] h-[16rem]'
+  const height = axis === 'column' && 'min-h-[16rem] h-[16rem]';
 
   return (
-    <figure aria-label={label} className={`flex ${height} gap-3 w-full ${axisStyle}`}>
+    <figure
+      aria-label={label}
+      className={`flex ${height} gap-3 w-full ${axisStyle}`}
+    >
       {children}
     </figure>
   );
@@ -28,8 +31,14 @@ interface ImageProps {
 
 const Image = ({ src, time = undefined, loading, priority }: ImageProps) => {
   return (
-    <div className='relative w-full min-h-[7.5rem] max-h-[9rem] h-full'>
-      <img src={`${src}?h=288`} alt='이미지' className='object-contain w-full h-full rounded' loading={loading} {...{ fetchpriority: priority }} />
+    <div className="relative w-full min-h-[7.5rem] max-h-[9rem] h-full">
+      <img
+        src={`${src}?h=288`}
+        alt="이미지"
+        className="object-contain w-full h-full rounded"
+        loading={loading}
+        {...{ fetchpriority: priority }}
+      />
       {time !== undefined && <TimeLabel time={time} />}
     </div>
   );
@@ -44,12 +53,16 @@ interface MainProps {
 
 const Main = ({ kind, name, price, count }: MainProps) => {
   return (
-    <figcaption className='flex flex-col w-full gap-[.125rem] py-2'>
-      <h3 aria-label='이름' className='text-body1Bold text-gray1'>
+    <figcaption className="flex flex-col w-full gap-[.125rem] py-2">
+      <h3 aria-label="이름" className="text-body1Bold text-gray1">
         {name}
       </h3>
-      <Price title='시작가' price={price} />
-      {kind !== 'preAuction' ? <ParticipantCount count={count} /> : <LikeCount count={count} />}
+      <Price title="시작가" price={price} />
+      {kind !== 'preAuction' ? (
+        <ParticipantCount count={count} />
+      ) : (
+        <LikeCount count={count} />
+      )}
     </figcaption>
   );
 };

@@ -3,7 +3,7 @@ import {
   setNicknameError,
   setIsNicknameChecked,
   setIsSubmitEnabled,
-  setIsNicknameCheckDisabled,
+  setIsNicknameCheckDisabled
 } from '@/entities/user/model/profileEditSlice';
 
 export const updateProfileEditState = (
@@ -15,8 +15,14 @@ export const updateProfileEditState = (
     isNicknameCheckDisabled: boolean;
   }>
 ) => {
-  if ('nicknameError' in updates) dispatch(setNicknameError(updates.nicknameError || ''));
-  if ('isNicknameChecked' in updates) dispatch(setIsNicknameChecked(updates.isNicknameChecked || false));
-  if ('isSubmitEnabled' in updates) dispatch(setIsSubmitEnabled(updates.isSubmitEnabled || false));
-  if ('isNicknameCheckDisabled' in updates) dispatch(setIsNicknameCheckDisabled(updates.isNicknameCheckDisabled || false));
+  if ('nicknameError' in updates)
+    dispatch(setNicknameError(updates.nicknameError || ''));
+  if ('isNicknameChecked' in updates)
+    dispatch(setIsNicknameChecked(updates.isNicknameChecked || false));
+  if ('isSubmitEnabled' in updates)
+    dispatch(setIsSubmitEnabled(updates.isSubmitEnabled || false));
+  if ('isNicknameCheckDisabled' in updates)
+    dispatch(
+      setIsNicknameCheckDisabled(updates.isNicknameCheckDisabled || false)
+    );
 };

@@ -8,21 +8,33 @@ export const RouteErrorFallback = () => {
   const handleBack = () => navigate('/', { replace: true });
 
   return (
-    <div className='flex justify-center w-full' style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
-      <div className='relative w-[46rem] min-w-[23rem] h-full'>
+    <div
+      className="flex justify-center w-full"
+      style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+    >
+      <div className="relative w-[46rem] min-w-[23rem] h-full">
         <Layout>
-          <Layout.Header title='치즈 마켓' />
+          <Layout.Header title="치즈 마켓" />
           <Layout.Main>
-            <div className='flex flex-col items-center justify-center h-full gap-5'>
-              <img src={NotFoundIcon} alt='NotFoundLogo' className='size-40' />
-              <div className='flex flex-col items-center justify-center gap-1'>
-                <h2 className='text-heading2 text-gray1'>원하시는 페이지를 찾을 수 없습니다.</h2>
-                <p className='text-body2Bold text-gray2'>입력하신 주소를 다시 확인해주세요.</p>
+            <div className="flex flex-col items-center justify-center h-full gap-5">
+              <img src={NotFoundIcon} alt="NotFoundLogo" className="size-40" />
+              <div className="flex flex-col items-center justify-center gap-1">
+                <h2 className="text-heading2 text-gray1">
+                  원하시는 페이지를 찾을 수 없습니다.
+                </h2>
+                <p className="text-body2Bold text-gray2">
+                  입력하신 주소를 다시 확인해주세요.
+                </p>
               </div>
             </div>
           </Layout.Main>
-          <Layout.Footer type='single'>
-            <Button onClick={handleBack} type='button' className='w-full' color='cheeseYellow'>
+          <Layout.Footer type="single">
+            <Button
+              onClick={handleBack}
+              type="button"
+              className="w-full"
+              color="cheeseYellow"
+            >
               홈으로 가기
             </Button>
           </Layout.Footer>

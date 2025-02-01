@@ -6,7 +6,7 @@ import {
   IPreAuctionRegisteredItem,
   IUserAuctionHistoryItem,
   IUserAuctionLostItem,
-  IUserAuctionWonItem,
+  IUserAuctionWonItem
 } from '.';
 
 export interface PaginationData<T> {
@@ -21,9 +21,15 @@ export interface PaginationData<T> {
 
 export interface IAuctionList extends PaginationData<IAuctionItem> {}
 export interface IPreAuctionList extends PaginationData<IPreAuctionItem> {}
-export interface IAuctionOngoingRegisteredList extends PaginationData<IAuctionOngoingRegisteredItem> {}
-export interface IAuctionEndRegisteredList extends PaginationData<IAuctionEndRegisteredItem> {}
-export interface IPreAuctionRegisteredList extends PaginationData<IPreAuctionRegisteredItem> {}
-export interface IUserAuctionWonList extends PaginationData<IUserAuctionWonItem> {}
-export interface IUserAuctionHistoryList extends PaginationData<IUserAuctionHistoryItem> {}
-export interface IUserAuctionLostList extends PaginationData<IUserAuctionLostItem> {}
+export interface IAuctionOngoingRegisteredList
+  extends PaginationData<IAuctionOngoingRegisteredItem> {}
+export interface IAuctionEndRegisteredList
+  extends PaginationData<IAuctionEndRegisteredItem> {}
+export interface IPreAuctionRegisteredList
+  extends PaginationData<IPreAuctionRegisteredItem> {}
+export interface IUserAuctionWonList
+  extends PaginationData<IUserAuctionWonItem> {}
+export interface IUserAuctionHistoryList
+  extends PaginationData<IUserAuctionHistoryItem> {}
+export interface IUserAuctionLostList
+  extends PaginationData<IUserAuctionLostItem> {}

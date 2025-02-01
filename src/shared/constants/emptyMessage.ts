@@ -9,5 +9,5 @@ export const EMPTY_MESSAGE: { [key: string]: string } = Object.freeze({
   participated: '참여중인 경매가 없어요.',
   won: '입찰 성공한 경매가 없어요.',
   lost: '입찰 실패한 경매가 없어요.',
-  category: '해당 카테고리 목록이 없어요',
+  category: '해당 카테고리 목록이 없어요'
 });

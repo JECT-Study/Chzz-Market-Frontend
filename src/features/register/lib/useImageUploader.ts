@@ -1,9 +1,11 @@
 import { ChangeEvent, useRef, useState } from 'react';
+import { toast } from 'sonner';
 import { compressAndConvertToWebP, convertFileToDataURL } from '../utils';
 
-import { toast } from 'sonner';
-
-export const useImageUploader = (state: string[], setState: (images: string[]) => void) => {
+export const useImageUploader = (
+  state: string[],
+  setState: (images: string[]) => void
+) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [progress, setProgress] = useState(0);
   const [isReading, setIsReading] = useState(false);
@@ -39,7 +41,7 @@ export const useImageUploader = (state: string[], setState: (images: string[]) =
 
     const curFiles = Array.from(e.target.files);
     const maxSize = 10 * 1024 * 1024;
-    for (let file of curFiles) {
+    for (const file of curFiles) {
       if (file.size > maxSize) {
         toast.error('10MB 이하의 이미지만 가능합니다.');
         return;
@@ -63,6 +65,6 @@ export const useImageUploader = (state: string[], setState: (images: string[]) =
     handleImage,
     handleBoxClick,
     progress,
-    isReading,
+    isReading
   };
 };

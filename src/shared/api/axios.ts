@@ -23,7 +23,10 @@ const handleTokenError = (message: string) => {
 // Refresh (싱글턴 객체) 이걸로 refresh 요청 관리하고 대기중인 요청 처리
 export const RefreshHandler = (() => {
   let isRefreshing = false;
-  let pendingRequests: Array<{ resolve: (token: string | null) => void; reject: (error: any) => void }> = []; // queue
+  let pendingRequests: Array<{
+    resolve: (token: string | null) => void;
+    reject: (error: any) => void;
+  }> = []; // queue
 
   const processPendingRequests = (error: any, token: string | null = null) => {
     pendingRequests.forEach(({ resolve, reject }) => {
@@ -49,9 +52,8 @@ export const RefreshHandler = (() => {
         setToken(newAccessToken); // 대기 중인 요청에 새 토큰 전달
         processPendingRequests(null, newAccessToken);
         return newAccessToken;
-      } else {
-        throw new Error('리프레시 토큰이 만료되었습니다.');
       }
+      throw new Error('리프레시 토큰이 만료되었습니다.');
     } catch (error) {
       processPendingRequests(error); // 대기중인 요청에 에러 전달
       throw error;
@@ -67,11 +69,11 @@ export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     withCredentials: true,
     timeout: 20000,
-    ...config,
+    ...config
   });
 
   axiosInstance.interceptors.request.use(async (request) => {
@@ -109,8 +111,10 @@ export const createClient = (config?: AxiosRequestConfig) => {
           originalRequest._retry = true;
 
           try {
-            const newAccessToken = await RefreshHandler.refreshTokenProcessQueue();
-            if (!newAccessToken) throw new Error('리프레시 토큰이 만료되었습니다.');
+            const newAccessToken =
+              await RefreshHandler.refreshTokenProcessQueue();
+            if (!newAccessToken)
+              throw new Error('리프레시 토큰이 만료되었습니다.');
 
             originalRequest.headers = originalRequest.headers || {};
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -118,7 +122,9 @@ export const createClient = (config?: AxiosRequestConfig) => {
 
             return await axiosInstance(originalRequest);
           } catch (refreshError) {
-            handleTokenError('리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.');
+            handleTokenError(
+              '리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.'
+            );
             return Promise.reject(refreshError);
           }
         }

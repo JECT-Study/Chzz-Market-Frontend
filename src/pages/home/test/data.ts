@@ -15,7 +15,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 100_000,
     participantCount: 2,
     isParticipated: false,
-    isSeller: false,
+    isSeller: false
   },
   {
     auctionId: 1,
@@ -25,7 +25,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 120_000,
     participantCount: 8,
     isParticipated: true,
-    isSeller: false,
+    isSeller: false
   },
   {
     auctionId: 2,
@@ -35,7 +35,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 180_000,
     participantCount: 29,
     isParticipated: false,
-    isSeller: false,
+    isSeller: false
   },
   {
     auctionId: 3,
@@ -45,7 +45,7 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 230_000,
     participantCount: 32,
     isParticipated: true,
-    isSeller: false,
+    isSeller: false
   },
   {
     auctionId: 4,
@@ -55,8 +55,8 @@ export const bestAuctionsData: IAuctionItem[] = [
     minPrice: 70_000,
     participantCount: 6,
     isParticipated: true,
-    isSeller: false,
-  },
+    isSeller: false
+  }
 ];
 
 export const imminentAuctionsData: IAuctionItem[] = [];
@@ -69,7 +69,7 @@ export const preAuctionsData: IPreAuctionItem[] = [
     minPrice: 230_000,
     likeCount: 45,
     isLiked: false,
-    isSeller: true,
+    isSeller: true
   },
   {
     auctionId: 11,
@@ -78,6 +78,6 @@ export const preAuctionsData: IPreAuctionItem[] = [
     minPrice: 180_000,
     likeCount: 18,
     isLiked: true,
-    isSeller: false,
-  },
+    isSeller: false
+  }
 ];

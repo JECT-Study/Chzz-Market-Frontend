@@ -8,13 +8,16 @@ export const useEndAuction = () => {
 
   const endAuction = useCallback(
     async (auctionId: number) => {
-      queryClient.setQueryData([QUERY_KEYS.AUCTION_DETAILS, auctionId], (oldData: IAuctionDetails) => {
-        return {
-          ...oldData,
-          status: 'ENDED',
-          timeRemaining: 0,
-        };
-      });
+      queryClient.setQueryData(
+        [QUERY_KEYS.AUCTION_DETAILS, auctionId],
+        (oldData: IAuctionDetails) => {
+          return {
+            ...oldData,
+            status: 'ENDED',
+            timeRemaining: 0
+          };
+        }
+      );
     },
     [queryClient]
   );

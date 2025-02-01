@@ -8,19 +8,23 @@ type FormFields = z.infer<typeof UserProfileEditFormSchema>;
 
 export const useEditProfile = () => {
   const location = useLocation();
-  const { userNickname: originalNickname, userBio, userProfileImageUrl } = location.state || {};
+  const {
+    userNickname: originalNickname,
+    userBio,
+    userProfileImageUrl
+  } = location.state || {};
   const { profileMutation, isPending } = useProfile();
 
   const {
     control,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormFields>({
     defaultValues: {
       nickname: originalNickname || '',
-      bio: userBio || '',
-    },
+      bio: userBio || ''
+    }
   });
 
   const handleEditProfile = (formData: FormData) => {
@@ -35,6 +39,6 @@ export const useEditProfile = () => {
     originalNickname,
     userProfileImageUrl,
     errors,
-    isPending,
+    isPending
   };
 };

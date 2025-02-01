@@ -13,10 +13,16 @@ interface ImageUploaderProps {
   setFile: Dispatch<SetStateAction<File | null>>;
 }
 
-export const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUploaderProps) => {
+export const ProfileImageUploader = ({
+  file,
+  setFile,
+  image,
+  setImage
+}: ImageUploaderProps) => {
   const [onMenu, setOnMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { fileInputRef, deleteImage, handleImage, handleBoxClick } = useProfileImageUploader(image, setImage, file, setFile, setOnMenu);
+  const { fileInputRef, deleteImage, handleImage, handleBoxClick } =
+    useProfileImageUploader(image, setImage, file, setFile, setOnMenu);
 
   const onClickImage = () => {
     if (!onMenu) {
@@ -40,19 +46,45 @@ export const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUp
   return (
     <div className="flex flex-col items-center gap-4">
       {image ? (
-        <div className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer" onClick={onClickImage}>
-          <img src={image} alt="프로필 사진" className="object-cover w-full h-full rounded-full" />
-          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
-          {onMenu &&
+        <div
+          className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer"
+          onClick={onClickImage}
+        >
+          <img
+            src={image}
+            alt="프로필 사진"
+            className="object-cover w-full h-full rounded-full"
+          />
+          <img
+            src={ProfileEdit}
+            alt="프로필 사진 옆 카메라"
+            className="w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0"
+          />
+          {onMenu && (
             <div ref={menuRef}>
-              <MenuAccordion fileInputRef={fileInputRef} deleteImage={deleteImage} setOnMenu={setOnMenu} />
+              <MenuAccordion
+                fileInputRef={fileInputRef}
+                deleteImage={deleteImage}
+                setOnMenu={setOnMenu}
+              />
             </div>
-          }
+          )}
         </div>
       ) : (
-        <div className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer" onClick={handleBoxClick}>
-          <img src={Profile} alt="프로필 사진" className="relative object-cover w-full h-full rounded-full" />
-          <img src={ProfileEdit} alt='프로필 사진 옆 카메라' className='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
+        <div
+          className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer"
+          onClick={handleBoxClick}
+        >
+          <img
+            src={Profile}
+            alt="프로필 사진"
+            className="relative object-cover w-full h-full rounded-full"
+          />
+          <img
+            src={ProfileEdit}
+            alt="프로필 사진 옆 카메라"
+            className="w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0"
+          />
         </div>
       )}
       <Input
@@ -60,7 +92,7 @@ export const ProfileImageUploader = ({ file, setFile, image, setImage }: ImageUp
         type="file"
         id="사진"
         className="hidden"
-        accept='image/jpeg, image/png, image/webp'
+        accept="image/jpeg, image/png, image/webp"
         onChange={handleImage} // 다수의 파일을 받지 않음
         aria-label="프로필 사진 업로드 인풋"
         role="button"

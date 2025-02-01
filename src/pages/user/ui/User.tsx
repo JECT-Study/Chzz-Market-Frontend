@@ -6,8 +6,18 @@ export const User = () => {
 
   return (
     <div className="flex flex-col">
-      <UserProfile nickname={profileData?.nickname} bio={profileData?.bio} profileImageUrl={profileData?.profileImageUrl} providerType={profileData?.providerType} isLoading={isLoading} />
-      <UserOrder participantCount={profileData?.participantCount} preRegisterCount={profileData?.preRegisterCount} registeredAuctionCount={profileData?.registeredAuctionCount} />
+      <UserProfile
+        nickname={profileData?.nickname}
+        bio={profileData?.bio}
+        profileImageUrl={profileData?.profileImageUrl}
+        providerType={profileData?.providerType}
+        isLoading={isLoading}
+      />
+      <UserOrder
+        participantCount={profileData?.participantCount}
+        preRegisterCount={profileData?.preRegisterCount}
+        registeredAuctionCount={profileData?.registeredAuctionCount}
+      />
       <UserOrderList />
     </div>
   );

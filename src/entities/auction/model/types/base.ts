@@ -6,7 +6,8 @@ export interface IAuctionItemBase {
   isSeller: boolean;
 }
 
-export interface IAuctionDetailsBase extends Omit<IAuctionItemBase, 'imageUrl'> {
+export interface IAuctionDetailsBase
+  extends Omit<IAuctionItemBase, 'imageUrl'> {
   sellerNickname: string;
   sellerProfileImageUrl: string;
   description: string;

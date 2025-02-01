@@ -20,7 +20,7 @@ export interface ProductProps {
 export const ProductItem = ({
   product,
   children,
-  onClick,
+  onClick
 }: {
   product: ProductProps;
   children: ReactNode;
@@ -39,7 +39,9 @@ export const ProductItem = ({
               src={product.imageUrl}
               alt={displayName || '제품 사진'}
             />
-            {product.timeRemaining && <TimeLabel time={product.timeRemaining} />}
+            {product.timeRemaining && (
+              <TimeLabel time={product.timeRemaining} />
+            )}
           </div>
         </div>
 

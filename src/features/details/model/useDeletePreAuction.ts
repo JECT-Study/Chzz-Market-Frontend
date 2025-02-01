@@ -15,7 +15,7 @@ export const useDeletePreAuction = (): {
     onSuccess: () => {
       navigate('/');
       toast.success('사전 경매가 삭제되었습니다.');
-    },
+    }
   });
 
   return { mutate, isPending };

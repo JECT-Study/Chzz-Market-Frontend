@@ -34,7 +34,7 @@ export const UserPreRegisteredList = () => {
     const options = {
       root: mainContainerRef.current,
       rootMargin: '0px',
-      threshold: 1.0,
+      threshold: 1.0
     };
     const observer = new IntersectionObserver(handleObserver, options);
 
@@ -51,9 +51,9 @@ export const UserPreRegisteredList = () => {
   }, [fetchNextEnrollPage, hasNextEnrollPage, handleObserver]);
 
   return (
-    <div className='mx-[-32px] my-[-4px] h-full'>
-      <EmptyBoundary type='userPreAuction' length={enrollItems.length}>
-        <div className='grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto'>
+    <div className="mx-[-32px] my-[-4px] h-full">
+      <EmptyBoundary type="userPreAuction" length={enrollItems.length}>
+        <div className="grid grid-cols-2 grid-rows-3 gap-4 p-4 overflow-y-auto">
           {enrollItems.map((product: IPreAuctionRegisteredItem) => (
             <PreAuctionMyRegister product={product} key={product.auctionId} />
           ))}

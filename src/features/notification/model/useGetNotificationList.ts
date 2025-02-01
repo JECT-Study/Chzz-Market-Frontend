@@ -11,7 +11,7 @@ export const useGetNotificationList = () => {
   const { data: notificationList } = useQuery({
     queryKey: [QUERY_KEYS.NOTIFICATION_LIST],
     queryFn: getNotificationList,
-    enabled: isLogin,
+    enabled: isLogin
   });
 
   return { notificationList };
@@ -20,7 +20,7 @@ export const useGetNotificationList = () => {
 export const useGetNotificationListWithSuspense = () => {
   const { data: notificationList } = useSuspenseQuery({
     queryKey: [QUERY_KEYS.NOTIFICATION_LIST],
-    queryFn: getNotificationList,
+    queryFn: getNotificationList
   });
 
   return { notificationList };

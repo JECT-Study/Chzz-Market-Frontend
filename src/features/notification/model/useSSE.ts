@@ -18,17 +18,21 @@ export const useSSE = <T>(url: string) => {
   useEffect(() => {
     const fetchSSE = () => {
       const accessToken = getToken();
-      eventSource.current = new EventSource(`${import.meta.env.VITE_API_URL}${url}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        heartbeatTimeout: 120_000,
-        withCredentials: true,
-      });
+      eventSource.current = new EventSource(
+        `${import.meta.env.VITE_API_URL}${url}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          },
+          heartbeatTimeout: 120_000,
+          withCredentials: true
+        }
+      );
 
       eventSource.current.onerror = async () => {
         try {
-          const newAccessToken = await RefreshHandler.refreshTokenProcessQueue();
+          const newAccessToken =
+            await RefreshHandler.refreshTokenProcessQueue();
           if (newAccessToken) {
             eventSource.current?.close();
             setTimeout(fetchSSE, 1000);

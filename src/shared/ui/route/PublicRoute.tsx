@@ -7,7 +7,7 @@ export const PublicRoute = ({ children }: { children: ReactNode }) => {
   const isLogin = useSelector(isLoggedIn);
 
   if (isLogin) {
-    return <Navigate to='/' replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

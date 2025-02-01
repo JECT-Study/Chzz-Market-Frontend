@@ -5,8 +5,8 @@ export const uploadImagesToS3 = async (urls: string[], files: File[]) => {
     const file = files[idx];
     const response = await axios.put(url, file, {
       headers: {
-        'Content-Type': file.type,
-      },
+        'Content-Type': file.type
+      }
     });
 
     return response.status === 200;

@@ -1,72 +1,97 @@
-import { GlobalLayout, LayoutWithNav } from "@/app/layout";
-import { Bid, bidLoader } from "@/pages/bid";
-import { BidderList, bidderListLoader } from "@/pages/bidder-list";
-import { AuctionDetails, PreAuctionDetails, auctionDetailsLoader, preAuctionDetailsLoader } from "@/pages/details";
-import { EditAuction, editAuctionLoader } from "@/pages/edit-auction";
-import { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess } from "@/pages/payment";
-import { User, UserParticipatedList, UserPreRegisteredList, UserProfileEdit, UserRegisteredList } from "@/pages/user";
-import { AsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorFallback } from '@/shared';
+import { GlobalLayout, LayoutWithNav } from '@/app/layout';
+import { Bid, bidLoader } from '@/pages/bid';
+import { BidderList, bidderListLoader } from '@/pages/bidder-list';
+import {
+  AuctionDetails,
+  PreAuctionDetails,
+  auctionDetailsLoader,
+  preAuctionDetailsLoader
+} from '@/pages/details';
+import { EditAuction, editAuctionLoader } from '@/pages/edit-auction';
+import {
+  Payment,
+  PaymentAddressAdd,
+  PaymentAddressEdit,
+  PaymentAddressEditList,
+  PaymentAddressList,
+  PaymentSuccess
+} from '@/pages/payment';
+import {
+  User,
+  UserParticipatedList,
+  UserPreRegisteredList,
+  UserProfileEdit,
+  UserRegisteredList
+} from '@/pages/user';
+import {
+  AsyncBoundary,
+  GlobalAsyncBoundary,
+  PrivateRoute,
+  PublicRoute,
+  ROUTES,
+  RouteErrorFallback
+} from '@/shared';
 
-import { Test } from "@/pages/Test";
-import { Heart } from "@/pages/heart";
-import { Home } from "@/pages/home";
-import { Login } from "@/pages/login";
-import { Notification } from "@/pages/notification";
-import { ProductList } from "@/pages/product-list";
-import { Register } from "@/pages/register";
-import { AuctionSearch } from "@/pages/search";
-import { Signup } from "@/pages/sign-up";
+import { Test } from '@/pages/Test';
+import { Heart } from '@/pages/heart';
+import { Home } from '@/pages/home';
+import { Login } from '@/pages/login';
+import { Notification } from '@/pages/notification';
+import { ProductList } from '@/pages/product-list';
+import { Register } from '@/pages/register';
+import { AuctionSearch } from '@/pages/search';
+import { Signup } from '@/pages/sign-up';
 import { createBrowserRouter } from 'react-router-dom';
 
 const layoutWithNavRouteList = [
   {
     path: ROUTES.HOME,
-    element: <Home />,
+    element: <Home />
   },
   {
     path: ROUTES.NOTIFICATION,
-    element: <Notification />,
+    element: <Notification />
   },
   {
     path: ROUTES.HEART,
-    element: <Heart />,
+    element: <Heart />
   },
   {
     path: ROUTES.USER.HOME,
-    element: <User />,
+    element: <User />
   },
   {
     path: ROUTES.USER.REGISTERED_LIST,
-    element: <UserRegisteredList />,
+    element: <UserRegisteredList />
   },
   {
     path: ROUTES.USER.PRE_REGISTERED_LIST,
-    element: <UserPreRegisteredList />,
+    element: <UserPreRegisteredList />
   },
   {
     path: ROUTES.USER.PARTICIPATED_LIST,
-    element: <UserParticipatedList />,
+    element: <UserParticipatedList />
   }
 ];
 
 const privateRouteList = [
   {
     path: ROUTES.REGISTER,
-    element: <Register />,
+    element: <Register />
   },
   {
     path: ROUTES.BID,
     element: <Bid />,
-    loader: bidLoader,
+    loader: bidLoader
   },
   {
     path: ROUTES.BIDDER_LIST,
     element: <BidderList />,
-    loader: bidderListLoader,
+    loader: bidderListLoader
   },
   {
     path: ROUTES.USER.PROFILE_EDIT,
-    element: <UserProfileEdit />,
+    element: <UserProfileEdit />
   },
 
   {
@@ -76,11 +101,11 @@ const privateRouteList = [
         <EditAuction />
       </AsyncBoundary>
     ),
-    loader: editAuctionLoader,
+    loader: editAuctionLoader
   },
   {
     path: ROUTES.PAYMENT.HOME,
-    element: <Payment />,
+    element: <Payment />
   },
   {
     path: ROUTES.PAYMENT.SUCCESS,
@@ -101,53 +126,50 @@ const privateRouteList = [
   {
     path: ROUTES.PAYMENT.ADDRESS.EDIT_LIST,
     element: <PaymentAddressEditList />
-  },
+  }
 ];
 
 const publicRouteList = [
   {
     path: ROUTES.SIGNUP,
-    element: <Signup />,
+    element: <Signup />
   },
   {
     path: ROUTES.LOGIN,
-    element: <Login />,
-  },
+    element: <Login />
+  }
 ];
 
 export const router = createBrowserRouter([
   {
-    element:
+    element: (
       <GlobalAsyncBoundary>
         <GlobalLayout />
-      </GlobalAsyncBoundary>,
+      </GlobalAsyncBoundary>
+    ),
     errorElement: <RouteErrorFallback />,
     children: [
       {
-        element: (
-          <LayoutWithNav />
-        ),
+        element: <LayoutWithNav />,
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
           element: (
             <AsyncBoundary>
               {path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}
             </AsyncBoundary>
-          ),
-        })),
+          )
+        }))
       },
 
       ...privateRouteList.map(({ path, element, loader }) => ({
         path,
-        element: (
-          <PrivateRoute>{element}</PrivateRoute>
-        ),
-        ...(loader && { loader }),
+        element: <PrivateRoute>{element}</PrivateRoute>,
+        ...(loader && { loader })
       })),
 
       ...publicRouteList.map(({ path, element }) => ({
         path,
-        element: <PublicRoute>{element}</PublicRoute>,
+        element: <PublicRoute>{element}</PublicRoute>
       })),
 
       {
@@ -156,21 +178,17 @@ export const router = createBrowserRouter([
           <AsyncBoundary>
             <ProductList />
           </AsyncBoundary>
-        ),
+        )
       },
       {
         path: ROUTES.AUCTION.ITEM,
-        element: (
-          <AuctionDetails />
-        ),
-        loader: auctionDetailsLoader,
+        element: <AuctionDetails />,
+        loader: auctionDetailsLoader
       },
       {
         path: ROUTES.PRE_AUCTION.ITEM,
-        element: (
-          <PreAuctionDetails />
-        ),
-        loader: preAuctionDetailsLoader,
+        element: <PreAuctionDetails />,
+        loader: preAuctionDetailsLoader
       },
       {
         path: `/test`,
@@ -178,10 +196,10 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.AUCTION_SEARCH,
-        element: <AuctionSearch />,
+        element: <AuctionSearch />
       }
-    ],
-  },
+    ]
+  }
 ]);
 
 export default router;
