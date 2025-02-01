@@ -5,7 +5,7 @@ import myAuctionData from './auctionData';
 import { mockUserProfile } from './userProfileData';
 
 export const getMyAuctionPreRegisterHandler: HttpHandler = http.get(
-  `${API_END_POINT.MY_AUCTION_PRE_REGISTER}`,
+  `${import.meta.env.VITE_API_URL}${API_END_POINT.MY_AUCTION_PRE_REGISTER}`,
   ({ request }) => {
     const url = new URL(request.url);
     const page = url.searchParams.get('page') || '0';
@@ -47,7 +47,7 @@ export const getUserProfileHandler: HttpHandler = http.get(
 );
 
 export const refreshTokenHandler: HttpHandler = http.post(
-  API_END_POINT.REFRESH_TOKEN,
+  `${import.meta.env.VITE_API_URL}${API_END_POINT.REFRESH_TOKEN}`,
   async () => {
     const mockResponse = {
       status: 'success',

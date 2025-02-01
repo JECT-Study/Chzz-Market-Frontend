@@ -4,7 +4,7 @@ import { API_END_POINT } from '@/shared';
 import ongoingProducts from './ongoingData';
 
 export const getOngoingProductListHandler: HttpHandler = http.get(
-  `${API_END_POINT.AUCTION}`,
+  `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}`,
   ({ request }) => {
     const url = new URL(request.url);
     const page = url.searchParams.get('page') || '0';
