@@ -1,17 +1,17 @@
-import { setNicknameError } from '@/features/sign-up/model/signupSlice';
 import { Button, FormField } from '@/shared';
 import { KeyboardEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Layout } from '@/app/layout/index';
-import { RootState } from '@/app/store';
 import type { IUser } from '@/entities/user/user';
-import { useSignup } from '@/features/sign-up/hooks';
+import { Input } from '@/shared/ui/input';
+import { Layout } from '@/app/layout/index';
 import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
-import { Input } from '@/shared/ui/input';
+import { RootState } from '@/app/store';
 import { Textarea } from '@/shared/ui/textarea';
+import { setNicknameError } from '@/features/sign-up/model/signupSlice';
 import { useNavigate } from 'react-router-dom';
+import { useSignup } from '@/features/sign-up/hooks';
 import { useSignupNicknameValidate } from '@/features/sign-up/hooks/useSignupNicknameValidate';
 
 export const Signup = () => {
@@ -79,7 +79,7 @@ export const Signup = () => {
               />
             </div>
             <div>
-              <Button type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={checkNicknameAvailability} disabled={isNicknameCheckDisabled}>중복확인</Button>
+              <Button ariaLabel='중복 확인' type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={checkNicknameAvailability} disabled={isNicknameCheckDisabled}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
