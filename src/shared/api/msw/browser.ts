@@ -1,4 +1,10 @@
 import {
+  auctionDetailsHandler,
+  convertPreAuctionHandler,
+  deletePreAuctionHandler,
+  heartAuctionHandler
+} from '@/features/details';
+import {
   getAuctionUploadURLsHandler,
   postAuctionHandler,
   uploadImagesToS3Handler
@@ -17,7 +23,6 @@ import {
 } from '@/features/notification';
 
 import { HttpHandler } from 'msw';
-import { auctionDetailsHandler } from '@/features/details';
 import { bidderListHandler } from '@/pages/bidder-list';
 import { getMyAuctionPreRegisterHandler } from '@/features/user';
 import { getOngoingProductListHandler } from '@/features/product-list';
@@ -44,7 +49,10 @@ const handlers: HttpHandler[] = [
   postAuctionHandler,
   patchPreAuctionHandler,
   getAuctionUploadURLsHandler,
-  uploadImagesToS3Handler
+  uploadImagesToS3Handler,
+  deletePreAuctionHandler,
+  convertPreAuctionHandler,
+  heartAuctionHandler
 ];
 
 export const worker = setupWorker(...handlers);
