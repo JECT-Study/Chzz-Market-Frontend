@@ -37,7 +37,6 @@ const Header = ({
               {option}
             </>
         }
-
       </div>
     </header>
   );
