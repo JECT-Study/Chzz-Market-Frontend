@@ -11,9 +11,13 @@ declare global {
        * e.g. cy.login()
        */
       login(): Chainable<void>;
+      verifyBaseUrl(): Chainable<void>;
     }
   }
 }
+Cypress.Commands.add('verifyBaseUrl', () => {
+  cy.location('origin').should('eq', Cypress.config('baseUrl'));
+});
 
 Cypress.Commands.add('login', () => {
   document.cookie = `REFRESH=mockKakaoRefreshToken; Path=/;`;

@@ -83,7 +83,7 @@ describe('경매 등록', () => {
     cy.findByLabelText('최종 등록 버튼').click();
 
     // 홈페이지 리다이렉트
-    cy.url().should('eq', 'http://localhost:5173/');
+    cy.verifyBaseUrl();
     cy.findByText('경매가 등록되었습니다.').should('be.visible');
   });
 });

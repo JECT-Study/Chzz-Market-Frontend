@@ -9,7 +9,7 @@ describe('로그인', () => {
 
     cy.wait(500);
 
-    cy.url().should('eq', 'http://localhost:5173/');
+    cy.verifyBaseUrl();
 
     cy.findByText('베스트 경매').should('be.visible');
     cy.findByText('종료 임박 경매').should('be.visible');
