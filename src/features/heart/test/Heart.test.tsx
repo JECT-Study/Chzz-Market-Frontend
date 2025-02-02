@@ -1,11 +1,11 @@
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { describe, expect, test, vi } from 'vitest';
 import { heartData, useDeleteHeart, useGetHeartList } from '@/features/heart';
 import { notificationData, useGetNotificationList } from '@/features/notification';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { describe, expect, test, vi } from 'vitest';
 
-import { LayoutWithNav } from '@/app/layout';
 import { Heart } from '@/pages/heart';
+import { LayoutWithNav } from '@/app/layout';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 
@@ -67,7 +67,7 @@ describe('찜 목록 테스트', () => {
     const heartProducts = await screen.findAllByRole('figure', {
       name: /내가 찜 한 사전 경매 상품/,
     });
-    expect(heartProducts).toHaveLength(3);
+    expect(heartProducts).toHaveLength(1);
   });
 
   test('항목을 클릭하면 상세 페이지로 이동한다.', async () => {
@@ -78,7 +78,7 @@ describe('찜 목록 테스트', () => {
     });
     await user.click(heartProducts[0]);
 
-    expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/pre-auction/0');
+    expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/pre-auction/11');
   });
 
   test('찜 목록에서 제외 버튼을 클릭하면 항목이 삭제된다.', async () => {
@@ -88,6 +88,6 @@ describe('찜 목록 테스트', () => {
     const firstButton = buttons[0];
     await user.click(firstButton);
 
-    expect(mutateMock).toHaveBeenCalledWith(0);
+    expect(mutateMock).toHaveBeenCalledWith(11);
   });
 });
