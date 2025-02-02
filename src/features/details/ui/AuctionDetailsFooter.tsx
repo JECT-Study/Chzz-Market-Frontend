@@ -1,10 +1,10 @@
 import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from "@/shared";
 
+import type { IAuctionDetails } from "@/entities";
 import { Layout } from "@/app/layout";
 import { useCancelBid } from "@/features/bid";
-import { useNavigate } from "react-router-dom";
 import { useGetAuctionDetails } from "../model";
-import type { IAuctionDetails } from "@/entities";
+import { useNavigate } from "react-router-dom";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   if (isSeller) {
     return (
       <Layout.Footer type="single">
-        <Button type='button' disabled color="disabled" className='w-full h-full'>
+        <Button type='button' disabled color="disabled" className='w-full h-full' ariaLabel="내가 등록한 경매">
           내가 등록한 경매
         </Button>
       </Layout.Footer>
@@ -79,6 +79,7 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
             className="w-full h-full"
             color="cheeseYellow"
             onClick={clickBid}
+            ariaLabel="경매 참여"
           >
             경매 참여하기
           </Button>
