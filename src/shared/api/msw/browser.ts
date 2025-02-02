@@ -1,3 +1,8 @@
+import {
+  getAuctionUploadURLsHandler,
+  postAuctionHandler,
+  uploadImagesToS3Handler
+} from '@/features/register';
 import { heartDeleteHandler, heartHandler } from '@/features/heart';
 import {
   kakaoLoginHandler,
@@ -17,6 +22,7 @@ import { bidderListHandler } from '@/pages/bidder-list';
 import { getMyAuctionPreRegisterHandler } from '@/features/user';
 import { getOngoingProductListHandler } from '@/features/product-list';
 import { homeAuctionsHandler } from '@/pages/home';
+import { patchPreAuctionHandler } from '@/features/edit-auction';
 import { setupWorker } from 'msw/browser';
 
 /* eslint-disable import/no-named-as-default */
@@ -34,7 +40,11 @@ const handlers: HttpHandler[] = [
   heartHandler,
   heartDeleteHandler,
   auctionDetailsHandler,
-  bidderListHandler
+  bidderListHandler,
+  postAuctionHandler,
+  patchPreAuctionHandler,
+  getAuctionUploadURLsHandler,
+  uploadImagesToS3Handler
 ];
 
 export const worker = setupWorker(...handlers);

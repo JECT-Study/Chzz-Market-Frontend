@@ -188,8 +188,8 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup className='focus-visible:ring-cheeseYellow'>
-                      {Object.values(CATEGORIES).map((el) => (
-                        <SelectItem key={el.value} value={el.code}>
+                      {Object.values(CATEGORIES).map((el, idx) => (
+                        <SelectItem key={el.value} value={el.code} aria-label={`옵션_${idx}`}>
                           {el.value}
                         </SelectItem>
                       ))}
@@ -245,15 +245,15 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
       </Layout.Main>
       <Layout.Footer type={caution === '' ? 'double' : 'single'}>
         {preAuction ? (
-          <Button disabled={patchPending} loading={patchPending} onClick={handleSubmit(onPatchSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
+          <Button ariaLabel="수정 완료 버튼" disabled={patchPending} loading={patchPending} onClick={handleSubmit(onPatchSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
             수정 완료
           </Button>
         ) : caution === '' ? (
           <>
-            <Button type='button' color='white' className='flex-1 h-full' onClick={() => handleProceed('PRE_REGISTER')}>
+            <Button type='button' ariaLabel="사전 등록하기" color='white' className='flex-1 h-full' onClick={() => handleProceed('PRE_REGISTER')}>
               사전 등록하기
             </Button>
-            <Button type='button' color='cheeseYellow' className='flex-[2] h-full' onClick={() => handleProceed('REGISTER')}>
+            <Button type='button' ariaLabel="바로 등록하기" color='cheeseYellow' className='flex-[2] h-full' onClick={() => handleProceed('REGISTER')}>
               바로 등록하기
             </Button>
           </>
@@ -264,7 +264,7 @@ export const AuctionForm = ({ preAuction }: { preAuction?: IPreAuctionDetails })
             className='w-full h-full'
             disabled={!check || postPending}
             onClick={handleSubmit(onPostSubmit)}
-            aria-label='최종 등록 버튼'
+            ariaLabel='최종 등록 버튼'
             loading={postPending}
           >
             등록하기
