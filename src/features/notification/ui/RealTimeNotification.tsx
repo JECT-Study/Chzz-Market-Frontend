@@ -1,7 +1,8 @@
 import { API_END_POINT, Modal } from "@/shared";
 import { useEffect, useState } from "react";
-import { RealTimeNotificationItem } from ".";
+
 import type { IRealTimeNotification } from "../config";
+import { RealTimeNotificationItem } from ".";
 import { useSSE } from "../model";
 
 export const RealTimeNotification = () => {
@@ -16,6 +17,7 @@ export const RealTimeNotification = () => {
       setNotifications((prev) => prev.slice(1));
     };
     if (currentNotification === null && notifications.length > 0) {
+      if (import.meta.env.MODE === 'development') return;
       showNextNotification();
     }
   }, [currentNotification, notifications, setNotifications]);
