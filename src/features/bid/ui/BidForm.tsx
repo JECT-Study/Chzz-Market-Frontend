@@ -10,15 +10,15 @@ import {
 } from '@/shared';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { BidCaution } from './BidCaution';
 import type { IAuctionDetails } from '@/entities';
 import { Layout } from '@/app/layout';
+import { getBidSchema } from '../config';
 import { useEditableNumberInput } from '@/features/register';
 import { useGetAuctionDetails } from '@/features/details';
+import { usePostBid } from '../model';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { usePostBid } from '../model';
-import { getBidSchema } from '../config';
-import { BidCaution } from './BidCaution';
 
 export const BidForm = ({ auctionId }: { auctionId: number }) => {
   const { details } = useGetAuctionDetails<IAuctionDetails>(auctionId);
@@ -120,10 +120,10 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
       </Layout.Main>
       <Layout.Footer type={isParticipated ? 'double' : 'single'}>
         <Button
-          type="button"
-          color="cheeseYellow"
-          className="w-full h-full transition-colors rounded text-button active:bg-black"
-          aria-label={maxFlag ? '제안하기' : '수정하기'}
+          type='button'
+          color='cheeseYellow'
+          className='w-full h-full transition-colors rounded text-button active:bg-black'
+          ariaLabel={maxFlag ? '제안하기' : '수정하기'}
           onClick={handleSubmit(onPostSubmit)}
           disabled={zeroFlag || !check || isPending}
           loading={isPending}

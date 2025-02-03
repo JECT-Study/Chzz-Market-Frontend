@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { ERROR_CODE } from '../constants/index';
+import { ERROR_CODE } from '../constants';
 
 export const getErrorByCode = (
   error: AxiosError<{ status: number; name: string; message: string[] }>

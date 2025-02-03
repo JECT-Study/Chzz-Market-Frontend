@@ -76,14 +76,14 @@ export const AuctionForm = ({
   } = useForm<FormFields>({
     defaultValues: preAuction
       ? {
-          auctionName: preAuction.auctionName,
-          category: CATEGORIES[preAuction.category].code,
-          minPrice: formatCurrencyWithWon(preAuction.minPrice),
-          description: preAuction.description,
-          images: preAuction.images.map((el) => el.imageUrl)
-        }
+        auctionName: preAuction.auctionName,
+        category: CATEGORIES[preAuction.category].code,
+        minPrice: formatCurrencyWithWon(preAuction.minPrice),
+        description: preAuction.description,
+        images: preAuction.images.map(el => el.imageUrl)
+      }
       : defaultValues,
-    resolver: zodResolver(RegisterSchema)
+    resolver: zodResolver(RegisterSchema),
   });
 
   const {
@@ -257,9 +257,9 @@ export const AuctionForm = ({
                     <SelectValue placeholder="카테고리를 선택하세요." />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectGroup className="focus-visible:ring-cheeseYellow">
-                      {Object.values(CATEGORIES).map((el) => (
-                        <SelectItem key={el.value} value={el.code}>
+                    <SelectGroup className='focus-visible:ring-cheeseYellow'>
+                      {Object.values(CATEGORIES).map((el, idx) => (
+                        <SelectItem key={el.value} value={el.code} aria-label={`옵션_${idx}`}>
                           {el.value}
                         </SelectItem>
                       ))}
@@ -269,8 +269,8 @@ export const AuctionForm = ({
               )}
             />
             <FormField
-              label="시작 가격*"
-              name="minPrice"
+              label='시작 가격*'
+              name='minPrice'
               control={control}
               error={errors.minPrice?.message}
               render={(field) => (
@@ -288,8 +288,8 @@ export const AuctionForm = ({
               )}
             />
             <FormField
-              label="상품 설명"
-              name="description"
+              label='상품 설명'
+              name='description'
               control={control}
               error={errors.description?.message}
               render={(field) => (
@@ -301,59 +301,32 @@ export const AuctionForm = ({
                 />
               )}
             />
-            <div className="relative flex flex-col gap-2">
+            < div className="relative flex flex-col gap-2" >
               <label
                 htmlFor="경매 마감 시간*"
                 className="cursor-pointer text-heading3"
               >
                 경매 마감 시간*
               </label>
-              <Input
-                id="경매 마감 시간*"
-                type="text"
-                defaultValue="24 시간"
-                disabled
-                className="text-gray1 border-gray2 bg-[#f1f1f1]"
-              />
-              <img
-                src={NoticeIcon}
-                alt="notice"
-                className="absolute bottom-[17%] right-[2%]"
-              />
-            </div>
-          </form>
+              <Input id='경매 마감 시간*' type='text' defaultValue='24 시간' disabled className='text-gray1 border-gray2 bg-[#f1f1f1]' />
+              <img src={NoticeIcon} alt='notice' className='absolute bottom-[17%] right-[2%]' />
+            </div >
+          </form >
         ) : (
           <RegisterCaution kind={caution} check={check} toggle={toggle} />
         )}
-      </Layout.Main>
+      </Layout.Main >
       <Layout.Footer type={caution === '' ? 'double' : 'single'}>
         {preAuction ? (
-          <Button
-            disabled={patchPending}
-            loading={patchPending}
-            onClick={handleSubmit(onPatchSubmit)}
-            type="button"
-            color="cheeseYellow"
-            className="w-full h-full"
-          >
+          <Button ariaLabel="수정 완료 버튼" disabled={patchPending} loading={patchPending} onClick={handleSubmit(onPatchSubmit)} type='button' color='cheeseYellow' className='w-full h-full'>
             수정 완료
           </Button>
         ) : caution === '' ? (
           <>
-            <Button
-              type="button"
-              color="white"
-              className="flex-1 h-full"
-              onClick={() => handleProceed('PRE_REGISTER')}
-            >
+            <Button type='button' ariaLabel="사전 등록하기" color='white' className='flex-1 h-full' onClick={() => handleProceed('PRE_REGISTER')}>
               사전 등록하기
             </Button>
-            <Button
-              type="button"
-              color="cheeseYellow"
-              className="flex-[2] h-full"
-              onClick={() => handleProceed('REGISTER')}
-            >
+            <Button type='button' ariaLabel="바로 등록하기" color='cheeseYellow' className='flex-[2] h-full' onClick={() => handleProceed('REGISTER')}>
               바로 등록하기
             </Button>
           </>
@@ -364,13 +337,13 @@ export const AuctionForm = ({
             className="w-full h-full"
             disabled={!check || postPending}
             onClick={handleSubmit(onPostSubmit)}
-            aria-label="최종 등록 버튼"
+            ariaLabel='최종 등록 버튼'
             loading={postPending}
           >
             등록하기
           </Button>
         )}
-      </Layout.Footer>
-    </Layout>
+      </Layout.Footer >
+    </Layout >
   );
 };

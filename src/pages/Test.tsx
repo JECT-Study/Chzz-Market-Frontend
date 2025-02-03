@@ -1,14 +1,16 @@
-import { Layout } from '@/app/layout';
-import { Button, httpClient, Input } from '@/shared';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Button, Input, httpClient } from "@/shared";
+import { useEffect, useState } from "react";
+
+import { AxiosError } from "axios";
+import { Layout } from "@/app/layout";
+import { useNavigate } from "react-router-dom";
 
 export const Test = () => {
-  const [state, setState] = useState(0);
+  const navigate = useNavigate()
+  const [state, setState] = useState(0)
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [minPrice, setMinPrice] = useState(1000);
-  const navigate = useNavigate();
 
   const clickButton = async () => {
     await httpClient.post(
@@ -16,6 +18,12 @@ export const Test = () => {
     );
     navigate('/');
   };
+
+  useEffect(() => {
+    if (import.meta.env.MODE !== 'development') {
+      throw new AxiosError('접근 권한', '403')
+    }
+  })
 
   return (
     <Layout>

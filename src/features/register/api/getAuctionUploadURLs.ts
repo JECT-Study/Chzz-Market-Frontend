@@ -1,6 +1,6 @@
 import { API_END_POINT, httpClient } from '@/shared';
 
-import { IAuctionImageUploadURLs } from '..';
+import type { IAuctionImageUploadURLs } from '..';
 
 export const getAuctionUploadURLs = async (
   imageNames: string[]

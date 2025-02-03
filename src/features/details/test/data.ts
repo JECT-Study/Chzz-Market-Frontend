@@ -1,10 +1,10 @@
+import type { IAuctionDetails, IPreAuctionDetails } from '@/entities';
+
 import adidasImage from '@/shared/assets/test/adidas_superstar.jpeg';
 import jordanBlackImage from '@/shared/assets/test/jordan_black.jpeg';
 import jordanBlueImage from '@/shared/assets/test/jordan_blue.jpeg';
 import jordanRedImage from '@/shared/assets/test/jordan_red.jpeg';
 import newBalanceImage from '@/shared/assets/test/newbalance_993.jpeg';
-
-import type { IAuctionDetails, IPreAuctionDetails } from '@/entities';
 
 export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
   // 일반 예시
@@ -54,7 +54,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
       }
     ],
     minPrice: 120_000,
-    timeRemaining: 3,
+    timeRemaining: 1,
     participantCount: 8,
     isParticipated: false,
     bidId: null,
@@ -89,7 +89,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     timeRemaining: 82_800,
     participantCount: 29,
     isParticipated: false,
-    bidId: 1,
+    bidId: 3,
     bidAmount: 0,
     remainingBidCount: 1,
     description: '에어 조던 블루입니다.',
@@ -146,7 +146,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
       }
     ],
     minPrice: 70_000,
-    timeRemaining: 2,
+    timeRemaining: 0,
     participantCount: 6,
     isParticipated: true,
     bidId: 1,
@@ -219,7 +219,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     isWon: true,
     isOrdered: false
   },
-  // 구매자, 종료된 경매, 참여자 하지 않은 예시
+  // 구매자, 종료된 경매, 참여하지 않은 예시
   {
     auctionId: 7,
     auctionName: '[나이키] 조던 블랙',
@@ -334,6 +334,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     status: 'PROCEEDING',
     category: 'FASHION_AND_CLOTHING'
   },
+
   // 구매자, 좋아요
   {
     auctionId: 11,
@@ -353,27 +354,27 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     sellerNickname: 'seller',
     sellerProfileImageUrl: newBalanceImage,
     status: 'PROCEEDING',
-    category: 'ELECTRONICS'
+    category: 'FASHION_AND_CLOTHING'
   },
   // 구매자, 좋아요 안 함
   {
     auctionId: 12,
-    updatedAt: '2025-01-23T17:51:30',
-    likeCount: 18,
+    updatedAt: '2025-01-31T21:51:30',
+    likeCount: 20,
     isLiked: false,
-    auctionName: '[나이키] 조던 블루',
+    auctionName: '[나이키] 조던 블랙',
     images: [
       {
         imageId: 0,
-        imageUrl: jordanBlueImage
+        imageUrl: jordanBlackImage
       }
     ],
-    minPrice: 180_000,
-    description: '에어 조던 블루입니다.',
+    minPrice: 210_000,
+    description: '에어 조던 블랙입니다.',
     isSeller: false,
     sellerNickname: 'seller',
     sellerProfileImageUrl: newBalanceImage,
     status: 'PROCEEDING',
-    category: 'ELECTRONICS'
+    category: 'FASHION_AND_CLOTHING'
   }
 ];

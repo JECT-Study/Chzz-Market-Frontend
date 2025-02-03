@@ -79,5 +79,14 @@ export const preAuctionsData: IPreAuctionItem[] = [
     likeCount: 18,
     isLiked: true,
     isSeller: false
+  },
+  {
+    auctionId: 12,
+    auctionName: '[나이키] 조던 블랙',
+    imageUrl: jordanBlackImage,
+    minPrice: 210_000,
+    likeCount: 20,
+    isLiked: false,
+    isSeller: false
   }
 ];

@@ -8,7 +8,7 @@ let curHeartData = [...heartData];
 export const heartHandler: HttpHandler = http.get(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.HEART_LIST}`,
   async () => {
-    await delay(1000);
+    await delay(500);
 
     return HttpResponse.json({
       items: curHeartData

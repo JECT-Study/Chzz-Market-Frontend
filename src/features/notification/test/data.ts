@@ -1,8 +1,9 @@
+import type { INotification } from '../config';
 import adidasImage from '@/shared/assets/test/adidas_superstar.jpeg';
+import jordanBlackImage from '@/shared/assets/test/jordan_black.jpeg';
 import jordanBlueImage from '@/shared/assets/test/jordan_blue.jpeg';
 import jordanRedImage from '@/shared/assets/test/jordan_red.jpeg';
 import newBalanceImage from '@/shared/assets/test/newbalance_993.jpeg';
-import type { INotification } from '../config';
 
 export const notificationData: INotification[] = [
   {
@@ -10,9 +11,9 @@ export const notificationData: INotification[] = [
     type: 'AUCTION_START',
     message: '미리 찜하기를 누른 사전 등록 제품의 경매가 시작되었습니다!',
     createdAt: '2024-09-09T08:57:30.944646',
-    isRead: false,
-    imageUrl: jordanBlueImage,
-    auctionId: 59
+    isRead: true,
+    imageUrl: newBalanceImage,
+    auctionId: 10
   },
   {
     notificationId: 1,
@@ -20,7 +21,7 @@ export const notificationData: INotification[] = [
     message: '경매에 올린 제품이 낙찰되었습니다!',
     createdAt: '2024-09-08T22:57:30.944646',
     isRead: true,
-    imageUrl: newBalanceImage,
+    imageUrl: jordanBlackImage,
     auctionId: 59
   },
   {
@@ -28,7 +29,7 @@ export const notificationData: INotification[] = [
     type: 'AUCTION_FAILURE',
     message: '경매에 올린 제품이 유찰되었습니다.',
     createdAt: '2024-09-08T14:57:30.944646',
-    isRead: true,
+    isRead: false,
     imageUrl: jordanRedImage
   },
   {

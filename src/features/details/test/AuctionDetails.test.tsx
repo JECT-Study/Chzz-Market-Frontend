@@ -1,24 +1,22 @@
+import { AuctionDetailsMain, useGetAuctionDetails } from '..';
 import { describe, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 import { BrowserRouter } from 'react-router-dom';
 import { CATEGORIES } from '@/shared';
 import type { IAuctionDetails } from '@/entities';
-import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import { useCancelBid } from '@/features/bid';
-import userEvent from '@testing-library/user-event';
-import { useEndAuction } from '../lib';
 import { auctionDetailsData } from './data';
-import { AuctionDetailsMain, useGetAuctionDetails } from '..';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { useCancelBid } from '../model';
+import { useEndAuction } from '../lib';
+import userEvent from '@testing-library/user-event';
 
 vi.mock('@/features/details/model', () => ({
-  useGetAuctionDetails: vi.fn()
+  useGetAuctionDetails: vi.fn(),
+  useCancelBid: vi.fn()
 }));
 vi.mock('@/features/details/lib', () => ({
   useEndAuction: vi.fn()
-}));
-vi.mock('@/features/bid/model', () => ({
-  useCancelBid: vi.fn()
 }));
 
 vi.mocked(useEndAuction).mockReturnValue({
@@ -163,9 +161,8 @@ describe('경매 상세 조회 테스트', () => {
     test('구매자이면서 참여한 사람은 참여 취소 버튼과 금액 수정 및 남은 횟수 버튼이 존재하며, 금액 수정 버튼 클릭하면 입찰 페이지로 이동한다.', async () => {
       const { user } = setup(3);
 
-      const { remainingBidCount, auctionId } =
-        auctionDetailsData[3] as IAuctionDetails;
-      const cancelBtn = screen.getByRole('button', { name: '참여 취소' });
+      const { remainingBidCount, auctionId } = auctionDetailsData[3] as IAuctionDetails
+      const cancelBtn = screen.getByRole('button', { name: '참여 취소 확인' });
       const editBtn = screen.getByRole('button', { name: '금액 수정' });
       const remainCount = screen.getByText(
         `금액 수정 (${remainingBidCount}회 가능)`
@@ -184,7 +181,7 @@ describe('경매 상세 조회 테스트', () => {
     test('구매자이면서 참여한 사람은 참여 취소 버튼이 있고, 클릭하면 확인 모달이 나오고, 취소 버튼 클릭하면 참여 취소할 수 있다.', async () => {
       const { user } = setup(3);
 
-      const cancelBtn = screen.getByRole('button', { name: '참여 취소' });
+      const cancelBtn = screen.getByRole('button', { name: '참여 취소 확인' });
       await user.click(cancelBtn);
 
       const modal = screen.getByLabelText('확인 모달');
@@ -195,9 +192,7 @@ describe('경매 상세 조회 테스트', () => {
       expect(modal).not.toBeInTheDocument();
 
       await user.click(cancelBtn);
-      const confirmBtn = screen.getByRole('button', {
-        name: '확인 모달 참여 취소'
-      });
+      const confirmBtn = screen.getByRole('button', { name: '참여 취소' });
       await user.click(confirmBtn);
 
       const { bidId } = auctionDetailsData[3] as IAuctionDetails;

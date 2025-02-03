@@ -5,8 +5,8 @@ import {
 } from '@tanstack/react-query';
 
 import { QUERY_KEYS } from '@/shared';
-import { toast } from 'sonner';
 import { cancelBid } from '../api';
+import { toast } from 'sonner';
 
 export const useCancelBid = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;

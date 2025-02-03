@@ -9,7 +9,7 @@ let notificationList = [...notificationData];
 export const notificationListHandler: HttpHandler = http.get(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.NOTIFICATION_LIST}`,
   async () => {
-    await delay(1000);
+    await delay(500);
 
     return HttpResponse.json({
       items: notificationList
@@ -20,26 +20,28 @@ export const notificationListHandler: HttpHandler = http.get(
 export const notificationReadHandler: HttpHandler = http.post(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.NOTIFICATION_LIST}/:id/read`,
   ({ params }) => {
-    const id = params.id as string;
-
-    const notificationId = parseInt(id, 10);
+    const { id } = params;
 
     notificationList = notificationList.map((el: INotification) =>
-      el.notificationId === notificationId ? { ...el, isRead: true } : el
+      el.notificationId === Number(id) ? { ...el, isRead: true } : el
     );
+    return HttpResponse.json({
+      items: notificationList
+    });
   }
 );
 
 export const notificationDeleteHandler: HttpHandler = http.delete(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.NOTIFICATION_LIST}/:id`,
   ({ params }) => {
-    const id = params.id as string;
-
-    const notificationId = parseInt(id, 10);
+    const { id } = params;
 
     notificationList = notificationList.filter(
-      (el) => el.notificationId !== notificationId
+      (el) => el.notificationId !== Number(id)
     );
+    return HttpResponse.json({
+      items: notificationList
+    });
   }
 );
 

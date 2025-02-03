@@ -1,2 +1,2 @@
-export { useCancelBid } from './model/index';
+export type { IBidPostData } from './config';
 export { BidForm } from './ui';

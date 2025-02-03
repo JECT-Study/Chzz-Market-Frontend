@@ -1,14 +1,14 @@
-import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { ReactNode, Suspense } from 'react';
 
-import { Layout } from '@/app/layout';
+import { Button } from '../Button';
 import ErrorIcon from '@/shared/assets/icons/error.svg';
+import { GlobalSpinner } from '../spinner';
+import { Layout } from '@/app/layout';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
+import { getErrorByCode } from '../../utils/getErrorByCode';
 import { isAxiosError } from 'axios';
 import { useLocation } from 'react-router-dom';
-import { getErrorByCode } from '../../utils/getErrorByCode';
-import { Button } from '../Button';
-import { GlobalSpinner } from '../spinner';
 
 interface FallbackComponentProps extends FallbackProps {
   header?: string;
@@ -23,7 +23,7 @@ const FallbackComponent = ({
   if (!isAxiosError(error)) throw error;
 
   return (
-    <Layout>
+    <>
       {header && <Layout.Header title={header} />}
       <div className="flex flex-col items-center justify-center w-full h-full gap-3 px-10">
         <img src={ErrorIcon} alt="에러 아이콘" />
@@ -33,18 +33,11 @@ const FallbackComponent = ({
           </h2>
           <p className=" text-gray2 web:text-body1 text-body2">{description}</p>
         </div>
-      </div>
-      <Layout.Footer type="single">
-        <Button
-          type="button"
-          color="cheeseYellow"
-          className="w-full h-full"
-          onClick={resetErrorBoundary}
-        >
+        <Button type='button' color='cheeseYellow' onClick={resetErrorBoundary}>
           다시 불러오기
         </Button>
-      </Layout.Footer>
-    </Layout>
+      </div>
+    </>
   );
 };
 
@@ -56,12 +49,13 @@ export const AsyncBoundary = ({
   header?: string;
 }) => {
   const { pathname, key } = useLocation();
-  const spinner = header && (
-    <Layout>
-      <Layout.Header title={header} />
-      <GlobalSpinner />
-    </Layout>
-  );
+  const spinner = (
+    header ?
+      <Layout>
+        <Layout.Header title={header} />
+        <GlobalSpinner />
+      </Layout> : <GlobalSpinner />
+  )
 
   return (
     <QueryErrorResetBoundary>

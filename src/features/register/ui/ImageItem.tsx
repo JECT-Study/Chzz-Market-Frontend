@@ -44,7 +44,7 @@ export const ImageItem = ({ image, index, deleteImage }: ImageItemProps) => {
           type="button"
           className="absolute top-[-5%] right-[-5%] cursor-pointer text-black size-6"
           onClick={() => deleteImage(index)}
-          aria-label={`사진 삭제 ${index}`}
+          aria-label={`사진 삭제_${index}`}
         >
           <img src={DeleteIcon} alt="사진 삭제 버튼" />
         </button>
