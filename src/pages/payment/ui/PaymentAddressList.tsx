@@ -1,30 +1,33 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Layout } from "@/app/layout/index";
-import { ADDRESS_SCRIPT_URL } from "@/features/address/config/address";
-import { Button } from "@/shared";
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Layout } from '@/app/layout/index';
+import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
+import { Button } from '@/shared';
 import rocation_off from '@/shared/assets/icons/rocation_off.svg';
 import rocation_on from '@/shared/assets/icons/rocation_on.svg';
-import { ROUTES } from "@/shared/constants/routes";
-import { FaCheck } from "react-icons/fa6";
-import { IoIosSearch } from "react-icons/io";
-import type { IAddressWithId } from "@/entities/address/address";
-import { useGetAddresses } from "@/features/address/model";
+import { ROUTES } from '@/shared/constants/routes';
+import { FaCheck } from 'react-icons/fa6';
+import { IoIosSearch } from 'react-icons/io';
+import type { IAddressWithId } from '@/entities/address/address';
+import { useGetAddresses } from '@/features/address/model';
 
 export const PaymentAddressList = () => {
   const navigate = useNavigate();
   const { auctionId } = useParams<{ auctionId: string }>();
   const location = useLocation();
-  const { addressData: initialAddressData, refetchAddresses } = useGetAddresses();
+  const { addressData: initialAddressData, refetchAddresses } =
+    useGetAddresses();
   const [addressData, setAddressData] = useState(initialAddressData);
-  const [selectAddress, setSelectAddress] = useState<IAddressWithId | null>(null);
+  const [selectAddress, setSelectAddress] = useState<IAddressWithId | null>(
+    null
+  );
   const addressItems = addressData?.items || [];
 
   useEffect(() => {
     if (initialAddressData?.items && initialAddressData.items.length > 0) {
       setAddressData(initialAddressData);
       setSelectAddress(initialAddressData.items[0]);
-    };
+    }
   }, [initialAddressData]);
 
   useEffect(() => {
@@ -53,15 +56,18 @@ export const PaymentAddressList = () => {
 
   const handleSubmitClick = () => {
     if (auctionId) {
-      navigate(ROUTES.PAYMENT.getRoute(auctionId), { state: { address: selectAddress }, replace: true });
+      navigate(ROUTES.PAYMENT.getRoute(auctionId), {
+        state: { address: selectAddress },
+        replace: true
+      });
     }
   };
 
   const handleEditButtonClick = () => {
     if (auctionId) {
-      navigate(ROUTES.PAYMENT.ADDRESS.getEditListRoute(auctionId))
+      navigate(ROUTES.PAYMENT.ADDRESS.getEditListRoute(auctionId));
     }
-  }
+  };
 
   const handleOpenAddress = () => {
     const popupWidth = 500;
@@ -75,31 +81,46 @@ export const PaymentAddressList = () => {
       height: popupHeight,
       onComplete: (data: any) => {
         const roadAddress = data.address;
-        const jibunAddress = data.jibunAddress;
+        const { jibunAddress } = data;
         const { zonecode } = data;
         if (auctionId) {
-          navigate(ROUTES.PAYMENT.ADDRESS.getAddRoute(auctionId), { state: { roadAddress, zonecode, jibunAddress } });
+          navigate(ROUTES.PAYMENT.ADDRESS.getAddRoute(auctionId), {
+            state: { roadAddress, zonecode, jibunAddress }
+          });
         }
-      },
+      }
     }).open({
       left,
-      top,
+      top
     });
   };
 
   return (
     <Layout>
-      <Layout.Header title="배송지 목록" handleBack={() => auctionId && navigate(ROUTES.PAYMENT.getRoute(auctionId))} />
-      <span className="absolute text-body1 web:text-heading3 cursor-pointer top-3 right-5" onClick={handleEditButtonClick}>편집</span>
+      <Layout.Header
+        title="배송지 목록"
+        handleBack={() =>
+          auctionId && navigate(ROUTES.PAYMENT.getRoute(auctionId))
+        }
+      />
+      <span
+        className="absolute text-body1 web:text-heading3 cursor-pointer top-3 right-5"
+        onClick={handleEditButtonClick}
+      >
+        편집
+      </span>
       <Layout.Main>
         <div>
           <div className="flex flex-col gap-5 pt-10">
             <h1 className="text-2xl font-semibold">배송지 추가</h1>
-            <div onClick={handleOpenAddress} className="relative flex items-center w-full">
+            <div
+              onClick={handleOpenAddress}
+              className="relative flex items-center w-full"
+            >
               <IoIosSearch className="absolute left-3 text-muted-foreground" />
               <input
                 type="text"
-                className='flex h-[50px] w-full pl-10 rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer'
+                className="flex h-[50px] w-full pl-10 rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
                 autoComplete="off"
                 placeholder="지번, 도로명, 건물명으로 검색"
               />
@@ -117,22 +138,36 @@ export const PaymentAddressList = () => {
                 >
                   <div className="flex items-center">
                     {item?.isDefault ? (
-                      <img src={rocation_on} className="mr-2 text-cheeseYellow" alt="위치 아이콘" />
+                      <img
+                        src={rocation_on}
+                        className="mr-2 text-cheeseYellow"
+                        alt="위치 아이콘"
+                      />
                     ) : (
-                      <img src={rocation_off} className="mr-2 text-gray2" alt="위치 아이콘" />
+                      <img
+                        src={rocation_off}
+                        className="mr-2 text-gray2"
+                        alt="위치 아이콘"
+                      />
                     )}
                   </div>
                   <div className="flex flex-col gap-2 mb-2">
                     {item.isDefault && (
-                      <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm">기본배송지</span>
+                      <span className="flex justify-center w-[4.8rem] h-[1.25rem] text-cheeseYellow text-body2 bg-[#FFF0D3] rounded-sm">
+                        기본배송지
+                      </span>
                     )}
-                    <span className="font-bold">{item.recipientName} / {item.phoneNumber}</span>
+                    <span className="font-bold">
+                      {item.recipientName} / {item.phoneNumber}
+                    </span>
                     <div className="text-gray2">
                       <p>{item.roadAddress}</p>
                       <p>{item.detailAddress}</p>
                     </div>
                   </div>
-                  <div className={`absolute ${selectAddress?.id === item.id ? 'right-4 top-16' : 'right-4 top-14'}`}>
+                  <div
+                    className={`absolute ${selectAddress?.id === item.id ? 'right-4 top-16' : 'right-4 top-14'}`}
+                  >
                     {selectAddress?.id === item.id && <FaCheck />}
                   </div>
                 </li>

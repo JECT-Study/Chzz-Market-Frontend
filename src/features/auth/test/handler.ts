@@ -53,7 +53,7 @@ export const naverLoginHandler: HttpHandler = http.get(
 );
 
 export const postSignupHandler: HttpHandler = http.post(
-  `${API_END_POINT.SIGNUP}`,
+  `${import.meta.env.VITE_API_URL}${API_END_POINT.SIGNUP}`,
   async () => {
     return new HttpResponse(
       JSON.stringify({

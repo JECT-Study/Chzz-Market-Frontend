@@ -1,5 +1,11 @@
 import { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
-import { FieldValues, Path, PathValue, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
+import {
+  FieldValues,
+  Path,
+  PathValue,
+  UseFormGetValues,
+  UseFormSetValue
+} from 'react-hook-form';
 
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 
@@ -9,14 +15,23 @@ interface UseEditableNumberProps<T extends FieldValues> {
   getValues: UseFormGetValues<T>;
 }
 
-export const useEditableNumberInput = <T extends FieldValues>({ name, setValue, getValues }: UseEditableNumberProps<T>) => {
+export const useEditableNumberInput = <T extends FieldValues>({
+  name,
+  setValue,
+  getValues
+}: UseEditableNumberProps<T>) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const num = Number(value.replace(/,/g, ''));
     if (!Number.isNaN(num)) {
-      setValue(name, num < 1000 ? ('' as PathValue<T, Path<T>>) : (formatCurrencyWithWon(num) as PathValue<T, Path<T>>));
+      setValue(
+        name,
+        num < 1000
+          ? ('' as PathValue<T, Path<T>>)
+          : (formatCurrencyWithWon(num) as PathValue<T, Path<T>>)
+      );
       setIsEditing(false);
     }
   };
@@ -43,6 +58,6 @@ export const useEditableNumberInput = <T extends FieldValues>({ name, setValue, 
     handleBlur,
     handleFocus,
     preventInvalidInput,
-    preventArrowKeys,
+    preventArrowKeys
   };
 };

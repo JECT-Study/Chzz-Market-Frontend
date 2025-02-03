@@ -64,6 +64,6 @@ export const useProfileImageUploader = (
     fileInputRef,
     deleteImage,
     handleImage,
-    handleBoxClick,
+    handleBoxClick
   };
 };

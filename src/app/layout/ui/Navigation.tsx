@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 interface NavigationItemProps {
   name: string;
   active: boolean;
-  path: string
+  path: string;
   unreadNotificationsCount: number;
 }
 
@@ -13,11 +13,12 @@ const NavigationItem = ({
   name,
   active,
   path,
-  unreadNotificationsCount = 0,
+  unreadNotificationsCount = 0
 }: NavigationItemProps) => {
   const navigate = useNavigate();
   const iconSrc = NAV_ICONS[name][active ? 'on' : 'off'];
-  const notificationCondition = name === 'notification' && unreadNotificationsCount > 0;
+  const notificationCondition =
+    name === 'notification' && unreadNotificationsCount > 0;
 
   return (
     <li aria-label={`${name}_icon`} className='flex justify-center transition-all items-center w-[11.25rem] min-w-[5.625rem] h-[3.75rem] relative'>
@@ -42,14 +43,16 @@ const NavigationItem = ({
 
 export const Navigation = ({ active }: { active: string }) => {
   const { notificationList } = useGetNotificationList();
-  const unreadNotificationsCount = notificationList ? notificationList.reduce(
-    (acc, cur) => (!cur.isRead ? acc + 1 : acc),
-    0,
-  ) : 0
+  const unreadNotificationsCount = notificationList
+    ? notificationList.reduce((acc, cur) => (!cur.isRead ? acc + 1 : acc), 0)
+    : 0;
 
   return (
-    <nav className="flex items-center h-full -mx-[22.5px]" aria-label="main navigation">
-      <ul className='flex w-full' role='menu'>
+    <nav
+      className="flex items-center h-full -mx-[22.5px]"
+      aria-label="main navigation"
+    >
+      <ul className="flex w-full" role="menu">
         {Object.entries(NAV_ICONS).map(([name, value]) => (
           <NavigationItem
             key={name}

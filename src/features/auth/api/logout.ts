@@ -1,5 +1,5 @@
-import { API_END_POINT, httpClient, removeToken } from "@/shared";
-import { refreshToken } from ".";
+import { API_END_POINT, httpClient, removeToken } from '@/shared';
+import { refreshToken } from '.';
 
 export const logout = async () => {
   await refreshToken();

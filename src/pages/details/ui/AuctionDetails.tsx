@@ -7,7 +7,7 @@ export const AuctionDetails = () => {
   const auctionId = useLoaderData() as number;
 
   return (
-    <AsyncBoundary header='제품 상세'>
+    <AsyncBoundary header="제품 상세">
       <AuctionDetailsMain auctionId={auctionId} />
     </AsyncBoundary>
   );

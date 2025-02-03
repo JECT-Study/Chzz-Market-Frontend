@@ -10,8 +10,10 @@ export const useAuth = () => {
   const handleKakaoLogin = async () => {
     if (import.meta.env.VITE_USE_MOCK === 'true') {
       // Mocking 환경
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`);
-      
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`
+      );
+
       const { data } = response;
 
       // Mocked 응답 처리
@@ -27,8 +29,10 @@ export const useAuth = () => {
   const handleNaverLogin = async () => {
     if (import.meta.env.VITE_USE_MOCK === 'true') {
       // Mocking 환경
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`);
-      
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`
+      );
+
       const { data } = response;
 
       // Mocked 응답 처리
@@ -46,7 +50,7 @@ export const useAuth = () => {
     onSuccess: () => {
       removeToken();
       navigate('/');
-    },
+    }
   });
 
   const handleLogout = () => {

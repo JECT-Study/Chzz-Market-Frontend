@@ -1,10 +1,10 @@
-import { UserParticipatedList } from "@/pages/user";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { MemoryRouter, useLocation } from "react-router-dom";
-import { beforeEach, describe, expect, test, vi } from "vitest";
-import { useHistory } from "../model";
+import { UserParticipatedList } from '@/pages/user';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter, useLocation } from 'react-router-dom';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { useHistory } from '../model';
 
 vi.mock('@/features/user/model', async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, any>;
@@ -13,11 +13,15 @@ vi.mock('@/features/user/model', async (importOriginal) => {
     useHistory: vi.fn(),
     OrderListTab: ({ setActiveTab }: any) => (
       <div>
-        <button onClick={() => setActiveTab('AuctionHistory')}>참여중인 경매</button>
+        <button onClick={() => setActiveTab('AuctionHistory')}>
+          참여중인 경매
+        </button>
         <button onClick={() => setActiveTab('AuctionsWon')}>성공한 경매</button>
-        <button onClick={() => setActiveTab('AuctionsLost')}>실패한 경매</button>
+        <button onClick={() => setActiveTab('AuctionsLost')}>
+          실패한 경매
+        </button>
       </div>
-    ),
+    )
   };
 });
 
@@ -25,7 +29,7 @@ vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
     ...actual,
-    useLocation: vi.fn(),
+    useLocation: vi.fn()
   };
 });
 
@@ -48,11 +52,11 @@ describe('참여한 경매 내역 페이지', () => {
                 timeRemaining: 3600,
                 status: 'PROCEEDING',
                 participantCount: 5,
-                createdAt: '2025-01-21T12:16:36.893Z',
-              },
-            ],
-          },
-        ],
+                createdAt: '2025-01-21T12:16:36.893Z'
+              }
+            ]
+          }
+        ]
       },
       wonData: {
         pages: [
@@ -67,11 +71,11 @@ describe('참여한 경매 내역 페이지', () => {
                 participantCount: 10,
                 endDateTime: '2025-01-21T12:17:30.029Z',
                 isOrdered: true,
-                orderId: 1234,
-              },
-            ],
-          },
-        ],
+                orderId: 1234
+              }
+            ]
+          }
+        ]
       },
       lostData: {
         pages: [
@@ -85,11 +89,11 @@ describe('참여한 경매 내역 페이지', () => {
                 isSeller: true,
                 participantCount: 8,
                 endDateTime: '2025-01-21T12:18:03.714Z',
-                bidAmount: 14000,
-              },
-            ],
-          },
-        ],
+                bidAmount: 14000
+              }
+            ]
+          }
+        ]
       },
       fetchNextHistoryPage: vi.fn(),
       fetchNextWonPage: vi.fn(),
@@ -99,11 +103,11 @@ describe('참여한 경매 내역 페이지', () => {
       hasNextLostPage: true,
       historyLoading: false,
       wonLoading: false,
-      lostLoading: false,
+      lostLoading: false
     });
 
     mockUseLocation.mockReturnValue({
-      state: { sortType: 'AuctionHistory' },
+      state: { sortType: 'AuctionHistory' }
     });
 
     render(
@@ -154,5 +158,4 @@ describe('참여한 경매 내역 페이지', () => {
       expect(screen.getByText(/8 명/)).toBeInTheDocument();
     });
   });
-
-})
+});

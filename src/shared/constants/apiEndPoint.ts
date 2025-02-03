@@ -4,7 +4,7 @@ export const API_END_POINT = {
   // AUTH
   LOGIN: {
     KAKAO: '/auth/kakao',
-    NAVER: '/auth/naver',
+    NAVER: '/auth/naver'
   },
   LOGOUT: `${PRE_FIX}/users/logout`,
   NICKNAME_CHECK: `${PRE_FIX}/users/check/nickname`,
@@ -35,5 +35,5 @@ export const API_END_POINT = {
   PAYMENT: `${PRE_FIX}/payments/approval`,
   CREATE_ORDERID: `${PRE_FIX}/payments/order-id`,
 
-  AUCTION_IMAGE_UPLOAD_URL: `${PRE_FIX}/image/auction`,
+  AUCTION_IMAGE_UPLOAD_URL: `${PRE_FIX}/image/auction`
 };

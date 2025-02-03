@@ -13,24 +13,24 @@ vi.mock('@/features/notification/model', () => ({
   useGetNotificationListWithSuspense: vi.fn(),
   useGetNotificationList: vi.fn(),
   useReadNotification: vi.fn(),
-  useDeleteNotification: vi.fn(),
+  useDeleteNotification: vi.fn()
 }));
 
 vi.mocked(useGetNotificationList).mockReturnValue({
-  notificationList: notificationData,
+  notificationList: notificationData
 });
 vi.mocked(useGetNotificationListWithSuspense).mockReturnValue({
-  notificationList: notificationData,
+  notificationList: notificationData
 });
 
 const mutateReadMock = vi.fn();
 vi.mocked(useReadNotification).mockReturnValue({
-  mutate: mutateReadMock,
+  mutate: mutateReadMock
 });
 
 const mutateDeleteMock = vi.fn();
 vi.mocked(useDeleteNotification).mockReturnValue({
-  mutate: mutateDeleteMock,
+  mutate: mutateDeleteMock
 });
 
 describe('알림 테스트', () => {
@@ -42,13 +42,13 @@ describe('알림 테스트', () => {
             <Route path="/notification" element={<Notification />} />
           </Route>
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
     const user = userEvent.setup();
 
     return {
       user,
-      ...utils,
+      ...utils
     };
   };
 
@@ -56,7 +56,7 @@ describe('알림 테스트', () => {
     const { user } = setup();
 
     const backBtnElement = screen.getByRole('button', {
-      name: /뒤로 가기/,
+      name: /뒤로 가기/
     });
     await user.click(backBtnElement);
     expect(mockedUseNavigate).toHaveBeenCalledWith(-1);
@@ -66,7 +66,7 @@ describe('알림 테스트', () => {
     setup();
 
     const notifications = await screen.findAllByRole('listitem', {
-      name: /알림/,
+      name: /알림/
     });
 
     expect(notifications).toHaveLength(6);
@@ -86,13 +86,13 @@ describe('알림 테스트', () => {
     const { user } = setup();
 
     const notifications = await screen.findAllByRole('listitem', {
-      name: /알림/,
+      name: /알림/
     });
 
     const unreadNotifications = notifications.reduce(
       (acc, cur) =>
         cur.classList.contains('bg-notificationBgColor') ? acc + 1 : acc,
-      0,
+      0
     );
     expect(unreadNotifications).toBe(1);
 
@@ -104,11 +104,13 @@ describe('알림 테스트', () => {
     const { user } = setup();
 
     const notifications = await screen.findAllByRole('listitem', {
-      name: /알림/,
+      name: /알림/
     });
     await user.click(notifications[0]);
 
-    expect(mockedUseNavigate).toHaveBeenCalledWith(`${NOTIFICATION_CONTENTS[notificationData[0].type].link!(notificationData[0].auctionId!)}`);
+    expect(mockedUseNavigate).toHaveBeenCalledWith(
+      `${NOTIFICATION_CONTENTS[notificationData[0].type].link!(notificationData[0].auctionId!)}`
+    );
   });
 
   test('알림을 삭제할 수 있다.', async () => {

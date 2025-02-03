@@ -13,9 +13,11 @@ export const Test = () => {
   const [minPrice, setMinPrice] = useState(1000);
 
   const clickButton = async () => {
-    await httpClient.post(`/api/v1/auctions/test?seconds=${state}&name=${name}&description=${description}&status=${'proceeding'}&minPrice=${minPrice}`)
-    navigate('/')
-  }
+    await httpClient.post(
+      `/api/v1/auctions/test?seconds=${state}&name=${name}&description=${description}&status=${'proceeding'}&minPrice=${minPrice}`
+    );
+    navigate('/');
+  };
 
   useEffect(() => {
     if (import.meta.env.MODE !== 'development') {
@@ -36,11 +38,16 @@ export const Test = () => {
           <Input onChange={(e) => setDescription(e.target.value)} />
           <label className="text-heading1">가격</label>
           <Input onChange={(e) => setMinPrice(Number(e.target.value))} />
-          <Button type="button" color="cheeseYellow" className="w-full" onClick={clickButton} >
+          <Button
+            type="button"
+            color="cheeseYellow"
+            className="w-full"
+            onClick={clickButton}
+          >
             테스트
           </Button>
         </div>
       </Layout.Main>
     </Layout>
   );
-}
+};

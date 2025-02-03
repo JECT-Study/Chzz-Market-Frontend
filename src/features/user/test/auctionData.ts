@@ -8,7 +8,7 @@ export const auctionData = {
       minPrice: 10000,
       participantCount: 7,
       status: 'PROCEEDING',
-      createdAt: '2024-08-05T10:00:00',
+      createdAt: '2024-08-05T10:00:00'
     },
     {
       id: 1,
@@ -18,8 +18,8 @@ export const auctionData = {
       minPrice: 1000,
       participantCount: 3,
       status: 'ENDED',
-      createdAt: '2024-08-04T19:12:19',
-    },
+      createdAt: '2024-08-04T19:12:19'
+    }
   ],
   pageable: {
     pageNumber: 0,
@@ -27,11 +27,11 @@ export const auctionData = {
     sort: {
       empty: false,
       sorted: true,
-      unsorted: false,
+      unsorted: false
     },
     offset: 0,
     paged: true,
-    unpaged: false,
+    unpaged: false
   },
   last: true,
   totalPages: 1,
@@ -42,10 +42,10 @@ export const auctionData = {
   sort: {
     empty: false,
     sorted: true,
-    unsorted: false,
+    unsorted: false
   },
   numberOfElements: 2,
-  empty: false,
+  empty: false
 };
 
 export default auctionData;

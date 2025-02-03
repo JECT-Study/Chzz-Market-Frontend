@@ -1,5 +1,5 @@
-import { Checkbox } from "@/shared";
-import { BID_CAUTION } from "../config";
+import { Checkbox } from '@/shared';
+import { BID_CAUTION } from '../config';
 
 interface BidCautionProps {
   check: boolean;
@@ -18,7 +18,11 @@ export const BidCaution = ({ check, toggle }: BidCautionProps) => {
           </div>
         ))}
       </div>
-      <Checkbox title='주의사항을 모두 확인하였으며 위 내용에 동의합니다.' check={check} toggle={toggle} />
+      <Checkbox
+        title="주의사항을 모두 확인하였으며 위 내용에 동의합니다."
+        check={check}
+        toggle={toggle}
+      />
     </section>
   );
 };

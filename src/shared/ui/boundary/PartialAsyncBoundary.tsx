@@ -7,18 +7,23 @@ import { isAxiosError } from 'axios';
 import { Button } from '../Button';
 import { LocalSpinner } from '../spinner';
 
-
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
-  if (!isAxiosError(error)) throw error
+  if (!isAxiosError(error)) throw error;
 
   return (
-    <div className={`flex flex-col items-center w-full justify-center min-h-[16rem] h-[16rem] gap-3 p-5 border rounded bg-error`}>
-      <img src={ErrorIcon} alt='에러 아이콘' className='web:size-10 size-8' />
-      <div className='space-y-2 text-center w-[16rem]'>
-        <h2 className='web:text-body2 text-caption text-gray2'>
+    <div className="flex flex-col items-center w-full justify-center min-h-[16rem] h-[16rem] gap-3 p-5 border rounded bg-error">
+      <img src={ErrorIcon} alt="에러 아이콘" className="web:size-10 size-8" />
+      <div className="space-y-2 text-center w-[16rem]">
+        <h2 className="web:text-body2 text-caption text-gray2">
           데이터를 불러오는 도중 문제가 발생했습니다.
         </h2>
-        <Button type='button' color='cheeseYellow' size='small' className='w-full text-sm web:text-body2' onClick={resetErrorBoundary}>
+        <Button
+          type="button"
+          color="cheeseYellow"
+          size="small"
+          className="w-full text-sm web:text-body2"
+          onClick={resetErrorBoundary}
+        >
           다시 불러오기
         </Button>
       </div>
@@ -31,10 +36,9 @@ export const PartialAsyncBoundary = ({ children }: { children: ReactNode }) => {
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary onReset={reset} FallbackComponent={FallbackComponent}>
-          <Suspense fallback={<LocalSpinner />}>
-            {children}
-          </Suspense>
-        </ErrorBoundary>)}
+          <Suspense fallback={<LocalSpinner />}>{children}</Suspense>
+        </ErrorBoundary>
+      )}
     </QueryErrorResetBoundary>
   );
 };

@@ -11,23 +11,27 @@ import { isAxiosError } from 'axios';
 import { useLocation } from 'react-router-dom';
 
 interface FallbackComponentProps extends FallbackProps {
-  header?: string
+  header?: string;
 }
 
-const FallbackComponent = ({ error, resetErrorBoundary, header }: FallbackComponentProps) => {
-  const { title, description } = getErrorByCode(error)
-  if (!isAxiosError(error)) throw error
+const FallbackComponent = ({
+  error,
+  resetErrorBoundary,
+  header
+}: FallbackComponentProps) => {
+  const { title, description } = getErrorByCode(error);
+  if (!isAxiosError(error)) throw error;
 
   return (
     <>
       {header && <Layout.Header title={header} />}
-      <div className='flex flex-col items-center justify-center w-full h-full gap-3 px-10'>
-        <img src={ErrorIcon} alt='에러 아이콘' />
-        <div className='space-y-2 text-center'>
-          <h2 className='web:text-heading2 text-heading3 text-gray1'>
+      <div className="flex flex-col items-center justify-center w-full h-full gap-3 px-10">
+        <img src={ErrorIcon} alt="에러 아이콘" />
+        <div className="space-y-2 text-center">
+          <h2 className="web:text-heading2 text-heading3 text-gray1">
             {title}
           </h2>
-          <p className=' text-gray2 web:text-body1 text-body2'>{description}</p>
+          <p className=" text-gray2 web:text-body1 text-body2">{description}</p>
         </div>
         <Button type='button' color='cheeseYellow' onClick={resetErrorBoundary}>
           다시 불러오기
@@ -37,7 +41,13 @@ const FallbackComponent = ({ error, resetErrorBoundary, header }: FallbackCompon
   );
 };
 
-export const AsyncBoundary = ({ children, header }: { children: ReactNode; header?: string }) => {
+export const AsyncBoundary = ({
+  children,
+  header
+}: {
+  children: ReactNode;
+  header?: string;
+}) => {
   const { pathname, key } = useLocation();
   const spinner = (
     header ?
@@ -50,11 +60,16 @@ export const AsyncBoundary = ({ children, header }: { children: ReactNode; heade
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
-        <ErrorBoundary onReset={reset} FallbackComponent={(props) => <FallbackComponent {...props} header={header} />} resetKeys={[pathname, key]}>
-          <Suspense fallback={spinner}>
-            {children}
-          </Suspense>
-        </ErrorBoundary>)}
+        <ErrorBoundary
+          onReset={reset}
+          FallbackComponent={(props) => (
+            <FallbackComponent {...props} header={header} />
+          )}
+          resetKeys={[pathname, key]}
+        >
+          <Suspense fallback={spinner}>{children}</Suspense>
+        </ErrorBoundary>
+      )}
     </QueryErrorResetBoundary>
   );
 };

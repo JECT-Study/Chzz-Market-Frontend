@@ -9,7 +9,7 @@ const preAuctionProducts = {
       participantCount: 6,
       id: 17,
       isParticipating: true,
-      category: 'fashion',
+      category: 'fashion'
     },
     {
       name: 'upcoming Castro2',
@@ -19,14 +19,14 @@ const preAuctionProducts = {
       participantCount: 8,
       id: 13,
       isParticipating: true,
-      category: 'fashion',
-    },
+      category: 'fashion'
+    }
   ],
   pageNumber: 0,
   pageSize: 10,
   totalPages: 4,
   totalElements: 30,
-  last: false,
+  last: false
 };
 
 export default preAuctionProducts;

@@ -20,7 +20,7 @@ export const convertDataURLtoFile = (dataURL: string): File => {
   const mimeToExtensionMap: { [key: string]: string } = {
     'image/jpeg': 'jpg',
     'image/png': 'png',
-    'image/webp': 'webp',
+    'image/webp': 'webp'
   };
 
   // MIME 타입이 지도된 확장자가 있는 경우에만 파일 생성

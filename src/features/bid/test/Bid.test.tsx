@@ -10,22 +10,24 @@ import { usePostBid } from '../model';
 import userEvent from '@testing-library/user-event';
 
 vi.mock('@/features/details/model', () => ({
-  useGetAuctionDetails: vi.fn(),
+  useGetAuctionDetails: vi.fn()
 }));
 vi.mock('@/features/bid/model', () => ({
-  usePostBid: vi.fn(),
+  usePostBid: vi.fn()
 }));
 
-const mockedPostBid = vi.fn()
+const mockedPostBid = vi.fn();
 
 vi.mocked(usePostBid).mockReturnValue({
   mutate: mockedPostBid,
-  isPending: false,
-})
+  isPending: false
+});
 
 describe('입찰 및 입찰 수정 테스트', () => {
   const setup = (auctionId: number) => {
-    const auctionData = auctionDetailsData.find((data) => data.auctionId === auctionId) as IAuctionDetails;
+    const auctionData = auctionDetailsData.find(
+      (data) => data.auctionId === auctionId
+    ) as IAuctionDetails;
     vi.mocked(useGetAuctionDetails).mockReturnValue({
       details: auctionData
     });
@@ -35,7 +37,7 @@ describe('입찰 및 입찰 수정 테스트', () => {
 
     return {
       user,
-      ...utils,
+      ...utils
     };
   };
 
@@ -67,7 +69,7 @@ describe('입찰 및 입찰 수정 테스트', () => {
 
   describe('입찰 테스트', () => {
     test('경매 상품에 사진, 이름, 시작가, 참여자, 시간을 표시한다.', async () => {
-      setup(0)
+      setup(0);
 
       const imgElement = screen.getByRole('img', { name: '이미지' });
       const nameElement = screen.getByLabelText('이름');
@@ -90,13 +92,16 @@ describe('입찰 및 입찰 수정 테스트', () => {
       await user.type(costInput, '120000');
 
       const checkbox = screen.getByRole('checkbox', {
-        name: '체크박스',
+        name: '체크박스'
       });
       await user.click(checkbox);
       expect(submitBtn).toBeEnabled();
 
       await user.click(submitBtn);
-      expect(mockedPostBid).toHaveBeenCalledWith({ auctionId: 0, bidAmount: 120000 });
+      expect(mockedPostBid).toHaveBeenCalledWith({
+        auctionId: 0,
+        bidAmount: 120000
+      });
     });
 
     test('시작가보다 높은 금액을 입력해야 한다.', async () => {
@@ -107,7 +112,7 @@ describe('입찰 및 입찰 수정 테스트', () => {
       await user.type(costInput, '20000');
 
       const checkbox = screen.getByRole('checkbox', {
-        name: '체크박스',
+        name: '체크박스'
       });
       await user.click(checkbox);
       expect(submitBtn).toBeEnabled();
@@ -116,11 +121,11 @@ describe('입찰 및 입찰 수정 테스트', () => {
       const errorMessage = screen.getByText(/시작가보다 높은 금액을 입력/);
       expect(errorMessage).toBeInTheDocument();
     });
-  })
+  });
 
   describe('입찰 수정 테스트', () => {
     test('경매 상품에 사진, 이름, 시작가, 참여자, 시간, 나의 참여 금액을 표시한다.', async () => {
-      setup(3)
+      setup(3);
 
       const imgElement = screen.getByRole('img', { name: '이미지' });
       const nameElement = screen.getByLabelText('이름');
@@ -137,7 +142,6 @@ describe('입찰 및 입찰 수정 테스트', () => {
       expect(bidAmount).toBeInTheDocument();
     });
 
-
     test('금액 수정 버튼이 있으며. 입찰 가격 입력 후 주의 사항을 체크해야 금액을 수정할 수 있다.', async () => {
       const { user } = setup(3);
 
@@ -146,13 +150,16 @@ describe('입찰 및 입찰 수정 테스트', () => {
       await user.type(costInput, '240000');
 
       const checkbox = screen.getByRole('checkbox', {
-        name: '체크박스',
+        name: '체크박스'
       });
       await user.click(checkbox);
       expect(submitBtn).toBeEnabled();
 
       await user.click(submitBtn);
-      expect(mockedPostBid).toHaveBeenCalledWith({ auctionId: 3, bidAmount: 240000 });
+      expect(mockedPostBid).toHaveBeenCalledWith({
+        auctionId: 3,
+        bidAmount: 240000
+      });
     });
 
     test('나의 참여 금액과 다른 금액 입력해야 한다.', async () => {
@@ -164,15 +171,16 @@ describe('입찰 및 입찰 수정 테스트', () => {
       await user.type(costInput, bidAmount.toString());
 
       const checkbox = await screen.findByRole('checkbox', {
-        name: '체크박스',
+        name: '체크박스'
       });
       await user.click(checkbox);
       expect(submitBtn).toBeEnabled();
 
       await user.click(submitBtn);
 
-      const errorMessage = screen.getByText(/현재 참여 금액과 다른 금액을 입력/);
+      const errorMessage =
+        screen.getByText(/현재 참여 금액과 다른 금액을 입력/);
       expect(errorMessage).toBeInTheDocument();
     });
-  })
+  });
 });

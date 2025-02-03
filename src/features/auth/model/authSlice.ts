@@ -8,7 +8,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   isLoggedIn: !!localStorage.getItem('accessToken'),
-  token: localStorage.getItem('accessToken'),
+  token: localStorage.getItem('accessToken')
 };
 
 export const authSlice = createSlice({
@@ -22,8 +22,8 @@ export const authSlice = createSlice({
     storeLogout: (state) => {
       state.isLoggedIn = false;
       state.token = null;
-    },
-  },
+    }
+  }
 });
 
 export const { storeLogin, storeLogout } = authSlice.actions;
