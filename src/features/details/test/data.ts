@@ -54,7 +54,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
       }
     ],
     minPrice: 120_000,
-    timeRemaining: 3,
+    timeRemaining: 1,
     participantCount: 8,
     isParticipated: false,
     bidId: null,
@@ -146,7 +146,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
       }
     ],
     minPrice: 70_000,
-    timeRemaining: 2,
+    timeRemaining: 0,
     participantCount: 6,
     isParticipated: true,
     bidId: 1,
@@ -219,7 +219,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     isWon: true,
     isOrdered: false
   },
-  // 구매자, 종료된 경매, 참여자 하지 않은 예시
+  // 구매자, 종료된 경매, 참여하지 않은 예시
   {
     auctionId: 7,
     auctionName: '[나이키] 조던 블랙',

@@ -4,7 +4,7 @@ describe('상세 조회', () => {
   });
 
   context('정식 경매', () => {
-    context('내가 등록한 경매', () => {
+    context('등록자', () => {
       beforeEach(() => {
         cy.visit('/auctions/auction/1');
         cy.wait(1000);
@@ -15,7 +15,7 @@ describe('상세 조회', () => {
       });
     });
 
-    context('내가 등록하지 않은 경매', () => {
+    context('비등록자', () => {
       it('경매 참여하기 클릭하면 입찰 페이지로 이동한다.', () => {
         cy.visit('/auctions/auction/0');
         cy.wait(1000);
@@ -58,7 +58,7 @@ describe('상세 조회', () => {
   });
 
   context('사전 경매', () => {
-    context('내가 등록한 경매', () => {
+    context('등록자', () => {
       beforeEach(() => {
         cy.visit('/auctions/pre-auction/10');
         cy.wait(1000);
@@ -102,7 +102,7 @@ describe('상세 조회', () => {
         cy.findByText('경매로 전환되었습니다.').should('exist');
       });
     });
-    context('내가 등록하지 않은 경매', () => {
+    context('비등록자', () => {
       beforeEach(() => {
         cy.visit('/auctions/pre-auction/12');
         cy.wait(1000);
