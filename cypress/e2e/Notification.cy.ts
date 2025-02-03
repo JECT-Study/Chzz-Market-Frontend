@@ -4,7 +4,7 @@ describe('알림', () => {
     cy.visit('/notification');
   });
 
-  it.only('읽은 알림과 읽지 않은 알림은 배경색으로 차이를 두며, 읽지 않은 알림을 클릭하면 읽음 표시한다.', () => {
+  it('읽은 알림과 읽지 않은 알림은 배경색으로 차이를 두며, 읽지 않은 알림을 클릭하면 읽음 표시한다.', () => {
     const unreadNotification = cy
       .findAllByLabelText(/알림/)
       .filter('.bg-notificationBgColor')
