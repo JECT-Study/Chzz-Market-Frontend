@@ -304,43 +304,6 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     isOrdered: true
   },
 
-  // 사전 경매 => 전환, 실 경매
-  {
-    auctionId: 10,
-    auctionName: '[뉴발란스] 993',
-    images: [
-      {
-        imageId: 0,
-        imageUrl: newBalanceImage
-      },
-      {
-        imageId: 1,
-        imageUrl: adidasImage
-      },
-      {
-        imageId: 2,
-        imageUrl: jordanBlackImage
-      }
-    ],
-    minPrice: 230_000,
-    timeRemaining: 86400,
-    participantCount: 0,
-    isParticipated: false,
-    bidId: null,
-    bidAmount: 0,
-    remainingBidCount: 3,
-    description: '뉴발란스 993입니다.',
-    isCancelled: false,
-    isSeller: true,
-    sellerNickname: 'seller',
-    sellerProfileImageUrl: jordanBlueImage,
-    status: 'PROCEEDING',
-    category: 'FASHION_AND_CLOTHING',
-    isWinner: false,
-    isWon: false,
-    isOrdered: false
-  },
-
   // 사전 경매
   // 판매자
   {
