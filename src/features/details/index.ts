@@ -5,6 +5,7 @@ export {
   deletePreAuctionHandler,
   convertPreAuctionHandler,
   heartAuctionHandler,
-  cancelBidHandler
+  cancelBidHandler,
+  postBidHandler
 } from './test';
 export { AuctionDetailsMain, PreAuctionDetailsMain } from './ui';

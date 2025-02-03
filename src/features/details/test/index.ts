@@ -3,6 +3,7 @@ export {
   deletePreAuctionHandler,
   convertPreAuctionHandler,
   heartAuctionHandler,
-  cancelBidHandler
+  cancelBidHandler,
+  postBidHandler
 } from './handler';
 export { auctionDetailsData } from './data';

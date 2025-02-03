@@ -91,7 +91,7 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
           type='button'
           color='cheeseYellow'
           className='w-full h-full transition-colors rounded text-button active:bg-black'
-          aria-label={maxFlag ? '제안하기' : '수정하기'}
+          ariaLabel={maxFlag ? '제안하기' : '수정하기'}
           onClick={handleSubmit(onPostSubmit)}
           disabled={zeroFlag || !check || isPending}
           loading={isPending}

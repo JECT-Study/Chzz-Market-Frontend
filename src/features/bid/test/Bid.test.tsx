@@ -141,10 +141,7 @@ describe('입찰 및 입찰 수정 테스트', () => {
     test('금액 수정 버튼이 있으며. 입찰 가격 입력 후 주의 사항을 체크해야 금액을 수정할 수 있다.', async () => {
       const { user } = setup(3);
 
-      const { remainingBidCount } = auctionDetailsData[3] as IAuctionDetails;
-      const submitBtn = screen.getByRole('button', {
-        name: `금액 수정 (${remainingBidCount}회 가능)`,
-      });
+      const submitBtn = screen.getByRole('button', { name: /수정하기/ });
       const costInput = await screen.findByLabelText('가격 제안하기');
       await user.type(costInput, '240000');
 
@@ -162,7 +159,7 @@ describe('입찰 및 입찰 수정 테스트', () => {
       const { user } = setup(3);
 
       const { bidAmount } = auctionDetailsData[3] as IAuctionDetails;
-      const submitBtn = await screen.findByRole('button', { name: /금액 수정/ });
+      const submitBtn = await screen.findByRole('button', { name: '수정하기' });
       const costInput = await screen.findByLabelText('가격 제안하기');
       await user.type(costInput, bidAmount.toString());
 

@@ -3,7 +3,8 @@ import {
   cancelBidHandler,
   convertPreAuctionHandler,
   deletePreAuctionHandler,
-  heartAuctionHandler
+  heartAuctionHandler,
+  postBidHandler
 } from '@/features/details';
 import {
   getAuctionUploadURLsHandler,
@@ -54,7 +55,8 @@ const handlers: HttpHandler[] = [
   deletePreAuctionHandler,
   convertPreAuctionHandler,
   heartAuctionHandler,
-  cancelBidHandler
+  cancelBidHandler,
+  postBidHandler
 ];
 
 export const worker = setupWorker(...handlers);

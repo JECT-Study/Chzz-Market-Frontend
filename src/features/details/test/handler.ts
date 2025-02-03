@@ -1,6 +1,7 @@
 import { HttpHandler, HttpResponse, delay, http } from 'msw';
 
 import { API_END_POINT } from '@/shared';
+import type { IBidPostData } from '@/features/bid';
 import { auctionDetailsData } from './data';
 
 let curDetailsData = [...auctionDetailsData];
@@ -19,14 +20,14 @@ export const auctionDetailsHandler: HttpHandler = http.get(
 
 export const deletePreAuctionHandler: HttpHandler = http.delete(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}/:preAuctionId`,
-  async () => {
+  () => {
     return HttpResponse.json({ status: 200 });
   }
 );
 
 export const convertPreAuctionHandler: HttpHandler = http.post(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}/:preAuctionId/start`,
-  async ({ params }) => {
+  ({ params }) => {
     const { preAuctionId } = params;
     const idx = curDetailsData.findIndex(
       (el) => el.auctionId === Number(preAuctionId)
@@ -58,7 +59,7 @@ export const convertPreAuctionHandler: HttpHandler = http.post(
 
 export const heartAuctionHandler: HttpHandler = http.post(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}/:preAuctionId/likes`,
-  async () => {
+  () => {
     return HttpResponse.json({ status: 200 });
   }
 );
@@ -81,6 +82,26 @@ export const cancelBidHandler: HttpHandler = http.patch(
           : item
       );
     }
+
+    return HttpResponse.json({ status: 200 });
+  }
+);
+
+export const postBidHandler: HttpHandler = http.post(
+  `${import.meta.env.VITE_API_URL}${API_END_POINT.BID}`,
+  async ({ request }) => {
+    const data = await request.json();
+    const { auctionId, bidAmount } = data as IBidPostData;
+
+    curDetailsData = curDetailsData.map((el) =>
+      el.auctionId === auctionId
+        ? {
+            ...el,
+            bidAmount,
+            remainingBidCount: 0
+          }
+        : el
+    );
 
     return HttpResponse.json({ status: 200 });
   }
