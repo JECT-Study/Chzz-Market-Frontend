@@ -12,7 +12,7 @@ describe('경매 수정', () => {
     cy.findByLabelText(/시작 가격/).should('have.value', '230,000원');
   });
 
-  it.only('수정 완료 버튼 클릭하면 홈으로 이동한다.', () => {
+  it('수정 완료 버튼 클릭하면 홈으로 이동한다.', () => {
     cy.findByLabelText('수정 완료 버튼').click();
     cy.findByText('사전 경매가 수정되었습니다.').should('be.visible');
   });
