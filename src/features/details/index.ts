@@ -4,6 +4,7 @@ export {
   auctionDetailsHandler,
   deletePreAuctionHandler,
   convertPreAuctionHandler,
-  heartAuctionHandler
+  heartAuctionHandler,
+  cancelBidHandler
 } from './test';
 export { AuctionDetailsMain, PreAuctionDetailsMain } from './ui';

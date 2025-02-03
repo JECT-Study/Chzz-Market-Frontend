@@ -89,7 +89,7 @@ export const auctionDetailsData: (IAuctionDetails | IPreAuctionDetails)[] = [
     timeRemaining: 82_800,
     participantCount: 29,
     isParticipated: false,
-    bidId: 1,
+    bidId: 3,
     bidAmount: 0,
     remainingBidCount: 1,
     description: '에어 조던 블루입니다.',

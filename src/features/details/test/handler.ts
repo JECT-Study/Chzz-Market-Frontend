@@ -3,21 +3,16 @@ import { HttpHandler, HttpResponse, delay, http } from 'msw';
 import { API_END_POINT } from '@/shared';
 import { auctionDetailsData } from './data';
 
+let curDetailsData = [...auctionDetailsData];
+
 export const auctionDetailsHandler: HttpHandler = http.get(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}/:auctionId`,
   async ({ params }) => {
     const { auctionId } = params;
     await delay(500);
 
-    const data = auctionDetailsData.filter(
-      (data) => data.auctionId === Number(auctionId)
-    );
-
-    const isPreAuction = window.location.pathname.includes('pre-auction');
-
-    // convert test 위해 auctionId 10 조건문 추가.
     return HttpResponse.json(
-      Number(auctionId) === 10 ? (isPreAuction ? data[1] : data[0]) : data[0]
+      curDetailsData.find((data) => data.auctionId === Number(auctionId))
     );
   }
 );
@@ -31,7 +26,32 @@ export const deletePreAuctionHandler: HttpHandler = http.delete(
 
 export const convertPreAuctionHandler: HttpHandler = http.post(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}/:preAuctionId/start`,
-  async () => {
+  async ({ params }) => {
+    const { preAuctionId } = params;
+    const idx = curDetailsData.findIndex(
+      (el) => el.auctionId === Number(preAuctionId)
+    );
+
+    if (idx !== -1) {
+      curDetailsData = curDetailsData.map((item, index) =>
+        index === idx
+          ? {
+              ...item,
+              timeRemaining: 86400,
+              participantCount: 0,
+              isParticipated: false,
+              bidId: null,
+              bidAmount: 0,
+              remainingBidCount: 3,
+              isCancelled: false,
+              isWinner: false,
+              isWon: false,
+              isOrdered: false
+            }
+          : item
+      );
+    }
+
     return HttpResponse.json({ status: 200 });
   }
 );
@@ -39,6 +59,29 @@ export const convertPreAuctionHandler: HttpHandler = http.post(
 export const heartAuctionHandler: HttpHandler = http.post(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}/:preAuctionId/likes`,
   async () => {
+    return HttpResponse.json({ status: 200 });
+  }
+);
+
+export const cancelBidHandler: HttpHandler = http.patch(
+  `${import.meta.env.VITE_API_URL}${API_END_POINT.BID}/:bidId/cancel`,
+  async ({ params }) => {
+    const { bidId } = params;
+    const idx = curDetailsData.findIndex(
+      (el) => 'bidId' in el && el.bidId === Number(bidId)
+    );
+
+    if (idx !== -1) {
+      curDetailsData = curDetailsData.map((item, index) =>
+        index === idx
+          ? {
+              ...item,
+              isCancelled: true
+            }
+          : item
+      );
+    }
+
     return HttpResponse.json({ status: 200 });
   }
 );

@@ -2,6 +2,7 @@ export {
   auctionDetailsHandler,
   deletePreAuctionHandler,
   convertPreAuctionHandler,
-  heartAuctionHandler
+  heartAuctionHandler,
+  cancelBidHandler
 } from './handler';
 export { auctionDetailsData } from './data';

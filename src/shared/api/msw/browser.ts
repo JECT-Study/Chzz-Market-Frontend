@@ -1,5 +1,6 @@
 import {
   auctionDetailsHandler,
+  cancelBidHandler,
   convertPreAuctionHandler,
   deletePreAuctionHandler,
   heartAuctionHandler
@@ -52,7 +53,8 @@ const handlers: HttpHandler[] = [
   uploadImagesToS3Handler,
   deletePreAuctionHandler,
   convertPreAuctionHandler,
-  heartAuctionHandler
+  heartAuctionHandler,
+  cancelBidHandler
 ];
 
 export const worker = setupWorker(...handlers);

@@ -16,16 +16,43 @@ describe('상세 조회', () => {
     });
 
     context('내가 등록하지 않은 경매', () => {
-      beforeEach(() => {
+      it('경매 참여하기 클릭하면 입찰 페이지로 이동한다.', () => {
         cy.visit('/auctions/auction/0');
         cy.wait(1000);
-      });
-
-      it('경매 참여하기 클릭하면 입찰 페이지로 이동한다.', () => {
         cy.findByLabelText('경매 참여').click();
 
         cy.findByText('경매 참여하기').should('exist');
         cy.url().should('include', '/auctions/bid/0');
+      });
+
+      it('참여 취소한 경매는 다시 참여하지 못한다.', () => {
+        cy.visit('/auctions/auction/2');
+        cy.wait(1000);
+
+        cy.findByLabelText('참여 취소한 경매').should('be.disabled');
+      });
+
+      it('1번 이상 입찰한 사람은 입찰 취소 버튼과 금액 수정 버튼이 있다. 참여 취소 버튼 클릭하면 확인 모달 나오고 클릭하면 참여 취소할 수 있다.', () => {
+        cy.visit('/auctions/auction/3');
+        cy.wait(1000);
+
+        cy.findByLabelText('참여 취소 확인').click();
+        cy.findByLabelText('모달').should('exist');
+
+        cy.findByLabelText('모달');
+        cy.findByLabelText('참여 취소').click();
+        cy.wait(500);
+
+        cy.findByText('경매 참여를 취소했습니다.').should('exist');
+        cy.findByLabelText('참여 취소한 경매').should('be.disabled');
+      });
+
+      it('금액 수정 버튼 옆에 남은 횟수가 기재되어 있고, 클릭하면 입찰 페이지로 이동한다.', () => {
+        cy.visit('/auctions/auction/3');
+        cy.wait(1000);
+
+        cy.findByLabelText('금액 수정').click();
+        cy.url().should('include', '/auctions/bid/3');
       });
     });
   });
@@ -36,6 +63,7 @@ describe('상세 조회', () => {
         cy.visit('/auctions/pre-auction/10');
         cy.wait(1000);
       });
+
       it('내가 등록한 사전 경매는 옵션이 있다.', () => {
         cy.findByLabelText('옵션').should('exist');
       });
