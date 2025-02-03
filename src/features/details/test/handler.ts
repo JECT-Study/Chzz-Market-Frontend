@@ -13,8 +13,12 @@ export const auctionDetailsHandler: HttpHandler = http.get(
       (data) => data.auctionId === Number(auctionId)
     );
 
+    const isPreAuction = window.location.pathname.includes('pre-auction');
+
     // convert test 위해 auctionId 10 조건문 추가.
-    return HttpResponse.json(Number(auctionId) === 10 ? data[1] : data[0]);
+    return HttpResponse.json(
+      Number(auctionId) === 10 ? (isPreAuction ? data[1] : data[0]) : data[0]
+    );
   }
 );
 
