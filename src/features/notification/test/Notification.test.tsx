@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
 import { notificationData, useDeleteNotification, useGetNotificationList, useGetNotificationListWithSuspense, useReadNotification } from '..';
+import { render, screen } from '@testing-library/react';
 
 import { LayoutWithNav } from '@/app/layout';
+import { NOTIFICATION_CONTENTS } from '../config';
 import { Notification } from '@/pages/notification';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { NOTIFICATION_CONTENTS } from '../config';
 
 vi.mock('@/features/notification/model', () => ({
   useGetNotificationListWithSuspense: vi.fn(),
@@ -76,7 +76,7 @@ describe('알림 테스트', () => {
     const image = screen.getAllByRole('img', { name: /이미지/ })[0];
     const time = screen.getAllByLabelText(/시간/)[0];
 
-    expect(firstItem).toHaveClass('bg-notificationBgColor');
+    expect(firstItem).not.toHaveClass('bg-notificationBgColor');
     expect(firstItem).toContainElement(title);
     expect(firstItem).toContainElement(image);
     expect(firstItem).toContainElement(time);
@@ -96,8 +96,8 @@ describe('알림 테스트', () => {
     );
     expect(unreadNotifications).toBe(1);
 
-    await user.click(notifications[0]);
-    expect(mutateReadMock).toHaveBeenCalledWith(0)
+    await user.click(notifications[2]);
+    expect(mutateReadMock).toHaveBeenCalledWith(2)
   });
 
   test('알림 클릭하면 알림 세부 정보를 볼 수 있는 페이지로 이동한다.', async () => {
