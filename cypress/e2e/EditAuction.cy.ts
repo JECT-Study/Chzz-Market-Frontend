@@ -9,11 +9,12 @@ describe('경매 수정', () => {
     cy.findAllByAltText(/상품 사진/).should('have.length.greaterThan', 0);
     cy.findByLabelText(/제목/).should('have.value', '[뉴발란스] 993');
     cy.findByRole('combobox', { name: /카테고리/ }).contains('패션 및 의류');
-    cy.findByLabelText(/시작 가격/).should('have.value', '230,000원');
+    cy.findByLabelText(/시작 가격/).should('have.value', '230,000 원');
   });
 
-  it('수정 완료 버튼 클릭하면 홈으로 이동한다.', () => {
+  it('수정 완료 버튼 클릭하면 상세 조회 페이지로 이동한다.', () => {
     cy.findByLabelText('수정 완료 버튼').click();
     cy.findByText('사전 경매가 수정되었습니다.').should('be.visible');
+    cy.url().should('include', '/auctions/pre-auction/10');
   });
 });

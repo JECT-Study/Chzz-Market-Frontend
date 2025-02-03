@@ -25,7 +25,7 @@ describe('알림', () => {
       .first();
 
     unreadNotification.click();
-    cy.wait(500);
+    cy.wait(1000);
 
     unreadDot.should('not.exist');
   });

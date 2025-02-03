@@ -25,12 +25,12 @@ describe('경매 종료', () => {
   });
 
   context('비등록자', () => {
-    it('입찰하지 않았거나 낙찰받지 못한 경우, 종료된 경매 버튼이 있고 클릭하지 못한다.', () => {
+    it('입찰하지 않았거나 낙찰받지 못한 경우, 종료된 경매 버튼으로 변경되고 클릭하지 못한다.', () => {
       cy.visit('/auctions/auction/7');
       cy.findByLabelText('종료된 경매').should('exist').and('be.disabled');
     });
 
-    it('입찰했는데, 낙찰한 경우 결제하기 버튼이 있고, 클릭하면 결제 페이지로 이동한다.', () => {
+    it('낙찰된 경우, 결제하기 버튼으로 변경되고 클릭하면 결제 페이지로 이동한다.', () => {
       cy.visit('/auctions/auction/8');
       cy.findByLabelText('결제하기').should('exist').click();
 

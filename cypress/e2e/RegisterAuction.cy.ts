@@ -11,7 +11,7 @@ describe('경매 등록', () => {
     cy.url().should('include', ROUTES.REGISTER);
   });
 
-  it('아무 것도 입력하지 않고 등록하기 버튼 클릭하면 빨간 경고문이 렌더링된다.', () => {
+  it('아무 것도 입력하지 않고 등록하기 버튼 클릭하면 빨간 경고문이 나타난다.', () => {
     cy.findByLabelText('바로 등록하기').click();
 
     cy.findByText(/사진은 최소 1장 이상 등록/).should('exist');
@@ -20,7 +20,7 @@ describe('경매 등록', () => {
     cy.findByText(/최소 1000원 이상 입력/).should('exist');
   });
 
-  it('이미지 업로드', () => {
+  it('이미지를 업로드할 수 있고, 삭제할 수 있다.', () => {
     cy.findByLabelText('사진 업로드 인풋').selectFile(
       [
         'cypress/fixtures/페이커.jpeg',
@@ -37,7 +37,7 @@ describe('경매 등록', () => {
     cy.findByLabelText('현재 사진 숫자').contains(2);
   });
 
-  it('시작가 입력하고 focus 다른 곳으로 두면 원으로 포맷되고, 다시 입력하면 숫자로 포맷된다.', () => {
+  it('시작가 입력하고 포커스를 다른 곳으로 두면 원으로 포맷되고, 다시 입력하면 숫자로 포맷된다.', () => {
     const costInput = cy.findByLabelText(/시작 가격/);
     costInput.type('200000');
 
