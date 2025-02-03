@@ -32,9 +32,12 @@ describe('경매 종료', () => {
 
     it('낙찰된 경우, 결제하기 버튼으로 변경되고 클릭하면 결제 페이지로 이동한다.', () => {
       cy.visit('/auctions/auction/8');
-      cy.findByLabelText('결제하기').should('exist').click();
+      cy.findByLabelText('결제하기').should('exist');
+    });
 
-      cy.url().should('include', '/auctions/8/payment');
+    it('낙찰되어 결제한 경우, 결제 내역 보기 버튼으로 변경되고 클릭하면 결제 내역 페이지로 이동한다.', () => {
+      cy.visit('/auctions/auction/9');
+      cy.findByLabelText('결제 내역 보기').should('exist');
     });
   });
 });

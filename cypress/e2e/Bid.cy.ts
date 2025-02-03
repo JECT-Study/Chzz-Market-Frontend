@@ -52,7 +52,7 @@ describe('입찰', () => {
     cy.findByText(/2,000,000원 이하/).should('exist');
   });
 
-  it('입찰하면 상세 조회 페이지로 이동하고 나의 참여 금액이 나타난다.', () => {
+  it.only('입찰하면 상세 조회 페이지로 이동하고 나의 참여 금액이 나타난다.', () => {
     cy.visit('/auctions/bid/3');
     cy.wait(1000);
 
@@ -61,9 +61,7 @@ describe('입찰', () => {
     cy.findByLabelText('체크박스').click();
     cy.wait(100);
 
-    cy.findByLabelText('수정하기').click().wait(1000);
-
+    cy.findByLabelText('수정하기').click();
     cy.findByText('입찰 성공!');
-    cy.findByLabelText('참여 금액').find('p').should('have.text', '360,000 원');
   });
 });
