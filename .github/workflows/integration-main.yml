@@ -26,11 +26,12 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      # 6. Cypress e2e 테스트 실행 (공식 액션 사용)
+      # 4. Cypress e2e 테스트 실행
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
+          build: npm run build
           start: npm run dev
           wait-on: "http://localhost:5173"
           record: true
