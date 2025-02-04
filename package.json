@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest --watch",
+    "test:ci": "vitest run",
     "test:coverage": "vitest --coverage",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --resolve-plugins-relative-to .",
     "preview": "vite preview",

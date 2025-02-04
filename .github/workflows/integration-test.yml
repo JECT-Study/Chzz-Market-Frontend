@@ -32,4 +32,4 @@ jobs:
 
       # 4. 통합 테스트
       - name: Run Integration Tests
-        run: npm test
+        run: npm run test:ci
