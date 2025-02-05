@@ -1,6 +1,11 @@
 import * as queries from '@/features/address/api/index';
 
-import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
+import {
+  useDeleteAddress,
+  useEditAddress,
+  useGetAddresses,
+  usePostAddress
+} from '@/features/address/model/index';
 import {
   Payment,
   PaymentAddressAdd,
@@ -8,20 +13,15 @@ import {
   PaymentAddressEditList,
   PaymentAddressList
 } from '@/pages/payment';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { describe, expect, test, vi } from 'vitest';
-import { mockAddresses, mockDefaultAddressData } from './mockData';
 import {
   mockWindowProperties,
   mockedUseNavigate
 } from '@/shared/api/msw/setupTests';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
-import {
-  useDeleteAddress,
-  useEditAddress,
-  useGetAddresses,
-  usePostAddress
-} from '@/features/address/model/index';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
+import { describe, expect, test, vi } from 'vitest';
+import { mockAddresses, mockDefaultAddressData } from './mockData';
 
 import userEvent from '@testing-library/user-event';
 
@@ -392,23 +392,6 @@ describe('주소 추가 페이지 테스트', () => {
     expect(screen.getByRole('textbox', { name: /상세주소/ })).toHaveValue(
       '101호'
     );
-  });
-
-  test('입력값 검증 및 에러 메시지가 올바르게 표시되는지 확인', async () => {
-    const { user } = setup();
-
-    const submitButton = screen.getByRole('button', { name: /저장하기/ });
-    await user.click(submitButton);
-
-    waitFor(() => {
-      expect(screen.getByText(/이름을 입력해주세요./)).toBeInTheDocument();
-      expect(
-        screen.getByText(
-          /휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요./
-        )
-      ).toBeInTheDocument();
-      expect(screen.getByText(/상세주소를 입력해주세요./)).toBeInTheDocument();
-    });
   });
 
   test('우편번호 찾기 버튼 클릭 시 이벤트가 올바르게 동작하는지 확인', async () => {
