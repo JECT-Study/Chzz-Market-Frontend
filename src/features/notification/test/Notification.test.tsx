@@ -1,13 +1,13 @@
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
 import { notificationData, useDeleteNotification, useGetNotificationList, useGetNotificationListWithSuspense, useReadNotification } from '..';
-import { render, screen } from '@testing-library/react';
 
 import { LayoutWithNav } from '@/app/layout';
-import { NOTIFICATION_CONTENTS } from '../config';
 import { Notification } from '@/pages/notification';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
+import { NOTIFICATION_CONTENTS } from '../config';
 
 vi.mock('@/features/notification/model', () => ({
   useGetNotificationListWithSuspense: vi.fn(),

@@ -2,10 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
+import { Login } from '@/pages/login';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
-import { Login } from '@/pages/login';
+import { MemoryRouter } from 'react-router';
 import { useAuth } from '../hooks';
 import { useRefreshTokenOnSuccess } from '../model';
 

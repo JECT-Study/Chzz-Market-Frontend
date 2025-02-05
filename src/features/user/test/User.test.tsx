@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 import { UserProfile } from '@/features/user/ui';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 
 describe('유저 페이지 테스트', () => {
   const setup = (props = {}) => {

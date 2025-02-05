@@ -1,6 +1,6 @@
 import { ROUTES } from '@/shared';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const HomeRegisterBtn = ({ isScrolled }: { isScrolled: boolean }) => {
   const navigate = useNavigate();
@@ -8,9 +8,8 @@ export const HomeRegisterBtn = ({ isScrolled }: { isScrolled: boolean }) => {
   return (
     <div className="sticky bottom-0 right-0 z-50 flex justify-end w-full cursor-pointer">
       <button
-        className={`relative text-center text-white rounded-full bg-cheeseYellow transition-all text-button  duration-500 h-14 p-4 ${
-          isScrolled ? 'w-full' : 'w-14'
-        }`}
+        className={`relative text-center text-white rounded-full bg-cheeseYellow transition-all text-button  duration-500 h-14 p-4 ${isScrolled ? 'w-full' : 'w-14'
+          }`}
         onClick={() => navigate(ROUTES.REGISTER)}
       >
         <span

@@ -1,7 +1,8 @@
+import { UseMutateFunction, useMutation } from '@tanstack/react-query';
+
 import type { IAddressBase } from '@/entities/address/address';
 import { ROUTES } from '@/shared';
-import { UseMutateFunction, useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { addAddress } from '../api';
 
 export const usePostAddress = (

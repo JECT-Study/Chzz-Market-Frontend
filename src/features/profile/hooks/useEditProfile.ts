@@ -1,7 +1,7 @@
 import { useProfile } from '@/features/profile/model/useProfile';
 import { UserProfileEditFormSchema } from '@/shared/constants/schema';
 import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { z } from 'zod';
 
 type FormFields = z.infer<typeof UserProfileEditFormSchema>;

@@ -1,10 +1,11 @@
-import type { IAuctionDetails } from '@/entities';
 import { auctionDetailsData, useGetAuctionDetails } from '@/features/details';
-import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
+
+import type { IAuctionDetails } from '@/entities';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router';
 import { useGetBidderList } from '../model';
 import { BidderListMain } from '../ui/BidderListMain';
 import { bidderListData } from './data';

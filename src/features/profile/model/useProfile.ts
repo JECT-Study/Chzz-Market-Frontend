@@ -1,11 +1,12 @@
-import type { IProfileData } from '@/entities/user/user';
-import { QUERY_KEYS } from '@/shared';
 import {
   UseMutateFunction,
   useMutation,
   useQuery
 } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+
+import type { IProfileData } from '@/entities/user/user';
+import { QUERY_KEYS } from '@/shared';
+import { useNavigate } from 'react-router';
 import { getProfile } from '../api/getProfile';
 import { postEditProfile } from '../api/postEditProfile';
 

@@ -1,19 +1,19 @@
-import { describe, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-
-import { BrowserRouter } from 'react-router-dom';
-import { CATEGORIES } from '@/shared';
-import type { IPreAuctionDetails } from '@/entities';
-import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import userEvent from '@testing-library/user-event';
-import { PreAuctionDetailsMain } from '..';
-import { auctionDetailsData } from './data';
+import { describe, expect, test, vi } from 'vitest';
 import {
   useConvertAuction,
   useDeletePreAuction,
   useGetAuctionDetails,
   useToggleAuctionDetailsHeart
 } from '../model';
+
+import type { IPreAuctionDetails } from '@/entities';
+import { CATEGORIES } from '@/shared';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router';
+import { PreAuctionDetailsMain } from '..';
+import { auctionDetailsData } from './data';
 
 vi.mock('@/features/details/model', () => ({
   useConvertAuction: vi.fn(),
@@ -102,8 +102,6 @@ describe('사전 경매 상세 조회 테스트', () => {
 
         const categoryBtn = screen.getByRole('button', { name: '카테고리' });
         await user.click(categoryBtn);
-
-        screen.debug();
 
         expect(mockedUseNavigate).toHaveBeenCalledWith(
           `/product/list?category=${CATEGORIES[category].lowerCode}`,

@@ -3,23 +3,23 @@ import {
   useGetNotificationList
 } from '@/features/notification';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
-
-import { LayoutWithNav } from '@/app/layout';
-import { getTimeColor } from '@/shared';
-import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import userEvent from '@testing-library/user-event';
-import {
-  bestAuctionsData,
-  imminentAuctionsData,
-  preAuctionsData
-} from './data';
 import {
   useGetBestAuctions,
   useGetImminentAuctions,
   useGetPreAuctions
 } from '../model';
+import {
+  bestAuctionsData,
+  imminentAuctionsData,
+  preAuctionsData
+} from './data';
+
+import { LayoutWithNav } from '@/app/layout';
+import { getTimeColor } from '@/shared';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import userEvent from '@testing-library/user-event';
 import { Home } from '../ui';
 
 vi.mock('@/pages/home/model');

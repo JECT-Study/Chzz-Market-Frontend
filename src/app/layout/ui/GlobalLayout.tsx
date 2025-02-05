@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom';
 import { RealTimeNotification } from '@/features/notification';
+import { Outlet } from 'react-router';
 
 export const GlobalLayout = () => {
   return (

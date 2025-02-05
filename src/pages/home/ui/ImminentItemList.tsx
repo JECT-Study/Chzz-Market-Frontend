@@ -6,7 +6,7 @@ import {
   ROUTES
 } from '@/shared';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useGetImminentAuctions } from '../model';
 
 const ImminentItemList = () => {

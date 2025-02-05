@@ -3,7 +3,7 @@ import { ParticipantCount, ROUTES } from '@/shared';
 import type { IUserAuctionWonItem } from '@/entities';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const OrderWonProduct = ({
   product
@@ -85,10 +85,9 @@ export const OrderWonProduct = ({
                 type="button"
                 onClick={handleButtonClick}
                 className={`w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
-                  ${
-                    product.isOrdered
-                      ? 'bg-gray3 border-none'
-                      : 'bg-gray1 text-white border-none'
+                  ${product.isOrdered
+                    ? 'bg-gray3 border-none'
+                    : 'bg-gray1 text-white border-none'
                   }
                 `}
               >

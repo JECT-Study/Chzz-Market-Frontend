@@ -1,7 +1,8 @@
+import { Button, Confirm, Modal, removeToken } from '@/shared';
+
 import { useAuth } from '@/features/auth/hooks';
 import { IoIosArrowForward } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
-import { Button, Confirm, Modal, removeToken } from '@/shared';
+import { useNavigate } from 'react-router';
 import { useDeleteUsers } from '../model/useDeleteUsers';
 
 export const UserOrderList = () => {

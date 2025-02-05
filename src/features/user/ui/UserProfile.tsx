@@ -3,7 +3,7 @@ import { Button } from '@/shared';
 import ProfileImage from '@/shared/assets/icons/profile.svg';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const UserProfile = ({
   nickname,

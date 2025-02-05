@@ -1,8 +1,8 @@
-import { LoaderFunction, useLoaderData } from 'react-router-dom';
+import { LoaderFunction, useLoaderData } from 'react-router';
 
-import { AuctionForm } from '@/shared';
 import type { IPreAuctionDetails } from '@/entities';
 import { useGetAuctionDetails } from '@/features/details';
+import { AuctionForm } from '@/shared';
 
 export const EditAuction = () => {
   const auctionId = useLoaderData() as number;

@@ -7,7 +7,7 @@ import {
 } from '@/shared';
 
 import type { IAuctionSearchItem } from '@/entities';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const AuctionSearchItem = ({
   product

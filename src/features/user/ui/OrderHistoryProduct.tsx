@@ -2,7 +2,7 @@ import { ParticipantCount, Price, ProductItem } from '@/shared';
 
 import type { IUserAuctionHistoryItem } from '@/entities';
 import { ROUTES } from '@/shared/constants/routes';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const OrderHistoryProduct = ({
   product

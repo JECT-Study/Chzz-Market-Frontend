@@ -5,7 +5,7 @@ import { usePatchPreAuction } from '@/features/edit-auction';
 import { Register } from '@/pages/register';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import { usePostAuction } from '..';
 
 vi.mock('@/features/register/model');

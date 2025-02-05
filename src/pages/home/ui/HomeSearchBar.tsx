@@ -5,8 +5,9 @@ import {
   CommandSeparator,
   ROUTES
 } from '@/shared';
+
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const HomeSearchBar = () => {
   const [inputValue, setInputValue] = useState('');
