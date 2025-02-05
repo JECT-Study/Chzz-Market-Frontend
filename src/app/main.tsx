@@ -1,19 +1,23 @@
 import './index.css';
 
+import { storeLogin } from '@/features/auth/model/authSlice';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Toaster } from 'sonner';
-import { createRoot } from 'react-dom/client';
-import { storeLogin } from '@/features/auth/model/authSlice';
-import { store } from './store';
-import { ReactQueryProvider } from './provider/index';
 import App from './App';
+import { ReactQueryProvider } from './provider/index';
+import { store } from './store';
 
 async function setupMocks(): Promise<void> {
-  if (import.meta.env.MODE !== 'development') {
+  const forceMock = import.meta.env.VITE_USE_MOCK_FORCE === 'true';
+
+  if (!forceMock && import.meta.env.MODE !== 'development') {
     return;
   }
 
-  if (import.meta.env.VITE_USE_MOCK !== 'true') return;
+  if (!forceMock && import.meta.env.VITE_USE_MOCK !== 'true') {
+    return;
+  }
 
   const { worker } = await import('../shared/api/msw/browser');
   await worker.start({
