@@ -6,7 +6,7 @@ import {
   ROUTES
 } from '@/shared';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useGetBestAuctions } from '../model';
 
 const BestItemList = () => {

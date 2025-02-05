@@ -1,15 +1,15 @@
-import { AuctionDetailsMain, useGetAuctionDetails } from '..';
-import { describe, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, test, vi } from 'vitest';
+import { AuctionDetailsMain, useGetAuctionDetails } from '..';
 
-import { BrowserRouter } from 'react-router-dom';
-import { CATEGORIES } from '@/shared';
 import type { IAuctionDetails } from '@/entities';
-import { auctionDetailsData } from './data';
+import { CATEGORIES } from '@/shared';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import { useCancelBid } from '../model';
-import { useEndAuction } from '../lib';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router';
+import { useEndAuction } from '../lib';
+import { useCancelBid } from '../model';
+import { auctionDetailsData } from './data';
 
 vi.mock('@/features/details/model', () => ({
   useGetAuctionDetails: vi.fn(),
@@ -110,8 +110,6 @@ describe('경매 상세 조회 테스트', () => {
 
         const categoryBtn = screen.getByRole('button', { name: '카테고리' });
         await user.click(categoryBtn);
-
-        screen.debug();
 
         expect(mockedUseNavigate).toHaveBeenCalledWith(
           `/product/list?category=${CATEGORIES[category].lowerCode}`,

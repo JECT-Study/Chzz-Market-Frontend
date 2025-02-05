@@ -8,7 +8,7 @@ import {
   SelectValue
 } from '@/shared/ui/select';
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 import { Layout } from '@/app/layout/index';
 import type { IAddressWithId } from '@/entities/address/address';

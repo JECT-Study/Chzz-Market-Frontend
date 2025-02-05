@@ -1,12 +1,12 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { store } from '@/app/store';
 import { UserProfileEdit } from '@/pages/user';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 
 vi.mock('@/features/profile/hooks/useProfileNicknameValidate', () => ({
   useProfileNicknameValidate: () => ({

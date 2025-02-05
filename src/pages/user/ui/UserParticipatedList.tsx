@@ -13,7 +13,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useHistory } from '@/features/user/model';
 import { EmptyBoundary } from '@/shared';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 export const UserParticipatedList = () => {
   const location = useLocation();

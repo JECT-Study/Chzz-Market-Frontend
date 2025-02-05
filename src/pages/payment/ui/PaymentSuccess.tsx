@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router';
 
 import { Layout } from '@/app/layout/index';
 import { httpClient } from '@/shared/api/axios';

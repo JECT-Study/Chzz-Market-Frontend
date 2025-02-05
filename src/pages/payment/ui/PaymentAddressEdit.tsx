@@ -1,6 +1,6 @@
 import { Button, Checkbox, FormField, useToggleState } from '@/shared';
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 import { Layout } from '@/app/layout/index';
 import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';

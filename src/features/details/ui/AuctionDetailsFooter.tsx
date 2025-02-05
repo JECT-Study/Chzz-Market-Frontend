@@ -1,9 +1,9 @@
 import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from "@/shared";
 import { useCancelBid, useGetAuctionDetails } from "../model";
 
-import type { IAuctionDetails } from "@/entities";
 import { Layout } from "@/app/layout";
-import { useNavigate } from "react-router-dom";
+import type { IAuctionDetails } from "@/entities";
+import { useNavigate } from "react-router";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();

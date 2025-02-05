@@ -1,0 +1,41 @@
+name: Main Integration & E2E Testing
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: 
+
+jobs:
+  e2e-tests:
+    name: End-to-End Tests (Cypress)
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Node.js 설치 및 npm 캐시 활성화
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # 3. 의존성 설치
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4. Cypress e2e 테스트 실행
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          build: npm run build
+          start: npm run dev
+          wait-on: "http://localhost:5173"
+          record: true
+          parallel: true
+          group: "E2E Tests"
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

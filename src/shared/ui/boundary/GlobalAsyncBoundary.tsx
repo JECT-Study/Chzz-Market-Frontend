@@ -1,13 +1,13 @@
-import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { ReactNode, Suspense } from 'react';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-import { Button } from '../Button';
-import ErrorIcon from '@/shared/assets/icons/error.svg';
-import { GlobalSpinner } from '../spinner';
 import { Layout } from '@/app/layout/index';
-import { getErrorByCode } from '../../utils/getErrorByCode';
-import { useNavigate } from 'react-router-dom';
+import ErrorIcon from '@/shared/assets/icons/error.svg';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { useNavigate } from 'react-router';
+import { getErrorByCode } from '../../utils/getErrorByCode';
+import { Button } from '../Button';
+import { GlobalSpinner } from '../spinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
   const { title, description } = getErrorByCode(error)

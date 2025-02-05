@@ -1,9 +1,10 @@
-import { AuctionSearch } from '@/pages/search';
 import { render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
-import userEvent from '@testing-library/user-event';
 import { getAuctionSearch, getPreAuctionSearch } from '../api';
+
+import { AuctionSearch } from '@/pages/search';
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router';
 
 vi.mock('@/features/auction-search/api', () => ({
   getAuctionSearch: vi.fn(),

@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData } from 'react-router-dom';
+import { LoaderFunction, useLoaderData } from 'react-router';
 
 import { AuctionDetailsMain } from '@/features/details';
 import { AsyncBoundary } from '@/shared';

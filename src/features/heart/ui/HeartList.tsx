@@ -2,7 +2,7 @@ import { AuctionItem, Button, EmptyBoundary, ROUTES } from '@/shared';
 import { useDeleteHeart, useGetHeartList } from '..';
 
 import type { IPreAuctionItem } from '@/entities';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const HeartList = () => {
   const navigate = useNavigate();

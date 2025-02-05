@@ -4,7 +4,7 @@ import type { IPreAuctionRegisteredItem } from '@/entities';
 import { useMyAuctionList } from '@/features/user/model';
 import { PreAuctionMyRegister } from '@/features/user/ui';
 import { EmptyBoundary } from '@/shared';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 export const UserPreRegisteredList = () => {
   const location = useLocation();

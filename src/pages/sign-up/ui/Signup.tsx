@@ -2,17 +2,17 @@ import { Button, FormField } from '@/shared';
 import { KeyboardEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import type { IUser } from '@/entities/user/user';
-import { Input } from '@/shared/ui/input';
 import { Layout } from '@/app/layout/index';
-import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
-import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { RootState } from '@/app/store';
-import { Textarea } from '@/shared/ui/textarea';
-import { setNicknameError } from '@/features/sign-up/model/signupSlice';
-import { useNavigate } from 'react-router-dom';
+import type { IUser } from '@/entities/user/user';
 import { useSignup } from '@/features/sign-up/hooks';
 import { useSignupNicknameValidate } from '@/features/sign-up/hooks/useSignupNicknameValidate';
+import { setNicknameError } from '@/features/sign-up/model/signupSlice';
+import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
+import NoticeRed from '@/shared/assets/icons/notice_red.svg';
+import { Input } from '@/shared/ui/input';
+import { Textarea } from '@/shared/ui/textarea';
+import { useNavigate } from 'react-router';
 
 export const Signup = () => {
   const dispatch = useDispatch();

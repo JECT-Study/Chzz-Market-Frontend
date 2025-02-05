@@ -2,7 +2,7 @@ import { getTimeAgo } from '@/shared';
 import DefaultImage from '@/shared/assets/icons/default_image.svg';
 import XButtonIcon from '@/shared/assets/icons/x_button.svg';
 import { MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { NOTIFICATION_CONTENTS, type INotification } from '../config';
 import { useDeleteNotification, useReadNotification } from '../model';
 

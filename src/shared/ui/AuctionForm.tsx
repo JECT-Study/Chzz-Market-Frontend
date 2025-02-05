@@ -34,7 +34,7 @@ import NoticeIcon from '@/shared/assets/icons/notice.svg';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 

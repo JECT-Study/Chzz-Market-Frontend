@@ -4,7 +4,7 @@ import { Layout } from '@/app/layout';
 import type { IAuctionDetails } from '@/entities';
 import { useGetAuctionDetails } from '@/features/details';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { BIDDER_LIST_PRICE_FILTER, type IBidder } from '../config';
 import { useGetBidderList } from '../model';
 

@@ -1,7 +1,7 @@
 import { LikeCount, Price, ProductItem, ROUTES } from '@/shared';
 
 import type { IPreAuctionRegisteredItem } from '@/entities';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const PreAuctionMyRegister = ({
   product

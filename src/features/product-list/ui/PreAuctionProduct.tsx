@@ -2,7 +2,7 @@ import { LikeCount, Price, ProductItem } from '@/shared';
 
 import type { IPreAuctionItem } from '@/entities';
 import { ROUTES } from '@/shared/constants/routes';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useToggleAuctionListHeart } from '../model';
 
 export const PreAuctionProduct = ({
@@ -28,11 +28,10 @@ export const PreAuctionProduct = ({
         type="button"
         disabled={!product.isSeller}
         className={`w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
-        ${
-          product.isLiked
+        ${product.isLiked
             ? 'bg-white border border-gray1'
             : 'bg-gray3 text-black border-none'
-        }
+          }
       `}
       >
         {product.isSeller

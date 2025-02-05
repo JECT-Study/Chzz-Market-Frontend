@@ -1,7 +1,7 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
 import { ROUTES } from '@/shared';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { convertAuction } from '../api';
 

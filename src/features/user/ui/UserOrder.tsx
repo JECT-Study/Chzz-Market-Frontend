@@ -5,7 +5,7 @@ import OnGoingIcon from '@/shared/assets/icons/ongoing_auction.svg';
 import PreAuctionIcon from '@/shared/assets/icons/pre_auction.svg';
 import SuccessIcon from '@/shared/assets/icons/successful_auction.svg';
 import { ROUTES } from '@/shared/constants/routes';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 interface Props {
   participantCount?: IParticipantCountItems;

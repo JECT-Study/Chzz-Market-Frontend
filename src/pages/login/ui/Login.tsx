@@ -4,7 +4,7 @@ import { useRefreshTokenOnSuccess } from '@/features/auth/model';
 import ChizzImage from '@/shared/assets/icons/main_cheese_icon.svg';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const Login = () => {
   const navigate = useNavigate();

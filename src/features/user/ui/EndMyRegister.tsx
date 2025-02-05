@@ -9,7 +9,7 @@ import {
 import type { IAuctionEndRegisteredItem } from '@/entities';
 import PriceIcon from '@/shared/assets/icons/price.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const EndMyRegister = ({
   product

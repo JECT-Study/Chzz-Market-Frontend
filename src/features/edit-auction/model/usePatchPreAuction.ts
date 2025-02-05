@@ -1,9 +1,9 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import { ROUTES } from '@/shared';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import type { IRegisterPatch } from '@/features/register';
+import { ROUTES } from '@/shared';
+import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 import { patchPreAuction } from '..';
 
 export const usePatchPreAuction = (): {
@@ -21,7 +21,9 @@ export const usePatchPreAuction = (): {
     mutationFn: patchPreAuction,
     onSuccess: (data) => {
       toast.success('사전 경매가 수정되었습니다.');
-      navigate(ROUTES.PRE_AUCTION.getItemRoute(data.auctionId));
+      navigate(ROUTES.PRE_AUCTION.getItemRoute(data.auctionId), {
+        replace: true
+      });
     }
   });
 

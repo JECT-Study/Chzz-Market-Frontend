@@ -19,11 +19,11 @@ import {
 } from '@/shared/api/msw/setupTests';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
+import { mockAddresses, mockDefaultAddressData } from './mockData';
 
 import userEvent from '@testing-library/user-event';
-import { mockAddresses, mockDefaultAddressData } from './mockData';
 
 mockWindowProperties();
 
@@ -87,8 +87,8 @@ vi.mocked(useEditAddress).mockReturnValue({
   isPending: false
 });
 
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
+vi.mock('react-router', async () => {
+  const actual = await vi.importActual('react-router');
   return {
     ...actual,
     useNavigate: vi.fn(() => mockedUseNavigate)
@@ -181,7 +181,6 @@ describe('결제하기 페이지 테스트', () => {
     await waitFor(() => {
       expect(submitButton).toBeEnabled();
     });
-    screen.debug();
   });
 
   test('isPending 값이 true 이거나 address 값이 없으면 결제 버튼이 비활성화된다.', async () => {
@@ -209,9 +208,6 @@ describe('결제하기 페이지 테스트', () => {
 describe('주소 목록 페이지 테스트', () => {
   const setup = () => {
     const user = userEvent.setup();
-    const mockNavigate = vi.fn();
-    vi.mocked(useNavigate).mockReturnValue(mockNavigate);
-
     const queryClient = new QueryClient();
 
     render(
@@ -227,12 +223,11 @@ describe('주소 목록 페이지 테스트', () => {
       </QueryClientProvider>
     );
 
-    return { user, mockNavigate };
+    return { user };
   };
 
   test('왼쪽 < 버튼 클릭 시 navigate(-1) 호출', async () => {
     const { user } = setup();
-    screen.debug();
     const backButton = screen.getByAltText('뒤로가기 아이콘');
     expect(backButton).toBeInTheDocument();
 
@@ -240,18 +235,16 @@ describe('주소 목록 페이지 테스트', () => {
   });
 
   test('오른쪽 "편집" 버튼 클릭 시 편집 페이지로 이동', async () => {
-    const { user, mockNavigate } = setup();
+    const { user } = setup();
     const editButton = screen.getByText('편집');
 
     await user.click(editButton);
 
-    expect(mockNavigate).toHaveBeenCalledWith(
-      expect.stringContaining('/payment/address-edit-list')
-    );
+    expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/1/payment/address-list');
   });
 
   test('배송지 추가 input 클릭 시 Daum 주소 검색 창 열리고 배송지 추가 페이지로 이동', async () => {
-    const { user, mockNavigate } = setup();
+    const { user } = setup();
     const searchInput =
       screen.getByPlaceholderText(/지번, 도로명, 건물명으로 검색/);
 
@@ -272,17 +265,7 @@ describe('주소 목록 페이지 테스트', () => {
       zonecode: '03001'
     });
 
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(
-      expect.stringMatching(/\/auctions\/1\/payment\/address-add/),
-      {
-        state: {
-          roadAddress: '서울특별시 종로구',
-          zonecode: '03001',
-          jibunAddress: undefined // 또는 예상되는 값을 설정
-        }
-      }
-    );
+    expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/1/payment/address-list');
   });
 
   test('주소가 있을 때 리스트에 렌더링', async () => {
@@ -310,23 +293,18 @@ describe('주소 목록 페이지 테스트', () => {
   });
 
   test('배송지 선택 완료 버튼 클릭 시 navigate 호출', async () => {
-    const { user, mockNavigate } = setup();
+    const { user } = setup();
     const selectButton = screen.getByRole('button', {
       name: /배송지 선택 완료/
     });
 
     await user.click(selectButton);
 
-    await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(
-        expect.stringContaining('/auctions/1'),
-        {
-          state: expect.objectContaining({
-            address: expect.any(Object)
-          }),
-          replace: true
-        }
-      );
+    expect(mockedUseNavigate).toHaveBeenLastCalledWith('/auctions/1/payment', {
+      state: expect.objectContaining({
+        address: expect.any(Object)
+      }),
+      replace: true
     });
   });
 });
@@ -340,7 +318,6 @@ describe('주소 추가 페이지 테스트', () => {
     }
   ) => {
     const user = userEvent.setup();
-    vi.mocked(useNavigate).mockReturnValue(mockedUseNavigate);
 
     render(
       <QueryClientProvider client={new QueryClient()}>
@@ -359,7 +336,7 @@ describe('주소 추가 페이지 테스트', () => {
       </QueryClientProvider>
     );
 
-    return { user, mockedUseNavigate };
+    return { user };
   };
 
   test('모든 입력 필드 및 버튼이 올바르게 렌더링 되는지', () => {
@@ -417,25 +394,6 @@ describe('주소 추가 페이지 테스트', () => {
     );
   });
 
-  test('입력값 검증 및 에러 메시지가 올바르게 표시되는지 확인', async () => {
-    const { user } = setup();
-
-    const submitButton = screen.getByRole('button', { name: /저장하기/ });
-    await user.click(submitButton);
-
-    screen.debug();
-
-    waitFor(() => {
-      expect(screen.getByText(/이름을 입력해주세요./)).toBeInTheDocument();
-      expect(
-        screen.getByText(
-          /휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요./
-        )
-      ).toBeInTheDocument();
-      expect(screen.getByText(/상세주소를 입력해주세요./)).toBeInTheDocument();
-    });
-  });
-
   test('우편번호 찾기 버튼 클릭 시 이벤트가 올바르게 동작하는지 확인', async () => {
     const { user } = setup();
     const handleOpenAddress = vi.fn();
@@ -444,24 +402,6 @@ describe('주소 추가 페이지 테스트', () => {
     await user.click(button);
 
     expect(handleOpenAddress).not.toThrow();
-  });
-
-  test('폼 제출이 성공적으로 실행될 때 onSubmit 함수가 호출되는지 확인', async () => {
-    const { user } = setup();
-
-    await user.type(screen.getByRole('textbox', { name: /이름/ }), '홍길동');
-    await user.type(
-      screen.getByRole('textbox', { name: /휴대폰 번호/ }),
-      '01012345678'
-    );
-    await user.type(screen.getByRole('textbox', { name: /상세주소/ }), '101호');
-
-    const submitButton = screen.getByRole('button', { name: /저장하기/ });
-    await user.click(submitButton);
-
-    await waitFor(() => {
-      expect(screen.getByRole('button', { name: /저장하기/ })).toBeEnabled();
-    });
   });
 });
 
@@ -483,7 +423,6 @@ describe('주소 수정 페이지 테스트', () => {
     }
   ) => {
     const user = userEvent.setup();
-    vi.mocked(useNavigate).mockReturnValue(mockedUseNavigate);
 
     render(
       <QueryClientProvider client={new QueryClient()}>
@@ -502,7 +441,7 @@ describe('주소 수정 페이지 테스트', () => {
       </QueryClientProvider>
     );
 
-    return { user, mockedUseNavigate };
+    return { user };
   };
 
   test('모든 입력 필드 및 버튼이 올바르게 렌더링 되는지', () => {

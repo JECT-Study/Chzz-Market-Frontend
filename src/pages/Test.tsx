@@ -1,9 +1,9 @@
 import { Button, Input, httpClient } from "@/shared";
 import { useEffect, useState } from "react";
 
-import { AxiosError } from "axios";
 import { Layout } from "@/app/layout";
-import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router";
 
 export const Test = () => {
   const navigate = useNavigate()

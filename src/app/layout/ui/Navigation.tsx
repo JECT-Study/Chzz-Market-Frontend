@@ -1,6 +1,6 @@
-import { NAV_ICONS } from '../config';
 import { useGetNotificationList } from '@/features/notification';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { NAV_ICONS } from '../config';
 
 interface NavigationItemProps {
   name: string;

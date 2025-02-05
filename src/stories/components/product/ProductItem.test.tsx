@@ -4,7 +4,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { ProductItem } from '@/shared';
 import { mockWindowProperties } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 
 mockWindowProperties();
 

@@ -1,5 +1,5 @@
 import { Button } from '@/shared';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { NOTIFICATION_CONTENTS, type IRealTimeNotification } from '../config';
 import { useReadNotification } from '../model';
 

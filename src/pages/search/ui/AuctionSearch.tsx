@@ -1,11 +1,4 @@
 import { IAuctionSearchItem, IPreAuctionItem } from '@/entities';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-
-import { Layout } from '@/app/layout';
-import { getAuctionSearch } from '@/features/auction-search/api';
-import { getPreAuctionSearch } from '@/features/auction-search/api/getPreAuctionSearch';
-import { ProductListTabs } from '@/features/product-list';
 import {
   Command,
   CommandEmpty,
@@ -13,7 +6,14 @@ import {
   CommandList,
   GlobalSpinner
 } from '@/shared';
+import { useEffect, useState } from 'react';
+
+import { Layout } from '@/app/layout';
+import { getAuctionSearch } from '@/features/auction-search/api';
+import { getPreAuctionSearch } from '@/features/auction-search/api/getPreAuctionSearch';
+import { ProductListTabs } from '@/features/product-list';
 import EmptyIcon from '@/shared/assets/icons/empty.svg';
+import { useSearchParams } from 'react-router';
 import { AuctionSearchItem } from './AuctionSearchItem';
 import { PreAuctionSearchItem } from './PreAuctionSearchItem';
 
@@ -92,17 +92,17 @@ export const AuctionSearch = () => {
             <div className="grid grid-cols-2 gap-6 p-2 overflow-y-auto web:p-4">
               {ongoingFlag
                 ? items?.map((product: IAuctionSearchItem) => (
-                    <AuctionSearchItem
-                      key={product.auctionId}
-                      product={product}
-                    />
-                  ))
+                  <AuctionSearchItem
+                    key={product.auctionId}
+                    product={product}
+                  />
+                ))
                 : preItems?.map((product: IPreAuctionItem) => (
-                    <PreAuctionSearchItem
-                      key={product.auctionId}
-                      product={product}
-                    />
-                  ))}
+                  <PreAuctionSearchItem
+                    key={product.auctionId}
+                    product={product}
+                  />
+                ))}
             </div>
           )}
         </CommandList>

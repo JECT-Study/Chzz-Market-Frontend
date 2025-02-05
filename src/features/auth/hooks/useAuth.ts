@@ -2,7 +2,7 @@ import { logout } from '@/features/auth/api';
 import { removeToken } from '@/shared/utils/token';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const useAuth = () => {
   const navigate = useNavigate();
