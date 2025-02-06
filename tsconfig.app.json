@@ -28,7 +28,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["cypress", "@testing-library/cypress"]
   },
-  "include": ["src/**/*", ".husky/_/mockServiceWorker.js", "public/mockServiceWorker.js"]
+  "include": ["src/**/*", ".husky/_/mockServiceWorker.js", "public/mockServiceWorker.js", "cypress/**/*.ts",]
 }

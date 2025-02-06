@@ -2,9 +2,9 @@ import { Layout } from '@/app/layout/index';
 import { useAuth } from '@/features/auth/hooks';
 import { useRefreshTokenOnSuccess } from '@/features/auth/model';
 import ChizzImage from '@/shared/assets/icons/main_cheese_icon.svg';
-import { RiKakaoTalkFill } from "react-icons/ri";
+import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -23,8 +23,11 @@ export const Login = () => {
             <img
               src={ChizzImage}
               alt="logo"
-              className="w-[7rem] h-[7rem] web:w-[9.5rem] web:h-[8.63rem]" />
-            <h2 className="pt-5 text-3xl font-semibold text-center web:text-4xl">치즈 마켓</h2>
+              className="w-[7rem] h-[7rem] web:w-[9.5rem] web:h-[8.63rem]"
+            />
+            <h2 className="pt-5 text-3xl font-semibold text-center web:text-4xl">
+              치즈 마켓
+            </h2>
           </div>
 
           <div className="flex flex-col items-center justify-center flex-1 w-full gap-4">

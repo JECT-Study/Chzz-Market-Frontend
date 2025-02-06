@@ -1,16 +1,16 @@
 import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from "@/shared";
+import { useCancelBid, useGetAuctionDetails } from "../model";
 
 import { Layout } from "@/app/layout";
-import { useCancelBid } from "@/features/bid";
-import { useNavigate } from "react-router-dom";
-import { useGetAuctionDetails } from "../model";
+import type { IAuctionDetails } from "@/entities";
+import { useNavigate } from "react-router";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
   const { mutate: cancelBid, isPending } = useCancelBid()
-  const { auctionDetails } = useGetAuctionDetails(auctionId);
+  const { details } = useGetAuctionDetails<IAuctionDetails>(auctionId);
 
-  const { isOrdered, isWinner, status, isSeller, bidId, isCancelled, remainingBidCount, isWon } = auctionDetails
+  const { isOrdered, isWinner, status, isSeller, bidId, isCancelled, remainingBidCount, isWon } = details
   const remainFlag = remainingBidCount === MAX_BID_COUNT
   const disabledFlag = remainingBidCount === 0
 
@@ -24,7 +24,7 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
         {isSeller
           ?
           // 판매자
-          <Button aria-label="참여자 내역 보기" type='button' disabled={!isWon} color={!isWon ? 'disabled' : 'cheeseYellow'} onClick={isWon ? () => navigate(ROUTES.getBidderListRoute(auctionId)) : undefined} className='w-full h-full'>
+          <Button ariaLabel="참여자 내역 보기" type='button' disabled={!isWon} color={!isWon ? 'disabled' : 'cheeseYellow'} onClick={isWon ? () => navigate(ROUTES.getBidderListRoute(auctionId)) : undefined} className='w-full h-full'>
             참여자 내역 보기
           </Button>
           :
@@ -32,12 +32,12 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
           (isWinner
             ?
             // 결제 완료
-            <Button type='button' aria-label={isOrdered ? '결제 내역 보기' : '결제하기'} color="cheeseYellow" onClick={!isOrdered ? () => navigate(ROUTES.PAYMENT.getRoute(auctionId)) : undefined} className='w-full h-full'>
+            <Button type='button' ariaLabel={isOrdered ? '결제 내역 보기' : '결제하기'} color="cheeseYellow" onClick={!isOrdered ? () => navigate(ROUTES.PAYMENT.getRoute(auctionId)) : undefined} className='w-full h-full'>
               {isOrdered ? '결제 내역 보기' : '결제하기'}
             </Button>
             :
             // 낙찰 실패
-            <Button aria-label="종료된 경매" type='button' disabled color="disabled" className='w-full h-full'>
+            <Button ariaLabel="종료된 경매" type='button' disabled color="disabled" className='w-full h-full'>
               종료된 경매
             </Button>)
         }
@@ -49,7 +49,7 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   if (isCancelled) {
     return (
       <Layout.Footer type="single">
-        <Button type='button' disabled color="disabled" className='w-full h-full' aria-label="참여 취소한 경매">
+        <Button type='button' disabled color="disabled" className='w-full h-full' ariaLabel="참여 취소한 경매">
           참여 취소한 경매
         </Button>
       </Layout.Footer>
@@ -60,7 +60,7 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   if (isSeller) {
     return (
       <Layout.Footer type="single">
-        <Button type='button' disabled color="disabled" className='w-full h-full'>
+        <Button type='button' disabled color="disabled" className='w-full h-full' ariaLabel="내가 등록한 경매">
           내가 등록한 경매
         </Button>
       </Layout.Footer>
@@ -78,6 +78,7 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
             className="w-full h-full"
             color="cheeseYellow"
             onClick={clickBid}
+            ariaLabel="경매 참여"
           >
             경매 참여하기
           </Button>
@@ -88,14 +89,14 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
                 <Button
                   type="button"
                   className="flex-1 h-full transition-colors rounded text-button active:bg-black"
-                  ariaLabel="참여 취소"
+                  ariaLabel="참여 취소 확인"
                 >
                   참여 취소
                 </Button>
               </Modal.Open>
               <Modal.Window name="cancelBid">
                 <Confirm type="cancelBid" >
-                  <Button type='button' disabled={isPending} loading={isPending} color='cheeseYellow' className='w-full' onClick={clickCancel} ariaLabel="확인 모달 참여 취소">
+                  <Button type='button' disabled={isPending} loading={isPending} color='cheeseYellow' className='w-full' onClick={clickCancel} ariaLabel="참여 취소">
                     참여 취소
                   </Button>
                 </Confirm>

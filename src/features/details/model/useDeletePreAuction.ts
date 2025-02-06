@@ -1,6 +1,6 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { deletePreAuction } from '../api';
 
@@ -15,7 +15,7 @@ export const useDeletePreAuction = (): {
     onSuccess: () => {
       navigate('/');
       toast.success('사전 경매가 삭제되었습니다.');
-    },
+    }
   });
 
   return { mutate, isPending };

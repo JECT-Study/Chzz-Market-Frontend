@@ -1,10 +1,11 @@
-import { UserRegisteredList } from "@/pages/user";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { MemoryRouter, useLocation } from "react-router-dom";
-import { beforeEach, describe, expect, test, vi } from "vitest";
-import { useMyAuctionList } from "../model";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter, useLocation } from 'react-router';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+
+import { UserRegisteredList } from '@/pages/user';
+import userEvent from '@testing-library/user-event';
+import { useMyAuctionList } from '../model';
 
 vi.mock('@/features/user/model', async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, any>;
@@ -16,15 +17,15 @@ vi.mock('@/features/user/model', async (importOriginal) => {
         <button onClick={() => setActiveTab('ongoing')}>진행중인 경매</button>
         <button onClick={() => setActiveTab('end')}>종료된 경매</button>
       </div>
-    ),
+    )
   };
 });
 
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
+vi.mock('react-router', async () => {
+  const actual = await vi.importActual('react-router');
   return {
     ...actual,
-    useLocation: vi.fn(),
+    useLocation: vi.fn()
   };
 });
 
@@ -46,11 +47,11 @@ describe('내가 등록한 경매 내역 페이지', () => {
                 isSeller: true,
                 timeRemaining: 3600,
                 participantCount: 5,
-                createdAt: '2025-01-21T12:16:36.893Z',
-              },
-            ],
-          },
-        ],
+                createdAt: '2025-01-21T12:16:36.893Z'
+              }
+            ]
+          }
+        ]
       },
       endData: {
         pages: [
@@ -63,20 +64,20 @@ describe('내가 등록한 경매 내역 페이지', () => {
                 minPrice: 20000,
                 isSeller: true,
                 participantCount: 10,
-                endDateTime: '2025-01-21T12:17:30.029Z',
-              },
-            ],
-          },
-        ],
+                endDateTime: '2025-01-21T12:17:30.029Z'
+              }
+            ]
+          }
+        ]
       },
       fetchNextOngoingPage: vi.fn(),
       fetchNextEndPage: vi.fn(),
       hasNextOngoingPage: true,
-      hasNextEndPage: true,
+      hasNextEndPage: true
     });
 
     mockUseLocation.mockReturnValue({
-      state: { sortType: 'ongoing' },
+      state: { sortType: 'ongoing' }
     });
 
     render(

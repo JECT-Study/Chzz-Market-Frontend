@@ -3,11 +3,15 @@ import CheckOn from '@/shared/assets/icons/check_on.svg';
 
 interface CheckboxProps {
   check: boolean;
-  title?: string
+  title?: string;
   toggle: () => void;
 }
 
-export const Checkbox = ({ check, toggle, title = '주의사항을 모두 확인하였으며 위 내용에 동의합니다.' }: CheckboxProps) => {
+export const Checkbox = ({
+  check,
+  toggle,
+  title = '주의사항을 모두 확인하였으며 위 내용에 동의합니다.'
+}: CheckboxProps) => {
   const state = check ? 'on' : 'off';
   const iconSrc = check ? CheckOn : CheckOff;
 
@@ -23,7 +27,10 @@ export const Checkbox = ({ check, toggle, title = '주의사항을 모두 확인
       >
         <img src={iconSrc} alt={`check_${state}`} className="w-6 h-6" />
       </span>
-      <span onClick={toggle} className="pt-[3px] text-body2 text-gray1 cursor-pointer">
+      <span
+        onClick={toggle}
+        className="pt-[3px] text-body2 text-gray1 cursor-pointer"
+      >
         {title}
       </span>
     </label>

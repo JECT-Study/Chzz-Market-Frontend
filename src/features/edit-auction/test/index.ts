@@ -1,0 +1,1 @@
+export { patchPreAuctionHandler } from './handler';

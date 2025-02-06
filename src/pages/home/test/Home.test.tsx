@@ -1,9 +1,20 @@
-import { notificationData, useGetNotificationList } from '@/features/notification';
+import {
+  notificationData,
+  useGetNotificationList
+} from '@/features/notification';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
-import { useGetBestAuctions, useGetImminentAuctions, useGetPreAuctions } from '../model';
-import { bestAuctionsData, imminentAuctionsData, preAuctionsData } from './data';
+import {
+  useGetBestAuctions,
+  useGetImminentAuctions,
+  useGetPreAuctions
+} from '../model';
+import {
+  bestAuctionsData,
+  imminentAuctionsData,
+  preAuctionsData
+} from './data';
 
 import { LayoutWithNav } from '@/app/layout';
 import { getTimeColor } from '@/shared';
@@ -15,16 +26,16 @@ vi.mock('@/pages/home/model');
 vi.mock('@/features/notification/model');
 
 vi.mocked(useGetBestAuctions).mockReturnValue({
-  bestAuctions: bestAuctionsData,
+  bestAuctions: bestAuctionsData
 });
 vi.mocked(useGetImminentAuctions).mockReturnValue({
-  imminentAuctions: imminentAuctionsData,
+  imminentAuctions: imminentAuctionsData
 });
 vi.mocked(useGetPreAuctions).mockReturnValue({
-  preAuctions: preAuctionsData,
+  preAuctions: preAuctionsData
 });
 vi.mocked(useGetNotificationList).mockReturnValue({
-  notificationList: notificationData,
+  notificationList: notificationData
 });
 
 describe('Home 테스트', () => {
@@ -33,7 +44,7 @@ describe('Home 테스트', () => {
       <MemoryRouter initialEntries={['/']}>
         <Routes>
           <Route element={<LayoutWithNav />}>
-            <Route path='/' element={<Home />} />
+            <Route path="/" element={<Home />} />
           </Route>
         </Routes>
       </MemoryRouter>
@@ -42,7 +53,7 @@ describe('Home 테스트', () => {
 
     return {
       user,
-      ...utils,
+      ...utils
     };
   };
 
@@ -51,7 +62,7 @@ describe('Home 테스트', () => {
       const { user } = setup();
 
       const mockData = await screen.findAllByRole('figure', {
-        name: /best/,
+        name: /best/
       });
       await user.click(mockData[0]);
 
@@ -63,24 +74,26 @@ describe('Home 테스트', () => {
 
       const emptyMessage = await screen.findByLabelText(/empty/);
       expect(emptyMessage).toBeInTheDocument();
-    })
+    });
 
     test('사전 경매 상품을 클릭하면 사전 경매 상세 페이지로 이동한다.', async () => {
       const { user } = setup();
 
       const mockData = await screen.findAllByRole('figure', {
-        name: /preAuction/,
+        name: /preAuction/
       });
       await user.click(mockData[0]);
 
-      expect(mockedUseNavigate).toHaveBeenCalledWith(`/auctions/pre-auction/${preAuctionsData[0].auctionId}`);
+      expect(mockedUseNavigate).toHaveBeenCalledWith(
+        `/auctions/pre-auction/${preAuctionsData[0].auctionId}`
+      );
     });
 
     describe('경매 시간은 남은 시간에 따라 다른 색으로 표시한다.', () => {
       const expectColor = (time: number) => {
         const colorNumber = time < 8 ? 1 : time < 16 ? 2 : 3;
-        return ` text-timeColor${colorNumber} border-timeColor${colorNumber}`
-      }
+        return ` text-timeColor${colorNumber} border-timeColor${colorNumber}`;
+      };
 
       test('8시간 미만일 경우 빨간색으로 표시한다.', async () => {
         const time = 1;
@@ -119,11 +132,14 @@ describe('Home 테스트', () => {
     const { user } = setup();
 
     const electronicsCategory = await screen.findByRole('listitem', {
-      name: /electronics/,
+      name: /electronics/
     });
     await user.click(electronicsCategory);
 
-    expect(mockedUseNavigate).toHaveBeenCalledWith('/product/list?category=electronics', { state: { category: '전자기기' } });
+    expect(mockedUseNavigate).toHaveBeenCalledWith(
+      '/product/list?category=electronics',
+      { state: { category: '전자기기' } }
+    );
   });
 
   describe('Navigation Test', () => {
@@ -140,7 +156,7 @@ describe('Home 테스트', () => {
       const { user } = setup();
 
       const noticeIcon = screen.getByRole('img', {
-        name: /notification_off_icon/,
+        name: /notification_off_icon/
       });
       await user.click(noticeIcon);
 

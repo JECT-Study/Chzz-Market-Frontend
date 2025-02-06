@@ -1,7 +1,16 @@
 import type { IAddressWithId } from '@/entities/address/address';
-import { getAddress, getAddressDetail, getCustomerKey, postOrderId } from '@/features/address/api';
+import {
+  getAddress,
+  getAddressDetail,
+  getCustomerKey,
+  postOrderId
+} from '@/features/address/api';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
-import { UseMutateFunction, useMutation, useQuery } from '@tanstack/react-query';
+import {
+  UseMutateFunction,
+  useMutation,
+  useQuery
+} from '@tanstack/react-query';
 import { loadTossPayments } from '@tosspayments/tosspayments-sdk';
 import { useState } from 'react';
 
@@ -10,23 +19,23 @@ const clientKey = `${import.meta.env.VITE_TOSS_CLIENT_KEY}`;
 export const usePostPayment = (auctionId: string, orderId: string) => {
   const { data: auctionData, isLoading: auctionDataIsLoading } = useQuery({
     queryKey: [QUERY_KEYS.AUCTION_ADDRESS_DETAIL],
-    queryFn: () => getAddressDetail(auctionId),
+    queryFn: () => getAddressDetail(auctionId)
   });
 
   const { data: DefaultAddressData } = useQuery({
     queryKey: [QUERY_KEYS.ADDRESS],
-    queryFn: () => getAddress(),
+    queryFn: () => getAddress()
   });
 
   const postPayment = (formData: any, address: IAddressWithId) => {
-    const memo = formData.memo;
+    const { memo } = formData;
     const addressId = address.id;
     const phoneNumber = address.phoneNumber.replace(/-/g, '');
 
     const fetchPayment = async () => {
       try {
         const customerData = await getCustomerKey();
-        const customerKey = customerData.customerKey;
+        const { customerKey } = customerData;
         const tossPayments = await loadTossPayments(clientKey);
         const payment = tossPayments.payment({ customerKey });
 
@@ -34,21 +43,20 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
           method: 'CARD', // 카드 결제
           amount: {
             currency: 'KRW',
-            value: auctionData.winningAmount,
+            value: auctionData.winningAmount
           },
           orderId,
           orderName: auctionData.auctionName,
-          successUrl:
-            window.location.origin + `/payment/success?auctionId=${auctionId}&memo=${encodeURIComponent(JSON.stringify(memo))}&addressId=${addressId}`,
-          failUrl: window.location.origin + '/fail',
+          successUrl: `${window.location.origin}/payment/success?auctionId=${auctionId}&memo=${encodeURIComponent(JSON.stringify(memo))}&addressId=${addressId}`,
+          failUrl: `${window.location.origin}/fail`,
           customerMobilePhone: phoneNumber,
           customerName: address.recipientName,
           card: {
             useEscrow: false,
             flowMode: 'DEFAULT',
             useCardPoint: false,
-            useAppCardOnly: false,
-          },
+            useAppCardOnly: false
+          }
         });
       } catch (error) {
         throw error;
@@ -60,13 +68,17 @@ export const usePostPayment = (auctionId: string, orderId: string) => {
   return { auctionData, postPayment, DefaultAddressData, auctionDataIsLoading };
 };
 
-export const usePostOrderId = (): { createId: UseMutateFunction; orderId: string; isPending: boolean } => {
+export const usePostOrderId = (): {
+  createId: UseMutateFunction;
+  orderId: string;
+  isPending: boolean;
+} => {
   const [orderId, setOrderId] = useState<string>('');
   const { mutate: createId, isPending } = useMutation({
     mutationFn: postOrderId,
     onSuccess: (data) => {
       setOrderId(data.orderId);
-    },
+    }
   });
 
   return { createId, orderId, isPending };

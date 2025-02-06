@@ -1,0 +1,1 @@
+export { getMyAuctionPreRegisterHandler } from './handler';

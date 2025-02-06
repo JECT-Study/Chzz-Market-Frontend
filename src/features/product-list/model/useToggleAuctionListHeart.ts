@@ -1,6 +1,10 @@
-import { QUERY_KEYS } from '@/shared';
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  UseMutateFunction,
+  useMutation,
+  useQueryClient
+} from '@tanstack/react-query';
 
+import { QUERY_KEYS } from '@/shared';
 import { heartAuction } from '@/features/details/api';
 
 export const useToggleAuctionListHeart = (): {
@@ -11,15 +15,15 @@ export const useToggleAuctionListHeart = (): {
     mutationFn: heartAuction,
     onSuccess: (_, preAuctionId) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.HEART_LIST],
+        queryKey: [QUERY_KEYS.HEART_LIST]
       });
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.PRE_AUCTION_DETAILS, preAuctionId],
+        queryKey: [QUERY_KEYS.AUCTION_DETAILS, preAuctionId]
       });
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.PRE_AUCTION_LIST],
+        queryKey: [QUERY_KEYS.PRE_AUCTION_LIST]
       });
-    },
+    }
   });
 
   return { mutate };

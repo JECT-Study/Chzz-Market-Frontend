@@ -11,17 +11,18 @@ const meta: Meta<typeof ProductItem> = {
       description: '상품 정보를 포함하는 객체입니다.',
       table: {
         type: { summary: 'object' },
-        defaultValue: { summary: '{}' },
-      },
-    },
+        defaultValue: { summary: '{}' }
+      }
+    }
   },
-  parameters: { // parameters.docs.description.component
+  parameters: {
+    // parameters.docs.description.component
     docs: {
       description: {
         component: 'ProductItem은 상품 정보를 렌더링하는 컴포넌트입니다.' // 전체 컴포넌트에 대한 설명 추가
-      },
-    },
-  },
+      }
+    }
+  }
 };
 
 export default meta;
@@ -40,15 +41,15 @@ export const Default: Story = {
       isLiked: false,
       status: 'active',
       createdAt: '2024-01-01T00:00:00',
-      imageUrl: 'https://via.placeholder.com/150',
+      imageUrl: 'https://via.placeholder.com/150'
     },
     children: (
       <>
         <Price title="시작가" price={50000} />
         <LikeCount count={5} />
       </>
-    ),
-  },
+    )
+  }
 };
 
 export const Liked: Story = {
@@ -63,13 +64,13 @@ export const Liked: Story = {
       isLiked: true,
       status: 'active',
       createdAt: '2024-01-01T00:00:00',
-      imageUrl: 'https://via.placeholder.com/150',
+      imageUrl: 'https://via.placeholder.com/150'
     },
     children: (
       <>
         <Price title="시작가" price={100000} />
         <LikeCount count={10} />
       </>
-    ),
-  },
+    )
+  }
 };

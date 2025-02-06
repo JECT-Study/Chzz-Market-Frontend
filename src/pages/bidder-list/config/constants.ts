@@ -7,11 +7,11 @@ export const BIDDER_LIST_PRICE_FILTER: {
   HIGH: {
     sort: 'desc',
     name: '높은 가격순',
-    icon: HighestPriceIcon,
+    icon: HighestPriceIcon
   },
   LOW: {
     sort: 'asc',
     name: '낮은 가격순',
-    icon: LowestPriceIcon,
-  },
+    icon: LowestPriceIcon
+  }
 });

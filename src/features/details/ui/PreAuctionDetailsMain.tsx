@@ -1,21 +1,22 @@
 import { CarouselItem, CustomCarousel, Modal, getTimeAgo } from '@/shared';
 import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
-import { useDeletePreAuction, useGetPreAuctionDetails } from '..';
+import { useDeletePreAuction, useGetAuctionDetails } from '..';
 
 import { Layout } from '@/app/layout';
+import type { IPreAuctionDetails } from '@/entities';
 import BoxEditIcon from '@/shared/assets/icons/in_box_edit_time.svg';
 import BoxLikeIcon from '@/shared/assets/icons/in_box_like.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
 import ThreeDotsIcon from '@/shared/assets/icons/three_dots.svg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const PreAuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
 
-  const { preAuctionDetails } = useGetPreAuctionDetails(auctionId);
+  const { details } = useGetAuctionDetails<IPreAuctionDetails>(auctionId);
   const { mutate: deletePreAuction, isPending } = useDeletePreAuction();
 
-  const { images, auctionName, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = preAuctionDetails
+  const { images, auctionName, likeCount, isLiked, sellerNickname, minPrice, isSeller, description, category, sellerProfileImageUrl, updatedAt } = details
   const updatedTime = getTimeAgo(updatedAt)
 
   const clickEdit = () => navigate(`/auctions/pre-auction/edit/${auctionId}`);

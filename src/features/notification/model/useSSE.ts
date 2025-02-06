@@ -1,11 +1,11 @@
+import { RefreshHandler, getToken } from '@/shared';
 import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
 
-import { isLoggedIn } from '@/features/auth/model/authSlice';
-import { RefreshHandler, getToken } from '@/shared';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { logout } from '@/features/auth/api';
+import { isLoggedIn } from '@/features/auth/model/authSlice';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 export const useSSE = <T>(url: string) => {
   const [state, setState] = useState<T[]>([]);
@@ -18,17 +18,21 @@ export const useSSE = <T>(url: string) => {
   useEffect(() => {
     const fetchSSE = () => {
       const accessToken = getToken();
-      eventSource.current = new EventSource(`${import.meta.env.VITE_API_URL}${url}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        heartbeatTimeout: 120_000,
-        withCredentials: true,
-      });
+      eventSource.current = new EventSource(
+        `${import.meta.env.VITE_API_URL}${url}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          },
+          heartbeatTimeout: 120_000,
+          withCredentials: true
+        }
+      );
 
       eventSource.current.onerror = async () => {
         try {
-          const newAccessToken = await RefreshHandler.refreshTokenProcessQueue();
+          const newAccessToken =
+            await RefreshHandler.refreshTokenProcessQueue();
           if (newAccessToken) {
             eventSource.current?.close();
             setTimeout(fetchSSE, 1000);

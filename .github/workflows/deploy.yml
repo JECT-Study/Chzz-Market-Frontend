@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-    # 수동 실행
+  # 수동 실행
   workflow_dispatch:
     
 jobs:
@@ -24,8 +24,8 @@ jobs:
         id: deployment
         uses: chrnorm/deployment-action@v2
         with:
-          token: '${{ secrets.GITHUB_TOKEN }}'  # GITHUB_TOKEN 사용
-          environment-url: https://chzzmarket.store  # 배포 URL
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          environment-url: https://chzzmarket.store
           environment: production
 
        # 3. Node.js 설치 및 글로벌 npm 캐시 활성화

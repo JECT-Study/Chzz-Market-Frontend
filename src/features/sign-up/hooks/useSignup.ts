@@ -16,13 +16,13 @@ interface IUseSignupReturn {
 
 const defaultValues = {
   nickname: '',
-  bio: '',
+  bio: ''
 };
 
 export const useSignup = (): IUseSignupReturn => {
   const { signupMutation, isPending } = usePostSignup();
   const { control, setValue, handleSubmit, watch } = useForm<FormFields>({
-    defaultValues,
+    defaultValues
   });
 
   return {
@@ -31,6 +31,6 @@ export const useSignup = (): IUseSignupReturn => {
     watch,
     setValue,
     signupMutation,
-    isPending,
+    isPending
   };
 };

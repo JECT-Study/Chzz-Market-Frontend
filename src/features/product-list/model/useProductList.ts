@@ -1,15 +1,23 @@
-import { getEnrollProductList, getOngoingProductList } from '@/features/product-list/api';
+import {
+  getEnrollProductList,
+  getOngoingProductList
+} from '@/features/product-list/api';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useProductList = (activeTab: string, ongoingSortType: string, preAuctionSortType: string, category: string): any => {
+export const useProductList = (
+  activeTab: string,
+  ongoingSortType: string,
+  preAuctionSortType: string,
+  category: string
+): any => {
   const {
     data: ongoingData,
     isLoading: _ongoingLoading,
     error: _ongoingError,
     fetchNextPage: fetchNextOngoingPage,
-    hasNextPage: hasNextOngoingPage,
+    hasNextPage: hasNextOngoingPage
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.AUCTION_LIST, ongoingSortType, category],
     queryFn: () =>
@@ -17,7 +25,7 @@ export const useProductList = (activeTab: string, ongoingSortType: string, preAu
         pageNumber: 0,
         pageSize: 10,
         sortType: ongoingSortType,
-        category,
+        category
       }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
@@ -26,7 +34,7 @@ export const useProductList = (activeTab: string, ongoingSortType: string, preAu
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'ongoing',
+    enabled: activeTab === 'ongoing'
   });
 
   const {
@@ -34,10 +42,16 @@ export const useProductList = (activeTab: string, ongoingSortType: string, preAu
     isLoading: _enrollLoading,
     error: _enrollError,
     fetchNextPage: fetchNextEnrollPage,
-    hasNextPage: hasNextEnrollPage,
+    hasNextPage: hasNextEnrollPage
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.PRE_AUCTION_LIST, preAuctionSortType, category],
-    queryFn: () => getEnrollProductList({ pageNumber: 0, pageSize: 10, sortType: preAuctionSortType, category }),
+    queryFn: () =>
+      getEnrollProductList({
+        pageNumber: 0,
+        pageSize: 10,
+        sortType: preAuctionSortType,
+        category
+      }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;
@@ -45,7 +59,7 @@ export const useProductList = (activeTab: string, ongoingSortType: string, preAu
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'pre-enroll',
+    enabled: activeTab === 'pre-enroll'
   });
 
   return {
@@ -54,6 +68,6 @@ export const useProductList = (activeTab: string, ongoingSortType: string, preAu
     fetchNextOngoingPage,
     fetchNextEnrollPage,
     hasNextOngoingPage,
-    hasNextEnrollPage,
+    hasNextEnrollPage
   };
 };

@@ -1,6 +1,6 @@
 import { CATEGORIES, Price } from "@/shared";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 interface DetailsBasicProps {
   auctionName: string, category: string, minPrice: number

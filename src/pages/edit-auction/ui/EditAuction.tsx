@@ -1,13 +1,15 @@
-import { useGetPreAuctionDetails } from "@/features/details";
-import { AuctionForm } from "@/shared";
-import { LoaderFunction, useLoaderData } from "react-router-dom";
+import { LoaderFunction, useLoaderData } from 'react-router';
+
+import type { IPreAuctionDetails } from '@/entities';
+import { useGetAuctionDetails } from '@/features/details';
+import { AuctionForm } from '@/shared';
 
 export const EditAuction = () => {
   const auctionId = useLoaderData() as number;
-  const { preAuctionDetails } = useGetPreAuctionDetails(auctionId);
+  const { details } = useGetAuctionDetails<IPreAuctionDetails>(auctionId);
 
-  return <AuctionForm preAuction={preAuctionDetails} />
-}
+  return <AuctionForm preAuction={details} />;
+};
 
 export const loader: LoaderFunction<number> = async ({ params }) => {
   const { auctionId } = params;

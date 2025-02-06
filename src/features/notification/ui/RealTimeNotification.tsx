@@ -1,14 +1,17 @@
 import { API_END_POINT, Modal } from "@/shared";
 import { useEffect, useState } from "react";
-import { RealTimeNotificationItem } from ".";
+
 import type { IRealTimeNotification } from "../config";
+import { RealTimeNotificationItem } from ".";
 import { useSSE } from "../model";
 
 export const RealTimeNotification = () => {
-  const { state: notifications, setState: setNotifications } = useSSE<IRealTimeNotification>(`${API_END_POINT.REALTIME_NOTIFICATIONS}`);
-  const [currentNotification, setCurrentNotification] = useState<IRealTimeNotification | null>(null);
+  const { state: notifications, setState: setNotifications } =
+    useSSE<IRealTimeNotification>(`${API_END_POINT.REALTIME_NOTIFICATIONS}`);
+  const [currentNotification, setCurrentNotification] =
+    useState<IRealTimeNotification | null>(null);
 
-  const closeModal = () => setCurrentNotification(null)
+  const closeModal = () => setCurrentNotification(null);
 
   useEffect(() => {
     const showNextNotification = () => {
@@ -16,6 +19,7 @@ export const RealTimeNotification = () => {
       setNotifications((prev) => prev.slice(1));
     };
     if (currentNotification === null && notifications.length > 0) {
+      if (import.meta.env.MODE === 'development') return;
       showNextNotification();
     }
   }, [currentNotification, notifications, setNotifications]);
@@ -24,10 +28,13 @@ export const RealTimeNotification = () => {
       {currentNotification && (
         <Modal>
           <Modal.Window closeModal={closeModal}>
-            <RealTimeNotificationItem onClose={closeModal} notification={currentNotification} />
+            <RealTimeNotificationItem
+              onClose={closeModal}
+              notification={currentNotification}
+            />
           </Modal.Window>
         </Modal>
       )}
     </>
   );
-}
+};

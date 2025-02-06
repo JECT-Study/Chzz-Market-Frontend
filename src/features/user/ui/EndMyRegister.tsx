@@ -1,26 +1,42 @@
-import { CreatedAt, ParticipantCount, Price, ProductItem, ROUTES } from '@/shared';
+import {
+  CreatedAt,
+  ParticipantCount,
+  Price,
+  ProductItem,
+  ROUTES
+} from '@/shared';
 
 import type { IAuctionEndRegisteredItem } from '@/entities';
 import PriceIcon from '@/shared/assets/icons/price.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
-export const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem }) => {
+export const EndMyRegister = ({
+  product
+}: {
+  product: IAuctionEndRegisteredItem;
+}) => {
   const navigate = useNavigate();
   const winningBidAmount = product.winningBidAmount ?? 0;
   const formattedWinningBid = formatCurrencyWithWon(winningBidAmount);
 
   return (
-    <ProductItem product={product} onClick={() => navigate(ROUTES.AUCTION.getItemRoute(product.auctionId))}>
-      <Price title='시작가' price={product.minPrice} />
+    <ProductItem
+      product={product}
+      onClick={() => navigate(ROUTES.AUCTION.getItemRoute(product.auctionId))}
+    >
+      <Price title="시작가" price={product.minPrice} />
       <ParticipantCount count={product.participantCount} />
       <div
         aria-label="낙찰 금액"
         className="flex items-center text-xs web:text-body2 text-gray2"
       >
         <img src={PriceIcon} alt="참여자" />
-        <span className='whitespace-nowrap'>
-          낙찰 금액 <span className="text-xs text-black web:text-body2Bold">{formattedWinningBid}</span>
+        <span className="whitespace-nowrap">
+          낙찰 금액{' '}
+          <span className="text-xs text-black web:text-body2Bold">
+            {formattedWinningBid}
+          </span>
         </span>
       </div>
       <div
@@ -28,8 +44,11 @@ export const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem 
         className="flex items-center text-xs web:text-body2 text-gray2"
       >
         <img src={PriceIcon} alt="참여자" />
-        <span className='whitespace-nowrap'>
-          낙찰 여부 <span className="text-xs text-black web:text-body2Bold">{product.isWon ? '낙찰' : '유찰'}</span>
+        <span className="whitespace-nowrap">
+          낙찰 여부{' '}
+          <span className="text-xs text-black web:text-body2Bold">
+            {product.isWon ? '낙찰' : '유찰'}
+          </span>
         </span>
       </div>
       <div
@@ -37,8 +56,11 @@ export const EndMyRegister = ({ product }: { product: IAuctionEndRegisteredItem 
         className="flex items-center text-xs web:text-body2 text-gray2"
       >
         <img src={PriceIcon} alt="참여자" />
-        <span className='whitespace-nowrap'>
-          결제 여부 <span className="text-xs text-black web:text-body2Bold">{product.isOrdered ? '결제 완료' : '미결제'}</span>
+        <span className="whitespace-nowrap">
+          결제 여부{' '}
+          <span className="text-xs text-black web:text-body2Bold">
+            {product.isOrdered ? '결제 완료' : '미결제'}
+          </span>
         </span>
       </div>
       <CreatedAt createAt={product.createAt} />

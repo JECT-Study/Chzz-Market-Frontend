@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router';
 import { router } from './router';
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
 
       // HTML 루트에 CSS 변수 세팅
       document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
+    };
 
     setVh();
 
@@ -19,9 +19,8 @@ const App = () => {
 
     return () => {
       window.removeEventListener('resize', setVh);
-    }
-
-  }, [])
+    };
+  }, []);
 
   return <RouterProvider router={router} />;
 };

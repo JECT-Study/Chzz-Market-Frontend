@@ -1,20 +1,15 @@
-import {
-  act,
-  render,
-  screen,
-  waitFor
-} from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
 import { usePatchPreAuction } from '@/features/edit-auction';
 import { Register } from '@/pages/register';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import { usePostAuction } from '..';
 
-vi.mock('@/features/register/model')
-vi.mock('@/features/edit-auction/model')
+vi.mock('@/features/register/model');
+vi.mock('@/features/edit-auction/model');
 vi.mocked(usePostAuction).mockReturnValue({
   mutate: vi.fn(),
   isPending: false
@@ -31,7 +26,7 @@ describe('경매 등록.', () => {
     const enrollBtn = screen.getByRole('button', { name: '바로 등록하기' });
     const preButton = screen.getByRole('button', { name: '사전 등록하기' });
     const heading = screen.getByRole('heading', {
-      name: /경매 등록하기/,
+      name: /경매 등록하기/
     });
 
     return {
@@ -39,7 +34,7 @@ describe('경매 등록.', () => {
       heading,
       preButton,
       enrollBtn,
-      ...utils,
+      ...utils
     };
   };
 
@@ -56,7 +51,7 @@ describe('경매 등록.', () => {
     const { user } = setup();
 
     const selectTrigger = screen.getByRole('combobox', {
-      name: /카테고리/,
+      name: /카테고리/
     });
 
     // 카테고리 선택
@@ -123,7 +118,7 @@ describe('유효성 검사.', () => {
     return {
       user,
       enrollBtn,
-      ...utils,
+      ...utils
     };
   };
 
@@ -136,7 +131,9 @@ describe('유효성 검사.', () => {
 
       await user.click(enrollBtn);
 
-      const errorMessage = screen.getByText(/제목은 공백을 제외하고 2자 이상 입력/);
+      const errorMessage = screen.getByText(
+        /제목은 공백을 제외하고 2자 이상 입력/
+      );
       expect(errorMessage).toBeInTheDocument();
     });
 
@@ -205,7 +202,7 @@ describe('유효성 검사.', () => {
 
       await waitFor(() => {
         const errorMessage = screen.getByText(
-          /상품 설명은 최대 1000자 이하로 입력/,
+          /상품 설명은 최대 1000자 이하로 입력/
         );
         expect(errorMessage).toBeInTheDocument();
       });
@@ -220,7 +217,7 @@ describe('유효성 검사.', () => {
 
       await waitFor(() => {
         const errorMessage = screen.getByText(
-          /상품 설명은 줄바꿈을 10개 이하로 입력/,
+          /상품 설명은 줄바꿈을 10개 이하로 입력/
         );
         expect(errorMessage).toBeInTheDocument();
       });

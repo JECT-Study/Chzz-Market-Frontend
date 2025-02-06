@@ -1,7 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setIsNameValid, setIsNicknameCheckDisabled, setIsNicknameChecked, setIsSubmitEnabled, setNicknameError } from '../model/signupSlice';
 import { useCheckNickname } from '@/features/profile/model';
+import {
+  setIsNameValid,
+  setIsNicknameCheckDisabled,
+  setIsNicknameChecked,
+  setIsSubmitEnabled,
+  setNicknameError
+} from '../model/signupSlice';
 
 interface UseNicknameProps {
   nickname: string;
@@ -23,7 +29,11 @@ export const useSignupNicknameValidate = ({ nickname }: UseNicknameProps) => {
       dispatch(setIsSubmitEnabled(true));
       dispatch(setIsNameValid(true));
     } else {
-      dispatch(setNicknameError('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.'));
+      dispatch(
+        setNicknameError(
+          '이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.'
+        )
+      );
       dispatch(setIsNicknameChecked(false));
       dispatch(setIsSubmitEnabled(false));
       dispatch(setIsNameValid(false));
@@ -34,7 +44,7 @@ export const useSignupNicknameValidate = ({ nickname }: UseNicknameProps) => {
     const { data } = await checkNickname();
     if (data) {
       handleNicknameValidation(data.isAvailable);
-    } 
+    }
   };
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import type { IRegisterPost } from '..';
 import { postAuction } from '../api';
@@ -15,7 +15,7 @@ export const usePostAuction = (): {
     onSuccess: () => {
       toast.success('경매가 등록되었습니다.');
       navigate('/');
-    },
+    }
   });
 
   return { mutate, isPending };

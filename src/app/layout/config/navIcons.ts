@@ -14,24 +14,24 @@ export const NAV_ICONS: {
     path: '/',
     title: '치즈 마켓',
     on: HomeOn,
-    off: HomeOff,
+    off: HomeOff
   },
   notification: {
     path: '/notification',
     title: '알림',
     on: NotificationOn,
-    off: NotificationOff,
+    off: NotificationOff
   },
   heart: {
     path: '/heart',
     title: '내가 찜 한 사전 경매 목록',
     on: HeartOn,
-    off: HeartOff,
+    off: HeartOff
   },
   user: {
     path: '/user',
     title: '마이페이지',
     on: MyOn,
-    off: MyOff,
-  },
+    off: MyOff
+  }
 });

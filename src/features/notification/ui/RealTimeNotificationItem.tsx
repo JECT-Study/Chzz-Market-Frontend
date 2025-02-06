@@ -1,11 +1,11 @@
-import { Button } from "@/shared";
-import { useNavigate } from 'react-router-dom';
+import { Button } from '@/shared';
+import { useNavigate } from 'react-router';
 import { NOTIFICATION_CONTENTS, type IRealTimeNotification } from '../config';
 import { useReadNotification } from '../model';
 
 export const RealTimeNotificationItem = ({
   notification,
-  onClose,
+  onClose
 }: {
   notification: IRealTimeNotification;
   onClose: () => void;
@@ -46,6 +46,6 @@ export const RealTimeNotificationItem = ({
       >
         {buttonName}
       </Button>
-    </div >
+    </div>
   );
 };

@@ -1,39 +1,36 @@
 import './index.css';
 
-import App from './App';
-import { Provider } from 'react-redux';
-import { ReactQueryProvider } from './provider/index';
-import { Toaster } from 'sonner';
-import { createRoot } from 'react-dom/client';
-import { store } from './store';
 import { storeLogin } from '@/features/auth/model/authSlice';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { Toaster } from 'sonner';
+import App from './App';
+import { ReactQueryProvider } from './provider/index';
+import { store } from './store';
 
 async function setupMocks(): Promise<void> {
-  if (import.meta.env.MODE !== 'development') {
+  if (import.meta.env.MODE !== 'development' || import.meta.env.VITE_USE_MOCK !== 'true') {
     return;
   }
-
-  if (import.meta.env.VITE_USE_MOCK !== 'true') return;
 
   const { worker } = await import('../shared/api/msw/browser');
   await worker.start({
     onUnhandledRequest: (req) => {
       const url = new URL(req.url);
       if (url.pathname.endsWith('.svg')) {
-        return; // .svg 파일 요청을 무시
+        // .svg 파일 요청을 무시
       }
-    },
+    }
   });
 }
 
-
 (async () => {
   const token = localStorage.getItem('accessToken');
-  if (token) store.dispatch(storeLogin({ token }))
+  if (token) store.dispatch(storeLogin({ token }));
 
-  await setupMocks()
+  await setupMocks();
 
-  const root = createRoot(document.getElementById('root')!)
+  const root = createRoot(document.getElementById('root')!);
   root.render(
     <ReactQueryProvider>
       <Provider store={store}>
@@ -42,4 +39,4 @@ async function setupMocks(): Promise<void> {
       <Toaster richColors />
     </ReactQueryProvider>
   );
-})()
+})();

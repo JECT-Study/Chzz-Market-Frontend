@@ -1,5 +1,8 @@
-
-import { getAuctionEndRegister, getAuctionOngoingRegister, getAuctionPreAuctionRegister } from '@/features/user/api';
+import {
+  getAuctionEndRegister,
+  getAuctionOngoingRegister,
+  getAuctionPreAuctionRegister
+} from '@/features/user/api';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -10,7 +13,7 @@ export const useMyAuctionList = (activeTab: string): any => {
     isLoading: _ongoingLoading,
     error: _ongoingError,
     fetchNextPage: fetchNextOngoingPage,
-    hasNextPage: hasNextOngoingPage,
+    hasNextPage: hasNextOngoingPage
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.USER_AUCTION_REGISTERED],
     queryFn: () => getAuctionOngoingRegister({ pageNumber: 0, pageSize: 10 }),
@@ -21,7 +24,7 @@ export const useMyAuctionList = (activeTab: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'ongoing', // 활성화 상태 설정
+    enabled: activeTab === 'ongoing' // 활성화 상태 설정
   });
 
   const {
@@ -29,7 +32,7 @@ export const useMyAuctionList = (activeTab: string): any => {
     isLoading: _endLoading,
     error: _endError,
     fetchNextPage: fetchNextEndPage,
-    hasNextPage: hasNextEndPage,
+    hasNextPage: hasNextEndPage
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.USER_AUCTION_REGISTERED],
     queryFn: () => getAuctionEndRegister({ pageNumber: 0, pageSize: 10 }),
@@ -40,7 +43,7 @@ export const useMyAuctionList = (activeTab: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'end', // 활성화 상태 설정
+    enabled: activeTab === 'end' // 활성화 상태 설정
   });
 
   const {
@@ -48,10 +51,11 @@ export const useMyAuctionList = (activeTab: string): any => {
     isLoading: _enrollLoading,
     error: _enrollError,
     fetchNextPage: fetchNextEnrollPage,
-    hasNextPage: hasNextEnrollPage,
+    hasNextPage: hasNextEnrollPage
   } = useInfiniteQuery({
     queryKey: [QUERY_KEYS.USER_PRE_AUCTION_REGISTERED],
-    queryFn: () => getAuctionPreAuctionRegister({ pageNumber: 0, pageSize: 10 }),
+    queryFn: () =>
+      getAuctionPreAuctionRegister({ pageNumber: 0, pageSize: 10 }),
     getNextPageParam: (lastPage) => {
       if (lastPage.pageNumber + 1 >= lastPage.totalPages) {
         return undefined;
@@ -59,7 +63,7 @@ export const useMyAuctionList = (activeTab: string): any => {
       return lastPage.pageNumber + 1;
     },
     initialPageParam: 0,
-    enabled: activeTab === 'preAuction',
+    enabled: activeTab === 'preAuction'
   });
 
   return {
@@ -71,6 +75,6 @@ export const useMyAuctionList = (activeTab: string): any => {
     fetchNextEnrollPage,
     hasNextOngoingPage,
     hasNextEndPage,
-    hasNextEnrollPage,
+    hasNextEnrollPage
   };
 };

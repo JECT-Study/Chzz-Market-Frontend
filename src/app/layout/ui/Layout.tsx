@@ -1,7 +1,7 @@
 import { ReactNode, forwardRef } from 'react';
 
 import BackArrowIcon from '@/shared/assets/icons/back_arrow.svg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 interface HeaderProps {
   title?: string;
@@ -37,7 +37,6 @@ const Header = ({
               {option}
             </>
         }
-
       </div>
     </header>
   );

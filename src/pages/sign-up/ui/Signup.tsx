@@ -1,4 +1,3 @@
-import { setNicknameError } from '@/features/sign-up/model/signupSlice';
 import { Button, FormField } from '@/shared';
 import { KeyboardEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,31 +6,33 @@ import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
 import type { IUser } from '@/entities/user/user';
 import { useSignup } from '@/features/sign-up/hooks';
+import { useSignupNicknameValidate } from '@/features/sign-up/hooks/useSignupNicknameValidate';
+import { setNicknameError } from '@/features/sign-up/model/signupSlice';
 import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
-import { useNavigate } from 'react-router-dom';
-import { useSignupNicknameValidate } from '@/features/sign-up/hooks/useSignupNicknameValidate';
+import { useNavigate } from 'react-router';
 
 export const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
 
-  const { nicknameError, isNameValid, isNicknameChecked, isSubmitEnabled, isNicknameCheckDisabled } = useSelector((state: RootState) => state.signup);
-
   const {
-    control,
-    watch,
-    isPending,
-    handleSubmit,
-    signupMutation
-  } = useSignup();
+    nicknameError,
+    isNameValid,
+    isNicknameChecked,
+    isSubmitEnabled,
+    isNicknameCheckDisabled
+  } = useSelector((state: RootState) => state.signup);
+
+  const { control, watch, isPending, handleSubmit, signupMutation } =
+    useSignup();
   const formValues = watch();
   const nickname = formValues.nickname?.trim() || '';
   const { checkNicknameAvailability } = useSignupNicknameValidate({
-    nickname,
+    nickname
   });
 
   const onSubmit = (data: IUser) => {
@@ -60,8 +61,8 @@ export const Signup = () => {
           className="flex flex-col px-2 py-4 space-y-4"
         >
           <h2 className="pb-4 text-heading3">기본 정보 입력</h2>
-          <div className='flex items-end gap-[10px]'>
-            <div className='flex-1'>
+          <div className="flex items-end gap-[10px]">
+            <div className="flex-1">
               <FormField
                 label="닉네임 *"
                 name="nickname"
@@ -79,15 +80,25 @@ export const Signup = () => {
               />
             </div>
             <div>
-              <Button type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={checkNicknameAvailability} disabled={isNicknameCheckDisabled}>중복확인</Button>
+              <Button ariaLabel='중복 확인' type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={checkNicknameAvailability} disabled={isNicknameCheckDisabled}>중복확인</Button>
             </div>
           </div>
           {nicknameError && (
-            <div className={`flex items-center gap-2 ${isNameValid ? 'text-customBlue' : 'text-redNotice'}`}>
+            <div
+              className={`flex items-center gap-2 ${isNameValid ? 'text-customBlue' : 'text-redNotice'}`}
+            >
               {isNameValid ? (
-                <img src={NoticeBlue} alt="notice_red" className="mb-[2px] size-3" />
+                <img
+                  src={NoticeBlue}
+                  alt="notice_red"
+                  className="mb-[2px] size-3"
+                />
               ) : (
-                <img src={NoticeRed} alt="notice_red" className="mb-[2px] size-3" />
+                <img
+                  src={NoticeRed}
+                  alt="notice_red"
+                  className="mb-[2px] size-3"
+                />
               )}
               <span className="text-body2">{nicknameError}</span>
             </div>
@@ -113,7 +124,11 @@ export const Signup = () => {
           type="button"
           className="w-full h-[2.94rem] rounded-lg"
           color="cheeseYellow"
-          onClick={() => formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
+          onClick={() =>
+            formRef.current?.dispatchEvent(
+              new Event('submit', { cancelable: true, bubbles: true })
+            )
+          }
           disabled={!isSubmitEnabled || isPending}
           loading={isPending}
         >

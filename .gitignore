@@ -25,3 +25,10 @@ dist-ssr
 *.sln
 *.sw?
 *storybook.log
+
+node_modules/
+dist/
+build/
+*.log
+.prettierignore
+.eslintrc.cjs

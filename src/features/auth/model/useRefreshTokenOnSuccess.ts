@@ -1,8 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
-import { refreshToken } from "../api";
-import { storeLogin } from "./authSlice";
-import { useEffect } from "react";
+import { useMutation } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshToken } from '../api';
+import { storeLogin } from './authSlice';
 
 export const useRefreshTokenOnSuccess = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const useRefreshTokenOnSuccess = () => {
       if (newAccessToken) {
         dispatch(storeLogin({ token: newAccessToken }));
       }
-    },
+    }
   });
 
   useEffect(() => {

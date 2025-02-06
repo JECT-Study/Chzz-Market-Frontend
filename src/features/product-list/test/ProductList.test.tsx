@@ -1,10 +1,11 @@
-import { useProductList } from "@/features/product-list";
-import { ProductList } from "@/pages/product-list";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { MemoryRouter, useLocation } from "react-router-dom";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter, useLocation } from 'react-router';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+
+import { useProductList } from '@/features/product-list';
+import { ProductList } from '@/pages/product-list';
+import userEvent from '@testing-library/user-event';
 
 vi.mock('@/features/product-list', async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, any>;
@@ -18,15 +19,15 @@ vi.mock('@/features/product-list', async (importOriginal) => {
         <button onClick={() => setActiveTab('pre-auction')}>사전 경매</button>
       </div>
     ),
-    setActiveTabMock,
+    setActiveTabMock
   };
 });
 
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
+vi.mock('react-router', async () => {
+  const actual = await vi.importActual('react-router');
   return {
     ...actual,
-    useLocation: vi.fn(),
+    useLocation: vi.fn()
   };
 });
 
@@ -48,11 +49,11 @@ describe('ProductList', () => {
                 isSeller: true,
                 timeRemaining: 36000,
                 participantCount: 5,
-                isParticipated: true,
-              },
-            ],
-          },
-        ],
+                isParticipated: true
+              }
+            ]
+          }
+        ]
       },
       enrollData: {
         pages: [
@@ -66,20 +67,20 @@ describe('ProductList', () => {
                 isSeller: false,
                 timeRemaining: 36000,
                 participantCount: 10,
-                isParticipated: false,
-              },
-            ],
-          },
-        ],
+                isParticipated: false
+              }
+            ]
+          }
+        ]
       },
       fetchNextOngoingPage: vi.fn(),
       fetchNextEnrollPage: vi.fn(),
       hasNextOngoingPage: true,
-      hasNextEnrollPage: true,
+      hasNextEnrollPage: true
     });
 
     mockUseLocation.mockReturnValue({
-      state: { category: 'ELECTRONICS' },
+      state: { category: 'ELECTRONICS' }
     });
 
     render(
