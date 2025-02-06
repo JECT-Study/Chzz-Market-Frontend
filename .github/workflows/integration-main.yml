@@ -39,3 +39,5 @@ jobs:
           group: "E2E Tests"
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          VITE_USE_MOCK: "true"
+          VITE_USE_MOCK_FORCE: "true"
