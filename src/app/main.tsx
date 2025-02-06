@@ -9,13 +9,7 @@ import { ReactQueryProvider } from './provider/index';
 import { store } from './store';
 
 async function setupMocks(): Promise<void> {
-  const forceMock = import.meta.env.VITE_USE_MOCK_FORCE === 'true';
-
-  if (!forceMock && import.meta.env.MODE !== 'development') {
-    return;
-  }
-
-  if (!forceMock && import.meta.env.VITE_USE_MOCK !== 'true') {
+  if (import.meta.env.MODE !== 'development' || import.meta.env.VITE_USE_MOCK !== 'true') {
     return;
   }
 
