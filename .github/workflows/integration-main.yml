@@ -11,8 +11,9 @@ jobs:
     name: End-to-End Tests (Cypress)
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        instance: [1, 2, 3, 4, 5, 6, 7, 8]
+        container: [1, 2, 3, 4, 5, 6, 7, 8]
     steps:
       # 1. 코드 체크아웃
       - name: Checkout Repository
@@ -34,12 +35,11 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          build: npm run build
           start: npm run dev
           wait-on: "http://localhost:5173"
           record: true
           parallel: true
-          group: "E2E Tests"
+          group: "UI-Chrome"
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           VITE_API_URL: http://localhost:8080
