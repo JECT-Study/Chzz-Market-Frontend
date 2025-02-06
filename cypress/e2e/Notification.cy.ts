@@ -9,10 +9,9 @@ describe('알림', () => {
       .findAllByLabelText(/알림/)
       .filter('.bg-notificationBgColor')
       .first();
-    unreadNotification.click();
-    cy.wait(500);
-
-    unreadNotification.should('not.have.class', 'bg-notificationBgColor');
+    unreadNotification
+      .click()
+      .should('not.have.class', 'bg-notificationBgColor');
   });
 
   it('읽지 않은 알림이 있으면 네비게이션에 빨간 점으로 표시하고 다 읽으면 사라진다.', () => {
