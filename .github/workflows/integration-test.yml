@@ -66,3 +66,5 @@ jobs:
           group: "E2E Tests"
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          VITE_API_URL: http://localhost:8080
+          VITE_USE_MOCK: true
