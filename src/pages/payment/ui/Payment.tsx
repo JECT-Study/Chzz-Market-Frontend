@@ -1,4 +1,4 @@
-import { Button, FormField } from '@/shared';
+import { Button, FormField, ProgressiveImage } from '@/shared';
 import {
   Select,
   SelectContent,
@@ -119,11 +119,7 @@ export const Payment = () => {
             <h2 className="text-heading3 web:text-heading2">기본 정보 입력</h2>
             {/* 상품 정보 */}
             <div className="flex p-2 space-x-4">
-              <img
-                src={auctionData?.imageUrl}
-                alt="product"
-                className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]"
-              />
+              <ProgressiveImage lowResSrc={`${auctionData?.imageUrl}?h=20`} highResSrc={`${auctionData?.imageUrl}?h=228`} alt="product" className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]" priority='high' />
               <div>
                 <p className="text-heading3 web:text-heading2">
                   {auctionData?.auctionName}
@@ -176,7 +172,7 @@ export const Payment = () => {
           {/* 배송지 */}
           {auctionDataIsLoading ? (
             <div className="flex mb-4 rounded-md animate-pulse">
-              <div className="flex items-center w-6 h-6 bg-gray-200 rounded-full mr-2" />
+              <div className="flex items-center w-6 h-6 mr-2 bg-gray-200 rounded-full" />
               <div className="flex flex-col space-y-2">
                 <div className="w-32 h-4 bg-gray-200 rounded" />
                 <div className="w-48 h-4 bg-gray-200 rounded" />

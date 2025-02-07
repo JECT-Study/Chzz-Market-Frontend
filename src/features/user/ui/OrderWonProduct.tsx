@@ -1,4 +1,4 @@
-import { ParticipantCount, ROUTES } from '@/shared';
+import { ParticipantCount, ProgressiveImage, ROUTES } from '@/shared';
 
 import type { IUserAuctionWonItem } from '@/entities';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
@@ -34,11 +34,7 @@ export const OrderWonProduct = ({
       <div className="flex flex-col">
         <div className="w-full h-auto mb-4">
           <div className="relative">
-            <img
-              className="object-cover w-[10rem] h-[7.5rem] web:w-full web:h-[15rem] rounded-t"
-              src={product.imageUrl}
-              alt={product.auctionName || '제품 사진'}
-            />
+            <ProgressiveImage lowResSrc={`${product.imageUrl}?h=20`} highResSrc={`${product.imageUrl}?h=840`} alt={product.auctionName || '제품 사진'} className="object-cover w-[10rem] h-[7.5rem] web:w-full web:h-[15rem] rounded-t" priority='high' />
             {product.isOrdered ? (
               <div
                 aria-label="시간"
