@@ -30,7 +30,7 @@ export const ProgressiveImage = ({ lowResSrc, highResSrc, alt, priority, loading
           display: 'block'
         }}
         loading={loading}
-        fetchPriority={priority}
+        {...{ fetchpriority: priority }}
         {...props}
       />
       <img
@@ -44,7 +44,7 @@ export const ProgressiveImage = ({ lowResSrc, highResSrc, alt, priority, loading
           transition: 'opacity 0.7s ease-out'
         }}
         loading={loading}
-        fetchPriority={priority}
+        {...{ fetchpriority: priority }}
         {...props}
       />
     </div>
