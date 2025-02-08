@@ -1,4 +1,4 @@
-import { CarouselItem, CustomCarousel, Modal, getTimeAgo } from '@/shared';
+import { CarouselItem, CustomCarousel, Modal, ProgressiveImage, getTimeAgo } from '@/shared';
 import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
 import { useDeletePreAuction, useGetAuctionDetails } from '..';
 
@@ -47,7 +47,7 @@ export const PreAuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
             <CustomCarousel length={images.length} loop>
               {images.map((img, idx) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <img src={`${img.imageUrl}?h=840`} alt={`상품 사진_${img.imageId}`} className='object-contain h-[420px]' {...{ fetchpriority: idx === 0 ? 'high' : 'low' }} loading={idx === 0 ? 'eager' : 'lazy'} />
+                  <ProgressiveImage lowResSrc={`${img.imageUrl}?h=20`} highResSrc={`${img.imageUrl}?h=840`} alt={`상품 사진_${idx}`} className='object-contain h-[420px]' priority={idx === 0 ? 'high' : 'low'} loading={idx === 0 ? 'eager' : 'lazy'} />
                 </CarouselItem>
               ))}
             </CustomCarousel>
