@@ -1,2 +1,2 @@
-export { getAuctionSearch } from "./getAuctionSearch";
-export { getPreAuctionSearch } from "./getPreAuctionSearch";
+export { getAuctionSearch } from './getAuctionSearch';
+export { getPreAuctionSearch } from './getPreAuctionSearch';

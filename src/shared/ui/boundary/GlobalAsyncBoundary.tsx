@@ -10,12 +10,12 @@ import { Button } from '../Button';
 import { GlobalSpinner } from '../spinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
-  const { title, description } = getErrorByCode(error)
-  const navigate = useNavigate()
+  const { title, description } = getErrorByCode(error);
+  const navigate = useNavigate();
   const handleClick = () => {
-    if (error.code === '403') navigate('/')
-    resetErrorBoundary()
-  }
+    if (error.code === '403') navigate('/');
+    resetErrorBoundary();
+  };
 
   return (
     <div
@@ -36,8 +36,13 @@ const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
               </div>
             </div>
           </Layout.Main>
-          <Layout.Footer type='single'>
-            <Button type='button' color='cheeseYellow' className='w-full h-full' onClick={handleClick}>
+          <Layout.Footer type="single">
+            <Button
+              type="button"
+              color="cheeseYellow"
+              className="w-full h-full"
+              onClick={handleClick}
+            >
               {error.code === '403' ? '홈으로 가기' : '다시 시도하기'}
             </Button>
           </Layout.Footer>

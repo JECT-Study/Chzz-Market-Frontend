@@ -1,1 +1,1 @@
-export { AuctionSearch } from "./ui/AuctionSearch";
+export { AuctionSearch } from './ui/AuctionSearch';

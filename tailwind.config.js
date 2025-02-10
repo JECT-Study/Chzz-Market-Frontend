@@ -4,23 +4,23 @@ module.exports = {
   content: [
     './src/**/*.{ts,tsx}',
     './src/**/*.stories.@(ts|tsx)',
-    './src/**/*.mdx',
+    './src/**/*.mdx'
   ],
   prefix: '',
   theme: {
     fontFamily: {
-      sans: 'Pretendard, sans-serif',
+      sans: 'Pretendard, sans-serif'
     },
     container: {
       center: true,
       padding: '2rem',
       screens: {
-        '2xl': '1400px',
-      },
+        '2xl': '1400px'
+      }
     },
     extend: {
       width: {
-        web: '46.875rem',
+        web: '46.875rem'
       },
       minWidth: {
         mobile: '21.875rem'
@@ -29,85 +29,85 @@ module.exports = {
         error: '#f5f5f5'
       },
       screens: {
-        mobile: '375px', 
-        web: '750px', 
-        image:'530px'
+        mobile: '375px',
+        web: '750px',
+        image: '530px'
       },
       boxShadow: {
         top: '0 0 8px rgba(0, 0, 0, 0.08)',
-        bottom: '0 0 8px rgba(0, 0, 0, 0.08)',
+        bottom: '0 0 8px rgba(0, 0, 0, 0.08)'
       },
       fontSize: {
         heading1: [
           '1.5rem',
           {
             lineHeight: '1.3',
-            fontWeight: '700',
-          },
+            fontWeight: '700'
+          }
         ],
         heading2: [
           '1.25rem',
           {
             lineHeight: '1.3',
-            fontWeight: '700',
-          },
+            fontWeight: '700'
+          }
         ],
         heading3: [
           '1.125rem',
           {
             lineHeight: '1.4',
-            fontWeight: '600',
-          },
+            fontWeight: '600'
+          }
         ],
         body1: [
           '1rem',
           {
             lineHeight: '1.6',
-            fontWeight: '500',
-          },
+            fontWeight: '500'
+          }
         ],
         body2: [
           '.875rem',
           {
             lineHeight: '1.6',
-            fontWeight: '500',
-          },
+            fontWeight: '500'
+          }
         ],
         body1Bold: [
           '1rem',
           {
             lineHeight: '1.6',
-            fontWeight: '700',
-          },
+            fontWeight: '700'
+          }
         ],
         body2Bold: [
           '.875rem',
           {
             lineHeight: '1.6',
-            fontWeight: '700',
-          },
+            fontWeight: '700'
+          }
         ],
         button: [
           '1rem',
           {
             lineHeight: '1.4',
-            fontWeight: '600',
-          },
+            fontWeight: '600'
+          }
         ],
         smallBtn: [
           '.875rem',
           {
             lineHeight: '1.4',
-            fontWeight: '600',
-          },
+            fontWeight: '600'
+          }
         ],
         caption: [
           '.75rem',
           {
             lineHeight: '1.4',
-            fontWeight: '500',
-          },
-        ],
+            fontWeight: '500'
+          }
+        ]
       },
       colors: {
         mainCheeseYellow: '#FFC558',
@@ -131,53 +131,53 @@ module.exports = {
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          foreground: 'hsl(var(--primary-foreground))'
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          foreground: 'hsl(var(--secondary-foreground))'
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          foreground: 'hsl(var(--destructive-foreground))'
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          foreground: 'hsl(var(--muted-foreground))'
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+          foreground: 'hsl(var(--accent-foreground))'
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          foreground: 'hsl(var(--popover-foreground))'
         },
         card: {
           DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
+          foreground: 'hsl(var(--card-foreground))'
+        }
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        sm: 'calc(var(--radius) - 4px)'
       },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 'var(--radix-accordion-content-height)' }
         },
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
+          to: { height: '0' }
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-      },
-    },
+        'accordion-up': 'accordion-up 0.2s ease-out'
+      }
+    }
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate')]
 };

@@ -92,17 +92,17 @@ export const AuctionSearch = () => {
             <div className="grid grid-cols-2 gap-6 p-2 overflow-y-auto web:p-4">
               {ongoingFlag
                 ? items?.map((product: IAuctionSearchItem) => (
-                  <AuctionSearchItem
-                    key={product.auctionId}
-                    product={product}
-                  />
-                ))
+                    <AuctionSearchItem
+                      key={product.auctionId}
+                      product={product}
+                    />
+                  ))
                 : preItems?.map((product: IPreAuctionItem) => (
-                  <PreAuctionSearchItem
-                    key={product.auctionId}
-                    product={product}
-                  />
-                ))}
+                    <PreAuctionSearchItem
+                      key={product.auctionId}
+                      product={product}
+                    />
+                  ))}
             </div>
           )}
         </CommandList>

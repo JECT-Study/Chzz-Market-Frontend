@@ -1,7 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
-import { notificationData, useDeleteNotification, useGetNotificationList, useGetNotificationListWithSuspense, useReadNotification } from '..';
+import {
+  notificationData,
+  useDeleteNotification,
+  useGetNotificationList,
+  useGetNotificationListWithSuspense,
+  useReadNotification
+} from '..';
 
 import { LayoutWithNav } from '@/app/layout';
 import { Notification } from '@/pages/notification';
@@ -97,7 +103,7 @@ describe('알림 테스트', () => {
     expect(unreadNotifications).toBe(1);
 
     await user.click(notifications[2]);
-    expect(mutateReadMock).toHaveBeenCalledWith(2)
+    expect(mutateReadMock).toHaveBeenCalledWith(2);
   });
 
   test('알림 클릭하면 알림 세부 정보를 볼 수 있는 페이지로 이동한다.', async () => {

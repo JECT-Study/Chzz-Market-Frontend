@@ -11,10 +11,13 @@ function excludeTestImages(): PluginOption {
     name: 'exclude-test-images',
     enforce: 'pre',
     load(id: string) {
-      if (process.env.NODE_ENV === 'production' && id.includes('src/shared/assets/test')) {
+      if (
+        process.env.NODE_ENV === 'production' &&
+        id.includes('src/shared/assets/test')
+      ) {
         return 'export default ""';
       }
-    },
+    }
   };
 }
 
@@ -22,7 +25,7 @@ const removeMSW = () => ({
   name: 'remove-msw',
   closeBundle: async () => {
     await rimraf(path.join(__dirname, 'dist', 'mockServiceWorker.js'));
-  },
+  }
 });
 
 export default defineConfig({
@@ -40,12 +43,12 @@ export default defineConfig({
       '@/utils': resolve(__dirname, 'src/utils'),
       '@/models': resolve(__dirname, 'src/models'),
       '@/store': resolve(__dirname, 'src/store'),
-      '@/stories': resolve(__dirname, 'src/stories'),
-    },
+      '@/stories': resolve(__dirname, 'src/stories')
+    }
   },
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/shared/api/msw/setupTests.ts',
-  },
+    setupFiles: './src/shared/api/msw/setupTests.ts'
+  }
 });

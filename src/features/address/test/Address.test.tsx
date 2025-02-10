@@ -240,7 +240,9 @@ describe('주소 목록 페이지 테스트', () => {
 
     await user.click(editButton);
 
-    expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/1/payment/address-list');
+    expect(mockedUseNavigate).toHaveBeenCalledWith(
+      '/auctions/1/payment/address-list'
+    );
   });
 
   test('배송지 추가 input 클릭 시 Daum 주소 검색 창 열리고 배송지 추가 페이지로 이동', async () => {
@@ -265,7 +267,9 @@ describe('주소 목록 페이지 테스트', () => {
       zonecode: '03001'
     });
 
-    expect(mockedUseNavigate).toHaveBeenCalledWith('/auctions/1/payment/address-list');
+    expect(mockedUseNavigate).toHaveBeenCalledWith(
+      '/auctions/1/payment/address-list'
+    );
   });
 
   test('주소가 있을 때 리스트에 렌더링', async () => {
