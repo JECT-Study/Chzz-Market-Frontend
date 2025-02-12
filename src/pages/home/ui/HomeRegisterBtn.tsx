@@ -1,9 +1,12 @@
 import { ROUTES } from '@/shared';
+import { RefObject } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router';
+import { useScrollDetection } from '../lib';
 
-export const HomeRegisterBtn = ({ isScrolled }: { isScrolled: boolean }) => {
+export const HomeRegisterBtn = ({ containRef }: { containRef: RefObject<HTMLDivElement> }) => {
   const navigate = useNavigate();
+  const { isScrolled } = useScrollDetection(0, containRef);
 
   return (
     <div className="sticky bottom-0 right-0 z-50 flex justify-end w-full cursor-pointer">
