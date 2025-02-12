@@ -1,4 +1,4 @@
-import { getTimeAgo } from '@/shared';
+import { ProgressiveImage, getTimeAgo } from '@/shared';
 import DefaultImage from '@/shared/assets/icons/default_image.svg';
 import XButtonIcon from '@/shared/assets/icons/x_button.svg';
 import { MouseEvent } from 'react';
@@ -55,11 +55,7 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
           </div>
         </figcaption>
         <div className="flex items-start gap-3">
-          <img
-            className="object-contain rounded size-24"
-            src={imageUrl ?? DefaultImage}
-            alt={`이미지_${notificationId}`}
-          />
+          <ProgressiveImage lowResSrc={`${imageUrl ?? DefaultImage}?h=20`} highResSrc={`${imageUrl ?? DefaultImage}?h=228`} alt={`이미지_${notificationId}`} className="object-contain rounded size-24" priority='high' />
           <button aria-label={`버튼_${notificationId}`} onClick={handleDelete}>
             <img
               className="inline rounded size-4"

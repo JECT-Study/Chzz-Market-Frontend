@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
-export const useScrollDetection = (position: number) => {
+export const useScrollDetection = (
+  position: number,
+  elementRef: RefObject<HTMLDivElement>
+) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const element = elementRef.current;

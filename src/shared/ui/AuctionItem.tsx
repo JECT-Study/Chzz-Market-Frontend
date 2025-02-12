@@ -1,4 +1,4 @@
-import { LikeCount, ParticipantCount, Price, TimeLabel } from '@/shared/ui';
+import { LikeCount, ParticipantCount, Price, ProgressiveImage, TimeLabel } from '@/shared/ui';
 
 import { ReactNode } from 'react';
 
@@ -32,13 +32,7 @@ interface ImageProps {
 const Image = ({ src, time = undefined, loading, priority }: ImageProps) => {
   return (
     <div className="relative w-full min-h-[7.5rem] max-h-[9rem] h-full">
-      <img
-        src={`${src}?h=288`}
-        alt="이미지"
-        className="object-contain w-full h-full rounded"
-        loading={loading}
-        {...{ fetchpriority: priority }}
-      />
+      <ProgressiveImage lowResSrc={`${src}?h=20`} highResSrc={`${src}?h=228`} alt="이미지" className="object-contain w-full h-full rounded" priority={priority} loading={loading} />
       {time !== undefined && <TimeLabel time={time} />}
     </div>
   );

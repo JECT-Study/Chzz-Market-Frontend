@@ -26,3 +26,4 @@ export * from './select';
 export { Toaster } from './sonner';
 export { ButtonSpinner, GlobalSpinner, LocalSpinner } from './spinner';
 export { Textarea } from './textarea';
+export { ProgressiveImage } from './ProgressiveImage';
