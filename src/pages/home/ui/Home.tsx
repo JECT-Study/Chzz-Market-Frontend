@@ -1,4 +1,4 @@
-import { useScrollDetection } from '../lib';
+import { useRef } from 'react';
 import BestItemList from './BestItemList';
 import CategoryList from './CategoryList';
 import HomeItemField from './HomeItemField';
@@ -7,11 +7,11 @@ import ImminentItemList from './ImminentItemList';
 import PreAuctionItemList from './PreAuctionItemList';
 
 export const Home = () => {
-  const { isScrolled, elementRef } = useScrollDetection(0);
+  const containRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
-      ref={elementRef}
+      ref={containRef}
       role="main"
       aria-label="main_area"
       className="relative flex flex-col justify-between w-full h-full gap-6 overflow-y-scroll"
@@ -28,7 +28,7 @@ export const Home = () => {
           <PreAuctionItemList />
         </HomeItemField>
       </div>
-      <HomeRegisterBtn isScrolled={isScrolled} />
+      <HomeRegisterBtn containRef={containRef} />
     </div>
   );
 };
