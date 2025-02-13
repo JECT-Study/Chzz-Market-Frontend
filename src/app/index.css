@@ -11,6 +11,54 @@
   }
 }
 
+/* Pretendard-Regular (400) */
+@font-face {
+  font-family: 'Pretendard';
+  src:local('Pretendard Regular'),
+      local('Pretendard-Regular'),
+      url('../shared/assets/fonts/Pretendard-Regular.woff2') format('woff2'),
+      url('../shared/assets/fonts/Pretendard-Regular.woff') format('woff');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Pretendard-Medium (500) */
+@font-face {
+  font-family: 'Pretendard';
+  src:local('Pretendard Medium'),
+      local('Pretendard-Medium'),
+      url('../shared/assets/fonts/Pretendard-Medium.woff2') format('woff2'),
+      url('../shared/assets/fonts/Pretendard-Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Pretendard-Semibold (600) */
+@font-face {
+  font-family: 'Pretendard';
+  src:local('Pretendard Semibold'),
+      local('Pretendard-Semibold'),
+      url('../shared/assets/fonts/Pretendard-Semibold.woff2') format('woff2'),
+      url('../shared/assets/fonts/Pretendard-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Pretendard-Bold (700) */
+@font-face {
+  font-family: 'Pretendard';
+  src:local('Pretendard Bold'),
+      local('Pretendard-Bold'),
+      url('../shared/assets/fonts/Pretendard-Bold.woff2') format('woff2'),
+      url('../shared/assets/fonts/Pretendard-Bold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
 /* input spin button 제거 */
 input[type='number'] {
   -moz-appearance: textfield;
