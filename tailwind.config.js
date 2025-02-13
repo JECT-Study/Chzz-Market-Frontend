@@ -6,10 +6,9 @@ module.exports = {
     './src/**/*.stories.@(ts|tsx)',
     './src/**/*.mdx',
   ],
-  prefix: '',
   theme: {
     fontFamily: {
-      sans: 'Pretendard, sans-serif',
+      sans: ['Pretendard', 'sans-serif'],
     },
     container: {
       center: true,
