@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { refreshToken } from '../api';
+import { useDispatch } from 'react-redux';
+import { refreshToken } from '..';
 import { storeLogin } from './authSlice';
 
 export const useRefreshTokenOnSuccess = () => {

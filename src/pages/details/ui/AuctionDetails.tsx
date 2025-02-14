@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 
 import { AuctionDetailsMain } from '@/features/details';
 import { AsyncBoundary } from '@/shared';
@@ -13,8 +13,4 @@ export const AuctionDetails = () => {
   );
 };
 
-export const loader: LoaderFunction<number> = async ({ params }) => {
-  const { auctionId } = params;
 
-  return auctionId;
-};

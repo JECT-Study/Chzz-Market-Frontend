@@ -27,8 +27,8 @@ const ImminentItemList = () => {
               <AuctionItem.Image
                 src={el.imageUrl}
                 time={el.timeRemaining}
-                loading={idx > 2 ? 'lazy' : 'eager'}
-                priority={idx === 0 ? 'high' : 'low'}
+                loading={idx < 3 ? 'eager' : 'lazy'}
+                priority={idx < 3 ? 'high' : 'low'}
               />
               <AuctionItem.Main
                 kind="imminent"
