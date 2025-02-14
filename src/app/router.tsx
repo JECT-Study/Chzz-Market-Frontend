@@ -2,7 +2,6 @@ import { GlobalLayout, LayoutWithNav } from "@/app/layout";
 import { AsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorFallback, RouteLoader } from '@/shared';
 
 import { Home } from "@/pages/home";
-import { Notification } from "@/pages/notification";
 import { lazy } from "react";
 import { createBrowserRouter } from 'react-router';
 
@@ -11,6 +10,7 @@ const PreAuctionDetails = lazy(() => import('@/pages/details').then(module => ({
 const Register = lazy(() => import('@/pages/register').then((module) => ({ default: module.Register })))
 const Test = lazy(() => import('@/pages/Test').then((module) => ({ default: module.Test })))
 const Heart = lazy(() => import('@/pages/heart').then((module) => ({ default: module.Heart })))
+const Notification = lazy(() => import('@/pages/notification').then((module) => ({ default: module.Notification })))
 const User = lazy(() => import('@/pages/user').then(module => ({ default: module.User })));
 const UserRegisteredList = lazy(() => import('@/pages/user').then(module => ({ default: module.UserRegisteredList })));
 const UserPreRegisteredList = lazy(() => import('@/pages/user').then(module => ({ default: module.UserPreRegisteredList })));
