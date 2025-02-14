@@ -1,1 +1,1 @@
-export { EditAuction, loader as editAuctionLoader } from './EditAuction';
+export { EditAuction } from './EditAuction';

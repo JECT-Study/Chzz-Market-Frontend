@@ -7,3 +7,4 @@ export { getTimeAgo } from './getTimeAgo';
 export { getTimeColor } from './getTimeColor';
 export { getToken, removeToken, setToken } from './token';
 export { truncateText } from './truncateText';
+export { RouteLoader } from './RouteLoader';
