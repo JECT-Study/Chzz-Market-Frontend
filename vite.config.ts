@@ -34,21 +34,18 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('dnd')) {
+            if (id.includes('react') || id.includes('react-dom')) {
               return 'react-vendor';
-            }
-            if (id.includes('axios')) {
-              return 'axios-vendor';
             }
             if (id.includes('tough-cookie')) {
               return 'tough-cookie-vendor';
             }
-            if (id.includes('zod')) {
-              return 'zod-vendor';
+            if (id.includes('axios')) {
+              return 'axios-vendor';
             }
           }
-          if (id.includes('/src/pages/home')) {
-            return 'initial';
+          if (id.includes('/src/shared/ui/')) {
+            return 'shared-ui';
           }
         },
         assetFileNames: (assetInfo) => {
