@@ -33,9 +33,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // node_modules 내의 react 및 react-dom 모듈을 'react-vendor' 청크로 묶음
           if (id.includes('node_modules')) {
-            if (id.includes('react-dom') || id.includes('react')) {
+            if (id.includes('react') || id.includes('dnd')) {
               return 'react-vendor';
             }
             if (id.includes('axios')) {
@@ -44,11 +43,8 @@ export default defineConfig({
             if (id.includes('tough-cookie')) {
               return 'tough-cookie-vendor';
             }
-            if (id.includes('msw')) {
-              return 'msw-vendor';
-            }
-            if (id.includes('zod') || id.includes('dnd')) {
-              return 'register-vendor';
+            if (id.includes('zod')) {
+              return 'zod-vendor';
             }
           }
           if (id.includes('/src/pages/home')) {
