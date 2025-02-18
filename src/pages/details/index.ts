@@ -1,6 +1,1 @@
-export {
-  AuctionDetails,
-  PreAuctionDetails,
-  auctionDetailsLoader,
-  preAuctionDetailsLoader
-} from './ui/index';
+export { AuctionDetails, PreAuctionDetails } from './ui';

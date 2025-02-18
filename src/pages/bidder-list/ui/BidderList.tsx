@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 
 import { AsyncBoundary } from '@/shared';
 import { BidderListMain } from './BidderListMain';
@@ -11,10 +11,4 @@ export const BidderList = () => {
       <BidderListMain auctionId={auctionId} />
     </AsyncBoundary>
   );
-};
-
-export const loader: LoaderFunction<number> = async ({ params }) => {
-  const { auctionId } = params;
-
-  return auctionId;
 };

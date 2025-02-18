@@ -1,5 +1,6 @@
+export * from './api';
 export {
   kakaoLoginHandler,
-  postSignupHandler,
-  naverLoginHandler
+  naverLoginHandler,
+  postSignupHandler
 } from './test';

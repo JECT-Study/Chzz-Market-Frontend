@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 
 import { BidForm } from '@/features/bid';
 import { AsyncBoundary } from '@/shared';
@@ -11,10 +11,4 @@ export const Bid = () => {
       <BidForm auctionId={auctionId} />
     </AsyncBoundary>
   );
-};
-
-export const loader: LoaderFunction<number> = async ({ params }) => {
-  const { auctionId } = params;
-
-  return auctionId;
 };

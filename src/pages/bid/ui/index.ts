@@ -1,1 +1,1 @@
-export { Bid, loader as bidLoader } from './Bid';
+export { Bid } from './Bid';

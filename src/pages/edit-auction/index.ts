@@ -1,1 +1,1 @@
-export { EditAuction, editAuctionLoader } from './ui';
+export { EditAuction } from './ui';
