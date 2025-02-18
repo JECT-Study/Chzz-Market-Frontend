@@ -159,7 +159,8 @@ describe('경매 상세 조회 테스트', () => {
     test('구매자이면서 참여한 사람은 참여 취소 버튼과 금액 수정 및 남은 횟수 버튼이 존재하며, 금액 수정 버튼 클릭하면 입찰 페이지로 이동한다.', async () => {
       const { user } = setup(3);
 
-      const { remainingBidCount, auctionId } = auctionDetailsData[3] as IAuctionDetails
+      const { remainingBidCount, auctionId } =
+        auctionDetailsData[3] as IAuctionDetails;
       const cancelBtn = screen.getByRole('button', { name: '참여 취소 확인' });
       const editBtn = screen.getByRole('button', { name: '금액 수정' });
       const remainCount = screen.getByText(

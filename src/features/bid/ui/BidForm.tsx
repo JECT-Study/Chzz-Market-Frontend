@@ -120,9 +120,9 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
       </Layout.Main>
       <Layout.Footer type={isParticipated ? 'double' : 'single'}>
         <Button
-          type='button'
-          color='cheeseYellow'
-          className='w-full h-full transition-colors rounded text-button active:bg-black'
+          type="button"
+          color="cheeseYellow"
+          className="w-full h-full transition-colors rounded text-button active:bg-black"
           ariaLabel={maxFlag ? '제안하기' : '수정하기'}
           onClick={handleSubmit(onPostSubmit)}
           disabled={zeroFlag || !check || isPending}

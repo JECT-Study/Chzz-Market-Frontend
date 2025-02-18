@@ -1,1 +1,8 @@
-export { Payment, PaymentAddressAdd, PaymentAddressEdit, PaymentAddressEditList, PaymentAddressList, PaymentSuccess } from './ui/index';
+export {
+  Payment,
+  PaymentAddressAdd,
+  PaymentAddressEdit,
+  PaymentAddressEditList,
+  PaymentAddressList,
+  PaymentSuccess
+} from './ui/index';

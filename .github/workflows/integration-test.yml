@@ -2,13 +2,13 @@
 name: Dev Integration Testing
 
 on:
-  push: 
-    branches: 
+  push:
+    branches:
       - dev
   pull_request:
     branches:
       - dev
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   integration-tests:

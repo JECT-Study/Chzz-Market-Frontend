@@ -8,7 +8,14 @@ interface ProgressiveImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   priority?: 'high' | 'low';
 }
 
-export const ProgressiveImage = ({ lowResSrc, highResSrc, alt, priority, loading, ...props }: ProgressiveImageProps) => {
+export const ProgressiveImage = ({
+  lowResSrc,
+  highResSrc,
+  alt,
+  priority,
+  loading,
+  ...props
+}: ProgressiveImageProps) => {
   const [highResLoaded, setHighResLoaded] = useState(false);
 
   useEffect(() => {
@@ -17,11 +24,10 @@ export const ProgressiveImage = ({ lowResSrc, highResSrc, alt, priority, loading
     img.onload = () => {
       setHighResLoaded(true);
     };
-
   }, [highResSrc]);
 
   return (
-    <div className='relative h-full overflow-hidden'>
+    <div className="relative h-full overflow-hidden">
       <img
         src={lowResSrc}
         style={{
@@ -48,6 +54,5 @@ export const ProgressiveImage = ({ lowResSrc, highResSrc, alt, priority, loading
         {...props}
       />
     </div>
-
   );
 };

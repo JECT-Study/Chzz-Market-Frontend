@@ -1,9 +1,49 @@
-import { GlobalLayout, LayoutWithNav } from "@/app/layout";
-import { AsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorFallback, RouteLoader } from '@/shared';
-
-import { Home } from "@/pages/home";
 import { lazy } from "react";
 import { createBrowserRouter } from 'react-router';
+import { GlobalLayout, LayoutWithNav } from '@/app/layout';
+import { Bid, bidLoader } from '@/pages/bid';
+import { BidderList, bidderListLoader } from '@/pages/bidder-list';
+import {
+  AuctionDetails,
+  PreAuctionDetails,
+  auctionDetailsLoader,
+  preAuctionDetailsLoader
+} from '@/pages/details';
+import { EditAuction, editAuctionLoader } from '@/pages/edit-auction';
+import {
+  Payment,
+  PaymentAddressAdd,
+  PaymentAddressEdit,
+  PaymentAddressEditList,
+  PaymentAddressList,
+  PaymentSuccess
+} from '@/pages/payment';
+import {
+  User,
+  UserParticipatedList,
+  UserPreRegisteredList,
+  UserProfileEdit,
+  UserRegisteredList
+} from '@/pages/user';
+import {
+  AsyncBoundary,
+  GlobalAsyncBoundary,
+  PrivateRoute,
+  PublicRoute,
+  ROUTES,
+  RouteErrorFallback,
+  RouteLoader
+} from '@/shared';
+
+import { Test } from '@/pages/Test';
+import { Heart } from '@/pages/heart';
+import { Home } from '@/pages/home';
+import { Login } from '@/pages/login';
+import { Notification } from '@/pages/notification';
+import { ProductList } from '@/pages/product-list';
+import { Register } from '@/pages/register';
+import { AuctionSearch } from '@/pages/search';
+import { Signup } from '@/pages/sign-up';
 
 const AuctionDetails = lazy(() => import('@/pages/details').then(module => ({ default: module.AuctionDetails })));
 const PreAuctionDetails = lazy(() => import('@/pages/details').then(module => ({ default: module.PreAuctionDetails })));
@@ -84,7 +124,7 @@ const privateRouteList = [
   {
     path: ROUTES.PRE_AUCTION.EDIT,
     element: (
-      <AsyncBoundary header='사전 경매 수정하기'>
+      <AsyncBoundary header="사전 경매 수정하기">
         <EditAuction />
       </AsyncBoundary>
     ),
@@ -141,7 +181,7 @@ export const router = createBrowserRouter([
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
           element: (
-            <AsyncBoundary >
+            <AsyncBoundary>
               {path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}
             </AsyncBoundary>
           )
@@ -187,6 +227,6 @@ export const router = createBrowserRouter([
       }
     ]
   }
-])
+]);
 
 export default router;

@@ -1,1 +1,1 @@
-export { useProfileImageUploader } from "./useProfileImageUploader";
+export { useProfileImageUploader } from './useProfileImageUploader';
