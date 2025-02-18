@@ -1,19 +1,13 @@
 import { IAuctionSearchItem, IPreAuctionItem } from '@/entities';
-import {
-  Command,
-  CommandEmpty,
-  CommandInput,
-  CommandList,
-  GlobalSpinner
-} from '@/shared';
+import { Command, CommandInput, CommandList, GlobalSpinner } from '@/shared';
 import { useEffect, useState } from 'react';
 
 import { Layout } from '@/app/layout';
 import { getAuctionSearch } from '@/features/auction-search/api';
 import { getPreAuctionSearch } from '@/features/auction-search/api/getPreAuctionSearch';
 import { ProductListTabs } from '@/features/product-list';
-import EmptyIcon from '@/shared/assets/icons/empty.svg';
 import { useSearchParams } from 'react-router';
+import SearchEmptyMessage from '@/features/auction-search/ui/SearchEmptyMessage';
 import { AuctionSearchItem } from './AuctionSearchItem';
 import { PreAuctionSearchItem } from './PreAuctionSearchItem';
 
@@ -82,15 +76,7 @@ export const AuctionSearch = () => {
             <>
               {/* 전체 검색 결과가 없는 경우 */}
               {items.length === 0 && preItems.length === 0 && (
-                <div
-                  style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
-                  className="flex flex-col items-center justify-center w-full h-full gap-2 rounded"
-                >
-                  <img src={EmptyIcon} alt="emptyIcon" className="size-10" />
-                  <CommandEmpty className="md:text-heading3 text-body1 text-gray2">
-                    검색 결과가 없습니다.
-                  </CommandEmpty>
-                </div>
+                <SearchEmptyMessage />
               )}
 
               {/* 정식 경매 검색 결과가 있는 경우 */}
@@ -119,28 +105,12 @@ export const AuctionSearch = () => {
 
               {/* 정식 경매만 없고, 사전 경매는 있을 때 */}
               {ongoingFlag && items.length === 0 && preItems.length > 0 && (
-                <div
-                  style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
-                  className="flex flex-col items-center justify-center w-full h-full gap-2"
-                >
-                  <img src={EmptyIcon} alt="emptyIcon" className="size-10" />
-                  <CommandEmpty className="md:text-heading3 text-body1 text-gray2">
-                    정식 경매에는 검색된 상품이 없습니다.
-                  </CommandEmpty>
-                </div>
+                <SearchEmptyMessage />
               )}
 
               {/* 사전 경매만 없고, 정식 경매는 있을 때 */}
               {!ongoingFlag && preItems.length === 0 && items.length > 0 && (
-                <div
-                  style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
-                  className="flex flex-col items-center justify-center w-full h-full gap-2"
-                >
-                  <img src={EmptyIcon} alt="emptyIcon" className="size-10" />
-                  <CommandEmpty className="md:text-heading3 text-body1 text-gray2">
-                    사전 경매에는 검색된 상품이 없습니다.
-                  </CommandEmpty>
-                </div>
+                <SearchEmptyMessage />
               )}
             </>
           )}
