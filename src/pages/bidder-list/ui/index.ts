@@ -1,1 +1,1 @@
-export { BidderList, loader as bidderListLoader } from './BidderList';
+export { BidderList } from './BidderList';

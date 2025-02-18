@@ -1,2 +1,2 @@
 export { bidderListHandler } from './test';
-export { BidderList, bidderListLoader } from './ui';
+export { BidderList } from './ui';

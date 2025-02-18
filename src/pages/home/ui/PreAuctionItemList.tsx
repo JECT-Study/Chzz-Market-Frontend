@@ -27,8 +27,8 @@ const PreAuctionItemList = () => {
             <AuctionItem label="preAuction" axis="column">
               <AuctionItem.Image
                 src={el.imageUrl}
-                loading={idx > 2 ? 'lazy' : 'eager'}
-                priority={idx === 0 ? 'high' : 'low'}
+                loading={idx < 3 ? 'eager' : 'lazy'}
+                priority={idx < 3 ? 'high' : 'low'}
               />
               <AuctionItem.Main
                 kind="preAuction"

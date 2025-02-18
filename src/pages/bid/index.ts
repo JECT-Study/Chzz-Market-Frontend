@@ -1,1 +1,1 @@
-export { Bid, bidLoader } from './ui/index';
+export { Bid } from './ui';

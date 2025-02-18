@@ -29,6 +29,36 @@ const removeMSW = () => ({
 });
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('tough-cookie')) {
+              return 'tough-cookie-vendor';
+            }
+            if (id.includes('axios')) {
+              return 'axios-vendor';
+            }
+          }
+          if (id.includes('/src/shared/ui/')) {
+            return 'shared-ui';
+          }
+        },
+        assetFileNames: (assetInfo) => {
+          // 폰트 파일 확장자에 해당하면 'fonts' 폴더로 출력
+          if (/\.(woff2?|ttf|otf)$/.test(assetInfo.name || '')) {
+            return 'assets/fonts/[name]-[hash][extname]';
+          }
+          // 나머지 파일은 기본 assets 폴더에 출력
+          return 'assets/[name]-[hash][extname]';
+        }
+      }
+    }
+  },
   plugins: [react(), removeMSW(), excludeTestImages()],
   resolve: {
     alias: {
