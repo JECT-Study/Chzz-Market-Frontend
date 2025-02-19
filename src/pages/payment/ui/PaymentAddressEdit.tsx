@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormField, useToggleState } from '@/shared';
+import { Button, Checkbox, formatPhoneNumber, FormField, useToggleState } from '@/shared';
 import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
@@ -34,6 +34,7 @@ export const PaymentAddressEdit = () => {
 
   const {
     control,
+    watch,
     formState: { errors, isValid },
     setValue,
     handleSubmit,
@@ -48,6 +49,8 @@ export const PaymentAddressEdit = () => {
       jibun: addressItem?.jibun || ''
     }
   });
+
+  const phoneNumberValue = watch('phoneNumber');
 
   const onSubmit = handleSubmit((data: AddressProps) => {
     const finalData = { ...data, isDefault: isChecked };
@@ -80,6 +83,12 @@ export const PaymentAddressEdit = () => {
       top
     });
   };
+
+  useEffect(() => {
+    if (phoneNumberValue) {
+      setValue("phoneNumber", formatPhoneNumber(phoneNumberValue));
+    }
+  }, [phoneNumberValue, setValue]);
 
   useEffect(() => {
     const script = document.createElement('script');
