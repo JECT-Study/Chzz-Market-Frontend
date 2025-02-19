@@ -1,5 +1,5 @@
 import { Button, Checkbox, FormField, useToggleState } from '@/shared';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
 import { Layout } from '@/app/layout/index';
@@ -7,7 +7,6 @@ import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
 import { useEditAddress } from '@/features/address/model';
 import { ROUTES } from '@/shared/constants/routes';
 import { Input } from '@/shared/ui/input';
-import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
 import { useForm } from 'react-hook-form';
 
 interface AddressProps {
@@ -27,7 +26,7 @@ export const PaymentAddressEdit = () => {
   const roadAddress = location.state?.roadAddress;
   const zonecode = location.state?.zonecode;
   const [isChecked, toggleCheck] = useToggleState(addressItem.isDefault);
-  const [isVaild, setIsVaild] = useState(false);
+  
   if (!auctionId) {
     return;
   }
@@ -35,12 +34,11 @@ export const PaymentAddressEdit = () => {
 
   const {
     control,
-    watch,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue,
     handleSubmit,
-    setError
   } = useForm<AddressProps>({
+    mode: 'onChange',
     defaultValues: {
       recipientName: addressItem?.recipientName || '',
       phoneNumber: addressItem?.phoneNumber || '',
@@ -51,47 +49,9 @@ export const PaymentAddressEdit = () => {
     }
   });
 
-  const recipientName = watch('recipientName');
-  const phoneNumber = watch('phoneNumber');
-  const detailAddress = watch('detailAddress');
-
   const onSubmit = handleSubmit((data: AddressProps) => {
-    let hasError = false;
-    if (!data.phoneNumber.startsWith('010') || data.phoneNumber.length > 13) {
-      setError('phoneNumber', {
-        message: '휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.'
-      });
-    }
-    if (!data.recipientName.trim()) {
-      setError('recipientName', {
-        type: 'manual',
-        message: '이름을 입력해주세요.'
-      });
-      hasError = true;
-    }
-
-    if (!data.roadAddress.trim()) {
-      setError('roadAddress', {
-        type: 'manual',
-        message: '주소지를 입력해주세요.'
-      });
-      hasError = true;
-    }
-
-    if (!data.detailAddress.trim()) {
-      setError('detailAddress', {
-        type: 'manual',
-        message: '상세주소를 입력해주세요.'
-      });
-      hasError = true;
-    }
-    if (!hasError) {
-      const finalData = {
-        ...data,
-        isDefault: isChecked
-      };
-      mutate({ addressId: addressItem.id, data: finalData });
-    }
+    const finalData = { ...data, isDefault: isChecked };
+    mutate({ addressId: addressItem.id, data: finalData });
   });
 
   const handleOpenAddress = () => {
@@ -106,14 +66,13 @@ export const PaymentAddressEdit = () => {
       width: popupWidth,
       height: popupHeight,
       onComplete: (data: any) => {
-        const roadAddress = data.address;
-        const { zonecode } = data;
+        console.log(data.zonecode);
 
-        setValue('zipcode', zonecode);
-        setValue('roadAddress', roadAddress);
+        setValue('zipcode', data.zonecode);
+        setValue('roadAddress', data.roadAddress);
 
         navigate(ROUTES.PAYMENT.ADDRESS.getEditRoute(auctionId), {
-          state: { addressItem, roadAddress, zonecode }
+          state: { addressItem, roadAddress: data.roadAddress, zonecode: data.zonecode }
         });
       }
     }).open({
@@ -127,19 +86,10 @@ export const PaymentAddressEdit = () => {
     script.src = ADDRESS_SCRIPT_URL;
     script.async = true;
     document.head.appendChild(script);
-
     return () => {
       document.head.removeChild(script);
     };
   }, []);
-
-  useEffect(() => {
-    const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
-    setValue('phoneNumber', formattedPhoneNumber);
-    if (recipientName && phoneNumber && detailAddress) {
-      setIsVaild(true);
-    }
-  }, [phoneNumber, setValue, detailAddress, recipientName]);
 
   return (
     <Layout>
@@ -153,6 +103,7 @@ export const PaymentAddressEdit = () => {
               label="이름"
               name="recipientName"
               control={control}
+              rules={{ required: '이름을 입력해주세요.' }}
               error={errors.recipientName?.message}
               render={(field) => (
                 <Input
@@ -168,6 +119,13 @@ export const PaymentAddressEdit = () => {
               label="휴대폰 번호"
               name="phoneNumber"
               control={control}
+              rules={{
+                required: '휴대폰 번호를 입력해주세요.',
+                validate: (value: string) =>
+                  value.startsWith('010') && value.length <= 13
+                    ? true
+                    : '휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.'
+              }}
               error={errors.phoneNumber?.message}
               render={(field) => (
                 <Input
@@ -207,6 +165,7 @@ export const PaymentAddressEdit = () => {
               label="주소지"
               name="roadAddress"
               control={control}
+              rules={{ required: '주소지를 입력해주세요.' }}
               error={errors.roadAddress?.message}
               render={(field) => (
                 <Input
@@ -223,6 +182,7 @@ export const PaymentAddressEdit = () => {
               label="상세주소"
               name="detailAddress"
               control={control}
+              rules={{ required: '상세주소를 입력해주세요.' }}
               error={errors.detailAddress?.message}
               render={(field) => (
                 <Input
@@ -246,9 +206,9 @@ export const PaymentAddressEdit = () => {
         <Button
           type="button"
           className="w-full h-[47px] rounded-lg"
-          color={isVaild ? 'cheeseYellow' : 'gray3'}
+          color={isValid ? 'cheeseYellow' : 'gray3'}
           onClick={onSubmit}
-          disabled={!isVaild || isPending}
+          disabled={!isValid || isPending}
           loading={isPending}
         >
           저장하기
