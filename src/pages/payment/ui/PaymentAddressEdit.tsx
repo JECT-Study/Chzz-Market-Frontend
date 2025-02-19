@@ -1,5 +1,5 @@
 import { Button, Checkbox, FormField, useToggleState } from '@/shared';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
 import { Layout } from '@/app/layout/index';
@@ -26,7 +26,6 @@ export const PaymentAddressEdit = () => {
   const addressItem = location.state?.addressItem;
   const roadAddress = location.state?.roadAddress;
   const zonecode = location.state?.zonecode;
-  const formRef = useRef<HTMLFormElement>(null);
   const [isChecked, toggleCheck] = useToggleState(addressItem.isDefault);
   const [isVaild, setIsVaild] = useState(false);
   if (!auctionId) {
@@ -55,14 +54,6 @@ export const PaymentAddressEdit = () => {
   const recipientName = watch('recipientName');
   const phoneNumber = watch('phoneNumber');
   const detailAddress = watch('detailAddress');
-
-  const handleSubmitClick = () => {
-    if (formRef.current) {
-      formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true })
-      );
-    }
-  };
 
   const onSubmit = handleSubmit((data: AddressProps) => {
     let hasError = false;
@@ -156,9 +147,7 @@ export const PaymentAddressEdit = () => {
       <Layout.Main>
         <div className="flex flex-col">
           <form
-            ref={formRef}
             className="flex flex-col gap-6"
-            onSubmit={onSubmit}
           >
             <FormField
               label="이름"
@@ -258,7 +247,7 @@ export const PaymentAddressEdit = () => {
           type="button"
           className="w-full h-[47px] rounded-lg"
           color={isVaild ? 'cheeseYellow' : 'gray3'}
-          onClick={handleSubmitClick}
+          onClick={onSubmit}
           disabled={!isVaild || isPending}
           loading={isPending}
         >
