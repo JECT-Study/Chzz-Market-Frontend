@@ -1,6 +1,9 @@
-import { Button, Confirm, Modal, removeToken } from '@/shared';
 
 import { useAuth } from '@/features/auth/hooks';
+import { Button } from '@/shared/ui/Button';
+import { Confirm } from '@/shared/ui/Confirm';
+import { Modal } from '@/shared/ui/Modal';
+import { removeToken } from '@/shared/utils/token';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router';
 import { useDeleteUsers } from '../model/useDeleteUsers';
@@ -25,7 +28,7 @@ export const UserOrderList = () => {
         className="flex justify-between w-full py-3 border-b cursor-pointer border-b-gray3"
         onClick={handleLogout}
       >
-        <h2 className="text-heading3 web:text-heading2 font-medium">
+        <h2 className="font-medium text-heading3 web:text-heading2">
           로그아웃
         </h2>
         <IoIosArrowForward className="text-2xl" />
@@ -33,7 +36,7 @@ export const UserOrderList = () => {
       <Modal>
         <Modal.Open name="deleteUser">
           <div className="flex justify-between w-full py-3 border-b cursor-pointer border-b-gray3">
-            <h2 className="text-heading3 web:text-heading2 font-medium">
+            <h2 className="font-medium text-heading3 web:text-heading2">
               회원탈퇴
             </h2>
             <IoIosArrowForward className="text-2xl" />

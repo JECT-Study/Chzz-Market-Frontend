@@ -12,7 +12,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useHistory } from '@/features/user/model';
-import { EmptyBoundary } from '@/shared';
+import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 import { useLocation } from 'react-router';
 
 export const UserParticipatedList = () => {

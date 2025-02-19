@@ -8,7 +8,7 @@ import { isAxiosError } from 'axios';
 import { useLocation } from 'react-router';
 import { getErrorByCode } from '../../utils/getErrorByCode';
 import { Button } from '../Button';
-import { GlobalSpinner } from '../spinner';
+import { GlobalSpinner } from '../spinner/GlobalSpinner';
 
 interface FallbackComponentProps extends FallbackProps {
   header?: string;

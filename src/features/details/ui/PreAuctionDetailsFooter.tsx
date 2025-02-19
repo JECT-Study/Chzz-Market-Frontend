@@ -1,7 +1,9 @@
-import { Button, Confirm, Modal } from "@/shared";
 import { useConvertAuction, useToggleAuctionDetailsHeart } from "../model";
 
 import { Layout } from "@/app/layout";
+import { Modal } from "@/shared/ui/Modal";
+import { Button } from "@/shared/ui/Button";
+import { Confirm } from "@/shared/ui/Confirm";
 
 interface PreAuctionDetailsFooterProps {
   isLiked: boolean

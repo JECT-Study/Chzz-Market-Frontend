@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router';
 
-import { AsyncBoundary } from '@/shared';
+import { AsyncBoundary } from '@/shared/ui/boundary/AsyncBoundary';
 import { BidderListMain } from './BidderListMain';
 
 export const BidderList = () => {

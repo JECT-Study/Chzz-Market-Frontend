@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { IPreAuctionRegisteredItem } from '@/entities';
 import { useMyAuctionList } from '@/features/user/model';
 import { PreAuctionMyRegister } from '@/features/user/ui';
-import { EmptyBoundary } from '@/shared';
+import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 import { useLocation } from 'react-router';
 
 export const UserPreRegisteredList = () => {

@@ -1,7 +1,9 @@
-import { ParticipantCount, ProgressiveImage, ROUTES } from '@/shared';
+import { ROUTES } from '@/shared';
 
 import type { IUserAuctionWonItem } from '@/entities';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
+import { ParticipantCount } from '@/shared/ui/ParticipantCount';
+import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router';
 

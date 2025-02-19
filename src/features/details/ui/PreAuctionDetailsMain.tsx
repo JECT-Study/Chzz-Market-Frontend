@@ -1,4 +1,3 @@
-import { CarouselItem, CustomCarousel, Modal, ProgressiveImage, getTimeAgo } from '@/shared';
 import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
 import { useDeletePreAuction, useGetAuctionDetails } from '..';
 
@@ -8,6 +7,11 @@ import BoxEditIcon from '@/shared/assets/icons/in_box_edit_time.svg';
 import BoxLikeIcon from '@/shared/assets/icons/in_box_like.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
 import ThreeDotsIcon from '@/shared/assets/icons/three_dots.svg';
+import { CustomCarousel } from '@/shared/ui/CustomCarousel';
+import { Modal } from '@/shared/ui/Modal';
+import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
+import { CarouselItem } from '@/shared/ui/carousel';
+import { getTimeAgo } from '@/shared/utils/getTimeAgo';
 import { useNavigate } from 'react-router';
 
 export const PreAuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {

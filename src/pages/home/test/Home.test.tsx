@@ -17,8 +17,8 @@ import {
 } from './data';
 
 import { LayoutWithNav } from '@/app/layout';
-import { getTimeColor } from '@/shared';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { getTimeColor } from '@/shared/utils/getTimeColor';
 import userEvent from '@testing-library/user-event';
 import { Home } from '../ui';
 

@@ -10,7 +10,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import { Layout } from '@/app/layout';
-import { EmptyBoundary } from '@/shared';
+import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 
 export const ProductList = () => {
   const [activeTab, setActiveTab] = useState('ongoing');

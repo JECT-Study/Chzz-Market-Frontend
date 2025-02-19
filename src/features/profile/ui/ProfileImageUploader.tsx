@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
-import { MenuAccordion } from '@/shared';
 import Profile from '@/shared/assets/icons/profile.svg';
 import ProfileEdit from '@/shared/assets/icons/profile_edit.svg';
 import { Input } from '../../../shared/ui/input';
 import { useProfileImageUploader } from '../lib';
+import { MenuAccordion } from '@/shared/ui/MenuAccordion';
 
 interface ImageUploaderProps {
   image: string | null;

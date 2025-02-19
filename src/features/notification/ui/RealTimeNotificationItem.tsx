@@ -1,4 +1,4 @@
-import { Button } from '@/shared';
+import { Button } from '@/shared/ui/Button';
 import { useNavigate } from 'react-router';
 import { NOTIFICATION_CONTENTS, type IRealTimeNotification } from '../config';
 import { useReadNotification } from '../model';

@@ -5,7 +5,7 @@ import ErrorIcon from '@/shared/assets/icons/error.svg';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { Button } from '../Button';
-import { LocalSpinner } from '../spinner';
+import { LocalSpinner } from '../spinner/LocalSpinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
   if (!isAxiosError(error)) throw error;

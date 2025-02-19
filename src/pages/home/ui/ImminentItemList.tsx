@@ -1,10 +1,9 @@
-import {
-  AuctionItem,
-  CarouselItem,
-  CustomCarousel,
-  EmptyBoundary,
-  ROUTES
-} from '@/shared';
+import { ROUTES } from '@/shared';
+
+import { AuctionItem } from '@/shared/ui/AuctionItem';
+import { CustomCarousel } from '@/shared/ui/CustomCarousel';
+import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
+import { CarouselItem } from '@/shared/ui/carousel';
 
 import { useNavigate } from 'react-router';
 import { useGetImminentAuctions } from '../model';

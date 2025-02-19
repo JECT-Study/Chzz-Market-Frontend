@@ -1,4 +1,5 @@
-import { Button, FormField } from '@/shared';
+import { Button } from '@/shared/ui/Button';
+import { FormField } from '@/shared/ui/FormField';
 import { KeyboardEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

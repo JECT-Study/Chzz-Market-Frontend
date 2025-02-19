@@ -1,5 +1,8 @@
-import { LikeCount, Price, ProductItem } from '@/shared/ui';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { LikeCount } from '@/shared/ui/LikeCount';
+import { Price } from '@/shared/ui/Price';
+import { ProductItem } from '@/shared/ui/ProductItem';
 
 const meta: Meta<typeof ProductItem> = {
   title: 'components/ProductItem',

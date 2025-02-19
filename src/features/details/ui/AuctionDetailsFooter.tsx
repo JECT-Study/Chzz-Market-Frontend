@@ -1,4 +1,7 @@
-import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from "@/shared";
+import { MAX_BID_COUNT, ROUTES } from "@/shared";
+import { Button } from "@/shared/ui/Button";
+import { Confirm } from "@/shared/ui/Confirm";
+import { Modal } from "@/shared/ui/Modal";
 import { useCancelBid, useGetAuctionDetails } from "../model";
 
 import { Layout } from "@/app/layout";

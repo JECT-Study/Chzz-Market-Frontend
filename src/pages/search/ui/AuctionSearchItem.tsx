@@ -1,12 +1,12 @@
 import {
-  ParticipantCount,
-  Price,
-  ProductItem,
   ROUTES,
-  TimeRemaining
 } from '@/shared';
+import { Price } from '@/shared/ui/Price';
+import { ProductItem } from '@/shared/ui/ProductItem';
 
 import type { IAuctionSearchItem } from '@/entities';
+import { ParticipantCount } from '@/shared/ui/ParticipantCount';
+import { TimeRemaining } from '@/shared/ui/TimeRemaining';
 import { useNavigate } from 'react-router';
 
 export const AuctionSearchItem = ({

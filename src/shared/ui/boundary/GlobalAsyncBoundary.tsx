@@ -7,7 +7,7 @@ import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { getErrorByCode } from '../../utils/getErrorByCode';
 import { Button } from '../Button';
-import { GlobalSpinner } from '../spinner';
+import { GlobalSpinner } from '../spinner/GlobalSpinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
   const { title, description } = getErrorByCode(error)

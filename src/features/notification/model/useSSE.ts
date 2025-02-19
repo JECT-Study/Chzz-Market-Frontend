@@ -1,9 +1,10 @@
-import { RefreshHandler, getToken } from '@/shared';
 import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 import { useEffect, useRef, useState } from 'react';
 
-import { logout } from '@/features/auth/api';
+import { logout } from '@/features/auth/api/logout';
 import { isLoggedIn } from '@/features/auth/model/authSlice';
+import { RefreshHandler } from '@/shared/api/axios';
+import { getToken } from '@/shared/utils/token';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 

@@ -1,9 +1,10 @@
-import { API_END_POINT, Modal } from "@/shared";
+import { API_END_POINT } from "@/shared";
 import { useEffect, useState } from "react";
 
 import type { IRealTimeNotification } from "../config";
 import { RealTimeNotificationItem } from ".";
 import { useSSE } from "../model";
+import { Modal } from "@/shared/ui/Modal";
 
 export const RealTimeNotification = () => {
   const { state: notifications, setState: setNotifications } =

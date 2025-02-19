@@ -1,4 +1,4 @@
-import { Checkbox } from '@/shared';
+import { Checkbox } from '@/shared/ui/Checkbox';
 import { BID_CAUTION } from '../config';
 
 interface BidCautionProps {

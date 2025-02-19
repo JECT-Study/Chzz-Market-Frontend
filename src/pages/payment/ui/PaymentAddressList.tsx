@@ -5,10 +5,10 @@ import { Layout } from '@/app/layout/index';
 import type { IAddressWithId } from '@/entities/address/address';
 import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
 import { useGetAddresses } from '@/features/address/model';
-import { Button } from '@/shared';
 import rocation_off from '@/shared/assets/icons/rocation_off.svg';
 import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import { ROUTES } from '@/shared/constants/routes';
+import { Button } from '@/shared/ui/Button';
 import { FaCheck } from 'react-icons/fa6';
 import { IoIosSearch } from 'react-icons/io';
 
@@ -105,7 +105,7 @@ export const PaymentAddressList = () => {
         }
       />
       <span
-        className="absolute text-body1 web:text-heading3 cursor-pointer top-3 right-5"
+        className="absolute cursor-pointer text-body1 web:text-heading3 top-3 right-5"
         onClick={handleEditButtonClick}
       >
         편집

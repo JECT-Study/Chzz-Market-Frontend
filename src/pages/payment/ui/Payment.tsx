@@ -1,4 +1,5 @@
-import { Button, FormField, ProgressiveImage } from '@/shared';
+import { Button } from '@/shared/ui/Button';
+import { FormField } from '@/shared/ui/FormField';
 import {
   Select,
   SelectContent,
@@ -19,6 +20,7 @@ import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { ROUTES } from '@/shared/constants/routes';
 import { AuctionShippingSchema } from '@/shared/constants/schema';
+import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
 import { Input } from '@/shared/ui/input';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';

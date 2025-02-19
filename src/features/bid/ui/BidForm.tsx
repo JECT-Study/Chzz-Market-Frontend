@@ -1,24 +1,21 @@
-import {
-  AuctionItem,
-  Button,
-  FormField,
-  Input,
-  MAX_BID_COUNT,
-  convertCurrencyToNumber,
-  formatCurrencyWithWon,
-  useToggleState
-} from '@/shared';
+import { MAX_BID_COUNT, useToggleState } from '@/shared';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { BidCaution } from './BidCaution';
-import type { IAuctionDetails } from '@/entities';
 import { Layout } from '@/app/layout';
-import { getBidSchema } from '../config';
-import { useEditableNumberInput } from '@/features/register';
+import type { IAuctionDetails } from '@/entities';
 import { useGetAuctionDetails } from '@/features/details';
-import { usePostBid } from '../model';
-import { z } from 'zod';
+import { useEditableNumberInput } from '@/features/register';
+import { AuctionItem } from '@/shared/ui/AuctionItem';
+import { Button } from '@/shared/ui/Button';
+import { FormField } from '@/shared/ui/FormField';
+import { Input } from '@/shared/ui/input';
+import { convertCurrencyToNumber } from '@/shared/utils/convertCurrencyToNumber';
+import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { getBidSchema } from '../config';
+import { usePostBid } from '../model';
+import { BidCaution } from './BidCaution';
 
 export const BidForm = ({ auctionId }: { auctionId: number }) => {
   const { details } = useGetAuctionDetails<IAuctionDetails>(auctionId);

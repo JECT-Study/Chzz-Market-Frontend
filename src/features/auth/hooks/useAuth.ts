@@ -1,8 +1,8 @@
-import { removeToken } from '@/shared';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { logout } from '..';
+import { removeToken } from '@/shared/utils/token';
+import { logout } from '../api/logout';
 
 export const useAuth = () => {
   const navigate = useNavigate();

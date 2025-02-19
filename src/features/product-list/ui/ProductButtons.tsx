@@ -1,4 +1,4 @@
-import { Button } from '@/shared';
+import { Button } from '@/shared/ui/Button';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 

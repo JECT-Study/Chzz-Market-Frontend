@@ -1,4 +1,3 @@
-import { CustomCarousel, Input } from '@/shared';
 import { DndContext, DragOverlay, closestCenter } from '@dnd-kit/core';
 import {
   SortableContext,
@@ -9,6 +8,8 @@ import { useDragAndDrop, useImageUploader } from '../lib';
 import { AddImageButton } from '.';
 import { ImageItem } from './ImageItem';
 import { ImageOverlay } from './ImageOverlay';
+import { CustomCarousel } from '@/shared/ui/CustomCarousel';
+import { Input } from '@/shared/ui/input';
 
 interface ImageUploaderProps {
   images: string[];

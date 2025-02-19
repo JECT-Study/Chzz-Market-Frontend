@@ -1,10 +1,8 @@
-import {
-  CreatedAt,
-  ParticipantCount,
-  Price,
-  ProductItem,
-  ROUTES
-} from '@/shared';
+import { ROUTES } from '@/shared';
+import { ParticipantCount } from '@/shared/ui/ParticipantCount';
+import { Price } from '@/shared/ui/Price';
+import { ProductItem } from '@/shared/ui/ProductItem';
+import { CreatedAt } from '@/shared/ui/CreatedAt';
 
 import type { IAuctionEndRegisteredItem } from '@/entities';
 import PriceIcon from '@/shared/assets/icons/price.svg';

@@ -1,4 +1,3 @@
-import { AuctionItem, Button, formatCurrencyWithWon } from '@/shared';
 
 import { Layout } from '@/app/layout';
 import type { IAuctionDetails } from '@/entities';
@@ -7,6 +6,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { BIDDER_LIST_PRICE_FILTER, type IBidder } from '../config';
 import { useGetBidderList } from '../model';
+import { AuctionItem } from '@/shared/ui/AuctionItem';
+import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
+import { Button } from '@/shared/ui/Button';
 
 export const BidderListMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);

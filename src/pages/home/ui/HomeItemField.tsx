@@ -1,4 +1,4 @@
-import { PartialAsyncBoundary } from '@/shared';
+import { PartialAsyncBoundary } from '@/shared/ui/boundary/PartialAsyncBoundary';
 import { ReactNode } from 'react';
 
 const HomeItemField = ({
@@ -12,7 +12,9 @@ const HomeItemField = ({
     <section className="flex flex-col w-full gap-6">
       <label className="text-heading3">{name}</label>
       <div className="flex gap-4 min-h-[16rem] h-[16rem]">
-        <PartialAsyncBoundary>{children}</PartialAsyncBoundary>
+        <PartialAsyncBoundary>
+          {children}
+        </PartialAsyncBoundary>
       </div>
     </section>
   );

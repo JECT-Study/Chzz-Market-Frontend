@@ -1,9 +1,11 @@
-import { Button, Input, httpClient } from "@/shared";
 import { useEffect, useState } from "react";
 
 import { Layout } from "@/app/layout";
+import { Button } from "@/shared/ui/Button";
+import { Input } from "@/shared/ui/input";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router";
+import { httpClient } from "@/shared/api/axios";
 
 export const Test = () => {
   const navigate = useNavigate()

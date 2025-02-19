@@ -1,7 +1,7 @@
-import { CSS } from '@dnd-kit/utilities';
-import { CarouselItem } from '@/shared';
 import DeleteIcon from '@/shared/assets/icons/delete.svg';
+import { CarouselItem } from '@/shared/ui/carousel';
 import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface ImageItemProps {
   image: string;

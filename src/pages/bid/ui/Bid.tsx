@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router';
 
 import { BidForm } from '@/features/bid';
-import { AsyncBoundary } from '@/shared';
+import { AsyncBoundary } from '@/shared/ui/boundary/AsyncBoundary';
 
 export const Bid = () => {
   const auctionId = useLoaderData() as number;

@@ -1,7 +1,13 @@
 import { GlobalLayout, LayoutWithNav } from "@/app/layout";
-import { AsyncBoundary, GlobalAsyncBoundary, PrivateRoute, PublicRoute, ROUTES, RouteErrorFallback, RouteLoader } from '@/shared';
 
 import { Home } from "@/pages/home";
+import { ROUTES } from "@/shared";
+import { AsyncBoundary } from "@/shared/ui/boundary/AsyncBoundary";
+import { GlobalAsyncBoundary } from "@/shared/ui/boundary/GlobalAsyncBoundary";
+import { RouteErrorFallback } from "@/shared/ui/boundary/RouteErrorFallback";
+import { PrivateRoute } from "@/shared/ui/route/PrivateRoute";
+import { PublicRoute } from "@/shared/ui/route/PublicRoute";
+import { RouteLoader } from "@/shared/utils/RouteLoader";
 import { lazy } from "react";
 import { createBrowserRouter } from 'react-router';
 

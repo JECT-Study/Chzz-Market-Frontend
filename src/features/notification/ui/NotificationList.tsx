@@ -1,4 +1,4 @@
-import { EmptyBoundary } from '@/shared';
+import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 import { useGetNotificationListWithSuspense } from '..';
 import type { INotification } from '../config';
 import { NotificationItem } from './NotificationItem';

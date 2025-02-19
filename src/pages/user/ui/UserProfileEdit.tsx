@@ -1,20 +1,21 @@
 import { setNicknameError } from '@/entities/user/model/profileEditSlice';
-import { Button, FormField } from '@/shared';
+import { Button } from '@/shared/ui/Button';
+import { FormField } from '@/shared/ui/FormField';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Layout } from '@/app/layout/index';
 import { RootState } from '@/app/store';
 import type { IUserProfile } from '@/entities/user/user';
+import { getProfileImageURL } from '@/features/profile/api';
 import { useEditProfile } from '@/features/profile/hooks';
+import { useProfileNicknameValidate } from '@/features/profile/hooks/useProfileNicknameValidate';
+import { uploadProfileImageToS3 } from '@/features/profile/model';
 import { ProfileImageUploader } from '@/features/profile/ui';
 import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
 import NoticeRed from '@/shared/assets/icons/notice_red.svg';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
-import { uploadProfileImageToS3 } from '@/features/profile/model';
-import { getProfileImageURL } from '@/features/profile/api';
-import { useProfileNicknameValidate } from '@/features/profile/hooks/useProfileNicknameValidate';
 
 export const UserProfileEdit = () => {
   const formRef = useRef<HTMLFormElement>(null);

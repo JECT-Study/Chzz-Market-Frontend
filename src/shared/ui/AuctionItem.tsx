@@ -1,6 +1,10 @@
-import { LikeCount, ParticipantCount, Price, ProgressiveImage, TimeLabel } from '@/shared/ui';
 
 import { ReactNode } from 'react';
+import { LikeCount } from './LikeCount';
+import { ParticipantCount } from './ParticipantCount';
+import { Price } from './Price';
+import { ProgressiveImage } from './ProgressiveImage';
+import { TimeLabel } from './TimeLabel';
 
 interface AuctionItemProps {
   label: string;

@@ -1,7 +1,10 @@
-import { ParticipantCount, Price, ProductItem, ROUTES } from '@/shared';
+import { ROUTES } from '@/shared';
+import { ProductItem } from '@/shared/ui/ProductItem';
+import { Price } from '@/shared/ui/Price';
 
 import type { IAuctionItem } from '@/entities';
 import { useNavigate } from 'react-router';
+import { ParticipantCount } from '@/shared/ui/ParticipantCount';
 
 export const OngoingProduct = ({ product }: { product: IAuctionItem }) => {
   const navigate = useNavigate();

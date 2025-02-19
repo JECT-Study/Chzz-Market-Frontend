@@ -1,4 +1,6 @@
-import { API_END_POINT, httpClient, setToken } from '@/shared';
+import { API_END_POINT } from '@/shared';
+import { httpClient } from '@/shared/api/axios';
+import { setToken } from '@/shared/utils/token';
 
 export const refreshToken = async () => {
   try {
