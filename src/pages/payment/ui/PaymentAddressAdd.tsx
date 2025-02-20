@@ -7,15 +7,10 @@ import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
 import { usePostAddress } from '@/features/address/model';
 import { Input } from '@/shared/ui/input';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { AddressFormSchema } from '@/features/address/config';
 
-interface AddressProps {
-  recipientName: string;
-  phoneNumber: string;
-  zipcode: string;
-  roadAddress: string;
-  jibun: string;
-  detailAddress: string;
-}
+type FormField = z.infer<typeof AddressFormSchema>
 
 export const PaymentAddressAdd = () => {
   const navigate = useNavigate();
@@ -35,22 +30,24 @@ export const PaymentAddressAdd = () => {
     formState: { errors, isValid },
     setValue,
     handleSubmit
-  } = useForm<AddressProps>({
-    mode: 'onChange',
+  } = useForm<FormField>({
     defaultValues: {
       recipientName: '',
       phoneNumber: '',
       zipcode: zonecode,
       roadAddress,
       detailAddress: '',
-      jibun: jibunAddress
     }
   });
 
   const phoneNumberValue = watch("phoneNumber");
   
-  const onSubmit = handleSubmit((data: AddressProps) => {
-    const finalData = { ...data, isDefault: isChecked };
+  const onSubmit = handleSubmit((data: FormField) => {
+    const finalData = {
+      ...data,
+      isDefault: isChecked,
+      jibun: data.zipcode
+    };
     mutate(finalData);
   });
 
@@ -108,7 +105,6 @@ export const PaymentAddressAdd = () => {
               label="이름 *"
               name="recipientName"
               control={control}
-              rules={{ required: '이름을 입력해주세요.' }}
               error={errors.recipientName?.message}
               render={(field) => (
                 <Input
@@ -124,13 +120,6 @@ export const PaymentAddressAdd = () => {
               label="휴대폰 번호 *"
               name="phoneNumber"
               control={control}
-              rules={{
-                required: '휴대폰 번호를 입력해주세요.',
-                validate: (value: string) =>
-                  value.startsWith('010') && value.length <= 13
-                    ? true
-                    : '휴대폰 번호는 010으로 시작하고 11자리로 입력해주세요.'
-              }}
               error={errors.phoneNumber?.message}
               render={(field) => (
                 <Input
@@ -170,7 +159,6 @@ export const PaymentAddressAdd = () => {
               label="주소지 *"
               name="roadAddress"
               control={control}
-              rules={{ required: '주소지를 입력해주세요.' }}
               error={errors.roadAddress?.message}
               render={(field) => (
                 <Input
@@ -187,7 +175,6 @@ export const PaymentAddressAdd = () => {
               label="상세주소 *"
               name="detailAddress"
               control={control}
-              rules={{ required: '상세주소를 입력해주세요.' }}
               error={errors.detailAddress?.message}
               render={(field) => (
                 <Input
