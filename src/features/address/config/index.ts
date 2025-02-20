@@ -1,2 +1,2 @@
 export type * from './address';
-export type * from './schema';
+export * from './schema';

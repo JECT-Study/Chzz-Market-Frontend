@@ -9,8 +9,9 @@ import { Input } from '@/shared/ui/input';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { AddressFormSchema } from '@/features/address/config';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-type FormField = z.infer<typeof AddressFormSchema>
+export type FormField = z.infer<typeof AddressFormSchema>
 
 export const PaymentAddressAdd = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const PaymentAddressAdd = () => {
   if (!auctionId) {
     return;
   }
+
   const { mutate, isPending } = usePostAddress(auctionId);
 
   const {
@@ -37,7 +39,8 @@ export const PaymentAddressAdd = () => {
       zipcode: zonecode,
       roadAddress,
       detailAddress: '',
-    }
+    },
+    resolver: zodResolver(AddressFormSchema)
   });
 
   const phoneNumberValue = watch("phoneNumber");

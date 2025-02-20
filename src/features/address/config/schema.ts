@@ -15,3 +15,5 @@ export const AddressFormSchema = z.object({
   roadAddress: z.string().min(1, '주소지를 입력해주세요.'),
   detailAddress: z.string().min(1, '상세주소를 입력해주세요.')
 });
+
+export type AddressFormType = z.infer<typeof AddressFormSchema>;

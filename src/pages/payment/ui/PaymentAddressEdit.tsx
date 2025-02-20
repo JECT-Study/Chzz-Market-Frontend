@@ -10,6 +10,7 @@ import { Input } from '@/shared/ui/input';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { AddressFormSchema } from '@/features/address/config/schema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type FormField = z.infer<typeof AddressFormSchema>
 
@@ -40,7 +41,8 @@ export const PaymentAddressEdit = () => {
       zipcode: zonecode || addressItem?.zipcode,
       roadAddress: roadAddress || addressItem?.roadAddress,
       detailAddress: addressItem?.detailAddress || '',
-    }
+    },
+    resolver: zodResolver(AddressFormSchema),
   });
 
   const phoneNumberValue = watch('phoneNumber');
