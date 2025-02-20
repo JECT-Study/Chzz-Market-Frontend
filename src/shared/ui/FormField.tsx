@@ -14,7 +14,6 @@ interface FormFieldProps<T extends FieldValues> {
   label?: string;
   render: (field: ControllerRenderProps<T>) => ReactElement;
   error?: string;
-  rules?: object;
 }
 
 export const FormField = <T extends FieldValues>({
@@ -22,8 +21,7 @@ export const FormField = <T extends FieldValues>({
   control,
   label,
   render,
-  error,
-  rules
+  error
 }: FormFieldProps<T>) => {
   return (
     <div className="relative flex flex-col gap-2">
@@ -36,7 +34,6 @@ export const FormField = <T extends FieldValues>({
       <Controller
         name={name}
         control={control}
-        rules={rules}
         render={({ field }) => render(field)}
       />
       {error && <ErrorMessage message={error} />}
