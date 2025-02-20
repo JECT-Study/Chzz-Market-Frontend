@@ -1,6 +1,6 @@
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 
-import type { IPreAuctionRegisteredItem } from '@/entities';
+import type { IPreAuctionRegisteredItem } from '@/entities/auction';
 import { LikeCount } from '@/shared/ui/LikeCount';
 import { Price } from '@/shared/ui/Price';
 import { ProductItem } from '@/shared/ui/ProductItem';

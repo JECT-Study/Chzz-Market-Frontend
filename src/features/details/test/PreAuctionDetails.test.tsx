@@ -7,9 +7,9 @@ import {
   useToggleAuctionDetailsHeart
 } from '../model';
 
-import type { IPreAuctionDetails } from '@/entities';
-import { CATEGORIES } from '@/shared';
+import type { IPreAuctionDetails } from '@/entities/auction';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { CATEGORIES } from '@/shared/constants/categories';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';
 import { PreAuctionDetailsMain } from '..';

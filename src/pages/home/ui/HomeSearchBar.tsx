@@ -1,4 +1,4 @@
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 import { Command, CommandInput, CommandList, CommandSeparator } from '@/shared/ui/Command';
 
 import { useState } from 'react';

@@ -1,7 +1,7 @@
 import { HttpHandler, HttpResponse, delay, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
 import type { IBidPostData } from '@/features/bid';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { auctionDetailsData } from './data';
 
 let curDetailsData = [...auctionDetailsData];

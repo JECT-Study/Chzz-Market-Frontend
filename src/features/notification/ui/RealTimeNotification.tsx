@@ -1,4 +1,4 @@
-import { API_END_POINT } from "@/shared";
+import { API_END_POINT } from "@/shared/constants/apiEndPoint";
 import { useEffect, useState } from "react";
 
 import type { IRealTimeNotification } from "../config";

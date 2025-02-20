@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import type { IPreAuctionRegisteredItem } from '@/entities';
+import type { IPreAuctionRegisteredItem } from '@/entities/auction';
 import { useMyAuctionList } from '@/features/user/model';
 import { PreAuctionMyRegister } from '@/features/user/ui';
 import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';

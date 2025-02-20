@@ -1,5 +1,5 @@
-import type { IAuctionDetails } from '@/entities';
-import { QUERY_KEYS } from '@/shared';
+import type { IAuctionDetails } from '@/entities/auction';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback } from 'react';
 

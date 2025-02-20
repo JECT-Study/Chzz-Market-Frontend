@@ -1,4 +1,4 @@
-import { IAuctionSearchItem, IPreAuctionItem } from '@/entities';
+import { IAuctionSearchItem, IPreAuctionItem } from '@/entities/auction';
 import { useEffect, useState } from 'react';
 
 import { Layout } from '@/app/layout';

@@ -1,5 +1,5 @@
 
-import type { IPreAuctionItem } from '@/entities';
+import type { IPreAuctionItem } from '@/entities/auction';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router';
 import { useToggleAuctionListHeart } from '../model';

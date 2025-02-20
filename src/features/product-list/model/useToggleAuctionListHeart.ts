@@ -4,8 +4,8 @@ import {
   useQueryClient
 } from '@tanstack/react-query';
 
-import { QUERY_KEYS } from '@/shared';
 import { heartAuction } from '@/features/details/api';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 
 export const useToggleAuctionListHeart = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;

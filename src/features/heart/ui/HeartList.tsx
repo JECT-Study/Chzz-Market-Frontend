@@ -1,12 +1,12 @@
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 
 import { useDeleteHeart, useGetHeartList } from '..';
 
-import type { IPreAuctionItem } from '@/entities';
-import { useNavigate } from 'react-router';
+import type { IPreAuctionItem } from '@/entities/auction';
 import { AuctionItem } from '@/shared/ui/AuctionItem';
 import { Button } from '@/shared/ui/Button';
+import { useNavigate } from 'react-router';
 
 export const HeartList = () => {
   const navigate = useNavigate();

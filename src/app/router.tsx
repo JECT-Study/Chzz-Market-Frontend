@@ -1,7 +1,7 @@
 import { GlobalLayout, LayoutWithNav } from "@/app/layout";
 
 import { Home } from "@/pages/home";
-import { ROUTES } from "@/shared";
+import { ROUTES } from "@/shared/constants/routes";
 import { AsyncBoundary } from "@/shared/ui/boundary/AsyncBoundary";
 import { GlobalAsyncBoundary } from "@/shared/ui/boundary/GlobalAsyncBoundary";
 import { RouteErrorFallback } from "@/shared/ui/boundary/RouteErrorFallback";

@@ -1,4 +1,4 @@
-import { QUERY_KEYS } from '@/shared';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getPreAuctions } from '../api';
 

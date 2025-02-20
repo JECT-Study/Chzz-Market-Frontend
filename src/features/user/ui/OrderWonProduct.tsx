@@ -1,6 +1,6 @@
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 
-import type { IUserAuctionWonItem } from '@/entities';
+import type { IUserAuctionWonItem } from '@/entities/auction';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { ParticipantCount } from '@/shared/ui/ParticipantCount';
 import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';

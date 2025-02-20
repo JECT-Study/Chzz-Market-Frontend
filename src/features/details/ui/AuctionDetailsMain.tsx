@@ -4,7 +4,7 @@ import { CarouselItem } from '@/shared/ui/carousel';
 import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
 
 import { Layout } from "@/app/layout";
-import type { IAuctionDetails } from "@/entities";
+import type { IAuctionDetails } from "@/entities/auction";
 import ParticipantAmount from '@/shared/assets/icons/my_participation_amount.svg';
 import Participants from '@/shared/assets/icons/participants.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';

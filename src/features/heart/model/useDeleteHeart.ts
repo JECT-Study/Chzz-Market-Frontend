@@ -1,12 +1,12 @@
-import type { IPreAuctionItem, IPreAuctionList } from '@/entities';
+import type { IPreAuctionItem, IPreAuctionList } from '@/entities/auction';
 import {
   UseMutateFunction,
   useMutation,
   useQueryClient
 } from '@tanstack/react-query';
 
-import { QUERY_KEYS } from '@/shared';
 import { heartAuction } from '@/features/details/api';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { toast } from 'sonner';
 
 export const useDeleteHeart = (): {

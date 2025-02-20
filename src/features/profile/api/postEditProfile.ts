@@ -1,5 +1,5 @@
-import { API_END_POINT } from '@/shared';
 import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
 export const postEditProfile = async (formData: FormData) => {
   const response = await httpClient.post(`${API_END_POINT.PROFILE}`, formData, {

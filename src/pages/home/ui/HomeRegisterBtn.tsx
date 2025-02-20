@@ -1,4 +1,4 @@
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 import { RefObject } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router';

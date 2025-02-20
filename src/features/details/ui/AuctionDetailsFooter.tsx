@@ -1,11 +1,12 @@
-import { MAX_BID_COUNT, ROUTES } from "@/shared";
+import { MAX_BID_COUNT } from "@/shared/constants/bid";
+import { ROUTES } from "@/shared/constants/routes";
 import { Button } from "@/shared/ui/Button";
 import { Confirm } from "@/shared/ui/Confirm";
 import { Modal } from "@/shared/ui/Modal";
 import { useCancelBid, useGetAuctionDetails } from "../model";
 
 import { Layout } from "@/app/layout";
-import type { IAuctionDetails } from "@/entities";
+import type { IAuctionDetails } from "@/entities/auction";
 import { useNavigate } from "react-router";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {

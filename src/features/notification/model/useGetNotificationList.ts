@@ -1,4 +1,4 @@
-import { QUERY_KEYS } from '@/shared';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import { isLoggedIn } from '@/features/auth/model/authSlice';

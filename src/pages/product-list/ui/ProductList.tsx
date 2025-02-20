@@ -1,4 +1,4 @@
-import type { IAuctionItem, IPreAuctionItem } from '@/entities';
+import type { IAuctionItem, IPreAuctionItem } from '@/entities/auction';
 import {
   OngoingProduct,
   PreAuctionProduct,

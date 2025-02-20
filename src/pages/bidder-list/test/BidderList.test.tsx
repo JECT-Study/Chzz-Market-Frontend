@@ -2,7 +2,7 @@ import { auctionDetailsData, useGetAuctionDetails } from '@/features/details';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import type { IAuctionDetails } from '@/entities';
+import type { IAuctionDetails } from '@/entities/auction';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';

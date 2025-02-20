@@ -1,6 +1,6 @@
 
 import { Layout } from '@/app/layout';
-import type { IAuctionDetails } from '@/entities';
+import type { IAuctionDetails } from '@/entities/auction';
 import { useGetAuctionDetails } from '@/features/details';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';

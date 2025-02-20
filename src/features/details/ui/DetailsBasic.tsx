@@ -1,4 +1,4 @@
-import { CATEGORIES } from "@/shared";
+import { CATEGORIES } from "@/shared/constants/categories";
 import { Price } from "@/shared/ui/Price";
 
 import { useNavigate } from 'react-router';

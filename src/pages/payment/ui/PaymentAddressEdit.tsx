@@ -1,4 +1,4 @@
-import { useToggleState } from '@/shared';
+import { useToggleState } from '@/shared/hooks/useToggleState';
 import { Button } from '@/shared/ui/Button';
 
 import { useEffect, useRef, useState } from 'react';

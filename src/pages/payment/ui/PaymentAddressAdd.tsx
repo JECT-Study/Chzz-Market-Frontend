@@ -1,4 +1,4 @@
-import { useToggleState } from '@/shared';
+import { useToggleState } from '@/shared/hooks/useToggleState';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 

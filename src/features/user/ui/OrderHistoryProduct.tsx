@@ -1,7 +1,7 @@
 import { ParticipantCount } from '@/shared/ui/ParticipantCount';
 import { Price } from '@/shared/ui/Price';
 import { ProductItem } from '@/shared/ui/ProductItem';
-import type { IUserAuctionHistoryItem } from '@/entities';
+import type { IUserAuctionHistoryItem } from '@/entities/auction';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router';
 

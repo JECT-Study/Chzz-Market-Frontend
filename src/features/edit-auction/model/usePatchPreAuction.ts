@@ -1,7 +1,7 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
 import type { IRegisterPatch } from '@/features/register';
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { patchPreAuction } from '..';

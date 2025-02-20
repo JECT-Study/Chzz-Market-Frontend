@@ -1,8 +1,9 @@
-import { MAX_BID_COUNT, useToggleState } from '@/shared';
+import { MAX_BID_COUNT } from '@/shared/constants/bid';
+import { useToggleState } from '@/shared/hooks/useToggleState';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Layout } from '@/app/layout';
-import type { IAuctionDetails } from '@/entities';
+import type { IAuctionDetails } from '@/entities/auction';
 import { useGetAuctionDetails } from '@/features/details';
 import { useEditableNumberInput } from '@/features/register';
 import { AuctionItem } from '@/shared/ui/AuctionItem';

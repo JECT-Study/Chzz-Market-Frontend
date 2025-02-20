@@ -1,4 +1,4 @@
-import type { IAuctionItem, IPreAuctionItem } from '@/entities';
+import type { IAuctionItem, IPreAuctionItem } from '@/entities/auction';
 
 import adidasImage from '@/shared/assets/test/adidas_superstar.jpeg';
 import jordanBlackImage from '@/shared/assets/test/jordan_black.jpeg';

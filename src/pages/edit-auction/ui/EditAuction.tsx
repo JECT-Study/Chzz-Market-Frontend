@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router';
 
-import type { IPreAuctionDetails } from '@/entities';
+import type { IPreAuctionDetails } from '@/entities/auction';
 import { useGetAuctionDetails } from '@/features/details';
 import { AuctionForm } from '@/shared/ui/AuctionForm';
 

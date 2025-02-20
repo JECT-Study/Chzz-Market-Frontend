@@ -2,7 +2,7 @@ import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
 import { useDeletePreAuction, useGetAuctionDetails } from '..';
 
 import { Layout } from '@/app/layout';
-import type { IPreAuctionDetails } from '@/entities';
+import type { IPreAuctionDetails } from '@/entities/auction';
 import BoxEditIcon from '@/shared/assets/icons/in_box_edit_time.svg';
 import BoxLikeIcon from '@/shared/assets/icons/in_box_like.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';

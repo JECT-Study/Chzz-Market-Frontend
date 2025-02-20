@@ -1,13 +1,13 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import { BidForm } from '..';
-import type { IAuctionDetails } from '@/entities';
+import type { IAuctionDetails } from '@/entities/auction';
+import { useGetAuctionDetails } from '@/features/details';
 import { auctionDetailsData } from '@/features/details/test/data';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import { useGetAuctionDetails } from '@/features/details';
-import { usePostBid } from '../model';
 import userEvent from '@testing-library/user-event';
+import { BidForm } from '..';
+import { usePostBid } from '../model';
 
 vi.mock('@/features/details/model', () => ({
   useGetAuctionDetails: vi.fn()

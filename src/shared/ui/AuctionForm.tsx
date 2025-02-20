@@ -1,10 +1,8 @@
-import {
-  CATEGORIES,
-  useToggleState
-} from '@/shared';
+import { CATEGORIES, } from '@/shared/constants/categories';
+import { useToggleState } from '@/shared/hooks/useToggleState';
 
 import { Layout } from '@/app/layout';
-import type { IPreAuctionDetails } from '@/entities';
+import type { IPreAuctionDetails } from '@/entities/auction';
 import { usePatchPreAuction } from '@/features/edit-auction';
 import {
   ImageUploaderInput,

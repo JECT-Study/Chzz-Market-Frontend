@@ -1,5 +1,5 @@
 
-import type { IUserAuctionLostItem } from '@/entities';
+import type { IUserAuctionLostItem } from '@/entities/auction';
 import { ParticipantCount } from '@/shared/ui/ParticipantCount';
 import { Price } from '@/shared/ui/Price';
 import { ProductItem } from '@/shared/ui/ProductItem';

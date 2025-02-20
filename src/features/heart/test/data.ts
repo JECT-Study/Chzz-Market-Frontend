@@ -1,4 +1,4 @@
-import type { IPreAuctionItem } from '@/entities';
+import type { IPreAuctionItem } from '@/entities/auction';
 import jordanBlueImage from '@/shared/assets/test/jordan_blue.jpeg';
 
 export const heartData: IPreAuctionItem[] = [

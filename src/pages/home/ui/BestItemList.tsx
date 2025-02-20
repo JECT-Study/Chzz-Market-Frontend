@@ -1,6 +1,5 @@
-import {
-  ROUTES
-} from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
+
 
 import { AuctionItem } from '@/shared/ui/AuctionItem';
 import { CustomCarousel } from '@/shared/ui/CustomCarousel';

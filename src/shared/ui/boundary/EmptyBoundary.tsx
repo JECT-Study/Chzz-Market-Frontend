@@ -1,4 +1,4 @@
-import { EMPTY_MESSAGE } from '@/shared';
+import { EMPTY_MESSAGE } from '@/shared/constants/emptyMessage';
 import EmptyIcon from '@/shared/assets/icons/empty.svg';
 import { ReactNode } from 'react';
 
