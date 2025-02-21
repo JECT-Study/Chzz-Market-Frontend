@@ -5,7 +5,7 @@ import { CustomCarousel } from '@/shared/ui/CustomCarousel';
 import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 import { CarouselItem } from '@/shared/ui/carousel';
 import { useNavigate } from 'react-router';
-import { useGetPreAuctions } from '../model';
+import { useGetPreAuctions } from '../model/useGetPreAuctions';
 
 const PreAuctionItemList = () => {
   const { preAuctions } = useGetPreAuctions();

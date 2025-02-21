@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import { Login } from '@/pages/login';
+import { Login } from '@/pages/login/Login';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';

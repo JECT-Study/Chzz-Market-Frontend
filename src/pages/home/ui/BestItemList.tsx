@@ -6,7 +6,7 @@ import { CustomCarousel } from '@/shared/ui/CustomCarousel';
 import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 import { CarouselItem } from '@/shared/ui/carousel';
 import { useNavigate } from 'react-router';
-import { useGetBestAuctions } from '../model';
+import { useGetBestAuctions } from '../model/useGetBestAuctions';
 
 const BestItemList = () => {
   const navigate = useNavigate();

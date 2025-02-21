@@ -4,7 +4,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { notificationData, useDeleteNotification, useGetNotificationList, useGetNotificationListWithSuspense, useReadNotification } from '..';
 
 import { LayoutWithNav } from '@/app/layout';
-import { Notification } from '@/pages/notification';
+import { Notification } from '@/pages/notification/Notification';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { NOTIFICATION_CONTENTS } from '../config';

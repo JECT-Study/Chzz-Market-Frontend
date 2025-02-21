@@ -33,8 +33,8 @@ import {
   logoutHandler,
   refreshTokenHandler
 } from '@/features/user';
-import { bidderListHandler } from '@/pages/bidder-list';
-import { homeAuctionsHandler } from '@/pages/home';
+import { bidderListHandler } from '@/pages/bidder-list/test/handler';
+import { homeAuctionsHandler } from '@/pages/home/test/handler';
 import { HttpHandler } from 'msw';
 import { setupWorker } from 'msw/browser';
 

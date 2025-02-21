@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, useLocation } from 'react-router';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { UserParticipatedList } from '@/pages/user';
+import { UserParticipatedList } from '@/pages/user/ui/UserParticipatedList';
 import userEvent from '@testing-library/user-event';
 import { useHistory } from '../model';
 

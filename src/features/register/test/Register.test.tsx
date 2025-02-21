@@ -2,7 +2,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
 import { usePatchPreAuction } from '@/features/edit-auction';
-import { Register } from '@/pages/register';
+import { Register } from '@/pages/register/Register';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';

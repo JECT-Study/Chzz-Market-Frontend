@@ -2,13 +2,14 @@
 import { Layout } from '@/app/layout';
 import type { IAuctionDetails } from '@/entities/auction';
 import { useGetAuctionDetails } from '@/features/details';
+import { AuctionItem } from '@/shared/ui/AuctionItem';
+import { Button } from '@/shared/ui/Button';
+import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { BIDDER_LIST_PRICE_FILTER, type IBidder } from '../config';
-import { useGetBidderList } from '../model';
-import { AuctionItem } from '@/shared/ui/AuctionItem';
-import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
-import { Button } from '@/shared/ui/Button';
+import { BIDDER_LIST_PRICE_FILTER } from '../config/constants';
+import { type IBidder } from '../config/type';
+import { useGetBidderList } from '../model/useGetBidderList';
 
 export const BidderListMain = ({ auctionId }: { auctionId: number }) => {
   const [filterState, setFilterState] = useState(BIDDER_LIST_PRICE_FILTER.HIGH);
@@ -65,7 +66,7 @@ export const BidderListMain = ({ auctionId }: { auctionId: number }) => {
               <li
                 aria-label="입찰자 리스트 아이템"
                 key={el.bidderNickname}
-                className={`flex p-3 items-center justify-between text-gray1 ${idx === 0 && 'border border-cheeseYellow rounded-lg'}`}
+                className={`flex p-3 items-center justify-between text-gray1 ${idx === 0 ? 'border border-cheeseYellow rounded-lg' : ''}`}
               >
                 <span aria-label="입찰자 이름" className="text-body1">
                   {el.bidderNickname}

@@ -5,11 +5,9 @@ import {
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
-import {
-  useGetBestAuctions,
-  useGetImminentAuctions,
-  useGetPreAuctions
-} from '../model';
+import { useGetBestAuctions } from '../model/useGetBestAuctions';
+import { useGetImminentAuctions } from '../model/useGetImminentAuctions';
+import { useGetPreAuctions } from '../model/useGetPreAuctions';
 import {
   bestAuctionsData,
   imminentAuctionsData,
@@ -20,7 +18,7 @@ import { LayoutWithNav } from '@/app/layout';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { getTimeColor } from '@/shared/utils/getTimeColor';
 import userEvent from '@testing-library/user-event';
-import { Home } from '../ui';
+import { Home } from '../ui/Home';
 
 vi.mock('@/pages/home/model');
 vi.mock('@/features/notification/model');

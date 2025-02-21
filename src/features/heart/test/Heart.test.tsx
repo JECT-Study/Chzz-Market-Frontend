@@ -8,7 +8,7 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
 
 import { LayoutWithNav } from '@/app/layout';
-import { Heart } from '@/pages/heart';
+import { Heart } from '@/pages/heart/Heart';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 

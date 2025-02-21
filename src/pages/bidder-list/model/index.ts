@@ -1,1 +1,0 @@
-export { useGetBidderList } from './useGetBidderList';

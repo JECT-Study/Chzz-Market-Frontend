@@ -2,7 +2,7 @@ import { ROUTES } from '@/shared/constants/routes';
 import { RefObject } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router';
-import { useScrollDetection } from '../lib';
+import { useScrollDetection } from '../lib/useScrollDetection';
 
 export const HomeRegisterBtn = ({ containRef }: { containRef: RefObject<HTMLDivElement> }) => {
   const navigate = useNavigate();

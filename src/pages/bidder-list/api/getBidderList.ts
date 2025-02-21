@@ -1,6 +1,6 @@
-import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
-import type { IBidderList } from '../config';
+import type { IBidderList } from '../config/type';
+import { httpClient } from '@/shared/api/axios';
 
 export const getBidderList = async (
   auctionId: number

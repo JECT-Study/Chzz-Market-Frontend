@@ -6,7 +6,7 @@ import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 import { CarouselItem } from '@/shared/ui/carousel';
 
 import { useNavigate } from 'react-router';
-import { useGetImminentAuctions } from '../model';
+import { useGetImminentAuctions } from '../model/useGetImminentAuctions';
 
 const ImminentItemList = () => {
   const { imminentAuctions } = useGetImminentAuctions();

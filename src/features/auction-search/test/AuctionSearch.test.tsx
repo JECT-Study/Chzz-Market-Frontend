@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { Mock, beforeEach, describe, expect, test, vi } from 'vitest';
 import { getAuctionSearch, getPreAuctionSearch } from '../api';
 
-import { AuctionSearch } from '@/pages/search';
+import { AuctionSearch } from '@/pages/search/ui/AuctionSearch';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';
 
