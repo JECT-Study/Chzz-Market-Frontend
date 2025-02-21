@@ -1,7 +1,7 @@
+import profileEditReducer from '@/entities/user/model/profileEditSlice';
+import authReducer from '@/features/auth/model/authSlice';
+import signupReducer from '@/features/sign-up/model/signupSlice';
 import { configureStore } from '@reduxjs/toolkit';
-import profileEditReducer from '../entities/user/model/profileEditSlice';
-import authReducer from '../features/auth/model/authSlice';
-import signupReducer from '../features/sign-up/model/signupSlice';
 
 export const store = configureStore({
   reducer: {

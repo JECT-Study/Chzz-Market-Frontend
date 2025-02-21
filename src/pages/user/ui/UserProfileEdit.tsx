@@ -4,7 +4,7 @@ import { FormField } from '@/shared/ui/FormField';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import { RootState } from '@/app/store';
 import type { IUserProfile } from '@/entities/user/user';
 import { getProfileImageURL } from '@/features/profile/api';

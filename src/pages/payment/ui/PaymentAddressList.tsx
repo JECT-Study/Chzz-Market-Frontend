@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import type { IAddressWithId } from '@/entities/address/address';
 import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
 import { useGetAddresses } from '@/features/address/model';

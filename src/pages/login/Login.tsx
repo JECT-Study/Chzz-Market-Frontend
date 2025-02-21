@@ -1,4 +1,4 @@
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { useRefreshTokenOnSuccess } from '@/features/auth/model/useRefreshTokenOnSuccess';
 import ChizzImage from '@/shared/assets/icons/main_cheese_icon.svg';

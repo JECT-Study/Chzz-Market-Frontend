@@ -9,7 +9,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
-import { Layout } from '@/app/layout';
+import { Layout } from '@/app/layout/ui/Layout';
 import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 
 export const ProductList = () => {

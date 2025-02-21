@@ -3,7 +3,7 @@ import { FormField } from '@/shared/ui/FormField';
 import { KeyboardEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import { RootState } from '@/app/store';
 import type { IUser } from '@/entities/user/user';
 import { useSignup } from '@/features/sign-up/hooks';

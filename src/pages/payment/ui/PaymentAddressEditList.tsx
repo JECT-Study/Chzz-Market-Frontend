@@ -2,12 +2,12 @@ import { useDeleteAddress, useGetAddresses } from '@/features/address/model';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import type { IAddressWithId } from '@/entities/address/address';
-import { Button } from '@/shared/ui/Button';
 import rocation_off from '@/shared/assets/icons/rocation_off.svg';
 import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import { ROUTES } from '@/shared/constants/routes';
+import { Button } from '@/shared/ui/Button';
 
 export const PaymentAddressEditList = () => {
   const navigate = useNavigate();

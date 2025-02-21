@@ -1,4 +1,5 @@
-import { GlobalLayout, LayoutWithNav } from "@/app/layout";
+import { GlobalLayout } from "@/app/layout/ui/GlobalLayout";
+import { LayoutWithNav } from "@/app/layout/ui/LayoutWithNav";
 
 import { Home } from "@/pages/home/ui/Home";
 import { ROUTES } from "@/shared/constants/routes";

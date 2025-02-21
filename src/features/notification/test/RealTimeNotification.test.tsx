@@ -1,7 +1,7 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { GlobalLayout } from '@/app/layout';
+import { GlobalLayout } from '@/app/layout/ui/GlobalLayout';
 import { store } from '@/app/store';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';

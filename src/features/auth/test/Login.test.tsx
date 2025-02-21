@@ -9,11 +9,11 @@ import { MemoryRouter } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
 import { useRefreshTokenOnSuccess } from '../model/useRefreshTokenOnSuccess';
 
-vi.mock('../hooks', () => ({
+vi.mock('../hooks/useAuth', () => ({
   useAuth: vi.fn()
 }));
 
-vi.mock('../model', () => ({
+vi.mock('../model/useRefreshTokenOnSuccess', () => ({
   useRefreshTokenOnSuccess: vi.fn()
 }));
 

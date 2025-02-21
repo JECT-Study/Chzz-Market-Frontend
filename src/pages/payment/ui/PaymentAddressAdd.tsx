@@ -2,7 +2,7 @@ import { useToggleState } from '@/shared/hooks/useToggleState';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
 import { usePostAddress } from '@/features/address/model';
 import { Button } from '@/shared/ui/Button';

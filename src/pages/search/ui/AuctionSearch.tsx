@@ -1,7 +1,7 @@
 import { IAuctionSearchItem, IPreAuctionItem } from '@/entities/auction/types/item';
 import { useEffect, useState } from 'react';
 
-import { Layout } from '@/app/layout';
+import { Layout } from '@/app/layout/ui/Layout';
 import { getAuctionSearch } from '@/features/auction-search/api';
 import { getPreAuctionSearch } from '@/features/auction-search/api/getPreAuctionSearch';
 import { ProductListTabs } from '@/features/product-list';

@@ -1,5 +1,5 @@
 
-import { Layout } from '@/app/layout';
+import { Layout } from '@/app/layout/ui/Layout';
 import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { useGetAuctionDetails } from '@/features/details';
 import { AuctionItem } from '@/shared/ui/AuctionItem';

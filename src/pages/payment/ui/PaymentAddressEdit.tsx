@@ -4,7 +4,7 @@ import { Button } from '@/shared/ui/Button';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
 import { useEditAddress } from '@/features/address/model';
 import { ROUTES } from '@/shared/constants/routes';

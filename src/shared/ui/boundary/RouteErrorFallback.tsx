@@ -1,4 +1,4 @@
-import { Layout } from '@/app/layout';
+import { Layout } from '@/app/layout/ui/Layout';
 import { useNavigate } from 'react-router';
 import NotFoundIcon from '../../assets/icons/404_sign.svg';
 import { Button } from '../Button';

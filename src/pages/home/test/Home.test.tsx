@@ -14,14 +14,16 @@ import {
   preAuctionsData
 } from './data';
 
-import { LayoutWithNav } from '@/app/layout';
+import { LayoutWithNav } from '@/app/layout/ui/LayoutWithNav';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { getTimeColor } from '@/shared/utils/getTimeColor';
 import userEvent from '@testing-library/user-event';
 import { Home } from '../ui/Home';
 
-vi.mock('@/pages/home/model');
-vi.mock('@/features/notification/model');
+vi.mock('@/pages/home/model/useGetBestAuctions');
+vi.mock('@/pages/home/model/useGetImminentAuctions');
+vi.mock('@/pages/home/model/useGetPreAuctions');
+vi.mock('@/features/notification/model/useGetNotificationList');
 
 vi.mocked(useGetBestAuctions).mockReturnValue({
   bestAuctions: bestAuctionsData

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { scan } from 'react-scan';
 import { Toaster } from 'sonner';
 import App from './App';
-import { ReactQueryProvider } from './provider/index';
+import { ReactQueryProvider } from './provider/queryProvider';
 import { store } from './store';
 
 async function setupMocks(): Promise<void> {

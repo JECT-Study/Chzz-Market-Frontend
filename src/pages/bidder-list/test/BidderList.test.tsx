@@ -1,20 +1,20 @@
 import { auctionDetailsData, useGetAuctionDetails } from '@/features/details';
-import { describe, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, test, vi } from 'vitest';
 
-import { BidderListMain } from '../ui/BidderListMain';
-import { BrowserRouter } from 'react-router';
 import type { IAuctionDetails } from '@/entities/auction/types/details';
-import { bidderListData } from './data';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import { useGetBidderList } from '../model/useGetBidderList';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router';
+import { useGetBidderList } from '../model/useGetBidderList';
+import { BidderListMain } from '../ui/BidderListMain';
+import { bidderListData } from './data';
 
-vi.mock('@/features/details/model', () => ({
+vi.mock('@/features/details/model/useGetAuctionDetails', () => ({
   useGetAuctionDetails: vi.fn()
 }));
 
-vi.mock('@/pages/bidder-list/model', () => ({
+vi.mock('@/pages/bidder-list/model/useGetBidderList', () => ({
   useGetBidderList: vi.fn()
 }));
 

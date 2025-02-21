@@ -1,7 +1,7 @@
 import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-import { Layout } from '@/app/layout';
+import { Layout } from '@/app/layout/ui/Layout';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useLocation } from 'react-router';

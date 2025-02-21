@@ -1,7 +1,7 @@
 import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-import { Layout } from '@/app/layout';
+import { Layout } from '@/app/layout/ui/Layout';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import ErrorIcon from '../../assets/icons/error.svg';

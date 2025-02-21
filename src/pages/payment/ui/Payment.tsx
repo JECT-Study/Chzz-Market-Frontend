@@ -11,7 +11,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import type { IAddressWithId } from '@/entities/address/address';
 import { addressMemo } from '@/features/address/config/address';
 import { usePostPayment } from '@/features/address/model';
