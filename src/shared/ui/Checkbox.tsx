@@ -1,5 +1,5 @@
-import CheckOff from '@/shared/assets/icons/check_off.svg';
-import CheckOn from '@/shared/assets/icons/check_on.svg';
+import CheckOff from '../assets/icons/check_off.svg';
+import CheckOn from '../assets/icons/check_on.svg';
 
 interface CheckboxProps {
   check: boolean;

@@ -1,4 +1,9 @@
 import {
+  kakaoLoginHandler,
+  naverLoginHandler,
+  postSignupHandler
+} from '@/features/auth/test/handler';
+import {
   auctionDetailsHandler,
   cancelBidHandler,
   convertPreAuctionHandler,
@@ -6,37 +11,32 @@ import {
   heartAuctionHandler,
   postBidHandler
 } from '@/features/details';
-import {
-  getAuctionUploadURLsHandler,
-  postAuctionHandler,
-  uploadImagesToS3Handler
-} from '@/features/register';
 import { heartDeleteHandler, heartHandler } from '@/features/heart';
-import {
-  kakaoLoginHandler,
-  naverLoginHandler,
-  postSignupHandler
-} from '@/features/auth';
 import {
   notificationDeleteHandler,
   notificationListHandler,
   notificationReadHandler,
   realTimeNotificationsHandler
 } from '@/features/notification';
+import {
+  getAuctionUploadURLsHandler,
+  postAuctionHandler,
+  uploadImagesToS3Handler
+} from '@/features/register';
 
-import { HttpHandler } from 'msw';
-import { bidderListHandler } from '@/pages/bidder-list';
-import { getMyAuctionPreRegisterHandler } from '@/features/user';
-import { getOngoingProductListHandler } from '@/features/product-list';
-import { homeAuctionsHandler } from '@/pages/home';
 import { patchPreAuctionHandler } from '@/features/edit-auction';
-import { setupWorker } from 'msw/browser';
+import { getOngoingProductListHandler } from '@/features/product-list';
 import {
   deleteUserHandler,
+  getMyAuctionPreRegisterHandler,
   getUserProfileHandler,
   logoutHandler,
   refreshTokenHandler
-} from '@/features/user/test/handler';
+} from '@/features/user';
+import { bidderListHandler } from '@/pages/bidder-list';
+import { homeAuctionsHandler } from '@/pages/home';
+import { HttpHandler } from 'msw';
+import { setupWorker } from 'msw/browser';
 
 /* eslint-disable import/no-named-as-default */
 const handlers: HttpHandler[] = [

@@ -85,11 +85,3 @@ export const deleteUserHandler: HttpHandler = http.delete(
     });
   }
 );
-
-export const mockUserHandlers = [
-  getMyAuctionPreRegisterHandler,
-  getUserProfileHandler,
-  logoutHandler,
-  deleteUserHandler,
-  refreshTokenHandler
-];

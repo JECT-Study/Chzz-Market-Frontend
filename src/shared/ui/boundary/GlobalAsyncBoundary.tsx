@@ -1,10 +1,10 @@
 import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-import { Layout } from '@/app/layout/index';
-import ErrorIcon from '@/shared/assets/icons/error.svg';
+import { Layout } from '@/app/layout';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
+import ErrorIcon from '../../assets/icons/error.svg';
 import { getErrorByCode } from '../../utils/getErrorByCode';
 import { Button } from '../Button';
 import { GlobalSpinner } from '../spinner/GlobalSpinner';

@@ -1,5 +1,5 @@
-import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
-import { TimeLabel } from '@/shared/ui/TimeLabel';
+import { ProgressiveImage } from './ProgressiveImage';
+import { TimeLabel } from './TimeLabel';
 import { ReactNode } from 'react';
 
 export interface ProductProps {

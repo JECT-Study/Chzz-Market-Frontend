@@ -1,4 +1,4 @@
-import NoticeRed from '@/shared/assets/icons/notice_red.svg';
+import NoticeRed from '../assets/icons/notice_red.svg';
 
 export const ErrorMessage = ({ message }: { message: string }) => {
   return (

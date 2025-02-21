@@ -1,5 +1,5 @@
 
-import { useAuth } from '@/features/auth/hooks';
+import { useAuth } from '@/features/auth/hooks/useAuth';
 import { Button } from '@/shared/ui/Button';
 import { Confirm } from '@/shared/ui/Confirm';
 import { Modal } from '@/shared/ui/Modal';

@@ -6,8 +6,8 @@ import { Login } from '@/pages/login';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
-import { useAuth } from '../hooks';
-import { useRefreshTokenOnSuccess } from '../model';
+import { useAuth } from '../hooks/useAuth';
+import { useRefreshTokenOnSuccess } from '../model/useRefreshTokenOnSuccess';
 
 vi.mock('../hooks', () => ({
   useAuth: vi.fn()

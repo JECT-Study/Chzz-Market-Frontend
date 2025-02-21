@@ -1,4 +1,4 @@
-import LikeIcon from '@/shared/assets/icons/in_box_like.svg';
+import LikeIcon from '../assets/icons/in_box_like.svg';
 
 export const LikeCount = ({ count }: { count: number }) => {
   return (

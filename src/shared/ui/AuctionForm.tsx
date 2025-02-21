@@ -1,5 +1,5 @@
-import { CATEGORIES, } from '@/shared/constants/categories';
-import { useToggleState } from '@/shared/hooks/useToggleState';
+import { CATEGORIES } from '../constants/categories';
+import { useToggleState } from '../hooks/useToggleState';
 
 import { Layout } from '@/app/layout';
 import type { IPreAuctionDetails } from '@/entities/auction';
@@ -16,13 +16,13 @@ import {
   type IRegisterPatch,
   type IRegisterPost
 } from '@/features/register';
-import NoticeIcon from '@/shared/assets/icons/notice.svg';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import NoticeIcon from '../assets/icons/notice.svg';
 import { convertCurrencyToNumber } from '../utils/convertCurrencyToNumber';
 import { formatCurrencyWithWon } from '../utils/formatCurrencyWithWon';
 import { Button } from './Button';

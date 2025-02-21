@@ -1,8 +1,8 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import type { IUser } from '@/entities/user/user';
+import type { IUser } from '@/entities/user';
 import { useNavigate } from 'react-router';
-import { postSignup } from '../api';
+import { postSignup } from '../api/postSignup';
 
 export const usePostSignup = (): {
   signupMutation: UseMutateFunction<any, Error, IUser, unknown>;
