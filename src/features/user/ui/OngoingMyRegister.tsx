@@ -4,7 +4,7 @@ import { ParticipantCount } from '@/shared/ui/ParticipantCount';
 import { Price } from '@/shared/ui/Price';
 import { ProductItem } from '@/shared/ui/ProductItem';
 
-import type { IAuctionOngoingRegisteredItem } from '@/entities/auction';
+import type { IAuctionOngoingRegisteredItem } from '@/entities/auction/types/userRegistered';
 import { useNavigate } from 'react-router';
 
 export const OngoingMyRegister = ({

@@ -2,7 +2,7 @@ import { CATEGORIES } from '../constants/categories';
 import { useToggleState } from '../hooks/useToggleState';
 
 import { Layout } from '@/app/layout';
-import type { IPreAuctionDetails } from '@/entities/auction';
+import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import { usePatchPreAuction } from '@/features/edit-auction';
 import {
   ImageUploaderInput,

@@ -1,6 +1,6 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import type { IUser } from '@/entities/user';
+import type { IUser } from '@/entities/user/user';
 import { useNavigate } from 'react-router';
 import { postSignup } from '../api/postSignup';
 

@@ -1,4 +1,4 @@
-import type { IAuctionItem } from '.';
+import type { IAuctionItem } from './item';
 
 // 페이지 정보에 대한 인터페이스
 export interface Pageable {

@@ -4,7 +4,7 @@ import {
   useQueryClient
 } from '@tanstack/react-query';
 
-import type { IPreAuctionDetails } from '@/entities/auction';
+import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { toast } from 'sonner';
 import { heartAuction } from '../api';

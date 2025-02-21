@@ -1,7 +1,7 @@
 import type {
   IAuctionEndRegisteredItem,
   IAuctionOngoingRegisteredItem
-} from '@/entities/auction';
+} from '@/entities/auction/types/userRegistered';
 import {
   EndMyRegister,
   OngoingMyRegister,

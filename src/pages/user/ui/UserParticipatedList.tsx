@@ -2,7 +2,7 @@ import type {
   IUserAuctionHistoryItem,
   IUserAuctionLostItem,
   IUserAuctionWonItem
-} from '@/entities/auction';
+} from '@/entities/auction/types/userParticipated';
 import {
   OrderHistoryProduct,
   OrderListTab,

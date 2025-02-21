@@ -1,10 +1,9 @@
 import { CustomCarousel } from '@/shared/ui/CustomCarousel';
-import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
 import { CarouselItem } from '@/shared/ui/carousel';
 import { AuctionDetailsFooter, DetailsBasic, ProgressBar } from ".";
 
 import { Layout } from "@/app/layout";
-import type { IAuctionDetails } from "@/entities/auction";
+import type { IAuctionDetails } from "@/entities/auction/types/details";
 import ParticipantAmount from '@/shared/assets/icons/my_participation_amount.svg';
 import Participants from '@/shared/assets/icons/participants.svg';
 import ProfileDefaultImage from '@/shared/assets/icons/profile.svg';
@@ -25,7 +24,8 @@ export const AuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
             <CustomCarousel length={images.length} loop>
               {images.map((img, idx) => (
                 <CarouselItem className='flex items-center justify-center' key={img.imageId}>
-                  <ProgressiveImage lowResSrc={`${img.imageUrl}?h=20`} highResSrc={`${img.imageUrl}?h=840`} alt={`상품 사진_${idx}`} className='object-contain h-[420px]' priority={idx === 0 ? 'high' : 'low'} loading={idx === 0 ? 'eager' : 'lazy'} />
+                  {/* <ProgressiveImage lowResSrc={`${img.imageUrl}?h=20`} highResSrc={`${img.imageUrl}?h=840`} alt={`상품 사진_${idx}`} className='object-contain h-[420px]' priority={idx === 0 ? 'high' : 'low'} loading={idx === 0 ? 'eager' : 'lazy'} /> */}
+                  <img src={`${img.imageUrl}?h=840`} alt={`상품 사진_${idx}`} className='object-contain h-[420px]' {...{ fetchpriority: idx === 0 ? 'high' : 'low' }} loading={idx === 0 ? 'eager' : 'lazy'} />
                 </CarouselItem>
               ))}
             </CustomCarousel>

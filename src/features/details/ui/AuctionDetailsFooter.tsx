@@ -6,7 +6,7 @@ import { Modal } from "@/shared/ui/Modal";
 import { useCancelBid, useGetAuctionDetails } from "../model";
 
 import { Layout } from "@/app/layout";
-import type { IAuctionDetails } from "@/entities/auction";
+import type { IAuctionDetails } from "@/entities/auction/types/details";
 import { useNavigate } from "react-router";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {

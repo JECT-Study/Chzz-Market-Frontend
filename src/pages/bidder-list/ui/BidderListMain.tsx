@@ -1,6 +1,6 @@
 
 import { Layout } from '@/app/layout';
-import type { IAuctionDetails } from '@/entities/auction';
+import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { useGetAuctionDetails } from '@/features/details';
 import { AuctionItem } from '@/shared/ui/AuctionItem';
 import { Button } from '@/shared/ui/Button';

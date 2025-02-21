@@ -1,13 +1,14 @@
+import { IAuctionItem, IPreAuctionItem } from './item';
 import {
-  IAuctionEndRegisteredItem,
-  IAuctionItem,
-  IAuctionOngoingRegisteredItem,
-  IPreAuctionItem,
-  IPreAuctionRegisteredItem,
   IUserAuctionHistoryItem,
   IUserAuctionLostItem,
   IUserAuctionWonItem
-} from '.';
+} from './userParticipated';
+import {
+  IAuctionEndRegisteredItem,
+  IAuctionOngoingRegisteredItem,
+  IPreAuctionRegisteredItem
+} from './userRegistered';
 
 export interface PaginationData<T> {
   hasNext: boolean;

@@ -2,7 +2,7 @@ import { ROUTES } from '@/shared/constants/routes';
 import { Price } from '@/shared/ui/Price';
 import { ProductItem } from '@/shared/ui/ProductItem';
 
-import type { IAuctionSearchItem } from '@/entities/auction';
+import type { IAuctionSearchItem } from '@/entities/auction/types/item';
 import { ParticipantCount } from '@/shared/ui/ParticipantCount';
 import { TimeRemaining } from '@/shared/ui/TimeRemaining';
 import { useNavigate } from 'react-router';

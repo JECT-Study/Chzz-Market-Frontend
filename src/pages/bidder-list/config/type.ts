@@ -1,4 +1,4 @@
-import type { PaginationData } from '@/entities/auction';
+import type { PaginationData } from '@/entities/auction/types/list';
 
 export interface IBidder {
   isWinningBidder: boolean;

@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 
 import { BidderListMain } from '../ui/BidderListMain';
 import { BrowserRouter } from 'react-router';
-import type { IAuctionDetails } from '@/entities/auction';
+import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { bidderListData } from './data';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { useGetBidderList } from '../model/useGetBidderList';

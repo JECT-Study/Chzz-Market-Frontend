@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import { AuctionDetailsMain, useGetAuctionDetails } from '..';
 
-import type { IAuctionDetails } from '@/entities/auction';
+import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { CATEGORIES } from '@/shared/constants/categories';
 import userEvent from '@testing-library/user-event';

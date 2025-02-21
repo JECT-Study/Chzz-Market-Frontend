@@ -3,7 +3,7 @@ import { useToggleState } from '@/shared/hooks/useToggleState';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Layout } from '@/app/layout';
-import type { IAuctionDetails } from '@/entities/auction';
+import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { useGetAuctionDetails } from '@/features/details';
 import { useEditableNumberInput } from '@/features/register';
 import { AuctionItem } from '@/shared/ui/AuctionItem';

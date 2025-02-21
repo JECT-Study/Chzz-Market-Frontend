@@ -7,7 +7,7 @@ import {
   useToggleAuctionDetailsHeart
 } from '../model';
 
-import type { IPreAuctionDetails } from '@/entities/auction';
+import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { CATEGORIES } from '@/shared/constants/categories';
 import userEvent from '@testing-library/user-event';

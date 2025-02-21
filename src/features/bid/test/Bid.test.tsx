@@ -1,7 +1,7 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import type { IAuctionDetails } from '@/entities/auction';
+import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { useGetAuctionDetails } from '@/features/details';
 import { auctionDetailsData } from '@/features/details/test/data';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';

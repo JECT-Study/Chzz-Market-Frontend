@@ -1,7 +1,7 @@
 import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
-import type { IAuctionList } from '@/entities/auction';
+import type { IAuctionList } from '@/entities/auction/types/list';
 import type { ProductParams } from '../config';
 
 export const getOngoingProductList = async ({
