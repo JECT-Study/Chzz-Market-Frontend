@@ -6,8 +6,8 @@ import { useGetAuctionDetails } from '@/features/details/model/useGetAuctionDeta
 import { auctionDetailsData } from '@/features/details/test/data';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { BidForm } from '..';
-import { usePostBid } from '../model';
+import { BidForm } from '../ui/BidForm';
+import { usePostBid } from '../model/usePostBid';
 
 vi.mock('@/features/details/model/useGetAuctionDetails', () => ({
   useGetAuctionDetails: vi.fn()

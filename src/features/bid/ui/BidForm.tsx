@@ -14,8 +14,8 @@ import { convertCurrencyToNumber } from '@/shared/utils/convertCurrencyToNumber'
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { getBidSchema } from '../config';
-import { usePostBid } from '../model';
+import { getBidSchema } from '../config/schema';
+import { usePostBid } from '../model/usePostBid';
 import { BidCaution } from './BidCaution';
 
 export const BidForm = ({ auctionId }: { auctionId: number }) => {

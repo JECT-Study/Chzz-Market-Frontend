@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router';
 
-import { BidForm } from '@/features/bid';
+import { BidForm } from '@/features/bid/ui/BidForm';
 import { AsyncBoundary } from '@/shared/ui/boundary/AsyncBoundary';
 
 export const Bid = () => {

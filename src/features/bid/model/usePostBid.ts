@@ -3,8 +3,8 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { postBid } from '../api';
-import { IBidPostData } from '../config';
+import { postBid } from '../api/postBid';
+import type { IBidPostData } from '../config/type';
 
 export const usePostBid = (
   auctionId: number

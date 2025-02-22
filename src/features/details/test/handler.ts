@@ -1,6 +1,6 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
-import type { IBidPostData } from '@/features/bid';
+import type { IBidPostData } from '@/features/bid/config/type';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { auctionDetailsData } from './data';
 
