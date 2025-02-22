@@ -6,9 +6,9 @@ import { Register } from '@/pages/register/Register';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';
-import { usePostAuction } from '..';
+import { usePostAuction } from '../model/usePostAuction';
 
-vi.mock('@/features/register/model');
+vi.mock('@/features/register/model/usePostAuction');
 vi.mock('@/features/edit-auction/model/usePatchPreAuction');
 vi.mocked(usePostAuction).mockReturnValue({
   mutate: vi.fn(),

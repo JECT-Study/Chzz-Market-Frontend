@@ -4,18 +4,15 @@ import { useToggleState } from '../hooks/useToggleState';
 import { Layout } from '@/app/layout/ui/Layout';
 import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import { usePatchPreAuction } from '@/features/edit-auction/model/usePatchPreAuction';
-import {
-  ImageUploaderInput,
-  RegisterCaution,
-  RegisterSchema,
-  convertDataURLtoFile,
-  getAuctionUploadURLs,
-  uploadImagesToS3,
-  useEditableNumberInput,
-  usePostAuction,
-  type IRegisterPatch,
-  type IRegisterPost
-} from '@/features/register';
+import { getAuctionUploadURLs } from '@/features/register/api/getAuctionUploadURLs';
+import { uploadImagesToS3 } from '@/features/register/api/uploadImagesToS3';
+import { RegisterSchema } from '@/features/register/config/schema';
+import type { IRegisterPatch, IRegisterPost } from '@/features/register/config/type';
+import { useEditableNumberInput } from '@/features/register/lib/useEditableNumberInput';
+import { usePostAuction } from '@/features/register/model/usePostAuction';
+import { ImageUploaderInput } from '@/features/register/ui/ImageUploaderInput';
+import { RegisterCaution } from '@/features/register/ui/RegisterCaution';
+import { convertDataURLtoFile } from '@/features/register/utils/convertDataURLtoFile';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';

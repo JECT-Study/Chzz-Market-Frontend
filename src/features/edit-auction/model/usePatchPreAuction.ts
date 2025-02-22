@@ -1,6 +1,6 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import type { IRegisterPatch } from '@/features/register';
+import type { IRegisterPatch } from '@/features/register/config/type';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';

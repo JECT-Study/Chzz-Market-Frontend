@@ -25,7 +25,7 @@ import {
   getAuctionUploadURLsHandler,
   postAuctionHandler,
   uploadImagesToS3Handler
-} from '@/features/register';
+} from '@/features/register/test/handler';
 
 import { patchPreAuctionHandler } from '@/features/edit-auction/test/handler';
 import { getOngoingProductListHandler } from '@/features/product-list';

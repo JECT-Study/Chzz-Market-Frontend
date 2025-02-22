@@ -2,8 +2,8 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import type { IRegisterPost } from '..';
-import { postAuction } from '../api';
+import { postAuction } from '../api/postAuction';
+import type { IRegisterPost } from '../config/type';
 
 export const usePostAuction = (): {
   mutate: UseMutateFunction<unknown, Error, IRegisterPost, unknown>;

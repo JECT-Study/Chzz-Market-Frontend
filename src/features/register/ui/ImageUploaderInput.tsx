@@ -3,13 +3,14 @@ import {
   SortableContext,
   verticalListSortingStrategy
 } from '@dnd-kit/sortable';
-import { useDragAndDrop, useImageUploader } from '../lib';
+import { useDragAndDrop, } from '../lib/useDragAndDrop';
+import { useImageUploader } from '../lib/useImageUploader';
 
-import { AddImageButton } from '.';
-import { ImageItem } from './ImageItem';
-import { ImageOverlay } from './ImageOverlay';
 import { CustomCarousel } from '@/shared/ui/CustomCarousel';
 import { Input } from '@/shared/ui/input';
+import { AddImageButton } from './AddImageButton';
+import { ImageItem } from './ImageItem';
+import { ImageOverlay } from './ImageOverlay';
 
 interface ImageUploaderProps {
   images: string[];

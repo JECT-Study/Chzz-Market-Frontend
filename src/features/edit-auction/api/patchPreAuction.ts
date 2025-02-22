@@ -1,4 +1,4 @@
-import type { IRegisterPatch } from '@/features/register';
+import type { IRegisterPatch } from '@/features/register/config/type';
 import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
