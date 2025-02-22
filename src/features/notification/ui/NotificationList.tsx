@@ -1,7 +1,7 @@
 import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
-import { useGetNotificationListWithSuspense } from '..';
-import type { INotification } from '../config';
+import type { INotification } from '../config/type';
 import { NotificationItem } from './NotificationItem';
+import { useGetNotificationListWithSuspense } from '../model/useGetNotificationList';
 
 export const NotificationList = () => {
   const { notificationList } = useGetNotificationListWithSuspense();

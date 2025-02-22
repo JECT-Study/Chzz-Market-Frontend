@@ -1,7 +1,8 @@
 import { Button } from '@/shared/ui/Button';
 import { useNavigate } from 'react-router';
-import { NOTIFICATION_CONTENTS, type IRealTimeNotification } from '../config';
-import { useReadNotification } from '../model';
+import { NOTIFICATION_CONTENTS } from '../config/constants';
+import { type IRealTimeNotification } from '../config/type';
+import { useReadNotification } from '../model/useReadNotification';
 
 export const RealTimeNotificationItem = ({
   notification,

@@ -1,4 +1,4 @@
-import { useGetNotificationList } from '@/features/notification';
+import { useGetNotificationList } from '@/features/notification/model/useGetNotificationList';
 import { useNavigate } from 'react-router';
 import { NAV_ICONS } from '../config/navIcons';
 

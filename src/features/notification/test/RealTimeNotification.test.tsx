@@ -6,13 +6,12 @@ import { store } from '@/app/store';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { useReadNotification, useSSE } from '../model';
-import { realTimeNotificationData } from '.';
+import { useReadNotification } from '../model/useReadNotification';
+import { useSSE } from '../model/useSSE';
+import { realTimeNotificationData } from './data';
 
-vi.mock('@/features/notification/model', () => ({
-  useReadNotification: vi.fn(),
-  useSSE: vi.fn()
-}));
+vi.mock('@/features/notification/model/useReadNotification');
+vi.mock('@/features/notification/model/useSSE');
 
 const mutateReadMock = vi.fn();
 vi.mocked(useReadNotification).mockReturnValue({

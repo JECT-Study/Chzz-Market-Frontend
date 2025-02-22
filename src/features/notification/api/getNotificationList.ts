@@ -1,7 +1,7 @@
 import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
-import type { INotification } from '../config';
+import type { INotification } from '../config/type';
 
 export const getNotificationList = async (): Promise<INotification[]> => {
   const response = await httpClient.get(`${API_END_POINT.NOTIFICATION_LIST}`);

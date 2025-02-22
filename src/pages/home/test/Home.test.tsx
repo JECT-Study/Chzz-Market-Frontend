@@ -1,7 +1,3 @@
-import {
-  notificationData,
-  useGetNotificationList
-} from '@/features/notification';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
@@ -19,6 +15,8 @@ import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { getTimeColor } from '@/shared/utils/getTimeColor';
 import userEvent from '@testing-library/user-event';
 import { Home } from '../ui/Home';
+import { useGetNotificationList } from '@/features/notification/model/useGetNotificationList';
+import { notificationData } from '@/features/notification/test/data';
 
 vi.mock('@/pages/home/model/useGetBestAuctions');
 vi.mock('@/pages/home/model/useGetImminentAuctions');

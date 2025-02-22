@@ -20,7 +20,7 @@ import {
   notificationListHandler,
   notificationReadHandler,
   realTimeNotificationsHandler
-} from '@/features/notification';
+} from '@/features/notification/test/handler';
 import {
   getAuctionUploadURLsHandler,
   postAuctionHandler,

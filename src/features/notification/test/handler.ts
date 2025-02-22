@@ -1,8 +1,8 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
-import { notificationData, realTimeNotificationData } from '.';
-import { type INotification } from '../config';
+import { type INotification } from '../config/type';
+import { notificationData, realTimeNotificationData } from './data';
 
 let notificationList = [...notificationData];
 

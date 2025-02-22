@@ -1,21 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
-import { notificationData, useDeleteNotification, useGetNotificationList, useGetNotificationListWithSuspense, useReadNotification } from '..';
 
 import { LayoutWithNav } from '@/app/layout/ui/LayoutWithNav';
 import { Notification } from '@/pages/notification/Notification';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { NOTIFICATION_CONTENTS } from '../config';
+import { NOTIFICATION_CONTENTS } from '../config/constants';
+import { useDeleteNotification } from '../model/useDeleteNotification';
+import { useGetNotificationList, useGetNotificationListWithSuspense } from '../model/useGetNotificationList';
+import { useReadNotification } from '../model/useReadNotification';
+import { notificationData } from './data';
 ;
 
-vi.mock('@/features/notification/model', () => ({
-  useGetNotificationListWithSuspense: vi.fn(),
-  useGetNotificationList: vi.fn(),
-  useReadNotification: vi.fn(),
-  useDeleteNotification: vi.fn()
-}));
+vi.mock('@/features/notification/model/useGetNotificationListWithSuspense');
+vi.mock('@/features/notification/model/useGetNotificationList');
+vi.mock('@/features/notification/model/useReadNotification');
+vi.mock('@/features/notification/model/useDeleteNotification');
 
 vi.mocked(useGetNotificationList).mockReturnValue({
   notificationList: notificationData

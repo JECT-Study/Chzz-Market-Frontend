@@ -3,7 +3,7 @@ import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import { isLoggedIn } from '@/features/auth/model/authSlice';
 import { useSelector } from 'react-redux';
-import { getNotificationList } from '../api';
+import { getNotificationList } from '../api/getNotificationList';
 
 export const useGetNotificationList = () => {
   const isLogin = useSelector(isLoggedIn);
