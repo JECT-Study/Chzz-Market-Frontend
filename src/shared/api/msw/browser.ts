@@ -24,7 +24,7 @@ import {
   uploadImagesToS3Handler
 } from '@/features/register';
 
-import { patchPreAuctionHandler } from '@/features/edit-auction';
+import { patchPreAuctionHandler } from '@/features/edit-auction/test/handler';
 import { getOngoingProductListHandler } from '@/features/product-list';
 import {
   deleteUserHandler,

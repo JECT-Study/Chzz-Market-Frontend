@@ -3,7 +3,7 @@ import { useToggleState } from '../hooks/useToggleState';
 
 import { Layout } from '@/app/layout/ui/Layout';
 import type { IPreAuctionDetails } from '@/entities/auction/types/details';
-import { usePatchPreAuction } from '@/features/edit-auction';
+import { usePatchPreAuction } from '@/features/edit-auction/model/usePatchPreAuction';
 import {
   ImageUploaderInput,
   RegisterCaution,
