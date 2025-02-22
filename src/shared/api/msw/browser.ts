@@ -11,7 +11,10 @@ import {
   heartAuctionHandler,
   postBidHandler
 } from '@/features/details/test/handler';
-import { heartDeleteHandler, heartHandler } from '@/features/heart';
+import {
+  heartDeleteHandler,
+  heartHandler
+} from '@/features/heart/test/handler';
 import {
   notificationDeleteHandler,
   notificationListHandler,

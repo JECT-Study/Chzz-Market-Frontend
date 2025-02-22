@@ -1,4 +1,3 @@
-import { heartData, useDeleteHeart, useGetHeartList } from '@/features/heart';
 import {
   notificationData,
   useGetNotificationList
@@ -11,16 +10,15 @@ import { LayoutWithNav } from '@/app/layout/ui/LayoutWithNav';
 import { Heart } from '@/pages/heart/Heart';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
+import { useDeleteHeart } from '../model/useDeleteHeart';
+import { useGetHeartList } from '../model/useGetHeartList';
+import { heartData } from './data';
 ;
 
-vi.mock('@/features/heart/model', () => ({
-  useGetHeartList: vi.fn(),
-  useDeleteHeart: vi.fn()
-}));
+vi.mock('@/features/heart/model/useGetHeartList');
+vi.mock('@/features/heart/model/useDeleteHeart');
 
-vi.mock('@/features/notification/model', () => ({
-  useGetNotificationList: vi.fn()
-}));
+vi.mock('@/features/notification/model/useGetNotificationList');
 
 vi.mocked(useGetNotificationList).mockReturnValue({
   notificationList: notificationData
