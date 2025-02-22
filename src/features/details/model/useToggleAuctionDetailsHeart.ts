@@ -7,7 +7,7 @@ import {
 import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { toast } from 'sonner';
-import { heartAuction } from '../api';
+import { heartAuction } from '../api/heartAuction';
 
 export const useToggleAuctionDetailsHeart = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;

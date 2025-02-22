@@ -1,5 +1,9 @@
-import { DetailsBasic, DetailsOption, PreAuctionDetailsFooter } from '.';
-import { useDeletePreAuction, useGetAuctionDetails } from '..';
+import { useDeletePreAuction } from '../model/useDeletePreAuction';
+import { useGetAuctionDetails } from '../model/useGetAuctionDetails';
+
+import { DetailsBasic } from './DetailsBasic';
+import { DetailsOption } from './DetailsOption';
+import { PreAuctionDetailsFooter } from './PreAuctionDetailsFooter';
 
 import { Layout } from '@/app/layout/ui/Layout';
 import type { IPreAuctionDetails } from '@/entities/auction/types/details';

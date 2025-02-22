@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router';
 
-import { PreAuctionDetailsMain } from '@/features/details';
+import { PreAuctionDetailsMain } from '@/features/details/ui/PreAuctionDetailsMain';
 import { AsyncBoundary } from '@/shared/ui/boundary/AsyncBoundary';
 
 export const PreAuctionDetails = () => {

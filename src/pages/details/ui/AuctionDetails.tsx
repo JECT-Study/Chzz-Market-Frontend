@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router';
 
-import { AuctionDetailsMain } from '@/features/details';
+import { AuctionDetailsMain } from '@/features/details/ui/AuctionDetailsMain';
 import { AsyncBoundary } from '@/shared/ui/boundary/AsyncBoundary';
 
 export const AuctionDetails = () => {

@@ -6,7 +6,7 @@ import {
 
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { toast } from 'sonner';
-import { cancelBid } from '../api';
+import { cancelBid } from '../api/cancelBid';
 
 export const useCancelBid = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;

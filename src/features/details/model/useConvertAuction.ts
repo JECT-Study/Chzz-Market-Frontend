@@ -3,7 +3,7 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { convertAuction } from '../api';
+import { convertAuction } from '../api/convertAuction';
 
 export const useConvertAuction = (
   preAuctionId: number

@@ -1,7 +1,7 @@
 
 import { Layout } from '@/app/layout/ui/Layout';
 import type { IAuctionDetails } from '@/entities/auction/types/details';
-import { useGetAuctionDetails } from '@/features/details';
+import { useGetAuctionDetails } from '@/features/details/model/useGetAuctionDetails';
 import { AuctionItem } from '@/shared/ui/AuctionItem';
 import { Button } from '@/shared/ui/Button';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';

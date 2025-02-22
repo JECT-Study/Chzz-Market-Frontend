@@ -1,4 +1,3 @@
-import { auctionDetailsData, useGetAuctionDetails } from '@/features/details';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
@@ -9,6 +8,8 @@ import { BrowserRouter } from 'react-router';
 import { useGetBidderList } from '../model/useGetBidderList';
 import { BidderListMain } from '../ui/BidderListMain';
 import { bidderListData } from './data';
+import { useGetAuctionDetails } from '@/features/details/model/useGetAuctionDetails';
+import { auctionDetailsData } from '@/features/details/test/data';
 
 vi.mock('@/features/details/model/useGetAuctionDetails', () => ({
   useGetAuctionDetails: vi.fn()

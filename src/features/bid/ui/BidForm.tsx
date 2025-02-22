@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Layout } from '@/app/layout/ui/Layout';
 import type { IAuctionDetails } from '@/entities/auction/types/details';
-import { useGetAuctionDetails } from '@/features/details';
+import { useGetAuctionDetails } from '@/features/details/model/useGetAuctionDetails';
 import { useEditableNumberInput } from '@/features/register';
 import { AuctionItem } from '@/shared/ui/AuctionItem';
 import { Button } from '@/shared/ui/Button';

@@ -10,7 +10,7 @@ import {
   deletePreAuctionHandler,
   heartAuctionHandler,
   postBidHandler
-} from '@/features/details';
+} from '@/features/details/test/handler';
 import { heartDeleteHandler, heartHandler } from '@/features/heart';
 import {
   notificationDeleteHandler,
