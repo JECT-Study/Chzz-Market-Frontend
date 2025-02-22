@@ -3,7 +3,6 @@ import './index.css';
 import { storeLogin } from '@/features/auth/model/authSlice';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { scan } from 'react-scan';
 import { Toaster } from 'sonner';
 import App from './App';
 import { ReactQueryProvider } from './provider/queryProvider';
@@ -31,12 +30,12 @@ async function setupMocks(): Promise<void> {
 
   await setupMocks();
 
-  // react scan
   if (typeof window !== 'undefined') {
-    scan({
-      enabled: true,
+    import('react-scan').then(({ scan }) => {
+      scan({ enabled: true });
     });
   }
+
 
   const root = createRoot(document.getElementById('root')!);
   root.render(
