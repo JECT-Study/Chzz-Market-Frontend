@@ -6,11 +6,11 @@ import { logout } from '..';
 export const useAuth = () => {
   const navigate = useNavigate();
 
-  const handleKakaoLogin = async () => {
+  const handleKakaoLogin = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`;
   };
 
-  const handleNaverLogin = async () => {
+  const handleNaverLogin = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/oauth2/authorization/naver`;
   };
 
