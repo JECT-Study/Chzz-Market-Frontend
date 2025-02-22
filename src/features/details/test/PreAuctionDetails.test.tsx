@@ -13,18 +13,10 @@ import { useToggleAuctionDetailsHeart } from '../model/useToggleAuctionDetailsHe
 import { PreAuctionDetailsMain } from '../ui/PreAuctionDetailsMain';
 import { auctionDetailsData } from './data';
 
-vi.mock('@/features/details/model/useConvertAuction', () => ({
-  useConvertAuction: vi.fn(),
-}));
-vi.mock('@/features/details/model/useDeletePreAuction', () => ({
-  useDeletePreAuction: vi.fn(),
-}));
-vi.mock('@/features/details/model/useGetAuctionDetails', () => ({
-  useGetAuctionDetails: vi.fn(),
-}));
-vi.mock('@/features/details/model/useToggleAuctionDetailsHeart', () => ({
-  useToggleAuctionDetailsHeart: vi.fn()
-}));
+vi.mock('@/features/details/model/useConvertAuction');
+vi.mock('@/features/details/model/useDeletePreAuction');
+vi.mock('@/features/details/model/useGetAuctionDetails');
+vi.mock('@/features/details/model/useToggleAuctionDetailsHeart');
 
 const mockedConvertAuction = vi.fn();
 vi.mocked(useConvertAuction).mockReturnValue({

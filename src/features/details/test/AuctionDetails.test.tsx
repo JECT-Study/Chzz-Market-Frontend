@@ -12,16 +12,9 @@ import { useGetAuctionDetails } from '../model/useGetAuctionDetails';
 import { AuctionDetailsMain } from '../ui/AuctionDetailsMain';
 import { auctionDetailsData } from './data';
 
-vi.mock('@/features/details/model/useGetAuctionDetails', () => ({
-  useGetAuctionDetails: vi.fn(),
-  useCancelBid: vi.fn()
-}));
-vi.mock('@/features/details/model/useCancelBid', () => ({
-  useCancelBid: vi.fn()
-}));
-vi.mock('@/features/details/lib/useEndAuction', () => ({
-  useEndAuction: vi.fn()
-}));
+vi.mock('@/features/details/model/useGetAuctionDetails');
+vi.mock('@/features/details/model/useCancelBid');
+vi.mock('@/features/details/lib/useEndAuction');
 
 vi.mocked(useEndAuction).mockReturnValue({
   endAuction: vi.fn()

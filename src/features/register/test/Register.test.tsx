@@ -1,7 +1,7 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import { usePatchPreAuction } from '@/features/edit-auction';
+import { usePatchPreAuction } from '@/features/edit-auction/model/usePatchPreAuction';
 import { Register } from '@/pages/register/Register';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router';
 import { usePostAuction } from '..';
 
 vi.mock('@/features/register/model');
-vi.mock('@/features/edit-auction/model');
+vi.mock('@/features/edit-auction/model/usePatchPreAuction');
 vi.mocked(usePostAuction).mockReturnValue({
   mutate: vi.fn(),
   isPending: false
