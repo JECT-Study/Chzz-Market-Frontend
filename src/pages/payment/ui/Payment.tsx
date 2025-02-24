@@ -121,7 +121,13 @@ export const Payment = () => {
             <h2 className="text-heading3 web:text-heading2">기본 정보 입력</h2>
             {/* 상품 정보 */}
             <div className="flex p-2 space-x-4">
-              <ProgressiveImage lowResSrc={`${auctionData?.imageUrl}?h=20`} highResSrc={`${auctionData?.imageUrl}?h=228`} alt="product" className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]" priority='high' />
+              <ProgressiveImage
+                lowResSrc={`${auctionData?.imageUrl}?h=20`}
+                highResSrc={`${auctionData?.imageUrl}?h=228`}
+                alt="product"
+                className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]"
+                priority="high"
+              />
               <div>
                 <p className="text-heading3 web:text-heading2">
                   {auctionData?.auctionName}

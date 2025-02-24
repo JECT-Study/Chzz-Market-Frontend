@@ -58,7 +58,13 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
           </div>
         </figcaption>
         <div className="flex items-start gap-3">
-          <ProgressiveImage lowResSrc={`${imageUrl ?? DefaultImage}?h=20`} highResSrc={`${imageUrl ?? DefaultImage}?h=228`} alt={`이미지_${notificationId}`} className="object-contain rounded size-24" priority='high' />
+          <ProgressiveImage
+            lowResSrc={`${imageUrl ?? DefaultImage}?h=20`}
+            highResSrc={`${imageUrl ?? DefaultImage}?h=228`}
+            alt={`이미지_${notificationId}`}
+            className="object-contain rounded size-24"
+            priority="high"
+          />
           <button aria-label={`버튼_${notificationId}`} onClick={handleDelete}>
             <img
               className="inline rounded size-4"

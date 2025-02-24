@@ -81,7 +81,15 @@ export const Signup = () => {
               />
             </div>
             <div>
-              <Button ariaLabel='중복 확인' type='button' className='w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2' onClick={checkNicknameAvailability} disabled={isNicknameCheckDisabled}>중복확인</Button>
+              <Button
+                ariaLabel="중복 확인"
+                type="button"
+                className="w-[5rem] web:w-[6.5rem] h-[3.13rem] border-gray2"
+                onClick={checkNicknameAvailability}
+                disabled={isNicknameCheckDisabled}
+              >
+                중복확인
+              </Button>
             </div>
           </div>
           {nicknameError && (

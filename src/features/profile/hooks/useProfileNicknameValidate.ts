@@ -53,6 +53,14 @@ export const useProfileNicknameValidate = ({
   };
 
   useEffect(() => {
+    if (!nickname.trim()) {
+      dispatch(setNicknameError('닉네임을 입력해주세요.'));
+      dispatch(setIsSubmitEnabled(false));
+      dispatch(setIsNicknameChecked(false));
+      dispatch(setIsNicknameCheckDisabled(true));
+      return;
+    }
+
     if (nickname.length > 15) {
       dispatch(setNicknameError('닉네임은 15자 미만으로 입력해주세요.'));
       dispatch(setIsSubmitEnabled(false));

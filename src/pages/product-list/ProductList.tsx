@@ -101,14 +101,14 @@ export const ProductList = () => {
           <div className="grid grid-cols-2 gap-6 p-4 overflow-y-auto">
             {ongoingFlag
               ? ongoingItems?.map((product: IAuctionItem) => (
-                <OngoingProduct key={product.auctionId} product={product} />
-              ))
+                  <OngoingProduct key={product.auctionId} product={product} />
+                ))
               : enrollItems?.map((product: IPreAuctionItem) => (
-                <PreAuctionProduct
-                  key={product.auctionId}
-                  product={product}
-                />
-              ))}
+                  <PreAuctionProduct
+                    key={product.auctionId}
+                    product={product}
+                  />
+                ))}
           </div>
         </EmptyBoundary>
         <div ref={loader} />

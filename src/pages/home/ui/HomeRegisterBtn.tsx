@@ -11,8 +11,9 @@ export const HomeRegisterBtn = ({ containRef }: { containRef: RefObject<HTMLDivE
   return (
     <div className="sticky bottom-0 right-0 z-50 flex justify-end w-full cursor-pointer">
       <button
-        className={`relative text-center text-white rounded-full bg-cheeseYellow transition-all text-button  duration-500 h-14 p-4 ${isScrolled ? 'w-full' : 'w-14'
-          }`}
+        className={`relative text-center text-white rounded-full bg-cheeseYellow transition-all text-button  duration-500 h-14 p-4 ${
+          isScrolled ? 'w-full' : 'w-14'
+        }`}
         onClick={() => navigate(ROUTES.REGISTER)}
       >
         <span

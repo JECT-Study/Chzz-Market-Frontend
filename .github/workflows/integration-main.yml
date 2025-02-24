@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   e2e-tests:
@@ -36,10 +36,10 @@ jobs:
         with:
           browser: chrome
           start: npm run dev
-          wait-on: "http://localhost:5173"
+          wait-on: 'http://localhost:5173'
           record: true
           parallel: true
-          group: "UI-Chrome"
+          group: 'UI-Chrome'
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           VITE_API_URL: http://localhost:8080

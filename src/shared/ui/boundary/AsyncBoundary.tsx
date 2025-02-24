@@ -33,7 +33,7 @@ const FallbackComponent = ({
           </h2>
           <p className=" text-gray2 web:text-body1 text-body2">{description}</p>
         </div>
-        <Button type='button' color='cheeseYellow' onClick={resetErrorBoundary}>
+        <Button type="button" color="cheeseYellow" onClick={resetErrorBoundary}>
           다시 불러오기
         </Button>
       </div>
@@ -49,13 +49,14 @@ export const AsyncBoundary = ({
   header?: string;
 }) => {
   const { pathname, key } = useLocation();
-  const spinner = (
-    header ?
-      <Layout>
-        <Layout.Header title={header} />
-        <GlobalSpinner />
-      </Layout> : <GlobalSpinner />
-  )
+  const spinner = header ? (
+    <Layout>
+      <Layout.Header title={header} />
+      <GlobalSpinner />
+    </Layout>
+  ) : (
+    <GlobalSpinner />
+  );
 
   return (
     <QueryErrorResetBoundary>

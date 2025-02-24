@@ -1,2 +1,2 @@
-export { getOngoingProductList } from "./getOngoingProductList";
-export { getEnrollProductList } from "./getEnrollProductList";
+export { getOngoingProductList } from './getOngoingProductList';
+export { getEnrollProductList } from './getEnrollProductList';

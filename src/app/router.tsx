@@ -91,7 +91,7 @@ const privateRouteList = [
   {
     path: ROUTES.PRE_AUCTION.EDIT,
     element: (
-      <AsyncBoundary header='사전 경매 수정하기'>
+      <AsyncBoundary header="사전 경매 수정하기">
         <EditAuction />
       </AsyncBoundary>
     ),
@@ -148,7 +148,7 @@ export const router = createBrowserRouter([
         children: layoutWithNavRouteList.map(({ path, element }) => ({
           path,
           element: (
-            <AsyncBoundary >
+            <AsyncBoundary>
               {path === '/' ? element : <PrivateRoute>{element}</PrivateRoute>}
             </AsyncBoundary>
           )
@@ -194,6 +194,6 @@ export const router = createBrowserRouter([
       }
     ]
   }
-])
+]);
 
 export default router;

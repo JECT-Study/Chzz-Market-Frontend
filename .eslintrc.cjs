@@ -41,6 +41,7 @@ module.exports = {
       },
     ],
     'react/react-in-jsx-scope': 'off',
+    "@typescript-eslint/no-shadow": "off",
     // import React from 'react' 꺼두기
     'react/jsx-uses-react': 'off',
     'react/jsx-uses-vars': 'off',
