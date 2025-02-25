@@ -1,6 +1,6 @@
 import { Button } from '@/shared/ui/Button';
 import { FormField } from '@/shared/ui/FormField';
-import { KeyboardEvent, useRef } from 'react';
+import { KeyboardEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Layout } from '@/app/layout/ui/Layout';
@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router';
 export const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const formRef = useRef<HTMLFormElement>(null);
 
   const {
     nicknameError,
@@ -56,8 +55,6 @@ export const Signup = () => {
       <Layout.Header title="회원가입" handleBack={() => navigate('/')} />
       <Layout.Main>
         <form
-          ref={formRef}
-          onSubmit={handleSubmit(onSubmit)}
           onKeyDown={handleEnterKey}
           className="flex flex-col px-2 py-4 space-y-4"
         >
@@ -133,11 +130,7 @@ export const Signup = () => {
           type="button"
           className="w-full h-[2.94rem] rounded-lg"
           color="cheeseYellow"
-          onClick={() =>
-            formRef.current?.dispatchEvent(
-              new Event('submit', { cancelable: true, bubbles: true })
-            )
-          }
+          onClick={handleSubmit(onSubmit)}
           disabled={!isSubmitEnabled || isPending}
           loading={isPending}
         >

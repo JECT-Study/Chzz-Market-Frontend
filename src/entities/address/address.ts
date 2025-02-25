@@ -7,7 +7,7 @@ export interface IAddressBase {
   roadAddress: string;
   jibun: string;
   detailAddress: string;
-  isDefault: boolean;
+  isDefault?: boolean;
 }
 
 export interface IAddressWithId extends IAddressBase {
