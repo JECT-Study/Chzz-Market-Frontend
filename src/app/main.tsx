@@ -33,13 +33,6 @@ async function setupMocks(): Promise<void> {
 
   await setupMocks();
 
-  if (typeof window !== 'undefined') {
-    import('react-scan').then(({ scan }) => {
-      scan({ enabled: true });
-    });
-  }
-
-
   const root = createRoot(document.getElementById('root')!);
   root.render(
     <ReactQueryProvider>
