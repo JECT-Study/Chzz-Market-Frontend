@@ -1,6 +1,8 @@
-import { API_END_POINT, httpClient, setToken } from '@/shared';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { setToken } from '@/shared/utils/token';
 
-import type { IUser } from '@/entities/user';
+import type { IUser } from '@/entities/user/user';
 
 export const postSignup = async (data: IUser) => {
   const response = await httpClient.post(API_END_POINT.SIGNUP, { ...data });

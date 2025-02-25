@@ -1,8 +1,8 @@
-import { getToken, removeToken, setToken } from '@/shared/utils/token';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
-import { refreshToken } from '@/features/auth';
+import { refreshToken } from '@/features/auth/api/refreshToken';
 import { toast } from 'sonner';
+import { getToken, removeToken, setToken } from '../utils/token';
 
 interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
   _retry?: boolean;

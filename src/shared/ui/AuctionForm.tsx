@@ -1,42 +1,32 @@
-import {
-  Button,
-  CATEGORIES,
-  FormField,
-  Input,
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Textarea,
-  convertCurrencyToNumber,
-  formatCurrencyWithWon,
-  useToggleState
-} from '@/shared';
+import { CATEGORIES } from '../constants/categories';
+import { useToggleState } from '../hooks/useToggleState';
 
-import { Layout } from '@/app/layout';
-import type { IPreAuctionDetails } from '@/entities';
-import { usePatchPreAuction } from '@/features/edit-auction';
-import {
-  ImageUploaderInput,
-  RegisterCaution,
-  RegisterSchema,
-  convertDataURLtoFile,
-  getAuctionUploadURLs,
-  uploadImagesToS3,
-  useEditableNumberInput,
-  usePostAuction,
-  type IRegisterPatch,
-  type IRegisterPost
-} from '@/features/register';
-import NoticeIcon from '@/shared/assets/icons/notice.svg';
+import { Layout } from '@/app/layout/ui/Layout';
+import type { IPreAuctionDetails } from '@/entities/auction/types/details';
+import { usePatchPreAuction } from '@/features/edit-auction/model/usePatchPreAuction';
+import { getAuctionUploadURLs } from '@/features/register/api/getAuctionUploadURLs';
+import { uploadImagesToS3 } from '@/features/register/api/uploadImagesToS3';
+import { RegisterSchema } from '@/features/register/config/schema';
+import type { IRegisterPatch, IRegisterPost } from '@/features/register/config/type';
+import { useEditableNumberInput } from '@/features/register/lib/useEditableNumberInput';
+import { usePostAuction } from '@/features/register/model/usePostAuction';
+import { ImageUploaderInput } from '@/features/register/ui/ImageUploaderInput';
+import { RegisterCaution } from '@/features/register/ui/RegisterCaution';
+import { convertDataURLtoFile } from '@/features/register/utils/convertDataURLtoFile';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import NoticeIcon from '../assets/icons/notice.svg';
+import { convertCurrencyToNumber } from '../utils/convertCurrencyToNumber';
+import { formatCurrencyWithWon } from '../utils/formatCurrencyWithWon';
+import { Button } from './Button';
+import { FormField } from './FormField';
+import { Input } from './input';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './select';
+import { Textarea } from './textarea';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 interface ExistingImage {

@@ -1,9 +1,9 @@
 import { Outlet, useLocation, useNavigate } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import { HiOutlineSearch } from 'react-icons/hi';
-import { Navigation } from '.';
-import { ROUTE_INFO } from '../config';
+import { ROUTE_INFO } from '../config/routeInfo';
+import { Navigation } from './Navigation';
 
 export const LayoutWithNav = () => {
   const navigate = useNavigate();

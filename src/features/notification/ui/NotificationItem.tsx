@@ -1,10 +1,13 @@
-import { ProgressiveImage, getTimeAgo } from '@/shared';
 import DefaultImage from '@/shared/assets/icons/default_image.svg';
 import XButtonIcon from '@/shared/assets/icons/x_button.svg';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router';
-import { NOTIFICATION_CONTENTS, type INotification } from '../config';
-import { useDeleteNotification, useReadNotification } from '../model';
+import { type INotification } from '../config/type';
+import { getTimeAgo } from '@/shared/utils/getTimeAgo';
+import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
+import { useDeleteNotification } from '../model/useDeleteNotification';
+import { useReadNotification } from '../model/useReadNotification';
+import { NOTIFICATION_CONTENTS } from '../config/constants';
 
 export const NotificationItem = ({ item }: { item: INotification }) => {
   const {

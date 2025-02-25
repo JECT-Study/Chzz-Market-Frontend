@@ -1,4 +1,4 @@
-import { CONFIRM_MESSAGE } from '@/shared/constants/confirmMessage';
+import { CONFIRM_MESSAGE } from '../constants/confirmMessage';
 import { ReactNode } from 'react';
 import { Button } from './Button';
 

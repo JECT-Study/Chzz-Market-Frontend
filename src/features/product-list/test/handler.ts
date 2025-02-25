@@ -1,6 +1,6 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import ongoingProducts from './ongoingData';
 
 export const getOngoingProductListHandler: HttpHandler = http.get(

@@ -1,5 +1,6 @@
-import { Button } from '@/shared';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '@/shared/ui/Button';
 
 const meta: Meta<typeof Button> = {
   title: 'components/Button',

@@ -1,6 +1,6 @@
 // src/mocks/handlers.ts
 import { HttpHandler, HttpResponse, http } from 'msw';
-import { API_END_POINT } from '@/shared';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import {
   bestAuctionsData,
   imminentAuctionsData,

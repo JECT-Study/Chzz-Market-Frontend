@@ -11,18 +11,6 @@
   }
 }
 
-/* Pretendard-Regular (400) */
-@font-face {
-  font-family: 'Pretendard';
-  src:local('Pretendard Regular'),
-      local('Pretendard-Regular'),
-      url('../shared/assets/fonts/Pretendard-Regular.woff2') format('woff2'),
-      url('../shared/assets/fonts/Pretendard-Regular.woff') format('woff');
-  font-weight: normal;
-  font-display: swap;
-  font-style: normal;
-}
-
 /* Pretendard-Medium (500) */
 @font-face {
   font-family: 'Pretendard';

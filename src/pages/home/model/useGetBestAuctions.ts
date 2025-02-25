@@ -1,6 +1,6 @@
-import { QUERY_KEYS } from '@/shared';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getBestAuctions } from '../api';
+import { getBestAuctions } from '../api/getBestAuctions';
 
 export const useGetBestAuctions = () => {
   const { data: bestAuctions } = useSuspenseQuery({

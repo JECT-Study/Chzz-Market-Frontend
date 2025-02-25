@@ -1,7 +1,7 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
-import type { IAuctionImageUploadURLs } from '..';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import type { IAuctionImageUploadURLs } from '../config/type';
 
 export const postAuctionHandler: HttpHandler = http.post(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}`,

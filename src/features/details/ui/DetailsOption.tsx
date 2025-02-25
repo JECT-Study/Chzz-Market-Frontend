@@ -1,7 +1,8 @@
-import { Button, Confirm, Modal } from '@/shared';
-
 import DeleteIcon from '@/shared/assets/icons/modal_cancel.svg';
 import EditIcon from '@/shared/assets/icons/modal_edit.svg';
+import { Button } from '@/shared/ui/Button';
+import { Confirm } from '@/shared/ui/Confirm';
+import { Modal } from '@/shared/ui/Modal';
 
 interface DetailsOptionProps {
   clickEdit: () => void;

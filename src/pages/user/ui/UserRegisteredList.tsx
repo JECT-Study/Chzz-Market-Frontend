@@ -1,7 +1,7 @@
 import type {
   IAuctionEndRegisteredItem,
   IAuctionOngoingRegisteredItem
-} from '@/entities';
+} from '@/entities/auction/types/userRegistered';
 import {
   EndMyRegister,
   OngoingMyRegister,
@@ -10,7 +10,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useMyAuctionList } from '@/features/user/model';
-import { EmptyBoundary } from '@/shared';
+import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 import { useLocation } from 'react-router';
 
 export const UserRegisteredList = () => {

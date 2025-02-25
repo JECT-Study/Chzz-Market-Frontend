@@ -1,7 +1,7 @@
-import { HttpHandler, HttpResponse, delay, http } from 'msw';
+import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
-import type { IBidPostData } from '@/features/bid';
+import type { IBidPostData } from '@/features/bid/config/type';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { auctionDetailsData } from './data';
 
 let curDetailsData = [...auctionDetailsData];
@@ -10,7 +10,6 @@ export const auctionDetailsHandler: HttpHandler = http.get(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.AUCTION}/:auctionId`,
   async ({ params }) => {
     const { auctionId } = params;
-    await delay(500);
 
     return HttpResponse.json(
       curDetailsData.find((data) => data.auctionId === Number(auctionId))

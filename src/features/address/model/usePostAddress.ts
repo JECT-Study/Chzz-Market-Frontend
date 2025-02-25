@@ -1,7 +1,7 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
 import type { IAddressBase } from '@/entities/address/address';
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router';
 import { addAddress } from '../api';
 

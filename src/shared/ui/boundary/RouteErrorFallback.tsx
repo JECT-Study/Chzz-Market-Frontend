@@ -1,6 +1,6 @@
-import { Layout } from '@/app/layout/index';
-import NotFoundIcon from '@/shared/assets/icons/404_sign.svg';
+import { Layout } from '@/app/layout/ui/Layout';
 import { useNavigate } from 'react-router';
+import NotFoundIcon from '../../assets/icons/404_sign.svg';
 import { Button } from '../Button';
 
 export const RouteErrorFallback = () => {

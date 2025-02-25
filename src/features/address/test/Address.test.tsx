@@ -5,14 +5,12 @@ import {
   useEditAddress,
   useGetAddresses,
   usePostAddress
-} from '@/features/address/model/index';
-import {
-  Payment,
-  PaymentAddressAdd,
-  PaymentAddressEdit,
-  PaymentAddressEditList,
-  PaymentAddressList
-} from '@/pages/payment';
+} from '@/features/address/model';
+import { Payment } from '@/pages/payment/ui/Payment';
+import { PaymentAddressAdd } from '@/pages/payment/ui/PaymentAddressAdd';
+import { PaymentAddressEdit } from '@/pages/payment/ui/PaymentAddressEdit';
+import { PaymentAddressEditList } from '@/pages/payment/ui/PaymentAddressEditList';
+import { PaymentAddressList } from '@/pages/payment/ui/PaymentAddressList';
 import {
   mockWindowProperties,
   mockedUseNavigate

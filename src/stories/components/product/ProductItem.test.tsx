@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import { ProductItem } from '@/shared';
 import { mockWindowProperties } from '@/shared/api/msw/setupTests';
+import { ProductItem } from '@/shared/ui/ProductItem';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 

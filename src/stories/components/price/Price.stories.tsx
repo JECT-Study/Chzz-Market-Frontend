@@ -1,4 +1,4 @@
-import { Price } from '@/shared';
+import { Price } from '@/shared/ui/Price';
 import { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Price> = {

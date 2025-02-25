@@ -1,6 +1,7 @@
-import { API_END_POINT, httpClient } from '@/shared';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
-import type { IAuctionImageUploadURLs } from '..';
+import type { IAuctionImageUploadURLs } from '../config/type';
 
 export const getAuctionUploadURLs = async (
   imageNames: string[]

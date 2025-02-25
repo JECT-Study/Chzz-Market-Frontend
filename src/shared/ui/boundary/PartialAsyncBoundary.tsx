@@ -1,11 +1,11 @@
 import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-import ErrorIcon from '@/shared/assets/icons/error.svg';
+import ErrorIcon from '../../assets/icons/error.svg';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { Button } from '../Button';
-import { LocalSpinner } from '../spinner';
+import { LocalSpinner } from '../spinner/LocalSpinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
   if (!isAxiosError(error)) throw error;

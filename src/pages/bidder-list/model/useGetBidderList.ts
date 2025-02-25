@@ -1,6 +1,6 @@
 import { QUERY_KEYS } from '@/shared/constants/queryKeys';
+import { getBidderList } from '../api/getBidderList';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getBidderList } from '../api';
 
 export const useGetBidderList = (auctionId: number) => {
   const { data: bidderList } = useSuspenseQuery({

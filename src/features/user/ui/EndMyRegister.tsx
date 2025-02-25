@@ -1,12 +1,10 @@
-import {
-  CreatedAt,
-  ParticipantCount,
-  Price,
-  ProductItem,
-  ROUTES
-} from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
+import { CreatedAt } from '@/shared/ui/CreatedAt';
+import { ParticipantCount } from '@/shared/ui/ParticipantCount';
+import { Price } from '@/shared/ui/Price';
+import { ProductItem } from '@/shared/ui/ProductItem';
 
-import type { IAuctionEndRegisteredItem } from '@/entities';
+import type { IAuctionEndRegisteredItem } from '@/entities/auction/types/userRegistered';
 import PriceIcon from '@/shared/assets/icons/price.svg';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router';

@@ -48,9 +48,6 @@ export default defineConfig(() => {
                 return 'zod-vendor';
               }
             }
-            if (id.includes('/src/shared/ui/')) {
-              return 'shared-ui';
-            }
           },
           assetFileNames: (assetInfo) => {
             // 폰트 파일 확장자에 해당하면 'fonts' 폴더로 출력

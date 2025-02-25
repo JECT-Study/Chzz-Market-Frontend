@@ -1,5 +1,5 @@
-import { nicknameCheck } from '@/features/auth/api';
-import { QUERY_KEYS } from '@/shared';
+import { nicknameCheck } from '@/features/auth/api/nicknameCheck';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import {
   QueryObserverResult,
   RefetchOptions,

@@ -1,14 +1,14 @@
 import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-import { Layout } from '@/app/layout';
-import ErrorIcon from '@/shared/assets/icons/error.svg';
+import { Layout } from '@/app/layout/ui/Layout';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useLocation } from 'react-router';
+import ErrorIcon from '../../assets/icons/error.svg';
 import { getErrorByCode } from '../../utils/getErrorByCode';
 import { Button } from '../Button';
-import { GlobalSpinner } from '../spinner';
+import { GlobalSpinner } from '../spinner/GlobalSpinner';
 
 interface FallbackComponentProps extends FallbackProps {
   header?: string;

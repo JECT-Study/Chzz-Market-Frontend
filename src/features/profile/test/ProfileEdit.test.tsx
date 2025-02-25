@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { store } from '@/app/store';
-import { UserProfileEdit } from '@/pages/user';
+import { UserProfileEdit } from '@/pages/user/ui/UserProfileEdit';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router';

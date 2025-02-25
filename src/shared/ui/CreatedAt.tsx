@@ -1,4 +1,4 @@
-import PriceIcon from '@/shared/assets/icons/price.svg';
+import PriceIcon from '../assets/icons/price.svg';
 
 export const CreatedAt = ({ createAt }: { createAt: string }) => {
   const date = new Date(createAt);

@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query';
 
 import type { IProfileData } from '@/entities/user/user';
-import { QUERY_KEYS } from '@/shared';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useNavigate } from 'react-router';
 import { getProfile } from '../api/getProfile';
 import { postEditProfile } from '../api/postEditProfile';

@@ -1,1 +1,7 @@
-export { getMyAuctionPreRegisterHandler } from './handler';
+export {
+  deleteUserHandler,
+  getMyAuctionPreRegisterHandler,
+  getUserProfileHandler,
+  logoutHandler,
+  refreshTokenHandler
+} from './handler';

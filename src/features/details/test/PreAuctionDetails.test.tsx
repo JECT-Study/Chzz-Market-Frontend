@@ -1,26 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
-import {
-  useConvertAuction,
-  useDeletePreAuction,
-  useGetAuctionDetails,
-  useToggleAuctionDetailsHeart
-} from '../model';
 
-import type { IPreAuctionDetails } from '@/entities';
-import { CATEGORIES } from '@/shared';
+import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { CATEGORIES } from '@/shared/constants/categories';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';
-import { PreAuctionDetailsMain } from '..';
+import { useConvertAuction } from '../model/useConvertAuction';
+import { useDeletePreAuction } from '../model/useDeletePreAuction';
+import { useGetAuctionDetails } from '../model/useGetAuctionDetails';
+import { useToggleAuctionDetailsHeart } from '../model/useToggleAuctionDetailsHeart';
+import { PreAuctionDetailsMain } from '../ui/PreAuctionDetailsMain';
 import { auctionDetailsData } from './data';
 
-vi.mock('@/features/details/model', () => ({
-  useConvertAuction: vi.fn(),
-  useDeletePreAuction: vi.fn(),
-  useGetAuctionDetails: vi.fn(),
-  useToggleAuctionDetailsHeart: vi.fn()
-}));
+vi.mock('@/features/details/model/useConvertAuction');
+vi.mock('@/features/details/model/useDeletePreAuction');
+vi.mock('@/features/details/model/useGetAuctionDetails');
+vi.mock('@/features/details/model/useToggleAuctionDetailsHeart');
 
 const mockedConvertAuction = vi.fn();
 vi.mocked(useConvertAuction).mockReturnValue({

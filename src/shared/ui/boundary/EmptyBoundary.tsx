@@ -1,6 +1,6 @@
-import { EMPTY_MESSAGE } from '@/shared';
-import EmptyIcon from '@/shared/assets/icons/empty.svg';
 import { ReactNode } from 'react';
+import EmptyIcon from '../../assets/icons/empty.svg';
+import { EMPTY_MESSAGE } from '../../constants/emptyMessage';
 
 const EmptyFallback = ({ type }: { type: string }) => {
   return (

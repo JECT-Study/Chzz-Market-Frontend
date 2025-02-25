@@ -1,5 +1,5 @@
-import PriceIcon from '@/shared/assets/icons/price.svg';
-import { formatSecondsToTime } from '..';
+import PriceIcon from '../assets/icons/price.svg';
+import { formatSecondsToTime } from '../utils/formatSecondsToTime';
 
 export const TimeRemaining = ({
   title,

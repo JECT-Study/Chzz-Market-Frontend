@@ -1,16 +1,14 @@
-import { HttpHandler, HttpResponse, delay, http } from 'msw';
+import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
-import { notificationData, realTimeNotificationData } from '.';
-import { type INotification } from '../config';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { type INotification } from '../config/type';
+import { notificationData, realTimeNotificationData } from './data';
 
 let notificationList = [...notificationData];
 
 export const notificationListHandler: HttpHandler = http.get(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.NOTIFICATION_LIST}`,
   async () => {
-    await delay(500);
-
     return HttpResponse.json({
       items: notificationList
     });

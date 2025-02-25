@@ -4,7 +4,7 @@ import { MemoryRouter, useLocation } from 'react-router';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { useProductList } from '@/features/product-list';
-import { ProductList } from '@/pages/product-list';
+import { ProductList } from '@/pages/product-list/ProductList';
 import userEvent from '@testing-library/user-event';
 
 vi.mock('@/features/product-list', async (importOriginal) => {

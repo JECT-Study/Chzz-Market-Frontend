@@ -1,4 +1,4 @@
-import type { INotification } from '../config';
+import type { INotification } from '../config/type';
 import adidasImage from '@/shared/assets/test/adidas_superstar.jpeg';
 import jordanBlackImage from '@/shared/assets/test/jordan_black.jpeg';
 import jordanBlueImage from '@/shared/assets/test/jordan_blue.jpeg';

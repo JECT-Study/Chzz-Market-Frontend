@@ -1,9 +1,14 @@
-import { Button, Confirm, MAX_BID_COUNT, Modal, ROUTES } from '@/shared';
-import { useCancelBid, useGetAuctionDetails } from '../model';
+import { MAX_BID_COUNT } from "@/shared/constants/bid";
+import { ROUTES } from "@/shared/constants/routes";
+import { Button } from "@/shared/ui/Button";
+import { Confirm } from "@/shared/ui/Confirm";
+import { Modal } from "@/shared/ui/Modal";
 
-import { Layout } from '@/app/layout';
-import type { IAuctionDetails } from '@/entities';
-import { useNavigate } from 'react-router';
+import { Layout } from "@/app/layout/ui/Layout";
+import type { IAuctionDetails } from "@/entities/auction/types/details";
+import { useNavigate } from "react-router";
+import { useCancelBid } from "../model/useCancelBid";
+import { useGetAuctionDetails } from "../model/useGetAuctionDetails";
 
 export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
@@ -47,33 +52,33 @@ export const AuctionDetailsFooter = ({ auctionId }: { auctionId: number }) => {
             참여자 내역 보기
           </Button>
         ) : // 낙찰 성공
-        isWinner ? (
-          // 결제 완료
-          <Button
-            type="button"
-            ariaLabel={isOrdered ? '결제 내역 보기' : '결제하기'}
-            color="cheeseYellow"
-            onClick={
-              !isOrdered
-                ? () => navigate(ROUTES.PAYMENT.getRoute(auctionId))
-                : undefined
-            }
-            className="w-full h-full"
-          >
-            {isOrdered ? '결제 내역 보기' : '결제하기'}
-          </Button>
-        ) : (
-          // 낙찰 실패
-          <Button
-            ariaLabel="종료된 경매"
-            type="button"
-            disabled
-            color="disabled"
-            className="w-full h-full"
-          >
-            종료된 경매
-          </Button>
-        )}
+          isWinner ? (
+            // 결제 완료
+            <Button
+              type="button"
+              ariaLabel={isOrdered ? '결제 내역 보기' : '결제하기'}
+              color="cheeseYellow"
+              onClick={
+                !isOrdered
+                  ? () => navigate(ROUTES.PAYMENT.getRoute(auctionId))
+                  : undefined
+              }
+              className="w-full h-full"
+            >
+              {isOrdered ? '결제 내역 보기' : '결제하기'}
+            </Button>
+          ) : (
+            // 낙찰 실패
+            <Button
+              ariaLabel="종료된 경매"
+              type="button"
+              disabled
+              color="disabled"
+              className="w-full h-full"
+            >
+              종료된 경매
+            </Button>
+          )}
       </Layout.Footer>
     );
   }

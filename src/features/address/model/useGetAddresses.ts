@@ -1,4 +1,4 @@
-import { QUERY_KEYS } from '@/shared';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import {
   QueryObserverResult,
   RefetchOptions,

@@ -1,11 +1,15 @@
-import { Button, Checkbox, FormField, useToggleState } from '@/shared';
+import { useToggleState } from '@/shared/hooks/useToggleState';
+import { Button } from '@/shared/ui/Button';
+
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import { ADDRESS_SCRIPT_URL } from '@/features/address/config/address';
 import { useEditAddress } from '@/features/address/model';
 import { ROUTES } from '@/shared/constants/routes';
+import { Checkbox } from '@/shared/ui/Checkbox';
+import { FormField } from '@/shared/ui/FormField';
 import { Input } from '@/shared/ui/input';
 import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
 import { useForm } from 'react-hook-form';

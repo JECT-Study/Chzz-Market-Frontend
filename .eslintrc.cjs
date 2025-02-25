@@ -4,7 +4,7 @@ module.exports = {
   extends: ['airbnb', 'airbnb-typescript', 'airbnb/hooks', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended', 'plugin:testing-library/react', 'plugin:vitest/recommended', 'plugin:jest-dom/recommended', 'plugin:storybook/recommended'],
   ignorePatterns: ['dist', '.eslintrc.cjs', 'tailwind.config.js'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'import'],
   settings: {
     'import/resolver': {
       typescript: {
@@ -75,9 +75,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     "import/export": "off",
 
-    // 의존성 문제 해결
     'no-param-reassign': 'off',
-    'import/no-cycle': 'off',
+    'import/no-cycle': 'error',
     'import/no-named-as-default': 'off',
 
     'react/prop-types': 'off', // TypeScript를 사용하여 prop-type 규칙을 사용하지 않도록 설정합니다

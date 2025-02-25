@@ -1,5 +1,5 @@
-import PriceIcon from '@/shared/assets/icons/price.svg';
-import { formatCurrencyWithWon } from '..';
+import PriceIcon from '../assets/icons/price.svg';
+import { formatCurrencyWithWon } from '../utils/formatCurrencyWithWon';
 
 export const Price = ({ title, price }: { title: string; price: number }) => {
   const formatted = formatCurrencyWithWon(price);

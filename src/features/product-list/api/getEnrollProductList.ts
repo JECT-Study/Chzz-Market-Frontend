@@ -1,6 +1,7 @@
-import { API_END_POINT, httpClient } from '@/shared';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
-import type { IPreAuctionList } from '@/entities';
+import type { IPreAuctionList } from '@/entities/auction/types/list';
 import type { ProductParams } from '../config';
 
 export const getEnrollProductList = async ({

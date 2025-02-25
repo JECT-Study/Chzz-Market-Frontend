@@ -1,23 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
-import { AuctionDetailsMain, useGetAuctionDetails } from '..';
 
-import type { IAuctionDetails } from '@/entities';
-import { CATEGORIES } from '@/shared';
+import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { CATEGORIES } from '@/shared/constants/categories';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';
-import { useEndAuction } from '../lib';
-import { useCancelBid } from '../model';
+import { useEndAuction } from '../lib/useEndAuction';
+import { useCancelBid } from '../model/useCancelBid';
+import { useGetAuctionDetails } from '../model/useGetAuctionDetails';
+import { AuctionDetailsMain } from '../ui/AuctionDetailsMain';
 import { auctionDetailsData } from './data';
 
-vi.mock('@/features/details/model', () => ({
-  useGetAuctionDetails: vi.fn(),
-  useCancelBid: vi.fn()
-}));
-vi.mock('@/features/details/lib', () => ({
-  useEndAuction: vi.fn()
-}));
+vi.mock('@/features/details/model/useGetAuctionDetails');
+vi.mock('@/features/details/model/useCancelBid');
+vi.mock('@/features/details/lib/useEndAuction');
 
 vi.mocked(useEndAuction).mockReturnValue({
   endAuction: vi.fn()

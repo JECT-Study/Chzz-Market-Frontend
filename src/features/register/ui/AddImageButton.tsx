@@ -1,4 +1,4 @@
-import { ProgressCircle } from '@/shared';
+import { ProgressCircle } from '@/shared/ui/ProgressCircle';
 import { AiOutlinePlus } from 'react-icons/ai';
 
 interface AddImageButtonProps {

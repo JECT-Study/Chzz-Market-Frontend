@@ -1,5 +1,5 @@
-import { CommandEmpty } from '@/shared';
 import EmptyIcon from '@/shared/assets/icons/empty.svg';
+import { CommandEmpty } from '@/shared/ui/Command';
 
 const SearchEmptyMessage = () => {
   return (

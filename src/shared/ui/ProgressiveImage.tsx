@@ -46,7 +46,7 @@ export const ProgressiveImage = ({
           position: 'absolute',
           top: 0,
           left: 0,
-          opacity: highResLoaded ? 1 : 0,
+          opacity: highResLoaded ? 1 : 0.1,
           transition: 'opacity 0.7s ease-out'
         }}
         loading={loading}
