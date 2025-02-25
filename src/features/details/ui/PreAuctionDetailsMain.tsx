@@ -1,10 +1,3 @@
-import { useDeletePreAuction } from '../model/useDeletePreAuction';
-import { useGetAuctionDetails } from '../model/useGetAuctionDetails';
-
-import { DetailsBasic } from './DetailsBasic';
-import { DetailsOption } from './DetailsOption';
-import { PreAuctionDetailsFooter } from './PreAuctionDetailsFooter';
-
 import { Layout } from '@/app/layout/ui/Layout';
 import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import BoxEditIcon from '@/shared/assets/icons/in_box_edit_time.svg';
@@ -17,6 +10,11 @@ import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
 import { CarouselItem } from '@/shared/ui/carousel';
 import { getTimeAgo } from '@/shared/utils/getTimeAgo';
 import { useNavigate } from 'react-router';
+import { useDeletePreAuction } from '../model/useDeletePreAuction';
+import { useGetAuctionDetails } from '../model/useGetAuctionDetails';
+import { DetailsBasic } from './DetailsBasic';
+import { DetailsOption } from './DetailsOption';
+import { PreAuctionDetailsFooter } from './PreAuctionDetailsFooter';
 
 export const PreAuctionDetailsMain = ({ auctionId }: { auctionId: number }) => {
   const navigate = useNavigate();
