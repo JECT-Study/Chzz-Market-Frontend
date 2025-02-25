@@ -1,4 +1,3 @@
-
 import DeleteIcon from '@/shared/assets/icons/modal_cancel.svg';
 import EditIcon from '@/shared/assets/icons/modal_edit.svg';
 import { Button } from '@/shared/ui/Button';
