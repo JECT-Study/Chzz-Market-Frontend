@@ -10,8 +10,9 @@ export const useAuth = () => {
   const handleKakaoLogin = async () => {
     if (
       import.meta.env.VITE_USE_MOCK === 'true' &&
-      import.meta.env.mode === 'development'
+      import.meta.env.MODE === 'development'
     ) {
+      console.log('mock');
       // Mocking 환경
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`
@@ -32,7 +33,7 @@ export const useAuth = () => {
   const handleNaverLogin = async () => {
     if (
       import.meta.env.VITE_USE_MOCK === 'true' &&
-      import.meta.env.mode === 'development'
+      import.meta.env.MODE === 'development'
     ) {
       // Mocking 환경
       const response = await axios.get(
