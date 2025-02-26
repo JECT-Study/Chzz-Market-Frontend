@@ -1,7 +1,8 @@
-import { API_END_POINT, httpClient } from '@/shared';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
+import type { IAuctionOngoingRegisteredList } from '@/entities/auction/types/list';
 import type { GetAuctionProps } from '@/entities/user/user';
-import type { IAuctionOngoingRegisteredList } from '@/entities';
 
 export const getAuctionOngoingRegister = async ({
   pageNumber,

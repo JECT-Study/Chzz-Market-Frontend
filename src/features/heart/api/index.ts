@@ -1,1 +1,0 @@
-export { getHeartList } from './getHeartList';

@@ -1,5 +1,7 @@
-import { API_END_POINT, httpClient, removeToken } from '@/shared';
-import { refreshToken } from '.';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
+import { removeToken } from '@/shared/utils/token';
+import { refreshToken } from '../api/refreshToken';
 
 export const logout = async () => {
   await refreshToken();

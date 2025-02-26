@@ -1,5 +1,6 @@
 import type { IAddressBase } from '@/entities/address/address';
-import { API_END_POINT, httpClient } from '@/shared';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
 export const editAddress = async ({
   addressId,

@@ -1,4 +1,4 @@
-import { RealTimeNotification } from '@/features/notification';
+import { RealTimeNotification } from '@/features/notification/ui/RealTimeNotification';
 import { Outlet } from 'react-router';
 
 export const GlobalLayout = () => {

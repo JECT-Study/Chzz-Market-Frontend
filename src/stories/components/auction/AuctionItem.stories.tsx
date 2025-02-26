@@ -1,4 +1,6 @@
-import { AuctionItem, Button } from '@/shared';
+import { AuctionItem } from '@/shared/ui/AuctionItem';
+import { Button } from '@/shared/ui/Button';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof AuctionItem> = {
@@ -34,7 +36,7 @@ export const Default: Story = {
         <AuctionItem.Button>
           <Button
             type="button"
-            className="bg-blue-500 text-white px-2 py-1 rounded"
+            className="px-2 py-1 text-white bg-blue-500 rounded"
           >
             참여하기
           </Button>
@@ -60,7 +62,7 @@ export const ColumnLayout: Story = {
         <AuctionItem.Button>
           <Button
             type="button"
-            className="bg-green-500 text-white px-2 py-1 rounded"
+            className="px-2 py-1 text-white bg-green-500 rounded"
           >
             좋아요
           </Button>
@@ -86,7 +88,7 @@ export const NoTimeImage: Story = {
         <AuctionItem.Button>
           <Button
             type="button"
-            className="bg-gray-300 text-black px-2 py-1 rounded"
+            className="px-2 py-1 text-black bg-gray-300 rounded"
           >
             자세히 보기
           </Button>

@@ -1,6 +1,6 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { bidderListData } from './data';
 
 export const bidderListHandler: HttpHandler = http.get(

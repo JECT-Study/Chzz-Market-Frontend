@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, useLocation } from 'react-router';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { UserRegisteredList } from '@/pages/user';
+import { UserRegisteredList } from '@/pages/user/ui/UserRegisteredList';
 import userEvent from '@testing-library/user-event';
 import { useMyAuctionList } from '../model';
 

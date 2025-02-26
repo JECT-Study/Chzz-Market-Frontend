@@ -1,4 +1,4 @@
-import type { IBidder } from '../config';
+import type { IBidder } from '../config/type';
 
 export const bidderListData: IBidder[] = [
   {

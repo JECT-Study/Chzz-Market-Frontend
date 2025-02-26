@@ -1,8 +1,13 @@
-import { AuctionItem, Button, EmptyBoundary, ROUTES } from '@/shared';
-import { useDeleteHeart, useGetHeartList } from '..';
+import { ROUTES } from '@/shared/constants/routes';
+import { EmptyBoundary } from '@/shared/ui/boundary/EmptyBoundary';
 
-import type { IPreAuctionItem } from '@/entities';
+
+import type { IPreAuctionItem } from '@/entities/auction/types/item';
+import { AuctionItem } from '@/shared/ui/AuctionItem';
+import { Button } from '@/shared/ui/Button';
 import { useNavigate } from 'react-router';
+import { useGetHeartList } from '../model/useGetHeartList';
+import { useDeleteHeart } from '../model/useDeleteHeart';
 
 export const HeartList = () => {
   const navigate = useNavigate();
@@ -12,11 +17,20 @@ export const HeartList = () => {
   const handleDelete = (id: number) => mutate(id);
 
   return (
-    <EmptyBoundary type='heart' length={heartList.length}>
-      <ul className='grid items-center justify-between grid-cols-2 gap-8'>
+    <EmptyBoundary type="heart" length={heartList.length}>
+      <ul className="grid items-center justify-between grid-cols-2 gap-8">
         {heartList.map((el: IPreAuctionItem, idx: number) => (
-          <li key={el.auctionId} onClick={() => navigate(ROUTES.PRE_AUCTION.getItemRoute(el.auctionId))} className='cursor-pointer'>
-            <AuctionItem axis='column' label={`${idx}_내가 찜 한 사전 경매 상품`}>
+          <li
+            key={el.auctionId}
+            onClick={() =>
+              navigate(ROUTES.PRE_AUCTION.getItemRoute(el.auctionId))
+            }
+            className="cursor-pointer"
+          >
+            <AuctionItem
+              axis="column"
+              label={`${idx}_내가 찜 한 사전 경매 상품`}
+            >
               <AuctionItem.Image src={el.imageUrl} />
               <AuctionItem.Main
                 name={el.auctionName}
@@ -25,7 +39,12 @@ export const HeartList = () => {
                 kind="pre-register"
               />
               <AuctionItem.Button>
-                <Button ariaLabel={`${idx}_찜 목록에서 제외`} onClick={() => handleDelete(el.auctionId)} type='button' className='w-full'>
+                <Button
+                  ariaLabel={`${idx}_찜 목록에서 제외`}
+                  onClick={() => handleDelete(el.auctionId)}
+                  type="button"
+                  className="w-full"
+                >
                   찜 목록에서 제외
                 </Button>
               </AuctionItem.Button>

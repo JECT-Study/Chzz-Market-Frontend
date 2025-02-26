@@ -1,13 +1,15 @@
-import { Button, Input, httpClient } from "@/shared";
 import { useEffect, useState } from "react";
 
-import { Layout } from "@/app/layout";
+import { Layout } from "@/app/layout/ui/Layout";
+import { httpClient } from "@/shared/api/axios";
+import { Button } from "@/shared/ui/Button";
+import { Input } from "@/shared/ui/input";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router";
 
 export const Test = () => {
-  const navigate = useNavigate()
-  const [state, setState] = useState(0)
+  const navigate = useNavigate();
+  const [state, setState] = useState(0);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [minPrice, setMinPrice] = useState(1000);
@@ -21,9 +23,9 @@ export const Test = () => {
 
   useEffect(() => {
     if (import.meta.env.MODE !== 'development') {
-      throw new AxiosError('접근 권한', '403')
+      throw new AxiosError('접근 권한', '403');
     }
-  })
+  });
 
   return (
     <Layout>

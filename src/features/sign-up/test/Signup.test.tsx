@@ -1,18 +1,20 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { store } from '@/app/store';
-import { Signup } from '@/pages/sign-up/ui/Signup';
+import { Signup } from '@/pages/sign-up/Signup';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router';
 
+const queryClient = new QueryClient();
+
 describe('Signup', () => {
   beforeEach(() => {
     render(
-      <QueryClientProvider client={new QueryClient()}>
+      <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <BrowserRouter>
             <Signup />
@@ -20,6 +22,11 @@ describe('Signup', () => {
         </Provider>
       </QueryClientProvider>
     );
+  });
+
+  afterEach(() => {
+    cleanup();
+    queryClient.clear();
   });
 
   const setup = async (testId: string, value: string) => {

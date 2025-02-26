@@ -1,4 +1,4 @@
-import { getTimeColor } from '@/shared/utils/getTimeColor';
+import { getTimeColor } from '../utils/getTimeColor';
 
 export const TimeLabel = ({ time }: { time: number }) => {
   let formattedTime = time / 3600;

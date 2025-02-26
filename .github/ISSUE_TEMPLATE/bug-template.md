@@ -4,7 +4,6 @@ about: project's bugs
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
 ## 🐞 버그 내용

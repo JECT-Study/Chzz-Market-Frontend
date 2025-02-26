@@ -1,5 +1,5 @@
-import { Checkbox } from '@/shared';
-import { PRE_REGISTER_CAUTION, REGISTER_CAUTION } from '../config';
+import { Checkbox } from '@/shared/ui/Checkbox';
+import { PRE_REGISTER_CAUTION, REGISTER_CAUTION } from '../config/caution';
 
 interface CautionProps {
   kind: string;

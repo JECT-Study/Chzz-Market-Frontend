@@ -1,11 +1,11 @@
-import { QUERY_KEYS } from '@/shared';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import {
   UseMutateFunction,
   useMutation,
   useQueryClient
 } from '@tanstack/react-query';
 
-import { readNotification } from '../api';
+import { readNotification } from '../api/readNotification';
 
 export const useReadNotification = (): {
   mutate: UseMutateFunction<unknown, Error, number, unknown>;

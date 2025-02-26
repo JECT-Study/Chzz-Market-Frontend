@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import { httpClient } from '@/shared/api/axios';
 import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { useEffect } from 'react';

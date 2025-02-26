@@ -1,25 +1,22 @@
-import { heartData, useDeleteHeart, useGetHeartList } from '@/features/heart';
-import {
-  notificationData,
-  useGetNotificationList
-} from '@/features/notification';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
 
-import { LayoutWithNav } from '@/app/layout';
-import { Heart } from '@/pages/heart';
+import { LayoutWithNav } from '@/app/layout/ui/LayoutWithNav';
+import { useGetNotificationList } from '@/features/notification/model/useGetNotificationList';
+import { notificationData } from '@/features/notification/test/data';
+import { Heart } from '@/pages/heart/Heart';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
+import { useDeleteHeart } from '../model/useDeleteHeart';
+import { useGetHeartList } from '../model/useGetHeartList';
+import { heartData } from './data';
+;
 
-vi.mock('@/features/heart/model', () => ({
-  useGetHeartList: vi.fn(),
-  useDeleteHeart: vi.fn()
-}));
+vi.mock('@/features/heart/model/useGetHeartList');
+vi.mock('@/features/heart/model/useDeleteHeart');
 
-vi.mock('@/features/notification/model', () => ({
-  useGetNotificationList: vi.fn()
-}));
+vi.mock('@/features/notification/model/useGetNotificationList');
 
 vi.mocked(useGetNotificationList).mockReturnValue({
   notificationList: notificationData

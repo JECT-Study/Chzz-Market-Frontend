@@ -1,6 +1,6 @@
-import { HttpHandler, HttpResponse, delay, http } from 'msw';
+import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import { heartData } from './data';
 
 let curHeartData = [...heartData];
@@ -8,8 +8,6 @@ let curHeartData = [...heartData];
 export const heartHandler: HttpHandler = http.get(
   `${import.meta.env.VITE_API_URL}${API_END_POINT.HEART_LIST}`,
   async () => {
-    await delay(500);
-
     return HttpResponse.json({
       items: curHeartData
     });

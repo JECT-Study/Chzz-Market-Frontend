@@ -1,12 +1,10 @@
-import {
-  CreatedAt,
-  ParticipantCount,
-  Price,
-  ProductItem,
-  ROUTES
-} from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
+import { CreatedAt } from '@/shared/ui/CreatedAt';
+import { ParticipantCount } from '@/shared/ui/ParticipantCount';
+import { Price } from '@/shared/ui/Price';
+import { ProductItem } from '@/shared/ui/ProductItem';
 
-import type { IAuctionOngoingRegisteredItem } from '@/entities';
+import type { IAuctionOngoingRegisteredItem } from '@/entities/auction/types/userRegistered';
 import { useNavigate } from 'react-router';
 
 export const OngoingMyRegister = ({

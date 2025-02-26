@@ -1,4 +1,4 @@
-import UserIcon from '@/shared/assets/icons/user.svg';
+import UserIcon from '../assets/icons/user.svg';
 
 export const ParticipantCount = ({ count }: { count: number }) => {
   return (

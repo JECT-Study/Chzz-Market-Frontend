@@ -1,4 +1,5 @@
-import { Button, FormField, ProgressiveImage } from '@/shared';
+import { Button } from '@/shared/ui/Button';
+import { FormField } from '@/shared/ui/FormField';
 import {
   Select,
   SelectContent,
@@ -7,10 +8,10 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/shared/ui/select';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
-import { Layout } from '@/app/layout/index';
+import { Layout } from '@/app/layout/ui/Layout';
 import type { IAddressWithId } from '@/entities/address/address';
 import { addressMemo } from '@/features/address/config/address';
 import { usePostPayment } from '@/features/address/model';
@@ -19,6 +20,7 @@ import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { ROUTES } from '@/shared/constants/routes';
 import { AuctionShippingSchema } from '@/shared/constants/schema';
+import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
 import { Input } from '@/shared/ui/input';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';
@@ -33,7 +35,6 @@ const defaultValues = {
 
 export const Payment = () => {
   const navigate = useNavigate();
-  const formRef = useRef<HTMLFormElement>(null);
   const [isValid, setIsValid] = useState<boolean>();
   const [isMemoSelectDisabled, setMemoSelectDisabled] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<IAddressWithId | null>(
@@ -71,14 +72,6 @@ export const Payment = () => {
 
   const memoInputValue = watch('memoInput');
   const formattedAmount = formatCurrencyWithWon(auctionData.winningAmount);
-
-  const handleSubmitClick = () => {
-    if (formRef.current) {
-      formRef.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true })
-      );
-    }
-  };
 
   const handleClickAddressList = () =>
     navigate(ROUTES.PAYMENT.ADDRESS.getListRoute(auctionId!));
@@ -119,7 +112,13 @@ export const Payment = () => {
             <h2 className="text-heading3 web:text-heading2">기본 정보 입력</h2>
             {/* 상품 정보 */}
             <div className="flex p-2 space-x-4">
-              <ProgressiveImage lowResSrc={`${auctionData?.imageUrl}?h=20`} highResSrc={`${auctionData?.imageUrl}?h=228`} alt="product" className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]" priority='high' />
+              <ProgressiveImage
+                lowResSrc={`${auctionData?.imageUrl}?h=20`}
+                highResSrc={`${auctionData?.imageUrl}?h=228`}
+                alt="product"
+                className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]"
+                priority="high"
+              />
               <div>
                 <p className="text-heading3 web:text-heading2">
                   {auctionData?.auctionName}
@@ -234,9 +233,7 @@ export const Payment = () => {
             </div>
           )}
           <form
-            ref={formRef}
             className="flex flex-col"
-            onSubmit={handleSubmit(onSubmit)}
           >
             <FormField
               label="배송메모"
@@ -288,7 +285,7 @@ export const Payment = () => {
           type="button"
           className="w-full h-[47px] rounded-lg"
           color="cheeseYellow"
-          onClick={handleSubmitClick}
+          onClick={handleSubmit(onSubmit)}
           disabled={isValid || isPending}
           loading={isPending}
         >

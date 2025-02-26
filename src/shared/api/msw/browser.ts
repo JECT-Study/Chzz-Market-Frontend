@@ -1,42 +1,45 @@
 import {
+  kakaoLoginHandler,
+  naverLoginHandler,
+  postSignupHandler
+} from '@/features/auth/test/handler';
+import {
   auctionDetailsHandler,
   cancelBidHandler,
   convertPreAuctionHandler,
   deletePreAuctionHandler,
   heartAuctionHandler,
   postBidHandler
-} from '@/features/details';
+} from '@/features/details/test/handler';
 import {
-  getAuctionUploadURLsHandler,
-  postAuctionHandler,
-  uploadImagesToS3Handler
-} from '@/features/register';
-import { heartDeleteHandler, heartHandler } from '@/features/heart';
-import {
-  kakaoLoginHandler,
-  naverLoginHandler,
-  postSignupHandler
-} from '@/features/auth';
+  heartDeleteHandler,
+  heartHandler
+} from '@/features/heart/test/handler';
 import {
   notificationDeleteHandler,
   notificationListHandler,
   notificationReadHandler,
   realTimeNotificationsHandler
-} from '@/features/notification';
+} from '@/features/notification/test/handler';
+import {
+  getAuctionUploadURLsHandler,
+  postAuctionHandler,
+  uploadImagesToS3Handler
+} from '@/features/register/test/handler';
 
-import { HttpHandler } from 'msw';
-import { bidderListHandler } from '@/pages/bidder-list';
-import { getMyAuctionPreRegisterHandler } from '@/features/user';
+import { patchPreAuctionHandler } from '@/features/edit-auction/test/handler';
 import { getOngoingProductListHandler } from '@/features/product-list';
-import { homeAuctionsHandler } from '@/pages/home';
-import { patchPreAuctionHandler } from '@/features/edit-auction';
-import { setupWorker } from 'msw/browser';
 import {
   deleteUserHandler,
+  getMyAuctionPreRegisterHandler,
   getUserProfileHandler,
   logoutHandler,
   refreshTokenHandler
-} from '@/features/user/test/handler';
+} from '@/features/user';
+import { bidderListHandler } from '@/pages/bidder-list/test/handler';
+import { homeAuctionsHandler } from '@/pages/home/test/handler';
+import { HttpHandler } from 'msw';
+import { setupWorker } from 'msw/browser';
 
 /* eslint-disable import/no-named-as-default */
 const handlers: HttpHandler[] = [

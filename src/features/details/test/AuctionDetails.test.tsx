@@ -1,23 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
-import { AuctionDetailsMain, useGetAuctionDetails } from '..';
 
-import type { IAuctionDetails } from '@/entities';
-import { CATEGORIES } from '@/shared';
+import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { CATEGORIES } from '@/shared/constants/categories';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';
-import { useEndAuction } from '../lib';
-import { useCancelBid } from '../model';
+import { useEndAuction } from '../lib/useEndAuction';
+import { useCancelBid } from '../model/useCancelBid';
+import { useGetAuctionDetails } from '../model/useGetAuctionDetails';
+import { AuctionDetailsMain } from '../ui/AuctionDetailsMain';
 import { auctionDetailsData } from './data';
 
-vi.mock('@/features/details/model', () => ({
-  useGetAuctionDetails: vi.fn(),
-  useCancelBid: vi.fn()
-}));
-vi.mock('@/features/details/lib', () => ({
-  useEndAuction: vi.fn()
-}));
+vi.mock('@/features/details/model/useGetAuctionDetails');
+vi.mock('@/features/details/model/useCancelBid');
+vi.mock('@/features/details/lib/useEndAuction');
 
 vi.mocked(useEndAuction).mockReturnValue({
   endAuction: vi.fn()
@@ -159,7 +156,8 @@ describe('경매 상세 조회 테스트', () => {
     test('구매자이면서 참여한 사람은 참여 취소 버튼과 금액 수정 및 남은 횟수 버튼이 존재하며, 금액 수정 버튼 클릭하면 입찰 페이지로 이동한다.', async () => {
       const { user } = setup(3);
 
-      const { remainingBidCount, auctionId } = auctionDetailsData[3] as IAuctionDetails
+      const { remainingBidCount, auctionId } =
+        auctionDetailsData[3] as IAuctionDetails;
       const cancelBtn = screen.getByRole('button', { name: '참여 취소 확인' });
       const editBtn = screen.getByRole('button', { name: '금액 수정' });
       const remainCount = screen.getByText(

@@ -2,7 +2,7 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { deletePreAuction } from '../api';
+import { deletePreAuction } from '../api/deletePreAuction';
 
 export const useDeletePreAuction = (): {
   mutate: UseMutateFunction<any, Error, number, unknown>;

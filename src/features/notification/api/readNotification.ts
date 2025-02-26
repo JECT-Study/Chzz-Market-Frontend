@@ -1,4 +1,5 @@
-import { API_END_POINT, httpClient } from '@/shared';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
 export const readNotification = async (id: number) => {
   const response = await httpClient.post(

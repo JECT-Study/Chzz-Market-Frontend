@@ -1,8 +1,8 @@
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 import { RefObject } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router';
-import { useScrollDetection } from '../lib';
+import { useScrollDetection } from '../lib/useScrollDetection';
 
 export const HomeRegisterBtn = ({ containRef }: { containRef: RefObject<HTMLDivElement> }) => {
   const navigate = useNavigate();
@@ -11,8 +11,9 @@ export const HomeRegisterBtn = ({ containRef }: { containRef: RefObject<HTMLDivE
   return (
     <div className="sticky bottom-0 right-0 z-50 flex justify-end w-full cursor-pointer">
       <button
-        className={`relative text-center text-white rounded-full bg-cheeseYellow transition-all text-button  duration-500 h-14 p-4 ${isScrolled ? 'w-full' : 'w-14'
-          }`}
+        className={`relative text-center text-white rounded-full bg-cheeseYellow transition-all text-button  duration-500 h-14 p-4 ${
+          isScrolled ? 'w-full' : 'w-14'
+        }`}
         onClick={() => navigate(ROUTES.REGISTER)}
       >
         <span

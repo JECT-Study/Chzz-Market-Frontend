@@ -1,10 +1,10 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
-import type { IRegisterPatch } from '@/features/register';
-import { ROUTES } from '@/shared';
+import type { IRegisterPatch } from '@/features/register/config/type';
+import { ROUTES } from '@/shared/constants/routes';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { patchPreAuction } from '..';
+import { patchPreAuction } from '../api/patchPreAuction';
 
 export const usePatchPreAuction = (): {
   mutate: UseMutateFunction<

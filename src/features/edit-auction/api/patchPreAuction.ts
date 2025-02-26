@@ -1,5 +1,6 @@
-import type { IRegisterPatch } from '@/features/register';
-import { API_END_POINT, httpClient } from '@/shared';
+import type { IRegisterPatch } from '@/features/register/config/type';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
 export const patchPreAuction = async ({
   preAuctionId,

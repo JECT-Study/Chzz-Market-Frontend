@@ -1,21 +1,21 @@
 import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-import { Layout } from '@/app/layout/index';
-import ErrorIcon from '@/shared/assets/icons/error.svg';
+import { Layout } from '@/app/layout/ui/Layout';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
+import ErrorIcon from '../../assets/icons/error.svg';
 import { getErrorByCode } from '../../utils/getErrorByCode';
 import { Button } from '../Button';
-import { GlobalSpinner } from '../spinner';
+import { GlobalSpinner } from '../spinner/GlobalSpinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
-  const { title, description } = getErrorByCode(error)
-  const navigate = useNavigate()
+  const { title, description } = getErrorByCode(error);
+  const navigate = useNavigate();
   const handleClick = () => {
-    if (error.code === '403') navigate('/')
-    resetErrorBoundary()
-  }
+    if (error.code === '403') navigate('/');
+    resetErrorBoundary();
+  };
 
   return (
     <div
@@ -36,8 +36,13 @@ const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
               </div>
             </div>
           </Layout.Main>
-          <Layout.Footer type='single'>
-            <Button type='button' color='cheeseYellow' className='w-full h-full' onClick={handleClick}>
+          <Layout.Footer type="single">
+            <Button
+              type="button"
+              color="cheeseYellow"
+              className="w-full h-full"
+              onClick={handleClick}
+            >
               {error.code === '403' ? '홈으로 가기' : '다시 시도하기'}
             </Button>
           </Layout.Footer>

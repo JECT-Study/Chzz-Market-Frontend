@@ -3,11 +3,11 @@
 ## 프로젝트 소개
 
 ## 팀원 소개
-|팀장|팀원|팀원|
-|:-:|:-:|:-:|
-|<img src="https://avatars.githubusercontent.com/u/93777385?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/89385423?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/169774207?v=4" width="150" height="150"/>|
-|JunSeok<br/>[@CLOUDoort](https://github.com/CLOUDoort)|장석원<br/>[@aquaman122](https://github.com/aquaman122)|[@luminox93](https://github.com/luminox93)|
 
+|                                            팀장                                            |                                            팀원                                            |                                            팀원                                             |
+| :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
+| <img src="https://avatars.githubusercontent.com/u/93777385?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/89385423?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/169774207?v=4" width="150" height="150"/> |
+|                   JunSeok<br/>[@CLOUDoort](https://github.com/CLOUDoort)                   |                  장석원<br/>[@aquaman122](https://github.com/aquaman122)                   |                         [@luminox93](https://github.com/luminox93)                          |
 
 ## ⚙️ 기술 스택
 

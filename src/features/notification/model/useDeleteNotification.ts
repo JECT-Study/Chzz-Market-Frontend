@@ -1,12 +1,12 @@
-import { QUERY_KEYS } from '@/shared';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import {
   UseMutateFunction,
   useMutation,
   useQueryClient
 } from '@tanstack/react-query';
 
-import { deleteNotification } from '../api';
-import type { INotification } from '../config';
+import { deleteNotification } from '../api/deleteNotification';
+import type { INotification } from '../config/type';
 
 export const useDeleteNotification = (): {
   mutate: UseMutateFunction<unknown, Error, number, unknown>;

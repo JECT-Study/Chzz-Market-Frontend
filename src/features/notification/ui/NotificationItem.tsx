@@ -1,10 +1,13 @@
-import { ProgressiveImage, getTimeAgo } from '@/shared';
 import DefaultImage from '@/shared/assets/icons/default_image.svg';
 import XButtonIcon from '@/shared/assets/icons/x_button.svg';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router';
-import { NOTIFICATION_CONTENTS, type INotification } from '../config';
-import { useDeleteNotification, useReadNotification } from '../model';
+import { type INotification } from '../config/type';
+import { getTimeAgo } from '@/shared/utils/getTimeAgo';
+import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
+import { useDeleteNotification } from '../model/useDeleteNotification';
+import { useReadNotification } from '../model/useReadNotification';
+import { NOTIFICATION_CONTENTS } from '../config/constants';
 
 export const NotificationItem = ({ item }: { item: INotification }) => {
   const {
@@ -55,7 +58,13 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
           </div>
         </figcaption>
         <div className="flex items-start gap-3">
-          <ProgressiveImage lowResSrc={`${imageUrl ?? DefaultImage}?h=20`} highResSrc={`${imageUrl ?? DefaultImage}?h=228`} alt={`이미지_${notificationId}`} className="object-contain rounded size-24" priority='high' />
+          <ProgressiveImage
+            lowResSrc={`${imageUrl ?? DefaultImage}?h=20`}
+            highResSrc={`${imageUrl ?? DefaultImage}?h=228`}
+            alt={`이미지_${notificationId}`}
+            className="object-contain rounded size-24"
+            priority="high"
+          />
           <button aria-label={`버튼_${notificationId}`} onClick={handleDelete}>
             <img
               className="inline rounded size-4"

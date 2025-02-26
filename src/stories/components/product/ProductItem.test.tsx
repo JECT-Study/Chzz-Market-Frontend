@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import { ProductItem } from '@/shared';
 import { mockWindowProperties } from '@/shared/api/msw/setupTests';
+import { ProductItem } from '@/shared/ui/ProductItem';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 
@@ -43,7 +43,7 @@ describe('ProductItem 컴포넌트 테스트', () => {
     expect(productImage).toBeInTheDocument();
     expect(productImage).toHaveAttribute(
       'src',
-      'https://via.placeholder.com/150?h=228'
+      'https://via.placeholder.com/150?h=20'
     );
 
     const auctionName = screen.getByText('테스트 상품');

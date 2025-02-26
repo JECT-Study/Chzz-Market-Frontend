@@ -1,4 +1,4 @@
-import { ROUTES } from '@/shared';
+import { ROUTES } from '@/shared/constants/routes';
 
 interface NotificationContent {
   buttonName: string;

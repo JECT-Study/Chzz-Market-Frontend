@@ -8,46 +8,39 @@ interface ProgressiveImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   priority?: 'high' | 'low';
 }
 
-export const ProgressiveImage = ({ lowResSrc, highResSrc, alt, priority, loading, ...props }: ProgressiveImageProps) => {
-  const [highResLoaded, setHighResLoaded] = useState(false);
+export const ProgressiveImage = ({
+  lowResSrc,
+  highResSrc,
+  alt,
+  priority,
+  loading,
+  ...props
+}: ProgressiveImageProps) => {
+  // 현재 표시 중인 src
+  const [currentSrc, setCurrentSrc] = useState(lowResSrc);
+  // 고해상도 이미지 로드 여부
+  const [isHighResLoaded, setIsHighResLoaded] = useState(false);
 
   useEffect(() => {
     const img = new Image();
     img.src = highResSrc;
     img.onload = () => {
-      setHighResLoaded(true);
+      setCurrentSrc(highResSrc);
+      setIsHighResLoaded(true);
     };
-
   }, [highResSrc]);
 
   return (
-    <div className='relative h-full overflow-hidden'>
-      <img
-        src={lowResSrc}
-        style={{
-          opacity: highResLoaded ? 0 : 1,
-          transition: 'opacity 0.7s ease-out',
-          display: 'block'
-        }}
-        loading={loading}
-        {...{ fetchpriority: priority }}
-        {...props}
-      />
-      <img
-        src={highResSrc}
-        alt={alt}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          opacity: highResLoaded ? 1 : 0,
-          transition: 'opacity 0.7s ease-out'
-        }}
-        loading={loading}
-        {...{ fetchpriority: priority }}
-        {...props}
-      />
-    </div>
-
+    <img
+      src={currentSrc}
+      alt={alt}
+      style={{
+        transition: 'filter 0.5s ease-out',
+        filter: isHighResLoaded ? 'none' : 'blur(5px)',
+      }}
+      loading={loading}
+      {...{ fetchpriority: priority }}
+      {...props}
+    />
   );
 };

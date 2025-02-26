@@ -1,6 +1,6 @@
-import { useGetNotificationList } from '@/features/notification';
+import { useGetNotificationList } from '@/features/notification/model/useGetNotificationList';
 import { useNavigate } from 'react-router';
-import { NAV_ICONS } from '../config';
+import { NAV_ICONS } from '../config/navIcons';
 
 interface NavigationItemProps {
   name: string;
@@ -21,7 +21,10 @@ const NavigationItem = ({
     name === 'notification' && unreadNotificationsCount > 0;
 
   return (
-    <li aria-label={`${name}_icon`} className='flex justify-center transition-all items-center w-[11.25rem] min-w-[5.625rem] h-[3.75rem] relative'>
+    <li
+      aria-label={`${name}_icon`}
+      className="flex justify-center transition-all items-center w-[11.25rem] min-w-[5.625rem] h-[3.75rem] relative"
+    >
       <div className="relative">
         <img
           onClick={() => navigate(path)}
@@ -36,7 +39,6 @@ const NavigationItem = ({
           />
         )}
       </div>
-
     </li>
   );
 };

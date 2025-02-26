@@ -1,29 +1,27 @@
-import {
-  notificationData,
-  useGetNotificationList
-} from '@/features/notification';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
-import {
-  useGetBestAuctions,
-  useGetImminentAuctions,
-  useGetPreAuctions
-} from '../model';
+import { useGetBestAuctions } from '../model/useGetBestAuctions';
+import { useGetImminentAuctions } from '../model/useGetImminentAuctions';
+import { useGetPreAuctions } from '../model/useGetPreAuctions';
 import {
   bestAuctionsData,
   imminentAuctionsData,
   preAuctionsData
 } from './data';
 
-import { LayoutWithNav } from '@/app/layout';
-import { getTimeColor } from '@/shared';
+import { LayoutWithNav } from '@/app/layout/ui/LayoutWithNav';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { getTimeColor } from '@/shared/utils/getTimeColor';
 import userEvent from '@testing-library/user-event';
-import { Home } from '../ui';
+import { Home } from '../ui/Home';
+import { useGetNotificationList } from '@/features/notification/model/useGetNotificationList';
+import { notificationData } from '@/features/notification/test/data';
 
-vi.mock('@/pages/home/model');
-vi.mock('@/features/notification/model');
+vi.mock('@/pages/home/model/useGetBestAuctions');
+vi.mock('@/pages/home/model/useGetImminentAuctions');
+vi.mock('@/pages/home/model/useGetPreAuctions');
+vi.mock('@/features/notification/model/useGetNotificationList');
 
 vi.mocked(useGetBestAuctions).mockReturnValue({
   bestAuctions: bestAuctionsData

@@ -3,14 +3,16 @@ import './index.css';
 import { storeLogin } from '@/features/auth/model/authSlice';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { scan } from 'react-scan';
 import { Toaster } from 'sonner';
 import App from './App';
-import { ReactQueryProvider } from './provider/index';
+import { ReactQueryProvider } from './provider/queryProvider';
 import { store } from './store';
 
 async function setupMocks(): Promise<void> {
-  if (import.meta.env.MODE !== 'development' || import.meta.env.VITE_USE_MOCK !== 'true') {
+  if (
+    import.meta.env.MODE !== 'development' ||
+    import.meta.env.VITE_USE_MOCK !== 'true'
+  ) {
     return;
   }
 
@@ -30,13 +32,6 @@ async function setupMocks(): Promise<void> {
   if (token) store.dispatch(storeLogin({ token }));
 
   await setupMocks();
-
-  // react scan
-  if (typeof window !== 'undefined') {
-    scan({
-      enabled: true,
-    });
-  }
 
   const root = createRoot(document.getElementById('root')!);
   root.render(

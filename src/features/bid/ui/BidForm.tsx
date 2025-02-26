@@ -1,24 +1,22 @@
-import {
-  AuctionItem,
-  Button,
-  FormField,
-  Input,
-  MAX_BID_COUNT,
-  convertCurrencyToNumber,
-  formatCurrencyWithWon,
-  useToggleState
-} from '@/shared';
+import { MAX_BID_COUNT } from '@/shared/constants/bid';
+import { useToggleState } from '@/shared/hooks/useToggleState';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { BidCaution } from './BidCaution';
-import type { IAuctionDetails } from '@/entities';
-import { Layout } from '@/app/layout';
-import { getBidSchema } from '../config';
-import { useEditableNumberInput } from '@/features/register';
-import { useGetAuctionDetails } from '@/features/details';
-import { usePostBid } from '../model';
-import { z } from 'zod';
+import { Layout } from '@/app/layout/ui/Layout';
+import type { IAuctionDetails } from '@/entities/auction/types/details';
+import { useGetAuctionDetails } from '@/features/details/model/useGetAuctionDetails';
+import { useEditableNumberInput } from '@/features/register/lib/useEditableNumberInput';
+import { AuctionItem } from '@/shared/ui/AuctionItem';
+import { Button } from '@/shared/ui/Button';
+import { FormField } from '@/shared/ui/FormField';
+import { Input } from '@/shared/ui/input';
+import { convertCurrencyToNumber } from '@/shared/utils/convertCurrencyToNumber';
+import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { getBidSchema } from '../config/schema';
+import { usePostBid } from '../model/usePostBid';
+import { BidCaution } from './BidCaution';
 
 export const BidForm = ({ auctionId }: { auctionId: number }) => {
   const { details } = useGetAuctionDetails<IAuctionDetails>(auctionId);
@@ -120,9 +118,9 @@ export const BidForm = ({ auctionId }: { auctionId: number }) => {
       </Layout.Main>
       <Layout.Footer type={isParticipated ? 'double' : 'single'}>
         <Button
-          type='button'
-          color='cheeseYellow'
-          className='w-full h-full transition-colors rounded text-button active:bg-black'
+          type="button"
+          color="cheeseYellow"
+          className="w-full h-full transition-colors rounded text-button active:bg-black"
           ariaLabel={maxFlag ? '제안하기' : '수정하기'}
           onClick={handleSubmit(onPostSubmit)}
           disabled={zeroFlag || !check || isPending}

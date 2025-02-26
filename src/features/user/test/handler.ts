@@ -1,6 +1,6 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 
-import { API_END_POINT } from '@/shared';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 import myAuctionData from './auctionData';
 import { mockUserProfile } from './userProfileData';
 
@@ -85,11 +85,3 @@ export const deleteUserHandler: HttpHandler = http.delete(
     });
   }
 );
-
-export const mockUserHandlers = [
-  getMyAuctionPreRegisterHandler,
-  getUserProfileHandler,
-  logoutHandler,
-  deleteUserHandler,
-  refreshTokenHandler
-];

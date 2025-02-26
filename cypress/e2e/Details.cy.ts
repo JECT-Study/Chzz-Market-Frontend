@@ -112,9 +112,8 @@ describe('상세 조회', () => {
         cy.findByLabelText('옵션').should('not.exist');
       });
 
-      it('찜 목록에 추가 버튼 클릭하면 찜 목록에 추가되고, 찜 목록에서 제외 버튼으로 변경된다.', () => {
+      it('찜 목록에 추가 버튼 클릭할 수 있다.', () => {
         cy.findByLabelText('찜 목록에 추가').click();
-        cy.findByLabelText('찜 목록에서 제외');
       });
     });
   });

@@ -1,20 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, test, vi } from 'vitest';
-import { notificationData, useDeleteNotification, useGetNotificationList, useGetNotificationListWithSuspense, useReadNotification } from '..';
 
-import { LayoutWithNav } from '@/app/layout';
-import { Notification } from '@/pages/notification';
+import { LayoutWithNav } from '@/app/layout/ui/LayoutWithNav';
+import { Notification } from '@/pages/notification/Notification';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import userEvent from '@testing-library/user-event';
-import { NOTIFICATION_CONTENTS } from '../config';
+import { NOTIFICATION_CONTENTS } from '../config/constants';
+import { useDeleteNotification } from '../model/useDeleteNotification';
+import { useGetNotificationList, useGetNotificationListWithSuspense } from '../model/useGetNotificationList';
+import { useReadNotification } from '../model/useReadNotification';
+import { notificationData } from './data';
+;
 
-vi.mock('@/features/notification/model', () => ({
-  useGetNotificationListWithSuspense: vi.fn(),
-  useGetNotificationList: vi.fn(),
-  useReadNotification: vi.fn(),
-  useDeleteNotification: vi.fn()
-}));
+vi.mock('@/features/notification/model/useGetNotificationListWithSuspense');
+vi.mock('@/features/notification/model/useGetNotificationList');
+vi.mock('@/features/notification/model/useReadNotification');
+vi.mock('@/features/notification/model/useDeleteNotification');
 
 vi.mocked(useGetNotificationList).mockReturnValue({
   notificationList: notificationData
@@ -97,7 +99,7 @@ describe('알림 테스트', () => {
     expect(unreadNotifications).toBe(1);
 
     await user.click(notifications[2]);
-    expect(mutateReadMock).toHaveBeenCalledWith(2)
+    expect(mutateReadMock).toHaveBeenCalledWith(2);
   });
 
   test('알림 클릭하면 알림 세부 정보를 볼 수 있는 페이지로 이동한다.', async () => {

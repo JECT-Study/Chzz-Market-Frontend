@@ -1,7 +1,8 @@
-import { API_END_POINT, httpClient } from '@/shared';
+import { httpClient } from '@/shared/api/axios';
+import { API_END_POINT } from '@/shared/constants/apiEndPoint';
 
+import type { IUserAuctionLostList } from '@/entities/auction/types/list';
 import type { GetAuctionProps } from '@/entities/user/user';
-import type { IUserAuctionLostList } from '@/entities';
 
 export const getMyLostAuction = async ({
   pageNumber,

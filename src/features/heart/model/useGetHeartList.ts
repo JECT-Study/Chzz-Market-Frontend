@@ -1,6 +1,6 @@
-import { QUERY_KEYS } from '@/shared';
+import { QUERY_KEYS } from '@/shared/constants/queryKeys';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getHeartList } from '..';
+import { getHeartList } from '../api/getHeartList';
 
 export const useGetHeartList = () => {
   const { data: heartList } = useSuspenseQuery({

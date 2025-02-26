@@ -1,6 +1,7 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { toast } from 'sonner';
-import { compressAndConvertToWebP, convertFileToDataURL } from '../utils';
+import { compressAndConvertToWebP } from '../utils/compressAndConvertToWebp';
+import { convertFileToDataURL } from '../utils/convertFileToDataURL';
 
 export const useImageUploader = (
   state: string[],

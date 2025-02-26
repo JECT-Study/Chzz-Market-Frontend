@@ -1,4 +1,4 @@
-import type { PaginationData } from '@/entities';
+import type { PaginationData } from '../auction/types/list';
 
 export interface IAddressBase {
   recipientName: string;
@@ -7,7 +7,7 @@ export interface IAddressBase {
   roadAddress: string;
   jibun: string;
   detailAddress: string;
-  isDefault: boolean;
+  isDefault?: boolean;
 }
 
 export interface IAddressWithId extends IAddressBase {

@@ -1,1 +1,0 @@
-export { homeAuctionsHandler } from './handler';

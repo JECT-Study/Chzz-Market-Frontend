@@ -1,5 +1,5 @@
 import type { IProfileProps } from '@/entities/user/user';
-import { Button } from '@/shared';
+import { Button } from '@/shared/ui/Button';
 import ProfileImage from '@/shared/assets/icons/profile.svg';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';

@@ -1,8 +1,8 @@
-import { removeToken } from '@/shared';
+import { removeToken } from '@/shared/utils/token';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { logout } from '..';
+import { logout } from '../api/logout';
+import axios from 'axios';
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -10,9 +10,7 @@ export const useAuth = () => {
   const handleKakaoLogin = async () => {
     if (import.meta.env.VITE_USE_MOCK === 'true') {
       // Mocking 환경
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`);
 
       const { data } = response;
 
@@ -29,9 +27,7 @@ export const useAuth = () => {
   const handleNaverLogin = async () => {
     if (import.meta.env.VITE_USE_MOCK === 'true') {
       // Mocking 환경
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/oauth2/authorization/naver`);
 
       const { data } = response;
 
