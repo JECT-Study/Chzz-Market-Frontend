@@ -1,32 +1,32 @@
-import { CATEGORIES } from '../constants/categories';
-import { useToggleState } from '../hooks/useToggleState';
-
-import { Layout } from '@/app/layout/ui/Layout';
-import type { IPreAuctionDetails } from '@/entities/auction/types/details';
-import { usePatchPreAuction } from '@/features/edit-auction/model/usePatchPreAuction';
-import { getAuctionUploadURLs } from '@/features/register/api/getAuctionUploadURLs';
-import { uploadImagesToS3 } from '@/features/register/api/uploadImagesToS3';
-import { RegisterSchema } from '@/features/register/config/schema';
 import type { IRegisterPatch, IRegisterPost } from '@/features/register/config/type';
-import { useEditableNumberInput } from '@/features/register/lib/useEditableNumberInput';
-import { usePostAuction } from '@/features/register/model/usePostAuction';
-import { ImageUploaderInput } from '@/features/register/ui/ImageUploaderInput';
-import { RegisterCaution } from '@/features/register/ui/RegisterCaution';
-import { convertDataURLtoFile } from '@/features/register/utils/convertDataURLtoFile';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
-import { toast } from 'sonner';
-import { z } from 'zod';
-import NoticeIcon from '../assets/icons/notice.svg';
-import { convertCurrencyToNumber } from '../utils/convertCurrencyToNumber';
-import { formatCurrencyWithWon } from '../utils/formatCurrencyWithWon';
-import { Button } from './Button';
-import { FormField } from './FormField';
-import { Input } from './input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './select';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+
+import { Button } from './Button';
+import { CATEGORIES } from '../constants/categories';
+import { FormField } from './FormField';
+import type { IPreAuctionDetails } from '@/entities/auction/types/details';
+import { ImageUploaderInput } from '@/features/register/ui/ImageUploaderInput';
+import { Input } from './input';
+import { Layout } from '@/app/layout/ui/Layout';
+import NoticeIcon from '../assets/icons/notice.svg';
+import { RegisterCaution } from '@/features/register/ui/RegisterCaution';
+import { RegisterSchema } from '@/features/register/config/schema';
 import { Textarea } from './textarea';
+import { convertCurrencyToNumber } from '../utils/convertCurrencyToNumber';
+import { convertDataURLtoFile } from '@/features/register/utils/convertDataURLtoFile';
+import { formatCurrencyWithWon } from '../utils/formatCurrencyWithWon';
+import { getAuctionUploadURLs } from '@/features/register/api/getAuctionUploadURLs';
+import { toast } from 'sonner';
+import { uploadImagesToS3 } from '@/features/register/api/uploadImagesToS3';
+import { useEditableNumberInput } from '@/features/register/lib/useEditableNumberInput';
+import { useNavigate } from 'react-router';
+import { usePatchPreAuction } from '@/features/edit-auction/model/usePatchPreAuction';
+import { usePostAuction } from '@/features/register/model/usePostAuction';
+import { useToggleState } from '../hooks/useToggleState';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 interface ExistingImage {
@@ -66,12 +66,12 @@ export const AuctionForm = ({
   } = useForm<FormFields>({
     defaultValues: preAuction
       ? {
-          auctionName: preAuction.auctionName,
-          category: CATEGORIES[preAuction.category].code,
-          minPrice: formatCurrencyWithWon(preAuction.minPrice),
-          description: preAuction.description,
-          images: preAuction.images.map((el) => el.imageUrl)
-        }
+        auctionName: preAuction.auctionName,
+        category: CATEGORIES[preAuction.category].code,
+        minPrice: formatCurrencyWithWon(preAuction.minPrice),
+        description: preAuction.description,
+        images: preAuction.images.map((el) => el.imageUrl)
+      }
       : defaultValues,
     resolver: zodResolver(RegisterSchema)
   });
@@ -338,7 +338,6 @@ export const AuctionForm = ({
             <Button
               type="button"
               ariaLabel="사전 등록하기"
-              color="white"
               className="flex-1 h-full"
               onClick={() => handleProceed('PRE_REGISTER')}
             >

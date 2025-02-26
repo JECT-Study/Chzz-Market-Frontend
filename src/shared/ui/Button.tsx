@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import classNames from 'classnames';
+import { ReactNode } from 'react';
 import { ButtonSpinner } from './spinner/ButtonSpinner';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,7 +18,6 @@ export const Button = ({
   children,
   size = 'medium',
   color = 'white',
-  hoverColor = '',
   disabled = false,
   onClick,
   type,
@@ -46,9 +45,8 @@ export const Button = ({
     'px-6 py-3 text-lg': size === 'large'
   });
   const hoverColorClasses = classNames({
-    'hover:bg-black/70 hover:text-white': hoverColor === 'black',
-    'hover:bg-white hover:text-black border border-black':
-      hoverColor === 'white'
+    'hover:bg-black/10 active:bg-black/20': color === 'white' || color.includes('gray'),
+    'hover:bg-opacity-80 active:bg-opacity-50 active:border-none': color === 'cheeseYellow' || color === 'black',
   });
   const combinedClasses = classNames(
     colorClasses,
