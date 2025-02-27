@@ -16,7 +16,10 @@ export const PreAuctionProduct = ({
   const { mutate: toggleAuctionListHeart } = useToggleAuctionListHeart();
   const handleProductClick = () =>
     navigate(ROUTES.PRE_AUCTION.getItemRoute(product.auctionId));
-  const confirmDelete = () => toggleAuctionListHeart(product.auctionId);
+  const confirmDelete = () => {
+    if (product.isSeller) return;
+    toggleAuctionListHeart(product.auctionId);
+  };
 
   return (
     <ProductItem product={product} onClick={handleProductClick}>
