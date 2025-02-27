@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { useEndAuction } from '../lib/useEndAuction';
 import { formatSecondsToTime } from '@/shared/utils/formatSecondsToTime';
+import { useEndAuction } from '../lib/useEndAuction';
 
 const totalTime = 24 * 60 ** 2;
 
@@ -64,7 +64,11 @@ export const ProgressBar = ({
         <div
           className={`${progressBarColor} h-full transition-width duration-1000`}
           style={{ width: `${progressBarWidth}%` }}
+          role="progressbar"
           aria-label="남은 시간 막대"
+          aria-valuenow={progressBarWidth}
+          aria-valuemin={0}
+          aria-valuemax={100}
         />
       </div>
     </div>
