@@ -54,7 +54,7 @@ export const Navigation = ({ active }: { active: string }) => {
       className="flex items-center h-full -mx-[22.5px]"
       aria-label="main navigation"
     >
-      <ul className="flex w-full" role="menu">
+      <ul className="flex w-full">
         {Object.entries(NAV_ICONS).map(([name, value]) => (
           <NavigationItem
             key={name}

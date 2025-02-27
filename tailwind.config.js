@@ -113,7 +113,7 @@ module.exports = {
         cheeseYellow: '#FD6A10',
         customBlue: '#448AFF',
         gray1: '#454545',
-        gray2: '#888888',
+        gray2: '#666666',
         gray3: '#D9D9D9',
         redNotice: '#FF0000',
         timeColor1: '#F07C7B',
