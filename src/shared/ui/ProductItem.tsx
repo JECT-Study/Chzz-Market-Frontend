@@ -1,6 +1,6 @@
+import { ReactNode } from 'react';
 import { ProgressiveImage } from './ProgressiveImage';
 import { TimeLabel } from './TimeLabel';
-import { ReactNode } from 'react';
 
 export interface ProductProps {
   id?: number;
@@ -32,7 +32,7 @@ export const ProductItem = ({
 
   return (
     <div key={productId} className="p-1 mb-4 cursor-pointer" onClick={onClick}>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <div className="w-full h-auto mb-2 web:mb-4">
           <div className="relative">
             <ProgressiveImage
@@ -47,12 +47,9 @@ export const ProductItem = ({
             )}
           </div>
         </div>
-
-        <div className="flex flex-col gap-[2px] web:gap-[4px]">
-          <div>
-            <p className="text-body2 web:text-heading3">{displayName}</p>
-          </div>
-          <div className="flex flex-col">{children}</div>
+        <div className="flex flex-col gap-1 web:gap-2">
+          <p className="text-body2 web:text-heading3">{displayName}</p>
+          <div className="flex flex-col gap-1">{children}</div>
         </div>
       </div>
     </div>
