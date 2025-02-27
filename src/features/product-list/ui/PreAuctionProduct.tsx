@@ -17,7 +17,6 @@ export const PreAuctionProduct = ({
   const handleProductClick = () =>
     navigate(ROUTES.PRE_AUCTION.getItemRoute(product.auctionId));
   const confirmDelete = () => {
-    if (product.isSeller) return;
     toggleAuctionListHeart(product.auctionId);
   };
 
@@ -31,7 +30,7 @@ export const PreAuctionProduct = ({
           confirmDelete();
         }}
         type="button"
-        disabled={!product.isSeller}
+        disabled={product.isSeller}
         className={`w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
         ${
           product.isLiked
