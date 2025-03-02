@@ -22,6 +22,7 @@ export const useRefreshTokenOnSuccess = () => {
   useEffect(() => {
     if (status === 'success') {
       mutate();
+      window.history.replaceState(null, '', window.location.pathname);
     }
   }, [status, mutate]);
 

@@ -1,6 +1,5 @@
 import { Layout } from '@/app/layout/ui/Layout';
 import { useAuth } from '@/features/auth/hooks/useAuth';
-import { useRefreshTokenOnSuccess } from '@/features/auth/model/useRefreshTokenOnSuccess';
 import ChizzImage from '@/shared/assets/icons/main_cheese_icon.svg';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
@@ -9,10 +8,6 @@ import { useNavigate } from 'react-router';
 export const Login = () => {
   const navigate = useNavigate();
   const { handleKakaoLogin, handleNaverLogin } = useAuth();
-  const { isSuccess } = useRefreshTokenOnSuccess();
-  if (isSuccess) {
-    navigate('/');
-  }
 
   return (
     <Layout>
