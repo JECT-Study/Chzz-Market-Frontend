@@ -12,7 +12,6 @@ export const useAuth = () => {
       import.meta.env.VITE_USE_MOCK === 'true' &&
       import.meta.env.MODE === 'development'
     ) {
-      console.log('mock');
       // Mocking 환경
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/oauth2/authorization/kakao`

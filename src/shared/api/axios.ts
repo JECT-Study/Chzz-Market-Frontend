@@ -98,7 +98,6 @@ export const createClient = (config?: AxiosRequestConfig) => {
       const errorName = response.data?.name;
       const errorMessage = response.data?.message[0];
       const requestUrl = originalRequest.url;
-      console.log(requestUrl);
 
       if (errorName === 'AUTHENTICATION_REQUIRED') {
         handleTokenError('로그인이 필요합니다.', requestUrl);
