@@ -3,6 +3,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { refreshToken } from '@/features/auth/api/refreshToken';
 import { toast } from 'sonner';
 import { getToken, removeToken, setToken } from '../utils/token';
+import { NEED_LOGIN_API_LIST } from '../constants/apiEndPoint';
 
 interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
   _retry?: boolean;
@@ -14,10 +15,12 @@ interface ErrorResponseData {
   name: string;
 }
 
-const handleTokenError = (message: string) => {
-  removeToken();
-  toast(message);
-  window.location.href = '/login';
+const handleTokenError = (message: string, requestUrl?: string) => {
+  if (requestUrl && NEED_LOGIN_API_LIST.some((api) => requestUrl.includes(api))) {
+    removeToken();
+    toast(message);
+    window.location.href = '/login';
+  }
 };
 
 // Refresh (싱글턴 객체) 이걸로 refresh 요청 관리하고 대기중인 요청 처리
@@ -94,16 +97,18 @@ export const createClient = (config?: AxiosRequestConfig) => {
       const { response } = error;
       const errorName = response.data?.name;
       const errorMessage = response.data?.message[0];
+      const requestUrl = originalRequest.url;
+      console.log(requestUrl);
 
       if (errorName === 'AUTHENTICATION_REQUIRED') {
-        handleTokenError('로그인이 필요합니다.');
+        handleTokenError('로그인이 필요합니다.', requestUrl);
       }
 
       if (response && response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
 
         if (errorMessage === '리프레시 토큰이 유효하지 않습니다.') {
-          handleTokenError(errorMessage);
+          handleTokenError(errorMessage, requestUrl);
           return Promise.reject(error); // 바로 재로그인 유도
         }
 
@@ -123,7 +128,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
             return await axiosInstance(originalRequest);
           } catch (refreshError) {
             handleTokenError(
-              '리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.'
+              '리프레시 토큰이 만료되었습니다. 다시 로그인해주세요.', requestUrl
             );
             return Promise.reject(refreshError);
           }
