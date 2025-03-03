@@ -39,10 +39,7 @@ export const API_END_POINT = {
 };
 
 export const NEED_LOGIN_API_LIST = [
-  API_END_POINT.PROFILE,
-  API_END_POINT.ORDER_LIST,
-  API_END_POINT.BID,
-  API_END_POINT.PAYMENT,
-  API_END_POINT.CREATE_ORDERID,
-  API_END_POINT.MY_AUCTION_PRE_REGISTER
+  '/api/v1/users',
+  '/api/v1/users/profile',
+  '/api/v1/bids',
 ];
