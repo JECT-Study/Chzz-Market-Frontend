@@ -17,6 +17,9 @@ import userEvent from '@testing-library/user-event';
 import { Home } from '../ui/Home';
 import { useGetNotificationList } from '@/features/notification/model/useGetNotificationList';
 import { notificationData } from '@/features/notification/test/data';
+import { Provider } from 'react-redux';
+import { store } from '@/app/store';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 vi.mock('@/pages/home/model/useGetBestAuctions');
 vi.mock('@/pages/home/model/useGetImminentAuctions');
@@ -37,15 +40,20 @@ vi.mocked(useGetNotificationList).mockReturnValue({
 });
 
 describe('Home 테스트', () => {
+ 
   const setup = () => {
     const utils = render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route element={<LayoutWithNav />}>
-            <Route path="/" element={<Home />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>
+      <QueryClientProvider client={new QueryClient()}>
+        <Provider store={store}>
+          <MemoryRouter initialEntries={['/']}>
+            <Routes>
+              <Route element={<LayoutWithNav />}>
+                <Route path="/" element={<Home />} />
+              </Route>
+            </Routes>
+          </MemoryRouter>
+        </Provider>
+      </QueryClientProvider>
     );
     const user = userEvent.setup();
 
