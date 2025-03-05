@@ -3,7 +3,6 @@ import { ROUTES } from '@/shared/constants/routes';
 import type { IUserAuctionWonItem } from '@/entities/auction/types/userParticipated';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { ParticipantCount } from '@/shared/ui/ParticipantCount';
-import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router';
 
@@ -36,13 +35,11 @@ export const OrderWonProduct = ({
       <div className="flex flex-col">
         <div className="w-full h-auto mb-4">
           <div className="relative">
-            <ProgressiveImage
-              lowResSrc={`${product.imageUrl}?h=20`}
-              highResSrc={`${product.imageUrl}?h=840`}
+            <img
+              src={`${product.imageUrl}?h=840`}
               alt={product.auctionName || '제품 사진'}
               className="object-cover w-[10rem] h-[7.5rem] web:w-full web:h-[15rem] rounded-t"
-              priority="high"
-            />
+              {...{ fetchpriority: "high" }} />
             {product.isOrdered ? (
               <div
                 aria-label="시간"
@@ -89,10 +86,9 @@ export const OrderWonProduct = ({
                 type="button"
                 onClick={handleButtonClick}
                 className={`w-[10.1rem] h-[2.1rem] web:w-[21rem] web:h-[2.5rem] text-body2 web:text-body1 focus:outline-none rounded-lg transition-colors box-border
-                  ${
-                    product.isOrdered
-                      ? 'bg-gray3 border-none'
-                      : 'bg-gray1 text-white border-none'
+                  ${product.isOrdered
+                    ? 'bg-gray3 border-none'
+                    : 'bg-gray1 text-white border-none'
                   }
                 `}
               >
