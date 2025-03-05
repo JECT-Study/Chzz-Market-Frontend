@@ -1,13 +1,23 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import BestItemList from './BestItemList';
 import CategoryList from './CategoryList';
 import HomeItemField from './HomeItemField';
 import { HomeRegisterBtn } from './HomeRegisterBtn';
 import ImminentItemList from './ImminentItemList';
 import PreAuctionItemList from './PreAuctionItemList';
+import { useRefreshTokenOnSuccess } from '@/features/auth/model/useRefreshTokenOnSuccess';
+import { useNavigate } from 'react-router';
 
 export const Home = () => {
+  const navigate = useNavigate();
   const containRef = useRef<HTMLDivElement>(null);
+  const { isSuccess } = useRefreshTokenOnSuccess();
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/', { replace: true });
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <div
