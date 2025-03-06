@@ -35,13 +35,7 @@ export const ProductItem = ({
       <div className="flex flex-col gap-2">
         <div className="w-full h-auto mb-2 web:mb-4">
           <div className="relative">
-            <ProgressiveImage
-              lowResSrc={`${product.imageUrl}?h=20`}
-              highResSrc={`${product.imageUrl}?h=228`}
-              alt={displayName || '제품 사진'}
-              className="object-cover w-[10rem] h-[7.5rem] web:w-full web:h-[15rem] rounded-t"
-              priority="high"
-            />
+            <ProgressiveImage lowResSrc={`${product.imageUrl}?h=10`} highResSrc={`${product.imageUrl}?h=228`} alt={displayName || '제품 사진'} className="object-cover w-[10rem] h-[7.5rem] web:w-full web:h-[15rem] rounded-t" priority='high' />
             {product.timeRemaining && (
               <TimeLabel time={product.timeRemaining} />
             )}

@@ -20,7 +20,6 @@ import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { ROUTES } from '@/shared/constants/routes';
 import { AuctionShippingSchema } from '@/shared/constants/schema';
-import { ProgressiveImage } from '@/shared/ui/ProgressiveImage';
 import { Input } from '@/shared/ui/input';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';
@@ -112,13 +111,11 @@ export const Payment = () => {
             <h2 className="text-heading3 web:text-heading2">기본 정보 입력</h2>
             {/* 상품 정보 */}
             <div className="flex p-2 space-x-4">
-              <ProgressiveImage
-                lowResSrc={`${auctionData?.imageUrl}?h=20`}
-                highResSrc={`${auctionData?.imageUrl}?h=228`}
+              <img
+                src={`${auctionData?.imageUrl}?h=228`}
                 alt="product"
                 className="object-cover rounded-md w-[6.62rem] h-[6.62rem] web:w-[8rem] web:h-[8rem]"
-                priority="high"
-              />
+                {...{ fetchpriority: "high" }} />
               <div>
                 <p className="text-heading3 web:text-heading2">
                   {auctionData?.auctionName}
