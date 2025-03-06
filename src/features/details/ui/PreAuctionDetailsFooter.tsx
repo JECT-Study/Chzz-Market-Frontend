@@ -29,6 +29,7 @@ export const PreAuctionDetailsFooter = ({
     if (!isLogin) {
       toast.error('로그인 후 이용해주세요.');
       navigate('/login');
+      return;
     }
 
     toggleAuctionItemHeart(auctionId)
