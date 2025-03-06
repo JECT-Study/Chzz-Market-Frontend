@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { LikeCount } from './LikeCount';
 import { ParticipantCount } from './ParticipantCount';
 import { Price } from './Price';
+import { ProgressiveImage } from './ProgressiveImage';
 import { TimeLabel } from './TimeLabel';
 
 interface AuctionItemProps {
@@ -34,12 +35,8 @@ interface ImageProps {
 const Image = ({ src, time = undefined, loading, priority }: ImageProps) => {
   return (
     <div className="relative w-full min-h-[7.5rem] max-h-[9rem] h-full">
-      <img
-        src={`${src}?h=228`}
-        alt="이미지"
-        className="object-contain w-full h-full rounded"
-        {...{ fetchpriority: priority }}
-        loading={loading} />
+      <ProgressiveImage lowResSrc={`${src}?h=10`} highResSrc={`${src}?h=228`} alt="이미지"
+        className="object-contain w-full h-full rounded" priority={priority} loading={loading} />
       {time !== undefined && <TimeLabel time={time} />}
     </div>
   );
