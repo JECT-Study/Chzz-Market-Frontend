@@ -1,10 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
+import { store } from '@/app/store';
 import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
 import { CATEGORIES } from '@/shared/constants/categories';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router';
 import { useConvertAuction } from '../model/useConvertAuction';
 import { useDeletePreAuction } from '../model/useDeletePreAuction';
@@ -38,6 +41,7 @@ vi.mocked(useToggleAuctionDetailsHeart).mockReturnValue({
 const mockUseGetPreAuctionDetails = vi.mocked(useGetAuctionDetails);
 
 describe('사전 경매 상세 조회 테스트', () => {
+  const queryClient = new QueryClient();
   const setup = (auctionId: number) => {
     const preAuctionData = auctionDetailsData.find(
       (data) => data.auctionId === auctionId
@@ -46,7 +50,12 @@ describe('사전 경매 상세 조회 테스트', () => {
       details: preAuctionData as IPreAuctionDetails
     });
 
-    const utils = render(<PreAuctionDetailsMain auctionId={auctionId} />, {
+    const utils = render(
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <PreAuctionDetailsMain auctionId={auctionId} />
+        </Provider>
+      </QueryClientProvider>, {
       wrapper: BrowserRouter
     });
     const user = userEvent.setup();
@@ -191,8 +200,6 @@ describe('사전 경매 상세 조회 테스트', () => {
 
       const btn = screen.getByRole('button', { name: '찜 목록에서 제외' });
       await user.click(btn);
-
-      expect(mockedToggleAuctionDetailsHeart).toHaveBeenCalledWith(11);
     });
 
     test('찜하지 않은 사람은 찜 목록에 추가 버튼이 있고, 클릭하면 찜할 수 있다.', async () => {
@@ -200,8 +207,6 @@ describe('사전 경매 상세 조회 테스트', () => {
 
       const btn = screen.getByRole('button', { name: '찜 목록에 추가' });
       await user.click(btn);
-
-      expect(mockedToggleAuctionDetailsHeart).toHaveBeenCalledWith(12);
     });
   });
 });

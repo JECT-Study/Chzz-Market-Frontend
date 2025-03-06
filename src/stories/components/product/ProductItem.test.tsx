@@ -43,7 +43,7 @@ describe('ProductItem 컴포넌트 테스트', () => {
     expect(productImage).toBeInTheDocument();
     expect(productImage).toHaveAttribute(
       'src',
-      'https://via.placeholder.com/150?h=20'
+      'https://via.placeholder.com/150?h=10'
     );
 
     const auctionName = screen.getByText('테스트 상품');

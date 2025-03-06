@@ -1,7 +1,11 @@
 import { Layout } from "@/app/layout/ui/Layout";
+import { isLoggedIn } from "@/features/auth/model/authSlice";
 import { Button } from "@/shared/ui/Button";
 import { Confirm } from "@/shared/ui/Confirm";
 import { Modal } from "@/shared/ui/Modal";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { useConvertAuction } from "../model/useConvertAuction";
 import { useToggleAuctionDetailsHeart } from "../model/useToggleAuctionDetailsHeart";
 
@@ -18,6 +22,18 @@ export const PreAuctionDetailsFooter = ({
 }: PreAuctionDetailsFooterProps) => {
   const { mutate: toggleAuctionItemHeart } = useToggleAuctionDetailsHeart();
   const { mutate: convertToAuction, isPending } = useConvertAuction(auctionId);
+  const isLogin = useSelector(isLoggedIn);
+  const navigate = useNavigate();
+
+  const clickHeart = () => {
+    if (!isLogin) {
+      toast.error('로그인 후 이용해주세요.');
+      navigate('/login');
+      return;
+    }
+
+    toggleAuctionItemHeart(auctionId)
+  }
 
   return (
     <Layout.Footer type="single">
@@ -55,7 +71,7 @@ export const PreAuctionDetailsFooter = ({
           type="button"
           className="w-full h-full"
           color={isLiked ? 'grayWhite' : 'cheeseYellow'}
-          onClick={() => toggleAuctionItemHeart(auctionId)}
+          onClick={clickHeart}
         >
           {isLiked ? '찜 목록에서 제외' : '찜 목록에 추가'}
         </Button>
