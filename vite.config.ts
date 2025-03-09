@@ -35,9 +35,14 @@ export default defineConfig(() => {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              if (id.includes('react') || id.includes('react-dom')) {
+              if (
+                /node_modules\/react(?:\/|$)/.test(id) ||
+                /node_modules\/react-dom(?:\/|$)/.test(id) ||
+                /node_modules\/react-router(?:\/|$)/.test(id)
+              ) {
                 return 'react-vendor';
               }
+
               if (id.includes('axios')) {
                 return 'axios-vendor';
               }
