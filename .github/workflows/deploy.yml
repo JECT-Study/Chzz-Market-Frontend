@@ -80,9 +80,9 @@ jobs:
             --cache-control "max-age=31536000, public, immutable"
 
       # 11. 폰트 파일 업로드 (Cache-Control 헤더 적용)
-      - name: Deploy font files with Cache-Control
+      - name: Deploy fonts files with Cache-Control
         run: |
-          aws s3 cp ./dist/assets/font s3://${{ secrets.S3_BUCKET_NAME }}/assets/font --recursive --metadata-directive REPLACE --cache-control "max-age=31536000, public, immutable"
+          aws s3 cp ./dist/assets/fonts s3://${{ secrets.S3_BUCKET_NAME }}/assets/font --recursive --metadata-directive REPLACE --cache-control "max-age=31536000, public, immutable"
 
       # 12. favicon.svg & robots.txt 업로드 (Cache-Control 헤더 적용)
       - name: Deploy favicon and robots.txt with Cache-Control
