@@ -1,6 +1,6 @@
 import { ReactNode, forwardRef } from 'react';
 
-import BackArrowIcon from '@/shared/assets/icons/back_arrow.svg';
+import { Icon } from '@/shared/ui/Icon';
 import { useNavigate } from 'react-router';
 
 interface HeaderProps {
@@ -22,7 +22,7 @@ const Header = ({ title, handleBack, option, children }: HeaderProps) => {
             aria-label="뒤로 가기"
             onClick={handleBack ?? (() => navigate(-1))}
           >
-            <img src={BackArrowIcon} alt="뒤로가기 아이콘" className="size-6" />
+            <Icon name="back_arrow" ariaLabel='뒤로가기 아이콘' style='size-6' />
           </button>
         )}
         {children ? (

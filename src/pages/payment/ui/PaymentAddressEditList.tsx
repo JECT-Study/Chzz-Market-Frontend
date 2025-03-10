@@ -4,10 +4,9 @@ import { useNavigate, useParams } from 'react-router';
 
 import { Layout } from '@/app/layout/ui/Layout';
 import type { IAddressWithId } from '@/entities/address/address';
-import rocation_off from '@/shared/assets/icons/rocation_off.svg';
-import rocation_on from '@/shared/assets/icons/rocation_on.svg';
 import { ROUTES } from '@/shared/constants/routes';
 import { Button } from '@/shared/ui/Button';
+import { Icon } from '@/shared/ui/Icon';
 
 export const PaymentAddressEditList = () => {
   const navigate = useNavigate();
@@ -70,17 +69,9 @@ export const PaymentAddressEditList = () => {
               >
                 <div className="flex items-center">
                   {item?.isDefault ? (
-                    <img
-                      src={rocation_on}
-                      className="mr-2 text-cheeseYellow"
-                      alt="위치 아이콘"
-                    />
+                    <Icon name='location_on' style='mr-2 text-cheeseYellow' ariaLabel='위치 아이콘' />
                   ) : (
-                    <img
-                      src={rocation_off}
-                      className="mr-2 text-gray2"
-                      alt="위치 아이콘"
-                    />
+                    <Icon name='location_off' style='mr-2 text-gray2' ariaLabel='위치 아이콘' />
                   )}
                 </div>
                 <div className="flex flex-col gap-2 mb-2">

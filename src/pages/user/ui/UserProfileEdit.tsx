@@ -12,8 +12,7 @@ import { useEditProfile } from '@/features/profile/hooks';
 import { useProfileNicknameValidate } from '@/features/profile/hooks/useProfileNicknameValidate';
 import { uploadProfileImageToS3 } from '@/features/profile/model';
 import { ProfileImageUploader } from '@/features/profile/ui';
-import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
-import NoticeRed from '@/shared/assets/icons/notice_red.svg';
+import { Icon } from '@/shared/ui/Icon';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
 
@@ -137,17 +136,9 @@ export const UserProfileEdit = () => {
               className={`flex items-center gap-2 ${isNicknameChecked ? 'text-customBlue' : 'text-redNotice'}`}
             >
               {isNicknameChecked ? (
-                <img
-                  src={NoticeBlue}
-                  alt="notice_red"
-                  className="mb-[2px] size-3"
-                />
+                <Icon name='notice_blue' style='mb-[2px] size-3' />
               ) : (
-                <img
-                  src={NoticeRed}
-                  alt="notice_red"
-                  className="mb-[2px] size-3"
-                />
+                <Icon name='notice_red' style='mb-[2px] size-3' />
               )}
               <span className="text-body2">{nicknameError}</span>
             </div>

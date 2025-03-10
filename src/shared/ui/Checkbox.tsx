@@ -1,5 +1,4 @@
-import CheckOff from '../assets/icons/check_off.svg';
-import CheckOn from '../assets/icons/check_on.svg';
+import { Icon } from './Icon';
 
 interface CheckboxProps {
   check: boolean;
@@ -13,7 +12,6 @@ export const Checkbox = ({
   title = '주의사항을 모두 확인하였으며 위 내용에 동의합니다.'
 }: CheckboxProps) => {
   const state = check ? 'on' : 'off';
-  const iconSrc = check ? CheckOn : CheckOff;
 
   return (
     <label className="flex items-center gap-3 my-5">
@@ -25,7 +23,7 @@ export const Checkbox = ({
         onClick={toggle}
         className="flex items-center cursor-pointer"
       >
-        <img src={iconSrc} alt={`check_${state}`} className="w-6 h-6" />
+        <Icon name={check ? 'check_on' : 'check_off'} style='w-6 h-6' ariaLabel={`check_${state}`} />
       </span>
       <span
         onClick={toggle}

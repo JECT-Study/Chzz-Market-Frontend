@@ -132,7 +132,7 @@ describe('참여한 경매 내역 페이지', () => {
     await userEvent.click(ongoingTab);
 
     await waitFor(() => {
-      const participantElement = screen.getByRole('img', { name: /참여자/ });
+      const participantElement = screen.getByLabelText(/참여자/);
       expect(participantElement).toBeInTheDocument();
       expect(screen.getByText(/5 명/)).toBeInTheDocument();
     });
@@ -143,7 +143,7 @@ describe('참여한 경매 내역 페이지', () => {
     await userEvent.click(wonTab);
 
     await waitFor(() => {
-      const participantElement = screen.getByRole('img', { name: /참여자/ });
+      const participantElement = screen.getByLabelText(/참여자/);
       expect(participantElement).toBeInTheDocument();
       expect(screen.getByText(/10 명/)).toBeInTheDocument();
     });
@@ -154,7 +154,7 @@ describe('참여한 경매 내역 페이지', () => {
     await userEvent.click(lostTab);
 
     await waitFor(() => {
-      const participantElement = screen.getByRole('img', { name: /참여자/ });
+      const participantElement = screen.getByLabelText(/참여자/);
       expect(participantElement).toBeInTheDocument();
       expect(screen.getByText(/8 명/)).toBeInTheDocument();
     });

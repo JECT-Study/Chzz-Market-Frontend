@@ -1,6 +1,6 @@
 import type { IProfileProps } from '@/entities/user/user';
 import { Button } from '@/shared/ui/Button';
-import ProfileImage from '@/shared/assets/icons/profile.svg';
+import { Icon } from '@/shared/ui/Icon';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
 import { useNavigate } from 'react-router';
@@ -37,11 +37,7 @@ export const UserProfile = ({
           className="w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] rounded-full mr-4 object-conver"
         />
       ) : (
-        <img
-          src={ProfileImage}
-          alt="기본 프로필 이미지"
-          className="w-[5.88rem] h-[5.88rem] web:w-[8.1rem] lg:h-[8.1rem] rounded-full mr-4"
-        />
+        <Icon name='profile' ariaLabel='기본 프로필 이미지' style='w-[5.88rem] h-[5.88rem] web:w-[8.1rem] lg:h-[8.1rem] rounded-full mr-4' />
       )}
       <div className="flex-1">
         <div className="flex items-start justify-between">
@@ -95,7 +91,7 @@ export const UserProfile = ({
               <div className="mb-2 text-body2Bold web:text-heading3">
                 자기소개
               </div>
-              <div className="whitespace-pre-wrap text-sm web:text-body1">
+              <div className="text-sm whitespace-pre-wrap web:text-body1">
                 {userBio}
               </div>
             </>

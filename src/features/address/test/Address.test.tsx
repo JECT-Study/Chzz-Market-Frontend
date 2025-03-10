@@ -226,7 +226,7 @@ describe('주소 목록 페이지 테스트', () => {
 
   test('왼쪽 < 버튼 클릭 시 navigate(-1) 호출', async () => {
     const { user } = setup();
-    const backButton = screen.getByAltText('뒤로가기 아이콘');
+    const backButton = screen.getByLabelText('뒤로가기 아이콘');
     expect(backButton).toBeInTheDocument();
 
     await user.click(backButton);

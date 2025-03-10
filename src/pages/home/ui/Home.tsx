@@ -1,12 +1,12 @@
+import { useRefreshTokenOnSuccess } from '@/features/auth/model/useRefreshTokenOnSuccess';
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router';
 import BestItemList from './BestItemList';
 import CategoryList from './CategoryList';
 import HomeItemField from './HomeItemField';
 import { HomeRegisterBtn } from './HomeRegisterBtn';
 import ImminentItemList from './ImminentItemList';
 import PreAuctionItemList from './PreAuctionItemList';
-import { useRefreshTokenOnSuccess } from '@/features/auth/model/useRefreshTokenOnSuccess';
-import { useNavigate } from 'react-router';
 
 export const Home = () => {
   const navigate = useNavigate();
