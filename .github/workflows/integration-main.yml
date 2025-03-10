@@ -10,10 +10,6 @@ jobs:
   e2e-tests:
     name: End-to-End Tests (Cypress)
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        container: [1, 2, 3, 4]
     steps:
       # 1. 코드 체크아웃
       - name: Checkout Repository
