@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import EmptyIcon from '../../assets/icons/empty.svg';
 import { EMPTY_MESSAGE } from '../../constants/emptyMessage';
+import { Icon } from '../Icon';
 
 const EmptyFallback = ({ type }: { type: string }) => {
   return (
@@ -8,7 +8,7 @@ const EmptyFallback = ({ type }: { type: string }) => {
       aria-label="empty message"
       className="flex flex-col items-center justify-center w-full h-full gap-2 rounded"
     >
-      <img src={EmptyIcon} alt="emptyIcon" className="size-10" />
+      <Icon name='empty' style='size-10' ariaLabel='empty_icon' />
       <p className="md:text-heading3 text-body1 text-gray2">
         {EMPTY_MESSAGE[type]}
       </p>

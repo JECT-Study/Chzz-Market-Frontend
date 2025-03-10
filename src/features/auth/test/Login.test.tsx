@@ -37,7 +37,7 @@ describe('로그인 페이지 테스트', () => {
     setup();
 
     expect(screen.getByText('치즈 마켓')).toBeInTheDocument();
-    expect(screen.getByAltText('logo')).toBeInTheDocument();
+    expect(screen.getByLabelText('logo')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /카카오 로그인/ })
     ).toBeInTheDocument();

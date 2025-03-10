@@ -4,6 +4,7 @@ import type { IAuctionDetails } from '@/entities/auction/types/details';
 import { useGetAuctionDetails } from '@/features/details/model/useGetAuctionDetails';
 import { AuctionItem } from '@/shared/ui/AuctionItem';
 import { Button } from '@/shared/ui/Button';
+import { Icon } from '@/shared/ui/Icon';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -53,11 +54,7 @@ export const BidderListMain = ({ auctionId }: { auctionId: number }) => {
               className="flex items-center gap-1 cursor-pointer text-body2 text-gray1"
             >
               <span aria-label="필터 이름">{filterState.name}</span>
-              <img
-                className="pb-1"
-                src={filterState.icon}
-                alt={filterState.name}
-              />
+              <Icon name={filterState.icon} ariaLabel={filterState.name} style='pb-1' />
             </button>
           </div>
           <hr className="border my-[-16px] border-gray3" />

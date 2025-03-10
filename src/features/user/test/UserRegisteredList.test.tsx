@@ -99,7 +99,7 @@ describe('내가 등록한 경매 내역 페이지', () => {
     await userEvent.click(ongoingTab);
 
     await waitFor(() => {
-      const participantElement = screen.getByRole('img', { name: /참여자/ });
+      const participantElement = screen.getByLabelText(/참여자/);
       expect(participantElement).toBeInTheDocument();
       expect(screen.getByText(/5 명/)).toBeInTheDocument();
     });

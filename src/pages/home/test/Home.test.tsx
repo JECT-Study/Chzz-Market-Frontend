@@ -11,15 +11,15 @@ import {
 } from './data';
 
 import { LayoutWithNav } from '@/app/layout/ui/LayoutWithNav';
-import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
-import { getTimeColor } from '@/shared/utils/getTimeColor';
-import userEvent from '@testing-library/user-event';
-import { Home } from '../ui/Home';
+import { store } from '@/app/store';
 import { useGetNotificationList } from '@/features/notification/model/useGetNotificationList';
 import { notificationData } from '@/features/notification/test/data';
-import { Provider } from 'react-redux';
-import { store } from '@/app/store';
+import { mockedUseNavigate } from '@/shared/api/msw/setupTests';
+import { getTimeColor } from '@/shared/utils/getTimeColor';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { Home } from '../ui/Home';
 
 vi.mock('@/pages/home/model/useGetBestAuctions');
 vi.mock('@/pages/home/model/useGetImminentAuctions');
@@ -40,7 +40,7 @@ vi.mocked(useGetNotificationList).mockReturnValue({
 });
 
 describe('Home 테스트', () => {
- 
+
   const setup = () => {
     const utils = render(
       <QueryClientProvider client={new QueryClient()}>
@@ -78,7 +78,7 @@ describe('Home 테스트', () => {
     test('경매 상품이 없으면 경매 없음 문구를 보여준다.', async () => {
       setup();
 
-      const emptyMessage = await screen.findByLabelText(/empty/);
+      const emptyMessage = await screen.findByLabelText(/empty_icon/);
       expect(emptyMessage).toBeInTheDocument();
     });
 
@@ -152,7 +152,7 @@ describe('Home 테스트', () => {
     test('홈 버튼은 색 있는 아이콘이며 클릭해도 여전히 홈이다.', async () => {
       const { user } = setup();
 
-      const homeIcon = screen.getByRole('img', { name: /home_on_icon/ });
+      const homeIcon = screen.getByRole('button', { name: /home_on_icon/ });
       await user.click(homeIcon);
 
       expect(mockedUseNavigate).toHaveBeenCalledWith('/');
@@ -161,7 +161,7 @@ describe('Home 테스트', () => {
     test('알림 버튼은 색 없는 아이콘이며, 클릭하면 알림 페이지로 이동한다.', async () => {
       const { user } = setup();
 
-      const noticeIcon = screen.getByRole('img', {
+      const noticeIcon = screen.getByRole('button', {
         name: /notification_off_icon/
       });
       await user.click(noticeIcon);
@@ -172,7 +172,7 @@ describe('Home 테스트', () => {
     test('찜 목록 버튼은 색 없는 아이콘이어야 하며, 클릭하면 찜 목록 페이지로 이동한다.', async () => {
       const { user } = setup();
 
-      const heartIcon = screen.getByRole('img', { name: /heart_off_icon/ });
+      const heartIcon = screen.getByRole('button', { name: /heart_off_icon/ });
       await user.click(heartIcon);
 
       expect(mockedUseNavigate).toHaveBeenCalledWith('/heart');
@@ -181,7 +181,7 @@ describe('Home 테스트', () => {
     test('유저 버튼은 색 없는 아이콘이어야 하며, 클릭하면 유저 페이지로 이동한다.', async () => {
       const { user } = setup();
 
-      const myIcon = screen.getByRole('img', { name: /user_off_icon/ });
+      const myIcon = screen.getByRole('button', { name: /user_off_icon/ });
       await user.click(myIcon);
 
       expect(mockedUseNavigate).toHaveBeenCalledWith('/user');

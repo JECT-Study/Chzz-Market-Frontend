@@ -1,4 +1,4 @@
-import PriceIcon from '../assets/icons/price.svg';
+import { Icon } from "./Icon";
 
 export const CreatedAt = ({ createAt }: { createAt: string }) => {
   const date = new Date(createAt);
@@ -13,7 +13,7 @@ export const CreatedAt = ({ createAt }: { createAt: string }) => {
       aria-label="마감 날짜"
       className="flex items-center text-xs web:text-body2 text-gray2"
     >
-      <img src={PriceIcon} alt="마감 날짜" />
+      <Icon name='price' ariaLabel='마감 날짜' />
       <span className="whitespace-nowrap">
         {`마감 날짜 `}
         <span className="text-xs text-black web:text-body2Bold">

@@ -1,4 +1,4 @@
-import UserIcon from '../assets/icons/user.svg';
+import { Icon } from "./Icon";
 
 export const ParticipantCount = ({ count }: { count: number }) => {
   return (
@@ -6,7 +6,7 @@ export const ParticipantCount = ({ count }: { count: number }) => {
       aria-label="참여자"
       className="flex items-center text-caption web:text-body2"
     >
-      <img src={UserIcon} alt="참여자" className="pb-[.125rem]" />
+      <Icon name='user' style="pb-[.125rem] size-5" />
       <div className="flex items-center gap-1">
         <span className=" text-gray2 whitespace-nowrap">참여자</span>
         <span className="font-bold">{count} 명</span>

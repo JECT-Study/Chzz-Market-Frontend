@@ -9,8 +9,7 @@ import type { IUser } from '@/entities/user/user';
 import { useSignup } from '@/features/sign-up/hooks';
 import { useSignupNicknameValidate } from '@/features/sign-up/hooks/useSignupNicknameValidate';
 import { setNicknameError } from '@/features/sign-up/model/signupSlice';
-import NoticeBlue from '@/shared/assets/icons/blue_notice.svg';
-import NoticeRed from '@/shared/assets/icons/notice_red.svg';
+import { Icon } from '@/shared/ui/Icon';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
 import { useNavigate } from 'react-router';
@@ -94,17 +93,9 @@ export const Signup = () => {
               className={`flex items-center gap-2 ${isNameValid ? 'text-customBlue' : 'text-redNotice'}`}
             >
               {isNameValid ? (
-                <img
-                  src={NoticeBlue}
-                  alt="notice_red"
-                  className="mb-[2px] size-3"
-                />
+                <Icon name='notice_blue' style='mb-[2px] size-3' />
               ) : (
-                <img
-                  src={NoticeRed}
-                  alt="notice_red"
-                  className="mb-[2px] size-3"
-                />
+                <Icon name='notice_red' style='mb-[2px] size-3' />
               )}
               <span className="text-body2">{nicknameError}</span>
             </div>

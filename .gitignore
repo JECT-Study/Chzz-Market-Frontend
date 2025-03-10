@@ -32,3 +32,5 @@ build/
 *.log
 .prettierignore
 .eslintrc.cjs
+
+public/sprite.svg

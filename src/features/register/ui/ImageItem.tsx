@@ -1,4 +1,4 @@
-import DeleteIcon from '@/shared/assets/icons/delete.svg';
+import { Icon } from '@/shared/ui/Icon';
 import { CarouselItem } from '@/shared/ui/carousel';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -46,7 +46,7 @@ export const ImageItem = ({ image, index, deleteImage }: ImageItemProps) => {
           onClick={() => deleteImage(index)}
           aria-label={`사진 삭제_${index}`}
         >
-          <img src={DeleteIcon} alt="사진 삭제 버튼" />
+          <Icon name="delete" ariaLabel='사진 삭제 버튼' style='size-5' />
         </button>
       </div>
     </CarouselItem>
