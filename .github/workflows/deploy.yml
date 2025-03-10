@@ -64,16 +64,38 @@ jobs:
       # 9. S3로 배포
       - name: Deploy to S3
         run: |
-          aws s3 sync ./dist s3://${{ secrets.S3_BUCKET_NAME }} --delete --exact-timestamps
+          aws s3 sync ./dist s3://${{ secrets.S3_BUCKET_NAME }} --delete --exact-timestamps  --exclude "assets/font/*" --exclude "favicon.svg" --exclude "robots.txt"
           echo "Deployment to S3 and CloudFront completed successfully!"
 
-      # 10. CloudFront 캐시 무효화
+      # 10. vendor 청크 업로드 (Cache-Control 헤더 적용)
+      - name: Deploy vendor chunks with Cache-Control
+        run: |
+          aws s3 cp ./dist s3://${{ secrets.S3_BUCKET_NAME }} --recursive \
+            --exclude "*" \
+            --include "react-vendor*.js" \
+            --include "axios-vendor*.js" \
+            --include "tough-cookie-vendor*.js" \
+            --include "zod-vendor*.js" \
+            --metadata-directive REPLACE \
+            --cache-control "max-age=31536000, public, immutable"
+
+      # 11. 폰트 파일 업로드 (Cache-Control 헤더 적용)
+      - name: Deploy font files with Cache-Control
+        run: |
+          aws s3 cp ./dist/assets/font s3://${{ secrets.S3_BUCKET_NAME }}/assets/font --recursive --metadata-directive REPLACE --cache-control "max-age=31536000, public, immutable"
+
+      # 12. favicon.svg & robots.txt 업로드 (Cache-Control 헤더 적용)
+      - name: Deploy favicon and robots.txt with Cache-Control
+        run: |
+          aws s3 cp ./dist/favicon.svg s3://${{ secrets.S3_BUCKET_NAME }}/favicon.svg --metadata-directive REPLACE --cache-control "max-age=31536000, public, immutable"
+          aws s3 cp ./dist/robots.txt s3://${{ secrets.S3_BUCKET_NAME }}/robots.txt --metadata-directive REPLACE --cache-control "max-age=31536000, public, immutable"
+    
+      # 13. CloudFront 캐시 무효화
       - name: Invalidate CloudFront Cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
-          echo "CloudFront Cache Invalidated!"
 
-      # 11. 배포 상태 업데이트 (성공)
+      # 14. 배포 상태 업데이트 (성공)
       - name: Update deployment status (success)
         if: success()
         uses: chrnorm/deployment-status@v2
@@ -83,7 +105,7 @@ jobs:
           state: 'success'
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
 
-      # 12. 배포 상태 업데이트 (실패)
+      # 15. 배포 상태 업데이트 (실패)
       - name: Update deployment status (failure)
         if: failure()
         uses: chrnorm/deployment-status@v2
