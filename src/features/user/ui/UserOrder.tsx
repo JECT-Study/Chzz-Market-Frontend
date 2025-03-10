@@ -1,10 +1,6 @@
 import type { IParticipantCountItems } from '@/entities/user/user';
-import AuctionIcon from '@/shared/assets/icons/auction.svg';
-import FailedIcon from '@/shared/assets/icons/failed_auction.svg';
-import OnGoingIcon from '@/shared/assets/icons/ongoing_auction.svg';
-import PreAuctionIcon from '@/shared/assets/icons/pre_auction.svg';
-import SuccessIcon from '@/shared/assets/icons/successful_auction.svg';
 import { ROUTES } from '@/shared/constants/routes';
+import { Icon } from '@/shared/ui/Icon';
 import { useNavigate } from 'react-router';
 
 interface Props {
@@ -44,18 +40,14 @@ export const UserOrder = ({
               })
             }
           >
-            <img
-              src={OnGoingIcon}
-              alt="참여중인 경매"
-              className="w-8 h-8 web:mb-2"
-            />
-            <span className="text-body2 text-center block web:hidden">
+            <Icon name="ongoing_auction" ariaLabel="참여중인 경매" style='w-8 h-8 web:mb-2' />
+            <span className="block text-center text-body2 web:hidden">
               참여중인 <br /> 경매
             </span>
-            <span className="text-heading3 hidden web:block">
+            <span className="hidden text-heading3 web:block">
               참여중인 경매
             </span>
-            <span className="mt-1 text-body2 web:text-lg text-orange-500">
+            <span className="mt-1 text-orange-500 text-body2 web:text-lg">
               {$participantCount.ongoingAuctionCount} 건
             </span>
           </div>
@@ -69,16 +61,12 @@ export const UserOrder = ({
               })
             }
           >
-            <img
-              src={SuccessIcon}
-              alt="성공한 경매"
-              className="w-8 h-8 web:mb-2"
-            />
-            <span className="text-body2 text-center block web:hidden">
+            <Icon name="successful_auction" ariaLabel="성공한 경매" style='w-8 h-8 web:mb-2' />
+            <span className="block text-center text-body2 web:hidden">
               성공한 <br /> 경매
             </span>
-            <span className="text-heading3 hidden web:block">성공한 경매</span>
-            <span className="mt-1 text-body2 web:text-lg text-orange-500">
+            <span className="hidden text-heading3 web:block">성공한 경매</span>
+            <span className="mt-1 text-orange-500 text-body2 web:text-lg">
               {$participantCount.successfulAuctionCount} 건
             </span>
           </div>
@@ -92,16 +80,12 @@ export const UserOrder = ({
               })
             }
           >
-            <img
-              src={FailedIcon}
-              alt="실패한 경매"
-              className="w-8 h-8 web:mb-2"
-            />
-            <span className="text-body2 text-center block web:hidden">
+            <Icon name="failed_auction" ariaLabel="실패한 경매" style='w-8 h-8 web:mb-2' />
+            <span className="block text-center text-body2 web:hidden">
               실패한 <br /> 경매
             </span>
-            <span className="text-heading3 hidden web:block">실패한 경매</span>
-            <span className="mt-1 text-body2 web:text-lg text-orange-500">
+            <span className="hidden text-heading3 web:block">실패한 경매</span>
+            <span className="mt-1 text-orange-500 text-body2 web:text-lg">
               {$participantCount.failedAuctionCount} 건
             </span>
           </div>
@@ -123,9 +107,9 @@ export const UserOrder = ({
               })
             }
           >
-            <img src={AuctionIcon} alt="정식 경매" className="w-8 h-8 mb-2" />
+            <Icon name='auction' ariaLabel='정식 경매' style='w-8 h-8 mb-2' />
             <span className="text-body2 web:text-heading3">정식 경매</span>
-            <span className="mt-1 text-body2 web:text-lg text-orange-500">
+            <span className="mt-1 text-orange-500 text-body2 web:text-lg">
               {$registeredAuctionCount} 건
             </span>
           </div>
@@ -139,13 +123,9 @@ export const UserOrder = ({
               })
             }
           >
-            <img
-              src={PreAuctionIcon}
-              alt="사전 경매"
-              className="w-8 h-[1.87rem] mb-2"
-            />
+            <Icon name='pre_auction' ariaLabel='사전 경매' style='w-8 h-[1.87rem] mb-2' />
             <span className="text-body2 web:text-heading3">사전 경매</span>
-            <span className="mt-1 text-body2 web:text-lg text-orange-500">
+            <span className="mt-1 text-orange-500 text-body2 web:text-lg">
               {$preRegisterCount} 건
             </span>
           </div>

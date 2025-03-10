@@ -1,32 +1,31 @@
 import type { IRegisterPatch, IRegisterPost } from '@/features/register/config/type';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './select';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './select';
 
-import { Button } from './Button';
-import { CATEGORIES } from '../constants/categories';
-import { FormField } from './FormField';
-import type { IPreAuctionDetails } from '@/entities/auction/types/details';
-import { ImageUploaderInput } from '@/features/register/ui/ImageUploaderInput';
-import { Input } from './input';
 import { Layout } from '@/app/layout/ui/Layout';
-import NoticeIcon from '../assets/icons/notice.svg';
-import { RegisterCaution } from '@/features/register/ui/RegisterCaution';
-import { RegisterSchema } from '@/features/register/config/schema';
-import { Textarea } from './textarea';
-import { convertCurrencyToNumber } from '../utils/convertCurrencyToNumber';
-import { convertDataURLtoFile } from '@/features/register/utils/convertDataURLtoFile';
-import { formatCurrencyWithWon } from '../utils/formatCurrencyWithWon';
-import { getAuctionUploadURLs } from '@/features/register/api/getAuctionUploadURLs';
-import { toast } from 'sonner';
-import { uploadImagesToS3 } from '@/features/register/api/uploadImagesToS3';
-import { useEditableNumberInput } from '@/features/register/lib/useEditableNumberInput';
-import { useNavigate } from 'react-router';
+import type { IPreAuctionDetails } from '@/entities/auction/types/details';
 import { usePatchPreAuction } from '@/features/edit-auction/model/usePatchPreAuction';
+import { getAuctionUploadURLs } from '@/features/register/api/getAuctionUploadURLs';
+import { uploadImagesToS3 } from '@/features/register/api/uploadImagesToS3';
+import { RegisterSchema } from '@/features/register/config/schema';
+import { useEditableNumberInput } from '@/features/register/lib/useEditableNumberInput';
 import { usePostAuction } from '@/features/register/model/usePostAuction';
-import { useToggleState } from '../hooks/useToggleState';
-import { z } from 'zod';
+import { ImageUploaderInput } from '@/features/register/ui/ImageUploaderInput';
+import { RegisterCaution } from '@/features/register/ui/RegisterCaution';
+import { convertDataURLtoFile } from '@/features/register/utils/convertDataURLtoFile';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { CATEGORIES } from '../constants/categories';
+import { useToggleState } from '../hooks/useToggleState';
+import { convertCurrencyToNumber } from '../utils/convertCurrencyToNumber';
+import { formatCurrencyWithWon } from '../utils/formatCurrencyWithWon';
+import { Button } from './Button';
+import { FormField } from './FormField';
+import { Input } from './input';
+import { Textarea } from './textarea';
 
 type FormFields = z.infer<typeof RegisterSchema>;
 interface ExistingImage {
@@ -298,7 +297,7 @@ export const AuctionForm = ({
             <div className="relative flex flex-col gap-2">
               <label
                 htmlFor="경매 마감 시간*"
-                className="cursor-pointer text-heading3"
+                className="cursor-pointer text-body2 web:text-heading3"
               >
                 경매 마감 시간*
               </label>
@@ -308,11 +307,6 @@ export const AuctionForm = ({
                 defaultValue="24 시간"
                 disabled
                 className="text-gray1 border-gray2 bg-[#f1f1f1]"
-              />
-              <img
-                src={NoticeIcon}
-                alt="notice"
-                className="absolute bottom-[17%] right-[2%]"
               />
             </div>
           </form>

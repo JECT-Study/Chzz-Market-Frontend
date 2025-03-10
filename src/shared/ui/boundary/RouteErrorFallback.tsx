@@ -1,7 +1,7 @@
 import { Layout } from '@/app/layout/ui/Layout';
 import { useNavigate } from 'react-router';
-import NotFoundIcon from '../../assets/icons/404_sign.svg';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
 
 export const RouteErrorFallback = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const RouteErrorFallback = () => {
           <Layout.Header title="치즈 마켓" />
           <Layout.Main>
             <div className="flex flex-col items-center justify-center h-full gap-5">
-              <img src={NotFoundIcon} alt="NotFoundLogo" className="size-40" />
+              <Icon name='404_sign' ariaLabel='NotFoundLogo' style="size-40" />
               <div className="flex flex-col items-center justify-center gap-1">
                 <h2 className="text-heading2 text-gray1">
                   원하시는 페이지를 찾을 수 없습니다.

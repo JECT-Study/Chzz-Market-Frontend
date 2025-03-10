@@ -1,4 +1,5 @@
 import { CATEGORIES } from '@/shared/constants/categories';
+import { Icon } from '@/shared/ui/Icon';
 import { useNavigate } from 'react-router';
 
 const CategoryItem = ({
@@ -21,11 +22,7 @@ const CategoryItem = ({
       className="flex flex-col items-center h-full gap-2 cursor-pointer"
       onClick={onClickCategory}
     >
-      <img
-        src={icon}
-        alt={`${name} 카테고리`}
-        className="p-3 rounded-full size-14 text-caption bg-categoryColor"
-      />
+      <Icon name={icon} ariaLabel={`${name} 카테고리`} style='p-3 rounded-full size-14 text-caption bg-categoryColor' />
       <div className="text-caption text-gray1">{name.split(' ')[0]}</div>
     </li>
   );

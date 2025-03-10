@@ -1,10 +1,9 @@
 import { Layout } from '@/app/layout/ui/Layout';
 import { useAuth } from '@/features/auth/hooks/useAuth';
-import ChizzImage from '@/shared/assets/icons/main_cheese_icon.svg';
+import Logo from '@/shared/assets/icons/logo.svg';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { SiNaver } from 'react-icons/si';
 import { useNavigate } from 'react-router';
-
 export const Login = () => {
   const navigate = useNavigate();
   const { handleKakaoLogin, handleNaverLogin } = useAuth();
@@ -15,16 +14,11 @@ export const Login = () => {
       <Layout.Main>
         <div className="flex flex-col items-center justify-center w-full h-full">
           <div className="flex flex-col items-center justify-center w-full gap-1 h-1/2">
-            <img
-              src={ChizzImage}
-              alt="logo"
-              className="w-[7rem] h-[7rem] web:w-[9.5rem] web:h-[8.63rem]"
-            />
+            <img src={Logo} aria-label='logo' className='size-28 web:w-[9rem] web:h-[8rem]' />
             <h2 className="pt-5 text-3xl font-semibold text-center web:text-4xl">
               치즈 마켓
             </h2>
           </div>
-
           <div className="flex flex-col items-center justify-center flex-1 w-full gap-4">
             <div className="flex justify-center w-[20.69rem] web:w-[30rem]">
               <button

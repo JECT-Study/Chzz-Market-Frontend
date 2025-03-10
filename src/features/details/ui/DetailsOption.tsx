@@ -1,7 +1,6 @@
-import DeleteIcon from '@/shared/assets/icons/modal_cancel.svg';
-import EditIcon from '@/shared/assets/icons/modal_edit.svg';
 import { Button } from '@/shared/ui/Button';
 import { Confirm } from '@/shared/ui/Confirm';
+import { Icon } from '@/shared/ui/Icon';
 import { Modal } from '@/shared/ui/Modal';
 
 interface DetailsOptionProps {
@@ -27,7 +26,7 @@ export const DetailsOption = ({
         className="flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10"
       >
         <span>수정하기</span>
-        <img src={EditIcon} alt="수정 아이콘" className="size-5 mb-[2px]" />
+        <Icon name="modal_edit" style='size-5 mb-[2px]' ariaLabel='수정 아이콘' />
       </button>
       <Modal>
         <Modal.Open name="deletePreAuction">
@@ -36,11 +35,7 @@ export const DetailsOption = ({
             className="flex items-center justify-center gap-3 px-2 py-4 transition-colors hover:bg-black/10 text-redNotice"
           >
             <span>삭제하기</span>
-            <img
-              src={DeleteIcon}
-              alt="삭제 아이콘"
-              className="size-5 mb-[2px]"
-            />
+            <Icon name="modal_cancel" style='size-5 mb-[2px]' ariaLabel='삭제 아이콘' />
           </button>
         </Modal.Open>
         <Modal.Window name="deletePreAuction">

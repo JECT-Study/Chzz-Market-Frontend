@@ -5,7 +5,7 @@ import { Price } from '@/shared/ui/Price';
 import { ProductItem } from '@/shared/ui/ProductItem';
 
 import type { IAuctionEndRegisteredItem } from '@/entities/auction/types/userRegistered';
-import PriceIcon from '@/shared/assets/icons/price.svg';
+import { Icon } from '@/shared/ui/Icon';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router';
 
@@ -29,7 +29,7 @@ export const EndMyRegister = ({
         aria-label="낙찰 금액"
         className="flex items-center text-xs web:text-body2 text-gray2"
       >
-        <img src={PriceIcon} alt="참여자" />
+        <Icon name='price' ariaLabel='참여자' />
         <span className="whitespace-nowrap">
           낙찰 금액{' '}
           <span className="text-xs text-black web:text-body2Bold">
@@ -41,7 +41,7 @@ export const EndMyRegister = ({
         aria-label="참여자"
         className="flex items-center text-xs web:text-body2 text-gray2"
       >
-        <img src={PriceIcon} alt="참여자" />
+        <Icon name='price' ariaLabel='참여자' />
         <span className="whitespace-nowrap">
           낙찰 여부{' '}
           <span className="text-xs text-black web:text-body2Bold">
@@ -53,7 +53,7 @@ export const EndMyRegister = ({
         aria-label="참여자"
         className="flex items-center text-xs web:text-body2 text-gray2"
       >
-        <img src={PriceIcon} alt="참여자" />
+        <Icon name='price' ariaLabel='참여자' />
         <span className="whitespace-nowrap">
           결제 여부{' '}
           <span className="text-xs text-black web:text-body2Bold">

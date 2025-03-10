@@ -5,9 +5,9 @@ import { Layout } from '@/app/layout/ui/Layout';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useLocation } from 'react-router';
-import ErrorIcon from '../../assets/icons/error.svg';
 import { getErrorByCode } from '../../utils/getErrorByCode';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
 import { GlobalSpinner } from '../spinner/GlobalSpinner';
 
 interface FallbackComponentProps extends FallbackProps {
@@ -26,7 +26,7 @@ const FallbackComponent = ({
     <>
       {header && <Layout.Header title={header} />}
       <div className="flex flex-col items-center justify-center w-full h-full gap-3 px-10">
-        <img src={ErrorIcon} alt="에러 아이콘" />
+        <Icon name='error' ariaLabel='에러 아이콘' />
         <div className="space-y-2 text-center">
           <h2 className="web:text-heading2 text-heading3 text-gray1">
             {title}

@@ -16,10 +16,9 @@ import type { IAddressWithId } from '@/entities/address/address';
 import { addressMemo } from '@/features/address/config/address';
 import { usePostPayment } from '@/features/address/model';
 import { usePostOrderId } from '@/features/address/model/usePostPayment';
-import rocation_on from '@/shared/assets/icons/rocation_on.svg';
-import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
 import { ROUTES } from '@/shared/constants/routes';
 import { AuctionShippingSchema } from '@/shared/constants/schema';
+import { Icon } from '@/shared/ui/Icon';
 import { Input } from '@/shared/ui/input';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useForm } from 'react-hook-form';
@@ -124,11 +123,8 @@ export const Payment = () => {
                   aria-label="결제 금액"
                   className="flex items-center text-body2 web:text-heading3"
                 >
-                  <img
-                    src={trophyImage}
-                    alt="트로피"
-                    className="w-[1.25rem] h-[1.2rem] web:w-[2rem] web:h-[2rem]"
-                  />
+
+                  <Icon name='successful_auction_win' ariaLabel='트로피' style='w-[1.25rem] h-[1.2rem] web:w-[2rem] web:h-[2rem]' />
                   <span className="overflow-hidden whitespace-nowrap pt-[2px]">
                     결제 금액
                   </span>
@@ -178,11 +174,7 @@ export const Payment = () => {
           ) : selectedAddress ? (
             <div className="flex mb-4 rounded-md">
               <div className="flex items-center">
-                <img
-                  src={rocation_on}
-                  className="mr-2 text-cheeseYellow"
-                  alt="위치 아이콘"
-                />
+                <Icon name='location_on' ariaLabel='위치 아이콘' style='mr-2 text-cheeseYellow' />
               </div>
               <div className="flex flex-col">
                 {selectedAddress.isDefault && (
@@ -203,11 +195,7 @@ export const Payment = () => {
           ) : Object.keys(address).length > 0 ? (
             <div className="flex mb-4 rounded-md">
               <div className="flex items-center">
-                <img
-                  src={rocation_on}
-                  className="mr-2 text-cheeseYellow"
-                  alt="위치 아이콘"
-                />
+                <Icon name='location_on' ariaLabel='위치 아이콘' style='mr-2 text-cheeseYellow' />
               </div>
               <div className="flex flex-col">
                 {address.isDefault && (

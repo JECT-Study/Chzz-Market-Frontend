@@ -4,9 +4,9 @@ import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { Layout } from '@/app/layout/ui/Layout';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
-import ErrorIcon from '../../assets/icons/error.svg';
 import { getErrorByCode } from '../../utils/getErrorByCode';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
 import { GlobalSpinner } from '../spinner/GlobalSpinner';
 
 const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
@@ -27,7 +27,7 @@ const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
           <Layout.Header title="치즈 마켓" />
           <Layout.Main>
             <div className="flex flex-col items-center min-w-[10rem] justify-center h-full gap-5">
-              <img src={ErrorIcon} alt="에러 아이콘" />
+              <Icon name='error' ariaLabel='에러 아이콘' />
               <div className="space-y-2 text-center">
                 <h2 className="web:text-heading2 text-heading3 text-gray1">
                   {title}

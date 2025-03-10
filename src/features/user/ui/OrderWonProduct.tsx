@@ -1,7 +1,7 @@
 import { ROUTES } from '@/shared/constants/routes';
 
 import type { IUserAuctionWonItem } from '@/entities/auction/types/userParticipated';
-import trophyImage from '@/shared/assets/icons/successful_auction_win.svg';
+import { Icon } from '@/shared/ui/Icon';
 import { ParticipantCount } from '@/shared/ui/ParticipantCount';
 import { formatCurrencyWithWon } from '@/shared/utils/formatCurrencyWithWon';
 import { useNavigate } from 'react-router';
@@ -69,11 +69,7 @@ export const OrderWonProduct = ({
               aria-label="시작가"
               className="flex items-center text-body2 web:text-body1 text-gray2"
             >
-              <img
-                src={trophyImage}
-                alt="트로피"
-                className="w-[20px] h-[19px]"
-              />
+              <Icon name='successful_auction_win' ariaLabel='트로피' style='w-[20px] h-[19px]' />
               <span className="overflow-hidden whitespace-nowrap pt-[2px]">
                 <span className="ml-1 text-xs text-black web:text-body2Bold">
                   {formatted}

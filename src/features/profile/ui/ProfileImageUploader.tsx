@@ -1,10 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
-import Profile from '@/shared/assets/icons/profile.svg';
-import ProfileEdit from '@/shared/assets/icons/profile_edit.svg';
+import { Icon } from '@/shared/ui/Icon';
+import { MenuAccordion } from '@/shared/ui/MenuAccordion';
 import { Input } from '../../../shared/ui/input';
 import { useProfileImageUploader } from '../lib';
-import { MenuAccordion } from '@/shared/ui/MenuAccordion';
 
 interface ImageUploaderProps {
   image: string | null;
@@ -55,11 +54,7 @@ export const ProfileImageUploader = ({
             alt="프로필 사진"
             className="object-cover w-full h-full rounded-full"
           />
-          <img
-            src={ProfileEdit}
-            alt="프로필 사진 옆 카메라"
-            className="w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0"
-          />
+          <Icon name='profile_edit' ariaLabel='프로필 사진 옆 카메라' style='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
           {onMenu && (
             <div ref={menuRef}>
               <MenuAccordion
@@ -75,16 +70,8 @@ export const ProfileImageUploader = ({
           className="relative w-[5.88rem] h-[5.88rem] web:w-[8.1rem] web:h-[8.1rem] cursor-pointer"
           onClick={handleBoxClick}
         >
-          <img
-            src={Profile}
-            alt="프로필 사진"
-            className="relative object-cover w-full h-full rounded-full"
-          />
-          <img
-            src={ProfileEdit}
-            alt="프로필 사진 옆 카메라"
-            className="w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0"
-          />
+          <Icon name='profile' ariaLabel='프로필 사진' style='relative object-cover w-full h-full rounded-full' />
+          <Icon name='profile_edit' ariaLabel='프로필 사진 옆 카메라' style='w-[1.87rem] h-[1.87rem] web:w-12 web:h-12 absolute bottom-0 right-0' />
         </div>
       )}
       <Input

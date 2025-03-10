@@ -1,5 +1,4 @@
-import DefaultImage from '@/shared/assets/icons/default_image.svg';
-import XButtonIcon from '@/shared/assets/icons/x_button.svg';
+import { Icon } from '@/shared/ui/Icon';
 import { getTimeAgo } from '@/shared/utils/getTimeAgo';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router';
@@ -57,17 +56,18 @@ export const NotificationItem = ({ item }: { item: INotification }) => {
           </div>
         </figcaption>
         <div className="flex items-start gap-3">
-          <img
-            src={`${imageUrl ?? DefaultImage}?h=228`}
-            alt={`이미지_${notificationId}`}
-            className="object-contain rounded size-24"
-            {...{ fetchpriority: 'high' }} />
-          <button aria-label={`버튼_${notificationId}`} onClick={handleDelete}>
+          {imageUrl
+            ?
             <img
-              className="inline rounded size-4"
-              src={XButtonIcon}
-              alt="알림 삭제 아이콘"
-            />
+              src={`${imageUrl}?h=228`}
+              alt={`이미지_${notificationId}`}
+              className="object-contain rounded size-24"
+              {...{ fetchpriority: 'high' }} />
+            :
+            <Icon name='default_image' ariaLabel='기본 이미지' style='object-contain rounded size-24' />
+          }
+          <button aria-label={`버튼_${notificationId}`} onClick={handleDelete}>
+            <Icon name='x_button' ariaLabel='알림 삭제 아이콘' style='inline rounded size-4' />
           </button>
         </div>
       </figure>
