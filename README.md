@@ -51,4 +51,17 @@
 ### Image Request Pipeline
 ![image request pipeline](https://github.com/user-attachments/assets/2308bcfa-c3dc-4927-853e-198073af58f5)
 
+## 페이지 별 주요 기능
+
+#### 🛠️ 메인페이지
+<img src="https://github.com/user-attachments/assets/9f4fbb2e-3432-4917-8a7c-dc32f9265f34" width="400" height="auto" style="border: 2px solid #000; border-radius: 10px; box-shadow: 3px 3px 10px rgba(0,0,0,0.3);">
+
+#### 🛠️ 경매 등록페이지
+<img src="https://github.com/user-attachments/assets/41f18a01-0eb1-44ae-8f1e-06296f8e2969" width="400" height="auto" style="border: 2px solid #000; border-radius: 10px; box-shadow: 3px 3px 10px rgba(0,0,0,0.3);">
+
+#### 🛠️ 마이페이지
+<img src="https://github.com/user-attachments/assets/a03c7569-d142-4720-9fc8-648cd1403d8f" width="400" height="auto" style="border: 2px solid #000; border-radius: 10px; box-shadow: 3px 3px 10px rgba(0,0,0,0.3);">
+
+#### 🛠️ 프로필 수정페이지
+<img src="https://github.com/user-attachments/assets/8792e7bd-8ef0-4e24-8888-aa08b8dc66c9" width="400" height="auto" style="border: 2px solid #000; border-radius: 10px; box-shadow: 3px 3px 10px rgba(0,0,0,0.3);">
 
