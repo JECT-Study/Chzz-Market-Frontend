@@ -51,4 +51,63 @@
 ### Image Request Pipeline
 ![image request pipeline](https://github.com/user-attachments/assets/2308bcfa-c3dc-4927-853e-198073af58f5)
 
+## 페이지 별 주요 기능
 
+<table>
+  <tr>
+    <td align="center">
+      <strong>메인 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/9f4fbb2e-3432-4917-8a7c-dc32f9265f34" width="400">
+    </td>
+    <td align="center">
+      <strong>경매 등록 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/41f18a01-0eb1-44ae-8f1e-06296f8e2969" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>마이 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/a03c7569-d142-4720-9fc8-648cd1403d8f" width="400">
+    </td>
+    <td align="center">
+      <strong>프로필 수정 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/8792e7bd-8ef0-4e24-8888-aa08b8dc66c9" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>제품 상세 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/92d5a69f-ca07-4e49-abde-39cc62353f00" width="400">
+    </td>
+    <td align="center">
+      <strong>경매 목록 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/1235b673-bd4e-46ff-94c7-9e42ec7f1031" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>알림 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/35909e7b-88d8-47d5-a190-696418f9b03b" width="400">
+    </td>
+    <td align="center">
+      <strong>로그인 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/0ec8a48c-7d19-4e7c-b2f0-0b4f85bd66fa" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>회원가입 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/e44fcee6-31b8-4095-a9b2-d45911dfd4b9" width="400">
+    </td>
+    <td align="center">
+      <strong>찜한 사전 경매목록 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/0e572b58-b394-4003-9196-22f5be0feca8" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <strong>참여한 정식 경매 내역 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/cf754bca-e1af-496d-9b0f-361038550c38" width="400">
+    </td>
+  </tr>
+</table>

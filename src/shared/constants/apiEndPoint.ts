@@ -37,9 +37,3 @@ export const API_END_POINT = {
 
   AUCTION_IMAGE_UPLOAD_URL: `${PRE_FIX}/image/auction`
 };
-
-export const NEED_LOGIN_API_LIST = [
-  '/api/v1/users',
-  '/api/v1/users/profile',
-  '/api/v1/bids',
-];
