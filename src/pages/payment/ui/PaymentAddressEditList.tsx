@@ -69,9 +69,9 @@ export const PaymentAddressEditList = () => {
               >
                 <div className="flex items-center">
                   {item?.isDefault ? (
-                    <Icon name='location_on' style='mr-2 text-cheeseYellow' ariaLabel='위치 아이콘' />
+                    <Icon name='location_on' style='mr-2 text-cheeseYellow size-4' ariaLabel='위치 아이콘' />
                   ) : (
-                    <Icon name='location_off' style='mr-2 text-gray2' ariaLabel='위치 아이콘' />
+                    <Icon name='location_off' style='mr-2 text-gray2 size-4' ariaLabel='위치 아이콘' />
                   )}
                 </div>
                 <div className="flex flex-col gap-2 mb-2">
