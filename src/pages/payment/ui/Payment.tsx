@@ -174,7 +174,7 @@ export const Payment = () => {
           ) : selectedAddress ? (
             <div className="flex mb-4 rounded-md">
               <div className="flex items-center">
-                <Icon name='location_on' ariaLabel='위치 아이콘' style='mr-2 text-cheeseYellow' />
+                <Icon name='location_on' ariaLabel='위치 아이콘' style='mr-2 text-cheeseYellow size-4' />
               </div>
               <div className="flex flex-col">
                 {selectedAddress.isDefault && (
