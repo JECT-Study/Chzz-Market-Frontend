@@ -26,7 +26,7 @@ const FallbackComponent = ({
     <>
       {header && <Layout.Header title={header} />}
       <div className="flex flex-col items-center justify-center w-full h-full gap-3 px-10">
-        <Icon name='error' ariaLabel='에러 아이콘' />
+        <Icon name='error' ariaLabel='에러 아이콘' style='size-10' />
         <div className="space-y-2 text-center">
           <h2 className="web:text-heading2 text-heading3 text-gray1">
             {title}

@@ -6,11 +6,9 @@ import { isLoggedIn } from '@/features/auth/model/authSlice';
 import { RefreshHandler } from '@/shared/api/axios';
 import { getToken } from '@/shared/utils/token';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 
 export const useSSE = <T>(url: string) => {
   const [state, setState] = useState<T[]>([]);
-  const navigate = useNavigate();
   const isLogin = useSelector(isLoggedIn);
 
   const EventSource = EventSourcePolyfill || NativeEventSource;
@@ -42,7 +40,6 @@ export const useSSE = <T>(url: string) => {
           }
         } catch (error) {
           await logout();
-          navigate('/login');
         }
       };
 
