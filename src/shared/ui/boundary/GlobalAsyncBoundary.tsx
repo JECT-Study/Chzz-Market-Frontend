@@ -27,7 +27,7 @@ const FallbackComponent = ({ error, resetErrorBoundary }: FallbackProps) => {
           <Layout.Header title="치즈 마켓" />
           <Layout.Main>
             <div className="flex flex-col items-center min-w-[10rem] justify-center h-full gap-5">
-              <Icon name='error' ariaLabel='에러 아이콘' />
+              <Icon name='error' ariaLabel='에러 아이콘' style='size-10' />
               <div className="space-y-2 text-center">
                 <h2 className="web:text-heading2 text-heading3 text-gray1">
                   {title}
