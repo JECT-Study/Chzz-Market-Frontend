@@ -1,0 +1,31 @@
+name: Rollback to Previous Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. AWS 크레덴셜 설정
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # 2. previous_build를 메인 버킷으로 복원
+      - name: Rollback S3 files to previous build
+        run: |
+          aws s3 sync s3://${{ secrets.S3_BUCKET_NAME }}/previous_build s3://${{ secrets.S3_BUCKET_NAME }} \
+            --delete \
+            --exclude "previous_build/*"
+
+      # 3. CloudFront 캐시 무효화
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
