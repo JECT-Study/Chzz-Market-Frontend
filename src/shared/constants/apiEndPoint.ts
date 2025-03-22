@@ -37,3 +37,37 @@ export const API_END_POINT = {
 
   AUCTION_IMAGE_UPLOAD_URL: `${PRE_FIX}/image/auction`
 };
+
+// 1.	사용자 인증이 필요한 API
+// 2.	입찰 & 경매 관련 API
+// 3.	결제 관련 API
+// 4.	알림 관련 API
+
+export const NEED_LOGIN_API_LIST = [
+  "/api/v1/addresses",
+  "/api/v1/auctions/{auctionId}/won",
+  "/api/v1/auctions/{auctionId}/bids",
+  "/api/v1/auctions/users/won",
+  "/api/v1/auctions/users/proceeding",
+  "/api/v1/auctions/users/pre",
+  "/api/v1/auctions/users/lost",
+  "/api/v1/auctions/users/likes",
+  "/api/v1/auctions/users/ended",
+  "/api/v1/auctions/{auctionId}/likes",
+  "/api/v1/bids",
+  "/api/v1/bids/{bidId}/cancel",
+  "/api/v1/image/profile",
+  "/api/v1/image/auction",
+  "/api/v1/notifications",
+  "/api/v1/notifications/subscribe",
+  "/api/v1/notifications/{notificationId}/read",
+  "/api/v1/payments/order-id",
+  "/api/v1/payments/approval",
+  "/api/v1/users",
+  "/api/v1/users/customer-key",
+  "/api/v1/users/check/nickname/{nickname}",
+  "/api/v1/users/tokens/reissue",
+  "/api/v1/users/profile",
+  "/api/v1/users/logout",
+  "/api/v1/users",
+];
