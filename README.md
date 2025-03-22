@@ -1,14 +1,14 @@
 # 치즈마켓
 ## 프로젝트 소개
 실시간 경매 기반의 중고거래 플랫폼입니다.
-> 개발 기간: 2024.07.01 ~ 진행중
+> 개발 기간: 2024.07.01 ~ 진행 중
 
 ## 팀원 소개
 
-|                                            팀장                                            |                                            팀원                                            |                                            팀원                                             |
-| :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| <img src="https://avatars.githubusercontent.com/u/93777385?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/89385423?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/169774207?v=4" width="150" height="150"/> |
-|                   JunSeok<br/>[@CLOUDoort](https://github.com/CLOUDoort)                   |                  장석원<br/>[@aquaman122](https://github.com/aquaman122)                   |                         [@luminox93](https://github.com/luminox93)                          |
+|                                            팀장                                            |                                            팀원                                            |
+| :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
+| <img src="https://avatars.githubusercontent.com/u/93777385?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/89385423?v=4" width="150" height="150"/> |
+|                   JunSeok<br/>[@CLOUDoort](https://github.com/CLOUDoort)                   |                  장석원<br/>[@aquaman122](https://github.com/aquaman122)                   |
 
 ## Tech Stack
 
@@ -27,6 +27,7 @@
 ![React Testing Library](https://img.shields.io/badge/React_Testing_Library-^16.0.0-E33332?style=flat-square&logo=testing-library&logoColor=white)
 ![Cypress](https://img.shields.io/badge/Cypress-^10.0.3-69D3A7?style=flat-square&logo=cypress&logoColor=white)
 ![MSW](https://img.shields.io/badge/MSW-^2.7.0-FF6933?style=flat-square&logo=mockserviceworker&logoColor=white)
+![Storybook](https://img.shields.io/badge/Storybook-^8.4.6-FF4785?style=flat-square&logo=storybook&logoColor=white)
 
 ### Lint & Formatting
 ![ESLint](https://img.shields.io/badge/ESLint-^8.57.0-4B32C3?style=flat-square&logo=eslint&logoColor=white)
@@ -52,7 +53,6 @@
 ![image request pipeline](https://github.com/user-attachments/assets/2308bcfa-c3dc-4927-853e-198073af58f5)
 
 ## 페이지 별 주요 기능
-
 <table>
   <tr>
     <td align="center">
@@ -108,6 +108,26 @@
     <td align="center" colspan="2">
       <strong>참여한 정식 경매 내역 페이지</strong><br>
       <img src="https://github.com/user-attachments/assets/cf754bca-e1af-496d-9b0f-361038550c38" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>결제 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/26b991b1-6bad-4515-81eb-ea31fcbfcd13" width="400">
+    </td>
+    <td align="center">
+      <strong>배송지 목록 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/d01c638e-22b2-4dc9-837d-6c8b8fd0f0b1" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>배송지 편집 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/84a5008b-b7c4-4f89-80a5-d3644adaee87" width="400">
+    </td>
+    <td align="center">
+      <strong>배송지 추가 페이지</strong><br>
+      <img src="https://github.com/user-attachments/assets/f23ec0a0-cce8-4e04-917c-b21c92723705" width="400">
     </td>
   </tr>
 </table>
