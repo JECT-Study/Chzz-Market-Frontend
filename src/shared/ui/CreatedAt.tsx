@@ -13,7 +13,7 @@ export const CreatedAt = ({ createAt }: { createAt: string }) => {
       aria-label="마감 날짜"
       className="flex items-center text-xs web:text-body2 text-gray2"
     >
-      <Icon name='price' ariaLabel='마감 날짜' />
+      <Icon name='price' ariaLabel='마감 날짜' style="pb-[.125rem] size-5" />
       <span className="whitespace-nowrap">
         {`마감 날짜 `}
         <span className="text-xs text-black web:text-body2Bold">
