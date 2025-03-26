@@ -19,7 +19,6 @@ const handleTokenError = (message: string, requestUrl?: string) => {
   if (requestUrl && NEED_LOGIN_API_LIST.some((api) => requestUrl.includes(api))) {
     removeToken();
     toast(message);
-    window.location.href = '/login';
   }
 };
 
